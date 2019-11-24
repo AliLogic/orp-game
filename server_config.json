@@ -1,0 +1,28 @@
+{
+	"servername": "[g][c=red]Onset[/c] [c=white]Roleplay[/c][/g]",
+	"gamemode": "Roleplay",
+	"website_url": "https://onsetroleplay.com",
+	"ipaddress": "0.0.0.0",
+	"port": 7777,
+	"maxplayers": 300,
+	"password": "",
+	"timeout": 15000,
+	"iplimit": 5,
+	"masterserver": true,
+	"plugins": [
+		"mariadb",
+		"ini-plugin"
+	],
+	"packages": [
+        "webgui",
+        "debug",
+        "mapeditor",
+		"orp"
+	],
+	"stream_distance": 12000.0,
+	"stream_update_rate": 0.05,
+	"voice": false,
+	"voice_sample_rate": 24000,
+	"voice_distance": 4000.0,
+	"voice_spatialization": true
+}
