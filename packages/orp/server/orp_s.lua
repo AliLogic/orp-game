@@ -8,6 +8,10 @@ Contributors:
 * Blue Mountains GmbH
 ]]--
 
+AddCommand("help", function (player)
+	return AddPlayerChaT(player, "Commands: /pos /v /w")
+end)
+
 AddCommand("pos", function (player, id)
 	local x, y, z = GetPlayerLocation(player)
 	return AddPlayerChat(player, "X: "..x.."Y: "..y.."Z: "..z)
@@ -44,6 +48,14 @@ AddCommand("v", function (player, model)
     -- Set us in the driver seat
 	SetPlayerInVehicle(player, vehicle)
 	AddPlayerChat(player, "Vehicle spawned! (New ID: "..vehicle..")")
+end)
+
+AddCommand("w", function (player, weapon, slot, ammo)
+	if (weapon == nil or slot == nil or ammo == nil) then
+		return AddPlayerChat(player, "Usage: /w <weapon> <slot> <ammo>")
+	end
+
+	SetPlayerWeapon(player, weapon, ammo, true, slot, true)
 end)
 
 AddEvent("OnPlayerChat", function(player, text)
