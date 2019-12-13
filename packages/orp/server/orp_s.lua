@@ -58,11 +58,29 @@ AddCommand("w", function (player, weapon, slot, ammo)
 	SetPlayerWeapon(player, weapon, ammo, true, slot, true)
 end)
 
+AddCommand("me", function (player, action)
+	if (action == nil) then
+		return AddPlayerChat(playerid, "Usage: /me [action]")
+	end
+
+	local x, y, z = GetPlayerLocation(player)
+	AddPlayerChatRange(x, y, 75.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player).." "..action.."</>")
+end)
+
+AddCommand("g", function (player, text)
+	if (text == nil) then
+		return AddPlayerChat(playerid, "Usage: /g [text]")
+	end
+
+	local x, y, z = GetPlayerLocation(player)
+	AddPlayerChatRange(x, y, 75.0, GetPlayerName(player)..": "..text)
+end)
+
 AddEvent("OnPlayerChat", function(player, text)
 	local x, y, z = GetPlayerLocation(player)
 
-	--AddPlayerChatRange(x, y, 75.0, "<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
-	AddPlayerChatAll("<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
+	AddPlayerChatRange(x, y, 75.0, "<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
+	--AddPlayerChatAll("<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
 	return false
 end)
 
