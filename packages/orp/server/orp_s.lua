@@ -9,7 +9,7 @@ Contributors:
 ]]--
 
 AddCommand("help", function (player)
-	return AddPlayerChaT(player, "Commands: /pos /v /w")
+	return AddPlayerChat(player, "Commands: /pos /v /w /me /g")
 end)
 
 AddCommand("pos", function (player, id)
