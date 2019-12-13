@@ -67,13 +67,20 @@ AddCommand("me", function (player, action)
 	AddPlayerChatRange(x, y, 75.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player).." "..action.."</>")
 end)
 
-AddCommand("g", function (player, text)
-	if (text == nil) then
+AddCommand("g", function (player, ...)
+	local args = {...}
+	local text = ''
+
+	if (args == nil) then
 		return AddPlayerChat(playerid, "Usage: /g [text]")
 	end
 
+	for k, v in pairs(args) do
+		text = text + v
+	end
+
 	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatRange(x, y, 75.0, GetPlayerName(player)..": "..text)
+	AddPlayerChatAll(GetPlayerName(player).." ("..player.."): "..text)
 end)
 
 AddEvent("OnPlayerChat", function(player, text)
