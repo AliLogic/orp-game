@@ -70,3 +70,54 @@
 [2019-12-13 21:46:46] [info] Detected CTRL+C, shutting down...
 [2019-12-13 21:46:46] [info] MariaDB: Unloading plugin...
 [2019-12-13 21:46:46] [info] MariaDB: Plugin unloaded.
+
+[2019-12-13 22:13:00] [info] Linux Server is starting
+[2019-12-13 22:13:00] [info] Detected 2 logical processors
+[2019-12-13 22:13:00] [info] Loaded 21 weapons from config
+[2019-12-13 22:13:00] [info] Loading plugin "mariadb"
+[2019-12-13 22:13:00] [error] Failed loading "mariadb": libmariadbclient.so.18: cannot open shared object file: No such file or directory
+[2019-12-13 22:13:00] [info] Loading plugin "ini-plugin"
+[2019-12-13 22:13:00] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-13 22:13:00] [info] Server password set from the config file
+[2019-12-13 22:13:00] [info] Starting package "webgui"
+[2019-12-13 22:13:00] [info] Starting package "debug"
+[2019-12-13 22:13:00] [info] Starting package "mapeditor"
+[2019-12-13 22:13:00] [info] Starting package "orp"
+[2019-12-13 22:13:00] [info] Package load done, clients will download 24 files with a total of 336 KB
+[2019-12-13 22:13:00] [info] Max players set to 300
+[2019-12-13 22:13:00] [info] Listening on 0.0.0.0
+[2019-12-13 22:13:00] [info] Open port channels:
+[2019-12-13 22:13:00] [info] 	UDP 7777 (game)
+[2019-12-13 22:13:00] [info] 	UDP 7776 (query)
+[2019-12-13 22:13:00] [info] 	TCP 7775 (file)
+[2019-12-13 22:13:00] [info] Server loaded. Entering simulation...
+[2019-12-13 22:13:26] [info] Detected CTRL+C, shutting down...
+[2019-12-13 22:13:26] [info] ini-plugin: Unloading plugin...
+[2019-12-13 22:13:26] [info] ini-plugin: Plugin unloaded.
+
+[2019-12-13 22:14:24] [info] Linux Server is starting
+[2019-12-13 22:14:24] [info] Detected 2 logical processors
+[2019-12-13 22:14:24] [info] Loaded 21 weapons from config
+[2019-12-13 22:14:24] [info] Loading plugin "mariadb"
+[2019-12-13 22:14:24] [error] Failed loading "mariadb": libmariadbclient.so.18: cannot open shared object file: No such file or directory
+[2019-12-13 22:14:24] [info] Loading plugin "ini-plugin"
+[2019-12-13 22:14:24] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-13 22:14:24] [info] Server password set from the config file
+[2019-12-13 22:14:24] [info] Starting package "webgui"
+[2019-12-13 22:14:24] [info] Starting package "debug"
+[2019-12-13 22:14:24] [info] Starting package "mapeditor"
+[2019-12-13 22:14:24] [info] Starting package "orp"
+[2019-12-13 22:14:24] [info] Package load done, clients will download 24 files with a total of 336 KB
+[2019-12-13 22:14:24] [info] Max players set to 300
+[2019-12-13 22:14:24] [info] Listening on 0.0.0.0
+[2019-12-13 22:14:24] [info] Open port channels:
+[2019-12-13 22:14:24] [info] 	UDP 7777 (game)
+[2019-12-13 22:14:24] [info] 	UDP 7776 (query)
+[2019-12-13 22:14:24] [info] 	TCP 7775 (file)
+[2019-12-13 22:14:24] [info] Server loaded. Entering simulation...
+[2019-12-13 22:15:53] [info] Client requesting connection 79.79.220.126:52737
+[2019-12-13 22:15:54] [info] Player (ID 1) joining the game (79.79.220.126:52737)
+[2019-12-13 22:22:53] [info] Player (ID 1) disconnected (79.79.220.126:52737)
+[2019-12-13 22:25:13] [info] Detected CTRL+C, shutting down...
+[2019-12-13 22:25:13] [info] ini-plugin: Unloading plugin...
+[2019-12-13 22:25:13] [info] ini-plugin: Plugin unloaded.

@@ -5,7 +5,7 @@
 	"ipaddress": "0.0.0.0",
 	"port": 7777,
 	"maxplayers": 300,
-	"password": "",
+	"password": "onsetrpstaffonly419",
 	"timeout": 15000,
 	"iplimit": 5,
 	"masterserver": true,
@@ -14,9 +14,9 @@
 		"ini-plugin"
 	],
 	"packages": [
-        "webgui",
-        "debug",
-        "mapeditor",
+                "webgui",
+                "debug",
+                "mapeditor",
 		"orp"
 	],
 	"stream_distance": 12000.0,
