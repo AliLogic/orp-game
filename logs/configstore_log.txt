@@ -1,0 +1,13 @@
+
+
+[2019-12-13 21:03:11] Failed to read store 'install' from 'C:\steamcmd\onsetserver\config\config.vdf.tmp'
+[2019-12-13 21:03:13] Flushed store 'install' to 'C:\steamcmd\onsetserver\config\config.vdf'
+[2019-12-13 21:03:14] Flushed store 'install' to 'C:\steamcmd\onsetserver\config\config.vdf'
+
+
+[2019-12-13 21:12:05] Loaded store 'install' from 'C:\steamcmd\onsetserver\config\config.vdf' successfully
+[2019-12-13 21:12:07] Flushed store 'install' to 'C:\steamcmd\onsetserver\config\config.vdf'
+
+
+[2019-12-13 21:46:40] Loaded store 'install' from 'C:\steamcmd\orp-game\config\config.vdf' successfully
+[2019-12-13 21:46:41] Flushed store 'install' to 'C:\steamcmd\orp-game\config\config.vdf'

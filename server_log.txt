@@ -1,0 +1,72 @@
+
+[2019-12-13 21:03:11] [info] Windows Server is starting
+[2019-12-13 21:03:11] [info] Detected 16 logical processors
+[2019-12-13 21:03:12] [info] Loaded 21 weapons from config
+[2019-12-13 21:03:12] [info] Loading plugin "mariadb"
+[2019-12-13 21:03:12] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-13 21:03:12] [info] Loading plugin "ini-plugin"
+[2019-12-13 21:03:12] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-13 21:03:12] [info] Starting package "webgui"
+[2019-12-13 21:03:12] [info] Starting package "debug"
+[2019-12-13 21:03:12] [info] Starting package "mapeditor"
+[2019-12-13 21:03:12] [info] Starting package "orp"
+[2019-12-13 21:03:12] [info] Package load done, clients will download 24 files with a total of 336 KB
+[2019-12-13 21:03:12] [info] Max players set to 300
+[2019-12-13 21:03:12] [info] Listening on 0.0.0.0
+[2019-12-13 21:03:12] [info] Open port channels:
+[2019-12-13 21:03:12] [info] 	UDP 7777 (game)
+[2019-12-13 21:03:12] [info] 	UDP 7776 (query)
+[2019-12-13 21:03:12] [info] 	TCP 7775 (file)
+[2019-12-13 21:03:12] [info] Server loaded. Entering simulation...
+[2019-12-13 21:04:39] [info] Client requesting connection 127.0.0.1:56488
+[2019-12-13 21:04:40] [info] Player (ID 1) joining the game (127.0.0.1:56488)
+[2019-12-13 21:04:58] [info] Player (ID 1) disconnected (127.0.0.1:56488)
+[2019-12-13 21:12:00] [info] Detected CTRL+C, shutting down...
+[2019-12-13 21:12:00] [info] MariaDB: Unloading plugin...
+[2019-12-13 21:12:00] [info] MariaDB: Plugin unloaded.
+
+[2019-12-13 21:12:05] [info] Windows Server is starting
+[2019-12-13 21:12:05] [info] Detected 16 logical processors
+[2019-12-13 21:12:05] [info] Loaded 21 weapons from config
+[2019-12-13 21:12:05] [info] Loading plugin "mariadb"
+[2019-12-13 21:12:05] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-13 21:12:05] [info] Loading plugin "ini-plugin"
+[2019-12-13 21:12:05] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-13 21:12:05] [info] Starting package "webgui"
+[2019-12-13 21:12:05] [info] Starting package "debug"
+[2019-12-13 21:12:05] [info] Starting package "mapeditor"
+[2019-12-13 21:12:05] [info] Starting package "orp"
+[2019-12-13 21:12:06] [info] Package load done, clients will download 24 files with a total of 336 KB
+[2019-12-13 21:12:06] [info] Max players set to 300
+[2019-12-13 21:12:06] [info] Listening on 0.0.0.0
+[2019-12-13 21:12:06] [info] Open port channels:
+[2019-12-13 21:12:06] [info] 	UDP 7777 (game)
+[2019-12-13 21:12:06] [info] 	UDP 7776 (query)
+[2019-12-13 21:12:06] [info] 	TCP 7775 (file)
+[2019-12-13 21:12:06] [info] Server loaded. Entering simulation...
+[2019-12-13 21:12:12] [info] Client requesting connection 127.0.0.1:55524
+[2019-12-13 21:12:12] [info] Player (ID 1) joining the game (127.0.0.1:55524)
+[2019-12-13 21:41:28] [info] Player (ID 1) disconnected (127.0.0.1:55524)
+
+[2019-12-13 21:46:39] [info] Windows Server is starting
+[2019-12-13 21:46:39] [info] Detected 16 logical processors
+[2019-12-13 21:46:40] [info] Loaded 21 weapons from config
+[2019-12-13 21:46:40] [info] Loading plugin "mariadb"
+[2019-12-13 21:46:40] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-13 21:46:40] [info] Loading plugin "ini-plugin"
+[2019-12-13 21:46:40] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-13 21:46:40] [info] Starting package "webgui"
+[2019-12-13 21:46:40] [info] Starting package "debug"
+[2019-12-13 21:46:40] [info] Starting package "mapeditor"
+[2019-12-13 21:46:40] [info] Starting package "orp"
+[2019-12-13 21:46:40] [info] Package load done, clients will download 24 files with a total of 336 KB
+[2019-12-13 21:46:40] [info] Max players set to 300
+[2019-12-13 21:46:40] [info] Listening on 0.0.0.0
+[2019-12-13 21:46:40] [info] Open port channels:
+[2019-12-13 21:46:40] [info] 	UDP 7777 (game)
+[2019-12-13 21:46:40] [info] 	UDP 7776 (query)
+[2019-12-13 21:46:40] [info] 	TCP 7775 (file)
+[2019-12-13 21:46:40] [info] Server loaded. Entering simulation...
+[2019-12-13 21:46:46] [info] Detected CTRL+C, shutting down...
+[2019-12-13 21:46:46] [info] MariaDB: Unloading plugin...
+[2019-12-13 21:46:46] [info] MariaDB: Plugin unloaded.

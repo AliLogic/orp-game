@@ -1,0 +1,18 @@
+{
+	"author": "Blue Mountains",
+	"version": "1.0",
+	"server_scripts": [
+		"scoreboard_s.lua"
+	],
+	"client_scripts": [
+		"scoreboard_c.lua"
+	],
+	"files": [
+		"gui/scoreboard.html",
+		"gui/scoreboard.css",
+		"gui/scoreboard.js",
+		"gui/jquery.js",
+		"gui/xbbcode.js",
+		"gui/xbbcode.css"
+	]
+}
