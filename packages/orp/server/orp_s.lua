@@ -60,7 +60,7 @@ end)
 
 AddCommand("me", function (player, action)
 	if (action == nil) then
-		return AddPlayerChat(playerid, "Usage: /me [action]")
+		return AddPlayerChat(player, "Usage: /me [action]")
 	end
 
 	local x, y, z = GetPlayerLocation(player)
