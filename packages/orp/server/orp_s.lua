@@ -74,9 +74,9 @@ AddCommand("g", function (player, ...)
 	if (args == nil) then
 		return AddPlayerChat(playerid, "Usage: /g [text]")
 	end
-
+ -- ./update.sh && ./start_linux.sh
 	for k, v in pairs(args) do
-		text = text + v
+		text = text..""..v
 	end
 
 	local x, y, z = GetPlayerLocation(player)
