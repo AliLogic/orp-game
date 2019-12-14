@@ -46,6 +46,56 @@ AddRemoteEvent("OnRaceStart", OnRaceStart)]]--
 	end
 end]]--
 
+function createUI (name)
+	if not ui == nil then
+		CallEvent("closeUI")
+	end
+
+    width, height = GetScreenSize()
+
+    uiName = name
+    ui = CreateWebUI(0, 0, 0, 0, 5, 32)
+    LoadWebFile(ui, "http://asset/".. GetPackageName() .."/ui/main.html")
+    SetWebAlignment(ui, 0.0, 0.0)
+    SetWebAnchors(ui, 0.0, 0.0, 1.0, 1.0)
+    SetWebVisibility(ui, WEB_HITINVISIBLE)
+    SetIgnoreLookInput(true)
+    ShowMouseCursor(true)
+    SetInputMode(INPUT_GAMEANDUI)
+
+    AddPlayerChat("Creating UI: ".. name)
+end
+
+-- Usage: CallEvent("createUI", "NAME_GOES_HERE")
+AddEvent("createUI", createUI)
+
+-- Destroy / Remove current GUI
+function destroyUI ()
+    DestroyWebUI(ui)
+    ui = 0
+    uiName = nil
+
+    SetIgnoreLookInput(false)
+    ShowMouseCursor(false)
+    SetInputMode(INPUT_GAME)
+
+    AddPlayerChat("Destorying UI")
+end
+
+-- Event to close UI
+AddEvent("closeUI", destroyUI)
+
+function onUIReady ()
+    AddPlayerChat("UI Ready")
+end
+
+AddEvent("onUIReady", onUIReady)
+
+-- Load Spawn Menu
+AddRemoteEvent("LoadSpawnMenu", function ()
+    CallEvent("createUI", "spawnMenu")
+end)
+
 function FormatTime(time)
 	local minutes = string.format("%02d", math.floor(time / 60.0))
 	local seconds = string.format("%02d", math.floor(time - (minutes * 60.0)))

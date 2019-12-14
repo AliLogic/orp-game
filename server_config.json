@@ -14,10 +14,9 @@
 		"ini-plugin"
 	],
 	"packages": [
-                "webgui",
-                "debug",
-                "mapeditor",
-		"orp"
+		"orp",
+        "dialogui",
+        "debug"
 	],
 	"stream_distance": 12000.0,
 	"stream_update_rate": 0.05,

@@ -2,10 +2,12 @@
 	"author": "infin1tyy",
 	"version": "1.0",
 	"server_scripts": [
-		"server/orp_s.lua"
+		"server/orp_s.lua",
+		"server/chat/chat_s.lua",
+		"server/database/database_s.lua"
 	],
 	"client_scripts": [
 		"client/orp_c.lua"
 	],
-	"files": []
+	"files": ["ui/main.html"]
 }
