@@ -120,7 +120,7 @@ AddCommand("g", function (player, ...)
 
 	local x, y, z = GetPlayerLocation(player)
 	AddPlayerChatAll(GetPlayerName(player).." ("..player.."):"..text)
-	
+
 end)
 
 AddCommand("pm", function (player, target, ..)
@@ -136,6 +136,10 @@ AddCommand("pm", function (player, target, ..)
 
 	local args = {..}
 	local text = ''
+
+	for k, v in pairs(args) do
+		text = text.." "..v
+	end
 
 	AddPlayerChat(player, "<span color=\"#eee854\">(( PM sent to "..GetPlayerName(target)" (ID: "..target.."):"..text.." ))</a>")
 	AddPlayerChat(target, "<span color=\"#eccd2d\">(( PM from "..GetPlayerName(player)" (ID: "..player.."):"..text.." ))</a>")
