@@ -71,7 +71,7 @@ AddCommand("g", function (player, ...)
 	local args = {...}
 	local text = ''
 
-	if (args[0] == nil) then
+	if (args == nil) then
 		return AddPlayerChat(player, "Usage: /g [text]")
 	end
 	-- ./update.sh && ./start_linux.sh
