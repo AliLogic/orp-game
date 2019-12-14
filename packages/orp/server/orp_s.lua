@@ -9,7 +9,7 @@ Contributors:
 ]]--
 
 AddCommand("help", function (player)
-	return AddPlayerChat(player, "Commands: /pos /v /w /me /g /b")
+	return AddPlayerChat(player, "Commands: /pos /v /w /me /do /g /b")
 end)
 
 AddCommand("pos", function (player, id)
@@ -74,6 +74,22 @@ AddCommand("me", function (player, ...)
 	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player)..""..text.."</>")
 end)
 
+AddCommand("do", function (player, ...)
+	local args = {...}
+	local text = ''
+
+	if (args == nil) then
+		return AddPlayerChat(player, "Usage: /do [action]")
+	end
+
+	for k, v in pairs(args) do
+		text = text.." "..v
+	end
+
+	local x, y, z = GetPlayerLocation(player)
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..text.."(( "..GetPlayerName(player).." ))</>")
+end)
+
 AddCommand("b", function (player, ...)
 	local args = {...}
 	local text = ''
@@ -87,7 +103,7 @@ AddCommand("b", function (player, ...)
 	end
 
 	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatRange(x, y, 800.0, "<span color=\"#b8bac6\">(( "..GetPlayerName(player)..""..text.." ))</>")
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#b8bac6\">(( "..GetPlayerName(player).." ("..player..")"..text.." ))</>")
 end)
 
 AddCommand("g", function (player, ...)
