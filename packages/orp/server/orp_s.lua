@@ -87,7 +87,7 @@ AddCommand("do", function (player, ...)
 	end
 
 	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..text.." (( "..GetPlayerName(player).." ))</>")
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">*"..text.." (( "..GetPlayerName(player).." ))</>")
 end)
 
 AddCommand("b", function (player, ...)
@@ -128,7 +128,9 @@ AddCommand("pm", function (player, target, ...)
 		return AddPlayerChat(player, "Usage: /pm [playerid] [text]")
 	end
 
-	target = tonumber(target)
+	if target == player then
+		return AddPlayerChat(player, "You cannot PM yourself.")
+	end
 
 	if IsValidPlayer(target) == false then
 		return AddPlayerChat(player, "Invalid player id.")
