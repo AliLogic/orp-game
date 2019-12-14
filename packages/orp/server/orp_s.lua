@@ -64,7 +64,7 @@ AddCommand("me", function (player, action)
 	end
 
 	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatRange(x, y, 75.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player).." "..action.."</>")
+	AddPlayerChatRange(x, y, 400.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player).." "..action.."</>")
 end)
 
 AddCommand("g", function (player, ...)
@@ -80,13 +80,13 @@ AddCommand("g", function (player, ...)
 	end
 
 	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatAll(GetPlayerName(player).." ("..player.."): "..text)
+	AddPlayerChatAll(GetPlayerName(player).." ("..player.."):"..text)
 end)
 
 AddEvent("OnPlayerChat", function(player, text)
 	local x, y, z = GetPlayerLocation(player)
 
-	AddPlayerChatRange(x, y, 75.0, "<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
+	AddPlayerChatRange(x, y, 400.0, "<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
 	--AddPlayerChatAll("<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
 	return false
 end)
