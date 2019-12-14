@@ -123,7 +123,7 @@ AddCommand("g", function (player, ...)
 
 end)
 
-AddCommand("pm", function (player, target, ..)
+AddCommand("pm", function (player, target, ...)
 	if (target == nil) then
 		return AddPlayerChat(player, "Usage: /pm [playerid] [text]")
 	end
@@ -134,7 +134,7 @@ AddCommand("pm", function (player, target, ..)
 		return AddPlayerChat(player, "Invalid player id.")
 	end
 
-	local args = {..}
+	local args = {...}
 	local text = ''
 
 	for k, v in pairs(args) do
