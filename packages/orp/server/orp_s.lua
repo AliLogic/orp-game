@@ -72,9 +72,9 @@ AddCommand("g", function (player, ...)
 	local text = ''
 
 	if (args[0] == nil) then
-		return AddPlayerChat(playerid, "Usage: /g [text]")
+		return AddPlayerChat(player, "Usage: /g [text]")
 	end
-	
+	-- ./update.sh && ./start_linux.sh
 	for k, v in pairs(args) do
 		text = text.." "..v
 	end
