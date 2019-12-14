@@ -9,7 +9,7 @@ Contributors:
 ]]--
 
 AddCommand("help", function (player)
-	return AddPlayerChat(player, "Commands: /pos /v /w /me /g")
+	return AddPlayerChat(player, "Commands: /pos /v /w /me /g /b")
 end)
 
 AddCommand("pos", function (player, id)
@@ -58,13 +58,36 @@ AddCommand("w", function (player, weapon, slot, ammo)
 	SetPlayerWeapon(player, weapon, ammo, false, slot, true)
 end)
 
-AddCommand("me", function (player, action)
-	if (action == nil) then
+AddCommand("me", function (player, ...)
+	local args = {...}
+	local text = ''
+
+	if (args == nil) then
 		return AddPlayerChat(player, "Usage: /me [action]")
 	end
 
+	for k, v in pairs(args) do
+		text = text.." "..v
+	end
+
 	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player).." "..action.."</>")
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player)..""..text.."</>")
+end)
+
+AddCommand("b", function (player, ...)
+	local args = {...}
+	local text = ''
+
+	if (args == nil) then
+		return AddPlayerChat(player, "Usage: /b [text]")
+	end
+
+	for k, v in pairs(args) do
+		text = text.." "..v
+	end
+
+	local x, y, z = GetPlayerLocation(player)
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#b8bac6\">(( <span color=\"#ffffff\">"..GetPlayerName(player)..""..text.." </>))</>")
 end)
 
 AddCommand("g", function (player, ...)
