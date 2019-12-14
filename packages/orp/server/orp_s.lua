@@ -103,7 +103,7 @@ AddCommand("b", function (player, ...)
 	end
 
 	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatRange(x, y, 800.0, "<span color=\"#b8bac6\">(( "..GetPlayerName(player).." ("..player..")"..text.." ))</>")
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#b8bac6\">(( "..GetPlayerName(player).." ("..player.."):"..text.." ))</>")
 end)
 
 AddCommand("g", function (player, ...)
