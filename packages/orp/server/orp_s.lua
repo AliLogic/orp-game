@@ -9,7 +9,7 @@ Contributors:
 ]]--
 
 AddCommand("help", function (player)
-	return AddPlayerChat(player, "Commands: /pos /v /w /me /do /g /b")
+	return AddPlayerChat(player, "Commands: /pos /v /w /me /do /g /b /pm")
 end)
 
 AddCommand("pos", function (player, id)
@@ -120,6 +120,25 @@ AddCommand("g", function (player, ...)
 
 	local x, y, z = GetPlayerLocation(player)
 	AddPlayerChatAll(GetPlayerName(player).." ("..player.."):"..text)
+	
+end)
+
+AddCommand("pm", function (player, target, ..)
+	if (target == nil) then
+		return AddPlayerChat(player, "Usage: /pm [playerid] [text]")
+	end
+
+	target = tonumber(target)
+
+	if IsValidPlayer(target) == false then
+		return AddPlayerChat(player, "Invalid player id.")
+	end
+
+	local args = {..}
+	local text = ''
+
+	AddPlayerChat(player, "<span color=\"#eee854\">(( PM sent to "..GetPlayerName(target)" (ID: "..target.."):"..text.." ))</a>")
+	AddPlayerChat(target, "<span color=\"#eccd2d\">(( PM from "..GetPlayerName(player)" (ID: "..player.."):"..text.." ))</a>")
 end)
 
 AddEvent("OnPlayerChat", function(player, text)
