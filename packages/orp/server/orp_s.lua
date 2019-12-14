@@ -76,7 +76,7 @@ AddCommand("g", function (player, ...)
 	end
  -- ./update.sh && ./start_linux.sh
 	for k, v in pairs(args) do
-		text = text..""..v
+		text = ..text.." "..v
 	end
 
 	local x, y, z = GetPlayerLocation(player)
