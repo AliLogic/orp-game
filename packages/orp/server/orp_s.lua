@@ -55,7 +55,7 @@ AddCommand("w", function (player, weapon, slot, ammo)
 		return AddPlayerChat(player, "Usage: /w <weapon> <slot> <ammo>")
 	end
 
-	SetPlayerWeapon(player, weapon, ammo, true, slot, true)
+	SetPlayerWeapon(player, weapon, ammo, false, slot, true)
 end)
 
 AddCommand("me", function (player, action)
