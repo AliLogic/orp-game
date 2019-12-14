@@ -141,8 +141,8 @@ AddCommand("pm", function (player, target, ...)
 		text = text.." "..v
 	end
 
-	AddPlayerChat(player, "<span color=\"#eee854\">(( PM sent to "..GetPlayerName(target).." (ID: "..target.."):"..text.." ))</a>")
-	AddPlayerChat(target, "<span color=\"#eccd2d\">(( PM from "..GetPlayerName(player).." (ID: "..player.."):"..text.." ))</a>")
+	AddPlayerChat(player, "<span color=\"#eee854\">(( PM sent to "..GetPlayerName(target).." (ID: "..target.."):"..text.." ))</>")
+	AddPlayerChat(target, "<span color=\"#eccd2d\">(( PM from "..GetPlayerName(player).." (ID: "..player.."):"..text.." ))</>")
 end)
 
 AddEvent("OnPlayerChat", function(player, text)
