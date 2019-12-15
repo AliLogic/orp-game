@@ -14,9 +14,11 @@
 		"ini-plugin"
 	],
 	"packages": [
-		"orp",
-        "dialogui",
-        "debug"
+		"default",
+		"colours",
+		"dialogui",
+		"debug",
+		"orp"
 	],
 	"stream_distance": 12000.0,
 	"stream_update_rate": 0.05,

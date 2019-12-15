@@ -1,59 +1,24 @@
+local colour = ImportPackage('colours')
+
 AddCommand("help", function (player)
-	return AddPlayerChat(player, "Commands: /pos /v /w /me /do /g /b /pm")
-end)
-
-AddCommand("pos", function (player, id)
-	local x, y, z = GetPlayerLocation(player)
-	return AddPlayerChat(player, "X: "..x.."Y: "..y.."Z: "..z)
-end)
-
-AddCommand("v", function (player, model)
-	if (model == nil) then
-		return AddPlayerChat(player, "Usage: /v <model>")
-	end
-
-	model = tonumber(model)
-
-	if (model < 1 or model > 12) then
-		return AddPlayerChat(player, "Vehicle model "..model.." does not exist.")
-	end
-
-	local x, y, z = GetPlayerLocation(player)
-	local h = GetPlayerHeading(player)
-
-	local vehicle = CreateVehicle(model, x, y, z, h)
-	if (vehicle == false) then
-		return AddPlayerChat(player, "Failed to spawn your vehicle.")
-	end
-
-	SetVehicleLicensePlate(vehicle, "ONSET")
-	AttachVehicleNitro(vehicle, true)
-
-	if (model == 8) then
-		-- Set Ambulance blue color and license plate text
-		SetVehicleColor(vehicle, RGB(0.0, 60.0, 240.0))
-		SetVehicleLicensePlate(vehicle, "EMS-02")
-	end
-
-    -- Set us in the driver seat
-	SetPlayerInVehicle(player, vehicle)
-	AddPlayerChat(player, "Vehicle spawned! (New ID: "..vehicle..")")
+	return AddPlayerChat(player, "Commands: /w /me /do /g /b /pm /ahelp /stats")
 end)
 
 AddCommand("w", function (player, weapon, slot, ammo)
 	if (weapon == nil or slot == nil or ammo == nil) then
-		return AddPlayerChat(player, "Usage: /w <weapon> <slot> <ammo>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /w <weapon> <slot> <ammo>")
 	end
 
-	SetPlayerWeapon(player, weapon, ammo, false, slot, true)
+    SetPlayerWeapon(player, weapon, ammo, true, slot, true)
+    AddPlayerChat(player, 'Given you a '..weapon..' with '..ammo..' ammo.')
 end)
 
 AddCommand("me", function (player, ...)
 	local args = {...}
 	local text = ''
 
-	if (args == nil) then
-		return AddPlayerChat(player, "Usage: /me [action]")
+	if (args[1] == nil) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /me [action]")
 	end
 
 	for k, v in pairs(args) do
@@ -69,8 +34,8 @@ AddCommand("do", function (player, ...)
 	local args = {...}
 	local text = ''
 
-	if (args == nil) then
-		return AddPlayerChat(player, "Usage: /do [action]")
+	if (args[1] == nil) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /do [action]")
 	end
 
 	for k, v in pairs(args) do
@@ -85,8 +50,8 @@ AddCommand("b", function (player, ...)
 	local args = {...}
 	local text = ''
 
-	if (args == nil) then
-		return AddPlayerChat(player, "Usage: /b [text]")
+	if (args[1] == nil) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /b [text]")
 	end
 
 	for k, v in pairs(args) do
@@ -101,8 +66,8 @@ AddCommand("g", function (player, ...)
 	local args = {...}
 	local text = ''
 
-	if (args == nil) then
-		return AddPlayerChat(player, "Usage: /g [text]")
+	if (args[1] == nil) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /g [text]")
 	end
 	-- ./update.sh && ./start_linux.sh
 	for k, v in pairs(args) do
@@ -115,8 +80,10 @@ AddCommand("g", function (player, ...)
 end)
 
 AddCommand("pm", function (player, target, ...)
-	if (target == nil) then
-		return AddPlayerChat(player, "Usage: /pm [playerid] [text]")
+    local args = {...}
+
+	if (target == nil or args[1] == nil) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /pm [playerid] [text]")
 	end
 
 	if target == player then
@@ -125,29 +92,37 @@ AddCommand("pm", function (player, target, ...)
 
 	if IsValidPlayer(target) == false then
 		return AddPlayerChat(player, "Invalid player id.")
-	end
-
-	local args = {...}
+    end
+    
 	local text = ''
 
 	for k, v in pairs(args) do
 		text = text.." "..v
 	end
 
-	AddPlayerChat(player, "<span color=\"#eee854\">(( PM sent to "..GetPlayerName(target).." (ID: "..target.."):"..text.." ))</>")
-	AddPlayerChat(target, "<span color=\"#eccd2d\">(( PM from "..GetPlayerName(player).." (ID: "..player.."):"..text.." ))</>")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\">(( PM sent to "..GetPlayerName(target).." (ID: "..target.."):"..text.." ))</>")
+	AddPlayerChat(target, "<span color=\""..colour.COLOUR_PMIN().."\">(( PM from "..GetPlayerName(player).." (ID: "..player.."):"..text.." ))</>")
+end)
+
+AddCommand('stats', function (player)
+	ViewPlayerStats(player, player)
 end)
 
 AddEvent("OnPlayerChatCommand", function (player, cmd, exists)	
-	--[[if (GetTimeSeconds() - PlayerData[player].cmd_cooldown < 0.5) then
+	if (GetTimeSeconds() - PlayerData[player].cmd_cooldown < 0.5) then
 		AddPlayerChat(player, "Slow down with your commands.")
 		return false
 	end
 
-	PlayerData[player].cmd_cooldown = GetTimeSeconds()--]]
+	PlayerData[player].cmd_cooldown = GetTimeSeconds()
 
 	if not exists then
-		AddPlayerChat(player, "Command '/"..cmd.."' not found!")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: </>The command '/"..cmd.."' doesnt exist! Use /help or consult a helper.")
+	else
+		if PlayerData[player].logged_in == false then
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be logged in to use any commands.</>")
+			return false
+		end
 	end
 	return true
 end)

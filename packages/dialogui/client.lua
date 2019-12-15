@@ -1,11 +1,11 @@
 local web = CreateWebUI(0, 0, 0, 0, 1, 16)
 SetWebAlignment(web, 0, 0)
 SetWebAnchors(web, 0, 0, 1, 1)
-SetWebURL(web, "http://asset/dialogui/dialog.html")
+SetWebURL(web, "http://asset/"..GetPackageName().."/dialog.html")
 local nextId = 1
 local dialogs = {}
 local lastOpened = -1
-local globalTheme = "default-dark"
+local globalTheme = "themes/default-dark.css"
 function createDialog(title, text, ...)
     local id = nextId
     nextId = nextId + 1
@@ -175,7 +175,7 @@ function showDialog(dialog)
     end
     local d = dialogs[dialog]
     local json = {
-        autoclose = d.autoclose == "true",
+        autoclose = d.autoclose == "false",
         columns = {},
         buttons = {}
     }
@@ -255,6 +255,22 @@ AddEvent("__dialog_system_closed", function()
     ShowMouseCursor(false)
     SetInputMode(INPUT_GAME)
 end)
+
+AddEvent("OnKeyPress", function(key)
+    if lastOpened ~= -1 then
+        SetIgnoreLookInput(true)
+        SetIgnoreMoveInput(true)
+        ShowMouseCursor(true)
+        SetInputMode(INPUT_GAMEANDUI)
+    end
+end)
+
+AddEvent("OnDialogUIReady", function()
+   if lastOpened ~= -1 then
+       showDialog(lastOpened)
+   end
+end)
+
 AddFunctionExport("create", createDialog)
 AddFunctionExport("setButtons", setDialogButtons)
 AddFunctionExport("addSelect", addDialogSelect)

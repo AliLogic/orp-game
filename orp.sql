@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               10.1.38-MariaDB - mariadb.org binary distribution
+-- Server version:               10.4.10-MariaDB-log - mariadb.org binary distribution
 -- Server OS:                    Win64
 -- HeidiSQL Version:             10.3.0.5771
 -- --------------------------------------------------------
@@ -12,34 +12,37 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Dumping database structure for orp
-CREATE DATABASE IF NOT EXISTS `orp` /*!40100 DEFAULT CHARACTER SET latin1 */;
-USE `orp`;
+-- Dumping database structure for ORP
+CREATE DATABASE IF NOT EXISTS `orp` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `ORP`;
 
--- Dumping structure for table orp.accounts
+-- Dumping structure for table ORP.accounts
 CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `steamid` varchar(17) NOT NULL,
-  `steam_name` varchar(32) NOT NULL,
-  `game_version` mediumint(10) unsigned NOT NULL,
-  `locale` varchar(6) NOT NULL,
-  `email` varchar(28) NOT NULL DEFAULT '',
-  `time` int(10) unsigned NOT NULL,
-  `admin` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `helper` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `registration_time` int(10) unsigned NOT NULL,
-  `registration_ip` varchar(16) NOT NULL,
-  `count_login` int(10) unsigned NOT NULL,
-  `count_kick` int(10) unsigned NOT NULL,
-  `last_login_time` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `steamid` varchar(32) NOT NULL,
+  `steam_name` varchar(32) DEFAULT NULL,
+  `game_version` mediumint(10) unsigned DEFAULT NULL,
+  `locale` varchar(6) DEFAULT NULL,
+  `email` varchar(28) DEFAULT NULL,
+  `time` int(10) unsigned DEFAULT NULL,
+  `admin` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `helper` tinyint(3) unsigned NOT NULL DEFAULT 0,
+  `registration_time` int(10) unsigned DEFAULT NULL,
+  `registration_ip` varchar(16) DEFAULT NULL,
+  `count_login` int(10) unsigned DEFAULT NULL,
+  `count_kick` int(10) unsigned zerofill DEFAULT NULL,
+  `last_login_time` int(10) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `steamid` (`steamid`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table orp.accounts: ~0 rows (approximately)
+-- Dumping data for table ORP.accounts: ~1 rows (approximately)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
+INSERT INTO `accounts` (`id`, `steamid`, `steam_name`, `game_version`, `locale`, `email`, `time`, `admin`, `helper`, `registration_time`, `registration_ip`, `count_login`, `count_kick`, `last_login_time`) VALUES
+	(14, '76561198291141818', NULL, NULL, NULL, NULL, NULL, 5, 0, NULL, '127.0.0.1', NULL, NULL, NULL);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
--- Dumping structure for table orp.applicants
+-- Dumping structure for table ORP.applicants
 CREATE TABLE IF NOT EXISTS `applicants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `discordName` varchar(255) NOT NULL,
@@ -51,11 +54,11 @@ CREATE TABLE IF NOT EXISTS `applicants` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table orp.applicants: ~0 rows (approximately)
+-- Dumping data for table ORP.applicants: ~0 rows (approximately)
 /*!40000 ALTER TABLE `applicants` DISABLE KEYS */;
 /*!40000 ALTER TABLE `applicants` ENABLE KEYS */;
 
--- Dumping structure for table orp.atm
+-- Dumping structure for table ORP.atm
 CREATE TABLE IF NOT EXISTS `atm` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `modelid` mediumint(8) unsigned NOT NULL,
@@ -68,13 +71,13 @@ CREATE TABLE IF NOT EXISTS `atm` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table orp.atm: ~0 rows (approximately)
+-- Dumping data for table ORP.atm: ~0 rows (approximately)
 /*!40000 ALTER TABLE `atm` DISABLE KEYS */;
-REPLACE INTO `atm` (`id`, `modelid`, `x`, `y`, `z`, `rx`, `ry`, `rz`) VALUES
+INSERT INTO `atm` (`id`, `modelid`, `x`, `y`, `z`, `rx`, `ry`, `rz`) VALUES
 	(1, 494, 129221, 78053, 1478, 0, 90, 0);
 /*!40000 ALTER TABLE `atm` ENABLE KEYS */;
 
--- Dumping structure for table orp.bans
+-- Dumping structure for table ORP.bans
 CREATE TABLE IF NOT EXISTS `bans` (
   `id` int(10) unsigned NOT NULL,
   `admin_id` int(10) unsigned NOT NULL,
@@ -94,28 +97,38 @@ CREATE TABLE IF NOT EXISTS `bans` (
   CONSTRAINT `bans_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table orp.bans: ~0 rows (approximately)
+-- Dumping data for table ORP.bans: ~0 rows (approximately)
 /*!40000 ALTER TABLE `bans` DISABLE KEYS */;
 /*!40000 ALTER TABLE `bans` ENABLE KEYS */;
 
--- Dumping structure for table orp.characters
+-- Dumping structure for table ORP.characters
 CREATE TABLE IF NOT EXISTS `characters` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `accountid` int(11) NOT NULL,
+  `steamid` varchar(32) NOT NULL DEFAULT '',
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
-  `health` float NOT NULL DEFAULT '100',
-  `armour` float NOT NULL DEFAULT '0',
-  `cash` int(11) NOT NULL DEFAULT '100',
-  `bank` int(11) NOT NULL DEFAULT '1000',
+  `gender` int(11) NOT NULL DEFAULT 0,
+  `health` float NOT NULL DEFAULT 100,
+  `armour` float NOT NULL DEFAULT 0,
+  `cash` int(11) NOT NULL DEFAULT 100,
+  `bank` int(11) NOT NULL DEFAULT 1000,
+  `x` varchar(50) NOT NULL DEFAULT '125773.0',
+  `y` varchar(50) NOT NULL DEFAULT '80246.0',
+  `z` varchar(50) NOT NULL DEFAULT '1645.0',
+  `a` varchar(50) NOT NULL DEFAULT '90.0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Dumping data for table orp.characters: ~0 rows (approximately)
+-- Dumping data for table ORP.characters: ~3 rows (approximately)
 /*!40000 ALTER TABLE `characters` DISABLE KEYS */;
+INSERT INTO `characters` (`id`, `accountid`, `steamid`, `firstname`, `lastname`, `gender`, `health`, `armour`, `cash`, `bank`, `x`, `y`, `z`, `a`) VALUES
+	(2, 14, '76561198291141818', 'Phillip', 'Hughes', 0, 100, 0, 100, 1000, '125905.546875', '80002.25', '1566.9010009766', '-167.39573669434'),
+	(3, 14, '76561198291141818', 'Phillip', 'Huff', 0, 100, 0, 100, 1000, '125773.0', '80246.0', '1645.0', '90.0'),
+	(4, 14, '76561198291141818', 'Samantha', 'Wright', 1, 100, 0, 100, 1000, '125773.0', '80246.0', '1645.0', '90.0');
 /*!40000 ALTER TABLE `characters` ENABLE KEYS */;
 
--- Dumping structure for table orp.ipbans
+-- Dumping structure for table ORP.ipbans
 CREATE TABLE IF NOT EXISTS `ipbans` (
   `ip` varchar(16) NOT NULL,
   `account_id` int(10) unsigned NOT NULL,
@@ -125,11 +138,11 @@ CREATE TABLE IF NOT EXISTS `ipbans` (
   PRIMARY KEY (`ip`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table orp.ipbans: ~0 rows (approximately)
+-- Dumping data for table ORP.ipbans: ~0 rows (approximately)
 /*!40000 ALTER TABLE `ipbans` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ipbans` ENABLE KEYS */;
 
--- Dumping structure for table orp.kicks
+-- Dumping structure for table ORP.kicks
 CREATE TABLE IF NOT EXISTS `kicks` (
   `id` int(10) unsigned NOT NULL,
   `admin_id` int(10) unsigned NOT NULL,
@@ -139,11 +152,11 @@ CREATE TABLE IF NOT EXISTS `kicks` (
   CONSTRAINT `kicks_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table orp.kicks: ~0 rows (approximately)
+-- Dumping data for table ORP.kicks: ~0 rows (approximately)
 /*!40000 ALTER TABLE `kicks` DISABLE KEYS */;
 /*!40000 ALTER TABLE `kicks` ENABLE KEYS */;
 
--- Dumping structure for table orp.log_chat
+-- Dumping structure for table ORP.log_chat
 CREATE TABLE IF NOT EXISTS `log_chat` (
   `id` int(10) unsigned NOT NULL,
   `time` int(10) unsigned NOT NULL,
@@ -152,11 +165,11 @@ CREATE TABLE IF NOT EXISTS `log_chat` (
   CONSTRAINT `log_chat_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table orp.log_chat: ~0 rows (approximately)
+-- Dumping data for table ORP.log_chat: ~0 rows (approximately)
 /*!40000 ALTER TABLE `log_chat` DISABLE KEYS */;
 /*!40000 ALTER TABLE `log_chat` ENABLE KEYS */;
 
--- Dumping structure for table orp.log_login
+-- Dumping structure for table ORP.log_login
 CREATE TABLE IF NOT EXISTS `log_login` (
   `id` int(10) unsigned NOT NULL,
   `ip` varchar(16) NOT NULL,
@@ -167,11 +180,11 @@ CREATE TABLE IF NOT EXISTS `log_login` (
   CONSTRAINT `log_login_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table orp.log_login: ~0 rows (approximately)
+-- Dumping data for table ORP.log_login: ~0 rows (approximately)
 /*!40000 ALTER TABLE `log_login` DISABLE KEYS */;
 /*!40000 ALTER TABLE `log_login` ENABLE KEYS */;
 
--- Dumping structure for table orp.log_reports
+-- Dumping structure for table ORP.log_reports
 CREATE TABLE IF NOT EXISTS `log_reports` (
   `id` int(10) unsigned NOT NULL,
   `reportedby_id` int(10) unsigned NOT NULL,
@@ -181,11 +194,11 @@ CREATE TABLE IF NOT EXISTS `log_reports` (
   CONSTRAINT `log_reports_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table orp.log_reports: ~0 rows (approximately)
+-- Dumping data for table ORP.log_reports: ~0 rows (approximately)
 /*!40000 ALTER TABLE `log_reports` DISABLE KEYS */;
 /*!40000 ALTER TABLE `log_reports` ENABLE KEYS */;
 
--- Dumping structure for table orp.log_weaponshot
+-- Dumping structure for table ORP.log_weaponshot
 CREATE TABLE IF NOT EXISTS `log_weaponshot` (
   `id` int(10) unsigned NOT NULL,
   `time` int(10) unsigned NOT NULL,
@@ -202,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `log_weaponshot` (
   CONSTRAINT `log_weaponshot_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table orp.log_weaponshot: ~0 rows (approximately)
+-- Dumping data for table ORP.log_weaponshot: ~0 rows (approximately)
 /*!40000 ALTER TABLE `log_weaponshot` DISABLE KEYS */;
 /*!40000 ALTER TABLE `log_weaponshot` ENABLE KEYS */;
 

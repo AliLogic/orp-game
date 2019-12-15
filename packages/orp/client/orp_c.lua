@@ -46,7 +46,7 @@ AddRemoteEvent("OnRaceStart", OnRaceStart)]]--
 	end
 end]]--
 
-function createUI (name)
+--[[function createUI (name)
 	if not ui == nil then
 		CallEvent("closeUI")
 	end
@@ -94,6 +94,13 @@ AddEvent("onUIReady", onUIReady)
 -- Load Spawn Menu
 AddRemoteEvent("LoadSpawnMenu", function ()
     CallEvent("createUI", "spawnMenu")
+end)]]--
+
+AddEvent("OnKeyPress", function (key)	
+	if key == "V" then
+		local bEnable = not IsFirstPersonCamera()
+		EnableFirstPersonCamera(bEnable)
+	end
 end)
 
 function FormatTime(time)
