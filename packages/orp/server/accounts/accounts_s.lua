@@ -117,9 +117,15 @@ function characterCreated(player)
 	PlayerData[player].id = mariadb_get_insert_id()
 	
 	print("Character ID "..PlayerData[player].id.." created for "..player)
+
+        PlayerData[player].x = 125773.0
+        PlayerData[player].y = 80246.0
+        PlayerData[player].z = 1645.0
+        PlayerData[player].a = 90.0
+
 	SetPlayerLoggedIn(player)
 
-	AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome to Onset Roleplay, '..GetPlayerName(player)..'.</>")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome to Onset Roleplay, "..PlayerData[player].name..".</>")
 end
 
 function LoadPlayerAccount(player)
