@@ -19,6 +19,10 @@ AddRemoteEvent("askClientCreation", function ()
 end)
 
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
+    if chardata == nil then
+        return Dialog.show(charviewnone)
+    end
+
     local count = 0
     for _ in pairs(chardata) do count = count + 1 end
     
