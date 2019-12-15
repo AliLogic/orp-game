@@ -4251,3 +4251,6 @@
 [2019-12-15 21:00:35] [info] Player (ID 1) disconnected (127.0.0.1:50111)
 [2019-12-15 21:00:35] [script] 2
 [2019-12-15 21:00:35] [script] Data destroyed for: 1
+[2019-12-15 21:01:54] [info] Detected CTRL+C, shutting down...
+[2019-12-15 21:01:54] [info] MariaDB: Unloading plugin...
+[2019-12-15 21:01:54] [info] MariaDB: Plugin unloaded.
