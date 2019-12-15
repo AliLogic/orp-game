@@ -400,3 +400,6 @@
 
 
 [2019-12-15 20:59:14] Loaded 1 apps from install folder "C:\steamcmd\orp-game\steamapps\appmanifest_*.acf".
+
+
+[2019-12-15 20:59:50] Loaded 1 apps from install folder "C:\steamcmd\orp-game\steamapps\appmanifest_*.acf".

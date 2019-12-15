@@ -4124,3 +4124,210 @@
 [2019-12-15 20:59:31.395] [mariadb] [debug] ResultSet::Create(connection=0x253caef7ff0, query_str='UPDATE characters SET firstname = 'Phillip', lastname = 'Hughes', gender = '0', health = 100, armour = 0, cash = 100, bank = 1000, x = '126578.484375', y = '79765.3515625', z = '1566.9005126953', a = '139.55596923828' WHERE id = 2')
 [2019-12-15 20:59:31.395] [mariadb] [debug] created new resultset '0x253c6a84880'
 [2019-12-15 20:59:31.395] [mariadb] [debug] fetched MariaDB result '0x0'
+[2019-12-15 20:59:50.862] [mariadb] [info] changed log level to 'debug'
+[2019-12-15 20:59:50.862] [mariadb] [debug] HandleManager::Create(this=0x2328096c190, host='localhost', user='root', pass='****', db='orp')
+[2019-12-15 20:59:50.862] [mariadb] [info] Creating new connection handle...
+[2019-12-15 20:59:50.862] [mariadb] [warning] mariadb_connect: no password specified ([string "orp/server/database/database_s.lua"]:15)
+[2019-12-15 20:59:50.862] [mariadb] [debug] Connection::Connection(this=0x23280738670, host='localhost', user='root', passw='****', db='orp')
+[2019-12-15 20:59:50.863] [mariadb] [debug] Connection::Connection - new connection = 0x2328073aec0
+[2019-12-15 20:59:50.863] [mariadb] [debug] Connection::Connection(this=0x23280e89040, host='localhost', user='root', passw='****', db='orp')
+[2019-12-15 20:59:50.864] [mariadb] [debug] Connection::Connection - new connection = 0x2328096fe30
+[2019-12-15 20:59:50.864] [mariadb] [debug] ThreadedConnection::WorkerFunc(this=0x23280e89040, connection=0x23280e89040)
+[2019-12-15 20:59:50.864] [mariadb] [debug] ThreadedConnection::ThreadedConnection(this=0x23280e89040, connection=0x23280e89040)
+[2019-12-15 20:59:50.864] [mariadb] [debug] ConnectionPool::ConnectionPool(size=4, this=0x2328097ba10)
+[2019-12-15 20:59:50.864] [mariadb] [debug] Connection::Connection(this=0x23280f9b040, host='localhost', user='root', passw='****', db='orp')
+[2019-12-15 20:59:50.865] [mariadb] [debug] Connection::Connection - new connection = 0x23280970440
+[2019-12-15 20:59:50.865] [mariadb] [debug] ThreadedConnection::WorkerFunc(this=0x23280f9b040, connection=0x23280f9b040)
+[2019-12-15 20:59:50.865] [mariadb] [debug] ThreadedConnection::ThreadedConnection(this=0x23280f9b040, connection=0x23280f9b040)
+[2019-12-15 20:59:50.865] [mariadb] [debug] Connection::Connection(this=0x232810ac040, host='localhost', user='root', passw='****', db='orp')
+[2019-12-15 20:59:50.866] [mariadb] [debug] Connection::Connection - new connection = 0x2328074e470
+[2019-12-15 20:59:50.866] [mariadb] [debug] ThreadedConnection::WorkerFunc(this=0x232810ac040, connection=0x232810ac040)
+[2019-12-15 20:59:50.866] [mariadb] [debug] ThreadedConnection::ThreadedConnection(this=0x232810ac040, connection=0x232810ac040)
+[2019-12-15 20:59:50.866] [mariadb] [debug] Connection::Connection(this=0x232811b9040, host='localhost', user='root', passw='****', db='orp')
+[2019-12-15 20:59:50.867] [mariadb] [debug] Connection::Connection - new connection = 0x232809bd3d0
+[2019-12-15 20:59:50.867] [mariadb] [debug] ThreadedConnection::WorkerFunc(this=0x232811b9040, connection=0x232811b9040)
+[2019-12-15 20:59:50.867] [mariadb] [debug] ThreadedConnection::ThreadedConnection(this=0x232811b9040, connection=0x232811b9040)
+[2019-12-15 20:59:50.867] [mariadb] [debug] Connection::Connection(this=0x232812cb040, host='localhost', user='root', passw='****', db='orp')
+[2019-12-15 20:59:50.868] [mariadb] [debug] Connection::Connection - new connection = 0x232809c74e0
+[2019-12-15 20:59:50.868] [mariadb] [debug] ThreadedConnection::WorkerFunc(this=0x232812cb040, connection=0x232812cb040)
+[2019-12-15 20:59:50.868] [mariadb] [debug] ThreadedConnection::ThreadedConnection(this=0x232812cb040, connection=0x232812cb040)
+[2019-12-15 20:59:50.868] [mariadb] [info] Connection handle with id '1' successfully created.
+[2019-12-15 20:59:50.868] [mariadb] [debug] HandleManager::Create - new handle = 0x23280981290
+[2019-12-15 20:59:50.868] [mariadb] [debug] mariadb_connect: return value: '1' ([string "orp/server/database/database_s.lua"]:15)
+[2019-12-15 20:59:50.869] [mariadb] [debug] Handle::SetCharacterSet(this=0x23280981290, charset='utf8mb4')
+[2019-12-15 20:59:50.869] [mariadb] [debug] Connection::SetCharset(charset='utf8mb4', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 20:59:50.869] [mariadb] [debug] Connection::SetCharset(charset='utf8mb4', this=0x23280e89040, connection=0x2328096fe30)
+[2019-12-15 20:59:50.869] [mariadb] [debug] ConnectionPool::SetCharset(charset='utf8mb4', this=0x2328097ba10)
+[2019-12-15 20:59:50.869] [mariadb] [debug] Connection::SetCharset(charset='utf8mb4', this=0x23280f9b040, connection=0x23280970440)
+[2019-12-15 20:59:50.869] [mariadb] [debug] Connection::SetCharset(charset='utf8mb4', this=0x232810ac040, connection=0x2328074e470)
+[2019-12-15 20:59:50.869] [mariadb] [debug] Connection::SetCharset(charset='utf8mb4', this=0x232811b9040, connection=0x232809bd3d0)
+[2019-12-15 20:59:50.870] [mariadb] [debug] Connection::SetCharset(charset='utf8mb4', this=0x232812cb040, connection=0x232809c74e0)
+[2019-12-15 20:59:50.870] [mariadb] [debug] mariadb_set_charset: return value: 'true' ([string "orp/server/database/database_s.lua"]:19)
+[2019-12-15 20:59:54.869] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='76561198291141818')
+[2019-12-15 20:59:54.869] [mariadb] [debug] Connection::EscapeString(src='76561198291141818', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 20:59:54.869] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '76561198291141818'
+[2019-12-15 20:59:54.869] [mariadb] [debug] mariadb_prepare: return value: 'SELECT id FROM accounts WHERE steamid = '76561198291141818' LIMIT 1;' ([string "orp/server/accounts/accounts_s.lua"]:19)
+[2019-12-15 20:59:54.869] [mariadb] [debug] Callback::Create(state=0x23280733098, func=0x232809626f0, len(args)=1)
+[2019-12-15 20:59:54.869] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-15 20:59:54.869] [mariadb] [debug] Handle::Execute(this=0x23280981290, type=2, query=0x23280abc790)
+[2019-12-15 20:59:54.869] [mariadb] [debug] ConnectionPool::Queue(query=0x23280abc790, this=0x2328097ba10)
+[2019-12-15 20:59:54.869] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-15 20:59:54.869] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/accounts/accounts_s.lua"]:22)
+[2019-12-15 20:59:54.869] [mariadb] [debug] Connection::Execute(query=0x23280abc790, this=0x23280f9b040, connection=0x23280970440)
+[2019-12-15 20:59:54.869] [mariadb] [debug] Query::Execute(this=0x23280abc790, connection=0x23280970440)
+[2019-12-15 20:59:54.870] [mariadb] [info] query "SELECT id FROM accounts WHERE steamid = '76561198291141818' LIMIT 1;" successfully executed within 0.313 milliseconds
+[2019-12-15 20:59:54.870] [mariadb] [debug] ResultSet::Create(connection=0x23280970440, query_str='SELECT id FROM accounts WHERE steamid = '76561198291141818' LIMIT 1;')
+[2019-12-15 20:59:54.870] [mariadb] [debug] created new resultset '0x23280a868f0'
+[2019-12-15 20:59:54.870] [mariadb] [debug] fetched MariaDB result '0x23280989670'
+[2019-12-15 20:59:54.870] [mariadb] [debug] allocated 32 bytes for Lua result
+[2019-12-15 20:59:54.871] [mariadb] [debug] Callback::Execute(state=0x23280733098, func=0x232809626f0, len(args)=1)
+[2019-12-15 20:59:54.871] [mariadb] [debug] executing callback...
+[2019-12-15 20:59:54.871] [mariadb] [debug] mariadb_get_row_count: return value: '1' ([string "orp/server/accounts/accounts_s.lua"]:33)
+[2019-12-15 20:59:54.871] [mariadb] [debug] mariadb_get_value_index: return value: '14' ([string "orp/server/accounts/accounts_s.lua"]:38)
+[2019-12-15 20:59:54.871] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='14')
+[2019-12-15 20:59:54.871] [mariadb] [debug] Connection::EscapeString(src='14', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 20:59:54.871] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '14'
+[2019-12-15 20:59:54.871] [mariadb] [debug] mariadb_prepare: return value: 'SELECT FROM_UNIXTIME(bans.ban_time), bans.reason FROM bans WHERE bans.id = 14;' ([string "orp/server/accounts/accounts_s.lua"]:40)
+[2019-12-15 20:59:54.871] [mariadb] [debug] Callback::Create(state=0x23280733098, func=0x23280962630, len(args)=1)
+[2019-12-15 20:59:54.871] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-15 20:59:54.871] [mariadb] [debug] Handle::Execute(this=0x23280981290, type=2, query=0x23280abd080)
+[2019-12-15 20:59:54.871] [mariadb] [debug] ConnectionPool::Queue(query=0x23280abd080, this=0x2328097ba10)
+[2019-12-15 20:59:54.871] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-15 20:59:54.871] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/accounts/accounts_s.lua"]:43)
+[2019-12-15 20:59:54.871] [mariadb] [info] Callback successfully executed.
+[2019-12-15 20:59:54.871] [mariadb] [debug] Connection::Execute(query=0x23280abd080, this=0x232810ac040, connection=0x2328074e470)
+[2019-12-15 20:59:54.871] [mariadb] [debug] Query::Execute(this=0x23280abd080, connection=0x2328074e470)
+[2019-12-15 20:59:54.871] [mariadb] [info] query "SELECT FROM_UNIXTIME(bans.ban_time), bans.reason FROM bans WHERE bans.id = 14;" successfully executed within 0.195 milliseconds
+[2019-12-15 20:59:54.871] [mariadb] [debug] ResultSet::Create(connection=0x2328074e470, query_str='SELECT FROM_UNIXTIME(bans.ban_time), bans.reason FROM bans WHERE bans.id = 14;')
+[2019-12-15 20:59:54.871] [mariadb] [debug] created new resultset '0x23280a868f0'
+[2019-12-15 20:59:54.871] [mariadb] [debug] fetched MariaDB result '0x232809890d0'
+[2019-12-15 20:59:54.871] [mariadb] [debug] allocated 0 bytes for Lua result
+[2019-12-15 20:59:54.873] [mariadb] [debug] Callback::Execute(state=0x23280733098, func=0x23280962630, len(args)=1)
+[2019-12-15 20:59:54.873] [mariadb] [debug] executing callback...
+[2019-12-15 20:59:54.873] [mariadb] [debug] mariadb_get_row_count: return value: '0' ([string "orp/server/accounts/accounts_s.lua"]:48)
+[2019-12-15 20:59:54.873] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='127.0.0.1')
+[2019-12-15 20:59:54.873] [mariadb] [debug] Connection::EscapeString(src='127.0.0.1', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 20:59:54.873] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '127.0.0.1'
+[2019-12-15 20:59:54.873] [mariadb] [debug] mariadb_prepare: return value: 'SELECT ipbans.reason FROM ipbans WHERE ipbans.ip = '127.0.0.1' LIMIT 1;' ([string "orp/server/accounts/accounts_s.lua"]:62)
+[2019-12-15 20:59:54.873] [mariadb] [debug] Callback::Create(state=0x23280733098, func=0x23280962930, len(args)=1)
+[2019-12-15 20:59:54.873] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-15 20:59:54.873] [mariadb] [debug] Handle::Execute(this=0x23280981290, type=2, query=0x23280abd700)
+[2019-12-15 20:59:54.873] [mariadb] [debug] ConnectionPool::Queue(query=0x23280abd700, this=0x2328097ba10)
+[2019-12-15 20:59:54.873] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-15 20:59:54.873] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/accounts/accounts_s.lua"]:65)
+[2019-12-15 20:59:54.873] [mariadb] [info] Callback successfully executed.
+[2019-12-15 20:59:54.873] [mariadb] [debug] Connection::Execute(query=0x23280abd700, this=0x232811b9040, connection=0x232809bd3d0)
+[2019-12-15 20:59:54.873] [mariadb] [debug] Query::Execute(this=0x23280abd700, connection=0x232809bd3d0)
+[2019-12-15 20:59:54.873] [mariadb] [info] query "SELECT ipbans.reason FROM ipbans WHERE ipbans.ip = '127.0.0.1' LIMIT 1;" successfully executed within 0.263 milliseconds
+[2019-12-15 20:59:54.873] [mariadb] [debug] ResultSet::Create(connection=0x232809bd3d0, query_str='SELECT ipbans.reason FROM ipbans WHERE ipbans.ip = '127.0.0.1' LIMIT 1;')
+[2019-12-15 20:59:54.873] [mariadb] [debug] created new resultset '0x23280a87160'
+[2019-12-15 20:59:54.873] [mariadb] [debug] fetched MariaDB result '0x23280989cb0'
+[2019-12-15 20:59:54.873] [mariadb] [debug] allocated 0 bytes for Lua result
+[2019-12-15 20:59:54.875] [mariadb] [debug] Callback::Execute(state=0x23280733098, func=0x23280962930, len(args)=1)
+[2019-12-15 20:59:54.875] [mariadb] [debug] executing callback...
+[2019-12-15 20:59:54.875] [mariadb] [debug] mariadb_get_row_count: return value: '0' ([string "orp/server/accounts/accounts_s.lua"]:69)
+[2019-12-15 20:59:54.875] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='14')
+[2019-12-15 20:59:54.875] [mariadb] [debug] Connection::EscapeString(src='14', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 20:59:54.875] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '14'
+[2019-12-15 20:59:54.875] [mariadb] [debug] mariadb_prepare: return value: 'SELECT * FROM accounts WHERE id = 14;' ([string "orp/server/accounts/accounts_s.lua"]:126)
+[2019-12-15 20:59:54.875] [mariadb] [debug] Callback::Create(state=0x23280733098, func=0x23280962170, len(args)=1)
+[2019-12-15 20:59:54.875] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-15 20:59:54.875] [mariadb] [debug] Handle::Execute(this=0x23280981290, type=2, query=0x23280abc450)
+[2019-12-15 20:59:54.875] [mariadb] [debug] ConnectionPool::Queue(query=0x23280abc450, this=0x2328097ba10)
+[2019-12-15 20:59:54.875] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-15 20:59:54.875] [mariadb] [debug] Connection::Execute(query=0x23280abc450, this=0x232812cb040, connection=0x232809c74e0)
+[2019-12-15 20:59:54.875] [mariadb] [debug] Query::Execute(this=0x23280abc450, connection=0x232809c74e0)
+[2019-12-15 20:59:54.875] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/accounts/accounts_s.lua"]:129)
+[2019-12-15 20:59:54.875] [mariadb] [info] Callback successfully executed.
+[2019-12-15 20:59:54.875] [mariadb] [info] query "SELECT * FROM accounts WHERE id = 14;" successfully executed within 0.268 milliseconds
+[2019-12-15 20:59:54.875] [mariadb] [debug] ResultSet::Create(connection=0x232809c74e0, query_str='SELECT * FROM accounts WHERE id = 14;')
+[2019-12-15 20:59:54.875] [mariadb] [debug] created new resultset '0x23280a862b0'
+[2019-12-15 20:59:54.875] [mariadb] [debug] fetched MariaDB result '0x23280abd480'
+[2019-12-15 20:59:54.875] [mariadb] [debug] allocated 176 bytes for Lua result
+[2019-12-15 20:59:54.877] [mariadb] [debug] Callback::Execute(state=0x23280733098, func=0x23280962170, len(args)=1)
+[2019-12-15 20:59:54.877] [mariadb] [debug] executing callback...
+[2019-12-15 20:59:54.877] [mariadb] [debug] mariadb_get_row_count: return value: '1' ([string "orp/server/accounts/accounts_s.lua"]:133)
+[2019-12-15 20:59:54.877] [mariadb] [debug] mariadb_get_assoc: return value: array with 14 entries ([string "orp/server/accounts/accounts_s.lua"]:137)
+[2019-12-15 20:59:54.877] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='14')
+[2019-12-15 20:59:54.877] [mariadb] [debug] Connection::EscapeString(src='14', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 20:59:54.877] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '14'
+[2019-12-15 20:59:54.877] [mariadb] [debug] mariadb_prepare: return value: 'SELECT * FROM characters WHERE accountid = 14;' ([string "orp/server/accounts/accounts_s.lua"]:153)
+[2019-12-15 20:59:54.877] [mariadb] [debug] Callback::Create(state=0x23280733098, func=0x232809626b0, len(args)=1)
+[2019-12-15 20:59:54.877] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-15 20:59:54.877] [mariadb] [debug] Handle::Execute(this=0x23280981290, type=2, query=0x23280abc040)
+[2019-12-15 20:59:54.877] [mariadb] [debug] ConnectionPool::Queue(query=0x23280abc040, this=0x2328097ba10)
+[2019-12-15 20:59:54.877] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-15 20:59:54.877] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/accounts/accounts_s.lua"]:156)
+[2019-12-15 20:59:54.877] [mariadb] [info] Callback successfully executed.
+[2019-12-15 20:59:54.877] [mariadb] [debug] Connection::Execute(query=0x23280abc040, this=0x23280f9b040, connection=0x23280970440)
+[2019-12-15 20:59:54.877] [mariadb] [debug] Query::Execute(this=0x23280abc040, connection=0x23280970440)
+[2019-12-15 20:59:54.877] [mariadb] [info] query "SELECT * FROM characters WHERE accountid = 14;" successfully executed within 0.374 milliseconds
+[2019-12-15 20:59:54.877] [mariadb] [debug] ResultSet::Create(connection=0x23280970440, query_str='SELECT * FROM characters WHERE accountid = 14;')
+[2019-12-15 20:59:54.877] [mariadb] [debug] created new resultset '0x23280a86fd0'
+[2019-12-15 20:59:54.877] [mariadb] [debug] fetched MariaDB result '0x23280abd480'
+[2019-12-15 20:59:54.877] [mariadb] [debug] allocated 744 bytes for Lua result
+[2019-12-15 20:59:54.879] [mariadb] [debug] Callback::Execute(state=0x23280733098, func=0x232809626b0, len(args)=1)
+[2019-12-15 20:59:54.879] [mariadb] [debug] executing callback...
+[2019-12-15 20:59:54.879] [mariadb] [debug] mariadb_get_row_count: return value: '3' ([string "orp/server/accounts/accounts_s.lua"]:161)
+[2019-12-15 20:59:54.879] [mariadb] [debug] mariadb_get_row_count: return value: '3' ([string "orp/server/accounts/accounts_s.lua"]:167)
+[2019-12-15 20:59:54.879] [mariadb] [debug] mariadb_get_assoc: return value: array with 14 entries ([string "orp/server/accounts/accounts_s.lua"]:168)
+[2019-12-15 20:59:54.879] [mariadb] [debug] mariadb_get_assoc: return value: array with 14 entries ([string "orp/server/accounts/accounts_s.lua"]:168)
+[2019-12-15 20:59:54.879] [mariadb] [debug] mariadb_get_assoc: return value: array with 14 entries ([string "orp/server/accounts/accounts_s.lua"]:168)
+[2019-12-15 20:59:54.879] [mariadb] [info] Callback successfully executed.
+[2019-12-15 21:00:01.655] [mariadb] [debug] mariadb_prepare: return value: 'SELECT * FROM characters WHERE id = 2;' ([string "orp/server/accounts/accounts_s.lua"]:205)
+[2019-12-15 21:00:01.655] [mariadb] [debug] Callback::Create(state=0x23280733098, func=0x23280a504b0, len(args)=2)
+[2019-12-15 21:00:01.655] [mariadb] [debug] created delayed callback with 2 parameters
+[2019-12-15 21:00:01.655] [mariadb] [debug] Handle::Execute(this=0x23280981290, type=2, query=0x23280abc790)
+[2019-12-15 21:00:01.655] [mariadb] [debug] ConnectionPool::Queue(query=0x23280abc790, this=0x2328097ba10)
+[2019-12-15 21:00:01.655] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-15 21:00:01.655] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/accounts/accounts_s.lua"]:208)
+[2019-12-15 21:00:01.655] [mariadb] [debug] Connection::Execute(query=0x23280abc790, this=0x232810ac040, connection=0x2328074e470)
+[2019-12-15 21:00:01.655] [mariadb] [debug] Query::Execute(this=0x23280abc790, connection=0x2328074e470)
+[2019-12-15 21:00:01.655] [mariadb] [info] query "SELECT * FROM characters WHERE id = 2;" successfully executed within 0.363 milliseconds
+[2019-12-15 21:00:01.655] [mariadb] [debug] ResultSet::Create(connection=0x2328074e470, query_str='SELECT * FROM characters WHERE id = 2;')
+[2019-12-15 21:00:01.655] [mariadb] [debug] created new resultset '0x23280a86080'
+[2019-12-15 21:00:01.655] [mariadb] [debug] fetched MariaDB result '0x23280abced0'
+[2019-12-15 21:00:01.655] [mariadb] [debug] allocated 248 bytes for Lua result
+[2019-12-15 21:00:01.657] [mariadb] [debug] Callback::Execute(state=0x23280733098, func=0x23280a504b0, len(args)=2)
+[2019-12-15 21:00:01.657] [mariadb] [debug] executing callback...
+[2019-12-15 21:00:01.657] [mariadb] [debug] mariadb_get_row_count: return value: '1' ([string "orp/server/accounts/accounts_s.lua"]:212)
+[2019-12-15 21:00:01.657] [mariadb] [debug] mariadb_get_assoc: return value: array with 14 entries ([string "orp/server/accounts/accounts_s.lua"]:217)
+[2019-12-15 21:00:01.657] [mariadb] [info] Callback successfully executed.
+[2019-12-15 21:00:35.643] [mariadb] [debug] mariadb_prepare: return value: 'UPDATE accounts SET admin = 5, helper = '0' WHERE id = 2 LIMIT 1;' ([string "orp/server/accounts/accounts_s.lua"]:319)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::Execute(this=0x23280981290, type=1, query=0x23280abc1e0)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-15 21:00:35.643] [mariadb] [debug] mariadb_query: return value: 'true' ([string "orp/server/accounts/accounts_s.lua"]:325)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Connection::Execute(query=0x23280abc1e0, this=0x23280e89040, connection=0x2328096fe30)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Query::Execute(this=0x23280abc1e0, connection=0x2328096fe30)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='Phillip')
+[2019-12-15 21:00:35.643] [mariadb] [debug] Connection::EscapeString(src='Phillip', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: 'Phillip'
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='Hughes')
+[2019-12-15 21:00:35.643] [mariadb] [debug] Connection::EscapeString(src='Hughes', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: 'Hughes'
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='125905.546875')
+[2019-12-15 21:00:35.643] [mariadb] [debug] Connection::EscapeString(src='125905.546875', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '125905.546875'
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='80002.25')
+[2019-12-15 21:00:35.643] [mariadb] [debug] Connection::EscapeString(src='80002.25', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '80002.25'
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='1566.9010009766')
+[2019-12-15 21:00:35.643] [mariadb] [debug] Connection::EscapeString(src='1566.9010009766', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '1566.9010009766'
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString(this=0x23280981290, src='-167.39573669434')
+[2019-12-15 21:00:35.643] [mariadb] [debug] Connection::EscapeString(src='-167.39573669434', this=0x23280738670, connection=0x2328073aec0)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '-167.39573669434'
+[2019-12-15 21:00:35.643] [mariadb] [debug] mariadb_prepare: return value: 'UPDATE characters SET firstname = 'Phillip', lastname = 'Hughes', gender = '0', health = 100, armour = 0, cash = 100, bank = 1000, x = '125905.546875', y = '80002.25', z = '1566.9010009766', a = '-167.39573669434' WHERE id = 2' ([string "orp/server/accounts/accounts_s.lua"]:330)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::Execute(this=0x23280981290, type=1, query=0x23280abd970)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-15 21:00:35.643] [mariadb] [debug] mariadb_query: return value: 'true' ([string "orp/server/accounts/accounts_s.lua"]:347)
+[2019-12-15 21:00:35.643] [mariadb] [info] query "UPDATE accounts SET admin = 5, helper = '0' WHERE id = 2 LIMIT 1;" successfully executed within 0.403 milliseconds
+[2019-12-15 21:00:35.643] [mariadb] [debug] ResultSet::Create(connection=0x2328096fe30, query_str='UPDATE accounts SET admin = 5, helper = '0' WHERE id = 2 LIMIT 1;')
+[2019-12-15 21:00:35.643] [mariadb] [debug] created new resultset '0x23280a86e90'
+[2019-12-15 21:00:35.643] [mariadb] [debug] fetched MariaDB result '0x0'
+[2019-12-15 21:00:35.643] [mariadb] [debug] Connection::Execute(query=0x23280abd970, this=0x23280e89040, connection=0x2328096fe30)
+[2019-12-15 21:00:35.643] [mariadb] [debug] Query::Execute(this=0x23280abd970, connection=0x2328096fe30)
+[2019-12-15 21:00:35.644] [mariadb] [info] query "UPDATE characters SET firstname = 'Phillip', lastname = 'Hughes', gender = '0', health = 100, armour = 0, cash = 100, bank = 1000, x = '125905.546875', y = '80002.25', z = '1566.9010009766', a = '-167.39573669434' WHERE id = 2" successfully executed within 1.325 milliseconds
+[2019-12-15 21:00:35.644] [mariadb] [debug] ResultSet::Create(connection=0x2328096fe30, query_str='UPDATE characters SET firstname = 'Phillip', lastname = 'Hughes', gender = '0', health = 100, armour = 0, cash = 100, bank = 1000, x = '125905.546875', y = '80002.25', z = '1566.9010009766', a = '-167.39573669434' WHERE id = 2')
+[2019-12-15 21:00:35.644] [mariadb] [debug] created new resultset '0x23280a86ad0'
+[2019-12-15 21:00:35.644] [mariadb] [debug] fetched MariaDB result '0x0'

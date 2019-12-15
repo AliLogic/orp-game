@@ -548,3 +548,7 @@
 
 [2019-12-15 20:59:14] Loaded store 'install' from 'C:\steamcmd\orp-game\config\config.vdf' successfully
 [2019-12-15 20:59:15] Flushed store 'install' to 'C:\steamcmd\orp-game\config\config.vdf'
+
+
+[2019-12-15 20:59:50] Loaded store 'install' from 'C:\steamcmd\orp-game\config\config.vdf' successfully
+[2019-12-15 20:59:51] Flushed store 'install' to 'C:\steamcmd\orp-game\config\config.vdf'
