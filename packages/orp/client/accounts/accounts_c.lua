@@ -14,15 +14,20 @@ Dialog.addSelect(charviewnone, 1, "Select a character below:", 1, "(1) Create Ne
 local charview = nil
 local creation_slot = 0
 
-AddRemoteEvent("askClientCreation", function() 
+AddRemoteEvent("askClientCreation", function ()
     Dialog.show(charcreate)
 end)
 
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
+    if chardata == nil then
+        return Dialog.show(charviewnone)
+    end
+
     local count = 0
     for _ in pairs(chardata) do count = count + 1 end
     
     if count == 0 then
+        AddPlayerChat("Count is 0")
         Dialog.show(charviewnone)
     else
         local char = {}

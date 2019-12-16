@@ -117,9 +117,15 @@ function characterCreated(player)
 	PlayerData[player].id = mariadb_get_insert_id()
 	
 	print("Character ID "..PlayerData[player].id.." created for "..player)
+
+        PlayerData[player].x = 125773.0
+        PlayerData[player].y = 80246.0
+        PlayerData[player].z = 1645.0
+        PlayerData[player].a = 90.0
+
 	SetPlayerLoggedIn(player)
 
-	AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome to Onset Roleplay, '..GetPlayerName(player)..'.</>")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome to Onset Roleplay, "..PlayerData[player].name..".</>")
 end
 
 function LoadPlayerAccount(player)
@@ -361,6 +367,7 @@ function SetPlayerLoggedIn(player)
 	PlayerData[player].logged_in = true
 	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, PlayerData[player].z)
 	SetPlayerHeading(player, PlayerData[player].a)
+        SetPlayerDimension(player, 0)
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
     --CallEvent("OnPlayerJoined", player)
 end
