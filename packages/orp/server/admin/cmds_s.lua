@@ -141,6 +141,8 @@ function cmd_acv(player, model, plate)
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(v)ehicle <model> <plate>")
     end
 
+    model = tonumber(model)
+
     if model < 0 or model > 25 then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle model "..model.." does not exist.</>")
     end
@@ -152,7 +154,7 @@ function cmd_acv(player, model, plate)
     local x, y, z = GetPlayerLocation(player)
     local a = GetPlayerHeading(player)
     
-    local vehicle = Vehicle_Create(model, x, y, z, a)
+    local vehicle = Vehicle_Create(model, plate, x, y, z, a)
     if vehicle == false then
         AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..model.." wasn't able to be created!</>")
     else
@@ -161,13 +163,32 @@ function cmd_acv(player, model, plate)
     end
     return
 end
-
 AddCommand('acreatevehicle', cmd_acv)
 AddCommand('acv', cmd_acv)
 
+function cmd_aev(player, vehicle, ownerid)
+    if (PlayerData[player].admin < 2) then
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+    end
+
+    vehicle = tonumber(vehicle)
+    ownerid = tonumber(ownerid)
+
+    if vehicle == nil or ownerid == nil then
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <ownerid>")
+    end
+
+    VehicleData[vehicle].owner = tonumber(ownerid)
+    AddPlayerChat(player, 'vehicle owner set to '..ownerid)
+
+    print('Vehicle is now: '..VehicleData[vehicle].owner..', player owner ID is '..PlayerData[player].id)
+end
+AddCommand('aeditvehicle', cmd_aev)
+AddCommand('aev', cmd_aev)
+
 AddCommand("ahelp", function (player)
     if (PlayerData[player].admin < 1) then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</model>")
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</vehicle>")
     end
 
     if PlayerData[player].admin > 0 then
@@ -180,7 +201,7 @@ AddCommand("ahelp", function (player)
         AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>None")
     end
     if PlayerData[player].admin > 3 then
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle")
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle")
     end
     if PlayerData[player].admin > 4 then
         AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/apos /asetadmin")

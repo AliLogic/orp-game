@@ -11,7 +11,7 @@
 		"server/helper/helper_s.lua",
 		"server/helper/cmds_s.lua",
 		"server/vehicle/vehicle_s.lua",
-		"serrver/vehicle/cmds_s.lua",
+		"server/vehicle/cmds_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [

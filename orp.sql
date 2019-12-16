@@ -219,6 +219,29 @@ CREATE TABLE IF NOT EXISTS `log_weaponshot` (
 /*!40000 ALTER TABLE `log_weaponshot` DISABLE KEYS */;
 /*!40000 ALTER TABLE `log_weaponshot` ENABLE KEYS */;
 
+-- Dumping structure for table ORP.vehicles
+CREATE TABLE IF NOT EXISTS `vehicles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `owner` int(11) NOT NULL DEFAULT 0,
+  `model` int(11) NOT NULL,
+  `plate` varchar(13) NOT NULL DEFAULT 'ONSET',
+  `faction` int(11) NOT NULL DEFAULT 0,
+  `x` varchar(50) NOT NULL,
+  `y` varchar(50) NOT NULL,
+  `z` varchar(50) NOT NULL,
+  `a` varchar(50) NOT NULL,
+  `r` int(11) NOT NULL,
+  `g` int(11) NOT NULL,
+  `b` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- Dumping data for table ORP.vehicles: ~0 rows (approximately)
+/*!40000 ALTER TABLE `vehicles` DISABLE KEYS */;
+INSERT INTO `vehicles` (`id`, `owner`, `model`, `plate`, `faction`, `x`, `y`, `z`, `a`, `r`, `g`, `b`) VALUES
+	(1, 2, 12, '1', 0, '129135.2109375', '79771.65625', '1469.5354003906', '-90.713439941406', 255, 255, 255);
+/*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

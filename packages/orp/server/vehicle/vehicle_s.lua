@@ -45,7 +45,7 @@ function Vehicle_Create(model, plate, x, y, z, a)
     CreateVehicleData(vehicle)
     SetVehicleLicensePlate(vehicle, plate)
 
-    local r, g, b, a = HexToRGBA(GetVehicleColor(vehicle))
+    local r, g, b, al = HexToRGBA(GetVehicleColor(vehicle))
     
     local query = mariadb_prepare(sql, "INSERT INTO vehicles (model, plate, x, y, z, a, r, g, b) VALUES (?, '?', '?', '?', '?', '?', ?, ?, ?);",
         model,
@@ -59,7 +59,7 @@ function Vehicle_Create(model, plate, x, y, z, a)
         b
         )
 
-    mariadb_async_query(sql, query, 'OnVehicleCreated', vehicle, model, plate, x, y, z, a, r, g, b)
+    mariadb_async_query(sql, query, OnVehicleCreated, vehicle, model, plate, x, y, z, a, r, g, b)
     return vehicle
 end
 
@@ -123,8 +123,10 @@ function OnVehicleLoaded(id)
         VehicleData[vehicle].g = result['g']
         VehicleData[vehicle].b = result['b']
 
-        VehicleData[vehicle].owner = result['owner']
+        VehicleData[vehicle].owner = tonumber(result['owner'])
         VehicleData[vehicle].faction = result['faction']
+
+        print(id.."'s owner: "..VehicleData[vehicle].owner)
 
         SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
         SetVehicleColor(vehicle, RGB(VehicleData[vehicle].r, VehicleData[vehicle].g, VehicleData[vehicle].b))
@@ -155,6 +157,7 @@ function OnVehicleUnloaded(vehicle)
         print('Vehicle unload unsuccessful, id: '..vehicle)
     else
         print('Vehicle unload successful, id: '..vehicle)
+        DestroyVehicle(vehicle)
     end   
 end
 
@@ -176,9 +179,9 @@ function OnLoadVehicles()
 end
 
 AddEvent('UnloadVehicles', function ()
-    for _, v in pairs(VehicleData) do
-        print('Unloading Vehicle ID '..v)
-        Vehicle_Unload(v)
+    for i = 1, #VehicleData, 1 do
+        print('Unloading Vehicle ID: '..i)
+        Vehicle_Unload(i)
     end
 end)
 
