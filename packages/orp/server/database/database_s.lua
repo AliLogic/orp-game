@@ -17,6 +17,8 @@ AddEvent("OnPackageStart", function ()
 	if (sql ~= false) then
 		print("MariaDB: Connected to " .. SQL_HOST)
 		mariadb_set_charset(sql, SQL_CHAR)
+
+		CallEvent('LoadVehicles')
 	else
 		print("MariaDB: Connection failed to " .. SQL_HOST .. ", see mariadb_log file")
 
@@ -29,5 +31,6 @@ end)
 
 -- Cleanup the MariaDB connection when the package/server stops
 AddEvent("OnPackageStop", function ()
+	CallEvent('UnloadVehicles')
     mariadb_close(sql)
 end)
