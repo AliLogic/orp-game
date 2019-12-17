@@ -100,6 +100,7 @@ AddEvent("OnKeyPress", function (key)
 	if key == "V" then
 		local bEnable = not IsFirstPersonCamera()
 		EnableFirstPersonCamera(bEnable)
+		SetNearClipPlane(15)
 	end
 end)
 

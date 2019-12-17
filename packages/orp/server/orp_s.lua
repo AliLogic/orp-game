@@ -10,7 +10,8 @@ Contributors:
 
 AddEvent("OnPlayerJoin", function (player)
 	SetPlayerDimension(player, player)
-	SetPlayerSpawnLocation(player, 179796.234375, 10621.763671875, 10394.176757813, 90.0)
+    SetPlayerSpawnLocation(player, 179796.234375, 10621.763671875, 10394.176757813, 90.0)
+    CallRemoteEvent(player, "FreezePlayer")    
 end)
 
 AddEvent("OnPlayerDeath", function (player, instigator)

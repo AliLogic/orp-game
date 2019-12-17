@@ -283,6 +283,8 @@ function CreatePlayerData(player)
 	PlayerData[player].z = 0.0
 	PlayerData[player].a = 0.0
 
+	PlayerData[player].is_frozen = false
+
     print("Data created for: "..player)
 end
 
@@ -372,7 +374,7 @@ function SetPlayerLoggedIn(player)
     --CallEvent("OnPlayerJoined", player)
 end
 
-function FreezePlayer(player, toggle) return CallRemoteEvent(player, 'FreezePlayer', toggle) end
+function FreezePlayer(player) return CallRemoteEvent(player, 'FreezePlayer') end
 
 AddRemoteEvent('accounts:kick', function (player)
 	KickPlayer(player, "You decided to quit the server!")
