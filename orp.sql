@@ -158,6 +158,19 @@ CREATE TABLE IF NOT EXISTS `faction_ranks` (
 /*!40000 ALTER TABLE `faction_ranks` DISABLE KEYS */;
 /*!40000 ALTER TABLE `faction_ranks` ENABLE KEYS */;
 
+-- Dumping structure for table ORP.faction_members
+CREATE TABLE IF NOT EXISTS `faction_members` (
+  `char_id` int(11) NOT NULL,
+  `faction_id` int(11) NOT NULL,
+  `rank_id` int(11) NOT NULL,
+  FOREIGN KEY (faction_id) REFERENCES factions(id),
+  FOREIGN KEY (char_id) REFERENCES characters(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table ORP.faction_members: ~0 rows (approximately)
+/*!40000 ALTER TABLE `faction_members` DISABLE KEYS */;
+/*!40000 ALTER TABLE `faction_members` ENABLE KEYS */;
+
 -- Dumping structure for table ORP.ipbans
 CREATE TABLE IF NOT EXISTS `ipbans` (
   `ip` varchar(16) NOT NULL,

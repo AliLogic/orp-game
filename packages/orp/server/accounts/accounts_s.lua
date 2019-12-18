@@ -15,10 +15,11 @@ end)
 function OnPlayerSteamAuth(player)
 	CreatePlayerData(player)
 	FreezePlayer(player)
-		
+
 	-- First check if there is an account for this player
 	local query = mariadb_prepare(sql, "SELECT id FROM accounts WHERE steamid = '?' LIMIT 1;",
-	tostring(GetPlayerSteamId(player)))
+		tostring(GetPlayerSteamId(player))
+	)
 
 	mariadb_async_query(sql, query, OnAccountLoadId, player)
 end
@@ -239,9 +240,11 @@ function OnCharacterLoaded(player, id)
 
 		SetPlayerHealth(player, tonumber(result['health']))
 		SetPlayerArmor(player, tonumber(result['armour']))
-		
+
 		SetPlayerLoggedIn(player)
-		
+
+		LoadCharacterFaction(player, id)
+
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay "..GetPlayerName(player)..".</>")
 		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
 	end
