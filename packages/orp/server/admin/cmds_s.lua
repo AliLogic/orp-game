@@ -168,10 +168,10 @@ AddCommand("asetadmin", function (player, target, level)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Admin levels range from 0 - 5.</>")
 	end
 
-	PlayerData[player].admin = level
+	PlayerData[target].admin = level
 
 	AddPlayerChat(player, string.format("<span color=\"%s\">You have set %s (%s, %d)'s admin rank to %s (%d).</>",
-		colour.COLOUR_YELLOW(), GetPlayerName(target), PlayerData[player].name, target, GetPlayerAdminRank(level), level))
+		colour.COLOUR_YELLOW(), GetPlayerName(target), PlayerData[target].name, target, GetPlayerAdminRank(level), level))
 
 	AddPlayerChat(player, string.format("<span color=\"%s\">%s %s has set your admin rank to %s (%d).</>",
 		colour.COLOUR_YELLOW(), GetPlayerAdminRank(player), PlayerData[player].name, GetPlayerAdminRank(level), level))
