@@ -185,13 +185,14 @@ AddEvent('UnloadVehicles', function ()
 	end
 end)
 
-AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
+-- AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
+AddRemoteEvent("OnPlayerStartEnterVehicle", function(player, vehicle, seat)
 	if VehicleData[vehicle] ~= nil then
 		if VehicleData[vehicle].is_locked == true then
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This vehicle is locked, you cannot enter it!</>")
 
-			RemovePlayerFromVehicle(player)
 			Slap(player)
+			return false
 		end
 	end
 end)
