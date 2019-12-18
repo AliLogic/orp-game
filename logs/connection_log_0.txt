@@ -1971,3 +1971,17 @@
 [2019-12-18 18:15:06] [1,3] Connect() starting connection (eNetQOSLevelMedium, cm1-mad1.cm.steampowered.com:27020, WebSocket)
 [2019-12-18 18:15:06] [1,3] ConnectionCompleted() (155.133.246.68:27020, WebSocket)
 [2019-12-18 18:15:07] [1,3] RecvMsgClientLogOnResponse() : [A:1:1903610889:13802] 'OK'
+
+
+[2019-12-18 18:18:41] Log session started
+[2019-12-18 18:18:41] [0,0] SetSteamID( [A:1:0:0] )
+[2019-12-18 18:18:41] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-18 18:18:41] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-18 18:18:41] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-18 18:18:41] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-18 18:18:41] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-18 18:18:41] CCMInterface::OnNetworkDeviceStateChange -- Saw device up, connecting to Steam
+[2019-12-18 18:18:42] [0,0] Server says 50% of connections should be websockets, we rolled 92 - using UDP as default.
+[2019-12-18 18:18:42] [1,2] Connect() starting connection (eNetQOSLevelMedium, 162.254.196.84:27017, UDP)
+[2019-12-18 18:18:42] [1,2] ConnectionCompleted() (155.133.246.69:27019, UDP)
+[2019-12-18 18:18:43] [1,2] RecvMsgClientLogOnResponse() : [A:1:1967861769:13802] 'OK'
