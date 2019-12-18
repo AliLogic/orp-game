@@ -1,13 +1,16 @@
 function GetPlayerAdminRank(player)
-    if PlayerData[player].admin == 1 then
+
+    local admin_level = tonumber(PlayerData[player].admin)
+
+    if admin_level == 1 then
         return 'Administrator'
-    elseif PlayerData[player].admin == 2 then
+    elseif admin_level == 2 then
         return 'Senior Administrator'
-    elseif PlayerData[player].admin == 3 then
+    elseif admin_level == 3 then
         return 'Lead Administrator'
-    elseif PlayerData[player].admin == 4 then
+    elseif admin_level == 4 then
         return 'Developer'
-    elseif PlayerData[player].admin == 5 then
+    elseif admin_level == 5 then
         return 'Management'
     else
         return 'None'
