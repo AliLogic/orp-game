@@ -17,10 +17,13 @@ function CreateFactionData(factionid)
 	FactionData[factionid].leadership_rank = 0
 	FactionData[factionid].radio_dimension = 0
 	FactionData[factionid].bank = 0
+
+	FactionRankData[factionid] = {}
 end
 
 function DestroyFactionData(factionid)
 	FactionData[factionid] = {}
+	FactionRankData[factionid] = {}
 end
 
 function Faction_Create(name, short_name, leadership_rank)
@@ -78,6 +81,21 @@ function OnFactionLoaded(factionid)
 		FactionData[factionid].leadership_rank = tonumber(result['leadership_rank'])
 		FactionData[factionid].radio_dimension = tonumber(result['radio_dimension'])
 		FactionData[factionid].bank = tonumber(result['bank'])
+
+		mariadb_async_query(sql, "SELECT * FROM factions_ranks WHERE id = "..FactionData[factionid].id, OnFactionRankLoaded)
+	end
+end
+
+function OnFactionRankLoaded(factionid)
+	local row_count = mariadb_get_row_count()
+
+	if row_count then
+		for i = 1, row_count do
+			local rank_id = mariadb_get_value_name_int(i, "rank_id")
+
+			FactionRankData[factionid] = {}
+			FactionRankData[factionid][rank_id].rank_name = mariadb_get_value_name(i, "rank_name")
+		end
 	end
 end
 
