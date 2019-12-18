@@ -801,3 +801,16 @@
 [2019-12-17 20:19:49] Loaded store 'install' from 'C:\steamcmd\orp-game\config\config.vdf' successfully
 [2019-12-17 20:19:50] Flushed store 'install' to 'C:\steamcmd\orp-game\config\config.vdf'
 [2019-12-17 20:19:51] Flushed store 'install' to 'C:\steamcmd\orp-game\config\config.vdf'
+
+
+[2019-12-18 18:10:50] Loaded store 'install' from 'C:\steamcmd\orp-game\config\config.vdf' successfully
+[2019-12-18 18:10:52] Flushed store 'install' to 'C:\steamcmd\orp-game\config\config.vdf'
+
+
+[2019-12-18 18:12:22] Loaded store 'install' from 'C:\steamcmd\orp-game\config\config.vdf' successfully
+[2019-12-18 18:12:23] Flushed store 'install' to 'C:\steamcmd\orp-game\config\config.vdf'
+
+
+[2019-12-18 18:15:05] Loaded store 'install' from 'C:\steamcmd\orp-game\config\config.vdf' successfully
+[2019-12-18 18:15:07] Flushed store 'install' to 'C:\steamcmd\orp-game\config\config.vdf'
+[2019-12-18 18:15:07] Flushed store 'install' to 'C:\steamcmd\orp-game\config\config.vdf'

@@ -20,6 +20,8 @@ AddEvent("OnPackageStart", function ()
 
 		CallEvent('LoadVehicles')
 		CallEvent('LoadFactions')
+
+		CallRemoteEvent('CreateMinimap')
 	else
 		print("MariaDB: Connection failed to " .. SQL_HOST .. ", see mariadb_log file")
 
