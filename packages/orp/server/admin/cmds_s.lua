@@ -249,7 +249,7 @@ function cmd_acv(player, model, plate)
 
 	local x, y, z = GetPlayerLocation(player)
 	local a = GetPlayerHeading(player)
-	
+
 	local vehicle = Vehicle_Create(model, plate, x, y, z, a)
 	if vehicle == false then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..model.." wasn't able to be created!</>")

@@ -6,37 +6,37 @@ CharacterData = {}
 AddEvent("OnPackageStart", function ()
 	CreateTimer(function()
 		for k, v in pairs(GetAllPlayers()) do
-            SavePlayerAccount(v)
-            print("All accounts have been saved!")
+			SavePlayerAccount(v)
+			print("All accounts have been saved!")
 		end
-    end, 1800000)
+	end, 1800000)
 end)
 
 function OnPlayerSteamAuth(player)
 	CreatePlayerData(player)
 	FreezePlayer(player)
-        
-    -- First check if there is an account for this player
+		
+	-- First check if there is an account for this player
 	local query = mariadb_prepare(sql, "SELECT id FROM accounts WHERE steamid = '?' LIMIT 1;",
-    tostring(GetPlayerSteamId(player)))
+	tostring(GetPlayerSteamId(player)))
 
-    mariadb_async_query(sql, query, OnAccountLoadId, player)
+	mariadb_async_query(sql, query, OnAccountLoadId, player)
 end
 AddEvent("OnPlayerSteamAuth", OnPlayerSteamAuth)
 
 function OnPlayerQuit(player)
-    SavePlayerAccount(player)
-    DestroyPlayerData(player)
+	SavePlayerAccount(player)
+	DestroyPlayerData(player)
 end
 AddEvent("OnPlayerQuit", OnPlayerQuit)
 
 function OnAccountLoadId(player)
 	if (mariadb_get_row_count() == 0) then
 		--There is no account for this player, continue by checking if their IP was banned		
-        CheckForIPBan(player)
+		CheckForIPBan(player)
 	else
 		--There is an account for this player, continue by checking if it's banned
-        PlayerData[player].accountid = mariadb_get_value_index(1, 1)
+		PlayerData[player].accountid = mariadb_get_value_index(1, 1)
 
 		local query = mariadb_prepare(sql, "SELECT FROM_UNIXTIME(bans.ban_time), bans.reason FROM bans WHERE bans.id = ?;",
 			PlayerData[player].accountid)
@@ -78,8 +78,8 @@ function OnAccountCheckIpBan(player)
 		print("Kicking "..GetPlayerName(player).." because their IP was banned")
 
 		local result = mariadb_get_assoc(1)
-        
-        KickPlayer(player, "🚨 <span color=\""..colour.COLOR_LIGHTRED()"\">You have been banned from the server.</>")
+		
+		KickPlayer(player, "🚨 <span color=\""..colour.COLOR_LIGHTRED()"\">You have been banned from the server.</>")
 	end
 end
 
@@ -119,10 +119,10 @@ function characterCreated(player)
 	
 	print("Character ID "..PlayerData[player].id.." created for "..player)
 
-        PlayerData[player].x = 125773.0
-        PlayerData[player].y = 80246.0
-        PlayerData[player].z = 1645.0
-        PlayerData[player].a = 90.0
+		PlayerData[player].x = 125773.0
+		PlayerData[player].y = 80246.0
+		PlayerData[player].z = 1645.0
+		PlayerData[player].a = 90.0
 
 	SetPlayerLoggedIn(player)
 
@@ -154,8 +154,8 @@ function OnAccountLoaded(player)
 
 		--SetPlayerHealth(player, tonumber(result['health']))
 		--SetPlayerArmor(player, tonumber(result['armor']))
-        --setPlayerThirst(player, tonumber(result['thirst']))
-        --setPlayerHunger(player, tonumber(result['hunger']))
+		--setPlayerThirst(player, tonumber(result['thirst']))
+		--setPlayerHunger(player, tonumber(result['hunger']))
 
 		local query = mariadb_prepare(sql, "SELECT * FROM characters WHERE accountid = ?;",
 			PlayerData[player].accountid)
@@ -264,17 +264,20 @@ function CreatePlayerData(player)
 	PlayerData[player].inventory = {}
 
 	PlayerData[player].logged_in = false
-	
-    PlayerData[player].admin = 0
+
+	PlayerData[player].admin = 0
 	PlayerData[player].helper = 0
-	
+
 	PlayerData[player].health = 100.0
 	PlayerData[player].armour = 0.0
 
 	PlayerData[player].cash = 100
 	PlayerData[player].bank = 1000
 
-    PlayerData[player].steamid = GetPlayerSteamId(player)
+	PlayerData[player].faction = 0
+	PlayerData[player].faction_rank = 0
+
+	PlayerData[player].steamid = GetPlayerSteamId(player)
 	PlayerData[player].job_vehicle = nil
 
 	PlayerData[player].job = ""
@@ -289,7 +292,7 @@ function CreatePlayerData(player)
 	PlayerData[player].is_frozen = false
 	PlayerData[player].label = nil -- 3d text label
 
-    print("Data created for: "..player)
+	print("Data created for: "..player)
 end
 
 function CreateCharacterData(player, character)
@@ -318,8 +321,8 @@ function SavePlayerAccount(player)
 		PlayerData[player].cash,
 		PlayerData[player].bank_balance,
 		GetPlayerHealth(player),
-        GetPlayerArmor(player),
-        PlayerData[player].hunger,
+		GetPlayerArmor(player),
+		PlayerData[player].hunger,
 		PlayerData[player].thirst,
 		PlayerData[player].name,
 		json_encode(PlayerData[player].clothing),
@@ -334,13 +337,13 @@ function SavePlayerAccount(player)
 		PlayerData[player].helper,
 		GetPlayerLocale(player),
 		PlayerData[player].id
-		)
-        
+	)
+
 	mariadb_query(sql, query)
 
 	PlayerData[player].x, PlayerData[player].y, PlayerData[player].z = GetPlayerLocation(player)
 	PlayerData[player].a = GetPlayerHeading(player)
-	
+
 	local query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
 		PlayerData[player].firstname,
 		PlayerData[player].lastname,
@@ -354,7 +357,7 @@ function SavePlayerAccount(player)
 		tostring(PlayerData[player].z),
 		tostring(PlayerData[player].a),
 		PlayerData[player].id
-		)
+	)
 
 	print(PlayerData[player].id)
 
@@ -364,7 +367,7 @@ end
 function DestroyPlayerData(player)
 	if (PlayerData[player] == nil) then
 		return
-    end
+	end
 
 	PlayerData[player] = nil
 	CharacterData[player] = nil
@@ -375,9 +378,9 @@ function SetPlayerLoggedIn(player)
 	PlayerData[player].logged_in = true
 	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, PlayerData[player].z)
 	SetPlayerHeading(player, PlayerData[player].a)
-    SetPlayerDimension(player, 0)
+	SetPlayerDimension(player, 0)
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
-    --CallEvent("OnPlayerJoined", player)
+	--CallEvent("OnPlayerJoined", player)
 end
 
 function FreezePlayer(player) return CallRemoteEvent(player, 'FreezePlayer', player) end
