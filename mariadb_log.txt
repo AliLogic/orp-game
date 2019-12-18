@@ -27071,3 +27071,297 @@
 [2019-12-18 18:19:28.549] [mariadb] [debug] ResultSet::Create(connection=0x1a8faaea770, query_str='UPDATE characters SET firstname = 'Phillip', lastname = 'Hughes', gender = '0', health = 100, armour = 0, cash = 100, bank = 1000, x = '167288.015625', y = '196564.484375', z = '1289.3999023438', a = '119.63745117188' WHERE id = 2')
 [2019-12-18 18:19:28.549] [mariadb] [debug] created new resultset '0x1a8faafe9b0'
 [2019-12-18 18:19:28.549] [mariadb] [debug] fetched MariaDB result '0x0'
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='12')
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::EscapeString(src='12', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '12'
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='1')
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::EscapeString(src='1', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '1'
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='0')
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::EscapeString(src='0', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '0'
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='129135.2109375')
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::EscapeString(src='129135.2109375', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '129135.2109375'
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='79771.65625')
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::EscapeString(src='79771.65625', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '79771.65625'
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='1469.5354003906')
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::EscapeString(src='1469.5354003906', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '1469.5354003906'
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='-90.713439941406')
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::EscapeString(src='-90.713439941406', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '-90.713439941406'
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.291] [mariadb] [debug] mariadb_prepare: return value: 'UPDATE vehicles SET owner = 2, model = 12, plate = '1', faction = 0, x = '129135.2109375', y = '79771.65625', z = '1469.5354003906', a = '-90.713439941406', r = 255, g = 255, b = 255 WHERE id = 1' ([string "orp/server/vehicle/vehicle_s.lua"]:137)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Callback::Create(state=0x1a8fa233f78, func=0x1a8fa1e1fa0, len(args)=1)
+[2019-12-18 18:20:08.291] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::Execute(this=0x1a8faacd090, type=2, query=0x1a8faae6ae0)
+[2019-12-18 18:20:08.291] [mariadb] [debug] ConnectionPool::Queue(query=0x1a8faae6ae0, this=0x1a8faadb610)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-18 18:20:08.291] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/vehicle/vehicle_s.lua"]:152)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Connection::Execute(query=0x1a8faae6ae0, this=0x1a8fb414040, connection=0x1a8fab2e720)
+[2019-12-18 18:20:08.291] [mariadb] [debug] Query::Execute(this=0x1a8faae6ae0, connection=0x1a8fab2e720)
+[2019-12-18 18:20:08.291] [mariadb] [info] query "UPDATE vehicles SET owner = 2, model = 12, plate = '1', faction = 0, x = '129135.2109375', y = '79771.65625', z = '1469.5354003906', a = '-90.713439941406', r = 255, g = 255, b = 255 WHERE id = 1" successfully executed within 0.369 milliseconds
+[2019-12-18 18:20:08.291] [mariadb] [debug] ResultSet::Create(connection=0x1a8fab2e720, query_str='UPDATE vehicles SET owner = 2, model = 12, plate = '1', faction = 0, x = '129135.2109375', y = '79771.65625', z = '1469.5354003906', a = '-90.713439941406', r = 255, g = 255, b = 255 WHERE id = 1')
+[2019-12-18 18:20:08.291] [mariadb] [debug] created new resultset '0x1a8fa0d06f0'
+[2019-12-18 18:20:08.291] [mariadb] [debug] fetched MariaDB result '0x0'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='6')
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::EscapeString(src='6', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '6'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='Commodore')
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::EscapeString(src='Commodore', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: 'Commodore'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='0')
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::EscapeString(src='0', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '0'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='130205.15625')
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::EscapeString(src='130205.15625', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '130205.15625'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='80522.5078125')
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::EscapeString(src='80522.5078125', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '80522.5078125'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='1468.7551269531')
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::EscapeString(src='1468.7551269531', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '1468.7551269531'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='-178.45524597168')
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::EscapeString(src='-178.45524597168', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '-178.45524597168'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.293] [mariadb] [debug] mariadb_prepare: return value: 'UPDATE vehicles SET owner = 7, model = 6, plate = 'Commodore', faction = 0, x = '130205.15625', y = '80522.5078125', z = '1468.7551269531', a = '-178.45524597168', r = 255, g = 255, b = 255 WHERE id = 2' ([string "orp/server/vehicle/vehicle_s.lua"]:137)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Callback::Create(state=0x1a8fa233f78, func=0x1a8fa1e1c80, len(args)=1)
+[2019-12-18 18:20:08.293] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::Execute(this=0x1a8faacd090, type=2, query=0x1a8faae7a50)
+[2019-12-18 18:20:08.293] [mariadb] [debug] ConnectionPool::Queue(query=0x1a8faae7a50, this=0x1a8faadb610)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-18 18:20:08.293] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/vehicle/vehicle_s.lua"]:152)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Connection::Execute(query=0x1a8faae7a50, this=0x1a8fb0eb040, connection=0x1a8faaeac30)
+[2019-12-18 18:20:08.293] [mariadb] [debug] Query::Execute(this=0x1a8faae7a50, connection=0x1a8faaeac30)
+[2019-12-18 18:20:08.293] [mariadb] [info] query "UPDATE vehicles SET owner = 7, model = 6, plate = 'Commodore', faction = 0, x = '130205.15625', y = '80522.5078125', z = '1468.7551269531', a = '-178.45524597168', r = 255, g = 255, b = 255 WHERE id = 2" successfully executed within 0.307 milliseconds
+[2019-12-18 18:20:08.293] [mariadb] [debug] ResultSet::Create(connection=0x1a8faaeac30, query_str='UPDATE vehicles SET owner = 7, model = 6, plate = 'Commodore', faction = 0, x = '130205.15625', y = '80522.5078125', z = '1468.7551269531', a = '-178.45524597168', r = 255, g = 255, b = 255 WHERE id = 2')
+[2019-12-18 18:20:08.293] [mariadb] [debug] created new resultset '0x1a8faafe230'
+[2019-12-18 18:20:08.293] [mariadb] [debug] fetched MariaDB result '0x0'
+[2019-12-18 18:20:08.293] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='7')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='7', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '7'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='Pickup')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='Pickup', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: 'Pickup'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='0')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='0', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '0'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='128573.125')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='128573.125', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '128573.125'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='79694.5234375')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='79694.5234375', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '79694.5234375'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='1467.4923095703')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='1467.4923095703', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '1467.4923095703'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='-89.936798095703')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='-89.936798095703', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '-89.936798095703'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.294] [mariadb] [debug] mariadb_prepare: return value: 'UPDATE vehicles SET owner = 3, model = 7, plate = 'Pickup', faction = 0, x = '128573.125', y = '79694.5234375', z = '1467.4923095703', a = '-89.936798095703', r = 255, g = 255, b = 255 WHERE id = 3' ([string "orp/server/vehicle/vehicle_s.lua"]:137)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Callback::Create(state=0x1a8fa233f78, func=0x1a8fa1e1e40, len(args)=1)
+[2019-12-18 18:20:08.294] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::Execute(this=0x1a8faacd090, type=2, query=0x1a8faae6bb0)
+[2019-12-18 18:20:08.294] [mariadb] [debug] ConnectionPool::Queue(query=0x1a8faae6bb0, this=0x1a8faadb610)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::Execute(query=0x1a8faae6bb0, this=0x1a8fb1fa040, connection=0x1a8faaf1dc0)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Query::Execute(this=0x1a8faae6bb0, connection=0x1a8faaf1dc0)
+[2019-12-18 18:20:08.294] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/vehicle/vehicle_s.lua"]:152)
+[2019-12-18 18:20:08.294] [mariadb] [info] query "UPDATE vehicles SET owner = 3, model = 7, plate = 'Pickup', faction = 0, x = '128573.125', y = '79694.5234375', z = '1467.4923095703', a = '-89.936798095703', r = 255, g = 255, b = 255 WHERE id = 3" successfully executed within 0.233 milliseconds
+[2019-12-18 18:20:08.294] [mariadb] [debug] ResultSet::Create(connection=0x1a8faaf1dc0, query_str='UPDATE vehicles SET owner = 3, model = 7, plate = 'Pickup', faction = 0, x = '128573.125', y = '79694.5234375', z = '1467.4923095703', a = '-89.936798095703', r = 255, g = 255, b = 255 WHERE id = 3')
+[2019-12-18 18:20:08.294] [mariadb] [debug] created new resultset '0x1a8f7fd1670'
+[2019-12-18 18:20:08.294] [mariadb] [debug] fetched MariaDB result '0x0'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='3')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='3', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '3'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='HIGHWAY')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='HIGHWAY', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: 'HIGHWAY'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='0')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='0', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '0'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='177662.171875')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='177662.171875', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '177662.171875'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='211093.546875')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='211093.546875', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '211093.546875'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='1195.2258300781')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='1195.2258300781', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '1195.2258300781'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='0.056781426072121')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='0.056781426072121', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '0.056781426072121'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.294] [mariadb] [debug] mariadb_prepare: return value: 'UPDATE vehicles SET owner = 2, model = 3, plate = 'HIGHWAY', faction = 0, x = '177662.171875', y = '211093.546875', z = '1195.2258300781', a = '0.056781426072121', r = 255, g = 255, b = 255 WHERE id = 4' ([string "orp/server/vehicle/vehicle_s.lua"]:137)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Callback::Create(state=0x1a8fa233f78, func=0x1a8fa1e1f00, len(args)=1)
+[2019-12-18 18:20:08.294] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::Execute(this=0x1a8faacd090, type=2, query=0x1a8faae74a0)
+[2019-12-18 18:20:08.294] [mariadb] [debug] ConnectionPool::Queue(query=0x1a8faae74a0, this=0x1a8faadb610)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-18 18:20:08.294] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/vehicle/vehicle_s.lua"]:152)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::Execute(query=0x1a8faae74a0, this=0x1a8fb30c040, connection=0x1a8faaf2280)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Query::Execute(this=0x1a8faae74a0, connection=0x1a8faaf2280)
+[2019-12-18 18:20:08.294] [mariadb] [info] query "UPDATE vehicles SET owner = 2, model = 3, plate = 'HIGHWAY', faction = 0, x = '177662.171875', y = '211093.546875', z = '1195.2258300781', a = '0.056781426072121', r = 255, g = 255, b = 255 WHERE id = 4" successfully executed within 0.192 milliseconds
+[2019-12-18 18:20:08.294] [mariadb] [debug] ResultSet::Create(connection=0x1a8faaf2280, query_str='UPDATE vehicles SET owner = 2, model = 3, plate = 'HIGHWAY', faction = 0, x = '177662.171875', y = '211093.546875', z = '1195.2258300781', a = '0.056781426072121', r = 255, g = 255, b = 255 WHERE id = 4')
+[2019-12-18 18:20:08.294] [mariadb] [debug] created new resultset '0x1a8fab3ef80'
+[2019-12-18 18:20:08.294] [mariadb] [debug] fetched MariaDB result '0x0'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='3')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='3', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '3'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='HIGHWAY')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='HIGHWAY', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: 'HIGHWAY'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='0')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='0', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '0'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='174926.984375')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='174926.984375', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '174926.984375'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='211088.734375')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='211088.734375', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '211088.734375'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='1195.2176513672')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='1195.2176513672', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '1195.2176513672'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='0.86799430847168')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='0.86799430847168', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '0.86799430847168'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.294] [mariadb] [debug] mariadb_prepare: return value: 'UPDATE vehicles SET owner = 2, model = 3, plate = 'HIGHWAY', faction = 0, x = '174926.984375', y = '211088.734375', z = '1195.2176513672', a = '0.86799430847168', r = 255, g = 255, b = 255 WHERE id = 5' ([string "orp/server/vehicle/vehicle_s.lua"]:137)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Callback::Create(state=0x1a8fa233f78, func=0x1a8fa1e2280, len(args)=1)
+[2019-12-18 18:20:08.294] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::Execute(this=0x1a8faacd090, type=2, query=0x1a8faae80d0)
+[2019-12-18 18:20:08.294] [mariadb] [debug] ConnectionPool::Queue(query=0x1a8faae80d0, this=0x1a8faadb610)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-18 18:20:08.294] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/vehicle/vehicle_s.lua"]:152)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Connection::Execute(query=0x1a8faae80d0, this=0x1a8fb414040, connection=0x1a8fab2e720)
+[2019-12-18 18:20:08.294] [mariadb] [debug] Query::Execute(this=0x1a8faae80d0, connection=0x1a8fab2e720)
+[2019-12-18 18:20:08.295] [mariadb] [info] query "UPDATE vehicles SET owner = 2, model = 3, plate = 'HIGHWAY', faction = 0, x = '174926.984375', y = '211088.734375', z = '1195.2176513672', a = '0.86799430847168', r = 255, g = 255, b = 255 WHERE id = 5" successfully executed within 0.156 milliseconds
+[2019-12-18 18:20:08.295] [mariadb] [debug] ResultSet::Create(connection=0x1a8fab2e720, query_str='UPDATE vehicles SET owner = 2, model = 3, plate = 'HIGHWAY', faction = 0, x = '174926.984375', y = '211088.734375', z = '1195.2176513672', a = '0.86799430847168', r = 255, g = 255, b = 255 WHERE id = 5')
+[2019-12-18 18:20:08.295] [mariadb] [debug] created new resultset '0x1a8f7fd18f0'
+[2019-12-18 18:20:08.295] [mariadb] [debug] fetched MariaDB result '0x0'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='6')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='6', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '6'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='Test')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='Test', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: 'Test'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='0')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='0', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '0'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='169077.515625')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='169077.515625', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '169077.515625'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='194126.859375')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='194126.859375', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '194126.859375'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='1209.3485107422')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='1209.3485107422', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '1209.3485107422'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='-19.992433547974')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='-19.992433547974', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '-19.992433547974'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.295] [mariadb] [debug] mariadb_prepare: return value: 'UPDATE vehicles SET owner = 7, model = 6, plate = 'Test', faction = 0, x = '169077.515625', y = '194126.859375', z = '1209.3485107422', a = '-19.992433547974', r = 255, g = 255, b = 255 WHERE id = 7' ([string "orp/server/vehicle/vehicle_s.lua"]:137)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Callback::Create(state=0x1a8fa233f78, func=0x1a8fa1e1e80, len(args)=1)
+[2019-12-18 18:20:08.295] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::Execute(this=0x1a8faacd090, type=2, query=0x1a8faae7f30)
+[2019-12-18 18:20:08.295] [mariadb] [debug] ConnectionPool::Queue(query=0x1a8faae7f30, this=0x1a8faadb610)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::Execute - return value: true
+[2019-12-18 18:20:08.295] [mariadb] [debug] mariadb_async_query: return value: 'true' ([string "orp/server/vehicle/vehicle_s.lua"]:152)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::Execute(query=0x1a8faae7f30, this=0x1a8fb0eb040, connection=0x1a8faaeac30)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Query::Execute(this=0x1a8faae7f30, connection=0x1a8faaeac30)
+[2019-12-18 18:20:08.295] [mariadb] [info] query "UPDATE vehicles SET owner = 7, model = 6, plate = 'Test', faction = 0, x = '169077.515625', y = '194126.859375', z = '1209.3485107422', a = '-19.992433547974', r = 255, g = 255, b = 255 WHERE id = 7" successfully executed within 0.158 milliseconds
+[2019-12-18 18:20:08.295] [mariadb] [debug] ResultSet::Create(connection=0x1a8faaeac30, query_str='UPDATE vehicles SET owner = 7, model = 6, plate = 'Test', faction = 0, x = '169077.515625', y = '194126.859375', z = '1209.3485107422', a = '-19.992433547974', r = 255, g = 255, b = 255 WHERE id = 7')
+[2019-12-18 18:20:08.295] [mariadb] [debug] created new resultset '0x1a8faafe410'
+[2019-12-18 18:20:08.295] [mariadb] [debug] fetched MariaDB result '0x0'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='20')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='20', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '20'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='HIGHWAY')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='HIGHWAY', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: 'HIGHWAY'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='0')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='0', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '0'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='176247.453125')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='176247.453125', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '176247.453125'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='212162.265625')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='212162.265625', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '212162.265625'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='2151.6293945313')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='2151.6293945313', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '2151.6293945313'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='-90.329650878906')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='-90.329650878906', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '-90.329650878906'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString(this=0x1a8faacd090, src='255')
+[2019-12-18 18:20:08.295] [mariadb] [debug] Connection::EscapeString(src='255', this=0x1a8fa233090, connection=0x1a8faae6110)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::EscapeString - return value: true, escaped string: '255'
+[2019-12-18 18:20:08.295] [mariadb] [debug] mariadb_prepare: return value: 'UPDATE vehicles SET owner = 2, model = 20, plate = 'HIGHWAY', faction = 0, x = '176247.453125', y = '212162.265625', z = '2151.6293945313', a = '-90.329650878906', r = 255, g = 255, b = 255 WHERE id = 6' ([string "orp/server/vehicle/vehicle_s.lua"]:137)
+[2019-12-18 18:20:08.295] [mariadb] [debug] Callback::Create(state=0x1a8fa233f78, func=0x1a8fa1e2080, len(args)=1)
+[2019-12-18 18:20:08.295] [mariadb] [debug] created delayed callback with 1 parameter
+[2019-12-18 18:20:08.295] [mariadb] [debug] Handle::Execute(this=0x1a8faacd090, type=2, query=0x1a8faae7bf0)
+[2019-12-18 18:20:08.295] [mariadb] [debug] ConnectionPool::Queue(query=0x1a8faae7bf0, this=0x1a8faadb610)
+[2019-12-18 18:20:08.295
