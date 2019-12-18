@@ -1,7 +1,12 @@
 local colour = ImportPackage('colours')
 
+AddCommand("q", function (playerid)
+
+	return KickPlayer(playerid, "Goodbye!")
+end)
+
 AddCommand("help", function (player)
-	return AddPlayerChat(player, "Commands: /w /me /do /g /b /pm /ahelp /stats")
+	return AddPlayerChat(player, "Commands: /w /me /do /g /b /pm /ahelp /stats /q")
 end)
 
 AddCommand("w", function (player, weapon, slot, ammo)
