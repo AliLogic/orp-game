@@ -270,8 +270,8 @@ function cmd_aev(player, ...)
     local args = {...}
 
     if args[1] == "owner" then
-        vehicle = tonumber(args[2])
-        target = tonumber(args[3])
+        local vehicle = tonumber(args[2])
+        local target = tonumber(args[3])
 
         if vehicle == nil or target == nil then
             return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle owner <vehicleid> <target>")
