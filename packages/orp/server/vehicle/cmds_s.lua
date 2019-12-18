@@ -4,20 +4,33 @@ function cmd_v(player, ...)
     local args = {...}
 
     if args[1] == "lock" then
+        local vehicle = GetPlayerVehicle(player)
+        if vehicle ~= 0 and VehicleData[vehicle] ~= nil and VehicleData[vehicle].owner == PlayerData[player].id then
+            if VehicleData[vehicle].is_locked == true then
+                VehicleData[vehicle].is_locked = false
+                AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle unlocked!</>")
+            else
+                VehicleData[vehicle].is_locked = true
+                AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle locked!</>")
+            end
+            return
+        end
+
         local x, y, z = GetPlayerLocation(player)
+        local ownsVehicle = false
         
         for _, v in pairs(GetAllVehicles()) do
             print(v)
             if VehicleData[v] ~= nil then
                 print('not nill '..v)
-                print('Owner is possibly '..VehicleData[v].owner)
-                print(type(VehicleData[v].owner))
-                print(type(PlayerData[player].id))
+                --print('Owner is possibly '..VehicleData[v].owner)
+                --print(type(VehicleData[v].owner))
+                --print(type(PlayerData[player].id))
                 if VehicleData[v].owner == PlayerData[player].id then
-                    print('player is owner '..v)
-                    print('3d distance is '..tonumber(GetDistance3D(x, y, z, VehicleData[v].x, VehicleData[v].y, VehicleData[v].z)))
-                    if tonumber(GetDistance3D(x, y, z, VehicleData[v].x, VehicleData[v].y, VehicleData[v].z)) < 200.0 then
-                        print('player is in distance '..v)
+                    --print('player is owner '..v)
+                    --print('3d distance is '..tonumber(GetDistance3D(x, y, z, VehicleData[v].x, VehicleData[v].y, VehicleData[v].z)))
+                    if tonumber(GetDistance3D(x, y, z, VehicleData[v].x, VehicleData[v].y, VehicleData[v].z)) < 250.0 then
+                        --print('player is in distance '..v)
                         if VehicleData[v].is_locked == true then
                             VehicleData[v].is_locked = false
                             AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle unlocked!</>")
@@ -27,11 +40,16 @@ function cmd_v(player, ...)
                         end
                         return
                     end
+                    ownsVehicle = true
                 end
             end
         end
 
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not own any vehicles!</>")
+        if ownsVehicle == false then
+            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not own any vehicles!</>")
+        else
+            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any of your owned vehicles!</>")
+        end
     elseif args[1] == "park" then
         local vehicle = GetPlayerVehicle(player)
 
@@ -75,7 +93,7 @@ function cmd_v(player, ...)
             return
         end
 
-        print('next codeblock')
+        --print('next codeblock')
 
         if VehicleData[vehicle] == nil or PlayerData[player].id ~= VehicleData[vehicle].owner then
             return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> Invalid vehicle.")

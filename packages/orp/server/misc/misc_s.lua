@@ -23,3 +23,23 @@ function ViewPlayerStats(player, target)
     AddPlayerChat(player, string.format("<span color=\"%s\">|__________________%s [%s]__________________|</>", 
         colour.COLOUR_DARKGREEN(), GetPlayerName(target), PlayerData[target].name)) -- in future, add time.
 end
+
+function SetPlayerChatBubble(player, message, seconds)
+    if PlayerData[player].label ~= nil then
+        if IsValidText3D(PlayerData[player].label) then
+            DestroyText3D(PlayerData[player].label)
+        end
+    end
+
+    PlayerData[player].label = CreateText3D(message, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    SetText3DAttached(PlayerData[player].label, ATTACH_PLAYER, player, 0.0, 0.0, 500.0)
+
+    Delay(seconds * 1000, function (player)
+        if PlayerData[player].label ~= nil then
+            if IsValidText3D(PlayerData[player].label) then
+                DestroyText3D(PlayerData[player].label)
+            end
+        end
+    end)
+    
+end

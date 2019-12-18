@@ -10,8 +10,19 @@ Contributors:
 
 AddEvent("OnPlayerJoin", function (player)
 	SetPlayerDimension(player, player)
-    SetPlayerSpawnLocation(player, 179796.234375, 10621.763671875, 10394.176757813, 90.0)
-    FreezePlayer(player)
+    SetPlayerSpawnLocation(player, 170694.515625, 194947.453125, 1396.9643554688, 90.0)
+end)
+
+AddEvent("OnPlayerSpawn", function(player)
+    if PlayerData[player] ~= nil then
+        if PlayerData[player].logged_in ~= false then
+            if PlayerData[player].label ~= nil then
+                if IsValidText3D(PlayerData[player].label) then
+                    DestroyText3D(PlayerData[player].label)
+                end
+            end
+        end
+    end
 end)
 
 AddEvent("OnPlayerDeath", function (player, instigator)

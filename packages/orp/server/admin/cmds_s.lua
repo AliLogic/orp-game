@@ -5,7 +5,10 @@ AddCommand("apos", function (player, id)
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
     end
 
-	local x, y, z = GetPlayerLocation(player)
+    local x, y, z = GetPlayerLocation(player)
+    local a = GetPlayerHeading(player)
+    
+    print("X: "..x.." Y: "..y.." Z: "..z.." A: "..a)
 	return AddPlayerChat(player, "X: "..x.." Y: "..y.." Z: "..z)
 end)
 
@@ -166,29 +169,59 @@ end
 AddCommand('acreatevehicle', cmd_acv)
 AddCommand('acv', cmd_acv)
 
-function cmd_aev(player, vehicle, ownerid)
+function cmd_aev(player, ...)
     if (PlayerData[player].admin < 2) then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
     end
 
-    vehicle = tonumber(vehicle)
-    ownerid = tonumber(ownerid)
+    local args = {...}
 
-    if vehicle == nil or ownerid == nil then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <ownerid>")
+    if args[1] == "owner" then
+        vehicle = tonumber(args[2])
+        target = tonumber(args[3])
+
+        if vehicle == nil or target == nil then
+            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle owner <vehicleid> <target>")
+        end
+
+        if IsValidPlayer(target) == nil or PlayerData[target] == nil then
+            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+        end
+
+        if PlayerData[target].logged_in == false then
+            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
+        end
+
+        CallRemoteEvent(player, "askClientActionConfirmation", player, 1, "Would you like to change this vehicle's owner?", target, vehicle)
+    else
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner")
     end
-
-    VehicleData[vehicle].owner = tonumber(ownerid)
-    AddPlayerChat(player, 'vehicle owner set to '..ownerid)
-
-    print('Vehicle is now: '..VehicleData[vehicle].owner..', player owner ID is '..PlayerData[player].id)
 end
 AddCommand('aeditvehicle', cmd_aev)
 AddCommand('aev', cmd_aev)
 
+AddRemoteEvent("clientActionConfirmationResult", function (result, player, target, vehicle)
+    if result == 1 then
+        if VehicleData[vehicle].faction ~= 0 then
+            AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: As this vehicle was owned by a faction, it will now be passed onto the player.</>")
+            VehicleData[vehicle].faction = 0
+        end
+
+        VehicleData[vehicle].owner = PlayerData[target].id
+
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
+        return
+    else
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You've decided to cancel any changes made to the vehicle!</>")
+        return
+    end
+end)
+
+
 AddCommand("ahelp", function (player)
     if (PlayerData[player].admin < 1) then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</vehicle>")
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</vehicleid>")
     end
 
     if PlayerData[player].admin > 0 then

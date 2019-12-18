@@ -13,7 +13,8 @@ AddEvent("OnPackageStart", function ()
 end)
 
 function OnPlayerSteamAuth(player)
-    CreatePlayerData(player)
+	CreatePlayerData(player)
+	FreezePlayer(player)
         
     -- First check if there is an account for this player
 	local query = mariadb_prepare(sql, "SELECT id FROM accounts WHERE steamid = '?' LIMIT 1;",
@@ -253,6 +254,8 @@ function CreatePlayerData(player)
 	PlayerData[player].accountid = 0
 
 	PlayerData[player].name = GetPlayerName(player)
+	PlayerData[player].steamname = GetPlayerName(player)
+
 	PlayerData[player].firstname = ""
 	PlayerData[player].lastname = ""
 	PlayerData[player].gender = 0
@@ -284,6 +287,7 @@ function CreatePlayerData(player)
 	PlayerData[player].a = 0.0
 
 	PlayerData[player].is_frozen = false
+	PlayerData[player].label = nil -- 3d text label
 
     print("Data created for: "..player)
 end
@@ -324,9 +328,11 @@ function SavePlayerAccount(player)
 		PlayerData[player].accountid
 		)]]--
 
-	local query = mariadb_prepare(sql, "UPDATE accounts SET admin = ?, helper = '?' WHERE id = ? LIMIT 1;",
+	local query = mariadb_prepare(sql, "UPDATE accounts SET steamname = '?', admin = ?, helper = '?', locale = '?' WHERE id = ? LIMIT 1;",
+		PlayerData[player].steamname,
 		PlayerData[player].admin,
 		PlayerData[player].helper,
+		GetPlayerLocale(player),
 		PlayerData[player].id
 		)
         
@@ -374,7 +380,7 @@ function SetPlayerLoggedIn(player)
     --CallEvent("OnPlayerJoined", player)
 end
 
-function FreezePlayer(player) return CallRemoteEvent(player, 'FreezePlayer') end
+function FreezePlayer(player) return CallRemoteEvent(player, 'FreezePlayer', player) end
 
 AddRemoteEvent('accounts:kick', function (player)
 	KickPlayer(player, "You decided to quit the server!")

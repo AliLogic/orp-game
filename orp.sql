@@ -11,16 +11,11 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
--- Dumping database structure for ORP
-CREATE DATABASE IF NOT EXISTS `orp` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ORP`;
-
 -- Dumping structure for table ORP.accounts
 CREATE TABLE IF NOT EXISTS `accounts` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `steamid` varchar(32) NOT NULL,
-  `steam_name` varchar(32) DEFAULT NULL,
+  `steamname` varchar(32) DEFAULT NULL,
   `game_version` mediumint(10) unsigned DEFAULT NULL,
   `locale` varchar(6) DEFAULT NULL,
   `email` varchar(28) DEFAULT NULL,
@@ -34,12 +29,14 @@ CREATE TABLE IF NOT EXISTS `accounts` (
   `last_login_time` int(10) unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `steamid` (`steamid`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
--- Dumping data for table ORP.accounts: ~1 rows (approximately)
+-- Dumping data for table ORP.accounts: ~3 rows (approximately)
 /*!40000 ALTER TABLE `accounts` DISABLE KEYS */;
-INSERT INTO `accounts` (`id`, `steamid`, `steam_name`, `game_version`, `locale`, `email`, `time`, `admin`, `helper`, `registration_time`, `registration_ip`, `count_login`, `count_kick`, `last_login_time`) VALUES
-	(14, '76561198291141818', NULL, NULL, NULL, NULL, NULL, 5, 0, NULL, '127.0.0.1', NULL, NULL, NULL);
+INSERT INTO `accounts` (`id`, `steamid`, `steamname`, `game_version`, `locale`, `email`, `time`, `admin`, `helper`, `registration_time`, `registration_ip`, `count_login`, `count_kick`, `last_login_time`) VALUES
+	(14, '76561198291141818', NULL, NULL, NULL, NULL, NULL, 5, 0, NULL, '127.0.0.1', NULL, NULL, NULL),
+	(15, '76561198448214499', NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, '66.91.242.78', NULL, NULL, NULL),
+	(16, '76561198377588641', NULL, NULL, NULL, NULL, NULL, 5, 0, NULL, '73.42.144.81', NULL, NULL, NULL);
 /*!40000 ALTER TABLE `accounts` ENABLE KEYS */;
 
 -- Dumping structure for table ORP.applicants
@@ -113,19 +110,21 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `armour` float NOT NULL DEFAULT 0,
   `cash` int(11) NOT NULL DEFAULT 100,
   `bank` int(11) NOT NULL DEFAULT 1000,
-  `x` varchar(50) NOT NULL DEFAULT '125773.0',
-  `y` varchar(50) NOT NULL DEFAULT '80246.0',
-  `z` varchar(50) NOT NULL DEFAULT '1645.0',
+  `x` varchar(50) NOT NULL DEFAULT '170694.515625',
+  `y` varchar(50) NOT NULL DEFAULT '194947.453125',
+  `z` varchar(50) NOT NULL DEFAULT '1396.9643554688',
   `a` varchar(50) NOT NULL DEFAULT '90.0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Dumping data for table ORP.characters: ~3 rows (approximately)
+-- Dumping data for table ORP.characters: ~5 rows (approximately)
 /*!40000 ALTER TABLE `characters` DISABLE KEYS */;
 INSERT INTO `characters` (`id`, `accountid`, `steamid`, `firstname`, `lastname`, `gender`, `health`, `armour`, `cash`, `bank`, `x`, `y`, `z`, `a`) VALUES
-	(2, 14, '76561198291141818', 'Phillip', 'Hughes', 0, 100, 0, 100, 1000, '125905.546875', '80002.25', '1566.9010009766', '-167.39573669434'),
-	(3, 14, '76561198291141818', 'Phillip', 'Huff', 0, 100, 0, 100, 1000, '125773.0', '80246.0', '1645.0', '90.0'),
-	(4, 14, '76561198291141818', 'Samantha', 'Wright', 1, 100, 0, 100, 1000, '125773.0', '80246.0', '1645.0', '90.0');
+	(2, 14, '76561198291141818', 'Phillip', 'Hughes', 0, 100, 0, 100, 1000, '175473.453125', '209261.59375', '1292.4172363281', '10.025207519531'),
+	(3, 14, '76561198291141818', 'Phillip', 'Huff', 0, 100, 0, 100, 1000, '121620.9765625', '117651.109375', '5010.8061523438', '176.76721191406'),
+	(4, 14, '76561198291141818', 'Samantha', 'Wright', 1, 100, 0, 100, 1000, '125773.0', '80246.0', '1645.0', '90.0'),
+	(6, 16, '76561198377588641', 'Commodore', 'Dev', 0, 100, 0, 100, 1000, '-10369.102539062', '150256.484375', '-24.000240325928', '-68.286560058594'),
+	(7, 16, '76561198377588641', 'Marcus', 'Irwin', 0, 100, 0, 100, 1000, '170694.515625', '194947.453125', '1396.9643554688', '90.0');
 /*!40000 ALTER TABLE `characters` ENABLE KEYS */;
 
 -- Dumping structure for table ORP.ipbans
@@ -234,12 +233,17 @@ CREATE TABLE IF NOT EXISTS `vehicles` (
   `g` int(11) NOT NULL,
   `b` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
--- Dumping data for table ORP.vehicles: ~0 rows (approximately)
+-- Dumping data for table ORP.vehicles: ~3 rows (approximately)
 /*!40000 ALTER TABLE `vehicles` DISABLE KEYS */;
 INSERT INTO `vehicles` (`id`, `owner`, `model`, `plate`, `faction`, `x`, `y`, `z`, `a`, `r`, `g`, `b`) VALUES
-	(1, 2, 12, '1', 0, '129135.2109375', '79771.65625', '1469.5354003906', '-90.713439941406', 255, 255, 255);
+	(1, 2, 12, '1', 0, '129135.2109375', '79771.65625', '1469.5354003906', '-90.713439941406', 255, 255, 255),
+	(2, 7, 6, 'Commodore', 0, '130205.15625', '80522.5078125', '1468.7551269531', '-178.45524597168', 255, 255, 255),
+	(3, 3, 7, 'Pickup', 0, '128573.125', '79694.5234375', '1467.4923095703', '-89.936798095703', 255, 255, 255),
+	(4, 2, 3, 'HIGHWAY', 0, '177662.171875', '211093.546875', '1195.2258300781', '0.056781426072121', 255, 255, 255),
+	(5, 2, 3, 'HIGHWAY', 0, '174926.984375', '211088.734375', '1195.2176513672', '0.86799430847168', 255, 255, 255),
+	(6, 2, 20, 'HIGHWAY', 0, '176247.453125', '212162.265625', '2151.6293945313', '-90.329650878906', 255, 255, 255);
 /*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -103,7 +103,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
     end
 end)
 
-AddRemoteEvent('FreezePlayer', function ()
+AddRemoteEvent('FreezePlayer', function (player)
     if PlayerData[player].is_frozen == false then
         SetIgnoreMoveInput(false)
         SetIgnoreLookInput(false)

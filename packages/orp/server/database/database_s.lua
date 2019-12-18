@@ -2,8 +2,8 @@ sql = false
 
 local SQL_HOST = "localhost"
 local SQL_PORT = 3306
-local SQL_USER = "orp"
-local SQL_PASS = "e5CfZb@Olyp%iT4v@&ch"
+local SQL_USER = "root"
+local SQL_PASS = "" --e5CfZb@Olyp%iT4v@&ch
 local SQL_DATABASE = "orp"
 local SQL_CHAR = "utf8mb4"
 local SQL_LOGL = "debug"

@@ -16,7 +16,8 @@
 	],
 	"client_scripts": [
 		"client/orp_c.lua",
-		"client/accounts/accounts_c.lua"
+		"client/accounts/accounts_c.lua",
+		"client/admin/admin_c.lua"
 	],
 	"files": []
 }

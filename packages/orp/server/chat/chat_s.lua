@@ -46,6 +46,30 @@ AddCommand("do", function (player, ...)
 	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">*"..text.." (( "..GetPlayerName(player).." ))</>")
 end)
 
+AddCommand("ame", function(player, ...)
+    local message = table.concat({...}, " ")
+    local x, y, z = GetPlayerLocation(player)
+
+    if message == nil or #{...} == 0 then
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ame [action]")
+    end
+
+    SetPlayerChatBubble(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> *"..message.."</>", 4)
+    AddPlayerChat(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> Annotated /me: "..message.."</>")
+end)
+
+AddCommand("ado", function(player, ...)
+    local message = table.concat({...}, " ")
+    local x, y, z = GetPlayerLocation(player)
+
+    if message == nil or #{...} == 0 then
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ado [action]")
+    end
+
+    SetPlayerChatBubble(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> *"..message.." (( "..GetPlayerName(player).." ))</>", 4)
+    AddPlayerChat(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> Annotated /do: "..message.."</>")
+end)
+
 AddCommand("b", function (player, ...)
 	local args = {...}
 	local text = ''

@@ -5935,3 +5935,1335 @@
 [2019-12-16 20:58:04] [info] Detected CTRL+C, shutting down...
 [2019-12-16 20:58:04] [script] Unloading Vehicle ID: 1
 [2019-12-16 20:58:05] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 16:49:51] [info] Windows Server is starting
+[2019-12-17 16:49:51] [info] Detected 16 logical processors
+[2019-12-17 16:49:51] [info] Loaded 21 weapons from config
+[2019-12-17 16:49:51] [info] Loading plugin "mariadb"
+[2019-12-17 16:49:51] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 16:49:51] [info] Loading plugin "ini-plugin"
+[2019-12-17 16:49:51] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 16:49:51] [info] Server password set from the config file
+[2019-12-17 16:49:51] [info] Starting package "default"
+[2019-12-17 16:49:51] [script] Door Count: 567
+[2019-12-17 16:49:51] [info] Starting package "colours"
+[2019-12-17 16:49:51] [info] Starting package "dialogui"
+[2019-12-17 16:49:51] [info] Starting package "debug"
+[2019-12-17 16:49:51] [info] Starting package "orp"
+[2019-12-17 16:49:51] [script] MariaDB: Connected to localhost
+[2019-12-17 16:49:51] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 16:49:51] [info] Max players set to 300
+[2019-12-17 16:49:51] [info] Listening on 0.0.0.0
+[2019-12-17 16:49:51] [info] Open port channels:
+[2019-12-17 16:49:51] [info] 	UDP 7777 (game)
+[2019-12-17 16:49:51] [info] 	UDP 7776 (query)
+[2019-12-17 16:49:51] [info] 	TCP 7775 (file)
+[2019-12-17 16:49:51] [info] Server loaded. Entering simulation...
+[2019-12-17 16:49:51] [script] Loading Vehicle ID 1
+[2019-12-17 16:49:51] [script] Loading Vehicle ID 2
+[2019-12-17 16:49:51] [script] 1's owner: 2
+[2019-12-17 16:49:51] [script] 2's owner: 7
+[2019-12-17 16:49:59] [info] Client requesting connection 127.0.0.1:63791
+[2019-12-17 16:49:59] [info] Player (ID 1) joining the game (127.0.0.1:63791)
+[2019-12-17 16:50:00] [script] Data created for: 1
+[2019-12-17 16:50:30] [info] Detected CTRL+C, shutting down...
+[2019-12-17 16:50:30] [script] Unloading Vehicle ID: 1
+[2019-12-17 16:50:30] [script] Unloading Vehicle ID: 2
+[2019-12-17 16:50:31] [info] MariaDB: Unloading plugin...
+[2019-12-17 16:50:31] [info] MariaDB: Plugin unloaded.
+
+[2019-12-17 16:50:35] [info] Windows Server is starting
+[2019-12-17 16:50:35] [info] Detected 16 logical processors
+[2019-12-17 16:50:35] [info] Loaded 21 weapons from config
+[2019-12-17 16:50:35] [info] Loading plugin "mariadb"
+[2019-12-17 16:50:35] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 16:50:35] [info] Loading plugin "ini-plugin"
+[2019-12-17 16:50:35] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 16:50:35] [info] Server password set from the config file
+[2019-12-17 16:50:35] [info] Starting package "default"
+[2019-12-17 16:50:35] [script] Door Count: 567
+[2019-12-17 16:50:35] [info] Starting package "colours"
+[2019-12-17 16:50:35] [info] Starting package "dialogui"
+[2019-12-17 16:50:35] [info] Starting package "debug"
+[2019-12-17 16:50:35] [info] Starting package "orp"
+[2019-12-17 16:50:35] [script] MariaDB: Connected to localhost
+[2019-12-17 16:50:35] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 16:50:35] [info] Max players set to 300
+[2019-12-17 16:50:35] [info] Listening on 0.0.0.0
+[2019-12-17 16:50:35] [info] Open port channels:
+[2019-12-17 16:50:35] [info] 	UDP 7777 (game)
+[2019-12-17 16:50:35] [info] 	UDP 7776 (query)
+[2019-12-17 16:50:35] [info] 	TCP 7775 (file)
+[2019-12-17 16:50:35] [info] Server loaded. Entering simulation...
+[2019-12-17 16:50:35] [script] Loading Vehicle ID 1
+[2019-12-17 16:50:35] [script] Loading Vehicle ID 2
+[2019-12-17 16:50:35] [script] 1's owner: 2
+[2019-12-17 16:50:35] [script] 2's owner: 7
+[2019-12-17 16:50:39] [info] Client requesting connection 127.0.0.1:63791
+[2019-12-17 16:50:39] [info] Player (ID 1) joining the game (127.0.0.1:63791)
+[2019-12-17 16:50:39] [script] Data created for: 1
+[2019-12-17 16:50:52] [script] IS NOT NILL
+[2019-12-17 16:50:52] [script] number
+[2019-12-17 16:50:52] [script] number
+[2019-12-17 16:50:52] [script] IS NOT NILL
+[2019-12-17 16:50:52] [script] number
+[2019-12-17 16:50:52] [script] number
+[2019-12-17 16:52:44] [info] Player (ID 1) disconnected (127.0.0.1:63791)
+[2019-12-17 16:52:44] [script] 2
+[2019-12-17 16:52:44] [script] Data destroyed for: 1
+[2019-12-17 16:52:45] [info] Client requesting connection 127.0.0.1:49909
+[2019-12-17 16:52:45] [info] Player (ID 1) joining the game (127.0.0.1:49909)
+[2019-12-17 16:52:46] [script] Data created for: 1
+[2019-12-17 16:52:53] [script] IS NOT NILL
+[2019-12-17 16:52:53] [script] number
+[2019-12-17 16:52:53] [script] number
+[2019-12-17 16:52:53] [script] IS NOT NILL
+[2019-12-17 16:52:53] [script] number
+[2019-12-17 16:52:53] [script] number
+[2019-12-17 17:20:35] [script] 3
+[2019-12-17 17:20:35] [script] All accounts have been saved!
+[2019-12-17 17:21:26] [script] IS NOT NILL
+[2019-12-17 17:21:26] [script] number
+[2019-12-17 17:21:26] [script] number
+[2019-12-17 17:21:26] [script] IS NOT NILL
+[2019-12-17 17:21:26] [script] number
+[2019-12-17 17:21:26] [script] number
+[2019-12-17 17:21:26] [script] IS NOT NILL
+[2019-12-17 17:21:26] [script] number
+[2019-12-17 17:21:26] [script] number
+[2019-12-17 17:22:08] [script] Vehicle is now: 3, player owner ID is 3
+[2019-12-17 17:22:09] [script] IS NOT NILL
+[2019-12-17 17:22:09] [script] number
+[2019-12-17 17:22:09] [script] number
+[2019-12-17 17:22:09] [script] IS NOT NILL
+[2019-12-17 17:22:09] [script] number
+[2019-12-17 17:22:09] [script] number
+[2019-12-17 17:22:09] [script] IS NOT NILL
+[2019-12-17 17:22:09] [script] number
+[2019-12-17 17:22:09] [script] number
+[2019-12-17 17:22:22] [script] 1
+[2019-12-17 17:22:22] [script] not nill 1
+[2019-12-17 17:22:22] [script] Owner is possibly 2
+[2019-12-17 17:22:22] [script] number
+[2019-12-17 17:22:22] [script] number
+[2019-12-17 17:22:22] [script] 2
+[2019-12-17 17:22:22] [script] not nill 2
+[2019-12-17 17:22:22] [script] Owner is possibly 7
+[2019-12-17 17:22:22] [script] number
+[2019-12-17 17:22:22] [script] number
+[2019-12-17 17:22:22] [script] 3
+[2019-12-17 17:22:22] [script] not nill 3
+[2019-12-17 17:22:22] [script] Owner is possibly 3
+[2019-12-17 17:22:22] [script] number
+[2019-12-17 17:22:22] [script] number
+[2019-12-17 17:22:22] [script] player is owner 3
+[2019-12-17 17:22:22] [script] 3d distance is 138.48905944824
+[2019-12-17 17:22:22] [script] player is in distance 3
+[2019-12-17 17:23:23] [info] Player (ID 1) disconnected (127.0.0.1:49909)
+[2019-12-17 17:23:23] [script] 3
+[2019-12-17 17:23:23] [script] Data destroyed for: 1
+[2019-12-17 17:23:26] [info] Detected CTRL+C, shutting down...
+[2019-12-17 17:23:26] [script] Unloading Vehicle ID: 1
+[2019-12-17 17:23:26] [script] Unloading Vehicle ID: 2
+[2019-12-17 17:23:26] [script] Unloading Vehicle ID: 3
+[2019-12-17 17:23:26] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 17:23:29] [info] Windows Server is starting
+[2019-12-17 17:23:29] [info] Detected 16 logical processors
+[2019-12-17 17:23:29] [info] Loaded 21 weapons from config
+[2019-12-17 17:23:29] [info] Loading plugin "mariadb"
+[2019-12-17 17:23:29] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 17:23:29] [info] Loading plugin "ini-plugin"
+[2019-12-17 17:23:29] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 17:23:29] [info] Server password set from the config file
+[2019-12-17 17:23:29] [info] Starting package "default"
+[2019-12-17 17:23:29] [script] Door Count: 567
+[2019-12-17 17:23:29] [info] Starting package "colours"
+[2019-12-17 17:23:29] [info] Starting package "dialogui"
+[2019-12-17 17:23:29] [info] Starting package "debug"
+[2019-12-17 17:23:29] [info] Starting package "orp"
+[2019-12-17 17:23:29] [script] MariaDB: Connected to localhost
+[2019-12-17 17:23:29] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 17:23:29] [info] Max players set to 300
+[2019-12-17 17:23:29] [info] Listening on 0.0.0.0
+[2019-12-17 17:23:29] [info] Open port channels:
+[2019-12-17 17:23:29] [info] 	UDP 7777 (game)
+[2019-12-17 17:23:29] [info] 	UDP 7776 (query)
+[2019-12-17 17:23:29] [info] 	TCP 7775 (file)
+[2019-12-17 17:23:29] [info] Server loaded. Entering simulation...
+[2019-12-17 17:23:29] [script] Loading Vehicle ID 1
+[2019-12-17 17:23:29] [script] Loading Vehicle ID 2
+[2019-12-17 17:23:29] [script] Loading Vehicle ID 3
+[2019-12-17 17:23:29] [script] 1's owner: 2
+[2019-12-17 17:23:29] [script] 2's owner: 7
+[2019-12-17 17:23:29] [script] 3's owner: 3
+[2019-12-17 17:23:35] [info] Client requesting connection 127.0.0.1:50190
+[2019-12-17 17:23:35] [info] Player (ID 1) joining the game (127.0.0.1:50190)
+[2019-12-17 17:23:35] [script] Data created for: 1
+[2019-12-17 17:23:57] [info] Detected CTRL+C, shutting down...
+[2019-12-17 17:23:57] [script] Unloading Vehicle ID: 1
+[2019-12-17 17:23:57] [script] Unloading Vehicle ID: 2
+[2019-12-17 17:23:57] [script] Unloading Vehicle ID: 3
+[2019-12-17 17:23:57] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 17:24:37] [info] Windows Server is starting
+[2019-12-17 17:24:37] [info] Detected 16 logical processors
+[2019-12-17 17:24:37] [info] Loaded 21 weapons from config
+[2019-12-17 17:24:37] [info] Loading plugin "mariadb"
+[2019-12-17 17:24:37] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 17:24:37] [info] Loading plugin "ini-plugin"
+[2019-12-17 17:24:37] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 17:24:37] [info] Server password set from the config file
+[2019-12-17 17:24:37] [info] Starting package "default"
+[2019-12-17 17:24:37] [script] Door Count: 567
+[2019-12-17 17:24:37] [info] Starting package "colours"
+[2019-12-17 17:24:37] [info] Starting package "dialogui"
+[2019-12-17 17:24:37] [info] Starting package "debug"
+[2019-12-17 17:24:37] [info] Starting package "orp"
+[2019-12-17 17:24:37] [script] MariaDB: Connected to localhost
+[2019-12-17 17:24:37] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 17:24:37] [info] Max players set to 300
+[2019-12-17 17:24:37] [info] Listening on 0.0.0.0
+[2019-12-17 17:24:37] [info] Open port channels:
+[2019-12-17 17:24:37] [info] 	UDP 7777 (game)
+[2019-12-17 17:24:37] [info] 	UDP 7776 (query)
+[2019-12-17 17:24:37] [info] 	TCP 7775 (file)
+[2019-12-17 17:24:37] [info] Server loaded. Entering simulation...
+[2019-12-17 17:24:37] [script] Loading Vehicle ID 1
+[2019-12-17 17:24:37] [script] Loading Vehicle ID 2
+[2019-12-17 17:24:37] [script] Loading Vehicle ID 3
+[2019-12-17 17:24:37] [script] 1's owner: 2
+[2019-12-17 17:24:37] [script] 2's owner: 7
+[2019-12-17 17:24:37] [script] 3's owner: 3
+[2019-12-17 17:24:40] [info] Client requesting connection 127.0.0.1:50190
+[2019-12-17 17:24:40] [info] Player (ID 1) joining the game (127.0.0.1:50190)
+[2019-12-17 17:24:40] [script] Data created for: 1
+[2019-12-17 17:24:48] [script] IS NOT NILL
+[2019-12-17 17:24:48] [script] number
+[2019-12-17 17:24:48] [script] number
+[2019-12-17 17:24:48] [script] IS NOT NILL
+[2019-12-17 17:24:48] [script] number
+[2019-12-17 17:24:48] [script] number
+[2019-12-17 17:24:48] [script] IS NOT NILL
+[2019-12-17 17:24:48] [script] number
+[2019-12-17 17:24:48] [script] number
+[2019-12-17 17:25:10] [script] 1
+[2019-12-17 17:25:10] [script] not nill 1
+[2019-12-17 17:25:10] [script] Owner is possibly 2
+[2019-12-17 17:25:10] [script] number
+[2019-12-17 17:25:10] [script] number
+[2019-12-17 17:25:10] [script] 2
+[2019-12-17 17:25:10] [script] not nill 2
+[2019-12-17 17:25:10] [script] Owner is possibly 7
+[2019-12-17 17:25:10] [script] number
+[2019-12-17 17:25:10] [script] number
+[2019-12-17 17:25:10] [script] 3
+[2019-12-17 17:25:10] [script] not nill 3
+[2019-12-17 17:25:10] [script] Owner is possibly 3
+[2019-12-17 17:25:10] [script] number
+[2019-12-17 17:25:10] [script] number
+[2019-12-17 17:25:10] [script] player is owner 3
+[2019-12-17 17:25:10] [script] 3d distance is 216.26460266113
+[2019-12-17 17:25:11] [script] 1
+[2019-12-17 17:25:11] [script] not nill 1
+[2019-12-17 17:25:11] [script] Owner is possibly 2
+[2019-12-17 17:25:11] [script] number
+[2019-12-17 17:25:11] [script] number
+[2019-12-17 17:25:11] [script] 2
+[2019-12-17 17:25:11] [script] not nill 2
+[2019-12-17 17:25:11] [script] Owner is possibly 7
+[2019-12-17 17:25:11] [script] number
+[2019-12-17 17:25:11] [script] number
+[2019-12-17 17:25:11] [script] 3
+[2019-12-17 17:25:11] [script] not nill 3
+[2019-12-17 17:25:11] [script] Owner is possibly 3
+[2019-12-17 17:25:11] [script] number
+[2019-12-17 17:25:11] [script] number
+[2019-12-17 17:25:11] [script] player is owner 3
+[2019-12-17 17:25:11] [script] 3d distance is 134.55972290039
+[2019-12-17 17:25:11] [script] player is in distance 3
+[2019-12-17 17:26:06] [script] Vehicle unload successful, id: 3
+[2019-12-17 17:26:08] [script] IS NOT NILL
+[2019-12-17 17:26:08] [script] number
+[2019-12-17 17:26:08] [script] number
+[2019-12-17 17:26:08] [script] IS NOT NILL
+[2019-12-17 17:26:08] [script] number
+[2019-12-17 17:26:08] [script] number
+[2019-12-17 17:26:08] [script] IS NOT NILL
+[2019-12-17 17:26:08] [script] number
+[2019-12-17 17:26:08] [script] number
+[2019-12-17 17:26:10] [script] next codeblock
+[2019-12-17 17:26:10] [script] 3's owner: 3
+[2019-12-17 17:26:52] [info] Player (ID 1) disconnected (127.0.0.1:50190)
+[2019-12-17 17:26:52] [script] 3
+[2019-12-17 17:26:52] [script] Data destroyed for: 1
+[2019-12-17 17:29:29] [info] Detected CTRL+C, shutting down...
+[2019-12-17 17:29:29] [script] Unloading Vehicle ID: 1
+[2019-12-17 17:29:29] [script] Unloading Vehicle ID: 2
+[2019-12-17 17:29:29] [script] Unloading Vehicle ID: 3
+[2019-12-17 17:29:30] [info] MariaDB: Unloading plugin...
+[2019-12-17 17:29:30] [info] MariaDB: Plugin unloaded.
+
+[2019-12-17 17:30:21] [info] Windows Server is starting
+[2019-12-17 17:30:21] [info] Detected 16 logical processors
+[2019-12-17 17:30:21] [info] Loaded 21 weapons from config
+[2019-12-17 17:30:21] [info] Loading plugin "mariadb"
+[2019-12-17 17:30:21] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 17:30:21] [info] Loading plugin "ini-plugin"
+[2019-12-17 17:30:21] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 17:30:21] [info] Server password set from the config file
+[2019-12-17 17:30:21] [info] Starting package "default"
+[2019-12-17 17:30:21] [script] Door Count: 567
+[2019-12-17 17:30:21] [info] Starting package "colours"
+[2019-12-17 17:30:21] [info] Starting package "dialogui"
+[2019-12-17 17:30:21] [info] Starting package "debug"
+[2019-12-17 17:30:21] [info] Starting package "orp"
+[2019-12-17 17:30:21] [script] MariaDB: Connected to localhost
+[2019-12-17 17:30:21] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 17:30:21] [info] Max players set to 300
+[2019-12-17 17:30:21] [info] Listening on 0.0.0.0
+[2019-12-17 17:30:21] [info] Open port channels:
+[2019-12-17 17:30:21] [info] 	UDP 7777 (game)
+[2019-12-17 17:30:21] [info] 	UDP 7776 (query)
+[2019-12-17 17:30:21] [info] 	TCP 7775 (file)
+[2019-12-17 17:30:21] [info] Server loaded. Entering simulation...
+[2019-12-17 17:30:21] [script] Loading Vehicle ID 1
+[2019-12-17 17:30:21] [script] Loading Vehicle ID 2
+[2019-12-17 17:30:21] [script] Loading Vehicle ID 3
+[2019-12-17 17:30:21] [script] 1's owner: 2
+[2019-12-17 17:30:21] [script] 2's owner: 7
+[2019-12-17 17:30:21] [script] 3's owner: 3
+[2019-12-17 17:30:47] [info] Client requesting connection 127.0.0.1:60141
+[2019-12-17 17:30:47] [info] Player (ID 1) joining the game (127.0.0.1:60141)
+[2019-12-17 17:30:47] [script] Data created for: 1
+[2019-12-17 17:30:56] [script] IS NOT NILL
+[2019-12-17 17:30:56] [script] number
+[2019-12-17 17:30:56] [script] number
+[2019-12-17 17:30:56] [script] IS NOT NILL
+[2019-12-17 17:30:56] [script] number
+[2019-12-17 17:30:56] [script] number
+[2019-12-17 17:30:56] [script] IS NOT NILL
+[2019-12-17 17:30:56] [script] number
+[2019-12-17 17:30:56] [script] number
+[2019-12-17 17:31:25] [script] 1
+[2019-12-17 17:31:25] [script] not nill 1
+[2019-12-17 17:31:25] [script] Owner is possibly 2
+[2019-12-17 17:31:25] [script] number
+[2019-12-17 17:31:25] [script] number
+[2019-12-17 17:31:25] [script] 2
+[2019-12-17 17:31:25] [script] not nill 2
+[2019-12-17 17:31:25] [script] Owner is possibly 7
+[2019-12-17 17:31:25] [script] number
+[2019-12-17 17:31:25] [script] number
+[2019-12-17 17:31:25] [script] player is owner 2
+[2019-12-17 17:31:25] [script] 3d distance is 164.2380065918
+[2019-12-17 17:31:25] [script] player is in distance 2
+[2019-12-17 17:34:44] [script] Vehicle unload successful, id: 2
+[2019-12-17 17:34:46] [info] Player (ID 1) disconnected (127.0.0.1:60141)
+[2019-12-17 17:34:46] [script] 7
+[2019-12-17 17:34:46] [script] Data destroyed for: 1
+[2019-12-17 17:34:56] [info] Detected CTRL+C, shutting down...
+[2019-12-17 17:34:56] [script] Unloading Vehicle ID: 1
+[2019-12-17 17:34:56] [script] Unloading Vehicle ID: 2
+[2019-12-17 17:34:56] [script] Unloading Vehicle ID: 3
+[2019-12-17 17:34:56] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 18:24:41] [info] Windows Server is starting
+[2019-12-17 18:24:41] [info] Detected 16 logical processors
+[2019-12-17 18:24:41] [info] Loaded 21 weapons from config
+[2019-12-17 18:24:41] [info] Loading plugin "mariadb"
+[2019-12-17 18:24:41] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 18:24:41] [info] Loading plugin "ini-plugin"
+[2019-12-17 18:24:41] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 18:24:41] [info] Server password set from the config file
+[2019-12-17 18:24:41] [info] Starting package "default"
+[2019-12-17 18:24:41] [script] Door Count: 567
+[2019-12-17 18:24:41] [info] Starting package "colours"
+[2019-12-17 18:24:41] [info] Starting package "dialogui"
+[2019-12-17 18:24:41] [info] Starting package "debug"
+[2019-12-17 18:24:41] [info] Starting package "orp"
+[2019-12-17 18:24:41] [script] MariaDB: Connected to localhost
+[2019-12-17 18:24:41] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 18:24:41] [info] Max players set to 300
+[2019-12-17 18:24:41] [info] Listening on 0.0.0.0
+[2019-12-17 18:24:41] [info] Open port channels:
+[2019-12-17 18:24:41] [info] 	UDP 7777 (game)
+[2019-12-17 18:24:41] [info] 	UDP 7776 (query)
+[2019-12-17 18:24:41] [info] 	TCP 7775 (file)
+[2019-12-17 18:24:41] [info] Server loaded. Entering simulation...
+[2019-12-17 18:24:41] [script] Loading Vehicle ID 1
+[2019-12-17 18:24:41] [script] Loading Vehicle ID 2
+[2019-12-17 18:24:41] [script] Loading Vehicle ID 3
+[2019-12-17 18:24:41] [script] 1's owner: 2
+[2019-12-17 18:24:41] [script] 2's owner: 7
+[2019-12-17 18:24:41] [script] 3's owner: 3
+[2019-12-17 18:24:51] [info] Client requesting connection 127.0.0.1:51975
+[2019-12-17 18:24:51] [info] Player (ID 1) joining the game (127.0.0.1:51975)
+[2019-12-17 18:24:52] [script] Data created for: 1
+[2019-12-17 18:24:59] [script] 1
+[2019-12-17 18:24:59] [script] 2
+[2019-12-17 18:24:59] [script] 3
+[2019-12-17 18:25:01] [script] 1
+[2019-12-17 18:25:01] [script] 2
+[2019-12-17 18:25:01] [script] 3
+[2019-12-17 18:25:02] [script] 1
+[2019-12-17 18:25:02] [script] 2
+[2019-12-17 18:25:02] [script] 3
+[2019-12-17 18:25:13] [script] 1
+[2019-12-17 18:25:13] [script] 2
+[2019-12-17 18:25:13] [script] 3
+[2019-12-17 18:28:04] [info] Player (ID 1) disconnected (127.0.0.1:51975)
+[2019-12-17 18:28:04] [script] 3
+[2019-12-17 18:28:04] [script] Data destroyed for: 1
+[2019-12-17 18:28:27] [info] Detected CTRL+C, shutting down...
+[2019-12-17 18:28:27] [script] Unloading Vehicle ID: 1
+[2019-12-17 18:28:27] [script] Unloading Vehicle ID: 2
+[2019-12-17 18:28:27] [script] Unloading Vehicle ID: 3
+[2019-12-17 18:28:28] [info] MariaDB: Unloading plugin...
+[2019-12-17 18:28:28] [info] MariaDB: Plugin unloaded.
+
+[2019-12-17 18:30:48] [info] Windows Server is starting
+[2019-12-17 18:30:48] [info] Detected 16 logical processors
+[2019-12-17 18:30:48] [info] Loaded 21 weapons from config
+[2019-12-17 18:30:48] [info] Loading plugin "mariadb"
+[2019-12-17 18:30:48] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 18:30:48] [info] Loading plugin "ini-plugin"
+[2019-12-17 18:30:48] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 18:30:48] [info] Server password set from the config file
+[2019-12-17 18:30:48] [info] Starting package "default"
+[2019-12-17 18:30:48] [script] Door Count: 567
+[2019-12-17 18:30:48] [info] Starting package "colours"
+[2019-12-17 18:30:48] [info] Starting package "dialogui"
+[2019-12-17 18:30:48] [info] Starting package "debug"
+[2019-12-17 18:30:48] [info] Starting package "orp"
+[2019-12-17 18:30:48] [script] MariaDB: Connected to localhost
+[2019-12-17 18:30:48] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 18:30:48] [info] Max players set to 300
+[2019-12-17 18:30:48] [info] Listening on 0.0.0.0
+[2019-12-17 18:30:48] [info] Open port channels:
+[2019-12-17 18:30:48] [info] 	UDP 7777 (game)
+[2019-12-17 18:30:48] [info] 	UDP 7776 (query)
+[2019-12-17 18:30:48] [info] 	TCP 7775 (file)
+[2019-12-17 18:30:48] [info] Server loaded. Entering simulation...
+[2019-12-17 18:30:48] [script] Loading Vehicle ID 1
+[2019-12-17 18:30:48] [script] Loading Vehicle ID 2
+[2019-12-17 18:30:48] [script] Loading Vehicle ID 3
+[2019-12-17 18:30:48] [script] 1's owner: 2
+[2019-12-17 18:30:48] [script] 2's owner: 7
+[2019-12-17 18:30:48] [script] 3's owner: 3
+[2019-12-17 18:31:01] [info] Client requesting connection 127.0.0.1:52078
+[2019-12-17 18:31:01] [info] Player (ID 1) joining the game (127.0.0.1:52078)
+[2019-12-17 18:31:01] [script] Data created for: 1
+[2019-12-17 18:31:31] [script] 1
+[2019-12-17 18:33:25] [script] X: 179778.09375 Y: 10642.267578125 Z: 10394.176757813 A: 140.29205322266
+[2019-12-17 18:46:14] [script] X: 170694.515625 Y: 194947.453125 Z: 1396.9643554688 A: 90.083770751953
+[2019-12-17 18:48:47] [info] Player (ID 1) disconnected (127.0.0.1:52078)
+[2019-12-17 18:48:47] [script] 2
+[2019-12-17 18:48:47] [script] Data destroyed for: 1
+[2019-12-17 18:48:51] [info] Detected CTRL+C, shutting down...
+[2019-12-17 18:48:51] [script] Unloading Vehicle ID: 1
+[2019-12-17 18:48:51] [script] Unloading Vehicle ID: 2
+[2019-12-17 18:48:51] [script] Unloading Vehicle ID: 3
+[2019-12-17 18:48:51] [info] MariaDB: Unloading plugin...
+[2019-12-17 18:48:51] [info] MariaDB: Plugin unloaded.
+
+[2019-12-17 18:49:14] [info] Windows Server is starting
+[2019-12-17 18:49:14] [info] Detected 16 logical processors
+[2019-12-17 18:49:14] [info] Loaded 21 weapons from config
+[2019-12-17 18:49:14] [info] Loading plugin "mariadb"
+[2019-12-17 18:49:14] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 18:49:14] [info] Loading plugin "ini-plugin"
+[2019-12-17 18:49:14] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 18:49:14] [info] Server password set from the config file
+[2019-12-17 18:49:14] [info] Starting package "default"
+[2019-12-17 18:49:14] [script] Door Count: 567
+[2019-12-17 18:49:14] [info] Starting package "colours"
+[2019-12-17 18:49:14] [info] Starting package "dialogui"
+[2019-12-17 18:49:14] [info] Starting package "debug"
+[2019-12-17 18:49:14] [info] Starting package "orp"
+[2019-12-17 18:49:14] [script] MariaDB: Connected to localhost
+[2019-12-17 18:49:14] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 18:49:14] [info] Max players set to 300
+[2019-12-17 18:49:14] [info] Listening on 0.0.0.0
+[2019-12-17 18:49:14] [info] Open port channels:
+[2019-12-17 18:49:14] [info] 	UDP 7777 (game)
+[2019-12-17 18:49:14] [info] 	UDP 7776 (query)
+[2019-12-17 18:49:14] [info] 	TCP 7775 (file)
+[2019-12-17 18:49:14] [info] Server loaded. Entering simulation...
+[2019-12-17 18:49:14] [script] Loading Vehicle ID 1
+[2019-12-17 18:49:14] [script] Loading Vehicle ID 2
+[2019-12-17 18:49:14] [script] Loading Vehicle ID 3
+[2019-12-17 18:49:14] [script] 1's owner: 2
+[2019-12-17 18:49:14] [script] 2's owner: 7
+[2019-12-17 18:49:14] [script] 3's owner: 3
+[2019-12-17 18:49:17] [info] Client requesting connection 127.0.0.1:56457
+[2019-12-17 18:49:17] [info] Player (ID 1) joining the game (127.0.0.1:56457)
+[2019-12-17 18:49:17] [script] Data created for: 1
+[2019-12-17 18:50:18] [info] Detected CTRL+C, shutting down...
+[2019-12-17 18:50:18] [script] Unloading Vehicle ID: 1
+[2019-12-17 18:50:18] [script] Unloading Vehicle ID: 2
+[2019-12-17 18:50:18] [script] Unloading Vehicle ID: 3
+[2019-12-17 18:50:19] [info] MariaDB: Unloading plugin...
+[2019-12-17 18:50:19] [info] MariaDB: Plugin unloaded.
+
+[2019-12-17 18:50:21] [info] Windows Server is starting
+[2019-12-17 18:50:21] [info] Detected 16 logical processors
+[2019-12-17 18:50:21] [info] Loaded 21 weapons from config
+[2019-12-17 18:50:21] [info] Loading plugin "mariadb"
+[2019-12-17 18:50:21] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 18:50:21] [info] Loading plugin "ini-plugin"
+[2019-12-17 18:50:21] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 18:50:21] [info] Server password set from the config file
+[2019-12-17 18:50:21] [info] Starting package "default"
+[2019-12-17 18:50:21] [script] Door Count: 567
+[2019-12-17 18:50:21] [info] Starting package "colours"
+[2019-12-17 18:50:21] [info] Starting package "dialogui"
+[2019-12-17 18:50:21] [info] Starting package "debug"
+[2019-12-17 18:50:21] [info] Starting package "orp"
+[2019-12-17 18:50:21] [script] MariaDB: Connected to localhost
+[2019-12-17 18:50:21] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 18:50:21] [info] Max players set to 300
+[2019-12-17 18:50:21] [info] Listening on 0.0.0.0
+[2019-12-17 18:50:21] [info] Open port channels:
+[2019-12-17 18:50:21] [info] 	UDP 7777 (game)
+[2019-12-17 18:50:21] [info] 	UDP 7776 (query)
+[2019-12-17 18:50:21] [info] 	TCP 7775 (file)
+[2019-12-17 18:50:21] [info] Server loaded. Entering simulation...
+[2019-12-17 18:50:21] [script] Loading Vehicle ID 1
+[2019-12-17 18:50:21] [script] Loading Vehicle ID 2
+[2019-12-17 18:50:21] [script] Loading Vehicle ID 3
+[2019-12-17 18:50:21] [script] 1's owner: 2
+[2019-12-17 18:50:21] [script] 2's owner: 7
+[2019-12-17 18:50:21] [script] 3's owner: 3
+[2019-12-17 18:50:23] [info] Client requesting connection 127.0.0.1:56457
+[2019-12-17 18:50:23] [info] Player (ID 1) joining the game (127.0.0.1:56457)
+[2019-12-17 18:50:23] [script] Data created for: 1
+[2019-12-17 19:20:21] [script] 2
+[2019-12-17 19:20:21] [script] All accounts have been saved!
+[2019-12-17 19:24:52] [info] Detected CTRL+C, shutting down...
+[2019-12-17 19:24:52] [script] Unloading Vehicle ID: 1
+[2019-12-17 19:24:52] [script] Unloading Vehicle ID: 2
+[2019-12-17 19:24:52] [script] Unloading Vehicle ID: 3
+[2019-12-17 19:24:53] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 19:25:00] [info] Windows Server is starting
+[2019-12-17 19:25:00] [info] Detected 16 logical processors
+[2019-12-17 19:25:00] [info] Loaded 21 weapons from config
+[2019-12-17 19:25:00] [info] Loading plugin "mariadb"
+[2019-12-17 19:25:00] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 19:25:00] [info] Loading plugin "ini-plugin"
+[2019-12-17 19:25:00] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 19:25:00] [info] Server password set from the config file
+[2019-12-17 19:25:00] [info] Starting package "default"
+[2019-12-17 19:25:00] [script] Door Count: 567
+[2019-12-17 19:25:00] [info] Starting package "colours"
+[2019-12-17 19:25:00] [info] Starting package "dialogui"
+[2019-12-17 19:25:00] [info] Starting package "debug"
+[2019-12-17 19:25:00] [info] Starting package "orp"
+[2019-12-17 19:25:00] [script] MariaDB: Connected to localhost
+[2019-12-17 19:25:00] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 19:25:00] [info] Max players set to 300
+[2019-12-17 19:25:00] [info] Listening on 0.0.0.0
+[2019-12-17 19:25:00] [info] Open port channels:
+[2019-12-17 19:25:00] [info] 	UDP 7777 (game)
+[2019-12-17 19:25:00] [info] 	UDP 7776 (query)
+[2019-12-17 19:25:00] [info] 	TCP 7775 (file)
+[2019-12-17 19:25:00] [info] Server loaded. Entering simulation...
+[2019-12-17 19:25:00] [script] Loading Vehicle ID 1
+[2019-12-17 19:25:00] [script] Loading Vehicle ID 2
+[2019-12-17 19:25:00] [script] Loading Vehicle ID 3
+[2019-12-17 19:25:00] [script] 1's owner: 2
+[2019-12-17 19:25:00] [script] 2's owner: 7
+[2019-12-17 19:25:00] [script] 3's owner: 3
+[2019-12-17 19:25:04] [info] Client requesting connection 127.0.0.1:56457
+[2019-12-17 19:25:04] [info] Player (ID 1) joining the game (127.0.0.1:56457)
+[2019-12-17 19:25:04] [error] [string "orp/server/misc/misc_s.lua"]:39: attempt to index a nil value (field '?')
+[2019-12-17 19:25:04] [script] Data created for: 1
+[2019-12-17 19:30:23] [info] Detected CTRL+C, shutting down...
+[2019-12-17 19:30:23] [script] Unloading Vehicle ID: 1
+[2019-12-17 19:30:23] [script] Unloading Vehicle ID: 2
+[2019-12-17 19:30:23] [script] Unloading Vehicle ID: 3
+[2019-12-17 19:30:24] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 19:30:26] [info] Windows Server is starting
+[2019-12-17 19:30:26] [info] Detected 16 logical processors
+[2019-12-17 19:30:26] [info] Loaded 21 weapons from config
+[2019-12-17 19:30:26] [info] Loading plugin "mariadb"
+[2019-12-17 19:30:26] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 19:30:26] [info] Loading plugin "ini-plugin"
+[2019-12-17 19:30:26] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 19:30:26] [info] Server password set from the config file
+[2019-12-17 19:30:26] [info] Starting package "default"
+[2019-12-17 19:30:26] [script] Door Count: 567
+[2019-12-17 19:30:26] [info] Starting package "colours"
+[2019-12-17 19:30:26] [info] Starting package "dialogui"
+[2019-12-17 19:30:26] [info] Starting package "debug"
+[2019-12-17 19:30:26] [info] Starting package "orp"
+[2019-12-17 19:30:26] [script] MariaDB: Connected to localhost
+[2019-12-17 19:30:26] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 19:30:26] [info] Max players set to 300
+[2019-12-17 19:30:26] [info] Listening on 0.0.0.0
+[2019-12-17 19:30:26] [info] Open port channels:
+[2019-12-17 19:30:26] [info] 	UDP 7777 (game)
+[2019-12-17 19:30:26] [info] 	UDP 7776 (query)
+[2019-12-17 19:30:26] [info] 	TCP 7775 (file)
+[2019-12-17 19:30:26] [info] Server loaded. Entering simulation...
+[2019-12-17 19:30:26] [script] Loading Vehicle ID 1
+[2019-12-17 19:30:26] [script] Loading Vehicle ID 2
+[2019-12-17 19:30:26] [script] Loading Vehicle ID 3
+[2019-12-17 19:30:26] [script] 1's owner: 2
+[2019-12-17 19:30:26] [script] 2's owner: 7
+[2019-12-17 19:30:26] [script] 3's owner: 3
+[2019-12-17 19:30:30] [info] Client requesting connection 127.0.0.1:56457
+[2019-12-17 19:30:30] [info] Player (ID 1) joining the game (127.0.0.1:56457)
+[2019-12-17 19:30:30] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 19:30:31] [script] Data created for: 1
+[2019-12-17 19:30:40] [error] [string "orp/server/misc/misc_s.lua"]:37: attempt to perform arithmetic on a nil value (local 'seconds')
+[2019-12-17 19:30:59] [info] Detected CTRL+C, shutting down...
+
+[2019-12-17 19:31:01] [info] Windows Server is starting
+[2019-12-17 19:31:01] [info] Detected 16 logical processors
+[2019-12-17 19:31:01] [info] Loaded 21 weapons from config
+[2019-12-17 19:31:01] [info] Loading plugin "mariadb"
+[2019-12-17 19:31:01] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 19:31:01] [info] Loading plugin "ini-plugin"
+[2019-12-17 19:31:01] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 19:31:01] [info] Server password set from the config file
+[2019-12-17 19:31:01] [info] Starting package "default"
+[2019-12-17 19:31:01] [script] Door Count: 567
+[2019-12-17 19:31:01] [info] Starting package "colours"
+[2019-12-17 19:31:01] [info] Starting package "dialogui"
+[2019-12-17 19:31:01] [info] Starting package "debug"
+[2019-12-17 19:31:01] [info] Starting package "orp"
+[2019-12-17 19:31:01] [script] MariaDB: Connected to localhost
+[2019-12-17 19:31:01] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 19:31:01] [info] Max players set to 300
+[2019-12-17 19:31:01] [info] Listening on 0.0.0.0
+[2019-12-17 19:31:01] [info] Open port channels:
+[2019-12-17 19:31:01] [info] 	UDP 7777 (game)
+[2019-12-17 19:31:01] [info] 	UDP 7776 (query)
+[2019-12-17 19:31:01] [info] 	TCP 7775 (file)
+[2019-12-17 19:31:01] [info] Server loaded. Entering simulation...
+[2019-12-17 19:31:01] [script] Loading Vehicle ID 1
+[2019-12-17 19:31:01] [script] Loading Vehicle ID 2
+[2019-12-17 19:31:01] [script] Loading Vehicle ID 3
+[2019-12-17 19:31:02] [script] 1's owner: 2
+[2019-12-17 19:31:02] [script] 2's owner: 7
+[2019-12-17 19:31:02] [script] 3's owner: 3
+[2019-12-17 19:31:06] [info] Client requesting connection 127.0.0.1:58361
+[2019-12-17 19:31:07] [info] Player (ID 1) joining the game (127.0.0.1:58361)
+[2019-12-17 19:31:07] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 19:31:07] [script] Data created for: 1
+[2019-12-17 19:31:26] [error] [string "orp/server/misc/misc_s.lua"]:38: attempt to index a nil value (field '?')
+[2019-12-17 19:58:01] [info] Player (ID 1) disconnected (127.0.0.1:58361)
+[2019-12-17 19:58:01] [script] 2
+[2019-12-17 19:58:01] [script] Data destroyed for: 1
+[2019-12-17 20:03:11] [info] Detected CTRL+C, shutting down...
+[2019-12-17 20:03:11] [script] Unloading Vehicle ID: 1
+[2019-12-17 20:03:11] [script] Unloading Vehicle ID: 2
+[2019-12-17 20:03:11] [script] Unloading Vehicle ID: 3
+[2019-12-17 20:03:12] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 20:03:19] [info] Windows Server is starting
+[2019-12-17 20:03:19] [info] Detected 16 logical processors
+[2019-12-17 20:03:19] [info] Loaded 21 weapons from config
+[2019-12-17 20:03:19] [info] Loading plugin "mariadb"
+[2019-12-17 20:03:19] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 20:03:19] [info] Loading plugin "ini-plugin"
+[2019-12-17 20:03:19] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 20:03:19] [info] Server password set from the config file
+[2019-12-17 20:03:19] [info] Starting package "default"
+[2019-12-17 20:03:19] [script] Door Count: 567
+[2019-12-17 20:03:19] [info] Starting package "colours"
+[2019-12-17 20:03:19] [info] Starting package "dialogui"
+[2019-12-17 20:03:19] [info] Starting package "debug"
+[2019-12-17 20:03:19] [info] Starting package "orp"
+[2019-12-17 20:03:19] [script] MariaDB: Connected to localhost
+[2019-12-17 20:03:19] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 20:03:19] [info] Max players set to 300
+[2019-12-17 20:03:19] [info] Listening on 0.0.0.0
+[2019-12-17 20:03:19] [info] Open port channels:
+[2019-12-17 20:03:19] [info] 	UDP 7777 (game)
+[2019-12-17 20:03:19] [info] 	UDP 7776 (query)
+[2019-12-17 20:03:19] [info] 	TCP 7775 (file)
+[2019-12-17 20:03:19] [info] Server loaded. Entering simulation...
+[2019-12-17 20:03:19] [script] Loading Vehicle ID 1
+[2019-12-17 20:03:19] [script] Loading Vehicle ID 2
+[2019-12-17 20:03:19] [script] Loading Vehicle ID 3
+[2019-12-17 20:03:19] [script] 1's owner: 2
+[2019-12-17 20:03:19] [script] 2's owner: 7
+[2019-12-17 20:03:19] [script] 3's owner: 3
+[2019-12-17 20:03:24] [info] Client requesting connection 127.0.0.1:54709
+[2019-12-17 20:03:24] [info] Player (ID 1) joining the game (127.0.0.1:54709)
+[2019-12-17 20:03:24] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:03:24] [script] Data created for: 1
+[2019-12-17 20:05:42] [info] Detected CTRL+C, shutting down...
+[2019-12-17 20:05:42] [script] Unloading Vehicle ID: 1
+[2019-12-17 20:05:42] [script] Unloading Vehicle ID: 2
+[2019-12-17 20:05:42] [script] Unloading Vehicle ID: 3
+[2019-12-17 20:05:42] [script] Unloading Vehicle ID: 4
+[2019-12-17 20:05:43] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 20:05:45] [info] Windows Server is starting
+[2019-12-17 20:05:45] [info] Detected 16 logical processors
+[2019-12-17 20:05:45] [info] Loaded 21 weapons from config
+[2019-12-17 20:05:45] [info] Loading plugin "mariadb"
+[2019-12-17 20:05:45] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 20:05:45] [info] Loading plugin "ini-plugin"
+[2019-12-17 20:05:45] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 20:05:45] [info] Server password set from the config file
+[2019-12-17 20:05:45] [info] Starting package "default"
+[2019-12-17 20:05:45] [script] Door Count: 567
+[2019-12-17 20:05:45] [info] Starting package "colours"
+[2019-12-17 20:05:45] [info] Starting package "dialogui"
+[2019-12-17 20:05:45] [info] Starting package "debug"
+[2019-12-17 20:05:45] [info] Starting package "orp"
+[2019-12-17 20:05:45] [script] MariaDB: Connected to localhost
+[2019-12-17 20:05:45] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 20:05:45] [info] Max players set to 300
+[2019-12-17 20:05:45] [info] Listening on 0.0.0.0
+[2019-12-17 20:05:45] [info] Open port channels:
+[2019-12-17 20:05:45] [info] 	UDP 7777 (game)
+[2019-12-17 20:05:45] [info] 	UDP 7776 (query)
+[2019-12-17 20:05:45] [info] 	TCP 7775 (file)
+[2019-12-17 20:05:45] [info] Server loaded. Entering simulation...
+[2019-12-17 20:05:45] [script] Loading Vehicle ID 1
+[2019-12-17 20:05:45] [script] Loading Vehicle ID 2
+[2019-12-17 20:05:45] [script] Loading Vehicle ID 3
+[2019-12-17 20:05:45] [script] Loading Vehicle ID 4
+[2019-12-17 20:05:45] [script] 1's owner: 2
+[2019-12-17 20:05:45] [script] 2's owner: 7
+[2019-12-17 20:05:45] [script] 3's owner: 3
+[2019-12-17 20:05:45] [script] 4's owner: 0
+[2019-12-17 20:05:51] [info] Client requesting connection 127.0.0.1:54709
+[2019-12-17 20:05:51] [info] Player (ID 1) joining the game (127.0.0.1:54709)
+[2019-12-17 20:05:51] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:05:52] [script] Data created for: 1
+[2019-12-17 20:06:04] [error] [string "orp/server/admin/cmds_s.lua"]:196: attempt to concatenate a nil value (global 'ownerid')
+[2019-12-17 20:07:07] [info] Detected CTRL+C, shutting down...
+[2019-12-17 20:07:07] [script] Unloading Vehicle ID: 1
+[2019-12-17 20:07:07] [script] Unloading Vehicle ID: 2
+[2019-12-17 20:07:07] [script] Unloading Vehicle ID: 3
+[2019-12-17 20:07:07] [script] Unloading Vehicle ID: 4
+[2019-12-17 20:07:07] [error] [string "orp/server/vehicle/vehicle_s.lua"]:152: bad argument #2 to 'mariadb_async_query' (expected string-like argument)
+[2019-12-17 20:07:07] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 20:07:10] [info] Windows Server is starting
+[2019-12-17 20:07:10] [info] Detected 16 logical processors
+[2019-12-17 20:07:10] [info] Loaded 21 weapons from config
+[2019-12-17 20:07:10] [info] Loading plugin "mariadb"
+[2019-12-17 20:07:10] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 20:07:10] [info] Loading plugin "ini-plugin"
+[2019-12-17 20:07:10] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 20:07:10] [info] Server password set from the config file
+[2019-12-17 20:07:10] [info] Starting package "default"
+[2019-12-17 20:07:10] [script] Door Count: 567
+[2019-12-17 20:07:10] [info] Starting package "colours"
+[2019-12-17 20:07:10] [info] Starting package "dialogui"
+[2019-12-17 20:07:10] [info] Starting package "debug"
+[2019-12-17 20:07:10] [info] Starting package "orp"
+[2019-12-17 20:07:10] [script] MariaDB: Connected to localhost
+[2019-12-17 20:07:10] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 20:07:10] [info] Max players set to 300
+[2019-12-17 20:07:10] [info] Listening on 0.0.0.0
+[2019-12-17 20:07:10] [info] Open port channels:
+[2019-12-17 20:07:10] [info] 	UDP 7777 (game)
+[2019-12-17 20:07:10] [info] 	UDP 7776 (query)
+[2019-12-17 20:07:10] [info] 	TCP 7775 (file)
+[2019-12-17 20:07:10] [info] Server loaded. Entering simulation...
+[2019-12-17 20:07:10] [script] Loading Vehicle ID 1
+[2019-12-17 20:07:10] [script] Loading Vehicle ID 2
+[2019-12-17 20:07:10] [script] Loading Vehicle ID 3
+[2019-12-17 20:07:10] [script] Loading Vehicle ID 4
+[2019-12-17 20:07:10] [script] 1's owner: 2
+[2019-12-17 20:07:10] [script] 2's owner: 7
+[2019-12-17 20:07:10] [script] 3's owner: 3
+[2019-12-17 20:07:10] [script] 4's owner: 0
+[2019-12-17 20:07:17] [info] Client requesting connection 127.0.0.1:54709
+[2019-12-17 20:07:17] [info] Player (ID 1) joining the game (127.0.0.1:54709)
+[2019-12-17 20:07:17] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:07:17] [script] Data created for: 1
+[2019-12-17 20:07:29] [error] [string "orp/server/admin/cmds_s.lua"]:199: attempt to concatenate a nil value (global 'ownerid')
+[2019-12-17 20:07:41] [info] Detected CTRL+C, shutting down...
+[2019-12-17 20:07:41] [script] Unloading Vehicle ID: 1
+[2019-12-17 20:07:41] [script] Unloading Vehicle ID: 2
+[2019-12-17 20:07:41] [script] Unloading Vehicle ID: 3
+[2019-12-17 20:07:41] [script] Unloading Vehicle ID: 4
+[2019-12-17 20:07:41] [error] [string "orp/server/vehicle/vehicle_s.lua"]:152: bad argument #2 to 'mariadb_async_query' (expected string-like argument)
+[2019-12-17 20:07:42] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 20:07:44] [info] Windows Server is starting
+[2019-12-17 20:07:44] [info] Detected 16 logical processors
+[2019-12-17 20:07:44] [info] Loaded 21 weapons from config
+[2019-12-17 20:07:44] [info] Loading plugin "mariadb"
+[2019-12-17 20:07:44] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 20:07:44] [info] Loading plugin "ini-plugin"
+[2019-12-17 20:07:44] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 20:07:44] [info] Server password set from the config file
+[2019-12-17 20:07:44] [info] Starting package "default"
+[2019-12-17 20:07:44] [script] Door Count: 567
+[2019-12-17 20:07:44] [info] Starting package "colours"
+[2019-12-17 20:07:44] [info] Starting package "dialogui"
+[2019-12-17 20:07:44] [info] Starting package "debug"
+[2019-12-17 20:07:44] [info] Starting package "orp"
+[2019-12-17 20:07:44] [script] MariaDB: Connected to localhost
+[2019-12-17 20:07:44] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 20:07:44] [info] Max players set to 300
+[2019-12-17 20:07:44] [info] Listening on 0.0.0.0
+[2019-12-17 20:07:44] [info] Open port channels:
+[2019-12-17 20:07:44] [info] 	UDP 7777 (game)
+[2019-12-17 20:07:44] [info] 	UDP 7776 (query)
+[2019-12-17 20:07:44] [info] 	TCP 7775 (file)
+[2019-12-17 20:07:44] [info] Server loaded. Entering simulation...
+[2019-12-17 20:07:44] [script] Loading Vehicle ID 1
+[2019-12-17 20:07:44] [script] Loading Vehicle ID 2
+[2019-12-17 20:07:44] [script] Loading Vehicle ID 3
+[2019-12-17 20:07:44] [script] Loading Vehicle ID 4
+[2019-12-17 20:07:44] [script] 1's owner: 2
+[2019-12-17 20:07:44] [script] 2's owner: 7
+[2019-12-17 20:07:44] [script] 3's owner: 3
+[2019-12-17 20:07:44] [script] 4's owner: 0
+[2019-12-17 20:07:46] [info] Client requesting connection 127.0.0.1:54709
+[2019-12-17 20:07:46] [info] Player (ID 1) joining the game (127.0.0.1:54709)
+[2019-12-17 20:07:46] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:07:47] [script] Data created for: 1
+[2019-12-17 20:08:44] [info] Detected CTRL+C, shutting down...
+[2019-12-17 20:08:44] [script] Unloading Vehicle ID: 1
+[2019-12-17 20:08:44] [script] Unloading Vehicle ID: 2
+[2019-12-17 20:08:44] [script] Unloading Vehicle ID: 3
+[2019-12-17 20:08:44] [script] Unloading Vehicle ID: 4
+[2019-12-17 20:08:44] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 20:08:46] [info] Windows Server is starting
+[2019-12-17 20:08:46] [info] Detected 16 logical processors
+[2019-12-17 20:08:46] [info] Loaded 21 weapons from config
+[2019-12-17 20:08:46] [info] Loading plugin "mariadb"
+[2019-12-17 20:08:46] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 20:08:46] [info] Loading plugin "ini-plugin"
+[2019-12-17 20:08:46] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 20:08:46] [info] Server password set from the config file
+[2019-12-17 20:08:46] [info] Starting package "default"
+[2019-12-17 20:08:46] [script] Door Count: 567
+[2019-12-17 20:08:46] [info] Starting package "colours"
+[2019-12-17 20:08:46] [info] Starting package "dialogui"
+[2019-12-17 20:08:46] [info] Starting package "debug"
+[2019-12-17 20:08:46] [info] Starting package "orp"
+[2019-12-17 20:08:46] [script] MariaDB: Connected to localhost
+[2019-12-17 20:08:46] [info] Package load done, clients will download 14 files with a total of 129 KB
+[2019-12-17 20:08:46] [info] Max players set to 300
+[2019-12-17 20:08:46] [info] Listening on 0.0.0.0
+[2019-12-17 20:08:46] [info] Open port channels:
+[2019-12-17 20:08:46] [info] 	UDP 7777 (game)
+[2019-12-17 20:08:46] [info] 	UDP 7776 (query)
+[2019-12-17 20:08:46] [info] 	TCP 7775 (file)
+[2019-12-17 20:08:46] [info] Server loaded. Entering simulation...
+[2019-12-17 20:08:46] [script] Loading Vehicle ID 1
+[2019-12-17 20:08:46] [script] Loading Vehicle ID 2
+[2019-12-17 20:08:46] [script] Loading Vehicle ID 3
+[2019-12-17 20:08:46] [script] Loading Vehicle ID 4
+[2019-12-17 20:08:46] [script] 1's owner: 2
+[2019-12-17 20:08:46] [script] 2's owner: 7
+[2019-12-17 20:08:46] [script] 3's owner: 3
+[2019-12-17 20:08:46] [script] 4's owner: 0
+[2019-12-17 20:08:49] [info] Client requesting connection 127.0.0.1:54709
+[2019-12-17 20:08:49] [info] Player (ID 1) joining the game (127.0.0.1:54709)
+[2019-12-17 20:08:49] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:08:50] [script] Data created for: 1
+[2019-12-17 20:09:18] [info] Detected CTRL+C, shutting down...
+[2019-12-17 20:09:18] [script] Unloading Vehicle ID: 1
+[2019-12-17 20:09:18] [script] Unloading Vehicle ID: 2
+[2019-12-17 20:09:18] [script] Unloading Vehicle ID: 3
+[2019-12-17 20:09:18] [script] Unloading Vehicle ID: 4
+[2019-12-17 20:09:18] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 20:09:20] [info] Windows Server is starting
+[2019-12-17 20:09:20] [info] Detected 16 logical processors
+[2019-12-17 20:09:20] [info] Loaded 21 weapons from config
+[2019-12-17 20:09:20] [info] Loading plugin "mariadb"
+[2019-12-17 20:09:20] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 20:09:20] [info] Loading plugin "ini-plugin"
+[2019-12-17 20:09:20] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 20:09:20] [info] Server password set from the config file
+[2019-12-17 20:09:20] [info] Starting package "default"
+[2019-12-17 20:09:20] [script] Door Count: 567
+[2019-12-17 20:09:20] [info] Starting package "colours"
+[2019-12-17 20:09:20] [info] Starting package "dialogui"
+[2019-12-17 20:09:20] [info] Starting package "debug"
+[2019-12-17 20:09:20] [info] Starting package "orp"
+[2019-12-17 20:09:20] [script] MariaDB: Connected to localhost
+[2019-12-17 20:09:20] [info] Package load done, clients will download 15 files with a total of 130 KB
+[2019-12-17 20:09:20] [info] Max players set to 300
+[2019-12-17 20:09:20] [info] Listening on 0.0.0.0
+[2019-12-17 20:09:20] [info] Open port channels:
+[2019-12-17 20:09:20] [info] 	UDP 7777 (game)
+[2019-12-17 20:09:20] [info] 	UDP 7776 (query)
+[2019-12-17 20:09:20] [info] 	TCP 7775 (file)
+[2019-12-17 20:09:20] [info] Server loaded. Entering simulation...
+[2019-12-17 20:09:20] [script] Loading Vehicle ID 1
+[2019-12-17 20:09:20] [script] Loading Vehicle ID 2
+[2019-12-17 20:09:20] [script] Loading Vehicle ID 3
+[2019-12-17 20:09:20] [script] Loading Vehicle ID 4
+[2019-12-17 20:09:20] [script] 1's owner: 2
+[2019-12-17 20:09:20] [script] 2's owner: 7
+[2019-12-17 20:09:20] [script] 3's owner: 3
+[2019-12-17 20:09:20] [script] 4's owner: 0
+[2019-12-17 20:09:23] [info] Client requesting connection 127.0.0.1:54709
+[2019-12-17 20:09:23] [info] Player (ID 1) joining the game (127.0.0.1:54709)
+[2019-12-17 20:09:23] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:09:23] [script] Data created for: 1
+[2019-12-17 20:09:40] [info] Player (ID 1) disconnected (127.0.0.1:54709)
+[2019-12-17 20:09:40] [script] 2
+[2019-12-17 20:09:40] [script] Data destroyed for: 1
+[2019-12-17 20:09:41] [info] Client requesting connection 127.0.0.1:58702
+[2019-12-17 20:09:41] [info] Player (ID 1) joining the game (127.0.0.1:58702)
+[2019-12-17 20:09:41] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:09:42] [script] Data created for: 1
+[2019-12-17 20:09:46] [script] IS NOT NILL
+[2019-12-17 20:09:46] [script] number
+[2019-12-17 20:09:46] [script] number
+[2019-12-17 20:09:46] [script] IS NOT NILL
+[2019-12-17 20:09:46] [script] number
+[2019-12-17 20:09:46] [script] number
+[2019-12-17 20:09:46] [script] IS NOT NILL
+[2019-12-17 20:09:46] [script] number
+[2019-12-17 20:09:46] [script] number
+[2019-12-17 20:09:46] [script] IS NOT NILL
+[2019-12-17 20:09:46] [script] number
+[2019-12-17 20:09:46] [script] number
+[2019-12-17 20:09:52] [script] 1
+[2019-12-17 20:09:52] [script] 2
+[2019-12-17 20:09:52] [script] 3
+[2019-12-17 20:09:52] [script] 4
+[2019-12-17 20:09:58] [script] 1
+[2019-12-17 20:09:58] [script] 2
+[2019-12-17 20:09:58] [script] 3
+[2019-12-17 20:09:58] [script] 4
+[2019-12-17 20:11:06] [script] 1
+[2019-12-17 20:11:06] [script] 2
+[2019-12-17 20:11:06] [script] 3
+[2019-12-17 20:11:06] [script] 4
+[2019-12-17 20:11:08] [script] 1
+[2019-12-17 20:11:08] [script] 2
+[2019-12-17 20:11:08] [script] 3
+[2019-12-17 20:11:08] [script] 4
+[2019-12-17 20:11:09] [script] 1
+[2019-12-17 20:11:09] [script] 2
+[2019-12-17 20:11:09] [script] 3
+[2019-12-17 20:11:09] [script] 4
+[2019-12-17 20:11:15] [script] 1
+[2019-12-17 20:11:15] [script] 2
+[2019-12-17 20:11:15] [script] 3
+[2019-12-17 20:11:15] [script] 4
+[2019-12-17 20:11:16] [script] 1
+[2019-12-17 20:11:16] [script] 2
+[2019-12-17 20:11:16] [script] 3
+[2019-12-17 20:11:16] [script] 4
+[2019-12-17 20:11:17] [script] 1
+[2019-12-17 20:11:17] [script] 2
+[2019-12-17 20:11:17] [script] 3
+[2019-12-17 20:11:17] [script] 4
+[2019-12-17 20:11:32] [script] IS NOT NILL
+[2019-12-17 20:11:32] [script] number
+[2019-12-17 20:11:32] [script] number
+[2019-12-17 20:11:32] [script] IS NOT NILL
+[2019-12-17 20:11:32] [script] number
+[2019-12-17 20:11:32] [script] number
+[2019-12-17 20:11:32] [script] IS NOT NILL
+[2019-12-17 20:11:32] [script] number
+[2019-12-17 20:11:32] [script] number
+[2019-12-17 20:11:32] [script] IS NOT NILL
+[2019-12-17 20:11:32] [script] number
+[2019-12-17 20:11:32] [script] number
+[2019-12-17 20:11:36] [script] 1
+[2019-12-17 20:11:36] [script] 2
+[2019-12-17 20:11:36] [script] 3
+[2019-12-17 20:11:36] [script] 4
+[2019-12-17 20:11:49] [info] Player (ID 1) disconnected (127.0.0.1:58702)
+[2019-12-17 20:11:49] [script] 2
+[2019-12-17 20:11:49] [script] Data destroyed for: 1
+[2019-12-17 20:11:51] [info] Client requesting connection 127.0.0.1:61507
+[2019-12-17 20:11:51] [info] Player (ID 1) joining the game (127.0.0.1:61507)
+[2019-12-17 20:11:51] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:11:51] [script] Data created for: 1
+[2019-12-17 20:11:58] [script] 1
+[2019-12-17 20:11:58] [script] 2
+[2019-12-17 20:11:58] [script] 3
+[2019-12-17 20:11:58] [script] 4
+[2019-12-17 20:11:59] [script] 1
+[2019-12-17 20:11:59] [script] 2
+[2019-12-17 20:11:59] [script] 3
+[2019-12-17 20:11:59] [script] 4
+[2019-12-17 20:12:00] [script] 1
+[2019-12-17 20:12:00] [script] 2
+[2019-12-17 20:12:00] [script] 3
+[2019-12-17 20:12:00] [script] 4
+[2019-12-17 20:12:01] [script] 1
+[2019-12-17 20:12:01] [script] 2
+[2019-12-17 20:12:01] [script] 3
+[2019-12-17 20:12:01] [script] 4
+[2019-12-17 20:12:02] [script] 1
+[2019-12-17 20:12:02] [script] 2
+[2019-12-17 20:12:02] [script] 3
+[2019-12-17 20:12:02] [script] 4
+[2019-12-17 20:12:06] [script] IS NOT NILL
+[2019-12-17 20:12:06] [script] number
+[2019-12-17 20:12:06] [script] number
+[2019-12-17 20:12:06] [script] IS NOT NILL
+[2019-12-17 20:12:06] [script] number
+[2019-12-17 20:12:06] [script] number
+[2019-12-17 20:12:06] [script] IS NOT NILL
+[2019-12-17 20:12:06] [script] number
+[2019-12-17 20:12:06] [script] number
+[2019-12-17 20:12:06] [script] IS NOT NILL
+[2019-12-17 20:12:06] [script] number
+[2019-12-17 20:12:06] [script] number
+[2019-12-17 20:13:21] [info] Detected CTRL+C, shutting down...
+[2019-12-17 20:13:21] [script] Unloading Vehicle ID: 1
+[2019-12-17 20:13:21] [script] Unloading Vehicle ID: 2
+[2019-12-17 20:13:21] [script] Unloading Vehicle ID: 3
+[2019-12-17 20:13:21] [script] Unloading Vehicle ID: 4
+[2019-12-17 20:13:21] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 20:13:23] [info] Windows Server is starting
+[2019-12-17 20:13:23] [info] Detected 16 logical processors
+[2019-12-17 20:13:23] [info] Loaded 21 weapons from config
+[2019-12-17 20:13:23] [info] Loading plugin "mariadb"
+[2019-12-17 20:13:23] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 20:13:23] [info] Loading plugin "ini-plugin"
+[2019-12-17 20:13:23] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 20:13:23] [info] Server password set from the config file
+[2019-12-17 20:13:23] [info] Starting package "default"
+[2019-12-17 20:13:23] [script] Door Count: 567
+[2019-12-17 20:13:23] [info] Starting package "colours"
+[2019-12-17 20:13:23] [info] Starting package "dialogui"
+[2019-12-17 20:13:23] [info] Starting package "debug"
+[2019-12-17 20:13:23] [info] Starting package "orp"
+[2019-12-17 20:13:23] [script] MariaDB: Connected to localhost
+[2019-12-17 20:13:23] [info] Package load done, clients will download 15 files with a total of 130 KB
+[2019-12-17 20:13:23] [info] Max players set to 300
+[2019-12-17 20:13:23] [info] Listening on 0.0.0.0
+[2019-12-17 20:13:23] [info] Open port channels:
+[2019-12-17 20:13:23] [info] 	UDP 7777 (game)
+[2019-12-17 20:13:23] [info] 	UDP 7776 (query)
+[2019-12-17 20:13:23] [info] 	TCP 7775 (file)
+[2019-12-17 20:13:23] [info] Server loaded. Entering simulation...
+[2019-12-17 20:13:23] [script] Loading Vehicle ID 1
+[2019-12-17 20:13:23] [script] Loading Vehicle ID 2
+[2019-12-17 20:13:23] [script] Loading Vehicle ID 3
+[2019-12-17 20:13:23] [script] Loading Vehicle ID 4
+[2019-12-17 20:13:23] [script] 1's owner: 2
+[2019-12-17 20:13:23] [script] 2's owner: 7
+[2019-12-17 20:13:23] [script] 3's owner: 3
+[2019-12-17 20:13:23] [script] 4's owner: 2
+[2019-12-17 20:13:49] [info] Client requesting connection 127.0.0.1:61507
+[2019-12-17 20:13:49] [info] Player (ID 1) joining the game (127.0.0.1:61507)
+[2019-12-17 20:13:49] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:13:49] [script] Data created for: 1
+[2019-12-17 20:13:59] [script] IS NOT NILL
+[2019-12-17 20:13:59] [script] number
+[2019-12-17 20:13:59] [script] number
+[2019-12-17 20:13:59] [script] IS NOT NILL
+[2019-12-17 20:13:59] [script] number
+[2019-12-17 20:13:59] [script] number
+[2019-12-17 20:13:59] [script] IS NOT NILL
+[2019-12-17 20:13:59] [script] number
+[2019-12-17 20:13:59] [script] number
+[2019-12-17 20:13:59] [script] IS NOT NILL
+[2019-12-17 20:13:59] [script] number
+[2019-12-17 20:13:59] [script] number
+[2019-12-17 20:14:01] [script] 4's owner: 2
+[2019-12-17 20:14:59] [info] Player (ID 1) disconnected (127.0.0.1:61507)
+[2019-12-17 20:14:59] [script] 2
+[2019-12-17 20:14:59] [script] Data destroyed for: 1
+[2019-12-17 20:15:02] [info] Detected CTRL+C, shutting down...
+[2019-12-17 20:15:02] [script] Unloading Vehicle ID: 1
+[2019-12-17 20:15:02] [script] Unloading Vehicle ID: 2
+[2019-12-17 20:15:02] [script] Unloading Vehicle ID: 3
+[2019-12-17 20:15:02] [script] Unloading Vehicle ID: 4
+[2019-12-17 20:15:02] [script] Unloading Vehicle ID: 5
+[2019-12-17 20:15:02] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 20:15:11] [info] Windows Server is starting
+[2019-12-17 20:15:11] [info] Detected 16 logical processors
+[2019-12-17 20:15:11] [info] Loaded 21 weapons from config
+[2019-12-17 20:15:11] [info] Loading plugin "mariadb"
+[2019-12-17 20:15:11] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 20:15:11] [info] Loading plugin "ini-plugin"
+[2019-12-17 20:15:11] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 20:15:11] [info] Server password set from the config file
+[2019-12-17 20:15:11] [info] Starting package "default"
+[2019-12-17 20:15:11] [script] Door Count: 567
+[2019-12-17 20:15:11] [info] Starting package "colours"
+[2019-12-17 20:15:11] [info] Starting package "dialogui"
+[2019-12-17 20:15:11] [info] Starting package "debug"
+[2019-12-17 20:15:11] [info] Starting package "orp"
+[2019-12-17 20:15:11] [script] MariaDB: Connected to localhost
+[2019-12-17 20:15:11] [info] Package load done, clients will download 15 files with a total of 130 KB
+[2019-12-17 20:15:11] [info] Max players set to 300
+[2019-12-17 20:15:11] [info] Listening on 0.0.0.0
+[2019-12-17 20:15:11] [info] Open port channels:
+[2019-12-17 20:15:11] [info] 	UDP 7777 (game)
+[2019-12-17 20:15:11] [info] 	UDP 7776 (query)
+[2019-12-17 20:15:11] [info] 	TCP 7775 (file)
+[2019-12-17 20:15:11] [info] Server loaded. Entering simulation...
+[2019-12-17 20:15:11] [script] Loading Vehicle ID 1
+[2019-12-17 20:15:11] [script] Loading Vehicle ID 2
+[2019-12-17 20:15:11] [script] Loading Vehicle ID 3
+[2019-12-17 20:15:11] [script] Loading Vehicle ID 4
+[2019-12-17 20:15:11] [script] 1's owner: 2
+[2019-12-17 20:15:11] [script] 2's owner: 7
+[2019-12-17 20:15:11] [script] 3's owner: 3
+[2019-12-17 20:15:11] [script] 4's owner: 2
+[2019-12-17 20:15:14] [info] Client requesting connection 127.0.0.1:51115
+[2019-12-17 20:15:14] [info] Player (ID 1) joining the game (127.0.0.1:51115)
+[2019-12-17 20:15:14] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:15:14] [script] Data created for: 1
+[2019-12-17 20:15:22] [script] 1
+[2019-12-17 20:15:22] [script] not nill 1
+[2019-12-17 20:15:22] [script] 2
+[2019-12-17 20:15:22] [script] not nill 2
+[2019-12-17 20:15:22] [script] 3
+[2019-12-17 20:15:22] [script] not nill 3
+[2019-12-17 20:15:22] [script] 4
+[2019-12-17 20:15:22] [script] not nill 4
+[2019-12-17 20:16:22] [script] Vehicle unload successful, id: 4
+[2019-12-17 20:16:24] [script] IS NOT NILL
+[2019-12-17 20:16:24] [script] number
+[2019-12-17 20:16:24] [script] number
+[2019-12-17 20:16:24] [script] IS NOT NILL
+[2019-12-17 20:16:24] [script] number
+[2019-12-17 20:16:24] [script] number
+[2019-12-17 20:16:24] [script] IS NOT NILL
+[2019-12-17 20:16:24] [script] number
+[2019-12-17 20:16:24] [script] number
+[2019-12-17 20:16:24] [script] IS NOT NILL
+[2019-12-17 20:16:24] [script] number
+[2019-12-17 20:16:24] [script] number
+[2019-12-17 20:16:26] [script] 4's owner: 2
+[2019-12-17 20:16:43] [script] 1
+[2019-12-17 20:16:43] [script] not nill 1
+[2019-12-17 20:16:43] [script] 2
+[2019-12-17 20:16:43] [script] not nill 2
+[2019-12-17 20:16:43] [script] 3
+[2019-12-17 20:16:43] [script] not nill 3
+[2019-12-17 20:16:43] [script] 4
+[2019-12-17 20:16:43] [script] not nill 4
+[2019-12-17 20:16:43] [script] 5
+[2019-12-17 20:16:43] [script] not nill 5
+[2019-12-17 20:16:45] [script] 1
+[2019-12-17 20:16:45] [script] not nill 1
+[2019-12-17 20:16:45] [script] 2
+[2019-12-17 20:16:45] [script] not nill 2
+[2019-12-17 20:16:45] [script] 3
+[2019-12-17 20:16:45] [script] not nill 3
+[2019-12-17 20:16:45] [script] 4
+[2019-12-17 20:16:45] [script] not nill 4
+[2019-12-17 20:16:45] [script] 5
+[2019-12-17 20:16:45] [script] not nill 5
+[2019-12-17 20:17:09] [script] 1
+[2019-12-17 20:17:09] [script] not nill 1
+[2019-12-17 20:17:09] [script] 2
+[2019-12-17 20:17:09] [script] not nill 2
+[2019-12-17 20:17:09] [script] 3
+[2019-12-17 20:17:09] [script] not nill 3
+[2019-12-17 20:17:09] [script] 4
+[2019-12-17 20:17:09] [script] not nill 4
+[2019-12-17 20:17:10] [script] 1
+[2019-12-17 20:17:10] [script] not nill 1
+[2019-12-17 20:17:10] [script] 2
+[2019-12-17 20:17:10] [script] not nill 2
+[2019-12-17 20:17:10] [script] 3
+[2019-12-17 20:17:10] [script] not nill 3
+[2019-12-17 20:17:10] [script] 4
+[2019-12-17 20:17:10] [script] not nill 4
+[2019-12-17 20:17:23] [script] 1
+[2019-12-17 20:17:23] [script] not nill 1
+[2019-12-17 20:17:23] [script] 2
+[2019-12-17 20:17:23] [script] not nill 2
+[2019-12-17 20:17:23] [script] 3
+[2019-12-17 20:17:23] [script] not nill 3
+[2019-12-17 20:17:23] [script] 4
+[2019-12-17 20:17:23] [script] not nill 4
+[2019-12-17 20:17:23] [script] 5
+[2019-12-17 20:17:23] [script] not nill 5
+[2019-12-17 20:17:24] [script] 1
+[2019-12-17 20:17:24] [script] not nill 1
+[2019-12-17 20:17:24] [script] 2
+[2019-12-17 20:17:24] [script] not nill 2
+[2019-12-17 20:17:24] [script] 3
+[2019-12-17 20:17:24] [script] not nill 3
+[2019-12-17 20:17:24] [script] 4
+[2019-12-17 20:17:24] [script] not nill 4
+[2019-12-17 20:17:24] [script] 5
+[2019-12-17 20:17:24] [script] not nill 5
+[2019-12-17 20:17:46] [info] Player (ID 1) disconnected (127.0.0.1:51115)
+[2019-12-17 20:17:46] [script] 2
+[2019-12-17 20:17:46] [script] Data destroyed for: 1
+[2019-12-17 20:17:47] [info] Client requesting connection 127.0.0.1:53165
+[2019-12-17 20:17:47] [info] Player (ID 1) joining the game (127.0.0.1:53165)
+[2019-12-17 20:17:47] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:17:47] [script] Data created for: 1
+[2019-12-17 20:17:55] [script] 1
+[2019-12-17 20:17:55] [script] not nill 1
+[2019-12-17 20:17:55] [script] 2
+[2019-12-17 20:17:55] [script] not nill 2
+[2019-12-17 20:17:55] [script] 3
+[2019-12-17 20:17:55] [script] not nill 3
+[2019-12-17 20:17:55] [script] 4
+[2019-12-17 20:17:55] [script] not nill 4
+[2019-12-17 20:17:55] [script] 5
+[2019-12-17 20:17:55] [script] not nill 5
+[2019-12-17 20:17:56] [script] 1
+[2019-12-17 20:17:56] [script] not nill 1
+[2019-12-17 20:17:56] [script] 2
+[2019-12-17 20:17:56] [script] not nill 2
+[2019-12-17 20:17:56] [script] 3
+[2019-12-17 20:17:56] [script] not nill 3
+[2019-12-17 20:17:56] [script] 4
+[2019-12-17 20:17:56] [script] not nill 4
+[2019-12-17 20:17:56] [script] 5
+[2019-12-17 20:17:56] [script] not nill 5
+[2019-12-17 20:17:59] [script] 1
+[2019-12-17 20:17:59] [script] not nill 1
+[2019-12-17 20:17:59] [script] 2
+[2019-12-17 20:17:59] [script] not nill 2
+[2019-12-17 20:17:59] [script] 3
+[2019-12-17 20:17:59] [script] not nill 3
+[2019-12-17 20:17:59] [script] 4
+[2019-12-17 20:17:59] [script] not nill 4
+[2019-12-17 20:17:59] [script] 1
+[2019-12-17 20:17:59] [script] not nill 1
+[2019-12-17 20:17:59] [script] 2
+[2019-12-17 20:17:59] [script] not nill 2
+[2019-12-17 20:17:59] [script] 3
+[2019-12-17 20:17:59] [script] not nill 3
+[2019-12-17 20:17:59] [script] 4
+[2019-12-17 20:17:59] [script] not nill 4
+[2019-12-17 20:18:02] [script] 1
+[2019-12-17 20:18:02] [script] not nill 1
+[2019-12-17 20:18:02] [script] 2
+[2019-12-17 20:18:02] [script] not nill 2
+[2019-12-17 20:18:02] [script] 3
+[2019-12-17 20:18:02] [script] not nill 3
+[2019-12-17 20:18:02] [script] 4
+[2019-12-17 20:18:02] [script] not nill 4
+[2019-12-17 20:18:02] [script] 5
+[2019-12-17 20:18:02] [script] not nill 5
+[2019-12-17 20:18:27] [script] Vehicle unload successful, id: 5
+[2019-12-17 20:18:29] [script] 5's owner: 2
+[2019-12-17 20:19:19] [info] Player (ID 1) disconnected (127.0.0.1:53165)
+[2019-12-17 20:19:19] [script] 2
+[2019-12-17 20:19:19] [script] Data destroyed for: 1
+[2019-12-17 20:19:20] [info] Client requesting connection 127.0.0.1:54108
+[2019-12-17 20:19:21] [info] Player (ID 1) joining the game (127.0.0.1:54108)
+[2019-12-17 20:19:21] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:19:21] [script] Data created for: 1
+[2019-12-17 20:19:29] [script] 1
+[2019-12-17 20:19:29] [script] not nill 1
+[2019-12-17 20:19:29] [script] 2
+[2019-12-17 20:19:29] [script] not nill 2
+[2019-12-17 20:19:29] [script] 3
+[2019-12-17 20:19:29] [script] not nill 3
+[2019-12-17 20:19:29] [script] 4
+[2019-12-17 20:19:29] [script] not nill 4
+[2019-12-17 20:19:29] [script] 5
+[2019-12-17 20:19:29] [script] not nill 5
+[2019-12-17 20:19:29] [script] 6
+[2019-12-17 20:19:29] [script] not nill 6
+[2019-12-17 20:19:32] [script] 1
+[2019-12-17 20:19:32] [script] not nill 1
+[2019-12-17 20:19:32] [script] 2
+[2019-12-17 20:19:32] [script] not nill 2
+[2019-12-17 20:19:32] [script] 3
+[2019-12-17 20:19:32] [script] not nill 3
+[2019-12-17 20:19:32] [script] 4
+[2019-12-17 20:19:32] [script] not nill 4
+[2019-12-17 20:19:32] [script] 5
+[2019-12-17 20:19:32] [script] not nill 5
+[2019-12-17 20:19:32] [script] 6
+[2019-12-17 20:19:32] [script] not nill 6
+[2019-12-17 20:19:35] [script] 1
+[2019-12-17 20:19:35] [script] not nill 1
+[2019-12-17 20:19:35] [script] 2
+[2019-12-17 20:19:35] [script] not nill 2
+[2019-12-17 20:19:35] [script] 3
+[2019-12-17 20:19:35] [script] not nill 3
+[2019-12-17 20:19:35] [script] 4
+[2019-12-17 20:19:35] [script] not nill 4
+[2019-12-17 20:19:35] [script] 5
+[2019-12-17 20:19:35] [script] not nill 5
+[2019-12-17 20:19:35] [script] 6
+[2019-12-17 20:19:35] [script] not nill 6
+[2019-12-17 20:19:44] [info] Player (ID 1) disconnected (127.0.0.1:54108)
+[2019-12-17 20:19:44] [script] 2
+[2019-12-17 20:19:44] [script] Data destroyed for: 1
+[2019-12-17 20:19:46] [info] Detected CTRL+C, shutting down...
+[2019-12-17 20:19:46] [script] Unloading Vehicle ID: 1
+[2019-12-17 20:19:46] [script] Unloading Vehicle ID: 2
+[2019-12-17 20:19:46] [script] Unloading Vehicle ID: 3
+[2019-12-17 20:19:46] [script] Unloading Vehicle ID: 4
+[2019-12-17 20:19:46] [script] Unloading Vehicle ID: 5
+[2019-12-17 20:19:46] [script] Unloading Vehicle ID: 6
+[2019-12-17 20:19:47] [info] MariaDB: Unloading plugin...
+
+[2019-12-17 20:19:49] [info] Windows Server is starting
+[2019-12-17 20:19:49] [info] Detected 16 logical processors
+[2019-12-17 20:19:49] [info] Loaded 21 weapons from config
+[2019-12-17 20:19:49] [info] Loading plugin "mariadb"
+[2019-12-17 20:19:49] [info] MariaDB: v1.1 successfully loaded.
+[2019-12-17 20:19:49] [info] Loading plugin "ini-plugin"
+[2019-12-17 20:19:49] [info] ini-plugin: v1.0 successfully loaded.
+[2019-12-17 20:19:49] [info] Server password set from the config file
+[2019-12-17 20:19:49] [info] Starting package "default"
+[2019-12-17 20:19:49] [script] Door Count: 567
+[2019-12-17 20:19:49] [info] Starting package "colours"
+[2019-12-17 20:19:49] [info] Starting package "dialogui"
+[2019-12-17 20:19:49] [info] Starting package "debug"
+[2019-12-17 20:19:49] [info] Starting package "orp"
+[2019-12-17 20:19:49] [script] MariaDB: Connected to localhost
+[2019-12-17 20:19:49] [info] Package load done, clients will download 15 files with a total of 130 KB
+[2019-12-17 20:19:49] [info] Max players set to 300
+[2019-12-17 20:19:49] [info] Listening on 0.0.0.0
+[2019-12-17 20:19:49] [info] Open port channels:
+[2019-12-17 20:19:49] [info] 	UDP 7777 (game)
+[2019-12-17 20:19:49] [info] 	UDP 7776 (query)
+[2019-12-17 20:19:49] [info] 	TCP 7775 (file)
+[2019-12-17 20:19:49] [info] Server loaded. Entering simulation...
+[2019-12-17 20:19:49] [script] Loading Vehicle ID 1
+[2019-12-17 20:19:49] [script] Loading Vehicle ID 2
+[2019-12-17 20:19:49] [script] Loading Vehicle ID 3
+[2019-12-17 20:19:49] [script] Loading Vehicle ID 4
+[2019-12-17 20:19:49] [script] Loading Vehicle ID 5
+[2019-12-17 20:19:49] [script] Loading Vehicle ID 6
+[2019-12-17 20:19:49] [script] 1's owner: 2
+[2019-12-17 20:19:49] [script] 2's owner: 7
+[2019-12-17 20:19:49] [script] 3's owner: 3
+[2019-12-17 20:19:49] [script] 4's owner: 2
+[2019-12-17 20:19:49] [script] 5's owner: 2
+[2019-12-17 20:19:49] [script] 6's owner: 2
+[2019-12-17 20:19:52] [info] Client requesting connection 127.0.0.1:58730
+[2019-12-17 20:19:52] [info] Player (ID 1) joining the game (127.0.0.1:58730)
+[2019-12-17 20:19:52] [error] [string "orp/server/misc/misc_s.lua"]:48: attempt to index a nil value (field '?')
+[2019-12-17 20:19:53] [script] Data created for: 1
+[2019-12-17 20:20:00] [script] 1
+[2019-12-17 20:20:00] [script] not nill 1
+[2019-12-17 20:20:00] [script] 2
+[2019-12-17 20:20:00] [script] not nill 2
+[2019-12-17 20:20:00] [script] 3
+[2019-12-17 20:20:00] [script] not nill 3
+[2019-12-17 20:20:00] [script] 4
+[2019-12-17 20:20:00] [script] not nill 4
+[2019-12-17 20:20:00] [script] 5
+[2019-12-17 20:20:00] [script] not nill 5
+[2019-12-17 20:20:00] [script] 6
+[2019-12-17 20:20:00] [script] not nill 6
+[2019-12-17 20:20:44] [script] Vehicle unload successful, id: 6
+[2019-12-17 20:20:47] [script] 6's owner: 2
+[2019-12-17 20:21:26] [info] Detected CTRL+C, shutting down...
+[2019-12-17 20:21:26] [script] Unloading Vehicle ID: 1
+[2019-12-17 20:21:26] [script] Unloading Vehicle ID: 2
+[2019-12-17 20:21:26] [script] Unloading Vehicle ID: 3
+[2019-12-17 20:21:26] [script] Unloading Vehicle ID: 4
+[2019-12-17 20:21:26] [script] Unloading Vehicle ID: 5
+[2019-12-17 20:21:26] [script] Unloading Vehicle ID: 6
+[2019-12-17 20:21:27] [info] MariaDB: Unloading plugin...
