@@ -18,6 +18,36 @@ AddCommand("w", function (player, weapon, slot, ammo)
     AddPlayerChat(player, 'Given you a '..weapon..' with '..ammo..' ammo.')
 end)
 
+local function cmd_shout(playerid, ...)
+
+	local args = table.concat({...}, " ")
+
+	if args == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /shout [message]")
+	end
+
+	local x, y, z = GetPlayerLocation(playerid)
+
+	AddPlayerChatRange(x, y, 1000.0, "<span color=\"#ffffffFF\">"..GetPlayerName(player).." shouts: "..args.."</>")
+end
+AddCommand("shout", cmd_shout)
+AddCommand("s", cmd_shout)
+
+local function cmd_low(playerid, ...)
+
+	local args = table.concat({...}, " ")
+
+	if args == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /low [message]")
+	end
+
+	local x, y, z = GetPlayerLocation(playerid)
+
+	AddPlayerChatRange(x, y, 400.0, "<span color=\"#ffffffFF\">"..GetPlayerName(player).." whispers: "..args.."</>")
+end
+AddCommand("low", cmd_low)
+AddCommand("l", cmd_low)
+
 AddCommand("me", function (player, ...)
 	local args = {...}
 	local text = ''
