@@ -55,7 +55,7 @@ function OnFactionCreated(faction, name, short_name, leadership_rank, fac_type)
 	FactionData[faction].name = name
 	FactionData[faction].short_name = short_name
 	FactionData[faction].leadership_rank = leadership_rank
-	FactionData[factionid].type = fac_type
+	FactionData[faction].type = fac_type
 end
 
 function Faction_Destroy(factionid)
@@ -82,7 +82,7 @@ function OnFactionLoaded(factionid)
 	else
 		local result = mariadb_get_assoc(1)
 
-		FactionData[factionid].id = id
+		FactionData[factionid].id = result['id']
 		FactionData[factionid].name = result['name']
 		FactionData[factionid].short_name = result['short_name']
 		FactionData[factionid].motd = result['motd']
