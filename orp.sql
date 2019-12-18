@@ -134,6 +134,7 @@ CREATE TABLE IF NOT EXISTS `factions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(50) DEFAULT NULL,
   `short_name` varchar(6) DEFAULT NULL,
+  `type` tinyint(2) DEFAULT NULL,
   `motd` varchar(50) DEFAULT 'Default MOTD',
   `leadership_rank` int(11) DEFAULT NULL,
   `radio_dimension` int(11) DEFAULT NULL,

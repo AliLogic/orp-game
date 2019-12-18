@@ -13,6 +13,7 @@ function CreateFactionData(factionid)
 
 	FactionData[factionid].name = ""
 	FactionData[factionid].short_name = ""
+	FactionData[factionid].type = 0
 	FactionData[factionid].motd = "Default MOTD"
 
 	FactionData[factionid].leadership_rank = 0
@@ -27,10 +28,10 @@ function DestroyFactionData(factionid)
 	FactionRankData[factionid] = {}
 end
 
-function Faction_Create(name, short_name, leadership_rank)
+function Faction_Create(name, short_name, leadership_rank, fac_type)
 	leadership_rank = leadership_rank or 10
 
-	local faction = 0
+	local faction = 1
 
 	while FactionData[faction] ~= nil do
 		faction = faction + 1
@@ -38,21 +39,23 @@ function Faction_Create(name, short_name, leadership_rank)
 
 	CreateFactionData(faction)
 
-	local query = mariadb_prepare(sql, "INSERT INTO factions (name, short_name, leadership_rank) VALUES('?', '?', '?')",
+	local query = mariadb_prepare(sql, "INSERT INTO factions (name, short_name, leadership_rank, type) VALUES('?', '?', '?', '?')",
 		name,
 		short_name,
-		leadership_rank
+		leadership_rank,
+		fac_type
 	)
 
-	mariadb_async_query(sql, query, OnFactionCreated, faction, name, short_name, leadership_rank)
+	mariadb_async_query(sql, query, OnFactionCreated, faction, name, short_name, leadership_rank, fac_type)
 	return faction
 end
 
-function OnFactionCreated(faction, name, short_name, leadership_rank)
+function OnFactionCreated(faction, name, short_name, leadership_rank, fac_type)
 	FactionData[faction].id = mariadb_get_insert_id()
 	FactionData[faction].name = name
 	FactionData[faction].short_name = short_name
 	FactionData[faction].leadership_rank = leadership_rank
+	FactionData[factionid].type = fac_type
 end
 
 function Faction_Destroy(factionid)
@@ -83,6 +86,7 @@ function OnFactionLoaded(factionid)
 		FactionData[factionid].name = result['name']
 		FactionData[factionid].short_name = result['short_name']
 		FactionData[factionid].motd = result['motd']
+		FactionData[factionid].type = result['type']
 
 		FactionData[factionid].leadership_rank = tonumber(result['leadership_rank'])
 		FactionData[factionid].radio_dimension = tonumber(result['radio_dimension'])
@@ -106,9 +110,10 @@ function OnFactionRankLoaded(factionid)
 end
 
 function Faction_Unload(factionid)
-	local query = mariadb_prepare(sql, "UPDATE factions SET name = '?', short_name = '?', motd = '?', leadership_rank = '?', radio_dimension = '?', bank = '?' WHERE id = ?",
+	local query = mariadb_prepare(sql, "UPDATE factions SET name = '?', short_name = '?', type = '?', motd = '?', leadership_rank = '?', radio_dimension = '?', bank = '?' WHERE id = ?",
 		FactionData[factionid].name,
 		FactionData[factionid].short_name,
+		FactionData[factionid].type,
 		FactionData[factionid].motd,
 		FactionData[factionid].leadership_rank,
 		FactionData[factionid].radio_dimension,
