@@ -2,6 +2,7 @@ local colour = ImportPackage('colours')
 
 FactionData = {}
 FactionRankData = {}
+
 DivisionData = {}
 DivisionRankData = {}
 
@@ -29,8 +30,13 @@ end
 function Faction_Create(name, short_name, leadership_rank)
 	leadership_rank = leadership_rank or 10
 
-	local factionid = 0
-	CreateFactionData(factionid)
+	local faction = 0
+
+	while FactionData[faction] ~= nil do
+		faction = faction + 1
+	end
+
+	CreateFactionData(faction)
 
 	local query = mariadb_prepare(sql, "INSERT INTO factions (name, short_name, leadership_rank) VALUES('?', '?', '?')",
 		name,
@@ -38,15 +44,15 @@ function Faction_Create(name, short_name, leadership_rank)
 		leadership_rank
 	)
 
-	mariadb_async_query(sql, query, OnFactionCreated, factionid, name, short_name, leadership_rank)
-	return factionid
+	mariadb_async_query(sql, query, OnFactionCreated, faction, name, short_name, leadership_rank)
+	return faction
 end
 
-function OnFactionCreated(factionid, name, short_name, leadership_rank)
-	FactionData[factionid].id = mariadb_get_insert_id()
-	FactionData[factionid].name = name
-	FactionData[factionid].short_name = short_name
-	FactionData[factionid].leadership_rank = leadership_rank
+function OnFactionCreated(faction, name, short_name, leadership_rank)
+	FactionData[faction].id = mariadb_get_insert_id()
+	FactionData[faction].name = name
+	FactionData[faction].short_name = short_name
+	FactionData[faction].leadership_rank = leadership_rank
 end
 
 function Faction_Destroy(factionid)
