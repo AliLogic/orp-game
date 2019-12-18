@@ -12,11 +12,13 @@
 		"server/helper/cmds_s.lua",
 		"server/vehicle/vehicle_s.lua",
 		"server/vehicle/cmds_s.lua",
+		"server/faction/faction_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [
 		"client/orp_c.lua",
-		"client/accounts/accounts_c.lua"
+		"client/accounts/accounts_c.lua",
+		"client/vehicle/vehicle_c.lua"
 	],
 	"files": []
 }
