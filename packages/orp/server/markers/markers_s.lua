@@ -174,3 +174,16 @@ AddEvent('UnloadMarkers', function ()
 		Marker_Unload(i)
 	end
 end)
+
+AddEvent("OnPlayerPickupHit", function (playerid, pickupid)
+
+	if (GetPickupPropertyValue(pickupid, "type") == "marker") then
+
+		SetPlayerPropertyValue(playerid, "marker", pickupid, true)
+	end
+end)
+
+AddRemoteEvent("OnPlayerInteractMarker", function (playerid, markerid)
+
+	AddPlayerChat(playerid, "Server knows you interacted with marker "..markerid..".")
+end)
