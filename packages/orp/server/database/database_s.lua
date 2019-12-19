@@ -20,6 +20,7 @@ AddEvent("OnPackageStart", function ()
 
 		CallEvent('LoadVehicles')
 		CallEvent('LoadFactions')
+		CallEvent('LoadATMs')
 
 		CallRemoteEvent('CreateMinimap')
 	else

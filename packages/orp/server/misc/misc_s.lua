@@ -43,3 +43,34 @@ function SetPlayerChatBubble(player, message, seconds)
     end)
     
 end
+
+function GetPlayerCash(player)
+    if PlayerData[player] ~= nil then
+        return PlayerData[player].cash
+    end
+end
+
+function SetPlayerCash(player, amount)
+    if PlayerData[player] ~= nil then
+        PlayerData[player].cash = amount
+    end
+end
+
+function AddPlayerCash(player, amount)
+    if PlayerData[player] ~= nil then
+        PlayerData[player].cash = PlayerData[player].cash + amount
+    end
+end
+
+function RemovePlayerCash(player, amount)
+    if PlayerData[player] ~= nil then
+        PlayerData[player].cash = PlayerData[player].cash - amount
+    end
+end
+
+AddRemoteEvent("GetPlayerCash", GetPlayerCash)
+AddRemoteEvent("SetPlayerCash", SetPlayerCash)
+AddRemoteEvent("AddPlayerCash", AddPlayerCash)
+AddRemoteEvent("RemovePlayerCash", RemovePlayerCash)
+
+-- In future, with all of these, add some cool server sided code to modify a nice UI or something.

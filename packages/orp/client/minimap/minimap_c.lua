@@ -1,3 +1,5 @@
+local minimap = nil
+
 AddRemoteEvent('CreateMinimap', function ()
     minimap = CreateWebUI(0, 0, 0, 0, 0, 32)
     SetWebVisibility(minimap, WEB_HITINVISIBLE)

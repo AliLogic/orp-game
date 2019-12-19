@@ -1,5 +1,5 @@
 {
-	"servername": "[g][c=red]Onset[/c] [c=white]Roleplay[/c][/g]",
+	"servername": "[ENG] Onset Roleplay",
 	"gamemode": "Roleplay",
 	"website_url": "https://onsetroleplay.com",
 	"ipaddress": "0.0.0.0",
@@ -8,7 +8,7 @@
 	"password": "onsetrpstaffonly419",
 	"timeout": 15000,
 	"iplimit": 5,
-	"masterserver": true,
+	"masterlist": false,
 	"plugins": [
 		"mariadb",
 		"ini-plugin"
