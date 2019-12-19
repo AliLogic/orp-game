@@ -32,7 +32,7 @@ function Vehicle_Create(model, plate, x, y, z, a)
 	if (model < 1 or model > 25) then
 		return false
 	end
-	
+
 	if string.len(plate) < 1 or string.len(plate) > 13 then
 		return false
 	end
@@ -46,7 +46,7 @@ function Vehicle_Create(model, plate, x, y, z, a)
 	SetVehicleLicensePlate(vehicle, plate)
 
 	local r, g, b, al = HexToRGBA(GetVehicleColor(vehicle))
-	
+
 	local query = mariadb_prepare(sql, "INSERT INTO vehicles (model, plate, x, y, z, a, r, g, b) VALUES (?, '?', '?', '?', '?', '?', ?, ?, ?);",
 		model,
 		plate,

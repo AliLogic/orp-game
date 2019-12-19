@@ -291,6 +291,22 @@ INSERT INTO `vehicles` (`id`, `owner`, `model`, `plate`, `faction`, `x`, `y`, `z
 	(7, 7, 6, 'Test', 0, '169077.515625', '194126.859375', '1209.3485107422', '-19.992433547974', 255, 255, 255);
 /*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
 
+CREATE TABLE `markers` (
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `model` int(11) NOT NULL,
+  `x1` float NOT NULL,
+  `y1` float NOT NULL,
+  `z1` float NOT NULL,
+  `x2` float NOT NULL,
+  `y2` float NOT NULL,
+  `z2` float NOT NULL,
+  `r` int(11) DEFAULT NULL,
+  `g` int(11) DEFAULT NULL,
+  `b` int(11) DEFAULT NULL,
+  `a` int(11) DEFAULT NULL,
+  `is_locked` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

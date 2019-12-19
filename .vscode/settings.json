@@ -181,6 +181,13 @@
         "GetVehicleVelocity",
         "HexToRGBA",
         "GetVehicleColor",
-        "GetVehicleDriver"
+        "GetVehicleDriver",
+        "CreatePickup",
+        "IsValidPickup",
+        "SetPickupPropertyValue",
+        "GetPickupPropertyValue",
+        "GetPlayerLocale",
+        "GetNetworkStats",
+        "SetNearClipPlane"
     ]
 }

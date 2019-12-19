@@ -129,7 +129,7 @@ function OnFactionUnloaded(factionid)
 		print('Faction unload unsuccessful, id: '..factionid)
 	else
 		print('Faction unload successful, id: '..factionid)
-		DestroyFaction(factionid)
+		DestroyFactionData(factionid)
 	end
 end
 
