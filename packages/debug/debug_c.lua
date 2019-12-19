@@ -67,7 +67,7 @@ end
 
 function UpdateNetworkStats()
 	local NetStats = GetNetworkStats()
-	
+
 	local data = "<br>NET CLIENT<br>"
 	data = data .. "ping: " .. GetPing() .. "ms<br>"
 	data = data .. "packetLoss: " .. tostring(NetStats['packetlossTotal']) .. "%<br>"

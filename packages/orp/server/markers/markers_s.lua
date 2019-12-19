@@ -36,6 +36,9 @@ function Marker_Create(modelid, x, y, z)
 	modelid = tonumber(modelid)
 	local marker_id = CreatePickup(modelid, x, y, z)
 
+	if marker_id == false then
+		return false
+	end
 	CreateMarkerData(marker_id)
 
 	local query = mariadb_prepare(sql, "INSERT INTO markers (model, x1, y1, z1) VALUES('?', '?', '?', '?')",
@@ -59,10 +62,15 @@ function OnMarkerCreated(marker_id, modelid, x, y, z)
 	MarkerData[marker_id].z1 = z
 end
 
-function Marker_Destroy(marker_id)
+function IsValidMarker(marker_id)
 	if MarkerData[marker_id] == nil or not IsValidPickup(MarkerData[marker_id].pickup1) then
 		return false
+	else
+		return true
 	end
+end
+
+function Marker_Destroy(marker_id)
 
 	local query = mariadb_prepare(sql, "DELETE FROM markers WHERE id = ?", MarkerData[marker_id].id)
 	mariadb_async_query(sql, query)

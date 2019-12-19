@@ -185,6 +185,9 @@
         "CreatePickup",
         "IsValidPickup",
         "SetPickupPropertyValue",
-        "GetPickupPropertyValue"
+        "GetPickupPropertyValue",
+        "GetPlayerLocale",
+        "GetNetworkStats",
+        "SetNearClipPlane"
     ]
 }
