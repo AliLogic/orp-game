@@ -153,7 +153,7 @@ AddEvent('UnloadFactions', function ()
 end)
 
 function LoadCharacterFaction(player, id)
-	local query = mariadb_prepare(sql, "SELECT * FROM faction_members WHERE id = '?' LIMIT 1",
+	local query = mariadb_prepare(sql, "SELECT * FROM faction_members WHERE char_id = '?' LIMIT 1",
 		id
 	)
 	mariadb_async_query(sql, query, OnLoadCharacterFaction, player)
@@ -166,8 +166,8 @@ function OnLoadCharacterFaction(playerid)
 	else
 		local result = mariadb_get_assoc(1)
 
-		PlayerData[playerid].faction = result['fac_id']
-		PlayerData[playerid].faction_rank = result['fac_rank']
+		PlayerData[playerid].faction = result['faction_id']
+		PlayerData[playerid].faction_rank = result['rank_id']
 
 		AddPlayerChat(playerid, "Faction Id: "..PlayerData[playerid].faction.." Faction Rank: "..PlayerData[playerid].faction_rank..".")
 	end
