@@ -158,6 +158,16 @@ function OnAccountLoaded(player)
 		--setPlayerThirst(player, tonumber(result['thirst']))
 		--setPlayerHunger(player, tonumber(result['hunger']))
 
+		if PlayerData[player].admin ~= 0 then
+			AddPlayerChat(player, "You have logged in successfully as a "..GetPlayerAdminRank(player)..".")
+		elseif PlayerData[player].helper ~= 0 then
+			AddPlayerChat(player, "You have logged in successfully as a Helper.")
+		else
+			AddPlayerChat(player, "You have logged in successfully.")
+		end
+
+		AddPlayerChat(player, "Logged in as ")
+
 		local query = mariadb_prepare(sql, "SELECT * FROM characters WHERE accountid = ?;",
 			PlayerData[player].accountid)
 
