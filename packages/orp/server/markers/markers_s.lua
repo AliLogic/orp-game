@@ -133,7 +133,7 @@ function OnMarkerLoaded(marker_id)
 end
 
 function Marker_Unload(marker_id)
-	local query = mariadb_prepare(sql, "UPDATE markers SET model = '?', x1 = '?', y1 = '?', z1 = '?', x2 = '?', y2 = '?', z2 = '?', r = '?', g = '?', b = '?', a = '?', is_locked = '?' WHERE id = ?",
+	local query = mariadb_prepare(sql, "UPDATE markers SET 'model' = '?', 'x1' = '?', 'y1' = '?', 'z1' = '?', 'x2' = '?', 'y2' = '?', 'z2' = '?', 'r' = '?', 'g' = '?', 'b' = '?', 'a' = '?', 'is_locked' = '?' WHERE 'id' = ?",
 		MarkerData[marker_id].model,
 		MarkerData[marker_id].x1,
 		MarkerData[marker_id].y1,
@@ -167,14 +167,14 @@ AddEvent('LoadMarkers', function ()
 end)
 
 function OnLoadMarkers()
-	for i = 1, mariadb_get_row_count(), 1 do
+	for i = 1, mariadb_get_row_count() do
 		print('Loading Marker ID '..i)
 		Marker_Load(i)
 	end
 end
 
 AddEvent('UnloadMarkers', function ()
-	for i = 1, #MarkerData, 1 do
+	for i = 1, #MarkerData do
 		print('Unloading Marker ID: '..i)
 		Marker_Unload(i)
 	end
