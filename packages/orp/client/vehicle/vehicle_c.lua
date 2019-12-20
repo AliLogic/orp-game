@@ -9,6 +9,7 @@ Contributors:
 ]]--
 
 AddEvent("OnPlayerStartEnterVehicle", function(vehicleid, seatid)
+	AddPlayerChat("Sending a remote event to the server")
 	CallRemoteEvent("OnPlayerStartEnterVehicle", vehicleid, seatid)
 	return false
 end)

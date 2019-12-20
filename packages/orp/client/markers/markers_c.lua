@@ -1,7 +1,7 @@
 AddEvent("OnKeyPress", function(key)
 
 	if key == 'E' then
-		local markerid = GetPlayerPropertyValue("marker")
+		local markerid = GetPlayerPropertyValue(GetPlayerId(), "marker")
 
 		if markerid ~= false then
 			local x, y, z = GetPlayerLocation()
