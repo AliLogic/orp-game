@@ -377,8 +377,7 @@ function SavePlayerAccount(player)
 		PlayerData[player].id
 	)
 
-	print(PlayerData[player].id)
-
+	CallEvent("SaveInventory", player)
 	mariadb_query(sql, query)
 end
 
@@ -389,6 +388,7 @@ function DestroyPlayerData(player)
 
 	PlayerData[player] = nil
 	CharacterData[player] = nil
+	InventoryData[player] = nil
 	print("Data destroyed for: "..player)
 end
 

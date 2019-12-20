@@ -1,15 +1,18 @@
 local colour = ImportPackage('colours')
 
 AddCommand("q", function (playerid)
-
 	return KickPlayer(playerid, "Goodbye!")
 end)
 
 AddCommand("help", function (player)
-	return AddPlayerChat(player, "Commands: /w /me /do /g /b /pm /ahelp /stats /q")
+	AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q")
+	AddPlayerChat(player, "Commands: /(inv)entory")
+	return 
 end)
 
 AddCommand("w", function (player, weapon, slot, ammo)
+	
+
 	if (weapon == nil or slot == nil or ammo == nil) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /w <weapon> <slot> <ammo>")
 	end
