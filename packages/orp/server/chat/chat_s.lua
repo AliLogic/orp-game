@@ -163,6 +163,12 @@ AddCommand("pm", function (player, target, ...)
 	AddPlayerChat(target, "<span color=\""..colour.COLOUR_PMIN().."\">(( PM from "..GetPlayerName(player).." (ID: "..player.."):"..text.." ))</>")
 end)
 
+AddCommand('players', function (player)
+	for k, v in pairs(GetAllPlayers()) do
+		AddPlayerChat(player, "ID: "..v.." Name: "..GetPlayerName(v))
+	end
+end)
+
 AddCommand('stats', function (player)
 	ViewPlayerStats(player, player)
 end)
