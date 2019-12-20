@@ -46,7 +46,7 @@ AddEvent("OnObjectStreamOut", function(object)
 	end
 end)
 
-AddEvent("OpenATMMenu", function (bal)
+AddRemoteEvent("OpenATMMenu", function (bal)
     if GetNearestATM() ~= 0 then
         atmmenu = Dialog.create("ATM Interaction:", 
             string.format("Welcome to the Bank of Nevada!<br><br>Your current balance is %d.<br><br>Please select a menu to continue:", bal),
