@@ -53,8 +53,11 @@ AddEvent("OpenATMMenu", function (bal)
             "Withdraw", "Deposit", "Exit"
         )
         Dialog.show(atmmenu)
+
+        AddPlayerChat("atm should show")
+        
     else
-        return
+        return AddPlayerChat("<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You are not near any ATMs!")
     end     
 end)
 
