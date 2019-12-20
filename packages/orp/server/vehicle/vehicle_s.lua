@@ -187,12 +187,15 @@ end)
 
 -- AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
 AddRemoteEvent("OnPlayerStartEnterVehicle", function(player, vehicle, seat)
+	AddPlayerChat("GOT OnPlayerStartEnterVehicle response for player: "..player..", vehicle: "..vehicle..", seat :"..seat.."")
 	if VehicleData[vehicle] ~= nil then
 		if VehicleData[vehicle].is_locked == true then
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This vehicle is locked, you cannot enter it!</>")
 
 			Slap(player)
 			--return false
+		else
+			SetPlayerInVehicle(player, vehicle, seat)
 		end
 	end
 end)
