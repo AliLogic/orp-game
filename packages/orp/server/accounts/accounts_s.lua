@@ -334,9 +334,8 @@ function SavePlayerAccount(player)
 		PlayerData[player].accountid
 		)]]--
 
-	local query = mariadb_prepare(sql, "UPDATE accounts SET steamname = '?', admin = ?, helper = '?', locale = '?' WHERE id = ? LIMIT 1;",
+	local query = mariadb_prepare(sql, "UPDATE accounts SET steamname = '?', helper = '?', locale = '?' WHERE id = ? LIMIT 1;",
 		PlayerData[player].steamname,
-		PlayerData[player].admin,
 		PlayerData[player].helper,
 		GetPlayerLocale(player),
 		PlayerData[player].id

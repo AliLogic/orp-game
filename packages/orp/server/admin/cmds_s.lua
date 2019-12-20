@@ -178,6 +178,12 @@ AddCommand("asetadmin", function (player, target, level)
 
 	AddPlayerChat(target, string.format("<span color=\"%s\">%s %s has set your admin rank to %s (%d).</>",
 		colour.COLOUR_YELLOW(), GetPlayerAdminRank(player), PlayerData[player].name, GetPlayerAdminRank(target), level))
+
+	local query = mariadb_prepare(sql, "UPDATE accounts SET admin = ? WHERE id = ? LIMIT 1;",
+		level,
+		PlayerData[target].id
+	)
+	mariadb_async_query(sql, query)
 end)
 
 AddCommand("a", function (player, ...)
