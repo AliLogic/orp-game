@@ -88,9 +88,12 @@ end
 function Marker_Load(marker_id)
 	local query = mariadb_prepare(sql, "SELECT * FROM markers WHERE id = ?", marker_id)
 	mariadb_async_query(sql, query, OnMarkerLoaded, marker_id)
+	print(marker_id.." is now being loaded.")
 end
 
 function OnMarkerLoaded(marker_id)
+	print("Code now transported to OnMarkerLoaded.")
+
 	if mariadb_get_row_count() == 0 then
 		print('Error with loading marker ID'..marker_id)
 	else
