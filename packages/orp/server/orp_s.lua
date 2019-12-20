@@ -34,6 +34,20 @@ AddEvent("OnPlayerQuit", function (player)
 	AddPlayerChatAll(GetPlayerName(player).." has left the server!")
 end)
 
+AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hitY, hitZ, startX, startY, startY, normalX, normalY, normalZ)
+    if player ~= 0 then
+        if weapon == 21 then
+            if hittype == HIT_PLAYER then
+                if IsValidPlayer(hitid) then
+
+                    local x, y, z = GetPlayerLocation(player)
+                    AddPlayerChatRange(x, y, 600.0, GetPlayerName(player).." tased "..GetPlayerName(hitid))
+                end
+            end
+        end
+    end
+end)
+
 function fexist(filename) return file_exists(filename) end
 function file_exists(filename)
     local file = io.open(filename, "r")
