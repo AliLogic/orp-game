@@ -63,7 +63,7 @@ function OnMarkerCreated(marker_id, modelid, x, y, z)
 end
 
 function IsValidMarker(marker_id)
-	if MarkerData[marker_id] == nil or not IsValidPickup(MarkerData[marker_id].pickup1) then
+	if MarkerData[marker_id] == nil or (IsValidPickup(MarkerData[marker_id].pickup1) == false) then
 		return false
 	else
 		return true
