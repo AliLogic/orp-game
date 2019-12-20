@@ -112,8 +112,6 @@ function OnMarkerLoaded(indexid, marker_id)
         MarkerData[indexid].y2 = tonumber(result['y2'])
 		MarkerData[indexid].z2 = tonumber(result['z2'])
 		
-		print(string.format("Type of x1: %s", type(result['x1'])))
-
         MarkerData[indexid].r = tonumber(result['r'])
         MarkerData[indexid].g = tonumber(result['g'])
         MarkerData[indexid].b = tonumber(result['b'])

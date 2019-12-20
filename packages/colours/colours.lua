@@ -11,6 +11,7 @@ AddFunctionExport('COLOUR_LOCAL', function() return '#b8bac6' end)
 AddFunctionExport('COLOR_WHISPER', function() return '#9d9d9d' end)
 
 AddFunctionExport('COLOUR_DARKGREEN', function() return '#33AA33' end)
+AddFunctionExport('COLOUR_RADIO', function() return '#FFEC8B' end)
 
 AddFunctionExport('COLOUR_YELLOW', function() return '#FFE104' end)
 AddFunctionExport('COLOUR_YELLOWEX', function() return '#FFFF00' end)

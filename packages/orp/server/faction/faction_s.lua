@@ -184,3 +184,7 @@ function OnLoadCharacterFaction(playerid)
 		AddPlayerChat(playerid, "Faction Id: "..PlayerData[playerid].faction.." Faction Rank: "..PlayerData[playerid].faction_rank..".")
 	end
 end
+
+function GetPlayerFactionType(player)
+	return FactionData[PlayerData[player].faction].type
+end

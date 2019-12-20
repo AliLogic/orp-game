@@ -356,7 +356,7 @@ function cmd_acf(player, maxrank, shortname, ...)
     local args = {...}
     
     if maxrank == nil or shortname == nil or args[1] == nil then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(f)action <> <shortname> <fullname>")
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(f)action <maxrank> <shortname> <fullname>")
     end
 
     maxrank = tonumber(maxrank)
@@ -372,13 +372,16 @@ function cmd_acf(player, maxrank, shortname, ...)
     local factionname = ''
 
 	for _, v in pairs(args) do
-		factionname = factionname.." "..v
+		if factionname == '' then
+			factionname = v
+		else
+			factionname = factionname.." "..v
+		end
     end
     
     local faction = Faction_Create(factionname, shortname, maxrank)
 
     AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), factionname, faction))
-
 end
 AddCommand("acreatefaction", cmd_acf)
 AddCommand("acf", cmd_acf)

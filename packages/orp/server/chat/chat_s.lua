@@ -6,7 +6,7 @@ end)
 
 AddCommand("help", function (player)
 	AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q")
-	AddPlayerChat(player, "Commands: /(inv)entory")
+	AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une)")
 	return 
 end)
 
@@ -23,7 +23,7 @@ AddCommand("w", function (player, weapon, slot, ammo)
     AddPlayerChat(player, 'Given you a '..weapon..' with '..ammo..' ammo.')
 end)
 
-local function cmd_shout(playerid, ...)
+function cmd_shout(playerid, ...)
 
 	local args = table.concat({...}, " ")
 
@@ -38,7 +38,7 @@ end
 AddCommand("shout", cmd_shout)
 AddCommand("s", cmd_shout)
 
-local function cmd_low(playerid, ...)
+function cmd_low(playerid, ...)
 
 	local args = table.concat({...}, " ")
 
@@ -61,7 +61,7 @@ AddCommand("me", function (player, ...)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /me [action]")
 	end
 
-	for k, v in pairs(args) do
+	for _, v in pairs(args) do
 		text = text.." "..v
 	end
 
@@ -187,7 +187,7 @@ AddEvent("OnPlayerChatCommand", function (player, cmd, exists)
 	PlayerData[player].cmd_cooldown = GetTimeSeconds()
 
 	if not exists then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: </>The command '/"..cmd.."' doesnt exist! Use /help or consult a helper.")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: </>The command '/"..cmd.."' doesnt exist! Type in /help or consult a helper.")
 	else
 		if PlayerData[player].logged_in == false then
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be logged in to use any commands.</>")
