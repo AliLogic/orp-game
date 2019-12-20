@@ -174,7 +174,7 @@ end)
 function OnLoadVehicles()
 	for i = 1, mariadb_get_row_count(), 1 do
 		print('Loading Vehicle ID '..i)
-		Vehicle_Load(i)
+		Vehicle_Load(mariadb_get_value_name_int(i, "id"))
 	end
 end
 

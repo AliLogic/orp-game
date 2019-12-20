@@ -7,8 +7,6 @@ AddEvent("LoadInventory", function (player)
 end)
 
 function OnInventoryLoaded(player)
-    CreatePlayerInventory()
-
     for i = 1, mariadb_get_row_count(), 1 do
         if i <= MAX_SLOTS then
             CreatePlayerInventory(player, i)
