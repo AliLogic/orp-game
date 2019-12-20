@@ -48,6 +48,7 @@ AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hi
                     
                     Delay(5 * 1000, function()
                         SetPlayerAnimation(hitid, "PUSHUP_END")
+                        SetPlayerHeading(hitid, GetPlayerHeading(player) - 180)
                     end)
                 end
             end
