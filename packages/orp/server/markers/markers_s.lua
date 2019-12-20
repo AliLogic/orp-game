@@ -167,7 +167,8 @@ AddEvent('LoadMarkers', function ()
 end)
 
 function OnLoadMarkers()
-	for i = 1, mariadb_get_row_count() do
+	print("OnLoadMarkers has been called.")
+	for i = 1, mariadb_get_row_count(), 1 do
 		print('Loading Marker ID '..i)
 		Marker_Load(i)
 	end
