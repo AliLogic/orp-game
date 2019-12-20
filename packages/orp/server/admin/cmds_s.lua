@@ -7,7 +7,7 @@ AddCommand("warp", function (playerid, fromid, toid)
 	end
 
 	if (fromid == nil or toid == nil) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /warp <playerid> <playerid>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /warp <player> <target>")
 	end
 
 	if (not IsValidPlayer(fromid)) or (not IsValidPlayer(toid)) then
@@ -176,7 +176,7 @@ AddCommand("asetadmin", function (player, target, level)
 	AddPlayerChat(player, string.format("<span color=\"%s\">You have set %s (%s, %d)'s admin rank to %s (%d).</>",
 		colour.COLOUR_YELLOW(), GetPlayerName(target), PlayerData[target].name, target, GetPlayerAdminRank(level), level))
 
-	AddPlayerChat(player, string.format("<span color=\"%s\">%s %s has set your admin rank to %s (%d).</>",
+	AddPlayerChat(target, string.format("<span color=\"%s\">%s %s has set your admin rank to %s (%d).</>",
 		colour.COLOUR_YELLOW(), GetPlayerAdminRank(player), PlayerData[player].name, GetPlayerAdminRank(level), level))
 end)
 
@@ -198,7 +198,7 @@ AddCommand("a", function (player, ...)
 	end
 
 	for _, i in pairs(GetAllPlayers()) do
-		if PlayerData[i].admin > 0 then
+		if PlayerData[i].admin > 0 and player ~= i then
 			AddPlayerChat(player, string.format("<span color=\"%s\">** %s %s (%s, %d):%s</>",
 				colour.COLOUR_LIGHTRED(), GetPlayerAdminRank(player), GetPlayerName(player), PlayerData[player].name, player, text))
 		end
@@ -319,7 +319,7 @@ function cmd_acf(player, maxrank, shortname, ...)
     local args = {...}
     
     if maxrank == nil or shortname == nil or args[1] == nil then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(f)action <maxrank> <shortname> <fullname>")
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(f)action <> <shortname> <fullname>")
     end
 
     maxrank = tonumber(maxrank)
@@ -352,7 +352,7 @@ AddCommand("ahelp", function (player)
     end
 
     if PlayerData[player].admin > 0 then
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </maxrank>/a")
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /aslap /warp")
     end
     if PlayerData[player].admin > 1 then
         AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
