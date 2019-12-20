@@ -77,6 +77,9 @@ function Marker_Destroy(marker_id)
 	local query = mariadb_prepare(sql, "DELETE FROM markers WHERE id = ?", MarkerData[marker_id].id)
 	mariadb_async_query(sql, query)
 
+	DestroyPickup(MarkerData[marker_id].pickup1)
+	DestroyPickup(MarkerData[marker_id].pickup2)
+
 	DestroyMarkerData(marker_id)
 
 	return true
@@ -112,19 +115,19 @@ function OnMarkerLoaded(marker_id)
 		MarkerData[marker_id].is_locked = result['is_locked']
 
 		MarkerData[marker_id].pickup1 = CreatePickup(MarkerData[marker_id].modelid, MarkerData[marker_id].x1, MarkerData[marker_id].y1, MarkerData[marker_id].z1)
-		SetPickupPropertyValue(MarkerData[marker_id].pickup1, "type", "marker", false)
-		SetPickupPropertyValue(MarkerData[marker_id].pickup1, "r", tostring(MarkerData[marker_id].r), false)
-		SetPickupPropertyValue(MarkerData[marker_id].pickup1, "g", tostring(MarkerData[marker_id].g), false)
-		SetPickupPropertyValue(MarkerData[marker_id].pickup1, "b", tostring(MarkerData[marker_id].b), false)
-		SetPickupPropertyValue(MarkerData[marker_id].pickup1, "a", tostring(MarkerData[marker_id].a), false)
+		SetPickupPropertyValue(MarkerData[marker_id].pickup1, "type", "marker", true)
+		SetPickupPropertyValue(MarkerData[marker_id].pickup1, "r", tostring(MarkerData[marker_id].r), true)
+		SetPickupPropertyValue(MarkerData[marker_id].pickup1, "g", tostring(MarkerData[marker_id].g), true)
+		SetPickupPropertyValue(MarkerData[marker_id].pickup1, "b", tostring(MarkerData[marker_id].b), true)
+		SetPickupPropertyValue(MarkerData[marker_id].pickup1, "a", tostring(MarkerData[marker_id].a), true)
 
 		if MarkerData[marker_id].x ~= 0 and MarkerData[marker_id].y ~= 0 then
 			MarkerData[marker_id].pickup2 = CreatePickup(MarkerData[marker_id].modelid, MarkerData[marker_id].x2, MarkerData[marker_id].y2, MarkerData[marker_id].z2)
-			SetPickupPropertyValue(MarkerData[marker_id].pickup2, "type", "marker", false)
-			SetPickupPropertyValue(MarkerData[marker_id].pickup2, "r", tostring(MarkerData[marker_id].r), false)
-			SetPickupPropertyValue(MarkerData[marker_id].pickup2, "g", tostring(MarkerData[marker_id].g), false)
-			SetPickupPropertyValue(MarkerData[marker_id].pickup2, "b", tostring(MarkerData[marker_id].b), false)
-			SetPickupPropertyValue(MarkerData[marker_id].pickup2, "a", tostring(MarkerData[marker_id].a), false)
+			SetPickupPropertyValue(MarkerData[marker_id].pickup2, "type", "marker", true)
+			SetPickupPropertyValue(MarkerData[marker_id].pickup2, "r", tostring(MarkerData[marker_id].r), true)
+			SetPickupPropertyValue(MarkerData[marker_id].pickup2, "g", tostring(MarkerData[marker_id].g), true)
+			SetPickupPropertyValue(MarkerData[marker_id].pickup2, "b", tostring(MarkerData[marker_id].b), true)
+			SetPickupPropertyValue(MarkerData[marker_id].pickup2, "a", tostring(MarkerData[marker_id].a), true)
 		end
 	end
 end

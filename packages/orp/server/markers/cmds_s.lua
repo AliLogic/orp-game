@@ -89,16 +89,16 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 		MarkerData[markerid].b = b
 		MarkerData[markerid].a = a
 
-		SetPickupPropertyValue(MarkerData[markerid].pickup1, "r", tostring(r), false)
-		SetPickupPropertyValue(MarkerData[markerid].pickup1, "g", tostring(g), false)
-		SetPickupPropertyValue(MarkerData[markerid].pickup1, "b", tostring(b), false)
-		SetPickupPropertyValue(MarkerData[markerid].pickup1, "a", tostring(a), false)
+		SetPickupPropertyValue(MarkerData[markerid].pickup1, "r", tostring(r), true)
+		SetPickupPropertyValue(MarkerData[markerid].pickup1, "g", tostring(g), true)
+		SetPickupPropertyValue(MarkerData[markerid].pickup1, "b", tostring(b), true)
+		SetPickupPropertyValue(MarkerData[markerid].pickup1, "a", tostring(a), true)
 
 		if MarkerData[markerid].pickup2 ~= 0 then
-			SetPickupPropertyValue(MarkerData[markerid].pickup2, "r", tostring(r), false)
-			SetPickupPropertyValue(MarkerData[markerid].pickup2, "g", tostring(g), false)
-			SetPickupPropertyValue(MarkerData[markerid].pickup2, "b", tostring(b), false)
-			SetPickupPropertyValue(MarkerData[markerid].pickup2, "a", tostring(a), false)
+			SetPickupPropertyValue(MarkerData[markerid].pickup2, "r", tostring(r), true)
+			SetPickupPropertyValue(MarkerData[markerid].pickup2, "g", tostring(g), true)
+			SetPickupPropertyValue(MarkerData[markerid].pickup2, "b", tostring(b), true)
+			SetPickupPropertyValue(MarkerData[markerid].pickup2, "a", tostring(a), true)
 		end
 
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." color changed.</>")

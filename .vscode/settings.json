@@ -191,6 +191,7 @@
         "SetNearClipPlane",
         "mariadb_set_charset",
         "mariadb_close",
-        "GetPickupStaticMeshComponent"
+        "GetPickupStaticMeshComponent",
+        "DestroyPickup"
     ]
 }
