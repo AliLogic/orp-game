@@ -192,7 +192,7 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function(player, vehicle, seat)
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This vehicle is locked, you cannot enter it!</>")
 
 			Slap(player)
-			return false
+			--return false
 		end
 	end
 end)
