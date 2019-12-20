@@ -284,7 +284,7 @@
 			"Name": "Taser",
 			"RateOfFire": 30.0,
 			"Damage": 0.0,
-			"Range": 2000.0,
+			"Range": 1000.0,
 			"Recoil": 0.05,
 			"MagazineSize": 1,
 			"CameraShake": 0.2,
