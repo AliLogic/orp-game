@@ -46,12 +46,16 @@ AddEvent("OnObjectStreamOut", function(object)
 	end
 end)
 
-AddRemoteEvent("OpenATMMenu", function (bal)
-    atmmenu = Dialog.create("ATM Interaction:", 
-        string.format("Welcome to the Bank of Nevada!<br><br>Your current balance is %d.<br><br>Please select a menu to continue:", bal),
-        "Withdraw", "Deposit", "Exit"
-    )
-    Dialog.show(atmmenu)
+AddEvent("OpenATMMenu", function (bal)
+    if GetNearestATM() ~= 0 then
+        atmmenu = Dialog.create("ATM Interaction:", 
+            string.format("Welcome to the Bank of Nevada!<br><br>Your current balance is %d.<br><br>Please select a menu to continue:", bal),
+            "Withdraw", "Deposit", "Exit"
+        )
+        Dialog.show(atmmenu)
+    else
+        return
+    end     
 end)
 
 AddEvent("OnDialogSubmit", function (dialog, button, amount)
@@ -63,7 +67,7 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
                 Dialog.close(atmmenu)
                 atmmenu = nil
 
-                return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You have no money to withdraw!</>")
+                return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You have no money to withdraw!</>")
             end
 
             Dialog.close(atmmenu)
@@ -82,7 +86,7 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
                 Dialog.close(atmmenu)
                 atmmenu = nil
 
-                return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You have no money to deposit!</>")
+                return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You have no money to deposit!</>")
             end
 
             Dialog.close(atmmenu)
@@ -97,7 +101,7 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
         else
             Dialog.close(atmmenu)
             atmmenu = nil
-            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
+            return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
         end
 
     elseif dialog == withdrawmenu then
@@ -107,11 +111,11 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
             amount = math.tointeger(amount)
         
             if amount < CONFIG_ATM_WITHDRAW_MIN or amount > CONFIG_ATM_WITHDRAW_MAX then
-                return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Your withdrawal amount is either too little or too much. Please retry.</>")
+                return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Your withdrawal amount is either too little or too much. Please retry.</>")
             end
 
             if amount > PlayerData[player].bank then
-                return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to withdraw your chosen amount.</>")
+                return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to withdraw your chosen amount.</>")
             end
 
             Dialog.close(withdrawmenu)
@@ -121,7 +125,7 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
         else
             Dialog.close(withdrawmenu)
             withdrawmenu = nil
-            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
+            return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
         end
 
 
@@ -132,11 +136,11 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
             amount = math.tointeger(amount)
         
             if amount < CONFIG_ATM_DEPOSIT_MIN or amount > CONFIG_ATM_DEPOSIT_MAX then
-                return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Your deposit amount is either too little or too much. Please retry.</>")
+                return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Your deposit amount is either too little or too much. Please retry.</>")
             end
 
             if amount > PlayerData[player].cash then
-                return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to deposit your chosen amount.</>")
+                return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to deposit your chosen amount.</>")
             end
 
             Dialog.close(depositmenu)
@@ -146,7 +150,7 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
         else
             Dialog.close(depositmenu)
             depositmenu = nil
-            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
+            return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
         end
     else
         return
@@ -181,11 +185,3 @@ function tablefind(tab, el)
 		end
 	end
 end
-
-AddRemoteEvent("UseATM", function (player)
-    if GetNearestATM() ~= 0 then
-        CallRemoteEvent("banking:atminteract", NearestATM)
-    else
-        AddPlayerChat("")
-    end     
-end)
