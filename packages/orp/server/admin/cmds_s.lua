@@ -27,7 +27,7 @@ AddCommand("gotoxyz", function (playerid, x, y, z)
 	end
 
 	if (x == nil or y == nil or z == nil) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /goto <x> <y> <z>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotoxyz <x> <y> <z>")
 	end
 
 	SetPlayerLocation(playerid, x, y, z)
