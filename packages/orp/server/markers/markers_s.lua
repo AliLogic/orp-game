@@ -86,8 +86,8 @@ function Marker_Destroy(marker_id)
 end
 
 function Marker_Load(i, marker_id)
-	local query = mariadb_prepare(sql, "SELECT * FROM markers WHERE id = ?", MarkerData[marker_id].id)
-	mariadb_async_query(sql, query, OnMarkerLoaded, i)
+	local query = mariadb_prepare(sql, "SELECT * FROM markers WHERE id = ?", marker_id)
+	mariadb_async_query(sql, query, OnMarkerLoaded, i, marker_id)
 	print(i.." "..marker_id.." is now being loaded.")
 end
 
@@ -177,9 +177,8 @@ function OnLoadMarkers()
 	print("OnLoadMarkers has been called.")
 	for i = 1, mariadb_get_row_count(), 1 do
 		CreateMarkerData(i)
-		MarkerData[i].id = mariadb_get_value_name_int(i, "id")
 		print('Loading Marker ID '..i)
-		Marker_Load(i)
+		Marker_Load(i, mariadb_get_value_name_int(i, "id"))
 	end
 end
 
