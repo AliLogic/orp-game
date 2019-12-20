@@ -6,7 +6,7 @@ local SQL_USER = "orp" --orp
 local SQL_PASS = "e5CfZb@Olyp%iT4v@&ch" --e5CfZb@Olyp%iT4v@&ch
 local SQL_DATABASE = "orp"
 local SQL_CHAR = "utf8mb4"
-local SQL_LOGL = "debug"
+local SQL_LOGL = "error"
 
 -- Setup a MariaDB connection when the package/server starts
 AddEvent("OnPackageStart", function ()
