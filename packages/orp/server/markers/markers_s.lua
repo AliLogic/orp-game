@@ -97,6 +97,8 @@ function OnMarkerLoaded(marker_id)
 	if mariadb_get_row_count() == 0 then
 		print('Error with loading marker ID'..marker_id)
 	else
+		print("Marker id is now being loaded... "..marker_id)
+
 		local result = mariadb_get_assoc(1)
 
 		MarkerData[marker_id].id = result['id']
@@ -109,6 +111,8 @@ function OnMarkerLoaded(marker_id)
 		MarkerData[marker_id].x2 = result['x1']
 		MarkerData[marker_id].y2 = result['y2']
 		MarkerData[marker_id].z2 = result['z2']
+
+		print("Type of x1: "..type(result['x1']))
 
 		MarkerData[marker_id].r = result['r']
 		MarkerData[marker_id].g = result['g']
