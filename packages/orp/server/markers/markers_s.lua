@@ -100,7 +100,7 @@ function OnMarkerLoaded(marker_id)
 		print("Marker id is now being loaded... "..marker_id)
 
 		local result = mariadb_get_assoc(1)
-		
+
         MarkerData[marker_id].id = tonumber(result['id'])
         MarkerData[marker_id].model = tonumber(result['model'])
 
@@ -177,7 +177,7 @@ function OnLoadMarkers()
 	print("OnLoadMarkers has been called.")
 	for i = 1, mariadb_get_row_count(), 1 do
 		print('Loading Marker ID '..i)
-		Marker_Load(i)
+		Marker_Load(mariadb_get_value_name_int(1, "id"))
 	end
 end
 
