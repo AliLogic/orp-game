@@ -23,7 +23,7 @@ AddCommand("w", function (player, weapon, slot, ammo)
     AddPlayerChat(player, 'Given you a '..weapon..' with '..ammo..' ammo.')
 end)
 
-local function cmd_shout(playerid, ...)
+function cmd_shout(playerid, ...)
 
 	local args = table.concat({...}, " ")
 
@@ -38,7 +38,7 @@ end
 AddCommand("shout", cmd_shout)
 AddCommand("s", cmd_shout)
 
-local function cmd_low(playerid, ...)
+function cmd_low(playerid, ...)
 
 	local args = table.concat({...}, " ")
 

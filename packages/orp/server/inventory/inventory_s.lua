@@ -29,7 +29,7 @@ AddEvent("LoadInventory", function (player)
     mariadb_async_query(sql, query, OnInventoryLoaded, player)
 end)
 
-local function OnInventoryLoaded(player)
+function OnInventoryLoaded(player)
     for i = 1, mariadb_get_row_count(), 1 do
         if i <= MAX_INVENTORY_SLOTS then
             CreatePlayerInventory(player, i)
@@ -41,7 +41,7 @@ local function OnInventoryLoaded(player)
     end
 end
 
-local function CreatePlayerInventory(player, slot)
+function CreatePlayerInventory(player, slot)
     if InventoryData[player] == nil then
         InventoryData[player] = {}
     end
@@ -69,7 +69,7 @@ function Inventory_GiveItem(player, item, amount)
     return false
 end
 
-local function OnInventoryItemAdded(player, slot)
+function OnInventoryItemAdded(player, slot)
     InventoryData[player][slot].id = mariadb_get_insert_id()
 end
 

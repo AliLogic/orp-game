@@ -1,4 +1,4 @@
-local function cmd_r(player, ...)
+function cmd_r(player, ...)
     if Inventory_HasItem(player, INV_ITEM_RADIO) == false then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You do not own a radio.")
     end
@@ -38,7 +38,7 @@ AddCommand("giveradio", function(player)
     end
 end)
 
-local function cmd_rtune(player, freq)
+function cmd_rtune(player, freq)
     if Inventory_HasItem(player, INV_ITEM_RADIO) == false then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You do not own a radio.")
     end
