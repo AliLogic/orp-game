@@ -1,5 +1,5 @@
-local EnvHour
-local EnvWeather
+local EnvHour = 0
+local EnvWeather = 0
 
 AddRemoteEvent("UpdateClientTime", function (hour, weather)
 
