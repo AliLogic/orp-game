@@ -28,7 +28,7 @@ local function cmd_shout(playerid, ...)
 
 	local x, y, z = GetPlayerLocation(playerid)
 
-	AddPlayerChatRange(x, y, 1000.0, "<span color=\"#ffffffFF\">"..GetPlayerName(player).." shouts: "..args.."</>")
+	AddPlayerChatRange(x, y, 1000.0, "<span color=\"#ffffffFF\">"..GetPlayerName(playerid).." shouts: "..args.."</>")
 end
 AddCommand("shout", cmd_shout)
 AddCommand("s", cmd_shout)
@@ -43,7 +43,7 @@ local function cmd_low(playerid, ...)
 
 	local x, y, z = GetPlayerLocation(playerid)
 
-	AddPlayerChatRange(x, y, 400.0, "<span color=\"#ffffffFF\">"..GetPlayerName(player).." whispers: "..args.."</>")
+	AddPlayerChatRange(x, y, 400.0, "<span color=\"#ffffffFF\">"..GetPlayerName(playerid).." whispers: "..args.."</>")
 end
 AddCommand("low", cmd_low)
 AddCommand("l", cmd_low)
