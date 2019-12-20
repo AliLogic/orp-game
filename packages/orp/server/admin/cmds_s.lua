@@ -181,7 +181,7 @@ AddCommand("asetadmin", function (player, target, level)
 
 	local query = mariadb_prepare(sql, "UPDATE accounts SET admin = ? WHERE id = ? LIMIT 1;",
 		level,
-		PlayerData[target].id
+		PlayerData[target].accountid
 	)
 	mariadb_async_query(sql, query)
 end)

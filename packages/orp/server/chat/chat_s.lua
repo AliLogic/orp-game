@@ -11,7 +11,9 @@ AddCommand("help", function (player)
 end)
 
 AddCommand("w", function (player, weapon, slot, ammo)
-	
+	if (PlayerData[playerid].admin < 5) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
 
 	if (weapon == nil or slot == nil or ammo == nil) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /w <weapon> <slot> <ammo>")
