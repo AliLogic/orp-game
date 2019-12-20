@@ -188,6 +188,8 @@
         "GetPickupPropertyValue",
         "GetPlayerLocale",
         "GetNetworkStats",
-        "SetNearClipPlane"
+        "SetNearClipPlane",
+        "mariadb_set_charset",
+        "mariadb_close"
     ]
 }
