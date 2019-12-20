@@ -13,9 +13,9 @@
 
 
 -- Dumping database structure for ORP
-DROP DATABASE IF EXISTS `ORP`;
+DROP DATABASE IF EXISTS `orp`;
 CREATE DATABASE IF NOT EXISTS `orp` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `ORP`;
+USE `orp`;
 
 -- Dumping structure for table ORP.accounts
 DROP TABLE IF EXISTS `accounts`;
