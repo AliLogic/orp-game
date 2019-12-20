@@ -30,10 +30,10 @@ AddEvent("LoadInventory", function (player)
 end)
 
 function OnInventoryLoaded(player)
+    for i = 1, MAX_INVENTORY_SLOTS, 1 do CreatePlayerInventory(player, i) end
+
     for i = 1, mariadb_get_row_count(), 1 do
         if i <= MAX_INVENTORY_SLOTS then
-            CreatePlayerInventory(player, i)
-
             InventoryData[player][i].id = mariadb_get_value_name_int(i, "id")
             InventoryData[player][i].itemid = mariadb_get_value_name_int(i, "itemid")
             InventoryData[player][i].amount = mariadb_get_value_name_int(i, "amount")

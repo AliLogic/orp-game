@@ -1,6 +1,10 @@
 local colour = ImportPackage('colours')
 
 function cmd_inv(player)
+    if InventoryData[player] == nil then
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You have nothing in your inventory!")
+    end
+
     if #InventoryData[player] == 0 then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You have nothing in your inventory!")
     end
