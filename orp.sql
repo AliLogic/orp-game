@@ -324,3 +324,16 @@ INSERT INTO `vehicles` (`id`, `owner`, `model`, `plate`, `faction`, `x`, `y`, `z
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+-- Dumping structure for table ORP.faction_members
+CREATE TABLE IF NOT EXISTS `faction_members` (
+  `char_id` int(11) NOT NULL,
+  `faction_id` int(11) NOT NULL,
+  `rank_id` int(11) NOT NULL,
+  FOREIGN KEY (faction_id) REFERENCES factions(id),
+  FOREIGN KEY (char_id) REFERENCES characters(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table ORP.faction_members: ~0 rows (approximately)
+/*!40000 ALTER TABLE `faction_members` DISABLE KEYS */;
+/*!40000 ALTER TABLE `faction_members` ENABLE KEYS */;
