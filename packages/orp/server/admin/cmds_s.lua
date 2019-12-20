@@ -198,12 +198,11 @@ AddCommand("a", function (player, ...)
 	end
 
 	for _, i in pairs(GetAllPlayers()) do
-		if PlayerData[i].admin > 0 and player ~= i then
-			AddPlayerChat(player, string.format("<span color=\"%s\">** %s %s (%s, %d):%s</>",
+		if PlayerData[i].admin > 0 then
+			AddPlayerChat(i, string.format("<span color=\"%s\">** %s %s (%s, %d):%s</>",
 				colour.COLOUR_LIGHTRED(), GetPlayerAdminRank(player), GetPlayerName(player), PlayerData[player].name, player, text))
 		end
 	end
-
 end)
 
 AddCommand("astats", function (player, target)
