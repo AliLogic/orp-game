@@ -10,4 +10,5 @@ Contributors:
 
 AddEvent("OnPlayerStartEnterVehicle", function(vehicleid, seatid)
 	CallRemoteEvent("OnPlayerStartEnterVehicle", vehicleid, seatid)
+	return false
 end)
