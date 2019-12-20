@@ -204,3 +204,7 @@ AddEvent("OnPlayerChat", function(player, text)
 	--AddPlayerChatAll("<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
 	return false
 end)
+
+AddCommand("anim", function (playerid, anim)
+	SetPlayerAnimation(playerid, anim)
+end)
