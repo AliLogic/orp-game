@@ -25,13 +25,15 @@ AddEvent("SaveInventory", function (player)
 end)
 
 AddEvent("LoadInventory", function (player)
+    for i = 1, MAX_INVENTORY_SLOTS, 1 do 
+        CreatePlayerInventory(player, i) 
+    end
+
     local query = mariadb_prepare(sql, "SELECT * FROM inventory WHERE charid = ?;", PlayerData[player].id)
     mariadb_async_query(sql, query, OnInventoryLoaded, player)
 end)
 
 function OnInventoryLoaded(player)
-    for i = 1, MAX_INVENTORY_SLOTS, 1 do CreatePlayerInventory(player, i) end
-
     for i = 1, mariadb_get_row_count(), 1 do
         if i <= MAX_INVENTORY_SLOTS then
             InventoryData[player][i].id = mariadb_get_value_name_int(i, "id")
@@ -46,7 +48,8 @@ function CreatePlayerInventory(player, slot)
         InventoryData[player] = {}
     end
 
-    InventoryData[player][slot].id = 0
+    InventoryData[player][slot] = {}
+    InventoryData[player][slot].id = 0 -- attempt to index a nil value
     InventoryData[player][slot].itemid = 0
     InventoryData[player][slot].amount = 0
 end
@@ -89,7 +92,7 @@ function Inventory_HasItem(player, item)
     if InventoryData[player] == nil then return false end
 
     for i = 1, MAX_INVENTORY_SLOTS, 1 do
-        if InventoryData[player][i].itemid == item then
+        if InventoryData[player][i].itemid == item then -- attempt to index a nil value
             return i
         end
     end
