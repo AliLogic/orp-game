@@ -56,7 +56,7 @@ AddRemoteEvent("OpenATMMenu", function (bal)
         AddPlayerChat("atm should show, nearest id is "..GetNearestATM())
     else
         return AddPlayerChat("<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You are not near any ATMs!")
-    end     
+    end
 end)
 
 AddEvent("OnDialogSubmit", function (dialog, button, amount)
@@ -110,7 +110,7 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
             if amount == nil then return end
 
             amount = math.tointeger(amount)
-        
+
             if amount < CONFIG_ATM_WITHDRAW_MIN or amount > CONFIG_ATM_WITHDRAW_MAX then
                 return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Your withdrawal amount is either too little or too much. Please retry.</>")
             end

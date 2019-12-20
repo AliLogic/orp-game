@@ -273,8 +273,8 @@ local function cmd_aev(player, vehicle, prefix, ...)
     end
 
 	if vehicle == nil or prefix == nil then
-		AddPlayerChat(vehicle, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <prefix>")
-		return AddPlayerChat(vehicle, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <prefix>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color")
 	end
 
 	vehicle = tonumber(vehicle)

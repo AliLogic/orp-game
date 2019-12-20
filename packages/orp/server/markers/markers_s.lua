@@ -74,7 +74,7 @@ end
 
 function Marker_Destroy(marker_id)
 
-	local query = mariadb_prepare(sql, "DELETE FROM markers WHERE id = ?", MarkerData[marker_id].id)
+	local query = mariadb_prepare(sql, "DELETE FROM markers WHERE id = '?'", MarkerData[marker_id].id)
 	mariadb_async_query(sql, query)
 
 	DestroyPickup(MarkerData[marker_id].pickup1)
