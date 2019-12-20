@@ -90,7 +90,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
                 Dialog.show(charcreate)
                 return
             end
-    
+
             AddPlayerChat('Logging in as '..string.match(slot, '[a-zA-Z]+ [a-zA-Z]+'))
             CallRemoteEvent("accounts:login", math.tointeger(string.match(slot, "%d")))
             Dialog.close(charview)

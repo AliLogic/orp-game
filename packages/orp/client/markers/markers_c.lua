@@ -12,7 +12,7 @@ AddEvent("OnKeyPress", function(key)
 
 				CallRemoteEvent("OnPlayerInteractMarker", markerid)
 			else
-				SetPlayerPropertyValue("marker", 0, true)
+				SetPlayerPropertyValue(GetPlayerId(), "marker", 0)
 			end
 		end
 	end
@@ -21,6 +21,8 @@ end)
 AddEvent("OnPickupStreamIn", function (pickup)
 
 	if (GetPickupPropertyValue(pickup, "type") == "marker") then
+
+		AddPlayerChat("pickup: "..pickup)
 
 		local r = tonumber(GetPickupPropertyValue(pickup, "r"))
 		local g = tonumber(GetPickupPropertyValue(pickup, "g"))

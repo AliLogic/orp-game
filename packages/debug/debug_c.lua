@@ -147,6 +147,6 @@ AddEvent("OnPlayerStreamOut", OnPlayerStreamOut)
 	This only works if the game was started with "-dev" switch
 ]]--
 function OnScriptError(message)
-	AddPlayerChat('<span color="#ff0000bb" style="bold" size="10">'..message..'</>')
+	AddPlayerChat('<span color="#ff0000bb" style="bold" size="30">'..message..'</>')
 end
 AddEvent("OnScriptError", OnScriptError)

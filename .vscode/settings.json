@@ -190,6 +190,7 @@
         "GetNetworkStats",
         "SetNearClipPlane",
         "mariadb_set_charset",
-        "mariadb_close"
+        "mariadb_close",
+        "GetPickupStaticMeshComponent"
     ]
 }

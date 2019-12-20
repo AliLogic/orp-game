@@ -179,7 +179,12 @@ end)
 
 AddEvent("OnPlayerPickupHit", function (playerid, pickupid)
 
+	AddPlayerChat(playerid, "OnPlayerPickupHit - player: "..playerid.." pickup: "..pickupid.."")
+	AddPlayerChat(playerid, "OnPlayerPickupHit - "..GetPickupPropertyValue(pickupid, "type")..".")
+
 	if (GetPickupPropertyValue(pickupid, "type") == "marker") then
+
+		AddPlayerChat(playerid, "marker")
 
 		SetPlayerPropertyValue(playerid, "marker", pickupid, true)
 	end
