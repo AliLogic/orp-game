@@ -25,47 +25,46 @@ function ViewPlayerStats(player, target)
 end
 
 function SetPlayerChatBubble(player, message, seconds)
-    if PlayerData[player].label ~= nil then
-        if IsValidText3D(PlayerData[player].label) then
-            DestroyText3D(PlayerData[player].label)
-        end
-    end
+	if PlayerData[player].label ~= nil then
+		if IsValidText3D(PlayerData[player].label) then
+			DestroyText3D(PlayerData[player].label)
+		end
+	end
 
-    PlayerData[player].label = CreateText3D(message, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-    SetText3DAttached(PlayerData[player].label, ATTACH_PLAYER, player, 0.0, 0.0, 150.0)
+	PlayerData[player].label = CreateText3D(message, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+	SetText3DAttached(PlayerData[player].label, ATTACH_PLAYER, player, 0.0, 0.0, 150.0)
 
-    Delay(seconds * 1000, function (player)
-        if PlayerData[player].label ~= nil then
-            if IsValidText3D(PlayerData[player].label) then
-                DestroyText3D(PlayerData[player].label)
-            end
-        end
-    end)
-    
+	Delay(seconds * 1000, function (player)
+	if PlayerData[player].label ~= nil then
+			if IsValidText3D(PlayerData[player].label) then
+				DestroyText3D(PlayerData[player].label)
+			end
+		end
+	end)
 end
 
 function GetPlayerCash(player)
-    if PlayerData[player] ~= nil then
-        return PlayerData[player].cash
-    end
+	if PlayerData[player] ~= nil then
+		return PlayerData[player].cash
+	end
 end
 
 function SetPlayerCash(player, amount)
-    if PlayerData[player] ~= nil then
-        PlayerData[player].cash = amount
-    end
+	if PlayerData[player] ~= nil then
+		PlayerData[player].cash = amount
+	end
 end
 
 function AddPlayerCash(player, amount)
-    if PlayerData[player] ~= nil then
-        PlayerData[player].cash = PlayerData[player].cash + amount
-    end
+	if PlayerData[player] ~= nil then
+		PlayerData[player].cash = PlayerData[player].cash + amount
+	end
 end
 
 function RemovePlayerCash(player, amount)
-    if PlayerData[player] ~= nil then
-        PlayerData[player].cash = PlayerData[player].cash - amount
-    end
+	if PlayerData[player] ~= nil then
+		PlayerData[player].cash = PlayerData[player].cash - amount
+	end
 end
 
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
