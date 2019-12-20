@@ -74,7 +74,8 @@ function OnInventoryItemAdded(player, slot)
 end
 
 function Inventory_RemoveItem(player, slot)
-    if InventoryData[player][slot] == nil or InventoryData[player][slot].id == 0 then return false end
+    if InventoryData[player][slot] == nil then return false end
+    if InventoryData[player][slot].id == 0 then return false end
 
     InventoryData[player][slot] = nil
     CreatePlayerInventory(player, slot)
