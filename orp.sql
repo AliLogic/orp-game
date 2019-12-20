@@ -326,6 +326,7 @@ INSERT INTO `vehicles` (`id`, `owner`, `model`, `plate`, `faction`, `x`, `y`, `z
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 
 -- Dumping structure for table ORP.faction_members
+DROP TABLE IF EXISTS `faction_members`;
 CREATE TABLE IF NOT EXISTS `faction_members` (
   `char_id` int(11) NOT NULL,
   `faction_id` int(11) NOT NULL,

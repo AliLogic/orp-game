@@ -23,10 +23,10 @@ AddCommand("facmod", function(playerid)
 end)
 
 AddCommand("f", function(playerid, ...)
-	local faction_id = PlayerData[playerid].faction
+	local factionid = PlayerData[playerid].faction
 	local faction_rank = PlayerData[playerid].faction_rank
 
-	if FactionData[faction_id].id ~= 0 then
+	if FactionData[factionid].id ~= 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
@@ -36,12 +36,14 @@ AddCommand("f", function(playerid, ...)
 
 	local msg = table.concat({...}, " ")
 
-	if (#msg == 0 or #msg > 128) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: message has invalid length 128")
-	end
+	--[[if (#msg == 0 or #msg > 128) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Message has invalid length 128")
+	end]]--
 
-	for k, v in ipairs(GetAllPlayers()) do
-		AddPlayerChat(v, "[FACTION CHAT] "..FactionRankData[faction_id][faction_rank].." "..GetPlayerName(playerid)..": "..msg)
+	for _, v in ipairs(GetAllPlayers()) do
+		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id then
+			AddPlayerChat(v, "(( "..FactionRankData[faction_id][faction_rank].." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
+		end
 	end
 end)
 
@@ -65,12 +67,14 @@ function cmd_acf(player, short_name, leadership_rank, fac_type, ...)
 	fac_type = tonumber(fac_type)
 	leadership_rank = tonumber(leadership_rank)
 
-	if (fac_type < 0 or fac_type > 1) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid faction type.</>")
+	if (fac_type < FACTION_CIVILIAN or fac_type > FACTION_GOV) then
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid faction type.</>")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Types:</> 1 (Civilian), 2 (Police), 3 (Medic), 4 (Government).")
+		return 
 	end
 
 	if leadership_rank < 0 or leadership_rank > 16 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: ranks can be between 1 - 16.</>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Ranks range from 1 - 16.</>")
 	end
 
 	local faction = Faction_Create(name, short_name, leadership_rank, fac_type)

@@ -159,14 +159,14 @@ function OnAccountLoaded(player)
 		--setPlayerHunger(player, tonumber(result['hunger']))
 
 		if PlayerData[player].admin ~= 0 then
-			AddPlayerChat(player, "You have logged in successfully as a "..GetPlayerAdminRank(player)..".")
+			AddPlayerChat(player, "You have logged in successfully as "..GetPlayerAdminRank(player)..".")
 		elseif PlayerData[player].helper ~= 0 then
 			AddPlayerChat(player, "You have logged in successfully as a Helper.")
 		else
 			AddPlayerChat(player, "You have logged in successfully.")
 		end
 
-		AddPlayerChat(player, "Logged in as ")
+		--AddPlayerChat(player, "Logged in as ")
 
 		local query = mariadb_prepare(sql, "SELECT * FROM characters WHERE accountid = ?;",
 			PlayerData[player].accountid)
@@ -248,15 +248,19 @@ function OnCharacterLoaded(player, id)
 		PlayerData[player].z = tonumber(result['z'])
 		PlayerData[player].a = tonumber(result['a'])
 
+		PlayerData[player].radio = tonumber(result['radio'])
+
 		SetPlayerHealth(player, tonumber(result['health']))
 		SetPlayerArmor(player, tonumber(result['armour']))
 
 		SetPlayerLoggedIn(player)
 
 		LoadCharacterFaction(player, id)
+		CallEvent("LoadInventory", player)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay "..GetPlayerName(player)..".</>")
-		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
+		SetPlayerName(player, string.format("%s %s", PlayerData[player].firstname, PlayerData[player].lastname))
+		
 	end
 end
 
@@ -286,6 +290,8 @@ function CreatePlayerData(player)
 
 	PlayerData[player].cash = 100
 	PlayerData[player].bank = 1000
+
+	PlayerData[player].radio = 0
 
 	PlayerData[player].faction = 0
 	PlayerData[player].faction_rank = 0

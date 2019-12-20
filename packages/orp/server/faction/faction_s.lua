@@ -6,6 +6,11 @@ FactionRankData = {}
 DivisionData = {}
 DivisionRankData = {}
 
+FACTION_CIVILIAN = 1
+FACTION_POLICE = 2
+FACTION_MEDIC = 3
+FACTION_GOV = 4
+
 function CreateFactionData(factionid)
 	FactionData[factionid] = {}
 
@@ -35,6 +40,10 @@ function Faction_Create(name, short_name, leadership_rank, fac_type)
 
 	while FactionData[faction] ~= nil do
 		faction = faction + 1
+	end
+
+	if fac_type == nil then
+		fac_type = FACTION_CIVILIAN
 	end
 
 	CreateFactionData(faction)
@@ -86,13 +95,16 @@ function OnFactionLoaded(factionid)
 		FactionData[factionid].name = result['name']
 		FactionData[factionid].short_name = result['short_name']
 		FactionData[factionid].motd = result['motd']
-		FactionData[factionid].type = result['type']
+		FactionData[factionid].type = tonumber(result['type'])
 
 		FactionData[factionid].leadership_rank = tonumber(result['leadership_rank'])
 		FactionData[factionid].radio_dimension = tonumber(result['radio_dimension'])
 		FactionData[factionid].bank = tonumber(result['bank'])
 
-		mariadb_async_query(sql, "SELECT * FROM factions_ranks WHERE id = "..FactionData[factionid].id, OnFactionRankLoaded)
+		local query = mariadb_prepare(sql, "SELECT * FROM factions_ranks WHERE id = ?",
+			FactionData[factionid].id)
+
+		mariadb_async_query(sql, query, OnFactionRankLoaded, FactionData[factionid].id)
 	end
 end
 
