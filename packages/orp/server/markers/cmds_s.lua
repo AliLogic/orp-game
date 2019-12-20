@@ -58,13 +58,13 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 	end
 
 	if markerid == nil or prefix == nil then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(m)arker <marker> <prefix>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(m)arker <marker> <prefix>")
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> color, interior, exterior")
 	end
 
 	markerid = tonumber(markerid)
 
-	if not IsValidMarker(markerid) then
+	if IsValidMarker(markerid) == false then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Marker "..markerid.." doesn't exist.")
 	end
 
