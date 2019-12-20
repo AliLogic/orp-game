@@ -121,7 +121,7 @@ function OnMarkerLoaded(indexid, marker_id)
 
 		MarkerData[indexid].is_locked = result['is_locked']
 
-		MarkerData[indexid].pickup1 = CreatePickup(MarkerData[indexid].modelid, MarkerData[indexid].x1, MarkerData[indexid].y1, MarkerData[indexid].z1)
+		MarkerData[indexid].pickup1 = CreatePickup(MarkerData[indexid].model, MarkerData[indexid].x1, MarkerData[indexid].y1, MarkerData[indexid].z1)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "type", "marker", true)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "r", tostring(MarkerData[indexid].r), true)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "g", tostring(MarkerData[indexid].g), true)
