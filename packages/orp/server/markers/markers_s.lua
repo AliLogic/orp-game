@@ -54,6 +54,8 @@ end
 
 function OnMarkerCreated(marker_id, modelid, x, y, z)
 
+	AddPlayerChatAll("Marker ID: "..marker_id.." has been created.")
+
 	MarkerData[marker_id].id = mariadb_get_insert_id()
 	MarkerData[marker_id].model = modelid
 
@@ -63,11 +65,11 @@ function OnMarkerCreated(marker_id, modelid, x, y, z)
 end
 
 function IsValidMarker(marker_id)
-	if MarkerData[marker_id] == nil or (IsValidPickup(MarkerData[marker_id].pickup1) == false) then
+	if MarkerData[marker_id] == nil then
 		return false
-	else
-		return true
 	end
+
+	return true
 end
 
 function Marker_Destroy(marker_id)
