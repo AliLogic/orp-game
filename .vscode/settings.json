@@ -198,6 +198,7 @@
         "GetObjectModel",
         "GetObjectRotation",
         "GetObjectScale",
-        "DestroyVehicle"
+        "DestroyVehicle",
+        "HIT_PLAYER"
     ]
 }
