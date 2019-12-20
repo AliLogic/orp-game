@@ -353,7 +353,7 @@ AddCommand("acf", cmd_acf)
 
 AddCommand("ahelp", function (player)
     if (PlayerData[player].admin < 1) then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</sh>")
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
     end
 
     if PlayerData[player].admin > 0 then

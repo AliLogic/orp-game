@@ -101,7 +101,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 			SetPickupPropertyValue(MarkerData[markerid].pickup2, "a", tostring(a), false)
 		end
 
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." color changed.")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." color changed.</>")
 	elseif prefix == "interior" then
 		local x, y, z = GetPlayerLocation(playerid)
 
@@ -111,7 +111,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 
 		--SetPickupLocation(MarkerData[markerid].pickup1, x, y, z)
 
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." interior location changed.")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." interior location changed.</>")
 	elseif prefix == "exterior" then
 		local x, y, z = GetPlayerLocation(playerid)
 
@@ -123,7 +123,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 			--SetPickupLocation(MarkerData[markerid].pickup2, x, y, z)
 		end
 
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." exterior location changed.")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." exterior location changed.</>")
 	else
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(m)arker <marker> <prefix>")
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> color, interior, exterior")
