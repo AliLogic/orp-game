@@ -8,10 +8,10 @@ local player = nil
 local target = nil
 local vehicle = nil
 
-AddRemoteEvent("askClientActionConfirmation", function (player, id, message, ...)
+AddRemoteEvent("askClientActionConfirmation", function (_player, id, message, ...)
     local args = {...}
     if id == 1 then
-        gplayer = player
+        player = _player
         target = args[2]
         vehicle = args[3]
 
@@ -29,9 +29,9 @@ AddEvent("OnDialogSubmit", function(dialog, button)
     Dialog.close(confirmation)
     confirmation = nil
 
-    CallRemoteEvent("clientActionConfirmationResult", button, gplayer, target, vehicle)
+    CallRemoteEvent("clientActionConfirmationResult", button, player, target, vehicle)
 
-    gplayer = nil
+    player = nil
     target = nil
     vehicle = nil
 end)

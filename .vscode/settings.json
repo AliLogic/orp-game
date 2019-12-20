@@ -192,6 +192,11 @@
         "mariadb_set_charset",
         "mariadb_close",
         "GetPickupStaticMeshComponent",
-        "DestroyPickup"
+        "DestroyPickup",
+        "SetObjectPropertyValue",
+        "SetObjectRotation",
+        "GetObjectModel",
+        "GetObjectRotation",
+        "GetObjectScale"
     ]
 }
