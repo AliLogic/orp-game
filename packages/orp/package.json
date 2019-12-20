@@ -17,6 +17,7 @@
 		"server/banking/cmds_s.lua",
 		"server/markers/markers_s.lua",
 		"server/markers/cmds_s.lua",
+		"server/env/env_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [
@@ -26,6 +27,7 @@
 		"client/admin/admin_c.lua",
 		"client/banking/banking_c.lua",
 		"client/markers/markers_c.lua",
+		"client/env/env_c.lua",
 		"client/misc/misc_c.lua"
 	],
 	"files": []
