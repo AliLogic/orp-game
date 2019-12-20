@@ -100,24 +100,24 @@ function OnMarkerLoaded(marker_id)
 		print("Marker id is now being loaded... "..marker_id)
 
 		local result = mariadb_get_assoc(1)
+		
+        MarkerData[marker_id].id = tonumber(result['id'])
+        MarkerData[marker_id].model = tonumber(result['model'])
 
-		MarkerData[marker_id].id = result['id']
-		MarkerData[marker_id].model = result['model']
+        MarkerData[marker_id].x1 = tonumber(result['x1'])
+        MarkerData[marker_id].y1 = tonumber(result['y1'])
+        MarkerData[marker_id].z1 = tonumber(result['z1'])
 
-		MarkerData[marker_id].x1 = result['x1']
-		MarkerData[marker_id].y1 = result['y1']
-		MarkerData[marker_id].z1 = result['z1']
+        MarkerData[marker_id].x2 = tonumber(result['x1'])
+        MarkerData[marker_id].y2 = tonumber(result['y2'])
+		MarkerData[marker_id].z2 = tonumber(result['z2'])
+		
+		print(string.format("Type of x1: %s", type(result['x1'])))
 
-		MarkerData[marker_id].x2 = result['x1']
-		MarkerData[marker_id].y2 = result['y2']
-		MarkerData[marker_id].z2 = result['z2']
-
-		print("Type of x1: "..type(result['x1']))
-
-		MarkerData[marker_id].r = result['r']
-		MarkerData[marker_id].g = result['g']
-		MarkerData[marker_id].b = result['b']
-		MarkerData[marker_id].a = result['a']
+        MarkerData[marker_id].r = tonumber(result['r'])
+        MarkerData[marker_id].g = tonumber(result['g'])
+        MarkerData[marker_id].b = tonumber(result['b'])
+        MarkerData[marker_id].a = tonumber(result['a'])
 
 		MarkerData[marker_id].is_locked = result['is_locked']
 
