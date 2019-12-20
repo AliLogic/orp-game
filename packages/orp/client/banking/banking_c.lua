@@ -1,5 +1,5 @@
-local colour = ImportPackage('colours')
 local Dialog = ImportPackage('dialogui')
+local colour = ImportPackage('colours')
 
 local StreamedAtmIds = { }
 local AtmIds = { }
@@ -53,9 +53,7 @@ AddRemoteEvent("OpenATMMenu", function (bal)
             "Withdraw", "Deposit", "Exit"
         )
         Dialog.show(atmmenu)
-
-        AddPlayerChat("atm should show")
-        
+        AddPlayerChat("atm should show, nearest id is "..GetNearestATM())
     else
         return AddPlayerChat("<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You are not near any ATMs!")
     end     
