@@ -101,7 +101,7 @@ function OnMarkerLoaded(indexid, marker_id)
 
 		local result = mariadb_get_assoc(1)
 
-        --MarkerData[indexid].id = tonumber(result['id'])
+        MarkerData[indexid].id = tonumber(result['id'])
         MarkerData[indexid].model = tonumber(result['model'])
 
         MarkerData[indexid].x1 = tonumber(result['x1'])
