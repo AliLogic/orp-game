@@ -196,10 +196,10 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 			--return false
 		else
 			AddPlayerChat(player, "[DEBUG-S] The vehicle is unlocked so putting them in!")
-			SetPlayerInVehicle(player, vehicle, seat)
+			SetPlayerInVehicle(player, vehicle, seat + 1)
 		end
 	else
 		AddPlayerChat(player, "[DEBUG-S] The vehicle is probably an admin so putting them in!")
-		SetPlayerInVehicle(player, vehicle, seat)
+		SetPlayerInVehicle(player, vehicle, seat + 1)
 	end
 end)
