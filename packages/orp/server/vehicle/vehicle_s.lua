@@ -57,7 +57,7 @@ function Vehicle_Create(model, plate, x, y, z, a)
 		r,
 		g,
 		b
-		)
+	)
 
 	mariadb_async_query(sql, query, OnVehicleCreated, vehicle, model, plate, x, y, z, a, r, g, b)
 	return vehicle
@@ -111,20 +111,20 @@ function OnVehicleLoaded(id)
 		CreateVehicleData(vehicle)
 
 		VehicleData[vehicle].id = id
-		VehicleData[vehicle].model = result['model']
+		VehicleData[vehicle].model = tonumber(result['model'])
 		VehicleData[vehicle].plate = result['plate']
 
 		VehicleData[vehicle].x = tonumber(result['x'])
 		VehicleData[vehicle].y = tonumber(result['y'])
 		VehicleData[vehicle].z = tonumber(result['z'])
 		VehicleData[vehicle].a = tonumber(result['a'])
-	
-		VehicleData[vehicle].r = result['r']
-		VehicleData[vehicle].g = result['g']
-		VehicleData[vehicle].b = result['b']
+
+		VehicleData[vehicle].r = tonumber(result['r'])
+		VehicleData[vehicle].g = tonumber(result['g'])
+		VehicleData[vehicle].b = tonumber(result['b'])
 
 		VehicleData[vehicle].owner = tonumber(result['owner'])
-		VehicleData[vehicle].faction = result['faction']
+		VehicleData[vehicle].faction = tonumber(result['faction'])
 
 		print(id.."'s owner: "..VehicleData[vehicle].owner)
 
