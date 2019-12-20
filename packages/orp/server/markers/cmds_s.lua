@@ -69,10 +69,15 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 	end
 
 	if prefix == "color" then
-		local r, g, b, a = {...}
+		local r, g, b, a, args
+		args = {...}
+		r = tonumber(args[1])
+		g = tonumber(args[2])
+		b = tonumber(args[3])
+		a = tonumber(args[4])
 
 		if r == nil or g == nil or b == nil or a == nil then
-			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(m)arker <marker> <color> <red> <green> <blue> <alpha>")
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(m)arker <marker> <color> <red> <green> <blue> <alpha>")
 		end
 
 		if r < 0 or r > 255 or g < 0 or g > 255 or b < 0 or b > 255 or a < 0 or a > 255 then
@@ -120,7 +125,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." exterior location changed.")
 	else
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(m)arker <marker> <prefix>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(m)arker <marker> <prefix>")
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> color, interior, exterior")
 	end
 end
