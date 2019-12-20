@@ -3,13 +3,13 @@ AddEvent("OnKeyPress", function(key)
 	if key == 'E' then
 		local markerid = GetPlayerPropertyValue("marker")
 
-		if markerid ~= 0 then
+		if markerid ~= false then
 			local x, y, z = GetPlayerLocation()
 			local distance = GetDistance3D(MarkerData[markerid].x, MarkerData[markerid].y, MarkerData[markerid].z, x, y, z)
-	
+
 			if distance < 300 then
 				AddPlayerChat("You have pressed the key while in range of marker "..markerid..".")
-	
+
 				CallRemoteEvent("OnPlayerInteractMarker", markerid)
 			else
 				SetPlayerPropertyValue("marker", 0, true)
