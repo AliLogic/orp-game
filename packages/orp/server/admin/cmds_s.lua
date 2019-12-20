@@ -267,34 +267,66 @@ end
 AddCommand('acreatevehicle', cmd_acv)
 AddCommand('acv', cmd_acv)
 
-function cmd_aev(player, ...)
+local function cmd_aev(player, vehicle, prefix, ...)
     if (PlayerData[player].admin < 2) then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
     end
 
-    local args = {...}
+	if vehicle == nil or prefix == nil then
+		AddPlayerChat(vehicle, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <prefix>")
+		return AddPlayerChat(vehicle, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color")
+	end
 
-    if args[1] == "owner" then
-        local vehicle = tonumber(args[2])
-        local target = tonumber(args[3])
+	vehicle = tonumber(vehicle)
 
-        if vehicle == nil or target == nil then
-            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle owner <vehicleid> <target>")
-        end
+	--[[if IsValidVehicle(vehicle) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..vehicle.." doesn't exist.")
+	end]]--
 
-        if IsValidPlayer(target) == nil or PlayerData[target] == nil then
-            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
-        end
+	local args = {...}
 
-        if PlayerData[target].logged_in == false then
-            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
-        end
+	if prefix == "owner" then
+		local target = tonumber(args[1])
 
-        CallRemoteEvent(player, "askClientActionConfirmation", player, 1, "Would you like to change this vehicle's owner?", target, vehicle)
+		if vehicle == nil or target == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle owner <vehicleid> <target>")
+		end
+
+		if IsValidPlayer(target) == nil or PlayerData[target] == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		end
+
+		if PlayerData[target].logged_in == false then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
+		end
+
+		CallRemoteEvent(player, "askClientActionConfirmation", player, 1, "Would you like to change this vehicle's owner?", target, vehicle)
+	elseif prefix == "color" then
+		local r, g, b
+
+		r = tonumber(args[1])
+		g = tonumber(args[2])
+		b = tonumber(args[3])
+
+		if r == nil or g == nil or b == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> color <red> <green> <blue>")
+		end
+
+		if r < 0 or r > 255 or g < 0 or g > 255 or b < 0 or b > 255 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The R, G, B values can only be between 0 to 255.")
+		end
+
+		VehicleData[vehicle].r = r
+		VehicleData[vehicle].g = g
+		VehicleData[vehicle].b = b
+
+		SetVehicleColor(vehicle, RGB(r, g, b))
+
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." color changed.</>")
     else
         AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner")
-    end
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color")
+	end
 end
 AddCommand('aeditvehicle', cmd_aev)
 AddCommand('aev', cmd_aev)
