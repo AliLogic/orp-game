@@ -27,13 +27,13 @@ local function cmd_shout(playerid, ...)
 
 	local args = table.concat({...}, " ")
 
-	if args == nil then
+	if #{...} then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /shout [message]")
 	end
 
 	local x, y, z = GetPlayerLocation(playerid)
 
-	AddPlayerChatRange(x, y, 1000.0, "<span color=\"#ffffffFF\">"..GetPlayerName(playerid).." shouts: "..args.."</>")
+	AddPlayerChatRange(x, y, 1200.0, "<span color=\"#ffffffFF\">"..GetPlayerName(playerid).." shouts: "..args.."</>")
 end
 AddCommand("shout", cmd_shout)
 AddCommand("s", cmd_shout)
@@ -42,7 +42,7 @@ local function cmd_low(playerid, ...)
 
 	local args = table.concat({...}, " ")
 
-	if args == nil then
+	if #{...} then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /low [message]")
 	end
 
