@@ -57,7 +57,7 @@ end)
 AddEvent("OnDialogSubmit", function (dialog, button, amount)
     if dialog == atmmenu then
         if button == 1 then
-            local player = getPlayerId()
+            local player = GetPlayerId()
 
             if PlayerData[player].bank < 1 then
                 Dialog.close(atmmenu)
@@ -76,7 +76,7 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
             Dialog.addTextInput(withdrawmenu, 1, "Amount:")
             Dialog.show(withdrawmenu)
         elseif button == 2 then
-            local player = getPlayerId()
+            local player = GetPlayerId()
 
             if PlayerData[player].cash < 1 then
                 Dialog.close(atmmenu)
