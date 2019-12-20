@@ -195,6 +195,7 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 			Slap(player)
 			--return false
 		else
+			AddPlayerChat(player, "GOT OnPlayerStartEnterVehicle response ENTERING")
 			SetPlayerInVehicle(player, vehicle, seat)
 		end
 	end

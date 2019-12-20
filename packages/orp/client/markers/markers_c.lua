@@ -5,7 +5,7 @@ AddEvent("OnKeyPress", function(key)
 
 		if markerid ~= false then
 			local x, y, z = GetPlayerLocation()
-			local distance = GetDistance3D(MarkerData[markerid].x, MarkerData[markerid].y, MarkerData[markerid].z, x, y, z)
+			local distance = 300 --GetDistance3D(MarkerData[markerid].x, MarkerData[markerid].y, MarkerData[markerid].z, x, y, z)
 
 			if distance < 300 then
 				AddPlayerChat("You have pressed the key while in range of marker "..markerid..".")
