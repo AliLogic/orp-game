@@ -51,14 +51,15 @@ end
 AddCommand("adestroymarker", cmd_adm)
 AddCommand("adm", cmd_adm)
 
-local function cmd_aem(playerid, markerid, type, ...)
+local function cmd_aem(playerid, markerid, prefix, ...)
 
 	if (PlayerData[playerid].admin < 4) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
-	if markerid == nil or type == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(m)arker <marker> <prefix>")
+	if markerid == nil or prefix == nil then
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(m)arker <marker> <prefix>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> color, interior, exterior")
 	end
 
 	markerid = tonumber(markerid)
@@ -67,7 +68,7 @@ local function cmd_aem(playerid, markerid, type, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Marker "..markerid.." doesn't exist.")
 	end
 
-	if type == "color" then
+	if prefix == "color" then
 		local r, g, b, a = {...}
 
 		if r == nil or g == nil or b == nil or a == nil then
@@ -96,8 +97,31 @@ local function cmd_aem(playerid, markerid, type, ...)
 		end
 
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." color changed.")
+	elseif prefix == "interior" then
+		local x, y, z = GetPlayerLocation(playerid)
+
+		MarkerData[markerid].x1 = x
+		MarkerData[markerid].y1 = y
+		MarkerData[markerid].z1 = z
+
+		--SetPickupLocation(MarkerData[markerid].pickup1, x, y, z)
+
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." interior location changed.")
+	elseif prefix == "exterior" then
+		local x, y, z = GetPlayerLocation(playerid)
+
+		MarkerData[markerid].x2 = x
+		MarkerData[markerid].y2 = y
+		MarkerData[markerid].z2 = z
+
+		if MarkerData[markerid].pickup2 ~= 0 then
+			--SetPickupLocation(MarkerData[markerid].pickup2, x, y, z)
+		end
+
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." exterior location changed.")
 	else
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(m)arker <marker> <prefix>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(m)arker <marker> <prefix>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> color, interior, exterior")
 	end
 end
 
