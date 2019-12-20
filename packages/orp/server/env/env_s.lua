@@ -1,7 +1,7 @@
 local EnvTimer
-local EnvHour
-local EnvMin
-local EnvWeather
+EnvHour = 0
+EnvMin = 0
+EnvWeather = 0
 local EnvTemperature
 
 local function UpdateTime()

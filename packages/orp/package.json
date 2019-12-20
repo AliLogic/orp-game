@@ -18,6 +18,7 @@
 		"server/markers/markers_s.lua",
 		"server/markers/cmds_s.lua",
 		"server/env/env_s.lua",
+		"server/env/cmds_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [
