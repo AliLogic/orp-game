@@ -43,7 +43,7 @@ AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hi
                     local x, y, z = GetPlayerLocation(player)
                     AddPlayerChatRange(x, y, 600.0, GetPlayerName(player).." tased "..GetPlayerName(hitid))
 
-                    SetPlayerHeading(player, GetPlayerHeading(player) - 180)
+                    SetPlayerHeading(hitid, GetPlayerHeading(player) - 180)
                     SetPlayerAnimation(hitid, "LAY10")
                     
                     Delay(5 * 1000, function()
