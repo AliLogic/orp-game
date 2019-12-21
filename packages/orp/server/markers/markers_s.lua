@@ -1,6 +1,16 @@
 local colour = ImportPackage('colours')
 
+MAX_MARKERS = 100
 MarkerData = {}
+
+function GetFreeMarkerId()
+
+	for i = 1, MAX_MARKERS, 1 do
+		if MarkerData[i] == nil then
+			return i
+		end
+	end
+end
 
 function CreateMarkerData(marker_id)
 
@@ -36,7 +46,7 @@ end
 function Marker_Create(modelid, x, y, z, dimension)
 
 	modelid = tonumber(modelid)
-	local marker_id = CreatePickup(modelid, x, y, z)
+	local marker_id = GetFreeMarkerId()
 
 	if marker_id == false then
 		return false
@@ -61,6 +71,7 @@ function OnMarkerCreated(marker_id, modelid, x, y, z, dimension)
 
 	MarkerData[marker_id].id = mariadb_get_insert_id()
 	MarkerData[marker_id].model = modelid
+	MarkerData[marker_id].pickup1 = CreatePickup(modelid, x, y, z)
 
 	MarkerData[marker_id].x1 = x
 	MarkerData[marker_id].y1 = y
@@ -126,7 +137,7 @@ function OnMarkerLoaded(indexid, marker_id)
 
 		MarkerData[indexid].pickup1 = CreatePickup(MarkerData[indexid].model, MarkerData[indexid].x1, MarkerData[indexid].y1, MarkerData[indexid].z1)
 		SetPickupDimension(MarkerData[indexid].pickup1, MarkerData[indexid].dimension1)
-		SetPickupPropertyValue(MarkerData[indexid].pickup1, "type", "marker", true)
+		SetPickupPropertyValue(MarkerData[indexid].pickup1, "markerid", indexid, true)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "r", tostring(MarkerData[indexid].r), true)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "g", tostring(MarkerData[indexid].g), true)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "b", tostring(MarkerData[indexid].b), true)
@@ -135,7 +146,7 @@ function OnMarkerLoaded(indexid, marker_id)
 		if MarkerData[indexid].x ~= 0 and MarkerData[indexid].y ~= 0 then
 			MarkerData[indexid].pickup2 = CreatePickup(MarkerData[indexid].modelid, MarkerData[indexid].x2, MarkerData[indexid].y2, MarkerData[indexid].z2)
 			SetPickupDimension(MarkerData[indexid].pickup2, MarkerData[indexid].dimension2)
-			SetPickupPropertyValue(MarkerData[indexid].pickup2, "type", "marker", true)
+			SetPickupPropertyValue(MarkerData[indexid].pickup2, "markerid", indexid, true)
 			SetPickupPropertyValue(MarkerData[indexid].pickup2, "r", tostring(MarkerData[indexid].r), true)
 			SetPickupPropertyValue(MarkerData[indexid].pickup2, "g", tostring(MarkerData[indexid].g), true)
 			SetPickupPropertyValue(MarkerData[indexid].pickup2, "b", tostring(MarkerData[indexid].b), true)
@@ -199,17 +210,35 @@ end)
 AddEvent("OnPlayerPickupHit", function (playerid, pickupid)
 
 	AddPlayerChat(playerid, "OnPlayerPickupHit - player: "..playerid.." pickup: "..pickupid.."")
-	AddPlayerChat(playerid, "OnPlayerPickupHit - "..GetPickupPropertyValue(pickupid, "type")..".")
+	AddPlayerChat(playerid, "OnPlayerPickupHit - "..GetPickupPropertyValue(pickupid, "markerid")..".")
 
-	if (GetPickupPropertyValue(pickupid, "type") == "marker") then
+	if (GetPickupPropertyValue(pickupid, "markerid") ~= false) then
 
-		AddPlayerChat(playerid, "marker")
+		AddPlayerChat(playerid, "pickupid "..pickupid.." has been detected as a marker id")
 
-		SetPlayerPropertyValue(playerid, "marker", pickupid, true)
+		SetPlayerPropertyValue(playerid, "pickupid", pickupid, true)
 	end
 end)
 
-AddRemoteEvent("OnPlayerInteractMarker", function (playerid, markerid)
+AddEvent("OnPlayerJoin", function (playerid)
+	SetPlayerPropertyValue(playerid, "pickupid", false, true)
+end)
+
+AddRemoteEvent("OnPlayerInteractMarker", function (playerid, pickupid)
 
 	AddPlayerChat(playerid, "Server knows you interacted with marker "..markerid..".")
+
+	for i = 1, #MarkerData, 1 do
+		if IsValidMarker(i) then
+			if MarkerData[i].pickup1 == pickupid then
+				if MarkerData[i].x2 ~= 0 then
+					SetPlayerLocation(playerid, MarkerData[i].x2, MarkerData[i].y2, MarkerData[i].z2)
+				end
+				break
+			elseif MarkerData[i].pickup2 == pickupid then
+				SetPlayerLocation(playerid, MarkerData[i].x1, MarkerData[i].y1, MarkerData[i].z1)
+				break;
+			end
+		end
+	end
 end)

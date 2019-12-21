@@ -201,6 +201,7 @@
         "DestroyVehicle",
         "HIT_PLAYER",
         "FRotator",
-        "SetPickupDimension"
+        "SetPickupDimension",
+        "GetPickupLocation"
     ]
 }
