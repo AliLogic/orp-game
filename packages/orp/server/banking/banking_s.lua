@@ -71,7 +71,7 @@ end
 AddRemoteEvent("banking:withdraw", function(player, amount)
 
 	if amount > PlayerData[player].bank then
-		return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to withdraw your chosen amount.</>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to withdraw your chosen amount.</>")
 	end
 	
     RemovePlayerCash(player, amount)
@@ -84,7 +84,7 @@ end)
 AddRemoteEvent("banking:deposit", function (player, amount)
 
 	if amount > PlayerData[player].cash then
-		return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to deposit your chosen amount.</>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to deposit your chosen amount.</>")
 	end
 
     AddPlayerCash(player, amount)
