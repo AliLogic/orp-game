@@ -60,7 +60,10 @@ function CreatePlayerInventory(player, slot)
 end
 
 function Inventory_GiveItem(player, item, amount)
-    if InventoryData[player] == nil then return false end
+    if InventoryData[player] == nil then
+        print("Inventory Data for Player IS NIL")
+        return false 
+    end
 
     for i = 1, MAX_INVENTORY_SLOTS, 1 do
         if InventoryData[player][i].id == 0 and InventoryData[player][i].itemid == 0 and nventoryData[player][i].amount == 0 then
