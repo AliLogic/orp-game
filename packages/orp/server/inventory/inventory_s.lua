@@ -2,8 +2,7 @@ InventoryData = {}
 MAX_INVENTORY_SLOTS = 12
 
 -- Inventory Items with their ID's
-INV_ITEM_RADIO = 01
-INV_ITEM_TEST = 2
+INV_ITEM_RADIO = 1
 
 --[[
     Functions from this module:
@@ -68,8 +67,6 @@ function Inventory_GiveItem(player, item, amount)
 
     for i = 1, MAX_INVENTORY_SLOTS, 1 do
         if InventoryData[player][i].id == 0 and InventoryData[player][i].itemid == 0 and InventoryData[player][i].amount == 0 then
-            print(type(INV_ITEM_TEST))
-            print(type(item))
             print("Giving player "..GetPlayerName(player).." item id "..tonumber(item))
 
             local query = mariadb_prepare(sql, "INSERT INTO inventory (charid, itemid, amount) VALUES('?', '?', '?');",
