@@ -77,8 +77,6 @@ function cmd_acf(player, maxrank, shortname, ...)
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction short name lengths range from 1 - 6.</>")
     end
 
-    local factionname = ''
-
 	for _, v in pairs(args) do
 		if factionname == '' then
 			factionname = v
