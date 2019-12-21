@@ -29,7 +29,7 @@ function cmd_shout(playerid, ...)
 
 	local args = table.concat({...}, " ")
 
-	if #{...} then
+	if #{...} == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /shout [message]")
 	end
 
@@ -44,7 +44,7 @@ function cmd_low(playerid, ...)
 
 	local args = table.concat({...}, " ")
 
-	if #{...} then
+	if #{...} == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /low [message]")
 	end
 
