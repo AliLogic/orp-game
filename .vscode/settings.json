@@ -202,6 +202,15 @@
         "HIT_PLAYER",
         "FRotator",
         "SetPickupDimension",
-        "GetPickupLocation"
+        "GetPickupLocation",
+        "mariadb_log",
+        "GetVehicleHeading",
+        "GetVehicleLocation",
+        "GetAllVehicles",
+        "GetTimeSeconds",
+        "GetVehicleModel",
+        "SetPlayerName",
+        "SetPlayerArmor",
+        "SetPlayerHealth"
     ]
 }

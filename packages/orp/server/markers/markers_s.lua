@@ -226,7 +226,7 @@ end)
 
 AddRemoteEvent("OnPlayerInteractMarker", function (playerid, pickupid)
 
-	AddPlayerChat(playerid, "Server knows you interacted with marker "..markerid..".")
+	AddPlayerChat(playerid, "Server knows you interacted with marker "..pickupid..".")
 
 	for i = 1, #MarkerData, 1 do
 		if IsValidMarker(i) then

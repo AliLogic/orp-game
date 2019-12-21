@@ -7,12 +7,12 @@ end)
 AddCommand("help", function (player)
 	AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q")
 	AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions")
-	return 
+	return
 end)
 
 AddCommand("w", function (player, weapon, slot, ammo)
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
 	if (weapon == nil or slot == nil or ammo == nil) then

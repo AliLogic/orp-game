@@ -69,6 +69,11 @@ function GetAtmByObject(atmobject)
 end
 
 AddRemoteEvent("banking:withdraw", function(player, amount)
+
+	if amount > PlayerData[player].bank then
+		return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to withdraw your chosen amount.</>")
+	end
+	
     RemovePlayerCash(player, amount)
 
     AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Withdrawn: $"..amount.."</>")
@@ -76,7 +81,12 @@ AddRemoteEvent("banking:withdraw", function(player, amount)
     AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
 end)
 
-AddRemoteEvent("banking:deposit", function (player, amount) 
+AddRemoteEvent("banking:deposit", function (player, amount)
+
+	if amount > PlayerData[player].cash then
+		return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to deposit your chosen amount.</>")
+	end
+
     AddPlayerCash(player, amount)
 
     AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Deposited: $"..amount.."</>")

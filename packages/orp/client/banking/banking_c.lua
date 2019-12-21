@@ -14,6 +14,14 @@ local atmmenu = nil
 local withdrawmenu = nil
 local depositmenu = nil
 
+local function tablefind(tab, el)
+	for index, value in pairs(tab) do
+		if value == el then
+			return index
+		end
+	end
+end
+
 AddRemoteEvent("banking:atmsetup", function(AtmObjects)
 	AtmIds = AtmObjects
 
@@ -115,10 +123,6 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
                 return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Your withdrawal amount is either too little or too much. Please retry.</>")
             end
 
-            if amount > PlayerData[player].bank then
-                return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to withdraw your chosen amount.</>")
-            end
-
             Dialog.close(withdrawmenu)
             withdrawmenu = nil
 
@@ -138,10 +142,6 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
         
             if amount < CONFIG_ATM_DEPOSIT_MIN or amount > CONFIG_ATM_DEPOSIT_MAX then
                 return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Your deposit amount is either too little or too much. Please retry.</>")
-            end
-
-            if amount > PlayerData[player].cash then
-                return AddPlayerChat("<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to deposit your chosen amount.</>")
             end
 
             Dialog.close(depositmenu)
@@ -177,12 +177,4 @@ function GetNearestATM()
 	end
 
 	return 0
-end
-
-function tablefind(tab, el)
-	for index, value in pairs(tab) do
-		if value == el then
-			return index
-		end
-	end
 end

@@ -10,7 +10,7 @@ AddEvent("OnKeyPress", function(key)
 			local distance = GetDistance3D(plX, plY, plZ, pkX, pkY, pkZ)
 
 			if distance < 300 then
-				AddPlayerChat("You have pressed the key while in range of marker "..markerid..".") -- nil value, currently problematic.
+				AddPlayerChat("You have pressed the key while in range of pickupid "..pickupid..".") -- nil value, currently problematic.
 
 				CallRemoteEvent("OnPlayerInteractMarker", pickupid)
 			else

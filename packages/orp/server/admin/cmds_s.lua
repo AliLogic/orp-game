@@ -233,7 +233,7 @@ AddCommand("astats", function (player, target)
 	ViewPlayerStats(player, target)
 end)
 
-function cmd_acv(player, model, plate)
+local function cmd_acv(player, model, plate)
 	if (PlayerData[player].admin < 4) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end

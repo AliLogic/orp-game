@@ -110,10 +110,10 @@ AddRemoteEvent("accounts:characterCreated", function (player, firstname, lastnam
 	local query = mariadb_prepare(sql, "INSERT INTO characters (accountid, steamid, firstname, lastname, gender) VALUES (?, '?', '?', '?', ?);",
 		PlayerData[player].accountid, tostring(GetPlayerSteamId(player)), PlayerData[player].firstname, PlayerData[player].lastname, PlayerData[player].gender)
 
-	mariadb_query(sql, query, characterCreated, player)
+	mariadb_query(sql, query, OnCharacterCreated, player)
 end)
 
-function characterCreated(player)
+function OnCharacterCreated(player)
 	PlayerData[player].id = mariadb_get_insert_id()
 	
 	print("Character ID "..PlayerData[player].id.." created for "..player)

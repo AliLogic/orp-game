@@ -1,3 +1,5 @@
+local colour = ImportPackage('colours')
+
 function cmd_createatm(player)
     if (PlayerData[player].admin < 5) then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
@@ -21,7 +23,7 @@ function OnAtmAdded(player, modelid, x, y, z, h)
 	if id ~= false then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> ATM ID "..id.." created successfully!")
 
-		CreateAtm(id, modelid, x, y, z, 0.0, h, 0.0)
+		CreateATM(id, modelid, x, y, z, 0.0, h, 0.0)
 
 		-- Tell clients
 		for _, v in pairs(GetAllPlayers()) do
