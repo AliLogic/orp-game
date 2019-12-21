@@ -51,7 +51,7 @@ AddCommand("f", function(playerid, ...)
 
 	for _, v in ipairs(GetAllPlayers()) do
 		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id then
-			AddPlayerChat(v, "(( "..FactionRankData[faction_id][faction_rank].." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
+			AddPlayerChat(v, "(( "..FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
 		end
 	end
 end)
