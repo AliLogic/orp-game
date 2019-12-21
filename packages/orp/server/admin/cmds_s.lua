@@ -267,21 +267,21 @@ end
 AddCommand('acreatevehicle', cmd_acv)
 AddCommand('acv', cmd_acv)
 
-function cmd_aev(player, vehicle, prefix, ...)
-    if (PlayerData[player].admin < 2) then
+local function cmd_aev(player, vehicle, prefix, ...)
+	if (PlayerData[player].admin < 2) then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
     end
 
 	if vehicle == nil or prefix == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <prefix>")
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color, plate")
 	end
 
 	vehicle = tonumber(vehicle)
 
-	--[[if IsValidVehicle(vehicle) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..vehicle.." doesn't exist.")
-	end]]--
+	if not IsValidVehicle(vehicle) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..vehicle.." doesn't exist.")
+	end
 
 	local args = {...}
 
@@ -300,7 +300,7 @@ function cmd_aev(player, vehicle, prefix, ...)
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
 		end
 
-		CallRemoteEvent(player, "askClientActionConfirmation", player, 1, "Would you like to change this vehicle's owner?", target, vehicle)
+		CallRemoteEvent(player, "askClientActionConfirmation", 1, "Would you like to change this vehicle's owner?", target, vehicle)
 	elseif prefix == "color" then
 		local r, g, b
 
@@ -323,9 +323,20 @@ function cmd_aev(player, vehicle, prefix, ...)
 		SetVehicleColor(vehicle, RGB(r, g, b))
 
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." color changed.</>")
+	elseif prefix == "plate" then
+		local numberPlate = args
+
+		if numberPlate == nil or #numberPlate == 0 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> plate <plate>")
+		end
+
+		VehicleData[vehicle].plate = numberPlate
+		SetVehicleLicensePlate(VehicleData[vehicle].vid, numberPlate)
+
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." number plate changed to \""..numberPlate.."\".</>")
     else
         AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color")
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color, plate")
 	end
 end
 AddCommand('aeditvehicle', cmd_aev)

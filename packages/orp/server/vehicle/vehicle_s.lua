@@ -1,10 +1,23 @@
 local colour = ImportPackage('colours')
 VehicleData = {}
+MAX_VEHICLES = 4096
+
+function GetFreeVehicleId()
+
+	for i = 1, MAX_VEHICLES, 1 do
+		if VehicleData[i].id == 0 then
+			return i
+		end
+	end
+
+	return 0
+end
 
 function CreateVehicleData(vehicle)
 	VehicleData[vehicle] = {}
 
 	VehicleData[vehicle].id = 0
+	VehicleData[vehicle].vid = 0
 	VehicleData[vehicle].owner = 0
 
 	VehicleData[vehicle].plate = "ONSET"
@@ -37,12 +50,18 @@ function Vehicle_Create(model, plate, x, y, z, a)
 		return false
 	end
 
+	local index = GetFreeVehicleId()
+	if index == 0 then
+		return false
+	end
+
 	local vehicle = CreateVehicle(model, x, y, z, a)
 	if vehicle == false then
 		return false
 	end
 
-	CreateVehicleData(vehicle)
+	CreateVehicleData(index)
+	VehicleData[index].vid = vehicle
 	SetVehicleLicensePlate(vehicle, plate)
 
 	local r, g, b, al = HexToRGBA(GetVehicleColor(vehicle))
@@ -59,7 +78,7 @@ function Vehicle_Create(model, plate, x, y, z, a)
 		b
 	)
 
-	mariadb_async_query(sql, query, OnVehicleCreated, vehicle, model, plate, x, y, z, a, r, g, b)
+	mariadb_async_query(sql, query, OnVehicleCreated, index, model, plate, x, y, z, a, r, g, b)
 	return vehicle
 end
 
@@ -111,6 +130,7 @@ function OnVehicleLoaded(id)
 		CreateVehicleData(vehicle)
 
 		VehicleData[vehicle].id = id
+		VehicleData[vehicle].vid = vehicle
 		VehicleData[vehicle].model = tonumber(result['model'])
 		VehicleData[vehicle].plate = result['plate']
 
@@ -157,7 +177,7 @@ function OnVehicleUnloaded(vehicle)
 		print('Vehicle unload unsuccessful, id: '..vehicle)
 	else
 		print('Vehicle unload successful, id: '..vehicle)
-		DestroyVehicle(vehicle)
+		DestroyVehicle(VehicleData[vehicle].vid)
 	end
 end
 

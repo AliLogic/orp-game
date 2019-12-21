@@ -3,17 +3,25 @@ AddEvent("OnKeyPress", function(key)
 	if key == 'E' then
 		local markerid = GetPlayerPropertyValue(GetPlayerId(), "marker")
 
+		AddPlayerChat("[DEBUG-C] markerid: "..markerid)
+
 		if markerid ~= false then
-			-- local x, y, z = GetPlayerLocation()
-			-- local distance = 200 --GetDistance3D(MarkerData[markerid].x, MarkerData[markerid].y, MarkerData[markerid].z, x, y, z)
 
-			-- if distance < 300 then
-			-- 	AddPlayerChat("You have pressed the key while in range of marker "..markerid..".") -- nil value, currently problematic.
+			AddPlayerChat("[DEBUG-C] marker not false")
+			local x, y, z = GetPlayerLocation()
+			local distance = 200 --GetDistance3D(MarkerData[markerid].x, MarkerData[markerid].y, MarkerData[markerid].z, x, y, z)
 
-			-- 	CallRemoteEvent("OnPlayerInteractMarker", markerid)
-			-- else
-			-- 	SetPlayerPropertyValue(GetPlayerId(), "marker", false)
-			-- end
+			AddPlayerChat("[DEBUG-C] distance = 200")
+
+			if distance < 300 then
+				AddPlayerChat("You have pressed the key while in range of marker "..markerid..".") -- nil value, currently problematic.
+
+				CallRemoteEvent("OnPlayerInteractMarker", markerid)
+			else
+				SetPlayerPropertyValue(GetPlayerId(), "marker", false)
+
+				AddPlayerChat("[DEBUG-C] set player property value marker false")
+			end
 		end
 	end
 end)
@@ -22,7 +30,7 @@ AddEvent("OnPickupStreamIn", function (pickup)
 
 	if (GetPickupPropertyValue(pickup, "type") == "marker") then
 
-		AddPlayerChat("pickup: "..pickup)
+		AddPlayerChat("[DEBUG-C] pickup: "..pickup)
 
 		local r = tonumber(GetPickupPropertyValue(pickup, "r"))
 		local g = tonumber(GetPickupPropertyValue(pickup, "g"))
