@@ -96,7 +96,11 @@ AddRemoteEvent("LoadSpawnMenu", function ()
     CallEvent("createUI", "spawnMenu")
 end)]]--
 
-AddEvent("OnKeyPress", function (key)	
+AddEvent("OnPlayerSpawn", function(playerid)
+	SetPostEffect("MotionBlur", "Amount", 0.5)
+end)
+
+AddEvent("OnKeyPress", function (key)
 	if key == "V" then
 		local bEnable = not IsFirstPersonCamera()
 		EnableFirstPersonCamera(bEnable)
@@ -120,5 +124,6 @@ AddRemoteEvent("ToggleTaseEffect", function (bToggle)
 		PlayCameraShake(5 * 1000, 2.0, 1.0, 1.1)
 	else
 		StopCameraShake(false)
+		SetPostEffect("MotionBlur", "Amount", 0.5)
 	end
 end)
