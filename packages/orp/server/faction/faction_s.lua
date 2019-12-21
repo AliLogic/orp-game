@@ -6,7 +6,6 @@ FactionRankData = {}
 DivisionData = {}
 DivisionRankData = {}
 
-FACTION_NONE = 0
 FACTION_CIVILIAN = 1
 FACTION_POLICE = 2
 FACTION_MEDIC = 3
@@ -187,6 +186,6 @@ function OnLoadCharacterFaction(playerid)
 end
 
 function GetPlayerFactionType(player)
-	if FactionData[PlayerData[player].faction].type == nil then return FACTION_NONE end
+	if FactionData[PlayerData[player].faction].type == nil then return 0 end
 	return FactionData[PlayerData[player].faction].type
 end
