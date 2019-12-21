@@ -1,6 +1,6 @@
 AddEvent("OnKeyPress", function(key)
 
-	if key == 'E' then
+	--[[if key == 'E' then
 		local markerid = GetPlayerPropertyValue(GetPlayerId(), "marker")
 
 		if markerid ~= false then
@@ -8,14 +8,14 @@ AddEvent("OnKeyPress", function(key)
 			local distance = 200 --GetDistance3D(MarkerData[markerid].x, MarkerData[markerid].y, MarkerData[markerid].z, x, y, z)
 
 			if distance < 300 then
-				AddPlayerChat("You have pressed the key while in range of marker "..markerid..".")
+				AddPlayerChat("You have pressed the key while in range of marker "..markerid..".") -- nil value, currently problematic.
 
 				CallRemoteEvent("OnPlayerInteractMarker", markerid)
 			else
 				SetPlayerPropertyValue(GetPlayerId(), "marker", false)
 			end
 		end
-	end
+	end]]--
 end)
 
 AddEvent("OnPickupStreamIn", function (pickup)
