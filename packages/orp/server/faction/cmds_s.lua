@@ -187,6 +187,10 @@ function cmd_aef(player, faction, prefix, ...)
 
 		local target = tonumber(args[1])
 
+		if IsValidPlayer(player) == nil or (PlayerData[target] ~= nil and PlayerData[target].logged_in)then
+
+		
+
 		if bank < 0 or bank > 250000 then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction bank amount must be at minimum $0, maximum $250,000.</>")
 		end

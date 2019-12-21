@@ -1,7 +1,5 @@
 local colour = ImportPackage('colours')
 
-
-
 AddCommand("q", function (playerid)
 	return KickPlayer(playerid, "Goodbye!")
 end)
