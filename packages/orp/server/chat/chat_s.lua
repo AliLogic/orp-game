@@ -10,7 +10,7 @@ AddCommand("factions", function (player)
     ))
 
 	for i = 1, #FactionData, 1 do
-		print(FactionData[i].name)
+		print("Faction name is "..FactionData[i].name)
 		AddPlayerChat(player, string.format("<span color=\"%s\">(%d)</> %s",
 			colour.COLOUR_DARKGREEN(), i, FactionData[i].name
 		))
