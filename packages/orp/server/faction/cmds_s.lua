@@ -187,16 +187,18 @@ function cmd_aef(player, faction, prefix, ...)
 
 		local target = tonumber(args[1])
 
-		if IsValidPlayer(player) == nil or (PlayerData[target] ~= nil and PlayerData[target].logged_in)then
-
-		
-
-		if bank < 0 or bank > 250000 then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction bank amount must be at minimum $0, maximum $250,000.</>")
+		if IsValidPlayer(target) == nil or PlayerData[target] == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
 		end
 
-		FactionData[faction].bank = bank
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction bank to "..bank..".")
+		if PlayerData[target].logged_in == false then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
+		end
+
+		PlayerData[target].faction = FactionData[faction].maxrank
+
+		AddPlayerChat(target, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> "..GetPlayerName(player).." has set you as the faction leader of "..FactionData[faction].name..".")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..GetPlayerName(target).." as the leader of "..FactionData[faction].name..".")
 	end
 
 end
