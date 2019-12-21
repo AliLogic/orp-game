@@ -267,8 +267,8 @@ end
 AddCommand('acreatevehicle', cmd_acv)
 AddCommand('acv', cmd_acv)
 
-function cmd_aev(player, vehicle, prefix, ...)
-    if (PlayerData[player].admin < 2) then
+local function cmd_aev(player, vehicle, prefix, ...)
+	if (PlayerData[player].admin < 2) then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
     end
 
@@ -279,9 +279,9 @@ function cmd_aev(player, vehicle, prefix, ...)
 
 	vehicle = tonumber(vehicle)
 
-	--[[if IsValidVehicle(vehicle) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..vehicle.." doesn't exist.")
-	end]]--
+	if not IsValidVehicle(vehicle) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..vehicle.." doesn't exist.")
+	end
 
 	local args = {...}
 
@@ -300,7 +300,7 @@ function cmd_aev(player, vehicle, prefix, ...)
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
 		end
 
-		CallRemoteEvent(player, "askClientActionConfirmation", player, 1, "Would you like to change this vehicle's owner?", target, vehicle)
+		CallRemoteEvent(player, "askClientActionConfirmation", 1, "Would you like to change this vehicle's owner?", target, vehicle)
 	elseif prefix == "color" then
 		local r, g, b
 
