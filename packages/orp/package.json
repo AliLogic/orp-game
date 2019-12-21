@@ -13,6 +13,7 @@
 		"server/vehicle/vehicle_s.lua",
 		"server/vehicle/cmds_s.lua",
 		"server/faction/faction_s.lua",
+		"server/faction/cmds_s.lua",
 		"server/banking/banking_s.lua",
 		"server/banking/cmds_s.lua",
 		"server/markers/markers_s.lua",
