@@ -1,7 +1,5 @@
 local colour = ImportPackage('colours')
 
-
-
 AddCommand("q", function (playerid)
 	return KickPlayer(playerid, "Goodbye!")
 end)
@@ -171,7 +169,7 @@ AddCommand("pm", function (player, target, ...)
 end)
 
 AddCommand('players', function (player)
-	for k, v in pairs(GetAllPlayers()) do
+	for _, v in pairs(GetAllPlayers()) do
 		AddPlayerChat(player, "ID: "..v.." Name: "..GetPlayerName(v))
 	end
 end)

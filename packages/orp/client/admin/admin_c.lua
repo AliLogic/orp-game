@@ -8,9 +8,7 @@ local target = nil
 local vehicle = nil
 
 AddRemoteEvent("askClientActionConfirmation", function (responseid, message, targetid, vehicleid)
-
 	if responseid == 1 then
-
 		target = targetid
 		vehicle = vehicleid
 
