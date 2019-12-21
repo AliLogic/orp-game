@@ -23,7 +23,7 @@
 		"server/inventory/inventory_s.lua",
 		"server/inventory/cmds_s.lua",
 		"server/radio/radio_s.lua",
-		"server/customzation/customzation_s.lua",
+		"server/customization/customization_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [
@@ -34,7 +34,7 @@
 		"client/banking/banking_c.lua",
 		"client/markers/markers_c.lua",
 		"client/env/env_c.lua",
-		"client/customzation/customzation_c.lua",
+		"client/customization/customization_c.lua",
 		"client/misc/misc_c.lua"
 	],
 	"files": []
