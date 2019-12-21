@@ -1,6 +1,8 @@
+local colour = ImportPackage('colours')
+
 function cmd_r(player, ...)
     if Inventory_HasItem(player, INV_ITEM_RADIO) == false then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You do not own a radio.")
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You do not own a radio.") -- nil value?
     end
 
     local args = {...}
