@@ -55,22 +55,22 @@ function cmd_rtune(player, freq)
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> Radio channels range from 0 - 9999.")
     end
 
-    if freq == 911 and GetPlayerFactionType(player) ~= FACTION_POLICE then
+    if freq == 911 and GetPlayerFactionType(player) ~= FACTION_POLICE then -- this does not execute atm, apparent nil value.
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> This frequency is reserved for a government agency.")
     end
 
-    if freq == 991 and GetPlayerFactionType(player) ~= FACTION_MEDIC then
+    if freq == 991 and GetPlayerFactionType(player) ~= FACTION_MEDIC then -- this does not execute atm, apparent nil value.
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> This frequency is reserved for a government agency.")
     end
 
-    if freq == 999 and GetPlayerFactionType(player) ~= FACTION_GOV then
+    if freq == 999 and GetPlayerFactionType(player) ~= FACTION_GOV then -- this does not execute atm, apparent nil value.
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> This frequency is reserved for a government agency.")
     end
 
     InventoryData[player][Inventory_HasItem(player, INV_ITEM_RADIO)].amount = freq
 
     local x, y, z = GetPlayerLocation(player)
-    
+
     AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player).." twists the dial on their radio, tuning it.</>")
     AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You have tuned your radio to "..freq..".</>")
 end
