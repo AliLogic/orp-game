@@ -110,6 +110,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 		MarkerData[markerid].z1 = z
 
 		--SetPickupLocation(MarkerData[markerid].pickup1, x, y, z)
+		SetPickupDimension(MarkerData[markerid].pickup1, GetPlayerDimension(playerid))
 
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." interior location changed.</>")
 	elseif prefix == "exterior" then
@@ -125,6 +126,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 
 		if MarkerData[markerid].pickup2 ~= 0 then
 			--SetPickupLocation(MarkerData[markerid].pickup2, x, y, z)
+			SetPickupDimension(MarkerData[markerid].pickup2, GetPlayerDimension(playerid))
 		end
 
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." exterior location changed.</>")

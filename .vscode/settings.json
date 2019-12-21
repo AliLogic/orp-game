@@ -200,6 +200,7 @@
         "GetObjectScale",
         "DestroyVehicle",
         "HIT_PLAYER",
-        "FRotator"
+        "FRotator",
+        "SetPickupDimension"
     ]
 }

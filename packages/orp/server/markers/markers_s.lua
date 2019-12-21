@@ -14,10 +14,12 @@ function CreateMarkerData(marker_id)
 	MarkerData[marker_id].x1 = 0
 	MarkerData[marker_id].y1 = 0
 	MarkerData[marker_id].z1 = 0
+	MarkerData[marker_id].dimension1 = 0
 
 	MarkerData[marker_id].x2 = 0
 	MarkerData[marker_id].y2 = 0
 	MarkerData[marker_id].z2 = 0
+	MarkerData[marker_id].dimension2 = 0
 
 	MarkerData[marker_id].r = 100
 	MarkerData[marker_id].g = 100
@@ -31,7 +33,7 @@ function DestroyMarkerData(marker_id)
 	MarkerData[marker_id] = {}
 end
 
-function Marker_Create(modelid, x, y, z)
+function Marker_Create(modelid, x, y, z, dimension)
 
 	modelid = tonumber(modelid)
 	local marker_id = CreatePickup(modelid, x, y, z)
@@ -41,18 +43,19 @@ function Marker_Create(modelid, x, y, z)
 	end
 	CreateMarkerData(marker_id)
 
-	local query = mariadb_prepare(sql, "INSERT INTO markers (model, x1, y1, z1) VALUES('?', '?', '?', '?')",
+	local query = mariadb_prepare(sql, "INSERT INTO markers (model, x1, y1, z1, dimension1) VALUES('?', '?', '?', '?', '?')",
 		modelid,
 		x,
 		y,
-		z
+		z,
+		dimension
 	)
 
-	mariadb_async_query(sql, query, OnMarkerCreated, marker_id, modelid, x, y, z)
+	mariadb_async_query(sql, query, OnMarkerCreated, marker_id, modelid, x, y, z, dimension)
 	return marker_id
 end
 
-function OnMarkerCreated(marker_id, modelid, x, y, z)
+function OnMarkerCreated(marker_id, modelid, x, y, z, dimension)
 
 	AddPlayerChatAll("Marker ID: "..marker_id.." has been created.")
 
@@ -62,6 +65,8 @@ function OnMarkerCreated(marker_id, modelid, x, y, z)
 	MarkerData[marker_id].x1 = x
 	MarkerData[marker_id].y1 = y
 	MarkerData[marker_id].z1 = z
+
+	MarkerData[marker_id].dimension1 = dimension
 end
 
 function IsValidMarker(marker_id)
@@ -101,25 +106,26 @@ function OnMarkerLoaded(indexid, marker_id)
 
 		local result = mariadb_get_assoc(1)
 
-        MarkerData[indexid].id = tonumber(result['id'])
-        MarkerData[indexid].model = tonumber(result['model'])
+		MarkerData[indexid].id = tonumber(result['id'])
+		MarkerData[indexid].model = tonumber(result['model'])
 
-        MarkerData[indexid].x1 = tonumber(result['x1'])
-        MarkerData[indexid].y1 = tonumber(result['y1'])
-        MarkerData[indexid].z1 = tonumber(result['z1'])
+		MarkerData[indexid].x1 = tonumber(result['x1'])
+		MarkerData[indexid].y1 = tonumber(result['y1'])
+		MarkerData[indexid].z1 = tonumber(result['z1'])
 
-        MarkerData[indexid].x2 = tonumber(result['x1'])
-        MarkerData[indexid].y2 = tonumber(result['y2'])
+		MarkerData[indexid].x2 = tonumber(result['x1'])
+		MarkerData[indexid].y2 = tonumber(result['y2'])
 		MarkerData[indexid].z2 = tonumber(result['z2'])
-		
-        MarkerData[indexid].r = tonumber(result['r'])
-        MarkerData[indexid].g = tonumber(result['g'])
-        MarkerData[indexid].b = tonumber(result['b'])
-        MarkerData[indexid].a = tonumber(result['a'])
+
+		MarkerData[indexid].r = tonumber(result['r'])
+		MarkerData[indexid].g = tonumber(result['g'])
+		MarkerData[indexid].b = tonumber(result['b'])
+		MarkerData[indexid].a = tonumber(result['a'])
 
 		MarkerData[indexid].is_locked = result['is_locked']
 
 		MarkerData[indexid].pickup1 = CreatePickup(MarkerData[indexid].model, MarkerData[indexid].x1, MarkerData[indexid].y1, MarkerData[indexid].z1)
+		SetPickupDimension(MarkerData[indexid].pickup1, MarkerData[indexid].dimension1)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "type", "marker", true)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "r", tostring(MarkerData[indexid].r), true)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "g", tostring(MarkerData[indexid].g), true)
@@ -128,6 +134,7 @@ function OnMarkerLoaded(indexid, marker_id)
 
 		if MarkerData[indexid].x ~= 0 and MarkerData[indexid].y ~= 0 then
 			MarkerData[indexid].pickup2 = CreatePickup(MarkerData[indexid].modelid, MarkerData[indexid].x2, MarkerData[indexid].y2, MarkerData[indexid].z2)
+			SetPickupDimension(MarkerData[indexid].pickup2, MarkerData[indexid].dimension2)
 			SetPickupPropertyValue(MarkerData[indexid].pickup2, "type", "marker", true)
 			SetPickupPropertyValue(MarkerData[indexid].pickup2, "r", tostring(MarkerData[indexid].r), true)
 			SetPickupPropertyValue(MarkerData[indexid].pickup2, "g", tostring(MarkerData[indexid].g), true)
@@ -138,14 +145,16 @@ function OnMarkerLoaded(indexid, marker_id)
 end
 
 function Marker_Unload(marker_id)
-	local query = mariadb_prepare(sql, "UPDATE markers SET 'model' = '?', 'x1' = '?', 'y1' = '?', 'z1' = '?', 'x2' = '?', 'y2' = '?', 'z2' = '?', 'r' = '?', 'g' = '?', 'b' = '?', 'a' = '?', 'is_locked' = '?' WHERE 'id' = ?",
+	local query = mariadb_prepare(sql, "UPDATE markers SET 'model' = '?', 'x1' = '?', 'y1' = '?', 'z1' = '?', 'dimension1' = '?', x2' = '?', 'y2' = '?', 'z2' = '?', 'dimension1' = '?', 'r' = '?', 'g' = '?', 'b' = '?', 'a' = '?', 'is_locked' = '?' WHERE 'id' = ?",
 		MarkerData[marker_id].model,
 		MarkerData[marker_id].x1,
 		MarkerData[marker_id].y1,
 		MarkerData[marker_id].z1,
+		MarkerData[marker_id].dimension1,
 		MarkerData[marker_id].x2,
 		MarkerData[marker_id].y2,
 		MarkerData[marker_id].z2,
+		MarkerData[marker_id].dimension2,
 		MarkerData[marker_id].r,
 		MarkerData[marker_id].g,
 		MarkerData[marker_id].b,
