@@ -1,5 +1,10 @@
 local colour = ImportPackage('colours')
 
+function Slap(player)
+	local x, y, z = GetPlayerLocation(player)
+	SetPlayerLocation(player, x, y, z + 200)
+end
+
 function ViewPlayerStats(player, target)
 	target = tonumber(target)
 
