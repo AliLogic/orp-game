@@ -66,7 +66,7 @@ function Inventory_GiveItem(player, item, amount)
     end
 
     for i = 1, MAX_INVENTORY_SLOTS, 1 do
-        if InventoryData[player][i].id == 0 and InventoryData[player][i].itemid == 0 and nventoryData[player][i].amount == 0 then
+        if InventoryData[player][i].id == 0 and InventoryData[player][i].itemid == 0 and InventoryData[player][i].amount == 0 then
             print("Giving player "..GetPlayerName(player).." item id "..item)
 
             local query = mariadb_prepare(sql, "INSERT INTO inventory (charid, itemid, amount) VALUES('?', '?', '?');",
