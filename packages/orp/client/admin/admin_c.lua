@@ -10,7 +10,7 @@ local vehicle = nil
 
 AddRemoteEvent("askClientActionConfirmation", function (_player, id, message, ...)
     local args = {...}
-    if id == 1 then
+    if id == 1 then -- use getplayerid instead of transporting through player.!!!
         player = _player
         target = args[2]
         vehicle = args[3]

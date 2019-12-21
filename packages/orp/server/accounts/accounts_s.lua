@@ -404,8 +404,8 @@ AddRemoteEvent('accounts:kick', function (player)
 	KickPlayer(player, "You decided to quit the server!")
 end)
 
-VEHICLE_NAMES = {
+--[[VEHICLE_NAMES = {
     "Premier", "Taxi", "Police Cruiser", "Luxe", "Regal", "Nascar", "Raptor", "Ambulance", "Garbage Truck", "Maverick",
 	"Pinnacle", "Sultan", "Bearcat Police", "Bearcat Camo", "Bearcat Medic", "Bearcat Military", "Barracks Police", "Barracks Camo", "Premier SE", 
 	"Maverick SE", "Patriot", "Cargo Lite Desert", "Cargo Lite Army", "Securicar", "Dacia"
-}
+}]]--
