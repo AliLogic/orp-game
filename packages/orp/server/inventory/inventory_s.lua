@@ -2,7 +2,7 @@ InventoryData = {}
 MAX_INVENTORY_SLOTS = 12
 
 -- Inventory Items with their ID's
-INV_ITEM_RADIO = 1
+INV_ITEM_RADIO = 1+0
 
 --[[
     Functions from this module:
