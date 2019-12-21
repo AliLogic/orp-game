@@ -161,11 +161,6 @@ function OnVehicleUnloaded(vehicle)
 	end
 end
 
-function Slap(player)
-	local x, y, z = GetPlayerLocation(player)
-	SetPlayerLocation(player, x, y, z)
-end
-
 AddEvent('LoadVehicles', function ()
 	local query = mariadb_prepare(sql, "SELECT * FROM vehicles;")
 	mariadb_async_query(sql, query, OnLoadVehicles)
