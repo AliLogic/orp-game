@@ -267,7 +267,7 @@ end
 AddCommand('acreatevehicle', cmd_acv)
 AddCommand('acv', cmd_acv)
 
-local function cmd_aev(player, vehicle, prefix, ...)
+function cmd_aev(player, vehicle, prefix, ...)
     if (PlayerData[player].admin < 2) then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
     end
@@ -348,46 +348,6 @@ AddRemoteEvent("clientActionConfirmationResult", function (result, player, targe
     end
 end)
 
-function cmd_acf(player, maxrank, shortname, ...)
-    if (PlayerData[player].admin < 5) then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
-    end
-
-    local args = {...}
-    
-    if maxrank == nil or shortname == nil or args[1] == nil then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(f)action <maxrank> <shortname> <fullname>")
-    end
-
-    maxrank = tonumber(maxrank)
-
-	if string.len(maxrank) < 0 or string.len(maxrank) > 10 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction max ranks range from 1 - 10.</>")
-	end
-    
-    if string.len(shortname) < 0 or string.len(shortname) > 6 then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction short name lengths range from 1 - 6.</>")
-    end
-
-    local factionname = ''
-
-	for _, v in pairs(args) do
-		if factionname == '' then
-			factionname = v
-		else
-			factionname = factionname.." "..v
-		end
-    end
-    
-    local faction = Faction_Create(factionname, shortname, maxrank)
-
-    AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), factionname, faction))
-end
-AddCommand("acreatefaction", cmd_acf)
-AddCommand("acf", cmd_acf)
-
-
-
 AddCommand("ahelp", function (player)
     if (PlayerData[player].admin < 1) then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
@@ -406,6 +366,6 @@ AddCommand("ahelp", function (player)
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker")
     end
     if PlayerData[player].admin > 4 then
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/apos /asetadmin /acreatefaction")
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/apos /asetadmin /acreatefaction /aeditfaction")
     end
 end)
