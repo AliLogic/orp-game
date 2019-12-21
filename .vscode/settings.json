@@ -199,6 +199,7 @@
         "GetObjectRotation",
         "GetObjectScale",
         "DestroyVehicle",
-        "HIT_PLAYER"
+        "HIT_PLAYER",
+        "FRotator"
     ]
 }
