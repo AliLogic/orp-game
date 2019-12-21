@@ -2,7 +2,7 @@ local EnvTimer
 EnvHour = 12
 EnvMin = 0
 EnvWeather = 1
-local EnvTemperature
+EnvTemperature = 30
 
 local function UpdateTime()
 	local t = os.date ("*t")
@@ -10,7 +10,6 @@ local function UpdateTime()
 	EnvHour = t.hour
 	EnvMin = t.min
 	EnvTemperature = 30
-	EnvWeather = 1
 
 	AddPlayerChatAll("[DEBUG-S] HOUR: "..EnvHour.." MIN: "..EnvMin.." WEATHER: "..EnvWeather)
 
