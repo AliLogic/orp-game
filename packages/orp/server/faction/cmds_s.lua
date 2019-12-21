@@ -51,12 +51,12 @@ AddCommand("f", function(playerid, ...)
 
 	for _, v in ipairs(GetAllPlayers()) do
 		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id then
-			AddPlayerChat(v, "(( "..FactionRankData[faction_id][faction_rank].." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
+			AddPlayerChat(v, "(( "..FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
 		end
 	end
 end)
 
-function cmd_acf(player, short_name, leadership_rank, fac_type, ...)
+local function cmd_acf(player, short_name, leadership_rank, fac_type, ...)
 	if (PlayerData[player].admin < 4) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
@@ -79,7 +79,7 @@ function cmd_acf(player, short_name, leadership_rank, fac_type, ...)
 	if (fac_type < FACTION_CIVILIAN or fac_type > FACTION_GOV) then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid faction type.</>")
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Types:</> 1 (Civilian), 2 (Police), 3 (Medic), 4 (Government).")
-		return 
+		return
 	end
 
 	if leadership_rank < 0 or leadership_rank > 16 then
