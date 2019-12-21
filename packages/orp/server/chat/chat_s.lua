@@ -2,7 +2,7 @@ local colour = ImportPackage('colours')
 
 AddCommand("factions", function (player)
 	if #FactionData < 1 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> No factions currently exist.")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> No factions currently exist.")
 	end
 
     AddPlayerChat(player, string.format("<span color=\"%s\">|_____________[</>List of Factions<span color=\"%s\">]_____________|</>",
@@ -11,7 +11,7 @@ AddCommand("factions", function (player)
 
 	for i = 1, #FactionData, 1 do
 		print(FactionData[i].name)
-		AddPlayerChat(playerid, string.format("<span color=\"%s\">(%d)</> %s",
+		AddPlayerChat(player, string.format("<span color=\"%s\">(%d)</> %s",
 			colour.COLOUR_DARKGREEN(), i, FactionData[i].name
 		))
 	end
