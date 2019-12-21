@@ -274,7 +274,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 
 	if vehicle == nil or prefix == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <prefix>")
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color, plate")
 	end
 
 	vehicle = tonumber(vehicle)
@@ -323,9 +323,20 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		SetVehicleColor(vehicle, RGB(r, g, b))
 
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." color changed.</>")
+	elseif prefix == "plate" then
+		local numberPlate = args
+
+		if numberPlate == nil or #numberPlate == 0 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> plate <plate>")
+		end
+
+		VehicleData[vehicle].plate = numberPlate
+		SetVehicleLicensePlate(VehicleData[vehicle].vid, numberPlate)
+
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." number plate changed to \""..numberPlate.."\".</>")
     else
         AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color")
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color, plate")
 	end
 end
 AddCommand('aeditvehicle', cmd_aev)
