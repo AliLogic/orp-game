@@ -110,3 +110,15 @@ function FormatTime(time)
 	local milliseconds = string.format("%03d", math.floor((time - (minutes * 60.0) - seconds) * 1000))
 	return minutes..':'..seconds..':'..milliseconds
 end
+
+AddRemoteEvent("ToggleTaseEffect", function (bToggle)
+
+	if bToggle == true then
+		SetPostEffect(hitid, "MotionBlur", "Amount", 1.0)
+		SetCameraShakeRotation(0.0, 0.0, 1.0, 10.0, 0.0, 0.0)
+		SetCameraShakeFOV(5.0, 5.0)
+		PlayCameraShake(5 * 1000, 2.0, 1.0, 1.1)
+	else
+		StopCameraShake(false)
+	end
+end)
