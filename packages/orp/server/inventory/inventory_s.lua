@@ -15,6 +15,8 @@ INV_ITEM_RADIO = 1
 
 AddEvent("SaveInventory", function (player)
     for i = 1, #InventoryData[player], 1 do
+        print("Saving item at slot: "..i)
+
         local query = mariadb_prepare(sql, "UPDATE inventory SET itemid = ?, amount = ? WHERE id = ?;",
             InventoryData[player][i].itemid,
             InventoryData[player][i].amount,
@@ -25,7 +27,8 @@ AddEvent("SaveInventory", function (player)
 end)
 
 AddEvent("LoadInventory", function (player)
-    for i = 1, MAX_INVENTORY_SLOTS, 1 do 
+    for i = 1, MAX_INVENTORY_SLOTS, 1 do
+        print("Init inventory slot "..i) 
         CreatePlayerInventory(player, i) 
     end
 
@@ -36,6 +39,8 @@ end)
 function OnInventoryLoaded(player)
     for i = 1, mariadb_get_row_count(), 1 do
         if i <= MAX_INVENTORY_SLOTS then
+            print("Loading item id "..i)
+
             InventoryData[player][i].id = mariadb_get_value_name_int(i, "id")
             InventoryData[player][i].itemid = mariadb_get_value_name_int(i, "itemid")
             InventoryData[player][i].amount = mariadb_get_value_name_int(i, "amount")
@@ -59,6 +64,8 @@ function Inventory_GiveItem(player, item, amount)
 
     for i = 1, MAX_INVENTORY_SLOTS, 1 do
         if InventoryData[player][i].id == 0 and InventoryData[player][i].itemid == 0 and nventoryData[player][i].amount == 0 then
+            print("Giving player "..GetPlayerName(player).." item id "..item)
+
             local query = mariadb_prepare(sql, "INSERT INTO inventory (charid, itemid, amount) VALUES('?', '?', '?');",
                 PlayerData[player].id,
                 item,
@@ -73,6 +80,7 @@ function Inventory_GiveItem(player, item, amount)
 end
 
 function OnInventoryItemAdded(player, slot)
+    print("Setting that item's SQL ID to "..mariadb_get_insert_id())
     InventoryData[player][slot].id = mariadb_get_insert_id()
 end
 
