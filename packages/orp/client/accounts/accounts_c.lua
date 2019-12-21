@@ -64,6 +64,10 @@ AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
             if string.match(firstname, '[A-Z][a-z]*') == nil or string.match(lastname, '[A-Z][a-z]*') == nil then
                 return AddPlayerChat('Your Firstname and Lastname must begin with a capital letter, followed by lowercase letter (Example: John, Doe).')
             end
+
+            if string.len(string.format("%s %s (0)", firstname, lastname)) > 32 then
+                return AddPlayerChat('Your firstname or lastname is too long.')
+            end
     
             Dialog.close(charcreate)
             CallRemoteEvent("accounts:characterCreated", string.match(firstname, '[A-Z][a-z]*'), string.match(lastname, '[A-Z][a-z]*'), gender)

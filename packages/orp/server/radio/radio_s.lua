@@ -70,8 +70,8 @@ function cmd_rtune(player, freq)
     InventoryData[player][Inventory_HasItem(player, INV_ITEM_RADIO)].amount = freq
 
     local x, y, z = GetPlayerLocation(player)
+    
     AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player).." twists the dial on their radio, tuning it.</>")
-
     AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You have tuned your radio to "..freq..".</>")
 end
 AddCommand("radiotune", cmd_rtune)

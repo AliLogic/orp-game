@@ -106,8 +106,6 @@ AddRemoteEvent("accounts:characterCreated", function (player, firstname, lastnam
 	elseif gender == 'Female' then
 		PlayerData[player].gender = 1
 	end
-
-	SetPlayerName(player, firstname.." "..lastname)
 	
 	local query = mariadb_prepare(sql, "INSERT INTO characters (accountid, steamid, firstname, lastname, gender) VALUES (?, '?', '?', '?', ?);",
 		PlayerData[player].accountid, tostring(GetPlayerSteamId(player)), PlayerData[player].firstname, PlayerData[player].lastname, PlayerData[player].gender)
@@ -259,7 +257,6 @@ function OnCharacterLoaded(player, id)
 		CallEvent("LoadInventory", player)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay "..GetPlayerName(player)..".</>")
-		SetPlayerName(player, string.format("%s %s", PlayerData[player].firstname, PlayerData[player].lastname))
 		
 	end
 end
@@ -397,6 +394,8 @@ function SetPlayerLoggedIn(player)
 	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, PlayerData[player].z)
 	SetPlayerHeading(player, PlayerData[player].a)
 	SetPlayerDimension(player, 0)
+
+	SetPlayerName(player, string.format("%s %s (%d)", PlayerData[player].firstname, PlayerData[player].lastname, player))
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
 	--CallEvent("OnPlayerJoined", player)
 end
