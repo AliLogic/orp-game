@@ -56,44 +56,46 @@ AddCommand("f", function(playerid, ...)
 	end
 end)
 
-local function cmd_acf(player, short_name, leadership_rank, fac_type, ...)
-	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+function cmd_acf(player, maxrank, shortname, ...)
+    if (PlayerData[player].admin < 5) then
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+    end
+
+    local args = {...}
+    
+    if maxrank == nil or shortname == nil or args[1] == nil then
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(f)action <maxrank> <shortname> <fullname>")
+    end
+
+    maxrank = tonumber(maxrank)
+
+	if string.len(maxrank) < 0 or string.len(maxrank) > 10 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction max ranks range from 1 - 10.</>")
 	end
+    
+    if string.len(shortname) < 0 or string.len(shortname) > 6 then
+        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction short name lengths range from 1 - 6.</>")
+    end
 
-	local name = {...}
+    local factionname = ''
 
-	if short_name == nil or leadership_rank == nil or fac_type == nil or name == nil then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(f)action <short name> <ranks> <faction type> <name>")
-	end
+	for _, v in pairs(args) do
+		if factionname == '' then
+			factionname = v
+		else
+			factionname = factionname.." "..v
+		end
+    end
+    
+    local faction = Faction_Create(factionname, shortname, maxrank)
 
-	name = table.concat(name, " ")
-
-	if name < 5 or name > 50 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction name length is invalid.</>")
-	end
-
-	fac_type = tonumber(fac_type)
-	leadership_rank = tonumber(leadership_rank)
-
-	if (fac_type < FACTION_CIVILIAN or fac_type > FACTION_GOV) then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid faction type.</>")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Types:</> 1 (Civilian), 2 (Police), 3 (Medic), 4 (Government).")
-		return
-	end
-
-	if leadership_rank < 0 or leadership_rank > 16 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Ranks range from 1 - 16.</>")
-	end
-
-	local faction = Faction_Create(name, short_name, leadership_rank, fac_type)
-	if faction == 0 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction "..short_name.." wasn't able to be created!</>")
-	else
-		AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), short_name, faction))
-		Slap(player)
-	end
-	return
+    AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), factionname, faction))
 end
-AddCommand('acreatefaction', cmd_acf)
-AddCommand('acf', cmd_acf)
+AddCommand("acreatefaction", cmd_acf)
+AddCommand("acf", cmd_acf)
+
+function cmd_aef(player, ...)
+	AddPlayerChat(player, "Coming soon...")
+end
+AddCommand("aeditfaction", cmd_acf)
+AddCommand("aef", cmd_acf)
