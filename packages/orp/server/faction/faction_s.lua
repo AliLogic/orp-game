@@ -91,7 +91,8 @@ function OnFactionLoaded(factionid)
 		print('Error with loading faction ID'..factionid)
 	else
 		local result = mariadb_get_assoc(1)
-
+		CreateFactionData(faction)
+		
 		FactionData[factionid].id = result['id']
 		FactionData[factionid].name = result['name']
 		FactionData[factionid].short_name = result['short_name']

@@ -1,7 +1,7 @@
 local colour = ImportPackage('colours')
 
 AddCommand("factions", function (player)
-	if #FactionData < 0 then
+	if #FactionData < 1 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> No factions currently exist.")
 	end
 
