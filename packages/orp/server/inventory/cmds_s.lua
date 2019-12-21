@@ -14,12 +14,14 @@ function cmd_inv(player)
     ))
 
     for i = 1, MAX_INVENTORY_SLOTS, 1 do
-        AddPlayerChat(player, string.format("<span color=\"%s\">(Slot: %d)</> %s [Amount: %d]",
-            colour.COLOUR_DARKGREEN(),
-            i,
-            Inventory_GetItemName(InventoryData[player][i].itemid),
-            InventoryData[player][i].amount
-        ))
+        if InventoryData[player][i] ~= false then
+            AddPlayerChat(player, string.format("<span color=\"%s\">(Slot: %d)</> %s [Amount: %d]",
+                colour.COLOUR_DARKGREEN(),
+                i,
+                Inventory_GetItemName(InventoryData[player][i].itemid),
+                InventoryData[player][i].amount
+            ))
+        end
     end
 end
 AddCommand("inventory", cmd_inv)
