@@ -52,6 +52,8 @@ AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hi
                     CallRemoteEvent(hitid, "ToggleTaseEffect", true)
 
                     Delay(5 * 1000, function()
+
+                        CallRemoteEvent(hitid, "ToggleTaseEffect", false)
                         SetPlayerHeading(hitid, GetPlayerHeading(player) - 180)
                         SetPlayerAnimation(hitid, "PUSHUP_END")
                     end)
