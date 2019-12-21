@@ -1,5 +1,9 @@
 local colour = ImportPackage('colours')
 
+AddCommand("factions", function (player)
+	if #FactionData[]
+end)
+
 AddCommand("q", function (playerid)
 	return KickPlayer(playerid, "Goodbye!")
 end)
