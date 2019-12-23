@@ -10,6 +10,8 @@ function GetFreeMarkerId()
 			return i
 		end
 	end
+
+	return false
 end
 
 function CreateMarkerData(marker_id)
