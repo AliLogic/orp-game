@@ -5,7 +5,8 @@ MAX_VEHICLES = 4096
 function GetFreeVehicleId()
 
 	for i = 1, MAX_VEHICLES, 1 do
-		if VehicleData[i].id == 0 then
+		if VehicleData[i] == nil then
+			CreateVehicleData(i)
 			return i
 		end
 	end
