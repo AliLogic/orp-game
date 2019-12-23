@@ -23,7 +23,8 @@ function cmd_r(player, ...)
 
     for _, i in pairs(GetAllPlayers()) do
         if GetPlayerRadioChannel(i) ~= false and GetPlayerRadioChannel(i) == GetPlayerRadioChannel(player) then
-            AddPlayerChat(player, "<span color=\""..colour.COLOUR_RADIO().."\">** [CH: "..GetPlayerRadioChannel(player).."] "..GetPlayerName(player).." says:"..text.."</>")
+            AddPlayerChat(i, "<span color=\""..colour.COLOUR_RADIO().."\">** [CH: "..GetPlayerRadioChannel(player).."] "..GetPlayerName(i).." says:"..text.."</>")
+            print("Player is: "..i)
         end
     end
 end
