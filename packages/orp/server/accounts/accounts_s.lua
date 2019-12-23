@@ -312,6 +312,8 @@ function CreatePlayerData(player)
 	PlayerData[player].is_frozen = false
 	PlayerData[player].label = nil -- 3d text label
 
+	PlayerData[player].pd_timer = 0
+
 	print("Data created for: "..player)
 end
 
@@ -400,9 +402,31 @@ function SetPlayerLoggedIn(player)
 	SetPlayerHeading(player, PlayerData[player].a)
 	SetPlayerDimension(player, 0)
 
+	PlayerData[player].pd_timer = CreateTimer(OnPlayerPayday, 60 * 60 * 1000, player)
+
 	SetPlayerName(player, string.format("%s %s", PlayerData[player].firstname, PlayerData[player].lastname, player))
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
 	--CallEvent("OnPlayerJoined", player)
+end
+
+function OnPlayerPayday(player)
+	
+	local exp = PlayerData[player].exp
+	local required_exp = (exp * 4) + 2
+	
+	PlayerData[player].exp = (PlayerData[player].exp + 1)
+
+	if (PlayerData[player].exp > (level * 4) + 2) then
+		AddPlayerChat(playerid, "You now have enough experience points to level up ("..exp.."/"..required_exp..")")
+	end
+
+	local query = mariadb_prepare(sql, "UPDATE characters SET exp = ? WHERE id = ? LIMIT 1",
+		PlayerData[player].exp,
+		PlayerData[player].id
+	)
+	mariadb_async_query(sql, query)
+
+	return
 end
 
 function FreezePlayer(player) return CallRemoteEvent(player, 'FreezePlayer', player) end
