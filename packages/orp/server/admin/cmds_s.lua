@@ -286,11 +286,10 @@ local function cmd_aev(player, vehicle, prefix, ...)
 	local args = {...}
 
 	if prefix == "owner" then
-		local vehicle = tonumber(args[1])
-		local target = tonumber(args[2])
+		local target = tonumber(args[1])
 		
 		if vehicle == nil or target == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle owner <vehicle> <target>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> owner <target>")
 		end
 
 		if IsValidPlayer(target) == nil or PlayerData[target] == nil then
