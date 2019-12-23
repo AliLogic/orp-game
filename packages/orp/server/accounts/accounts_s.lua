@@ -241,6 +241,9 @@ function OnCharacterLoaded(player, id)
 		PlayerData[player].cash = math.tointeger(result['cash'])
 		PlayerData[player].bank = math.tointeger(result['bank'])
 
+		PlayerData[player].level = math.tointeger(result['level'])
+		PlayerData[player].exp = math.tointeger(result['exp'])
+
 		PlayerData[player].x = tonumber(result['x'])
 		PlayerData[player].y = tonumber(result['y'])
 		PlayerData[player].z = tonumber(result['z'])
@@ -273,6 +276,9 @@ function CreatePlayerData(player)
 	PlayerData[player].firstname = ""
 	PlayerData[player].lastname = ""
 	PlayerData[player].gender = 0
+
+	PlayerData[player].level = 1
+	PlayerData[player].exp = 0
 
 	PlayerData[player].clothing = {}
 	PlayerData[player].inventory = {}
@@ -357,7 +363,7 @@ function SavePlayerAccount(player)
 	PlayerData[player].x, PlayerData[player].y, PlayerData[player].z = GetPlayerLocation(player)
 	PlayerData[player].a = GetPlayerHeading(player)
 
-	local query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
+	local query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, exp = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
 		PlayerData[player].firstname,
 		PlayerData[player].lastname,
 		PlayerData[player].gender,
@@ -365,6 +371,7 @@ function SavePlayerAccount(player)
 		PlayerData[player].armour,
 		PlayerData[player].cash,
 		PlayerData[player].bank,
+		PlayerData[player].exp,
 		tostring(PlayerData[player].x),
 		tostring(PlayerData[player].y),
 		tostring(PlayerData[player].z),
@@ -405,7 +412,7 @@ AddRemoteEvent('accounts:kick', function (player)
 end)
 
 --[[VEHICLE_NAMES = {
-    "Premier", "Taxi", "Police Cruiser", "Luxe", "Regal", "Nascar", "Raptor", "Ambulance", "Garbage Truck", "Maverick",
+	"Premier", "Taxi", "Police Cruiser", "Luxe", "Regal", "Nascar", "Raptor", "Ambulance", "Garbage Truck", "Maverick",
 	"Pinnacle", "Sultan", "Bearcat Police", "Bearcat Camo", "Bearcat Medic", "Bearcat Military", "Barracks Police", "Barracks Camo", "Premier SE", 
 	"Maverick SE", "Patriot", "Cargo Lite Desert", "Cargo Lite Army", "Securicar", "Dacia"
 }]]--
