@@ -62,7 +62,7 @@ function Vehicle_Create(model, plate, x, y, z, a)
 		return false
 	end
 
-	CreateVehicleData(index)
+	--CreateVehicleData(index)
 	VehicleData[index].vid = vehicle
 	SetVehicleLicensePlate(vehicle, plate)
 

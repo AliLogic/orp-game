@@ -349,7 +349,9 @@ AddRemoteEvent("clientActionConfirmationResult", function (result, player, targe
             VehicleData[vehicle].faction = 0
         end
 
-        VehicleData[vehicle].owner = PlayerData[target].id
+		VehicleData[vehicle].owner = PlayerData[target].id
+		print("Player Char SQLID is "..PlayerData[target].id)
+		print("Vehicle Owner Is Now Char SQLID: "..VehicleData[vehicle].owner)
 
         AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
         return
