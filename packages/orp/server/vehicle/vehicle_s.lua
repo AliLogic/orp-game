@@ -164,9 +164,9 @@ function Vehicle_Unload(vehicle)
 		tostring(VehicleData[vehicle].y),
 		tostring(VehicleData[vehicle].z),
 		tostring(VehicleData[vehicle].a),
-		VehicleData[vehicle].r,
-		VehicleData[vehicle].g,
-		VehicleData[vehicle].b,
+		tostring(VehicleData[vehicle].r),
+		tostring(VehicleData[vehicle].g),
+		tostring(VehicleData[vehicle].b),
 		VehicleData[vehicle].id
 	)
 
