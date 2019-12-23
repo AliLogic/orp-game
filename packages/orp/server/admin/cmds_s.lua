@@ -286,18 +286,19 @@ local function cmd_aev(player, vehicle, prefix, ...)
 	local args = {...}
 
 	if prefix == "owner" then
-		local target = tonumber(args[1])
-
+		local vehicle = tonumber(args[1])
+		local target = tonumber(args[2])
+		
 		if vehicle == nil or target == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle owner <vehicleid> <target>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle owner <vehicle> <target>")
 		end
 
 		if IsValidPlayer(target) == nil or PlayerData[target] == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</target>")
 		end
 
 		if PlayerData[target].logged_in == false then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</vehicle>")
 		end
 
 		CallRemoteEvent(player, "askClientActionConfirmation", 1, "Would you like to change this vehicle's owner?", target, vehicle)
