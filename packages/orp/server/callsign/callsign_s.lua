@@ -30,14 +30,14 @@ AddCommand("callsign", function (player, callsign)
     end
 
     VehicleData[vehicle].callsign = CreateText3D(callsign, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-    SetText3DAttached(VehicleData[vehicle].callsign, ATTACH_VEHICLE, vehicle, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 'trunk')
+    SetText3DAttached(VehicleData[vehicle].callsign, ATTACH_VEHICLE, vehicle, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 'WHEEL_FREAR_L')
     
     AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Callsign "..callsign.." attached!")
 end)
 
 AddEvent("UnloadCallsigns", function ()
     for i = 1, #VehicleData, 1 do
-        if VehicleData[vehicle].callsign ~= nil and IsValidText3D(VehicleData[vehicle].callsign) then
+        if VehicleData[i].callsign ~= nil and IsValidText3D(VehicleData[i].callsign) then
             DestroyText3D(VehicleData[i].callsign)
         end           
     end
