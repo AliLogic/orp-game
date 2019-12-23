@@ -4,9 +4,26 @@ AddCommand("q", function (playerid)
 	return KickPlayer(playerid, "Goodbye!")
 end)
 
+AddCommand("levelup", function (playerid)
+
+    local level = PlayerData[playerid].level
+    local exp = PlayerData[playerid].exp
+    local required_exp = (level * 4) + 2
+
+    if (required_exp < exp) then
+        return AddPlayerChat(playerid, "You do not have enough experience points to level up ("..exp.."/"..required_exp..")")
+    end
+
+    PlayerData[playerid].level = level + 1
+    PlayerData[playerid].exp = exp - required_exp
+
+    AddPlayerChat(playerid, "You have leveled up to "..PlayerData[playerid].level..".")
+    return
+end)
+
 AddCommand("help", function (player)
 	AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q")
-	AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions")
+	AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
 	return
 end)
 
