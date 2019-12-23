@@ -300,7 +300,19 @@ local function cmd_aev(player, vehicle, prefix, ...)
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</vehicle>")
 		end
 
-		CallRemoteEvent(player, "askClientActionConfirmation", 1, "Would you like to change this vehicle's owner?", target, vehicle)
+		if VehicleData[vehicle].faction ~= 0 then
+            AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: As this vehicle was owned by a faction, it will now be passed onto the player.</>")
+            VehicleData[vehicle].faction = 0
+        end
+
+		VehicleData[vehicle].owner = PlayerData[target].id
+		print("Player Char SQLID is "..PlayerData[target].id)
+		print("Vehicle Owner Is Now Char SQLID: "..VehicleData[vehicle].owner)
+
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
+        return
+
+		--CallRemoteEvent(player, "askClientActionConfirmation", 1, "Would you like to change this vehicle's owner?", target, vehicle)
 	elseif prefix == "color" then
 		local r, g, b
 
