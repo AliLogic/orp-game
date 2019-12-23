@@ -24,7 +24,7 @@ AddCommand("callsign", function (player, callsign)
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> Callsign length ranges from 1 - 12.")
     end
 
-    if (IsValidText3D(VehicleData[vehicle].callsign)) then
+    if VehicleData[vehicle].callsign ~= nil and IsValidText3D(VehicleData[vehicle].callsign) then
         DestroyText3D(VehicleData[vehicle].callsign)
         AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Your previous callsign was destroyed!")
     end
