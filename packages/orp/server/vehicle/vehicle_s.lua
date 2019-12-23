@@ -33,6 +33,7 @@ function CreateVehicleData(vehicle)
 	VehicleData[vehicle].b = 0
 
 	VehicleData[vehicle].is_locked = true
+	VehicleData[vehicle].is_spawned = true
 end
 
 function DestroyVehicleData(vehicle)

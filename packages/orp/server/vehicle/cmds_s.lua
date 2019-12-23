@@ -68,6 +68,8 @@ function cmd_v(player, ...)
         VehicleData[vehicle].y = y
         VehicleData[vehicle].z = z
         VehicleData[vehicle].a = a
+
+        VehicleData[vehicle].is_spawned = false
         
         Vehicle_Unload(vehicle)
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle parked!</>")
@@ -97,6 +99,10 @@ function cmd_v(player, ...)
 
         if VehicleData[vehicle] == nil or PlayerData[player].id ~= VehicleData[vehicle].owner then
             return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> Invalid vehicle.")
+        end
+
+        if VehicleData[vehicle].is_spawned == true then
+            return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> This vehicle is already spawned.")
         end
 
         Vehicle_Load(VehicleData[vehicle].id)
