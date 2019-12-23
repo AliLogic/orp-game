@@ -24,6 +24,7 @@
 		"server/inventory/cmds_s.lua",
 		"server/radio/radio_s.lua",
 		"server/customization/customization_s.lua",
+		"server/callsign/callsign_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [

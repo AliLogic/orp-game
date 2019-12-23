@@ -34,9 +34,10 @@ end)
 
 -- Cleanup the MariaDB connection when the package/server stops
 AddEvent("OnPackageStop", function ()
+	CallEvent('UnloadCallsigns')
 	CallEvent('UnloadVehicles')
 	CallEvent('UnloadFactions')
 	CallEvent('UnloadMarkers')
-
+	
 	mariadb_close(sql)
 end)

@@ -33,6 +33,8 @@ function CreateVehicleData(vehicle)
 	VehicleData[vehicle].g = 0
 	VehicleData[vehicle].b = 0
 
+	VehicleData[vehicle].callsign = nil
+
 	VehicleData[vehicle].is_locked = true
 	VehicleData[vehicle].is_spawned = true
 end
