@@ -336,7 +336,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." color changed.</>")
 	elseif prefix == "plate" then
-		local numberPlate = args
+		local numberPlate = table.concat({...}, " ")
 
 		if numberPlate == nil or #numberPlate == 0 then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> plate <plate>")

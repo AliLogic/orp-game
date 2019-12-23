@@ -159,7 +159,7 @@ function Vehicle_Unload(vehicle)
 	local query = mariadb_prepare(sql, "UPDATE vehicles SET owner = ?, model = ?, plate = '?', faction = ?, x = '?', y = '?', z = '?', a = '?', r = ?, g = ?, b = ? WHERE id = ?",
 		VehicleData[vehicle].owner,
 		VehicleData[vehicle].model,
-		VehicleData[vehicle].plate,
+		tostring(VehicleData[vehicle].plate),
 		VehicleData[vehicle].faction,
 		tostring(VehicleData[vehicle].x),
 		tostring(VehicleData[vehicle].y),
