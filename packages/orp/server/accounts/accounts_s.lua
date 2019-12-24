@@ -389,6 +389,8 @@ function DestroyPlayerData(player)
 	if (PlayerData[player] == nil) then
 		return
 	end
+	
+	DestroyTimer(CharacterData[player].pd_timer)
 
 	PlayerData[player] = nil
 	CharacterData[player] = nil
