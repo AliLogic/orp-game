@@ -28,3 +28,7 @@ AddEvent("OnPackageEnd", function()
 
 	DestroyTimer(EnvTimer)
 end)
+
+AddEvent("OnPlayerJoin", function(playerid)
+    CallRemoteEvent(playerid, "UpdateClientTime", EnvHour, EnvWeather)
+end)
