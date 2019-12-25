@@ -1,9 +1,9 @@
 local colour = ImportPackage('colours')
+
 VehicleData = {}
 MAX_VEHICLES = 4096
 
 function GetFreeVehicleId()
-
 	for i = 1, MAX_VEHICLES, 1 do
 		if VehicleData[i] == nil then
 			CreateVehicleData(i)

@@ -19,6 +19,7 @@
 		"colours",
 		"dialogui",
 		"debug",
+		"snowfx",
 		"orp"
 	],
 	"stream_distance": 12000.0,
