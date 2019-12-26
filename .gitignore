@@ -1,4 +1,8 @@
 *.exe
 *.zip
 *.rar
-server_log.txt
+*.txt
+
+config/
+logs/
+appcache/

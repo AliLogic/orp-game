@@ -40,7 +40,7 @@ function CreateVehicleData(vehicle)
 end
 
 function DestroyVehicleData(vehicle)
-	VehicleData[vehicle] = {}
+	VehicleData[vehicle] = nil
 end
 
 function Vehicle_Create(model, plate, x, y, z, a)

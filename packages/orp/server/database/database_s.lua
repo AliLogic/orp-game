@@ -22,6 +22,7 @@ AddEvent("OnPackageStart", function ()
 		CallEvent('LoadFactions')
 		CallEvent('LoadMarkers')
 		CallEvent('LoadATMs')
+		CallEvent('LoadBusinesses')
 
 		--CallRemoteEvent('CreateMinimap')
 	else
@@ -38,6 +39,7 @@ AddEvent("OnPackageStop", function ()
 	CallEvent('UnloadVehicles')
 	CallEvent('UnloadFactions')
 	CallEvent('UnloadMarkers')
+	CallEvent('UnloadBusinesses')
 	
 	mariadb_close(sql)
 end)

@@ -19,13 +19,11 @@ local function UpdateTime()
 end
 
 AddEvent("OnPackageStart", function()
-
 	UpdateTime()
 	EnvTimer = CreateTimer(UpdateTime, 60 * 1000)
 end)
 
 AddEvent("OnPackageEnd", function()
-
 	DestroyTimer(EnvTimer)
 end)
 
