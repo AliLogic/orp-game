@@ -122,6 +122,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `armour` float NOT NULL DEFAULT 0,
   `cash` int(11) NOT NULL DEFAULT 100,
   `bank` int(11) NOT NULL DEFAULT 1000,
+  `paycheck` int(11) NOT NULL DEFAULT 0,
   `level` int(11) NOT NULL DEFAULT 1,
   `exp` int(11) NOT NULL DEFAULT 0,
   `playtime` int(11) NOT NULL DEFAULT 0,
