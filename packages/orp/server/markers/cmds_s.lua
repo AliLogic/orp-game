@@ -17,13 +17,15 @@ local function cmd_acm(playerid, modelid)
 	end
 
 	local x, y, z = GetPlayerLocation(playerid)
+        local dimension = GetPlayerDimension(playerid)
 
-	local markerid = Marker_Create(modelid, x, y, z)
+	local markerid = Marker_Create(modelid, x, y, z, dimension)
 	if markerid == false then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Marker "..modelid.." wasn't able to be created!</>")
 	else
 		AddPlayerChat(playerid, string.format("<span color=\"%s\">Server: </>Marker %d (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), modelid, markerid))
 	end
+        return
 end
 
 AddCommand("acreatemarker", cmd_acm)
