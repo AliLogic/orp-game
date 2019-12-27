@@ -22,7 +22,10 @@ end
 function CreateBusinessData(business)
     BusinessData[business] = {}
 
+    -- Permanent (saving) values
+
     BusinessData[business].id = 0
+    BusinessData[business].markerid = 0 -- sqlid of the marker!
     BusinessData[business].owner = 0 -- 0, aka the state..
 
     BusinessData[business].name = "Business"
@@ -49,6 +52,9 @@ function CreateBusinessData(business)
     BusinessData[business].mx = 0.0 -- marker coordinates, as in, where you go and execute the /buy command.
     BusinessData[business].my = 0.0
     BusinessData[business].mz = 0.0
+
+    -- Temporary values
+    BusinessData[business].text3d_in = nil
 end
 
 function DestroyBusinessData(business)
@@ -71,7 +77,7 @@ AddEvent('UnloadBusinesses', function ()
     end
 end)
 
-function Business_Create(type, enterable, price, ...)
+function Business_Create(player, type, enterable, price, ...)
     name = table.concat({...}, " ")
     type = tonumber(type)
     enterable = tonumber(enterable)
@@ -97,6 +103,13 @@ function Business_Create(type, enterable, price, ...)
     if index == 0 then
         return false
     end
+
+    if enterable == 0 then
+        local x, y, z = GetPlayerLocation(player)
+        BusinessData[business].text3d = CreateText3D(string.format("%s %d\n/buy", BusinessData[business].name, index), 17, x, y, z, 0, 0, 0)
+    end
+
+    -- For enterable == 1, set it whenever they set a entrance (ex ey ez) to the business.
 
     local query = mariadb_prepare(sql, "INSERT INTO businesses (name, type, enterable, price) VALUES ('?', ?, ?, ?);",
         name, type, enterable, price    
@@ -131,6 +144,7 @@ function OnBusinessLoaded(businessid)
         -- type, enterable, price, message, dimension, ix iy iz ia, ex ey ez ea, mx my mz
 
         BusinessData[business].id = businessid
+        BusinessData[business].markerid = mariadb_get_value_name_int(businessid, "markerid")
         BusinessData[business].owner = mariadb_get_value_name_int(businessid, "owner")
 
         BusinessData[business].name = mariadb_get_value_name(businessid, "name")
@@ -157,6 +171,14 @@ function OnBusinessLoaded(businessid)
         BusinessData[business].mx = tonumber(mariadb_get_value_name(businessid, "mx"))
         BusinessData[business].my = tonumber(mariadb_get_value_name(businessid, "my"))
         BusinessData[business].mz = tonumber(mariadb_get_value_name(businessid, "mz"))
+
+        if BusinessData[business].enterable == 0 then
+            BusinessData[business].text3d = CreateText3D(string.format("%s\n/buy", BusinessData[business].name), 
+            17, BusinessData[business].mx, BusinessData[business].my, BusinessData[business].mz, 0, 0, 0)
+        end
+
+        -- CreateMarker
+        -- Create3dTextLabel
 
         print("Business "..business.." (SQL ID: "..businessid..") successfully loaded!")
 
