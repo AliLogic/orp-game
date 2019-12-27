@@ -243,7 +243,7 @@ function OnCharacterLoaded(player, id)
 
 		PlayerData[player].level = math.tointeger(result['level'])
 		PlayerData[player].exp = math.tointeger(result['exp'])
-		PlayerData[player].minutes = math.tointeger(result['mins'])
+		PlayerData[player].minutes = math.tointeger(result['minutes'])
 
 		PlayerData[player].x = tonumber(result['x'])
 		PlayerData[player].y = tonumber(result['y'])
@@ -295,6 +295,7 @@ function CreatePlayerData(player)
 
 	PlayerData[player].cash = 100
 	PlayerData[player].bank = 1000
+	PlayerData[player].paycheck = 0
 
 	PlayerData[player].faction = 0
 	PlayerData[player].faction_rank = 0
@@ -359,7 +360,7 @@ function SavePlayerAccount(player)
 		PlayerData[player].name,
 		PlayerData[player].helper,
 		GetPlayerLocale(player),
-		PlayerData[player].id
+		PlayerData[player].accountid
 	)
 
 	mariadb_query(sql, query)
@@ -408,7 +409,7 @@ function SetPlayerLoggedIn(player)
 
 	PlayerData[player].pd_timer = CreateTimer(OnPlayerPayday, 60 * 1000, player)
 
-	SetPlayerName(player, string.format("%s %s", PlayerData[player].firstname, PlayerData[player].lastname, player))
+	SetPlayerName(player, string.format("%s %s", PlayerData[player].firstname, PlayerData[player].lastname))
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
 	--CallEvent("OnPlayerJoined", player)
 end
@@ -419,7 +420,14 @@ function OnPlayerPayday(player)
 
 	if (PlayerData[player].minutes > 60) then
 
-		AddPlayerChat(playerid, "|________ PAYDAY ________|")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\"|________ PAYCHECK ________|</>")
+
+		AddPlayerChat(player, "Past Paycheck: $"..PlayerData[player].paycheck)
+
+		---[[PlayerData[player].paycheck = PlayerData[player].paycheck + 100 -- If they job equals to 0.]]
+
+		AddPlayerChat(player, "New Paycheck: $"..PlayerData[player].paycheck)
+		AddPlayerChat(player, "(( Paychecks are still a work in progress. ))")
 
 		PlayerData[player].minutes = 0
 
@@ -429,7 +437,7 @@ function OnPlayerPayday(player)
 		PlayerData[player].exp = (PlayerData[player].exp + 1)
 	
 		if (PlayerData[player].exp > (level * 4) + 2) then
-			AddPlayerChat(playerid, "You now have enough experience points to level up ("..exp.."/"..required_exp..")")
+			AddPlayerChat(player, "You now have enough experience points to level up ("..exp.."/"..required_exp..")")
 		end
 	
 		local query = mariadb_prepare(sql, "UPDATE characters SET exp = ? WHERE id = ? LIMIT 1",
@@ -438,7 +446,7 @@ function OnPlayerPayday(player)
 		)
 		mariadb_async_query(sql, query)
 
-		AddPlayerChat(playerid, "|________________________|")
+		AddPlayerChat(player, "|________________________|")
 	end
 
 	return
