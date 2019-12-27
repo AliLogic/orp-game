@@ -55,7 +55,7 @@ function Marker_Create(modelid, x, y, z, dimension)
 	end
 	CreateMarkerData(marker_id)
 
-	local query = mariadb_prepare(sql, "INSERT INTO markers (model, x1, y1, z1, dimension1) VALUES('?', '?', '?', '?', '?')",
+	local query = mariadb_prepare(sql, "INSERT INTO markers (model, x1, y1, z1, dimension1) VALUES('?', ?, ?, ?, ?);",
 		modelid,
 		x,
 		y,
