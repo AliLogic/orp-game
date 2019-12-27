@@ -147,7 +147,7 @@ function OnMarkerLoaded(indexid, marker_id)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "a", tostring(MarkerData[indexid].a), true)
 
 		if MarkerData[indexid].x ~= 0 and MarkerData[indexid].y ~= 0 then
-			MarkerData[indexid].pickup2 = CreatePickup(MarkerData[indexid].modelid, MarkerData[indexid].x2, MarkerData[indexid].y2, MarkerData[indexid].z2)
+			MarkerData[indexid].pickup2 = CreatePickup(MarkerData[indexid].model, MarkerData[indexid].x2, MarkerData[indexid].y2, MarkerData[indexid].z2)
 			SetPickupDimension(MarkerData[indexid].pickup2, MarkerData[indexid].dimension2)
 			SetPickupPropertyValue(MarkerData[indexid].pickup2, "markerid", indexid, true)
 			SetPickupPropertyValue(MarkerData[indexid].pickup2, "r", tostring(MarkerData[indexid].r), true)
