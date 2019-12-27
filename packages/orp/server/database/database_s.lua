@@ -40,6 +40,8 @@ AddEvent("OnPackageStop", function ()
 	CallEvent('UnloadFactions')
 	CallEvent('UnloadMarkers')
 	CallEvent('UnloadBusinesses')
+
+	CallEvent('SavePlayers')
 	
 	mariadb_close(sql)
 end)

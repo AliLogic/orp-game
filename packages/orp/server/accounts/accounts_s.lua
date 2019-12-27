@@ -5,11 +5,18 @@ CharacterData = {}
 
 AddEvent("OnPackageStart", function ()
 	CreateTimer(function()
-		for k, v in pairs(GetAllPlayers()) do
+		for _, v in pairs(GetAllPlayers()) do
 			SavePlayerAccount(v)
-			print("All accounts have been saved!")
 		end
+		print("All accounts have been saved!")
 	end, 1800000)
+end)
+
+AddEvent("SavePlayers", function () 
+	for _, v in pairs(GetAllPlayers()) do
+		SavePlayerAccount(v)
+	end
+	print("All accounts have been saved!")
 end)
 
 function OnPlayerSteamAuth(player)
