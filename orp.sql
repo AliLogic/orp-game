@@ -123,6 +123,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `cash` int(11) NOT NULL DEFAULT 100,
   `bank` int(11) NOT NULL DEFAULT 1000,
   `paycheck` int(11) NOT NULL DEFAULT 0,
+  `mins` int(2) NOT NULL DEFAULT 0,
   `level` int(11) NOT NULL DEFAULT 1,
   `exp` int(11) NOT NULL DEFAULT 0,
   `playtime` int(11) NOT NULL DEFAULT 0,

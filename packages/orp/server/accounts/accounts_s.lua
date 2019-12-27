@@ -243,6 +243,7 @@ function OnCharacterLoaded(player, id)
 
 		PlayerData[player].level = math.tointeger(result['level'])
 		PlayerData[player].exp = math.tointeger(result['exp'])
+		PlayerData[player].minutes = math.tointeger(result['mins'])
 
 		PlayerData[player].x = tonumber(result['x'])
 		PlayerData[player].y = tonumber(result['y'])
@@ -279,6 +280,7 @@ function CreatePlayerData(player)
 
 	PlayerData[player].level = 1
 	PlayerData[player].exp = 0
+	PlayerData[player].minutes = 0
 
 	PlayerData[player].clothing = {}
 	PlayerData[player].inventory = {}
@@ -365,7 +367,7 @@ function SavePlayerAccount(player)
 	PlayerData[player].x, PlayerData[player].y, PlayerData[player].z = GetPlayerLocation(player)
 	PlayerData[player].a = GetPlayerHeading(player)
 
-	local query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, exp = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
+	local query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, mins = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
 		PlayerData[player].firstname,
 		PlayerData[player].lastname,
 		PlayerData[player].gender,
@@ -373,7 +375,7 @@ function SavePlayerAccount(player)
 		PlayerData[player].armour,
 		PlayerData[player].cash,
 		PlayerData[player].bank,
-		PlayerData[player].exp,
+		PlayerData[player].minutes,
 		tostring(PlayerData[player].x),
 		tostring(PlayerData[player].y),
 		tostring(PlayerData[player].z),
@@ -404,7 +406,7 @@ function SetPlayerLoggedIn(player)
 	SetPlayerHeading(player, PlayerData[player].a)
 	SetPlayerDimension(player, 0)
 
-	PlayerData[player].pd_timer = CreateTimer(OnPlayerPayday, 60 * 60 * 1000, player)
+	PlayerData[player].pd_timer = CreateTimer(OnPlayerPayday, 60 * 1000, player)
 
 	SetPlayerName(player, string.format("%s %s", PlayerData[player].firstname, PlayerData[player].lastname, player))
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
@@ -412,21 +414,32 @@ function SetPlayerLoggedIn(player)
 end
 
 function OnPlayerPayday(player)
-	
-	local exp = PlayerData[player].exp
-	local required_exp = (exp * 4) + 2
-	
-	PlayerData[player].exp = (PlayerData[player].exp + 1)
 
-	if (PlayerData[player].exp > (level * 4) + 2) then
-		AddPlayerChat(playerid, "You now have enough experience points to level up ("..exp.."/"..required_exp..")")
+	PlayerData[player].minutes = (PlayerData[player].minutes + 1)
+
+	if (PlayerData[player].minutes > 60) then
+
+		AddPlayerChat(playerid, "|________ PAYDAY ________|")
+
+		PlayerData[player].minutes = 0
+
+		local exp = PlayerData[player].exp
+		local required_exp = (exp * 4) + 2
+		
+		PlayerData[player].exp = (PlayerData[player].exp + 1)
+	
+		if (PlayerData[player].exp > (level * 4) + 2) then
+			AddPlayerChat(playerid, "You now have enough experience points to level up ("..exp.."/"..required_exp..")")
+		end
+	
+		local query = mariadb_prepare(sql, "UPDATE characters SET exp = ? WHERE id = ? LIMIT 1",
+			PlayerData[player].exp,
+			PlayerData[player].id
+		)
+		mariadb_async_query(sql, query)
+
+		AddPlayerChat(playerid, "|________________________|")
 	end
-
-	local query = mariadb_prepare(sql, "UPDATE characters SET exp = ? WHERE id = ? LIMIT 1",
-		PlayerData[player].exp,
-		PlayerData[player].id
-	)
-	mariadb_async_query(sql, query)
 
 	return
 end
