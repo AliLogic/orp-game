@@ -1,7 +1,7 @@
 AddEvent("OnKeyPress", function(key)
 
 	if key == 'E' then
-		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
+		local pickupid = tonumber(GetPlayerPropertyValue(GetPlayerId(), "pickupid"))
 
 		if pickupid ~= false then
 
