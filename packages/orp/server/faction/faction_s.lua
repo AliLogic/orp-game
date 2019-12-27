@@ -103,7 +103,7 @@ function OnFactionLoaded(factionid)
 		FactionData[factionid].radio_dimension = tonumber(result['radio_dimension'])
 		FactionData[factionid].bank = tonumber(result['bank'])
 
-		local query = mariadb_prepare(sql, "SELECT * FROM factions_ranks WHERE id = ?",
+		local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ?",
 			FactionData[factionid].id)
 
 		mariadb_async_query(sql, query, OnFactionRankLoaded, FactionData[factionid].id)
