@@ -47,7 +47,8 @@ end
 
 function Marker_Create(modelid, x, y, z, dimension)
 
-	modelid = tonumber(modelid)
+        print("model: "..modelid.." x: "..x.." y: "..y.." z: "..z.."")
+
 	local marker_id = GetFreeMarkerId()
 
 	if marker_id == false then
