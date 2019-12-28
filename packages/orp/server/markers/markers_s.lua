@@ -33,10 +33,10 @@ function CreateMarkerData(marker_id)
 	MarkerData[marker_id].z2 = 0
 	MarkerData[marker_id].dimension2 = 0
 
-	MarkerData[marker_id].r = 100
-	MarkerData[marker_id].g = 100
+	MarkerData[marker_id].r = 255
+	MarkerData[marker_id].g = 204
 	MarkerData[marker_id].b = 0
-	MarkerData[marker_id].a = 100
+	MarkerData[marker_id].a = 200
 
 	MarkerData[marker_id].is_locked = true
 end
