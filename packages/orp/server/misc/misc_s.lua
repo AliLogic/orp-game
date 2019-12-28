@@ -72,6 +72,23 @@ function RemovePlayerCash(player, amount)
 	end
 end
 
+function SetPlayerHandcuff(playerid, bToggle)
+
+	PlayerData[playerid].handcuffed = bToggle
+	if bToggle then
+		SetPlayerAnimation(playerid, "CUFF")
+	else
+		SetPlayerAnimation(playerid, "STOP")
+	end
+end
+
+function IsPlayerHandcuffed(playerid)
+	if PlayerData[playerid] ~= nil then
+		return PlayerData[playerid].handcuffed
+	end
+	return 0
+end
+
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
 AddRemoteEvent("SetPlayerCash", SetPlayerCash)
 AddRemoteEvent("AddPlayerCash", AddPlayerCash)
