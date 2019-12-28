@@ -440,13 +440,14 @@ function OnPlayerPayday(player)
 
 		local exp = PlayerData[player].exp
 		local required_exp = (exp * 4) + 2
-		
+		local level = PlayerData[player].level
+
 		PlayerData[player].exp = (PlayerData[player].exp + 1)
-	
+
 		if (PlayerData[player].exp > (level * 4) + 2) then
 			AddPlayerChat(player, "You now have enough experience points to level up ("..exp.."/"..required_exp..")")
 		end
-	
+
 		local query = mariadb_prepare(sql, "UPDATE characters SET exp = ? WHERE id = ? LIMIT 1",
 			PlayerData[player].exp,
 			PlayerData[player].id

@@ -18,14 +18,14 @@ AddCommand("levelup", function (playerid)
     PlayerData[playerid].exp = exp - required_exp
 
     AddPlayerChat(playerid, "You have leveled up to "..PlayerData[playerid].level..".")
-    
+
     local query = mariadb_prepare(sql, "UPDATE characters SET level = ?, exp = ? WHERE id = ? LIMIT 1",
-        PlayerData[player].level,
-        PlayerData[player].exp,
-        PlayerData[player].id
+        PlayerData[playerid].level,
+        PlayerData[playerid].exp,
+        PlayerData[playerid].id
     )
     mariadb_async_query(sql, query)
-    
+
     return
 end)
 

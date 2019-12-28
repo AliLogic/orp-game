@@ -240,7 +240,7 @@ AddRemoteEvent("OnPlayerInteractMarker", function (playerid, pickupid)
 				break
 			elseif MarkerData[i].pickup2 == pickupid then
 				SetPlayerLocation(playerid, MarkerData[i].x1, MarkerData[i].y1, MarkerData[i].z1)
-				break;
+				break
 			end
 		end
 	end

@@ -211,6 +211,7 @@
         "GetVehicleModel",
         "SetPlayerName",
         "SetPlayerArmor",
-        "SetPlayerHealth"
+        "SetPlayerHealth",
+        "ATTACH_VEHICLE"
     ]
 }

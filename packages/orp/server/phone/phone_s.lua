@@ -333,7 +333,7 @@ local function cmd_sms(playerid, phonenumber, ...)
 
 	AddPlayerChat(playerid, "Your text message is being sent.");
 
-	SetPlayerChatBubble(playerid, "* "..GetPlayerName(playerid).." takes out their cellphone.", seconds)
+	SetPlayerChatBubble(playerid, "* "..GetPlayerName(playerid).." takes out their cellphone.", 4)
 
 	-- send the sms to the number (error if number is inactive)
 	-- send the sms to the player
