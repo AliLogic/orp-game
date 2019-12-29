@@ -165,7 +165,7 @@ function OnMarkerLoaded(indexid, marker_id)
 end
 
 function Marker_Unload(marker_id)
-	local query = mariadb_prepare(sql, "UPDATE markers SET model = '?', 'x1' = '?', 'y1' = '?', 'z1' = '?', 'dimension1' = '?', x2' = '?', 'y2' = '?', 'z2' = '?', 'dimension1' = '?', 'r' = '?', 'g' = '?', 'b' = '?', 'a' = '?', 'is_locked' = '?' WHERE 'id' = ?",
+	local query = mariadb_prepare(sql, "UPDATE markers SET model = '?', x1 = '?', y1 = '?', z1 = '?', dimension1 = '?', x2 = '?', y2 = '?', z2 = '?', dimension2 = '?', r = '?', g = '?', b = '?', a = '?', is_locked = '?' WHERE id = ?",
 		MarkerData[marker_id].model,
 		MarkerData[marker_id].x1,
 		MarkerData[marker_id].y1,
