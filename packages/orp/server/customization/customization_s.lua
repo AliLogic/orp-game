@@ -24,7 +24,9 @@ AddCommand("skin", function (playerid, r, g, b)
 		return AddPlayerChat(playerid, "/skin <r> <g> <b>")
 	end
 
-	SetPlayerPropertyValue(playerid, "skin_color", r, g, b, true)
+	SetPlayerPropertyValue(playerid, "skin_color_r", r, true)
+	SetPlayerPropertyValue(playerid, "skin_color_g", g, true)
+	SetPlayerPropertyValue(playerid, "skin_color_b", b, true)
 end)
 
 AddCommand("pupil", function (playerid, pupil)
@@ -34,4 +36,19 @@ AddCommand("pupil", function (playerid, pupil)
 	end
 
 	SetPlayerPropertyValue(playerid, "pupil_size", pupil, true)
+end)
+
+AddEvent("OnPlayerJoin", function(playerid)
+
+	SetPlayerPropertyValue(playerid, "pant_id", 2, true)
+	SetPlayerPropertyValue(playerid, "shoe_id", 1, true)
+	SetPlayerPropertyValue(playerid, "skin_color_r", 255, true)
+	SetPlayerPropertyValue(playerid, "skin_color_g", 255, true)
+	SetPlayerPropertyValue(playerid, "skin_color_b", 255, true)
+	SetPlayerPropertyValue(playerid, "pupil_size", 1, true)
+	SetPlayerPropertyValue(playerid, "shirt_id", 1, true)
+end)
+
+AddEvent("OnPlayerSpawn", function(playerid)
+	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
 end)
