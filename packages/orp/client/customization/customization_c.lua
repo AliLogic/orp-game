@@ -224,7 +224,7 @@ end
 local function SetPlayerClothing(playerid)
 
 	SetPlayerShoes(playerid)
-	--SetPlayerSkinColor(playerid)
+	SetPlayerSkinColor(playerid)
 	SetPlayerPupilSize(playerid)
 	SetPlayerHair(playerid)
 	SetPlayerHairColor(playerid)
@@ -233,6 +233,7 @@ local function SetPlayerClothing(playerid)
 	SetPlayerPants(playerid)
 	--SetPlayerPantsColor(playerid)
 end
+AddRemoteEvent("SetPlayerClothing", SetPlayerClothing)
 
 AddEvent("OnPlayerStreamIn", function(player)
 	SetPlayerClothing(player)
