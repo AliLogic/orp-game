@@ -56,6 +56,10 @@ function SetPlayerChatBubble(player, message, seconds)
 	end)
 end
 
+AddEvent("OnPlayerStreamIn", function (player, otherplayer)
+    SetPlayerName(otherplayer, PlayerData[otherplayer].firstname.." "..PlayerData[otherplayer].lastname)
+end)
+
 function GetPlayerCash(player)
 	if PlayerData[player] ~= nil then
 		return PlayerData[player].cash
