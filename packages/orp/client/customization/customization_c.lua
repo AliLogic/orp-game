@@ -155,7 +155,6 @@ function SetPlayerHairColor(playerid, r, g, b, a)
 	end
 
 	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing0")
-	-- Set reddish hair color.
 	SkeletalMeshComponent:SetColorParameterOnMaterials("Hair Color", FLinearColor(r / 255, g / 255, b / 255, a / 255))
 end
 
@@ -207,12 +206,12 @@ end
 local function SetPlayerClothing(playerid)
 
 	SetPlayerShoes(playerid)
-	SetPlayerSkinColor(playerid)
-	SetPlayerPupilSize(playerid)
 	SetPlayerHair(playerid)
-	SetPlayerHairColor(playerid)
 	SetPlayerShirt(playerid)
 	SetPlayerPants(playerid)
+	--SetPlayerSkinColor(playerid)
+	--SetPlayerPupilSize(playerid)
+	--SetPlayerHairColor(playerid)
 	--SetPlayerPantsColor(playerid)
 end
 AddRemoteEvent("SetPlayerClothing", SetPlayerClothing)
