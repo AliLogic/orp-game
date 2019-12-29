@@ -3,7 +3,7 @@ local colour = ImportPackage('colours')
 AddCommand("badge", function (playerid, lookupid)
 	local factionId = PlayerData[playerid].faction
 
-	if FactionData[factionId].id == 0 then
+	if factionId == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
@@ -40,7 +40,7 @@ local function cmd_handcuff(playerid, lookupid)
 
 	local factionId = PlayerData[playerid].faction
 
-	if FactionData[factionId].id == 0 then
+	if factionId == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
@@ -92,7 +92,7 @@ end)
 AddCommand("facmod", function(playerid)
 	local factionId = PlayerData[playerid].faction
 
-	if FactionData[factionId].id == 0 then
+	if factionId == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
