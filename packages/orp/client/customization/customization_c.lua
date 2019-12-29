@@ -120,8 +120,7 @@ function SetPlayerSkinColor(playerid, r, g, b)
 	end
 
 	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Body")
-	-- Set brownish skin color.
-	SkeletalMeshComponent:SetColorParameterOnMaterials("Skin Color", FLinearColor(r, g, b, 0.0))
+	SkeletalMeshComponent:SetColorParameterOnMaterials("Skin Color", FLinearColor(r, g, b, 1.0))
 end
 
 function SetPlayerPupilSize(playerid, size)
@@ -225,7 +224,7 @@ end
 local function SetPlayerClothing(playerid)
 
 	SetPlayerShoes(playerid)
-	SetPlayerSkinColor(playerid)
+	--SetPlayerSkinColor(playerid)
 	SetPlayerPupilSize(playerid)
 	SetPlayerHair(playerid)
 	SetPlayerHairColor(playerid)
