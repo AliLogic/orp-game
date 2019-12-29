@@ -38,6 +38,9 @@ function CreateGarageData(garage)
     GarageData[garage].ey = 0
     GarageData[garage].ez = 0
     GarageData[garage].ea = 0
+
+    -- Temporary values
+    GarageData[garage].text3d_out = nil
 end
 
 function DestroyGarageData(garage)
@@ -60,15 +63,10 @@ function OnGarageLoad()
     end
 end
 
-function Garage_Create(price, ...)
-    name = table.concat({...}, " ")
+function Garage_Create(price, x, y, z, a)
     price = tonumber(price)
 
     if price < 0 then
-        return false
-    end
-    
-    if string.len(name) < 0 or string.len(name) > 32 then
         return false
     end
     
@@ -77,17 +75,18 @@ function Garage_Create(price, ...)
         return false
     end
 
-    local query = mariadb_prepare(sql, "INSERT INTO garages (name, price) VALUES ('?', ?);",
-        name, price    
+    local query = mariadb_prepare(sql, "INSERT INTO garages (price, ex, ey, ez, ea) VALUES (?, '?', '?', '?', '?');",
+        price, x, y, z, a
     )
-    mariadb_async_query(sql, query, OnGarageCreated, index, name, price)
+    mariadb_async_query(sql, query, OnGarageCreated, index, price, x, y, z)
+    return index
 end
 
-function OnGarageCreated(i, name, price)
+function OnGarageCreated(i, price, x, y, z)
     GarageData[i].id = mariadb_get_insert_id()
-
-    GarageData[i].name = name
     GarageData[i].price = price
+
+    GarageData[i].text3d_out = CreateText3D("Garage "..i.."\n/entergarage", 17, x, y, z, 0, 0, 0)
 end
 
 function Garage_Load(garageid)
