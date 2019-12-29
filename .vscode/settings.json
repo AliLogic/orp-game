@@ -212,6 +212,19 @@
         "SetPlayerName",
         "SetPlayerArmor",
         "SetPlayerHealth",
-        "ATTACH_VEHICLE"
+        "ATTACH_VEHICLE",
+        "EnableSnowParticles",
+        "SetLandscapeSnowAlpha",
+        "Base64Encode",
+        "GetMouseHitLocation",
+        "ShowWeaponHUD",
+        "ShowChat",
+        "IsValidDoor",
+        "GetObjectPropertyValue",
+        "SetObjectOutline",
+        "IsCtrlPressed",
+        "IsShiftPressed",
+        "SetObjectEditable",
+        "SetPlayerClothingPreset"
     ]
 }

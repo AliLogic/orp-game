@@ -1,5 +1,41 @@
 local colour = ImportPackage('colours')
 
+AddCommand("badge", function (playerid, lookupid)
+	local factionId = PlayerData[playerid].faction
+
+	if FactionData[factionId].id == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+	end
+
+	if FactionData[factionId].type ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
+	end
+
+	if lookupid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /badge <playerid>")
+	end
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
+	end
+
+	local x, y, z = GetPlayerLocation(playerid)
+
+	if lookupid == playerid then
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. "looks at their badge.</>")
+	else
+		-- If distance is more than whats normal then send them an error message!
+
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. "shows " .. GetPlayerName(lookupid) .." their badge.</>")
+	end
+
+	AddPlayerChat(lookupid, "______________________________________")
+	AddPlayerChat(lookupid, "  Name: "..GetPlayerName(playerid))
+	AddPlayerChat(lookupid, "  Rank: "..PlayerData[playerid].faction_rank)
+	AddPlayerChat(lookupid, "  Agency: "..FactionData[factionId].name)
+	AddPlayerChat(lookupid, "______________________________________")
+end)
+
 local function cmd_handcuff(playerid, lookupid)
 
 	local factionId = PlayerData[playerid].faction
@@ -16,6 +52,10 @@ local function cmd_handcuff(playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /h(and)cuff <playerid>")
 	end
 
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
+	end
+
 	-- If distance is more than whats normal then send them an error message!
 
 	local is_handcuffed = IsPlayerHandcuffed(lookupid)
@@ -24,7 +64,7 @@ local function cmd_handcuff(playerid, lookupid)
 		AddPlayerChat(playerid, "You unhandcuffed "..GetPlayerName(lookupid)..".")
 	else
 		AddPlayerChat(playerid, "You handcuffed "..GetPlayerName(lookupid)..".")
-		AddPlayerChat(playerid, GetPlayerName(lookupid).." handcuffed you.")
+		AddPlayerChat(lookupid, GetPlayerName(playerid).." handcuffed you.")
 	end
 
 	SetPlayerHandcuff(lookupid, not is_handcuffed)

@@ -92,7 +92,7 @@ function OnFactionLoaded(factionid)
 	else
 		local result = mariadb_get_assoc(1)
 		CreateFactionData(factionid)
-		
+
 		FactionData[factionid].id = result['id']
 		FactionData[factionid].name = result['name']
 		FactionData[factionid].short_name = result['short_name']
