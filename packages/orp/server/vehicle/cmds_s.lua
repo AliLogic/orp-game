@@ -85,7 +85,7 @@ function cmd_v(player, ...)
                     print(type(VehicleData[i].owner))
                     print(type(PlayerData[player].id))
                     if VehicleData[i].owner == PlayerData[player].id then
-                        vehicles = string.format('%s ID:%d, Model:%d', vehicles, i, VehicleData[i].model)
+                        vehicles = string.format('%s ID:%d, Model:%d |', vehicles, i, VehicleData[i].model)
                     end
                 end
             end
