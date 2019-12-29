@@ -48,3 +48,18 @@ function SetPickupColor(pickup, r, g, b, a, materialslot)
 
 	MaterialInstance:SetColorParameter("BaseColor", FLinearColor(r, g, b, a))
 end
+
+AddEvent("OnPickupNetworkUpdatePropertyValue", function(pickup, PropertyName, PropertyValue)
+
+	if (GetPickupPropertyValue(pickup, "markerid") ~= false) then
+
+		AddPlayerChat("[DEBUG-C] pickup: "..pickup)
+
+		local r = tonumber(GetPickupPropertyValue(pickup, "r"))
+		local g = tonumber(GetPickupPropertyValue(pickup, "g"))
+		local b = tonumber(GetPickupPropertyValue(pickup, "b"))
+		local a = tonumber(GetPickupPropertyValue(pickup, "a"))
+
+		SetPickupColor(pickup, r, g, b, a)
+	end
+end)
