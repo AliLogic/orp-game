@@ -43,7 +43,7 @@ AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hi
                 if IsValidPlayer(hitid) then
 
                     local x, y, z = GetPlayerLocation(player)
-                    AddPlayerChatRange(x, y, 1000.0, "<span color=\""..colour.COLOUR_PURPLE().."\">* "..GetPlayerName(player).." falls on the ground after being hit by "..GetPlayerName(hitid).."'s taser.</>")
+                    AddPlayerChatRange(x, y, 1000.0, "<span color=\""..colour.COLOUR_PURPLE().."\">* "..GetPlayerName(hitid).." falls on the ground after being hit by "..GetPlayerName(player).."'s taser.</>")
 
                     AddPlayerChat(player, "<span color=\""..colour.COLOUR_YELLOW().."\">-> You hit "..GetPlayerName(hitid).." with your taser!</>")
                     AddPlayerChat(hitid, "<span color=\""..colour.COLOUR_YELLOW().."\"> -> You were just hit by a taser. 10,000 volts go through your body. </>")
