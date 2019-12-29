@@ -76,6 +76,12 @@ function OnMarkerCreated(marker_id, modelid, x, y, z, dimension)
 	MarkerData[marker_id].model = modelid
 	MarkerData[marker_id].pickup1 = CreatePickup(modelid, x, y, z)
 
+	SetPickupPropertyValue(MarkerData[marker_id].pickup1, "r", tostring(MarkerData[marker_id].r), true)
+	SetPickupPropertyValue(MarkerData[marker_id].pickup1, "g", tostring(MarkerData[marker_id].g), true)
+	SetPickupPropertyValue(MarkerData[marker_id].pickup1, "b", tostring(MarkerData[marker_id].b), true)
+	SetPickupPropertyValue(MarkerData[marker_id].pickup1, "a", tostring(MarkerData[marker_id].a), true)
+	SetPickupPropertyValue(MarkerData[marker_id].pickup1, "markerid", marker_id, true)
+
 	MarkerData[marker_id].x1 = x
 	MarkerData[marker_id].y1 = y
 	MarkerData[marker_id].z1 = z
