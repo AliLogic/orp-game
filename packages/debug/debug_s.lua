@@ -48,7 +48,7 @@ function cmd_debugobject(player, object)
 	if (not IsValidObject(object)) then
 		return AddPlayerChat(player, "Object (ID: "..object..") does not exist")
 	end
-	
+
 	local x, y, z = GetObjectLocation(object)
 	local rx, ry, rz = GetObjectRotation(object)
 	local sx, sy, sz = GetObjectScale(object)
@@ -56,7 +56,7 @@ function cmd_debugobject(player, object)
 	local attachType, attachId = GetObjectAttachmentInfo(object)
 	local isMoving = IsObjectMoving(object)
 	--local streamed = IsObjectStreamedIn(player, object) == true and 'True' or 'False'
-	
+
 	AddPlayerChat(player, '<span color="00ee00ff">Object (ID: '..object..')</>')
 	AddPlayerChat(player, '  Loc: ' .. x .. ', ' .. y .. ', ' .. z)
 	AddPlayerChat(player, '  Rot: ' .. rx .. ', ' .. ry .. ', ' .. rz)

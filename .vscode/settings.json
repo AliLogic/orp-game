@@ -226,6 +226,20 @@
         "IsShiftPressed",
         "SetObjectEditable",
         "SetPlayerClothingPreset",
-        "SetPlayerRagdoll"
+        "SetPlayerRagdoll",
+        "IsVehicleStreamedIn",
+        "GetVehicleNumberOfSeats",
+        "GetVehiclePassenger",
+        "GetObjectAttachmentInfo",
+        "GetLocalPlayer",
+        "IsChatFocus",
+        "DestroyDoor",
+        "GetDoorLocation",
+        "GetDoorModel",
+        "SetObjectLocation",
+        "EDIT_NONE",
+        "SetDrawColor",
+        "DrawCircle3D",
+        "GetObjectModelCount"
     ]
 }

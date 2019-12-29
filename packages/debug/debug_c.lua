@@ -37,7 +37,7 @@ function ToggleDebugStats()
 		webui = CreateWebUI(1, height / 3.8, width, height, 0, 10)
 		SetWebVisibility(webui, WEB_HITINVISIBLE)
 		LoadWebFile(webui, "http://asset/"..GetPackageName().."/gui/debug.html")
-		
+
 		UpdateClientTimer = CreateTimer(UpdateClientData, 100)
 		UpdateServerTimer = CreateTimer(UpdateServerData, 500)
 	end
@@ -109,7 +109,7 @@ function OnGetUpdateServerPools(PoolsTable, NetStats, AvgPing)
 	data = data .. "Timer: " .. PoolsTable[8] .. "<br>"
 
 	ExecuteWebJS(webui, "SetServerPools('"..data.."');")
-	
+
 	local data = "<br>NET SERVER<br>"
 	data = data .. "avgPing: " .. AvgPing .. "ms<br>"
 	data = data .. "packetLoss: " .. NetStats['packetlossTotal'] .. "%<br>"
@@ -137,7 +137,7 @@ function OnPlayerStreamOut(player)
 	if not DebugEnabled then
 		return
 	end
-	
+
 	AddPlayerChat("OnPlayerStreamOut("..player..")")
 end
 AddEvent("OnPlayerStreamOut", OnPlayerStreamOut)
