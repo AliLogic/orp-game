@@ -89,6 +89,13 @@ function IsPlayerHandcuffed(playerid)
 	return 0
 end
 
+function IsPlayerAlive(playerid)
+	if PlayerData[playerid] ~= nil then
+		return (PlayerData[playerid].state == CHARACTER_STATE_ALIVE)
+	end
+	return false
+end
+
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
 AddRemoteEvent("SetPlayerCash", SetPlayerCash)
 AddRemoteEvent("AddPlayerCash", AddPlayerCash)

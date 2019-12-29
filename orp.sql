@@ -127,6 +127,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
   `level` int(11) NOT NULL DEFAULT 1,
   `exp` int(11) NOT NULL DEFAULT 0,
   `playtime` int(11) NOT NULL DEFAULT 0,
+  `state` int(2) NOT NULL DEFAULT 1,
   `x` varchar(50) NOT NULL DEFAULT '170694.515625',
   `y` varchar(50) NOT NULL DEFAULT '194947.453125',
   `z` varchar(50) NOT NULL DEFAULT '1396.9643554688',
