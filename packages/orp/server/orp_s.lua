@@ -66,6 +66,18 @@ AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hi
     end
 end)
 
+AddEvent("OnPlayerStreamIn", function (player, otherplayer)
+	if PlayerData[otherplayer].id ~= 0 then
+		SetPlayerName(otherplayer, PlayerData[otherplayer].firstname.." "..PlayerData[otherplayer].lastname)
+	end
+end)
+
+AddEvent("OnPlayerSpawn", function(playerid)
+	if PlayerData[playerid].id ~= 0 then
+		SetPlayerName(playerid, PlayerData[playerid].firstname.." "..PlayerData[playerid].lastname)
+	end
+end)
+
 function fexist(filename) return file_exists(filename) end
 function file_exists(filename)
     local file = io.open(filename, "r")
