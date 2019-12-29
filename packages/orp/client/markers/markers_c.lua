@@ -1,10 +1,11 @@
 AddEvent("OnKeyPress", function(key)
 
 	if key == 'E' then
-		local pickupid = tonumber(GetPlayerPropertyValue(GetPlayerId(), "pickupid"))
+		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
 
 		if pickupid ~= false then
 
+			pickupid = tonumber(pickupid)
 			local plX, plY, plZ = GetPlayerLocation()
 			local pkX, pkY, pkZ = GetPickupLocation(pickupid)
 			local distance = GetDistance3D(plX, plY, plZ, pkX, pkY, pkZ)

@@ -123,7 +123,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 		MarkerData[markerid].z2 = z
 
 		if MarkerData[markerid].pickup2 == 0 then
-			MarkerData[markerid].pickup2 = CreatePickup(MarkerData[markerid].modelid, MarkerData[markerid].x2, MarkerData[markerid].y2, MarkerData[markerid].z2)
+			MarkerData[markerid].pickup2 = CreatePickup(MarkerData[markerid].model, MarkerData[markerid].x2, MarkerData[markerid].y2, MarkerData[markerid].z2)
 		end
 
 		if MarkerData[markerid].pickup2 ~= 0 then
