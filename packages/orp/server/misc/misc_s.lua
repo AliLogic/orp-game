@@ -37,7 +37,7 @@ function SetPlayerChatBubble(player, message, seconds)
 	end
 
 	PlayerData[player].label = CreateText3D(message, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-	SetText3DAttached(PlayerData[player].label, ATTACH_PLAYER, player, 0.0, 0.0, 180.0)
+	SetText3DAttached(PlayerData[player].label, ATTACH_PLAYER, player, 0.0, 0.0, 190.0)
 
 	--[[Delay(seconds * 1000, function (player)
 		if PlayerData[player].label ~= nil then
