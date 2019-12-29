@@ -214,6 +214,71 @@ AddCommand("a", function (player, ...)
 	end
 end)
 
+AddCommand("setstats", function (player, target, prefix, ...)
+	if (PlayerData[player].admin < 4) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if target == nil then
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /setstats <playerid> <prefix> <value>")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> cash, level, exp")
+		return true
+	end
+
+	target = tonumber(target)
+
+	if not IsValidPlayer(target) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	if PlayerData[target].logged_in == false then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
+	end
+
+	local args = table.concat({...}, " ")
+
+	if prefix == "cash" or prefix == "money" then
+
+		local amount = tonumber(args)
+
+		if amount < 0 or amount > 100000 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have inputted an invalid amount.</>")
+		end
+
+		SetPlayerCash(target, amount)
+
+		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s cash to $" .. amount .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. "has set your cash to $" .. amount .. ".")
+
+	elseif prefix == "level" or prefix == "lvl" then
+
+		local level = tonumber(args)
+
+		if level < 0 or level > 1000 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have inputted an invalid level.</>")
+		end
+
+		PlayerData[target].level = level
+
+		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s level to " .. level .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. "has set your level to " .. level .. ".")
+
+	elseif prefix == "exp" or prefix == "xp" then
+
+		local exp = tonumber(args)
+
+		if exp < 0 or exp > 1000 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have inputted an invalid exp.</>")
+		end
+
+		PlayerData[target].exp = exp
+
+		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s experience points to " .. exp .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. "has set your experience points to " .. exp .. ".")
+
+	end
+end)
+
 AddCommand("astats", function (player, target)
 	if (PlayerData[player].admin < 2) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
@@ -223,13 +288,13 @@ AddCommand("astats", function (player, target)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /astats <playerid>")
 	end
 
-	if IsValidPlayer(target) == nil then
+	target = tonumber(target)
+
+	if not IsValidPlayer(target) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
 	end
 
-	target = tonumber(target)
-
-	if PlayerData[tonumber(target)].logged_in == false then
+	if PlayerData[target].logged_in == false then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
 	end
 
@@ -394,6 +459,6 @@ AddCommand("ahelp", function (player)
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
     end
     if PlayerData[player].admin > 4 then
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/apos /asetadmin /acreatefaction /aeditfaction")
+        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/apos /asetadmin /acreatefaction /aeditfaction /setstats")
     end
 end)
