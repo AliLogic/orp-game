@@ -34,10 +34,20 @@ function CreateGarageData(garage)
 	GarageData[garage].iz = 0
 	GarageData[garage].ia = 0
 
+<<<<<<< HEAD
 	GarageData[garage].ex = 0
 	GarageData[garage].ey = 0
 	GarageData[garage].ez = 0
 	GarageData[garage].ea = 0
+=======
+    GarageData[garage].ex = 0
+    GarageData[garage].ey = 0
+    GarageData[garage].ez = 0
+    GarageData[garage].ea = 0
+
+    -- Temporary values
+    GarageData[garage].text3d_out = nil
+>>>>>>> 7ee79004aae45f6fc3b3ae004efc4182ab862f0f
 end
 
 function DestroyGarageData(garage)

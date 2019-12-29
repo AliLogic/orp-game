@@ -63,11 +63,9 @@ function OnAccountCheckBan(player)
 		CheckForIPBan(player)
 	else
 		--There is a ban in the database for this account
-		local result = mariadb_get_assoc(1)
+		print("Kicking "..GetPlayerName(player).." because their account was banned.")
 
-		print("Kicking "..GetPlayerName(player).." because their account was banned")
-
-		KickPlayer(player, "🚨 <span color=\""..colour.COLOR_LIGHTRED()"\">You have been banned from the server. Reason: "..result['reason'].."</>")
+		KickPlayer(player, "🚨 <span color=\""..colour.COLOR_LIGHTRED()"\">You have been banned from the server. Reason: "..mariadb_get_value_name(1, "reason").."</>")
 	end
 end
 
@@ -88,8 +86,6 @@ function OnAccountCheckIpBan(player)
 		end
 	else
 		print("Kicking "..GetPlayerName(player).." because their IP was banned")
-
-		local result = mariadb_get_assoc(1)
 
 		KickPlayer(player, "🚨 <span color=\""..colour.COLOR_LIGHTRED()"\">You have been banned from the server.</>")
 	end
@@ -423,8 +419,11 @@ function SetPlayerLoggedIn(player)
 	SetPlayerDimension(player, 0)
 
 	PlayerData[player].pd_timer = CreateTimer(OnPlayerPayday, 60 * 1000, player)
-	SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
-		
+
+	Delay(1000, function ()
+		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
+	end)
+	
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
 	--CallEvent("OnPlayerJoined", player)
 end
