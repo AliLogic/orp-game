@@ -54,7 +54,6 @@ AddCommand("slap", function (playerid, lookupid)
 end)
 
 AddCommand("goto", function (playerid, lookupid)
-
 	if (PlayerData[playerid].admin < 1) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
@@ -65,6 +64,10 @@ AddCommand("goto", function (playerid, lookupid)
 
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	if playerid == lookupid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot TP to yourself!</>")
 	end
 
 	local x, y, z = GetPlayerLocation(lookupid)
