@@ -120,7 +120,7 @@ function SetPlayerSkinColor(playerid, r, g, b)
 	end
 
 	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Body")
-	SkeletalMeshComponent:SetColorParameterOnMaterials("Skin Color", FLinearColor(r, g, b, 1.0))
+	SkeletalMeshComponent:SetColorParameterOnMaterials("Skin Color", FLinearColor(r / 255, g / 255, b / 255, 1))
 end
 
 function SetPlayerPupilSize(playerid, size)
@@ -156,24 +156,7 @@ function SetPlayerHairColor(playerid, r, g, b, a)
 
 	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing0")
 	-- Set reddish hair color.
-	SkeletalMeshComponent:SetColorParameterOnMaterials("Hair Color", FLinearColor(r, g, b, a))
-end
-
-function SetPlayerClothColor(playerid, r, g, b, a)
-
-	if r == nil then
-		r = GetPlayerPropertyValue(playerid, "shirt_color_r")
-		g = GetPlayerPropertyValue(playerid, "shirt_color_g")
-		b = GetPlayerPropertyValue(playerid, "shirt_color_b")
-		a = GetPlayerPropertyValue(playerid, "shirt_color_a")
-	end
-
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing4")
-	local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
-	DynamicMaterialInstance:SetColorParameter("Clothing Color", FLinearColor(r, g, b, a))
-	SkeletalMeshComponent:SetRelativeScale3D(FVector(1.0, 1.01, 1.0))
-	SkeletalMeshComponent:SetRelativeRotation(FRotator(0.0, 0.0, 0.0))
-	SkeletalMeshComponent:SetRelativeLocation(FVector(0.0, 0.0, 0.0))
+	SkeletalMeshComponent:SetColorParameterOnMaterials("Hair Color", FLinearColor(r / 255, g / 255, b / 255, a / 255))
 end
 
 function SetPlayerShirt(playerid, shirtid)
@@ -218,7 +201,7 @@ function SetPlayerPantsColor(playerid, r, g, b, a)
 
 	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing4")
 	local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
-	DynamicMaterialInstance:SetColorParameter("Clothing Color", FLinearColor(r, g, b, a))
+	DynamicMaterialInstance:SetColorParameter("Clothing Color", FLinearColor(r / 255, g / 255, b / 255, a / 255))
 end
 
 local function SetPlayerClothing(playerid)
@@ -228,7 +211,6 @@ local function SetPlayerClothing(playerid)
 	SetPlayerPupilSize(playerid)
 	SetPlayerHair(playerid)
 	SetPlayerHairColor(playerid)
-	SetPlayerClothColor(playerid)
 	SetPlayerShirt(playerid)
 	SetPlayerPants(playerid)
 	--SetPlayerPantsColor(playerid)
