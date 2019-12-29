@@ -240,7 +240,7 @@ AddEvent("OnPlayerStreamIn", function(player)
 end)
 
 AddEvent("OnPlayerNetworkUpdatePropertyValue", function(player, property, id)
-	if ValidPlayer(player) then
+	if IsValidPlayer(player) then
 		SetPlayerClothing(player)
 	end
 end)
