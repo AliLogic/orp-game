@@ -240,6 +240,7 @@
         "EDIT_NONE",
         "SetDrawColor",
         "DrawCircle3D",
-        "GetObjectModelCount"
+        "GetObjectModelCount",
+        "NotifyCrosshairHit"
     ]
 }

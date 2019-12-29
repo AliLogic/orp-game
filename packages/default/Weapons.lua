@@ -1077,7 +1077,6 @@ AddEvent("OnPackageStart", function()
 	Weapon:SetReloadEndSound(USoundCue.LoadFromAsset("/Game/Weapons/Sounds/Cues/HZTaserReloadEnd"))
 	Weapon:SetNoAmmoSound(USoundCue.LoadFromAsset("/Game/Weapons/Sounds/Cues/HZEmptyTaser_Cue"))
 	GetWeaponIdentifier():RegisterWeapon(Weapon)
-	
 end)
 
 local HitSounds = {}
@@ -1109,89 +1108,89 @@ function OnPlayWeaponHitEffects(PlayerId, Weapon, HitType, HitId, StartLocation,
 
 	HitNormal = HitNormal:ToOrientationRotator()
 	HitNormal.Roll = RandomFloat(-180.0, 180.0)
-	
+
 	if HitType == HIT_AIR then
-	
+
 	elseif HitType == HIT_PLAYER then
-	
+
 		-- Show some blood on the ground
 		GetPlayerActor(HitId):PlayBloodDecalEffects()
-	
+
 		-- If the local player shot trigger the crosshair hitmarker
 		if PlayerId == GetPlayerId() then	
 			NotifyCrosshairHit()
 		end
-	
+
 		local HitEffect = GetWorld():SpawnEmitterAttached(UParticleSystem.LoadFromAsset(HitParticles["Blood"]), HitResult:GetComponent(), "", HitLocationRelative, HitNormal, EAttachLocation.KeepRelativeOffset)
 		HitEffect:SetRelativeScale3D(FVector(0.6, 0.6, 0.6))
-		
+
 		HitEffect = GetWorld():SpawnEmitterAttached(UParticleSystem.LoadFromAsset(HitParticles["BloodCloud"]), HitResult:GetComponent(), "", HitLocationRelative, HitNormal, EAttachLocation.KeepRelativeOffset)
 		HitEffect:SetRelativeScale3D(FVector(0.2, 0.2, 0.2))
-		
+
 		GetWorld():SpawnSoundAttached(USoundCue.LoadFromAsset(HitSounds["Player"]), HitResult:GetComponent(), "", HitLocationRelative, EAttachLocation.KeepRelativeOffset)
-		
+
 	elseif HitType == HIT_VEHICLE then
-		
+
 		if Weapon:GetWeaponType() ~= 0 then
 			local HitEffect = GetWorld():SpawnEmitterAttached(UParticleSystem.LoadFromAsset(HitParticles["Metal"]), HitResult:GetComponent(), "", HitLocationRelative, HitNormal, EAttachLocation.KeepRelativeOffset)
 			HitEffect:SetWorldScale3D(FVector(0.5, 0.5, 0.5))
-			
+
 			GetWorld():SpawnDecalAttached(UMaterialInterface.LoadFromAsset(HitDecals["Metal"]), FVector(8.0, 28.0, 28.0), HitResult:GetComponent(), "", HitLocationRelative, HitNormal, 20.0, EAttachLocation.KeepRelativeOffset)
 		end
-		
+
 		GetWorld():SpawnSoundAttached(USoundCue.LoadFromAsset(HitSounds["Vehicle"]), HitResult:GetComponent(), "", HitLocationRelative, EAttachLocation.KeepRelativeOffset)
-		
+
 	elseif HitType == HIT_OBJECT then
-	
+
 		local Sound
 		if HitResult:GetPhysicalSurface() == EPhysicalSurface.SurfaceGlass then
 			Sound = USoundCue.LoadFromAsset(HitSounds["Glass"])
 		else
 			Sound = USoundCue.LoadFromAsset(HitSounds["Object"])
 		end
-		
+
 		if HitId ~= 0 then
 			if Weapon:GetWeaponType() ~= 0 then
 				local HitEffect = GetWorld():SpawnEmitterAttached(UParticleSystem.LoadFromAsset(HitParticles["Plaster"]), HitResult:GetComponent(), "", HitLocationRelative, HitNormal, EAttachLocation.KeepRelativeOffset)
 				HitEffect:SetWorldScale3D(FVector(0.25, 0.25, 0.25))
-				
+
 				GetWorld():SpawnDecalAttached(UMaterialInterface.LoadFromAsset(HitDecals["Plaster"]), FVector(8.0, 28.0, 28.0), HitResult:GetComponent(), "", HitLocationRelative, HitNormal, 20.0, EAttachLocation.KeepRelativeOffset)
 			end
-			
+
 			GetWorld():SpawnSoundAttached(Sound, HitResult:GetComponent(), "", HitLocationRelative, EAttachLocation.KeepRelativeOffset)
 		else
 			if Weapon:GetWeaponType() ~= 0 then
 				local HitEffect = GetWorld():SpawnEmitterAtLocation(UParticleSystem.LoadFromAsset(HitParticles["Plaster"]), HitLocation, HitNormal, FVector(1.0, 1.0, 1.0))
 				HitEffect:SetWorldScale3D(FVector(0.25, 0.25, 0.25))
-				
+
 				GetWorld():SpawnDecalAtLocation(UMaterialInterface.LoadFromAsset(HitDecals["Plaster"]), FVector(8.0, 28.0, 28.0), HitLocation, HitNormal, 20.0)
 			end
-			
+
 			GetWorld():SpawnSoundAtLocation(Sound, HitLocation)
 		end
-	
+
 	elseif HitType == HIT_NPC then
-	
+
 		-- Show some blood on the ground
 		GetNPCActor(HitId):PlayBloodDecalEffects()
-		
+
 		if PlayerId == GetPlayerId() then	
 			NotifyCrosshairHit()
 		end
-		
+
 		local HitEffect = GetWorld():SpawnEmitterAttached(UParticleSystem.LoadFromAsset(HitParticles["Blood"]), HitResult:GetComponent(), "", HitLocationRelative, HitNormal, EAttachLocation.KeepRelativeOffset)
 		HitEffect:SetRelativeScale3D(FVector(0.6, 0.6, 0.6))
-		
+
 		HitEffect = GetWorld():SpawnEmitterAttached(UParticleSystem.LoadFromAsset(HitParticles["BloodCloud"]), HitResult:GetComponent(), "", HitLocationRelative, HitNormal, EAttachLocation.KeepRelativeOffset)
 		HitEffect:SetRelativeScale3D(FVector(0.2, 0.2, 0.2))
-		
+
 		GetWorld():SpawnSoundAttached(USoundCue.LoadFromAsset(HitSounds["Player"]), HitResult:GetComponent(), "", HitLocationRelative, EAttachLocation.KeepRelativeOffset)
-	
+
 	elseif HitType == HIT_LANDSCAPE then
-	
+
 		local HitEffect = GetWorld():SpawnEmitterAtLocation(UParticleSystem.LoadFromAsset(HitParticles["Dirt"]), HitLocation, HitNormal, FVector(1.0, 1.0, 1.0))
 		HitEffect:SetWorldScale3D(FVector(0.45, 0.45, 0.1))
-		
+
 		local Sound
 		local Surface = HitResult:GetPhysicalSurface()
 		if Surface == EPhysicalSurface.SurfaceGrass then
@@ -1205,25 +1204,25 @@ function OnPlayWeaponHitEffects(PlayerId, Weapon, HitType, HitId, StartLocation,
 		else
 			Sound = USoundCue.LoadFromAsset(HitSounds["Ground"])
 		end
-		
+
 		GetWorld():SpawnSoundAtLocation(Sound, HitLocation)
-		
+
 	elseif HitType == HIT_WATER then
-	
+
 		local HitEffect = GetWorld():SpawnEmitterAtLocation(UParticleSystem.LoadFromAsset(HitParticles["Water"]), HitLocation, HitNormal, FVector(1.0, 1.0, 1.0))
 		HitEffect:SetWorldScale3D(FVector(0.3, 0.3, 0.3))
-		
+
 		GetWorld():SpawnSoundAtLocation(USoundCue.LoadFromAsset(HitSounds["Water"]), HitLocation, HitNormal)
-		
+
 	end
-	
+
 	local HitComponent = HitResult:GetComponent()
 	if HitComponent:IsValid() and HitComponent:IsSimulatingPhysics() then
-	
+
 		local MassMultiplier = HitComponent:GetMass() * -100.0
 		local Impulse = HitResult.Normal * FVector(MassMultiplier, MassMultiplier, MassMultiplier)
 		HitComponent:AddImpulseAtLocation(Impulse, HitResult.Location)
-		
+
 	end
 end
 AddEvent("OnPlayWeaponHitEffects", OnPlayWeaponHitEffects)
