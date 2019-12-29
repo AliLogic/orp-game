@@ -422,7 +422,7 @@ function SetPlayerLoggedIn(player)
 
 	PlayerData[player].pd_timer = CreateTimer(OnPlayerPayday, 60 * 1000, player)
 	SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
-	
+
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
 	--CallEvent("OnPlayerJoined", player)
 end
@@ -470,6 +470,11 @@ function FreezePlayer(player) return CallRemoteEvent(player, 'FreezePlayer', pla
 
 AddRemoteEvent('accounts:kick', function (player)
 	KickPlayer(player, "You decided to quit the server!")
+end)
+
+AddCommand("name", function (player) 
+	SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
+	AddPlayerChat(player, "Name set to: "..PlayerData[player].firstname.." "..PlayerData[player].lastname)
 end)
 
 --[[VEHICLE_NAMES = {
