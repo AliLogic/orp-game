@@ -106,7 +106,7 @@ function Business_Create(player, type, enterable, price, ...)
 
     if enterable == 0 then
         local x, y, z = GetPlayerLocation(player)
-        BusinessData[business].text3d = CreateText3D(string.format("%s %d\n/buy", BusinessData[business].name, index), 17, x, y, z, 0, 0, 0)
+        BusinessData[index].text3d = CreateText3D(string.format("%s %d\n/buy", BusinessData[index].name, index), 17, x, y, z, 0, 0, 0)
     end
 
     -- For enterable == 1, set it whenever they set a entrance (ex ey ez) to the business.
@@ -207,7 +207,7 @@ function OnBusinessUnloaded(business)
 end
 
 function Business_Destroy(business)
-	if BusinessData[vehicle] == nil then
+	if BusinessData[business] == nil then
 		return false
 	end
 

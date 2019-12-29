@@ -33,10 +33,10 @@ function CreateMarkerData(marker_id)
 	MarkerData[marker_id].z2 = 0
 	MarkerData[marker_id].dimension2 = 0
 
-	MarkerData[marker_id].r = 100
-	MarkerData[marker_id].g = 100
+	MarkerData[marker_id].r = 255
+	MarkerData[marker_id].g = 204
 	MarkerData[marker_id].b = 0
-	MarkerData[marker_id].a = 100
+	MarkerData[marker_id].a = 200
 
 	MarkerData[marker_id].is_locked = true
 end
@@ -147,7 +147,7 @@ function OnMarkerLoaded(indexid, marker_id)
 		SetPickupPropertyValue(MarkerData[indexid].pickup1, "a", tostring(MarkerData[indexid].a), true)
 
 		if MarkerData[indexid].x ~= 0 and MarkerData[indexid].y ~= 0 then
-			MarkerData[indexid].pickup2 = CreatePickup(MarkerData[indexid].modelid, MarkerData[indexid].x2, MarkerData[indexid].y2, MarkerData[indexid].z2)
+			MarkerData[indexid].pickup2 = CreatePickup(MarkerData[indexid].model, MarkerData[indexid].x2, MarkerData[indexid].y2, MarkerData[indexid].z2)
 			SetPickupDimension(MarkerData[indexid].pickup2, MarkerData[indexid].dimension2)
 			SetPickupPropertyValue(MarkerData[indexid].pickup2, "markerid", indexid, true)
 			SetPickupPropertyValue(MarkerData[indexid].pickup2, "r", tostring(MarkerData[indexid].r), true)
@@ -240,7 +240,7 @@ AddRemoteEvent("OnPlayerInteractMarker", function (playerid, pickupid)
 				break
 			elseif MarkerData[i].pickup2 == pickupid then
 				SetPlayerLocation(playerid, MarkerData[i].x1, MarkerData[i].y1, MarkerData[i].z1)
-				break;
+				break
 			end
 		end
 	end

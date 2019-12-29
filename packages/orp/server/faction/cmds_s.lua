@@ -1,5 +1,37 @@
 local colour = ImportPackage('colours')
 
+local function cmd_handcuff(playerid, lookupid)
+
+	local factionId = PlayerData[playerid].faction
+
+	if FactionData[factionId].id == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+	end
+
+	if FactionData[factionId].type ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
+	end
+
+	if lookupid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /h(and)cuff <playerid>")
+	end
+
+	-- If distance is more than whats normal then send them an error message!
+
+	local is_handcuffed = IsPlayerHandcuffed(lookupid)
+
+	if is_handcuffed then
+		AddPlayerChat(playerid, "You unhandcuffed "..GetPlayerName(lookupid)..".")
+	else
+		AddPlayerChat(playerid, "You handcuffed "..GetPlayerName(lookupid)..".")
+		AddPlayerChat(playerid, GetPlayerName(lookupid).." handcuffed you.")
+	end
+
+	SetPlayerHandcuff(lookupid, not is_handcuffed)
+end
+AddCommand("hcuff", cmd_handcuff)
+AddCommand("handcuff", cmd_handcuff)
+
 AddCommand("factions", function (player)
 	if #FactionData < 1 then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> No factions currently exist.")
@@ -56,7 +88,7 @@ AddCommand("f", function(playerid, ...)
 	end
 end)
 
-function cmd_acf(player, maxrank, shortname, ...)
+local function cmd_acf(player, maxrank, shortname, ...)
     if (PlayerData[player].admin < 5) then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
     end
@@ -128,7 +160,7 @@ function cmd_aef(player, faction, prefix, ...)
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction type to Police.")
 		elseif type == FACTION_MEDIC then
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction type to Medic.")
-		elseif type == FACTION_GOVV then
+		elseif type == FACTION_GOV then
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction type to Government.")
 		end
 

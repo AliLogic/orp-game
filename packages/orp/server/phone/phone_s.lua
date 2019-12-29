@@ -38,31 +38,31 @@ CellPlans = {
 	--[[ LIMITED/ UNLIMITED TEXTING ONLY ]]--
 	{
 		plan_name = "Limited Texting (10 mins)",
-		
+
 		texting = true,
 		text_limited = true,
-		
+
 		calling = false,
 		call_limited = false,
-		
+
 		data = false,
 		data_limited = false,
-		
+
 		minutes = 10,
 		data_amount = 0
 	},
 	{
 		plan_name = "Limited Texting (25 mins)",
-		
+
 		texting = true,
 		text_limited = true,
-		
+
 		calling = false,
 		call_limited = false,
-		
+
 		data = false,
 		data_limited = false,
-		
+
 		minutes = 25,
 		data_amount = 0
 	},
@@ -83,7 +83,7 @@ CellPlans = {
 	},
 	{
 		plan_name = "Unlimited Texting",
-		
+
 		texting = true,
 		text_limited = false,
 
@@ -92,7 +92,7 @@ CellPlans = {
 
 		data = false,
 		data_limited = false,
-		
+
 		minutes = 0,
 		data_amount = 0
 	},
@@ -108,7 +108,7 @@ CellPlans = {
 
 		data = false,
 		data_limited = false,
-		
+
 		minutes = 15,
 		data_amount = 0
 	},
@@ -123,7 +123,7 @@ CellPlans = {
 
 		data = false,
 		data_limited = false,
-		
+
 		minutes = 30,
 		data_amount = 0
 	},
@@ -138,7 +138,7 @@ CellPlans = {
 
 		data = false,
 		data_limited = false,
-		
+
 		minutes = 60,
 		data_amount = 0
 	},
@@ -154,7 +154,7 @@ CellPlans = {
 
 		data = false,
 		data_limited = false,
-		
+
 		minutes = 15,
 		data_amount = 0
 	},
@@ -169,7 +169,7 @@ CellPlans = {
 
 		data = false,
 		data_limited = false,
-		
+
 		minutes = 30,
 		data_amount = 0
 	},
@@ -184,7 +184,7 @@ CellPlans = {
 
 		data = false,
 		data_limited = false,
-		
+
 		minutes = 60,
 		data_amount = 0
 	},
@@ -200,7 +200,7 @@ CellPlans = {
 
 		data = false,
 		data_limited = false,
-		
+
 		minutes = 0,
 		data_amount = 0
 	},
@@ -216,7 +216,7 @@ CellPlans = {
 
 		data = true,
 		data_limited = true,
-		
+
 		minutes = 0,
 		data_amount = 25
 	},
@@ -231,7 +231,7 @@ CellPlans = {
 
 		data = true,
 		data_limited = true,
-		
+
 		minutes = 0,
 		data_amount = 50
 	},
@@ -246,7 +246,7 @@ CellPlans = {
 
 		data = true,
 		data_limited = true,
-		
+
 		minutes = 0,
 		data_amount = 100
 	},
@@ -262,7 +262,7 @@ CellPlans = {
 
 		data = true,
 		data_limited = false,
-		
+
 		minutes = 0,
 		data_amount = 0
 	}
@@ -313,6 +313,10 @@ end
 
 local function cmd_sms(playerid, phonenumber, ...)
 
+	if not IsPlayerAlive(playerid) then
+		return AddPlayerChat(playerid, "ERROR: You can't use your phone right now.")
+	end
+
 	if IsPlayerPhoneOff(playerid) then
 		return AddPlayerChat(playerid, "ERROR: Your cellphone is turned off.");
 	end
@@ -333,7 +337,7 @@ local function cmd_sms(playerid, phonenumber, ...)
 
 	AddPlayerChat(playerid, "Your text message is being sent.");
 
-	SetPlayerChatBubble(playerid, "* "..GetPlayerName(playerid).." takes out their cellphone.", seconds)
+	SetPlayerChatBubble(playerid, "* "..GetPlayerName(playerid).." takes out their cellphone.", 4)
 
 	-- send the sms to the number (error if number is inactive)
 	-- send the sms to the player
@@ -343,6 +347,11 @@ AddCommand("sms", cmd_sms)
 AddCommand("rcs", cmd_sms)
 
 AddCommand("louspeaker", function (playerid)
+
+	if not IsPlayerAlive(playerid) then
+		return AddPlayerChat(playerid, "ERROR: You can't use your phone right now.")
+	end
+
 	if IsPlayerPhoneOff(playerid) then
 		return AddPlayerChat(playerid, "ERROR: Your cellphone is turned off.");
 	end

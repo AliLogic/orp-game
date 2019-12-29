@@ -3,6 +3,10 @@ local colour = ImportPackage('colours')
 PlayerData = {}
 CharacterData = {}
 
+CHARACTER_STATE_ALIVE = 1
+CHARACTER_STATE_WOUNDED = 2
+CHARACTER_STATE_DEAD = 3
+
 AddEvent("OnPackageStart", function ()
 	CreateTimer(function()
 		for _, v in pairs(GetAllPlayers()) do
@@ -86,7 +90,7 @@ function OnAccountCheckIpBan(player)
 		print("Kicking "..GetPlayerName(player).." because their IP was banned")
 
 		local result = mariadb_get_assoc(1)
-		
+
 		KickPlayer(player, "🚨 <span color=\""..colour.COLOR_LIGHTRED()"\">You have been banned from the server.</>")
 	end
 end
@@ -113,7 +117,7 @@ AddRemoteEvent("accounts:characterCreated", function (player, firstname, lastnam
 	elseif gender == 'Female' then
 		PlayerData[player].gender = 1
 	end
-	
+
 	local query = mariadb_prepare(sql, "INSERT INTO characters (accountid, steamid, firstname, lastname, gender) VALUES (?, '?', '?', '?', ?);",
 		PlayerData[player].accountid, tostring(GetPlayerSteamId(player)), PlayerData[player].firstname, PlayerData[player].lastname, PlayerData[player].gender)
 
@@ -122,7 +126,7 @@ end)
 
 function OnCharacterCreated(player)
 	PlayerData[player].id = mariadb_get_insert_id()
-	
+
 	print("Character ID "..PlayerData[player].id.." created for "..player)
 
 		PlayerData[player].x = 125773.0
@@ -212,9 +216,9 @@ function OnCharacterPartLoaded(player)
 
 		SetPlayerHealth(player, tonumber(result['health']))
 		SetPlayerArmor(player, tonumber(result['armour']))
-		
+
 		SetPlayerLoggedIn(player)
-		
+
 		AddPlayerChat(player, '<span color=\""..colour.COLOUR_PMOUT().."\" style="bold italic" size="15">Welcome back to Onset Roleplay '..GetPlayerName(player)..'.</>')
 		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)]]--
 	end
@@ -244,6 +248,7 @@ function OnCharacterLoaded(player, id)
 
 		PlayerData[player].lastname = result['lastname']
 		PlayerData[player].gender = math.tointeger(result['gender'])
+		PlayerData[player].state = math.tointeger(result['state'])
 
 		PlayerData[player].cash = math.tointeger(result['cash'])
 		PlayerData[player].bank = math.tointeger(result['bank'])
@@ -284,6 +289,7 @@ function CreatePlayerData(player)
 	PlayerData[player].firstname = ""
 	PlayerData[player].lastname = ""
 	PlayerData[player].gender = 0
+	PlayerData[player].state = CHARACTER_STATE_ALIVE
 
 	PlayerData[player].level = 1
 	PlayerData[player].exp = 0
@@ -361,7 +367,7 @@ function SavePlayerAccount(player)
 		json_encode(PlayerData[player].inventory),
 		PlayerData[player].created,
 		PlayerData[player].accountid
-		)]]--
+	)]]--
 
 	local query = mariadb_prepare(sql, "UPDATE accounts SET steamname = '?', helper = '?', locale = '?' WHERE id = ? LIMIT 1;",
 		PlayerData[player].name,
@@ -399,7 +405,7 @@ function DestroyPlayerData(player)
 	if (PlayerData[player] == nil) then
 		return
 	end
-	
+
 	DestroyTimer(CharacterData[player].pd_timer)
 
 	PlayerData[player] = nil
@@ -440,13 +446,14 @@ function OnPlayerPayday(player)
 
 		local exp = PlayerData[player].exp
 		local required_exp = (exp * 4) + 2
-		
+		local level = PlayerData[player].level
+
 		PlayerData[player].exp = (PlayerData[player].exp + 1)
-	
+
 		if (PlayerData[player].exp > (level * 4) + 2) then
 			AddPlayerChat(player, "You now have enough experience points to level up ("..exp.."/"..required_exp..")")
 		end
-	
+
 		local query = mariadb_prepare(sql, "UPDATE characters SET exp = ? WHERE id = ? LIMIT 1",
 			PlayerData[player].exp,
 			PlayerData[player].id
