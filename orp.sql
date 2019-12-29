@@ -325,10 +325,10 @@ CREATE TABLE `markers` (
   `y2` float DEFAULT NULL,
   `z2` float DEFAULT NULL,
   `dimension2` int(11) DEFAULT NULL,
-  `r` int(11) DEFAULT NULL,
-  `g` int(11) DEFAULT NULL,
-  `b` int(11) DEFAULT NULL,
-  `a` int(11) DEFAULT NULL,
+  `r` int(11) DEFAULT 255,
+  `g` int(11) DEFAULT 204,
+  `b` int(11) DEFAULT 0,
+  `a` int(11) DEFAULT 200,
   `is_locked` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
