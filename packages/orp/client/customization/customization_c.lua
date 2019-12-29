@@ -100,76 +100,147 @@ Hair[5]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Police_Hair_LPR"
 Hair[6]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_03_LPR"
 Hair[7]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_02_LPR"
 
-AddRemoteEvent("SetPlayerShoes", function (shoeid)
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body")
-	SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Clothing2")
+function SetPlayerShoes(playerid, shoeid)
+
+	if shoeid == nil then
+		shoeid = GetPlayerPropertyValue(playerid, "shoe_id")
+	end
+
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Body")
+	SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing2")
 	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset(Shoes[shoeid]))
-end)
+end
 
-AddRemoteEvent("SetPlayerSkinColor", function (r, g, b)
+function SetPlayerSkinColor(playerid, r, g, b)
 
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body")
+	if r == nil then
+		r = GetPlayerPropertyValue(playerid, "skin_color_r")
+		g = GetPlayerPropertyValue(playerid, "skin_color_g")
+		b = GetPlayerPropertyValue(playerid, "skin_color_b")
+	end
+
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Body")
 	-- Set brownish skin color.
 	SkeletalMeshComponent:SetColorParameterOnMaterials("Skin Color", FLinearColor(r, g, b, 0.0))
-end)
+end
 
-AddRemoteEvent("SetPlayerPupilSize", function (size)
+function SetPlayerPupilSize(playerid, size)
 
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body")
+	if size == nil then
+		size = GetPlayerPropertyValue(playerid, "pupil_size")
+	end
+
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Body")
 	-- Make the pupil size big so it looks like the player is on drugs
 	SkeletalMeshComponent:SetFloatParameterOnMaterials("PupilScale", size)
-end)
+end
 
-AddRemoteEvent("SetPlayerHair", function (hairid)
+function SetPlayerHair(playerid, hairid)
+
+	if hairid == nil then
+		hairid = GetPlayerPropertyValue(playerid, "hair_id")
+	end
 
 	-- /Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_03_LPR
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Clothing0")
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing0")
 	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset(Hair[hairid]))
-end)
+end
 
-AddRemoteEvent("SetPlayerHairColor", function (r, g, b, a)
+function SetPlayerHairColor(playerid, r, g, b, a)
 
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Clothing0")
+	if r == nil then
+		r = GetPlayerPropertyValue(playerid, "hair_color_r")
+		g = GetPlayerPropertyValue(playerid, "hair_color_g")
+		b = GetPlayerPropertyValue(playerid, "hair_color_b")
+		a = GetPlayerPropertyValue(playerid, "hair_color_a")
+	end
+
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing0")
 	-- Set reddish hair color.
 	SkeletalMeshComponent:SetColorParameterOnMaterials("Hair Color", FLinearColor(r, g, b, a))
-end)
+end
 
-AddRemoteEvent("SetPlayerClothColor", function (r, g, b, a)
+function SetPlayerClothColor(playerid, r, g, b, a)
 
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Clothing4")
+	if r == nil then
+		r = GetPlayerPropertyValue(playerid, "shirt_color_r")
+		g = GetPlayerPropertyValue(playerid, "shirt_color_g")
+		b = GetPlayerPropertyValue(playerid, "shirt_color_b")
+		a = GetPlayerPropertyValue(playerid, "shirt_color_a")
+	end
+
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing4")
 	local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
 	DynamicMaterialInstance:SetColorParameter("Clothing Color", FLinearColor(r, g, b, a))
 	SkeletalMeshComponent:SetRelativeScale3D(FVector(1.0, 1.01, 1.0))
 	SkeletalMeshComponent:SetRelativeRotation(FRotator(0.0, 0.0, 0.0))
 	SkeletalMeshComponent:SetRelativeLocation(FVector(0.0, 0.0, 0.0))
-end)
+end
 
-AddRemoteEvent("SetPlayerShirt", function (shirtid)
+function SetPlayerShirt(playerid, shirtid)
 
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Clothing0")
+	if shirtid == nil then
+		shirtid = GetPlayerPropertyValue(playerid, "shirt_id")
+	end
+
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing0")
 	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset(Tops[shirtid]))
 
-	-- local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body")
+	-- local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Body")
 	-- SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset("/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal03_LPR"))
 	-- SkeletalMeshComponent:SetMaterial(3, UMaterialInterface.LoadFromAsset("/Game/CharacterModels/Materials/HZN_Materials/M_HZN_Body_NoShoesLegsTorso")) -- Mask to hide feet, legs and torso.
 
-	-- SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Clothing1")
+	-- SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing1")
 	-- SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset("/Game/CharacterModels/SkeletalMesh/Outfits/HZN_CH3D_Prisoner_LPR"))
-end)
+end
 
-AddRemoteEvent("SetPlayerPants", function (pantid)
+function SetPlayerPants(playerid, pantid)
+
+	if pantid == nil then
+		pantid = GetPlayerPropertyValue(playerid, "pant_id")
+	end
 
 	-- /Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_CargoPants_LPR
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Clothing4")
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing4")
 	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset(Pants[pantid]))
 	SkeletalMeshComponent:SetRelativeScale3D(FVector(1.0, 1.01, 1.0))
 	SkeletalMeshComponent:SetRelativeRotation(FRotator(0.0, 0.0, 0.0))
 	SkeletalMeshComponent:SetRelativeLocation(FVector(0.0, 0.0, 0.0))
-end)
+end
 
-AddRemoteEvent("SetPlayerPantsColor", function (r, g, b, a)
+function SetPlayerPantsColor(playerid, r, g, b, a)
 
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(GetPlayerId(), "Clothing4")
+	if r == nil then
+		r = GetPlayerPropertyValue(playerid, "pant_color_r")
+		g = GetPlayerPropertyValue(playerid, "pant_color_g")
+		b = GetPlayerPropertyValue(playerid, "pant_color_b")
+		a = GetPlayerPropertyValue(playerid, "pant_color_a")
+	end
+
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(playerid, "Clothing4")
 	local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
 	DynamicMaterialInstance:SetColorParameter("Clothing Color", FLinearColor(r, g, b, a))
+end
+
+local function SetPlayerClothing(playerid)
+
+	SetPlayerShoes(playerid)
+	SetPlayerSkinColor(playerid)
+	SetPlayerPupilSize(playerid)
+	SetPlayerHair(playerid)
+	SetPlayerHairColor(playerid)
+	SetPlayerClothColor(playerid)
+	SetPlayerShirt(playerid)
+	SetPlayerPants(playerid)
+	--SetPlayerPantsColor(playerid)
+end
+
+AddEvent("OnPlayerStreamIn", function(player)
+	SetPlayerClothing(player)
+end)
+
+AddEvent("OnPlayerNetworkUpdatePropertyValue", function(player, property, id)
+	if ValidPlayer(player) then
+		SetPlayerClothing(player)
+	end
 end)

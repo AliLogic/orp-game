@@ -5,7 +5,7 @@ AddCommand("pants", function (playerid, pantid)
 	end
 
 	pantid = tonumber(pantid)
-	CallRemoteEvent(playerid, "SetPlayerPants", pantid)
+	SetPlayerPropertyValue(playerid, "pant_id", pantid, true)
 end)
 
 AddCommand("shoe", function (playerid, shoeid)
@@ -15,7 +15,7 @@ AddCommand("shoe", function (playerid, shoeid)
 	end
 	local shoeid = tonumber(shoeid)
 
-	CallRemoteEvent(playerid, "SetPlayerShoes", shoeid)
+	SetPlayerPropertyValue(playerid, "shoe_id", shoeid, true)
 end)
 
 AddCommand("skin", function (playerid, r, g, b)
@@ -24,7 +24,7 @@ AddCommand("skin", function (playerid, r, g, b)
 		return AddPlayerChat(playerid, "/skin <r> <g> <b>")
 	end
 
-	CallRemoteEvent(playerid, "SetPlayerSkinColor", r, g, b)
+	SetPlayerPropertyValue(playerid, "skin_color", r, g, b, true)
 end)
 
 AddCommand("pupil", function (playerid, pupil)
@@ -33,5 +33,5 @@ AddCommand("pupil", function (playerid, pupil)
 		return AddPlayerChat(playerid, "/pupil <size>")
 	end
 
-	CallRemoteEvent(playerid, "SetPlayerPupilSize", pupil)
+	SetPlayerPropertyValue(playerid, "pupil_size", pupil, true)
 end)
