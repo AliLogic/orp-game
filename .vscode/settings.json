@@ -212,6 +212,8 @@
         "SetPlayerName",
         "SetPlayerArmor",
         "SetPlayerHealth",
-        "ATTACH_VEHICLE"
+        "ATTACH_VEHICLE",
+        "EnableSnowParticles",
+        "SetLandscapeSnowAlpha"
     ]
 }
