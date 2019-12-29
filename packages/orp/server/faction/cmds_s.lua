@@ -1,5 +1,34 @@
 local colour = ImportPackage('colours')
 
+AddCommand("mdc", function (playerid)
+
+	local factionId = PlayerData[playerid].faction
+
+	if factionId == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+	end
+
+	if FactionData[factionId].type ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
+	end
+
+	if not IsPlayerInAnyVehicle(playerid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a vehicle.</>")
+	end
+
+	if GetPlayerVehicleSeat(playerid) ~= 1 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in the driver seat.</>")
+	end
+
+	local vehicleid = GetPlayerVehicleID(playerid)
+
+	-- if (vehicle faction == 0 or vehicle faction type is not FACTION_POLICE) then
+	-- return AddPlayerChat(playerid, "This vehicle doesn't have an MDC.")
+
+	--ShowPlayerMDC(playerid)
+	return true
+end)
+
 local function cmd_m(playerid, ...)
 	local factionId = PlayerData[playerid].faction
 
@@ -11,7 +40,7 @@ local function cmd_m(playerid, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
 	end
 
-	if not IsPlayerInVehicle(playerid) then
+	if not IsPlayerInAnyVehicle(playerid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a vehicle.</>")
 	end
 

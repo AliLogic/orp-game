@@ -241,6 +241,9 @@
         "SetDrawColor",
         "DrawCircle3D",
         "GetObjectModelCount",
-        "NotifyCrosshairHit"
+        "NotifyCrosshairHit",
+        "GetCameraLocation",
+        "GetPlayerVehicleID",
+        "IsPlayerInAnyVehicle"
     ]
 }
