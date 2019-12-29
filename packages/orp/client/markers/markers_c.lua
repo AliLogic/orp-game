@@ -40,5 +40,11 @@ function SetPickupColor(pickup, r, g, b, a, materialslot)
 	local StaticMeshComponent = GetPickupStaticMeshComponent(pickup)
 	StaticMeshComponent:SetMaterial(materialslot, UMaterialInterface.LoadFromAsset("/Game/Scripting/Materials/MI_TranslucentLit"))
 	local MaterialInstance = StaticMeshComponent:CreateDynamicMaterialInstance(materialslot)
+
+	r = r / 255
+	g = g / 255
+	b = b / 255
+	a = a / 255
+
 	MaterialInstance:SetColorParameter("BaseColor", FLinearColor(r, g, b, a))
 end
