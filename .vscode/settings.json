@@ -225,6 +225,7 @@
         "IsCtrlPressed",
         "IsShiftPressed",
         "SetObjectEditable",
-        "SetPlayerClothingPreset"
+        "SetPlayerClothingPreset",
+        "SetPlayerRagdoll"
     ]
 }

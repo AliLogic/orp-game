@@ -46,16 +46,18 @@ AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hi
                     AddPlayerChat(player, "-> You hit "..GetPlayerName(hitid).." with your taser!")
                     AddPlayerChat(hitid, "> You were just hit by a taser. 10,000 volts go through your body.")
 
-                    SetPlayerHeading(hitid, GetPlayerHeading(player) - 180)
-                    SetPlayerAnimation(hitid, "LAY10")
+                    -- SetPlayerHeading(hitid, GetPlayerHeading(player) - 180)
+                    -- SetPlayerAnimation(hitid, "LAY10")
+                    SetPlayerRagdoll(hitid, true)
 
                     CallRemoteEvent(hitid, "ToggleTaseEffect", true)
 
                     Delay(5 * 1000, function()
 
                         CallRemoteEvent(hitid, "ToggleTaseEffect", false)
-                        SetPlayerHeading(hitid, GetPlayerHeading(player) - 180)
-                        SetPlayerAnimation(hitid, "PUSHUP_END")
+                        -- SetPlayerHeading(hitid, GetPlayerHeading(player) - 180)
+                        -- SetPlayerAnimation(hitid, "PUSHUP_END")
+                        SetPlayerRagdoll(hitid, false)
                     end)
                 end
             end
