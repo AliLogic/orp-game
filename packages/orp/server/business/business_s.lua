@@ -9,6 +9,10 @@ BUSINESS_TYPE_BAR = 3
 BUSINESS_TYPE_RESTAURANT = 4
 BUSINESS_TYPE_BANK = 5
 
+BUSINESS_OWNERSHIP_STATE = 0
+BUSINESS_OWNERSHIP_SOLE = 1
+BUSINESS_OWNERSHIP_FACTION = 2
+
 function GetFreeBusinessId()
     for i = 1, MAX_BUSINESSES, 1 do
         if BusinessData[i] == nil then
@@ -26,7 +30,9 @@ function CreateBusinessData(business)
 
     BusinessData[business].id = 0
     BusinessData[business].markerid = 0 -- sqlid of the marker!
+
     BusinessData[business].owner = 0 -- 0, aka the state..
+    BusinessData[business].ownership_type = BUSINESS_OWNERSHIP_STATE
 
     BusinessData[business].name = "Business"
     BusinessData[business].locked = 0 -- for yes, put 1.
@@ -54,7 +60,9 @@ function CreateBusinessData(business)
     BusinessData[business].mz = 0.0
 
     -- Temporary values
-    BusinessData[business].text3d_in = nil
+    BusinessData[business].text3d = nil -- The marker for inside coordinates where you execute /buy.
+    BusinessData[business].text3d_in = nil -- The marker for the inside coordinates where you /exit. Pretty useless but always useful for the future.
+    BusinessData[business].text3d_outside = nil -- The marker for outside coordinates, where you do /enter and shows business name.
 end
 
 function DestroyBusinessData(business)
@@ -145,7 +153,9 @@ function OnBusinessLoaded(businessid)
 
         BusinessData[business].id = businessid
         BusinessData[business].markerid = mariadb_get_value_name_int(businessid, "markerid")
+
         BusinessData[business].owner = mariadb_get_value_name_int(businessid, "owner")
+        BusinessData[business].ownership_type = mariadb_get_value_name_int(businessid, "ownership_type")
 
         BusinessData[business].name = mariadb_get_value_name(businessid, "name")
         BusinessData[business].locked = mariadb_get_value_name_int(businessid, "locked")
@@ -187,13 +197,14 @@ end
 
 function Business_Unload(business)
     local query = mariadb_prepare(sql, "UPDATE businesses SET owner = ?, name = '?', locked = ?, type = ?, enterable = ?, price = ?, message = '?', dimension = ?\
-    ix = '?', iy = '?', iz = '?', ia = '?', ex = '?', ey = '?', ez = '?', ea = '?', mx = '?', my = '?', mz = '?' WHERE id = ?;",
+    ix = '?', iy = '?', iz = '?', ia = '?', ex = '?', ey = '?', ez = '?', ea = '?', mx = '?', my = '?', mz = '?', ownership_type = ? WHERE id = ?;",
         BusinessData[business].owner, BusinessData[business].name, BusinessData[business].locked,
         BusinessData[business].type, BusinessData[business].enterable, BusinessData[business].price,
         BusinessData[business].message, BusinessData[business].dimension,
         tostring(BusinessData[business].ix), tostring(BusinessData[business].iy), tostring(BusinessData[business].iz), tostring(BusinessData[business].ia),
         tostring(BusinessData[business].ex), tostring(BusinessData[business].ey), tostring(BusinessData[business].ez), tostring(BusinessData[business].ea),
-        tostring(BusinessData[business].mx), tostring(BusinessData[business].my), tostring(BusinessData[business].mz)
+        tostring(BusinessData[business].mx), tostring(BusinessData[business].my), tostring(BusinessData[business].mz),
+        BusinessData[business].ownership_type, BusinessData[business].id
     )
     mariadb_async_query(sql, query, OnBusinessUnloaded, business)
 end
@@ -211,7 +222,7 @@ function Business_Destroy(business)
 		return false
 	end
 
-	local query = mariadb_prepare(sql, "DELETE FROM businesses WHERE id = ?", BusinessData[business].id)
+	local query = mariadb_prepare(sql, "DELETE FROM businesses WHERE id = ?;", BusinessData[business].id)
     mariadb_async_query(sql, query)
     
     --DestroyMarker
