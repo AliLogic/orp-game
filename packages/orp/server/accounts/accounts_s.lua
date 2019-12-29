@@ -288,6 +288,7 @@ function CreatePlayerData(player)
 
 	PlayerData[player].firstname = ""
 	PlayerData[player].lastname = ""
+
 	PlayerData[player].gender = 0
 	PlayerData[player].state = CHARACTER_STATE_ALIVE
 
