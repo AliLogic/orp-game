@@ -423,7 +423,11 @@ function SetPlayerLoggedIn(player)
 	SetPlayerDimension(player, 0)
 
 	PlayerData[player].pd_timer = CreateTimer(OnPlayerPayday, 60 * 1000, player)
-	SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
+
+	Delay(1000, function ()
+		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
+	end)
+	
 		
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
 	--CallEvent("OnPlayerJoined", player)
