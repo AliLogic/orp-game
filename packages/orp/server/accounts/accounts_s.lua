@@ -381,7 +381,7 @@ function SavePlayerAccount(player)
 	PlayerData[player].x, PlayerData[player].y, PlayerData[player].z = GetPlayerLocation(player)
 	PlayerData[player].a = GetPlayerHeading(player)
 
-	local query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, mins = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
+	local query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, minutes = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
 		PlayerData[player].firstname,
 		PlayerData[player].lastname,
 		PlayerData[player].gender,
@@ -406,11 +406,11 @@ function DestroyPlayerData(player)
 		return
 	end
 
-	DestroyTimer(CharacterData[player].pd_timer)
-
+	DestroyTimer(PlayerData[player].pd_timer)
 	PlayerData[player] = nil
 	CharacterData[player] = nil
 	InventoryData[player] = nil
+
 	print("Data destroyed for: "..player)
 end
 
@@ -433,7 +433,7 @@ function OnPlayerPayday(player)
 
 	if (PlayerData[player].minutes > 60) then
 
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\"|________ PAYCHECK ________|</>")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">|________ PAYCHECK ________|</>")
 
 		AddPlayerChat(player, "Past Paycheck: $"..PlayerData[player].paycheck)
 
