@@ -146,7 +146,7 @@ function OnBusinessLoaded(businessid)
     else
         local business = GetFreeBusinessId()
         if business == 0 then
-            print("A free business id wasn't able to be found? ("..#BusinessData.."/"..MAX_BUSINESSES..") business SQL ID "..businessid)
+            print("A free business id wasn't able to be found? ("..#BusinessData.."/"..MAX_BUSINESSES..") business SQL ID "..businessid..".")
         end
     
         -- type, enterable, price, message, dimension, ix iy iz ia, ex ey ez ea, mx my mz
