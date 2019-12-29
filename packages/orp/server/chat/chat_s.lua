@@ -120,7 +120,7 @@ AddCommand("ame", function(player, ...)
     end
 
 	--SetPlayerChatBubble(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> *"..message.."</>", 4)
-	SetPlayerChatBubble(player, "*"..message.."", 4)
+	SetPlayerChatBubble(player, "* "..message.."", 4)
     AddPlayerChat(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> Annotated /me: "..message.."</>")
 end)
 
@@ -133,7 +133,7 @@ AddCommand("ado", function(player, ...)
     end
 
 	--SetPlayerChatBubble(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> *"..message.." (( "..GetPlayerName(player).." ))</>", 4)
-	SetPlayerChatBubble(player, "*"..message.." (( "..GetPlayerName(player).." ))", 4)
+	SetPlayerChatBubble(player, "* "..message.." (( "..GetPlayerName(player).." ))", 4)
     AddPlayerChat(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> Annotated /do: "..message.."</>")
 end)
 
