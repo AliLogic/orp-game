@@ -9,9 +9,9 @@ BUSINESS_TYPE_BAR = 3
 BUSINESS_TYPE_RESTAURANT = 4
 BUSINESS_TYPE_BANK = 5
 
-BUSINESS_OWNERSHIP_STATE = 0
-BUSINESS_OWNERSHIP_SOLE = 1
-BUSINESS_OWNERSHIP_FACTION = 2
+BUSINESS_OWNERSHIP_STATE = 1
+BUSINESS_OWNERSHIP_SOLE = 2
+BUSINESS_OWNERSHIP_FACTION = 3
 
 function GetFreeBusinessId()
     for i = 1, MAX_BUSINESSES, 1 do
@@ -32,7 +32,7 @@ function CreateBusinessData(business)
     BusinessData[business].markerid = 0 -- sqlid of the marker!
 
     BusinessData[business].owner = 0 -- 0, aka the state..
-    BusinessData[business].ownership_type = BUSINESS_OWNERSHIP_STATE
+    BusinessData[business].ownership_type = 0 -- aka, the state... if +1'ed.
 
     BusinessData[business].name = "Business"
     BusinessData[business].locked = 0 -- for yes, put 1.
