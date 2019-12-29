@@ -1,5 +1,32 @@
 local colour = ImportPackage('colours')
 
+local function cmd_m(playerid, ...)
+	local factionId = PlayerData[playerid].faction
+
+	if factionId == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+	end
+
+	if FactionData[factionId].type ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
+	end
+
+	if not IsPlayerInVehicle(playerid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a vehicle.</>")
+	end
+
+	if #{...} == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /megaphone <message>")
+	end
+
+	local msg = table.concat({...}, " ")
+
+	local x, y, z = GetPlayerLocation(playerid)
+	AddPlayerChatRange(x, y, 2000.0, FactionRankData[factionId].faction_rank .." " .. GetPlayerName(playerid) .. " (megaphone): "..msg)
+end
+AddCommand("m", cmd_m)
+AddCommand("megaphone", cmd_m)
+
 AddCommand("badge", function (playerid, lookupid)
 	local factionId = PlayerData[playerid].faction
 
@@ -77,9 +104,9 @@ AddCommand("factions", function (player)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> No factions currently exist.")
 	end
 
-    AddPlayerChat(player, string.format("<span color=\"%s\">|_____________[</>List of Factions<span color=\"%s\">]_____________|</>",
-        colour.COLOUR_LIGHTRED(), colour.COLOUR_LIGHTRED()
-    ))
+	AddPlayerChat(player, string.format("<span color=\"%s\">|_____________[</>List of Factions<span color=\"%s\">]_____________|</>",
+		colour.COLOUR_LIGHTRED(), colour.COLOUR_LIGHTRED()
+	))
 
 	for i = 1, #FactionData, 1 do
 		print("Faction name is "..FactionData[i].name)
@@ -129,45 +156,39 @@ AddCommand("f", function(playerid, ...)
 end)
 
 local function cmd_acf(player, maxrank, shortname, ...)
-    if (PlayerData[player].admin < 5) then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
-    end
+	if (PlayerData[player].admin < 5) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
 
-    local args = {...}
-    
-    if maxrank == nil or shortname == nil or args[1] == nil then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(f)action <maxrank> <shortname> <fullname>")
-    end
+	local args = {...}
 
-    maxrank = tonumber(maxrank)
+	if maxrank == nil or shortname == nil or args[1] == nil then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(f)action <maxrank> <shortname> <fullname>")
+	end
+
+	maxrank = tonumber(maxrank)
 
 	if string.len(maxrank) < 0 or string.len(maxrank) > 10 then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction max ranks range from 1 - 10.</>")
 	end
-    
-    if string.len(shortname) < 0 or string.len(shortname) > 6 then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction short name lengths range from 1 - 6.</>")
-    end
 
-	for _, v in pairs(args) do
-		if factionname == '' then
-			factionname = v
-		else
-			factionname = factionname.." "..v
-		end
-    end
-    
-    local faction = Faction_Create(factionname, shortname, maxrank)
+	if string.len(shortname) < 0 or string.len(shortname) > 6 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction short name lengths range from 1 - 6.</>")
+	end
 
-    AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), factionname, faction))
+	local factionname = table.contact({...}, " ")
+
+	local faction = Faction_Create(factionname, shortname, maxrank)
+
+	AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), factionname, faction))
 end
 AddCommand("acreatefaction", cmd_acf)
 AddCommand("acf", cmd_acf)
 
-function cmd_aef(player, faction, prefix, ...)
-    if (PlayerData[player].admin < 5) then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
-    end
+local function cmd_aef(player, faction, prefix, ...)
+	if (PlayerData[player].admin < 5) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
 
 	if faction == nil or prefix == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)ection <faction> <prefix>")
