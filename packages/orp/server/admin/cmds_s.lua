@@ -229,7 +229,7 @@ AddCommand("setstats", function (player, target, prefix, ...)
 
 	if target == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /setstats <playerid> <prefix> <value>")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> cash, level, exp, paycheck, frank")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> cash, bank, level, exp, paycheck, frank")
 		return true
 	end
 
@@ -257,6 +257,19 @@ AddCommand("setstats", function (player, target, prefix, ...)
 
 		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s cash to $" .. amount .. ".")
 		AddPlayerChat(target, GetPlayerName(player) .. "has set your cash to $" .. amount .. ".")
+
+	elseif prefix == "bank" then
+
+		local amount = tonumber(args)
+
+		if amount < 0 or amount > 100000 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have inputted an invalid amount.</>")
+		end
+
+		PlayerData[target].bank = amount
+
+		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s bank cash to $" .. amount .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. "has set your bank cash to $" .. amount .. ".")
 
 	elseif prefix == "level" or prefix == "lvl" then
 
