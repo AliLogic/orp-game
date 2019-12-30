@@ -19,7 +19,7 @@ LumberjackData = {}
 
 AddCommand("jobhelp", function (playerid)
 
-	AddPlayerChat(playerid, "JOB HELP")
+	AddPlayerChat(playerid, "Your job is now Lumberjack: /chop")
 
 	PlayerData[playerid].job = 1
 end)
@@ -50,7 +50,9 @@ end
 
 local function ChopTree(playerid)
 
-	if LumberjackData[playerid].tree_id ~= 0 then
+	local treeid = LumberjackData[playerid].tree_id
+
+	if treeid ~= 0 then
 
 		SetPlayerAnimation(playerid, "PICKAXE_SWING")
 		LumberjackData[playerid].seconds = LumberjackData[playerid].seconds + 1
@@ -61,6 +63,10 @@ local function ChopTree(playerid)
 
 			if IsValidObject(LumberjackData[playerid].object) then
 				DestroyObject(LumberjackData[playerid].object)
+			end
+
+			if IsValidTimer(LUMBERJACK_TREES[treeid].timer) then
+				DestroyTimer(LUMBERJACK_TREES[treeid].timer)
 			end
 
 			SetObjectRotation(LUMBERJACK_TREES[playerid].obj_id, LUMBERJACK_TREES[playerid].obj_rx, LUMBERJACK_TREES[playerid].obj_ry - 80.0, LUMBERJACK_TREES[playerid].obj_rz)
