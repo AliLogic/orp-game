@@ -224,6 +224,8 @@ local function cmd_aef(player, faction, prefix, ...)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> type, name, shortname, leader, maxrank, bank.")
 	end
 
+	faction = tonumber(faction)
+
 	if FactionData[faction] == nil or FactionData[faction].id == 0 then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: That faction does not exist.</>")
 	end
