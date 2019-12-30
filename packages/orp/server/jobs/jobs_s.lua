@@ -12,7 +12,7 @@ JOB_TYPE_LUMBERJACK = 1
 JOB_TYPE_TAXI = 2
 JOB_TYPE_TRUCKER = 3
 
-CUTTING_TIME = 20
+CUTTING_TIME = 10
 LUMBERJACK_TREES = {}
 CREATED_TREES = 0
 LumberjackData = {}
@@ -92,7 +92,7 @@ AddCommand("chop", function (playerid)
 	end
 
 	LumberjackData[playerid].object = CreateObject(1047, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-	SetObjectAttached(LumberjackData[playerid], ATTACH_PLAYER, playerid, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "hand_l")
+	SetObjectAttached(LumberjackData[playerid].object, ATTACH_PLAYER, playerid, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "hand_l")
 
 	SetPlayerAnimation(playerid, "PICKAXE_SWING")
 end)
@@ -170,30 +170,30 @@ end
 
 AddEvent("OnPackageStart", function()
 
-	-- AddLumberjackTree(63, 0.0 + 100, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(64, 0.0 + 300, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(65, 0.0 + 500, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(66, 0.0 + 700, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(67, 0.0 + 1000, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(68, 0.0 + 1300, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(69, 0.0 + 1600, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(127, 0.0 + 1900, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(141, 0.0 + 4300, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(142, 0.0 + 4600, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(143, 0.0 + 4900, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(144, 0.0 + 5200, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(134, 0.0 + 100, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(135, 0.0 + 300, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(136, 0.0 + 500, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(137, 0.0 + 700, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(138, 0.0 + 1000, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(139, 0.0 + 1300, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(140, 0.0 + 1600, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(145, 0.0 + 1900, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(146, 0.0 + 2100, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(147, 0.0 + 2400, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(148, 0.0 + 2700, 0.0, 1575.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(149, 0.0 + 3000, 0.0, 1575.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(63, 0.0 + 100, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(64, 0.0 + 300, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(65, 0.0 + 500, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(66, 0.0 + 700, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(67, 0.0 + 1000, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(68, 0.0 + 1300, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(69, 0.0 + 1600, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(127, 0.0 + 1900, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(141, 0.0 + 4300, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(142, 0.0 + 4600, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(143, 0.0 + 4900, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	-- AddLumberjackTree(144, 0.0 + 5200, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(134, 0.0 + 100, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(135, 0.0 + 300, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(136, 0.0 + 500, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(137, 0.0 + 700, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(138, 0.0 + 1000, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(139, 0.0 + 1300, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(140, 0.0 + 1600, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(145, 0.0 + 1900, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(146, 0.0 + 2100, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(147, 0.0 + 2400, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(148, 0.0 + 2700, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(149, 0.0 + 3000, 0.0, 1565.0, 0.0, 0.0, 0.0)
 end)
 
 AddEvent("OnPackageStop", function()
@@ -207,7 +207,8 @@ AddEvent("OnPlayerJoin", function(playerid)
 
 	LumberjackData[playerid] = {
 		object = 0,
-		tree_id = 0
+		tree_id = 0,
+		seconds = 0
 	}
 
 end)
