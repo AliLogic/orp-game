@@ -10,6 +10,10 @@ AddCommand("warp", function (playerid, fromid, toid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /warp <player> <target>")
 	end
 
+	if (fromid == toid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You can not warp the same player to itself.</>")
+	end
+
 	if (not IsValidPlayer(fromid)) or (not IsValidPlayer(toid)) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
 	end
@@ -88,6 +92,10 @@ AddCommand("get", function (playerid, lookupid)
 
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	if playerid == lookupid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot TP to yourself!</>")
 	end
 
 	local x, y, z = GetPlayerLocation(playerid)
