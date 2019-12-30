@@ -14,6 +14,9 @@ function ViewPlayerStats(player, target)
 	AddPlayerChat(player, string.format("<span color=\"%s\">CHARACTER: Gender:[%s] CharID:[%d]</>",
 		colour.COLOUR_GRAD2(), (PlayerData[target].gender == 0 and 'Male' or 'Female'), PlayerData[player].id))
 
+	AddPlayerChat(player, string.format("<span color=\"%s\">CHARACTER: LEVEL:[%d] EXP:[%d]</>",
+		colour.COLOUR_GRAD2(), PlayerData[target].level, PlayerData[target].exp))
+
 	AddPlayerChat(player, string.format("<span color=\"%s\">MONEY: Cash:[$%d] Bank:[$%d]</>",
 		colour.COLOUR_GRAD1(), PlayerData[target].cash, PlayerData[target].bank))
 
