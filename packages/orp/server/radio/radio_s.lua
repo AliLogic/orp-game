@@ -5,9 +5,7 @@ local function cmd_r(player, ...)
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You do not own a radio.") -- nil value?
     end
 
-    local args = {...}
-
-    if args[1] == nil then
+    if #{...} == 0 then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(r)adio [text]")
     end
 
@@ -15,11 +13,7 @@ local function cmd_r(player, ...)
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You are not tuned into any frequency.")
     end
 
-    local text = ''
-
-    for _, v in pairs(args) do
-        text = text.." "..v
-    end
+    local text = table.concat({...}, " ")
 
     for _, i in pairs(GetAllPlayers()) do
         if GetPlayerRadioChannel(i) ~= false and GetPlayerRadioChannel(i) == GetPlayerRadioChannel(player) then

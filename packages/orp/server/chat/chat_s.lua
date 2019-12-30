@@ -48,7 +48,7 @@ AddCommand("w", function (player, weapon, slot, ammo)
     AddPlayerChat(player, 'Given you a '..weapon..' with '..ammo..' ammo.')
 end)
 
-function cmd_shout(playerid, ...)
+local function cmd_shout(playerid, ...)
 
 	local args = table.concat({...}, " ")
 
@@ -63,7 +63,7 @@ end
 AddCommand("shout", cmd_shout)
 AddCommand("s", cmd_shout)
 
-function cmd_low(playerid, ...)
+local function cmd_low(playerid, ...)
 
 	local args = table.concat({...}, " ")
 
@@ -79,16 +79,12 @@ AddCommand("low", cmd_low)
 AddCommand("l", cmd_low)
 
 AddCommand("me", function (player, ...)
-	local args = {...}
-	local text = ''
 
-	if (args[1] == nil) then
+	if (#{...} == 0) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /me [action]")
 	end
 
-	for _, v in pairs(args) do
-		text = text.." "..v
-	end
+	local text = table.concat({...}, " ")
 
 	local x, y, z = GetPlayerLocation(player)
 	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player)..""..text.."</>")
@@ -96,16 +92,12 @@ AddCommand("me", function (player, ...)
 end)
 
 AddCommand("do", function (player, ...)
-	local args = {...}
-	local text = ''
 
-	if (args[1] == nil) then
+	if (#{...} == nil) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /do [action]")
 	end
 
-	for k, v in pairs(args) do
-		text = text.." "..v
-	end
+	local text = table.concat({...}, " ")
 
 	local x, y, z = GetPlayerLocation(player)
 	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">*"..text.." (( "..GetPlayerName(player).." ))</>")
@@ -138,42 +130,32 @@ AddCommand("ado", function(player, ...)
 end)
 
 AddCommand("b", function (player, ...)
-	local args = {...}
-	local text = ''
 
-	if (args[1] == nil) then
+	if (#{...} == nil) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /b [text]")
 	end
 
-	for k, v in pairs(args) do
-		text = text.." "..v
-	end
-
+	local text = table.concat({...}, " ")
 	local x, y, z = GetPlayerLocation(player)
 	AddPlayerChatRange(x, y, 800.0, "<span color=\"#b8bac6\">(( "..GetPlayerName(player).." ("..player.."):"..text.." ))</>")
 end)
 
 AddCommand("g", function (player, ...)
-	local args = {...}
-	local text = ''
 
-	if (args[1] == nil) then
+	if (#{...} == 0) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /g [text]")
 	end
 	-- ./update.sh && ./start_linux.sh
-	for k, v in pairs(args) do
-		text = text.." "..v
-	end
 
+	local text = table.concat({...}, " ")
 	local x, y, z = GetPlayerLocation(player)
 	AddPlayerChatAll(GetPlayerName(player).." ("..player.."):"..text)
 
 end)
 
 AddCommand("pm", function (player, target, ...)
-    local args = {...}
 
-	if (target == nil or args[1] == nil) then
+	if (target == nil or #{...} == 0) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /pm [playerid] [text]")
 	end
 
@@ -184,12 +166,8 @@ AddCommand("pm", function (player, target, ...)
 	if IsValidPlayer(target) == false then
 		return AddPlayerChat(player, "Invalid player id.")
     end
-    
-	local text = ''
 
-	for k, v in pairs(args) do
-		text = text.." "..v
-	end
+	local text = table.concat({...}, " ")
 
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\">(( PM sent to "..GetPlayerName(target).." (ID: "..target.."):"..text.." ))</>")
 	AddPlayerChat(target, "<span color=\""..colour.COLOUR_PMIN().."\">(( PM from "..GetPlayerName(player).." (ID: "..player.."):"..text.." ))</>")

@@ -202,17 +202,11 @@ AddCommand("a", function (player, ...)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
-	local args = {...}
-
-	if args[1] == nil then
+	if #{...} == 0 then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /a [text]")
 	end
 
-	local text = ''
-
-	for _, v in pairs(args) do
-		text = text.." "..v
-	end
+	local text = table.concat({...}, " ")
 
 	for _, i in pairs(GetAllPlayers()) do
 		if PlayerData[i].admin > 0 then
