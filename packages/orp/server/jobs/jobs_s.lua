@@ -12,7 +12,8 @@ JOB_TYPE_LUMBERJACK = 1
 JOB_TYPE_TAXI = 2
 JOB_TYPE_TRUCKER = 3
 
-CUTTING_TIME = 10
+CUTTING_TIME = 30
+RESPAWN_TIME = 300
 LUMBERJACK_TREES = {}
 CREATED_TREES = 0
 LumberjackData = {}
@@ -70,6 +71,15 @@ local function ChopTree(playerid)
 			end
 
 			SetObjectRotation(LUMBERJACK_TREES[playerid].obj_id, LUMBERJACK_TREES[playerid].obj_rx, LUMBERJACK_TREES[playerid].obj_ry - 80.0, LUMBERJACK_TREES[playerid].obj_rz)
+
+			LumberjackData[playerid].tree_id = 0
+			LUMBERJACK_TREES[treeid].spawned = false
+
+			Delay(RESPAWN_TIME * 1000, function()
+
+				LUMBERJACK_TREES[treeid].spawned = true
+				SetObjectRotation(LUMBERJACK_TREES[playerid].obj_id, LUMBERJACK_TREES[playerid].obj_rx, LUMBERJACK_TREES[playerid].obj_ry, LUMBERJACK_TREES[playerid].obj_rz)
+			end)
 		end
 	end
 end
@@ -88,6 +98,10 @@ AddCommand("chop", function (playerid)
 
 	if treeid == 0 then
 		return AddPlayerChat(playerid, "Error: You are not near any trees.")
+	end
+
+	if LUMBERJACK_TREES[treeid].spawned == false then
+		return AddPlayerChat(playerid, "Error: This tree has been chopped.")
 	end
 
 	LUMBERJACK_TREES[treeid].timer = CreateTimer(ChopTree, 1000, playerid)
@@ -117,7 +131,8 @@ local function AddLumberjackTree(modelid, x, y, z, rx, ry, rz)
 		obj_ry = ry,
 		obj_rz = rz,
 		timer = 0,
-		text_id = CreateText3D("Tree ["..modelid.."] (".. CREATED_TREES ..")", 10, x, y, z, rx, ry, rz)
+		text_id = CreateText3D("Tree ["..modelid.."] (".. CREATED_TREES ..")", 10, x, y, z, rx, ry, rz),
+		spawned = true
 	}
 end
 
@@ -221,7 +236,11 @@ end)
 
 AddEvent("OnPlayerQuit", function(playerid)
 
+	if LumberjackData[playerid].tree_id ~= 0 then
+
+		DestroyTimer(LUMBERJACK_TREES[LumberjackData[playerid].tree_id].timer)
+	end
+
 	DestroyObject(LumberjackData[playerid].object)
 	LumberjackData[playerid] = {}
-
 end)
