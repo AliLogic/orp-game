@@ -10,12 +10,24 @@ AddCommand("pants", function (playerid, pantid)
 	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
 end)
 
+AddCommand("shirt", function (playerid, shirtid)
+
+	if shirtid == nil then
+		return AddPlayerChat(playerid, "/shoe <1 - 4>")
+	end
+	shirtid = tonumber(shirtid)
+
+	SetPlayerPropertyValue(playerid, "shirt_id", shirtid, true)
+
+	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
+end)
+
 AddCommand("shoe", function (playerid, shoeid)
 
 	if shoeid == nil then
 		return AddPlayerChat(playerid, "/shoe <1 - 4>")
 	end
-	local shoeid = tonumber(shoeid)
+	shoeid = tonumber(shoeid)
 
 	SetPlayerPropertyValue(playerid, "shoe_id", shoeid, true)
 
@@ -40,6 +52,8 @@ AddCommand("pupil", function (playerid, pupil)
 	if pupil == nil then
 		return AddPlayerChat(playerid, "/pupil <size>")
 	end
+
+	pupil = tonumber(pupil)
 
 	SetPlayerPropertyValue(playerid, "pupil_size", pupil, true)
 
