@@ -3,7 +3,7 @@ AddEvent("OnKeyPress", function(key)
 	if key == 'E' then
 		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
 
-		if pickupid ~= false then
+		if pickupid ~= 0 then
 
 			pickupid = tonumber(pickupid)
 			local plX, plY, plZ = GetPlayerLocation()
@@ -15,7 +15,7 @@ AddEvent("OnKeyPress", function(key)
 
 				CallRemoteEvent("OnPlayerInteractMarker", pickupid)
 			else
-				SetPlayerPropertyValue(GetPlayerId(), "pickupid", false)
+				SetPlayerPropertyValue(GetPlayerId(), "pickupid", 0)
 			end
 		end
 	end

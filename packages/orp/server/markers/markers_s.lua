@@ -230,7 +230,7 @@ AddEvent("OnPlayerPickupHit", function (playerid, pickupid)
 end)
 
 AddEvent("OnPlayerJoin", function (playerid)
-	SetPlayerPropertyValue(playerid, "pickupid", false, true)
+	SetPlayerPropertyValue(playerid, "pickupid", 0, true)
 end)
 
 AddRemoteEvent("OnPlayerInteractMarker", function (playerid, pickupid)
