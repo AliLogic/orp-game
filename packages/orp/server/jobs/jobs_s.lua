@@ -196,7 +196,7 @@ AddEvent("OnPackageStart", function()
 	AddLumberjackTree(149, 0.0 + 6700, 0.0, 2000.0, 0.0, 0.0, 0.0)
 end)
 
-AddEvent("OnPackageStart", function()
+AddEvent("OnPackageStop", function()
 
 	for treeid = 1, #LUMBERJACK_TREES, 1 do
 		RemoveLumberjackTree(treeid)
