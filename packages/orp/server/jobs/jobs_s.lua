@@ -50,10 +50,9 @@ end
 
 local function ChopTree(playerid)
 
-	SetPlayerAnimation(playerid, "PICKAXE_SWING")
-
 	if LumberjackData[playerid].tree_id ~= 0 then
 
+		SetPlayerAnimation(playerid, "PICKAXE_SWING")
 		LumberjackData[playerid].seconds = LumberjackData[playerid].seconds + 1
 
 		if LumberjackData[playerid].seconds >= CUTTING_TIME then
@@ -93,6 +92,7 @@ AddCommand("chop", function (playerid)
 
 	LumberjackData[playerid].object = CreateObject(1047, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 	SetObjectAttached(LumberjackData[playerid].object, ATTACH_PLAYER, playerid, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "hand_l")
+	LumberjackData[playerid].tree_id = treeid
 
 	SetPlayerAnimation(playerid, "PICKAXE_SWING")
 end)
