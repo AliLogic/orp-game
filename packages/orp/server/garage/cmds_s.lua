@@ -2,7 +2,7 @@ local colour = ImportPackage('colours')
 
 -- /acreategarage /aeditgarage /adestroygarage
 
-local function cmd_acg(player, price)
+function cmd_acg(player, price)
 	if (PlayerData[player].admin < 4) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
@@ -26,12 +26,17 @@ local function cmd_acg(player, price)
 	end
 end
 
-local function cmd_aeg(player, prefix, ...)
+function cmd_aeg(player, prefix, ...)
 	if (PlayerData[player].admin < 4) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
+	local args = {...}
+
 	if prefix == "name" then
+		if args[1] == nil then
+			return AddPlayerChat()
+		end
 	end
 end
 AddCommand("aeditgarage", cmd_aeg)
