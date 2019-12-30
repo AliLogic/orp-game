@@ -17,6 +17,13 @@ LUMBERJACK_TREES = {}
 CREATED_TREES = 0
 LumberjackData = {}
 
+AddCommand("jobhelp", function (playerid)
+
+	AddPlayerChat(playerid, "JOB HELP")
+
+	PlayerData[playerid].job = 1
+end)
+
 local function GetNearestTree(playerid, range)
 
 	range = range or 100.0
