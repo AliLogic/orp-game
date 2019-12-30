@@ -244,6 +244,7 @@
         "NotifyCrosshairHit",
         "GetCameraLocation",
         "GetPlayerVehicleID",
-        "IsPlayerInAnyVehicle"
+        "IsPlayerInAnyVehicle",
+        "SetObjectAttached"
     ]
 }

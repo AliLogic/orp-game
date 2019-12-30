@@ -101,10 +101,10 @@ AddCommand("apos", function (player, id)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
-    local x, y, z = GetPlayerLocation(player)
-    local a = GetPlayerHeading(player)
-    
-    print("X: "..x.." Y: "..y.." Z: "..z.." A: "..a)
+	local x, y, z = GetPlayerLocation(player)
+	local a = GetPlayerHeading(player)
+
+	print("X: "..x.." Y: "..y.." Z: "..z.." A: "..a)
 	return AddPlayerChat(player, "X: "..x.." Y: "..y.." Z: "..z)
 end)
 
@@ -221,7 +221,7 @@ AddCommand("setstats", function (player, target, prefix, ...)
 
 	if target == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /setstats <playerid> <prefix> <value>")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> cash, level, exp")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> cash, level, exp, paycheck, frank")
 		return true
 	end
 
@@ -275,6 +275,32 @@ AddCommand("setstats", function (player, target, prefix, ...)
 
 		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s experience points to " .. exp .. ".")
 		AddPlayerChat(target, GetPlayerName(player) .. "has set your experience points to " .. exp .. ".")
+
+	elseif prefix == "paycheck" or prefix == "payday" then
+
+		local amount = tonumber(args)
+
+		if amount < 0 or amount > 10000 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have inputted an invalid amount.</>")
+		end
+
+		--PlayerData[target].payday = amount
+
+		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s paycheck to " .. amount .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. "has set your paycheck to " .. amount .. ".")
+
+	elseif prefix == "frank" then
+
+		local rank = tonumber(args)
+
+		if rank < 0 or rank > 10 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have inputted an invalid rank.</>")
+		end
+
+		PlayerData[target].faction_rank = rank
+
+		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s faction rank to " .. rank .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. "has set your faction rank to " .. rank .. ".")
 
 	end
 end)
@@ -337,8 +363,8 @@ AddCommand('acv', cmd_acv)
 
 local function cmd_aev(player, vehicle, prefix, ...)
 	if (PlayerData[player].admin < 2) then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
-    end
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
 
 	if vehicle == nil or prefix == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <prefix>")
@@ -369,16 +395,16 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		end
 
 		if VehicleData[vehicle].faction ~= 0 then
-            AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: As this vehicle was owned by a faction, it will now be passed onto the player.</>")
-            VehicleData[vehicle].faction = 0
-        end
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: As this vehicle was owned by a faction, it will now be passed onto the player.</>")
+			VehicleData[vehicle].faction = 0
+		end
 
 		VehicleData[vehicle].owner = PlayerData[target].id
 		print("Player Char SQLID is "..PlayerData[target].id)
 		print("Vehicle Owner Is Now Char SQLID: "..VehicleData[vehicle].owner)
 
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
-        return
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
+		return
 
 		--CallRemoteEvent(player, "askClientActionConfirmation", 1, "Would you like to change this vehicle's owner?", target, vehicle)
 	elseif prefix == "color" then
@@ -414,51 +440,51 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		SetVehicleLicensePlate(VehicleData[vehicle].vid, numberPlate)
 
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." number plate changed to \""..numberPlate.."\".</>")
-    else
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color, plate")
+	else
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color, plate")
 	end
 end
 AddCommand('aeditvehicle', cmd_aev)
 AddCommand('aev', cmd_aev)
 
 AddRemoteEvent("clientActionConfirmationResult", function (result, player, target, vehicle)
-    if result == 1 then
-        if VehicleData[vehicle].faction ~= 0 then
-            AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: As this vehicle was owned by a faction, it will now be passed onto the player.</>")
-            VehicleData[vehicle].faction = 0
-        end
+	if result == 1 then
+		if VehicleData[vehicle].faction ~= 0 then
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: As this vehicle was owned by a faction, it will now be passed onto the player.</>")
+			VehicleData[vehicle].faction = 0
+		end
 
 		VehicleData[vehicle].owner = PlayerData[target].id
 		print("Player Char SQLID is "..PlayerData[target].id)
 		print("Vehicle Owner Is Now Char SQLID: "..VehicleData[vehicle].owner)
 
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
-        return
-    else
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You've decided to cancel any changes made to the vehicle!</>")
-        return
-    end
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
+		return
+	else
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You've decided to cancel any changes made to the vehicle!</>")
+		return
+	end
 end)
 
 AddCommand("ahelp", function (player)
-    if (PlayerData[player].admin < 1) then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
-    end
+	if (PlayerData[player].admin < 1) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
 
-    if PlayerData[player].admin > 0 then
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /aslap /warp")
-    end
-    if PlayerData[player].admin > 1 then
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
-    end
-    if PlayerData[player].admin > 2 then
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>None")
-    end
-    if PlayerData[player].admin > 3 then
+	if PlayerData[player].admin > 0 then
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /aslap /warp")
+	end
+	if PlayerData[player].admin > 1 then
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
+	end
+	if PlayerData[player].admin > 2 then
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>None")
+	end
+	if PlayerData[player].admin > 3 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
-    end
-    if PlayerData[player].admin > 4 then
-        AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/apos /asetadmin /acreatefaction /aeditfaction /setstats")
-    end
+	end
+	if PlayerData[player].admin > 4 then
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/apos /asetadmin /acreatefaction /aeditfaction /setstats")
+	end
 end)
