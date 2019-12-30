@@ -444,14 +444,13 @@ function OnPlayerPayday(player)
 		AddPlayerChat(player, "(( Paychecks are still a work in progress. ))")
 
 		PlayerData[player].minutes = 0
-
-		local exp = PlayerData[player].exp
-		local required_exp = (exp * 4) + 2
-		local level = PlayerData[player].level
-
 		PlayerData[player].exp = (PlayerData[player].exp + 1)
 
-		if (PlayerData[player].exp > (level * 4) + 2) then
+		local exp = PlayerData[player].exp
+		local level = PlayerData[player].level
+		local required_exp = (level * 4) + 2
+
+		if (required_exp < exp) then
 			AddPlayerChat(player, "You now have enough experience points to level up ("..exp.."/"..required_exp..")")
 		end
 

@@ -10,7 +10,7 @@ AddCommand("levelup", function (playerid)
     local exp = PlayerData[playerid].exp
     local required_exp = (level * 4) + 2
 
-    if (required_exp < exp) then
+    if (required_exp > exp) then
         return AddPlayerChat(playerid, "You do not have enough experience points to level up ("..exp.."/"..required_exp..")")
     end
 
