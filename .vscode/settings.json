@@ -245,6 +245,9 @@
         "GetCameraLocation",
         "GetPlayerVehicleID",
         "IsPlayerInAnyVehicle",
-        "SetObjectAttached"
+        "SetObjectAttached",
+        "HIT_OBJECT",
+        "SetObjectEditorSpeed",
+        "GetWebVisibility"
     ]
 }
