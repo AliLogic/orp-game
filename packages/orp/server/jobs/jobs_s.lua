@@ -71,8 +71,9 @@ local function ChopTree(playerid)
 				DestroyTimer(LUMBERJACK_TREES[treeid].timer)
 			end
 
-			SetObjectRotation(LUMBERJACK_TREES[playerid].obj_id, LUMBERJACK_TREES[playerid].obj_rx, LUMBERJACK_TREES[playerid].obj_ry - 800.0, LUMBERJACK_TREES[playerid].obj_rz)
+			SetObjectRotation(LUMBERJACK_TREES[playerid].obj_id, LUMBERJACK_TREES[playerid].obj_rx, LUMBERJACK_TREES[playerid].obj_ry, LUMBERJACK_TREES[playerid].obj_rz - 800.0)
 
+			LumberjackData[playerid].seconds = 0
 			LumberjackData[playerid].tree_id = 0
 			LUMBERJACK_TREES[treeid].spawned = false
 			LUMBERJACK_TREES[treeid].is_chopped = false
