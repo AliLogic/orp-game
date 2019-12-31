@@ -91,6 +91,29 @@ CREATE TABLE `bans` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
+DROP TABLE IF EXISTS `houses`;
+CREATE TABLE `houses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `doorid` int(11) NOT NULL,
+  `owner` int(11) NOT NULL DEFAULT 0,
+  `ownership_type` int(11) NOT NULL DEFAULT 0,
+  `name` varchar(32) NOT NULL,
+  `locked` int(11) NOT NULL DEFAULT 0,
+  `type` int(11) NOT NULL,
+  `price` int(11) NOT NULL DEFAULT 0,
+  `dimension` int(11) NOT NULL DEFAULT 0,
+  `message` varchar(128) NOT NULL DEFAULT 'This is a default business message.',
+  `ix` varchar(16) NOT NULL DEFAULT '0.0',
+  `iy` varchar(16) NOT NULL DEFAULT '0.0',
+  `iz` varchar(16) NOT NULL DEFAULT '0.0',
+  `ia` varchar(16) NOT NULL DEFAULT '0.0',
+  `ex` varchar(16) NOT NULL DEFAULT '0.0',
+  `ey` varchar(16) NOT NULL DEFAULT '0.0',
+  `ez` varchar(16) NOT NULL DEFAULT '0.0',
+  `ea` varchar(16) NOT NULL DEFAULT '0.0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `businesses`;
 CREATE TABLE `businesses` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
