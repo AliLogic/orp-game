@@ -5,7 +5,7 @@ This script contains all interactive doors/gates in the game.
 ]]--
 
 AddEvent("OnPlayerInteractDoor", function(player, door, bWantsOpen)
-	--AddPlayerChat(player, "Door: "..door..", "..tostring(bWantsOpen))
+	AddPlayerChat(player, "Door: "..door..", "..tostring(bWantsOpen))
 
 	-- Let the players open/close the door by default.
 	SetDoorOpen(door, not IsDoorOpen(door))
