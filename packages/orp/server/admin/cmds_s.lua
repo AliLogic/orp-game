@@ -1,5 +1,41 @@
 local colour = ImportPackage("colours")
 
+AddCommand("kick", function (playerid, lookupid, ...)
+
+	if (PlayerData[playerid].admin < 1) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if (lookupid == nil) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /kick <player> <reason*>")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if lookupid == playerid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot kick yourself!</>")
+	end
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	if PlayerData[lookupid].admin > PlayerData[playerid].admin then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You can not kick "..GetPlayerName(lookupid)..".</>")
+	end
+
+	local reason
+	if #{...} == 0 then
+		reason = "no reason specified"
+	else
+		reason = table.cocat({...}, " ")
+	end
+
+	AddPlayerChatAll("AdmCmd: "..GetPlayerName(lookupid).." was kicked by "..GetPlayerName(playerid)..", Reason: "..reason..".")
+
+	KickPlayer(lookupid, reason)
+end)
+
 AddCommand("warp", function (playerid, fromid, toid)
 
 	if (PlayerData[playerid].admin < 1) then
@@ -488,7 +524,7 @@ AddCommand("ahelp", function (player)
 	end
 
 	if PlayerData[player].admin > 0 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick")
 	end
 	if PlayerData[player].admin > 1 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
