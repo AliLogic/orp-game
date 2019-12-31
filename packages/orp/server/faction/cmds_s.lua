@@ -197,7 +197,7 @@ local function cmd_acf(player, maxrank, shortname, ...)
 
 	maxrank = tonumber(maxrank)
 
-	if string.len(maxrank) < 0 or string.len(maxrank) > 10 then
+	if maxrank < 0 or maxrank > 10 then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction max ranks range from 1 - 10.</>")
 	end
 
@@ -220,7 +220,7 @@ local function cmd_aef(player, faction, prefix, ...)
 	end
 
 	if faction == nil or prefix == nil then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)ection <faction> <prefix>")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> <prefix>")
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> type, name, shortname, leader, maxrank, bank.")
 	end
 
@@ -236,7 +236,7 @@ local function cmd_aef(player, faction, prefix, ...)
 		local type = args[1]
 
 		if type == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)ection <faction> type <type>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> type <type>")
 		end
 
 		if type < FACTION_CIVILIAN or type > FACTION_GOV then
@@ -260,7 +260,7 @@ local function cmd_aef(player, faction, prefix, ...)
 		
 	elseif prefix == "name" then
 		if args[1] == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)ection <faction> name <name>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> name <name>")
 		end
 
 		local name = table.concat({...}, " ")
@@ -272,7 +272,7 @@ local function cmd_aef(player, faction, prefix, ...)
 	
 	elseif prefix == "shortname" then
 		if args[1] == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)ection <faction> shortname <shortname>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> shortname <shortname>")
 		end
 
 		local shortname = args[1]
@@ -282,7 +282,7 @@ local function cmd_aef(player, faction, prefix, ...)
 	
 	elseif prefix == "maxrank" then
 		if args[1] == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)ection <faction> maxrank <maxrank>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> maxrank <maxrank>")
 		end
 
 		local shortname = args[1]
@@ -291,7 +291,7 @@ local function cmd_aef(player, faction, prefix, ...)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction shortname to "..shortname..".")
 	elseif prefix == "bank" then
 		if args[1] == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)ection <faction> bank <amount>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> bank <amount>")
 		end
 
 		local bank = tonumber(args[1])
@@ -304,7 +304,7 @@ local function cmd_aef(player, faction, prefix, ...)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction bank to "..bank..".")
 	elseif prefix == "leader" then
 		if args[1] == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)ection <faction> leader <target>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> leader <target>")
 		end
 
 		local target = tonumber(args[1])
