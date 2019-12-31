@@ -40,6 +40,10 @@ AddCommand("skin", function (playerid, r, g, b)
 		return AddPlayerChat(playerid, "/skin <r> <g> <b>")
 	end
 
+	r = tonumber(r)
+	g = tonumber(g)
+	b = tonumber(b)
+
 	SetPlayerPropertyValue(playerid, "skin_color_r", r, true)
 	SetPlayerPropertyValue(playerid, "skin_color_g", g, true)
 	SetPlayerPropertyValue(playerid, "skin_color_b", b, true)
