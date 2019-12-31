@@ -82,6 +82,8 @@ AddEvent("OnPlayerJoin", function(playerid)
 	SetPlayerPropertyValue(playerid, "pant_color_g", 255, true)
 	SetPlayerPropertyValue(playerid, "pant_color_b", 255, true)
 	SetPlayerPropertyValue(playerid, "pant_color_a", 255, true)
+
+	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
 end)
 
 AddEvent("OnPlayerSpawn", function(playerid)
