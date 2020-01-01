@@ -26,6 +26,8 @@
 		"server/customization/customization_s.lua",
 		"server/callsign/callsign_s.lua",
 		"server/jobs/jobs_s.lua",
+		"server/housing/housing_s.lua",
+		"server/housing/cmds_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [

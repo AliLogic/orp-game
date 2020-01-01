@@ -1,7 +1,10 @@
 function GetPlayerHelperRank(player)
-	if PlayerData[player].helper == 0 then
+
+	local helper_level = tonumber(PlayerData[player].helper)
+
+	if helper_level == 1 then
 		return 'Helper'
-	elseif PlayerData[player].helper == 1 then
+	elseif helper_level == 2 then
 		return 'Head Helper'
 	else
 		return 'None'
