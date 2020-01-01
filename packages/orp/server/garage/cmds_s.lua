@@ -8,7 +8,7 @@ function cmd_acg(player, price)
 	end
 
 	if price == nil then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(v)ehicle <price>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(g)arage <price>")
 	end
 
 	price = tonumber(price)

@@ -3,11 +3,12 @@ local colour = ImportPackage('colours')
 BusinessData = {}
 MAX_BUSINESSES = 256
 
-BUSINESS_TYPE_LOCAL = 1 -- aka 24/7
-BUSINESS_TYPE_AMMU = 2
-BUSINESS_TYPE_BAR = 3
-BUSINESS_TYPE_RESTAURANT = 4
-BUSINESS_TYPE_BANK = 5
+BUSINESS_TYPE_ENTERANCE = 1
+BUSINESS_TYPE_LOCAL = 2 -- aka 24/7
+BUSINESS_TYPE_AMMU = 3
+BUSINESS_TYPE_BAR = 4
+BUSINESS_TYPE_RESTAURANT = 5
+BUSINESS_TYPE_BANK = 6
 
 BUSINESS_OWNERSHIP_STATE = 1
 BUSINESS_OWNERSHIP_SOLE = 2
@@ -95,7 +96,7 @@ function Business_Create(player, type, enterable, price, ...)
 		return false
 	end
 
-	if type < 1 or type > 5 then
+	if type < 1 or type > 6 then
 		return false
 	end
 
@@ -112,20 +113,28 @@ function Business_Create(player, type, enterable, price, ...)
 		return false
 	end
 
+	local x, y, z = GetPlayerLocation(player)
+
 	if enterable == 0 then
-		local x, y, z = GetPlayerLocation(player)
 		BusinessData[index].text3d = CreateText3D(string.format("%s %d\n/buy", BusinessData[index].name, index), 17, x, y, z, 0, 0, 0)
+
+		local query = mariadb_prepare(sql, "INSERT INTO businesses (name, type, enterable, price, mx, my, mz) VALUES ('?', ?, ?, ?, '?', '?', '?');",
+			name, type, enterable, price, x, y, z
+		)
+		mariadb_async_query(sql, query, OnBusinessCreated, index, type, enterable, price, name)
+	else
+		-- For enterable == 1, set it whenever they set a entrance (ex ey ez) to the business.
+		local a = GetPlayerHeading(player)
+		BusinessData[index].text3d = CreateText3D(string.format("%s %d", BusinessData[index].name, index), 17, x, y, z, 0, 0, 0)
+
+		local query = mariadb_prepare(sql, "INSERT INTO businesses (name, type, enterable, price, ex, ey, ez, ea) VALUES ('?', ?, ?, ?, '?', '?', '?', '?');",
+			name, type, enterable, price, x, y, z, a
+		)
+		mariadb_async_query(sql, query, OnBusinessCreated, index, type, enterable, price, name)
 	end
-
-	-- For enterable == 1, set it whenever they set a entrance (ex ey ez) to the business.
-
-	local query = mariadb_prepare(sql, "INSERT INTO businesses (name, type, enterable, price) VALUES ('?', ?, ?, ?);",
-		name, type, enterable, price    
-	)
-	mariadb_async_query(sql, query, OnBusinessCreated, index, type, enterable, price, name)
 end
 
-function OnBusinessCreated(i, type, enterable, price, name)
+function OnBusinessCreated(i, type, enterable, price, name, ...)
 	BusinessData[i].id = mariadb_get_insert_id()
 
 	BusinessData[i].name = name
@@ -133,6 +142,19 @@ function OnBusinessCreated(i, type, enterable, price, name)
 
 	BusinessData[i].enterable = enterable
 	BusinessData[i].price = price
+
+	local args = {...}
+
+	if enterable == 0 then
+		BusinessData[i].mx = args[1]
+		BusinessData[i].my = args[2]
+		BusinessData[i].mz = args[3]
+	else
+		BusinessData[i].ex = args[1]
+		BusinessData[i].ey = args[2]
+		BusinessData[i].ez = args[3]
+		BusinessData[i].ea = args[4]
+	end
 end
 
 function Business_Load(businessid)
