@@ -233,43 +233,42 @@ local function cmd_aef(player, faction, prefix, ...)
 	local args = {...}
 
 	if prefix == "type" then
-		local type = args[1]
+		local ftype = tonumber(args[1])
 
-		if type == nil then
+		if ftype == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> type <type>")
 		end
 
-		if type < FACTION_CIVILIAN or type > FACTION_GOV then
+		if ftype < FACTION_CIVILIAN or ftype > FACTION_GOV then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction types range from 1 - 4.</>")
 		end
 
-		type = tonumber(type)
-		FactionData[faction].type = type
+		FactionData[faction].type = ftype
 
-		if type == FACTION_CIVILIAN then
+		if ftype == FACTION_CIVILIAN then
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction type to Civilian.")
-		elseif type == FACTION_POLICE then
+		elseif ftype == FACTION_POLICE then
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction type to Police.")
-		elseif type == FACTION_MEDIC then
+		elseif ftype == FACTION_MEDIC then
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction type to Medic.")
-		elseif type == FACTION_GOV then
+		elseif ftype == FACTION_GOV then
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction type to Government.")
 		end
 
 		return
-		
+
 	elseif prefix == "name" then
 		if args[1] == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> name <name>")
 		end
 
-		local name = table.concat({...}, " ")
+		local name = table.concat(args, " ")
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction name to "..name..".")
 		FactionData[faction].name = name
 
 		return
-	
+
 	elseif prefix == "shortname" then
 		if args[1] == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> shortname <shortname>")
@@ -279,16 +278,16 @@ local function cmd_aef(player, faction, prefix, ...)
 
 		FactionData[faction].shortname = shortname
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction shortname to "..shortname..".")
-	
+
 	elseif prefix == "maxrank" then
 		if args[1] == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> maxrank <maxrank>")
 		end
 
-		local shortname = args[1]
+		local rank = tonumber(args[1])
 
-		FactionData[faction].shortname = shortname
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction shortname to "..shortname..".")
+		FactionData[faction].leadership_rank = rank
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction max rank to "..rank..".")
 	elseif prefix == "bank" then
 		if args[1] == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> bank <amount>")
@@ -317,7 +316,7 @@ local function cmd_aef(player, faction, prefix, ...)
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
 		end
 
-		PlayerData[target].faction = FactionData[faction].maxrank
+		PlayerData[target].faction = FactionData[faction].leadership_rank
 
 		AddPlayerChat(target, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> "..GetPlayerName(player).." has set you as the faction leader of "..FactionData[faction].name..".")
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..GetPlayerName(target).." as the leader of "..FactionData[faction].name..".")
