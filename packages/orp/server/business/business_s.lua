@@ -123,7 +123,7 @@ function Business_Create(player, type, enterable, price, ...)
 		)
 		mariadb_async_query(sql, query, OnBusinessCreated, index, type, enterable, price, name)
 	else
-		-- For enterable == 1, set it whenever they set a entrance (ex ey ez) to the business.
+		-- For enterable == 1, set it whenever they set a entrance (ex ey ez) to the business. (done)
 		local a = GetPlayerHeading(player)
 		BusinessData[index].text3d = CreateText3D(string.format("%s %d", BusinessData[index].name, index), 17, x, y, z, 0, 0, 0)
 
@@ -146,14 +146,14 @@ function OnBusinessCreated(i, type, enterable, price, name, ...)
 	local args = {...}
 
 	if enterable == 0 then
-		BusinessData[i].mx = args[1]
-		BusinessData[i].my = args[2]
-		BusinessData[i].mz = args[3]
+		BusinessData[i].mx = tonumber(args[1])
+		BusinessData[i].my = tonumber(args[2])
+		BusinessData[i].mz = tonumber(args[3])
 	else
-		BusinessData[i].ex = args[1]
-		BusinessData[i].ey = args[2]
-		BusinessData[i].ez = args[3]
-		BusinessData[i].ea = args[4]
+		BusinessData[i].ex = tonumber(args[1])
+		BusinessData[i].ey = tonumber(args[2])
+		BusinessData[i].ez = tonumber(args[3])
+		BusinessData[i].ea = tonumber(args[4])
 	end
 end
 
