@@ -210,6 +210,7 @@ CREATE TABLE `faction_ranks` (
   `id` int(11) NOT NULL,
   `rank_id` int(11) NOT NULL,
   `rank_name` varchar(50) NOT NULL,
+  `rank_pay` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
