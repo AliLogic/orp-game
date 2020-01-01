@@ -3,7 +3,7 @@ local colour = ImportPackage('colours')
 BusinessData = {}
 MAX_BUSINESSES = 256
 
-BUSINESS_TYPE_ENTERANCE = 1
+BUSINESS_TYPE_ENTRANCE = 1
 BUSINESS_TYPE_LOCAL = 2 -- aka 24/7
 BUSINESS_TYPE_AMMU = 3
 BUSINESS_TYPE_BAR = 4
@@ -88,8 +88,7 @@ AddEvent('UnloadBusinesses', function ()
 	end
 end)
 
-function Business_Create(player, type, enterable, price, ...)
-	name = table.concat({...}, " ")
+function Business_Create(player, type, enterable, price, name)
 	type = tonumber(type)
 	enterable = tonumber(enterable)
 	price = tonumber(price)
@@ -134,6 +133,7 @@ function Business_Create(player, type, enterable, price, ...)
 		)
 		mariadb_async_query(sql, query, OnBusinessCreated, index, type, enterable, price, name)
 	end
+	return index
 end
 
 function OnBusinessCreated(i, type, enterable, price, name, ...)
@@ -250,6 +250,18 @@ function Business_Destroy(business)
 	mariadb_async_query(sql, query)
 
 	--DestroyMarker
-	--Destroy3dTextlabel
+	
+	if IsValidText3D(BusinessData[business].text3d) then
+		DestroyText3D(BusinessData[i].text3d)
+	end
+		
+	if IsValidText3D(BusinessData[business].text3d_out) then
+		DestroyText3D(BusinessData[business].text3d_out)
+	end
+
+	if IsValidText3D(BusinessData[business].text3d_in) then
+		DestroyText3D(BusinessData[business].text3d_in)
+	end
+		
 	DestroyBusinessData(business)
 end
