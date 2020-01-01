@@ -423,7 +423,7 @@ function SetPlayerLoggedIn(player)
 	Delay(1000, function ()
 		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
 	end)
-	
+
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
 	--CallEvent("OnPlayerJoined", player)
 end
@@ -436,14 +436,35 @@ function OnPlayerPayday(player)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">|________ PAYCHECK ________|</>")
 
-		AddPlayerChat(player, "Past Paycheck: $"..PlayerData[player].paycheck)
+		local paycheck = PlayerData[player].paycheck
 
-		---[[PlayerData[player].paycheck = PlayerData[player].paycheck + 100 -- If they job equals to 0.]]
+		AddPlayerChat(player, "Paycheck: $"..paycheck)
 
-		AddPlayerChat(player, "New Paycheck: $"..PlayerData[player].paycheck)
+		local factionid = PlayerData[player].faction
+
+		if factionid ~= 0 then
+
+			local factionrank = PlayerData[player].faction_rank
+			local factionpay = FactionRankData[factionid][factionrank].rank_pay
+
+			AddPlayerChat(player, "Faction pay: $"..factionpay)
+
+			paycheck = paycheck + factionpay
+		end
+
+		-- if PlayerData[player].job ~= 0 then
+		-- else
+		-- 	AddPlayerChat(player, "Unemployement benefit: $100")
+
+		-- 	paycheck = paycheck + 100
+		-- end
+
+		AddPlayerChat(player, "Final Paycheck: $"..paycheck)
 		AddPlayerChat(player, "(( Paychecks are still a work in progress. ))")
 
 		PlayerData[player].minutes = 0
+		PlayerData[player].paycheck = 0
+
 		PlayerData[player].exp = (PlayerData[player].exp + 1)
 
 		local exp = PlayerData[player].exp
