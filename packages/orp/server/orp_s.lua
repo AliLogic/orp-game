@@ -12,6 +12,7 @@ Contributors:
 local colour = ImportPackage('colours')
 
 AddEvent("OnPlayerJoin", function (player)
+	AddPlayerChatAll(GetPlayerName(player).." has joined the server!")
 	SetPlayerDimension(player, player)
 	SetPlayerSpawnLocation(player, 170694.515625, 194947.453125, 1396.9643554688, 90.0)
 end)
@@ -23,6 +24,10 @@ AddEvent("OnPlayerSpawn", function(player)
 				if IsValidText3D(PlayerData[player].label) then
 					DestroyText3D(PlayerData[player].label)
 				end
+			end
+
+			if PlayerData[player].id ~= 0 then
+				SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
 			end
 		end
 	end
@@ -70,15 +75,6 @@ AddEvent("OnPlayerStreamIn", function (player, otherplayer)
 	if PlayerData[otherplayer] ~= nil then
 		if PlayerData[otherplayer].id ~= 0 then
 			SetPlayerName(otherplayer, PlayerData[otherplayer].firstname.." "..PlayerData[otherplayer].lastname)
-		end
-	end
-end)
-
-AddEvent("OnPlayerSpawn", function(playerid)
-
-	if PlayerData[playerid] ~= nil then -- This is a fix for an error that happens when you spawn for the first time in the server...
-		if PlayerData[playerid].id ~= 0 then
-			SetPlayerName(playerid, PlayerData[playerid].firstname.." "..PlayerData[playerid].lastname)
 		end
 	end
 end)

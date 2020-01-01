@@ -18,6 +18,21 @@ LUMBERJACK_TREES = {}
 CREATED_TREES = 0
 LumberjackData = {}
 
+LumberjackTree = {
+	{134, -199991, -38517, 1021},
+	{135, -199474, -38753, 1021},
+	{136, -199165, -38943, 1021},
+	{137, -199349, -39353, 1021},
+	{138, -198660, -39604, 1021},
+	{139, -198522, -40717, 1021},
+	{140, 0.0, 0.0, 0.0},
+	{145, 0.0, 0.0, 0.0},
+	{146, 0.0, 0.0, 0.0},
+	{147, 0.0, 0.0, 0.0},
+	{148, 0.0, 0.0, 0.0},
+	{149, }
+}
+
 AddCommand("jobhelp", function (playerid)
 
 	AddPlayerChat(playerid, "Your job is now Lumberjack: /chop")
@@ -27,7 +42,7 @@ end)
 
 local function GetNearestTree(playerid, range)
 
-	range = range or 120.0
+	range = range or 130.0
 
 	local id = 0
 	local distance = range
@@ -202,30 +217,18 @@ end
 
 AddEvent("OnPackageStart", function()
 
-	-- AddLumberjackTree(63, 0.0 + 100, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(64, 0.0 + 300, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(65, 0.0 + 500, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(66, 0.0 + 700, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(67, 0.0 + 1000, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(68, 0.0 + 1300, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(69, 0.0 + 1600, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(127, 0.0 + 1900, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(141, 0.0 + 4300, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(142, 0.0 + 4600, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(143, 0.0 + 4900, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	-- AddLumberjackTree(144, 0.0 + 5200, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(134, 0.0 + 100, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(135, 0.0 + 300, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(136, 0.0 + 500, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(137, 0.0 + 700, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(138, 0.0 + 1000, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(139, 0.0 + 1300, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(140, 0.0 + 1600, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(145, 0.0 + 1900, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(146, 0.0 + 2100, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(147, 0.0 + 2400, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(148, 0.0 + 2700, 0.0, 1565.0, 0.0, 0.0, 0.0)
-	AddLumberjackTree(149, 0.0 + 3000, 0.0, 1565.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(134, 0.0 + 100, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(135, 0.0 + 300, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(136, 0.0 + 500, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(137, 0.0 + 700, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(138, 0.0 + 1000, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(139, 0.0 + 1300, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(140, 0.0 + 1600, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(145, 0.0 + 1900, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(146, 0.0 + 2100, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(147, 0.0 + 2400, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(148, 0.0 + 2700, 0.0, 1545.0, 0.0, 0.0, 0.0)
+	AddLumberjackTree(149, 0.0 + 3000, 0.0, 1545.0, 0.0, 0.0, 0.0)
 end)
 
 AddEvent("OnPackageStop", function()
