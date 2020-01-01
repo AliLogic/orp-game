@@ -5,7 +5,7 @@ function cmd_v(player, ...)
 
     if args[1] == "lock" then
         local vehicle = GetPlayerVehicle(player)
-        if vehicle ~= 0 and VehicleData[vehicle] ~= nil and VehicleData[vehicle].owner == PlayerData[player].id then
+        if vehicle ~= 0 and VehicleData[vehicle] ~= nil and (VehicleData[vehicle].owner == PlayerData[player].id or VehicleData[vehicle].renter == PlayerData[player].id) then
             if VehicleData[vehicle].is_locked == true then
                 VehicleData[vehicle].is_locked = false
                 AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle unlocked!</>")
@@ -26,7 +26,7 @@ function cmd_v(player, ...)
                 --print('Owner is possibly '..VehicleData[v].owner)
                 --print(type(VehicleData[v].owner))
                 --print(type(PlayerData[player].id))
-                if VehicleData[v].owner == PlayerData[player].id then
+                if VehicleData[v].owner == PlayerData[player].id or VehicleData[v].renter == PlayerData[player].id then
                     --print('player is owner '..v)
                     --print('3d distance is '..tonumber(GetDistance3D(x, y, z, VehicleData[v].x, VehicleData[v].y, VehicleData[v].z)))
                     if tonumber(GetDistance3D(x, y, z, VehicleData[v].x, VehicleData[v].y, VehicleData[v].z)) < 250.0 then

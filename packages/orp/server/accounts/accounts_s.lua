@@ -37,6 +37,7 @@ end
 AddEvent("OnPlayerSteamAuth", OnPlayerSteamAuth)
 
 function OnPlayerQuit(player)
+	CallEvent("UnrentPlayerVehicle", player)
 	SavePlayerAccount(player)
 	DestroyPlayerData(player)
 end
@@ -326,6 +327,7 @@ function CreatePlayerData(player)
 	PlayerData[player].label = nil -- 3d text label
 
 	PlayerData[player].pd_timer = 0
+	PlayerData[player].renting = 0 -- Vehicle ID that a player is renting.
 
 	print("Data created for: "..player)
 end

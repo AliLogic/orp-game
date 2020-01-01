@@ -419,13 +419,13 @@ local function cmd_aev(player, vehicle, prefix, ...)
 
 	if vehicle == nil or prefix == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <prefix>")
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color, plate")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color, plate, rental, faction")
 	end
 
 	vehicle = tonumber(vehicle)
 
-	if not IsValidVehicle(vehicle) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..vehicle.." doesn't exist.")
+	if not IsValidVehicle(vehicle) or VehicleData[vehicle] == nil then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..vehicle.." doesn't exist or isn't valid.")
 	end
 
 	local args = {...}
@@ -491,9 +491,55 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		SetVehicleLicensePlate(VehicleData[vehicle].vid, numberPlate)
 
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." number plate changed to \""..numberPlate.."\".</>")
+	elseif prefix == "rental" then
+		local rental = tonumber(args[1])
+
+		if rental == nil or (rental ~= 0 and rental ~= 1) then
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> rental <value>")
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Values: No (0), Yes (1)")
+			return
+		end
+
+		if VehicleData[vehicle].owner ~= 0 then
+			VehicleData[vehicle].owner = 0
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> As this vehicle was owned by a player, it will now be passwed onto the state.")
+		end
+
+		if VehicleData[vehicle].faction ~= 0 then
+			VehicleData[vehicle].faction = 0
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> As this vehicle was owned by a faction, it will now be passed onto the state.")
+		end
+
+		VehicleData[vehicle].plate = "RENTAL"
+		SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
+
+		VehicleData[vehicle].rental = 1
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You have made vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..") a rental vehicle!</>")
+	elseif prefix == "faction" then
+		local faction = tonumber(args[1])
+		
+		if vehicle == nil or faction == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> faction <target>")
+		end
+
+		if FactionData[faction] == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid faction ID entered.</target>")
+		end
+
+		if VehicleData[vehicle].owner ~= 0 then
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: As this vehicle was owned by a player, it will now be passed onto the faction.</>")
+			VehicleData[vehicle].owner = 0
+		end
+
+		VehicleData[vehicle].faction = FactionData[faction].id
+		print("Vehicle Owner Is Now FACTION SQLID: "..FactionData[faction].id)
+
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..FactionData[faction].name.." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
+		return
 	else
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color, plate")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color, plate, rental, faction")
+		return
 	end
 end
 AddCommand('aeditvehicle', cmd_aev)
@@ -502,7 +548,7 @@ AddCommand('aev', cmd_aev)
 AddRemoteEvent("clientActionConfirmationResult", function (result, player, target, vehicle)
 	if result == 1 then
 		if VehicleData[vehicle].faction ~= 0 then
-			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: As this vehicle was owned by a faction, it will now be passed onto the player.</>")
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> As this vehicle was owned by a faction, it will now be passed onto the player.")
 			VehicleData[vehicle].faction = 0
 		end
 
@@ -530,7 +576,7 @@ AddCommand("ahelp", function (player)
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
 	end
 	if PlayerData[player].admin > 2 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>None")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark")
 	end
 	if PlayerData[player].admin > 3 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
@@ -587,7 +633,7 @@ AddCommand("acreatebiz", cmd_acb)
 AddCommand("acb", cmd_acb)
 
 AddCommand("asethelper", function (player, target, level)
-	if (PlayerData[player].helper < 5) then
+	if (PlayerData[player].admin < 5) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
@@ -628,4 +674,25 @@ AddCommand("asethelper", function (player, target, level)
 		PlayerData[target].accountid
 	)
 	mariadb_async_query(sql, query)
+end)
+
+AddCommand("avpark", function (player) 
+	if (PlayerData[player].admin < 3) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if not IsPlayerInVehicle(player) and VehicleData[GetPlayerVehicle(player)] == nil then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a parkable vehicle.</>")
+	end
+
+	local vehicle = GetPlayerVehicle(player)
+	local x, y, z = GetVehicleLocation(vehicle)
+	local a = GetVehicleHeading(vehicle)
+
+	VehicleData[vehicle].x = x
+	VehicleData[vehicle].y = y
+	VehicleData[vehicle].z = z
+	VehicleData[vehicle].a = a
+
+	return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: </> Vehicle ID "..vehicle.." successfully parked!")
 end)

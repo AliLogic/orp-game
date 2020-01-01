@@ -37,6 +37,9 @@ function CreateVehicleData(vehicle)
 
 	VehicleData[vehicle].is_locked = true
 	VehicleData[vehicle].is_spawned = true
+
+	VehicleData[vehicle].rental = 0
+	VehicleData[vehicle].renter = 0
 end
 
 function DestroyVehicleData(vehicle)
@@ -149,6 +152,7 @@ function OnVehicleLoaded(id)
 
 		VehicleData[vehicle].owner = tonumber(result['owner'])
 		VehicleData[vehicle].faction = tonumber(result['faction'])
+		VehicleData[vehicle].rental = tonumber(result['rental'])
 
 		print(id.."'s owner: "..VehicleData[vehicle].owner)
 
@@ -158,11 +162,12 @@ function OnVehicleLoaded(id)
 end
 
 function Vehicle_Unload(vehicle)
-	local query = mariadb_prepare(sql, "UPDATE vehicles SET owner = ?, model = ?, plate = '?', faction = ?, x = '?', y = '?', z = '?', a = '?', r = ?, g = ?, b = ? WHERE id = ?",
+	local query = mariadb_prepare(sql, "UPDATE vehicles SET owner = ?, model = ?, plate = '?', faction = ?, rental = ?, x = '?', y = '?', z = '?', a = '?', r = ?, g = ?, b = ? WHERE id = ?",
 		VehicleData[vehicle].owner,
 		VehicleData[vehicle].model,
 		tostring(VehicleData[vehicle].plate),
 		VehicleData[vehicle].faction,
+		VehicleData[vehicle].rental,
 		tostring(VehicleData[vehicle].x),
 		tostring(VehicleData[vehicle].y),
 		tostring(VehicleData[vehicle].z),
@@ -208,17 +213,31 @@ end)
 AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 	AddPlayerChat(player, "[DEBUG-S] OnPlayerStartEnterVehicle player: "..player..", vehicle: "..vehicle..", seat :"..seat.."")
 	if VehicleData[vehicle] ~= nil then
+
+		if VehicleData[vehicle].rental == 1 then
+			if VehicleData[vehicle].renter == 0 and PlayerData[player].renting == 0 then
+				SetPlayerInVehicle(player, vehicle, seat)
+				StopVehicleEngine(vehicle)
+				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">This is a rentable "..GetVehicleModel(vehicle).."For $50! Enter /rent to rent it.</>")
+				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Note: You will require a valid drivers license.</>")
+				return
+			end
+		end
+
 		if VehicleData[vehicle].is_locked == true then
 			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This vehicle is locked, you cannot enter it!</>")
-
 			Slap(player)
 			--return false
 		else
+			if VehicleData[vehicle].renter ~= 0 and VehicleData[vehicle].renter == player then
+				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Welcome back to your rental vehicle, "..GetPlayerName(player)..".</>")
+			end
+
 			AddPlayerChat(player, "[DEBUG-S] The vehicle is unlocked so putting them in!")
 			SetPlayerInVehicle(player, vehicle, seat)
 		end
 	else
-		AddPlayerChat(player, "[DEBUG-S] The vehicle is probably an admin so putting them in!")
+		AddPlayerChat(player, "[DEBUG-S] The vehicle is probably an admin vehicle so putting them in!")
 		SetPlayerInVehicle(player, vehicle, seat)
 	end
 end)
