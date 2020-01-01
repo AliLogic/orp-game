@@ -10,6 +10,8 @@ BUSINESS_TYPE_BAR = 4
 BUSINESS_TYPE_RESTAURANT = 5
 BUSINESS_TYPE_BANK = 6
 
+BUSINESS_TYPE_MAX = 6
+
 BUSINESS_OWNERSHIP_STATE = 1
 BUSINESS_OWNERSHIP_SOLE = 2
 BUSINESS_OWNERSHIP_FACTION = 3
@@ -96,7 +98,7 @@ function Business_Create(player, type, enterable, price, ...)
 		return false
 	end
 
-	if type < 1 or type > 6 then
+	if type < 1 or type > BUSINESS_TYPE_MAX then
 		return false
 	end
 
