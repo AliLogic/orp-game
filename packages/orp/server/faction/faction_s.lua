@@ -30,8 +30,8 @@ function CreateFactionData(factionid)
 end
 
 function DestroyFactionData(factionid)
-	FactionData[factionid] = {}
-	FactionRankData[factionid] = {}
+	FactionData[factionid] = nil
+	FactionRankData[factionid] = nil
 end
 
 function Faction_Create(name, short_name, leadership_rank, fac_type)
@@ -118,7 +118,10 @@ function OnFactionRankLoaded(factionid)
 			local rank_id = mariadb_get_value_name_int(i, "rank_id")
 
 			FactionRankData[factionid] = {}
+			FactionRankData[factionid][rank_id] = {}
+
 			FactionRankData[factionid][rank_id].rank_name = mariadb_get_value_name(i, "rank_name")
+			FactionRankData[factionid][rank_id].rank_pay = mariadb_get_value_name_int(i, "rank_pay")
 		end
 	end
 end
