@@ -30,8 +30,8 @@ function CreateFactionData(factionid)
 end
 
 function DestroyFactionData(factionid)
-	FactionData[factionid] = {}
-	FactionRankData[factionid] = {}
+	FactionData[factionid] = nil
+	FactionRankData[factionid] = nil
 end
 
 function Faction_Create(name, short_name, leadership_rank, fac_type)

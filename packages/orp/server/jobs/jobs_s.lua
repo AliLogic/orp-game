@@ -252,5 +252,5 @@ AddEvent("OnPlayerQuit", function(playerid)
 	end
 
 	DestroyObject(LumberjackData[playerid].object)
-	LumberjackData[playerid] = {}
+	LumberjackData[playerid] = nil
 end)
