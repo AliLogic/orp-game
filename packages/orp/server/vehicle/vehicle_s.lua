@@ -218,7 +218,7 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 			if VehicleData[vehicle].renter == 0 and PlayerData[player].renting == 0 then
 				SetPlayerInVehicle(player, vehicle, seat)
 				StopVehicleEngine(vehicle)
-				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">This is a rentable "..GetVehicleModel(vehicle).."For $50! Enter /rent to rent it.</>")
+				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">This is a rentable "..GetVehicleModel(vehicle).." for $50! Enter /rent to rent it.</>")
 				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Note: You will require a valid drivers license.</>")
 				return
 			end
