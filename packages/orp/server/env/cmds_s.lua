@@ -20,5 +20,5 @@ local function cmd_asw(playerid, weatherid)
 	AddPlayerChat(playerid, "You have set the new game weather to "..weatherid..".")
 end
 
-AddCommand("asetwweather", cmd_asw)
+AddCommand("asetweather", cmd_asw)
 AddCommand("asw", cmd_asw)
