@@ -536,6 +536,50 @@ AddCommand("ahelp", function (player)
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
 	end
 	if PlayerData[player].admin > 4 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/w /apos /asetadmin /acreatefaction /aeditfaction /setstats /acreatehouse /aedithouse /asetweather")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/w /apos /asetadmin /acreatefaction /aeditfaction /setstats /acreatehouse /aedithouse /asetweather /asethelper")
 	end
+end)
+
+AddCommand("asethelper", function (player, target, level)
+	if (PlayerData[player].helper < 5) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if target == nil or level == nil then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /asethelper <playerid> <level>")
+	end
+
+	if IsValidPlayer(target) == nil then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	target = tonumber(target)
+
+	if PlayerData[target].logged_in == false then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
+	end
+
+	level = tonumber(level)
+
+	if level > PlayerData[player].helper then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot set a level above yours.</>")
+	end
+
+	if level < 0 or level > 2 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Helper levels range from 0 - 2.</>")
+	end
+
+	PlayerData[target].helper = level
+
+	AddPlayerChat(player, string.format("<span color=\"%s\">You have set %s (%s, %d)'s helper rank to %s (%d).</>",
+		colour.COLOUR_YELLOW(), GetPlayerName(target), PlayerData[target].name, target, GetPlayerHelperRank(target), level))
+
+	AddPlayerChat(target, string.format("<span color=\"%s\">%s %s has set your helper rank to %s (%d).</>",
+		colour.COLOUR_YELLOW(), GetPlayerHelperRank(player), PlayerData[player].name, GetPlayerHelperRank(target), level))
+
+	local query = mariadb_prepare(sql, "UPDATE accounts SET helper = ? WHERE id = ? LIMIT 1;",
+		level,
+		PlayerData[target].accountid
+	)
+	mariadb_async_query(sql, query)
 end)
