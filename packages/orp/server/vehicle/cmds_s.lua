@@ -9,6 +9,12 @@ local function cmd_engine(playerid)
 	local vehicleid = GetPlayerVehicle(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 
+	if VehicleData[vehicleid] ~= nil then
+		if VehicleData[vehicleid].renter ~= playerid and VehicleData[vehicleid].rental == 1 then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have the keys to this vehicle.</>")
+		end
+	end
+
 	if GetVehicleEngineState(vehicleid) then
 		StopVehicleEngine(vehicleid)
 		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." stopped the engine of the "..GetVehicleModelEx(vehicleid).."</>")
