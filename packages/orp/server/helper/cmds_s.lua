@@ -22,7 +22,7 @@ AddCommand("h", function (player, ...)
 	end
 
 	if #{...} == 0 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /a [text]")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /h [text]")
 	end
 
 	local text = table.concat({...}, " ")
