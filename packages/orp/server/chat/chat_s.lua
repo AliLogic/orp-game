@@ -137,7 +137,7 @@ AddCommand("b", function (player, ...)
 
 	local text = table.concat({...}, " ")
 	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatRange(x, y, 800.0, "<span color=\"#b8bac6\">(( "..GetPlayerName(player).." ("..player.."):"..text.." ))</>")
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#b8bac6\">(( "..GetPlayerName(player).." ("..player.."): "..text.." ))</>")
 end)
 
 AddCommand("g", function (player, ...)
@@ -169,8 +169,8 @@ AddCommand("pm", function (player, target, ...)
 
 	local text = table.concat({...}, " ")
 
-	AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\">(( PM sent to "..GetPlayerName(target).." (ID: "..target.."):"..text.." ))</>")
-	AddPlayerChat(target, "<span color=\""..colour.COLOUR_PMIN().."\">(( PM from "..GetPlayerName(player).." (ID: "..player.."):"..text.." ))</>")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\">(( PM sent to "..GetPlayerName(target).." (ID: "..target.."): "..text.." ))</>")
+	AddPlayerChat(target, "<span color=\""..colour.COLOUR_PMIN().."\">(( PM from "..GetPlayerName(player).." (ID: "..player.."): "..text.." ))</>")
 end)
 
 AddCommand('players', function (player)
