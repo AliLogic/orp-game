@@ -217,7 +217,10 @@ end
 AddRemoteEvent("SetPlayerClothing", SetPlayerClothing)
 
 AddEvent("OnPlayerStreamIn", function(player)
-	SetPlayerClothing(player)
+
+	Delay(100, function()
+		SetPlayerClothing(player)
+	end)
 end)
 
 AddEvent("OnPlayerNetworkUpdatePropertyValue", function(player, property, id)
