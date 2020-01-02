@@ -300,7 +300,7 @@
 			"Damage": 0.0,
 			"Range": 7000.0,
 			"Recoil": 0.2,
-			"MagazineSize": 1,
+			"MagazineSize": 9,
 			"CameraShake": 1.0,
 			"CameraShakeCrouching": 0.5,
 			"SpreadMin": 0.1,

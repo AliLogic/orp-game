@@ -51,7 +51,7 @@ AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hi
 					AddPlayerChatRange(x, y, 1000.0, "<span color=\""..colour.COLOUR_PURPLE().."\">* "..GetPlayerName(hitid).." falls on the ground after being hit by "..GetPlayerName(player).."'s Beratta 92 RB.</>")
 
 					AddPlayerChat(player, "<span color=\""..colour.COLOUR_YELLOW().."\">-> You hit "..GetPlayerName(hitid).." with your Beratta 92 RB!</>")
-					AddPlayerChat(hitid, "<span color=\""..colour.COLOUR_YELLOW().."\"> -> You were juust hit by a rubber bullet. You feel blunt force impact.</>")
+					AddPlayerChat(hitid, "<span color=\""..colour.COLOUR_YELLOW().."\">-> You were juust hit by a rubber bullet. You feel blunt force impact.</>")
 
 					-- SetPlayerHeading(hitid, GetPlayerHeading(player) - 180)
 					-- SetPlayerAnimation(hitid, "LAY10")
