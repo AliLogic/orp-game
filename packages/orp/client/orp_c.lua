@@ -3,6 +3,7 @@ Copyright (C) 2019 Onset Roleplay
 
 Developers:
 * Bork
+* Logic
 
 Contributors:
 * Blue Mountains GmbH
