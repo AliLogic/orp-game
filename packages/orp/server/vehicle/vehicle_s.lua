@@ -158,6 +158,7 @@ function OnVehicleLoaded(id)
 
 		SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
 		SetVehicleColor(vehicle, RGB(VehicleData[vehicle].r, VehicleData[vehicle].g, VehicleData[vehicle].b))
+		StopVehicleEngine(vehicle)
 	end
 end
 
@@ -206,6 +207,15 @@ AddEvent('UnloadVehicles', function ()
 	for i = 1, #VehicleData, 1 do
 		print('Unloading Vehicle ID: '..i)
 		Vehicle_Unload(i)
+	end
+end)
+
+AddEvent("OnPlayerEnterVehicle", function(playerid, vehicleid, seatid)
+
+	if seatid == 1 then
+		if GetVehicleEngineState(vehicleid) == false then
+			AddPlayerChat(playerid, "The engine is off. (/engine)")
+		end
 	end
 end)
 

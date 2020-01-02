@@ -12,7 +12,7 @@ AddCommand("mdc", function (playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
 	end
 
-	if not IsPlayerInAnyVehicle(playerid) then
+	if not IsPlayerInVehicle(playerid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a vehicle.</>")
 	end
 
@@ -40,7 +40,7 @@ local function cmd_m(playerid, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
 	end
 
-	if not IsPlayerInAnyVehicle(playerid) then
+	if not IsPlayerInVehicle(playerid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a vehicle.</>")
 	end
 

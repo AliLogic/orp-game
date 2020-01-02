@@ -1,3 +1,5 @@
+local colour = ImportPackage('colours')
+
 -- For rental vehicles.
 AddEvent("UnrentPlayerVehicle", function (player) 
 	if PlayerData[player].renting ~= 0 then
@@ -16,7 +18,7 @@ AddCommand("rent", function (player)
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are already renting a vehicle! Please /unrent first before renting another.</>")
     end
 
-    if IsPlayerInVehicle(player) or (VehicleData[GetPlayerVehicle(player)] ~= nil and 
+    if IsPlayerInVehicle(player) or (VehicleData[GetPlayerVehicle(player)] ~= nil and
         VehicleData[GetPlayerVehicle(player)].renter == 0 and 
         VehicleData[GetPlayerVehicle(player)].rental == 1
     ) then
@@ -37,7 +39,7 @@ AddCommand("rent", function (player)
         AddPlayerChat(player, "[DEBUG] Vehicle engine state TRUE.")
         StartVehicleEngine(vehicle)
     end
-    
+
     return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You have successfully rented this vehicle! It'll be accessible to you until you disconnect.</>")
 end)
 
