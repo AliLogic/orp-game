@@ -30,6 +30,7 @@
 		"server/jobs/jobs_s.lua",
 		"server/housing/housing_s.lua",
 		"server/housing/cmds_s.lua",
+		"server/cinema/cinema_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [
@@ -42,6 +43,7 @@
 		"client/env/env_c.lua",
 		"client/customization/customization_c.lua",
 		"client/weapons/custom_weapons_c.lua",
+		"client/cinema/cinema_s.lua",
 		"client/misc/misc_c.lua"
 	],
 	"files": []

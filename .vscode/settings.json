@@ -251,6 +251,15 @@
         "StopVehicleEngine",
         "GetVehicleEngineState",
         "StartVehicleEngine",
-        "GetPlayerState"
+        "GetPlayerState",
+        "GetWeaponIdentifier",
+        "CreateRemoteWebUI3D",
+        "HIT_AIR",
+        "GetPlayerActor",
+        "GetNPCActor",
+        "HIT_WATER",
+        "HIT_LANDSCAPE",
+        "HIT_NPC",
+        "HIT_VEHICLE"
     ]
 }
