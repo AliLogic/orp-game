@@ -12,6 +12,7 @@ Contributors:
 local colour = ImportPackage('colours')
 
 AddEvent("OnPlayerJoin", function (player)
+	print(GetPackageName())
 	AddPlayerChatAll(GetPlayerName(player).." has joined the server!")
 	SetPlayerDimension(player, player)
 	SetPlayerSpawnLocation(player, 170694.515625, 194947.453125, 1396.9643554688, 90.0)
