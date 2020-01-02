@@ -513,7 +513,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		VehicleData[vehicle].plate = "RENTAL"
 		SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
 
-		VehicleData[vehicle].rental = 1
+		VehicleData[vehicle].rental = rental
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You have made vehicle "..GetVehicleModelEx(vehicle).." (ID: "..vehicle..") a rental vehicle!</>")
 	elseif prefix == "faction" then
 		local faction = tonumber(args[1])
