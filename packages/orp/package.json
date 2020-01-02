@@ -44,5 +44,7 @@
 		"client/weapons/custom_weapons_c.lua",
 		"client/misc/misc_c.lua"
 	],
-	"files": []
+	"files": [
+		"client/pistol.png"
+	]
 }
