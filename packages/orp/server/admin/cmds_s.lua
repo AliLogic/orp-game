@@ -653,7 +653,7 @@ AddCommand("asethelper", function (player, target, level)
 
 	level = tonumber(level)
 
-	if level > PlayerData[player].helper then
+	if level > PlayerData[player].helper and PlayerData[player].admin ~= 0 then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot set a level above yours.</>")
 	end
 
