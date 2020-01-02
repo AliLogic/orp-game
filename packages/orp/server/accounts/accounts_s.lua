@@ -25,7 +25,7 @@ end)
 
 function OnPlayerSteamAuth(player)
 	CreatePlayerData(player)
-	FreezePlayer(player)
+	--FreezePlayer(player)
 
 	-- First check if there is an account for this player
 	local query = mariadb_prepare(sql, "SELECT id FROM accounts WHERE steamid = '?' LIMIT 1;",
