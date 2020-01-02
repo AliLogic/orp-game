@@ -3,19 +3,22 @@ AddEvent("OnKeyPress", function(key)
 	if key == 'E' then
 		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
 
-		if pickupid ~= 0 then
-
+		if pickupid ~= false then
 			pickupid = tonumber(pickupid)
-			local plX, plY, plZ = GetPlayerLocation()
-			local pkX, pkY, pkZ = GetPickupLocation(pickupid)
-			local distance = GetDistance3D(plX, plY, plZ, pkX, pkY, pkZ)
 
-			if distance < 300 then
-				AddPlayerChat("You have pressed the key while in range of pickupid "..pickupid..".") -- nil value, currently problematic.
+			if pickupid ~= 0 then
 
-				CallRemoteEvent("OnPlayerInteractMarker", pickupid)
-			else
-				SetPlayerPropertyValue(GetPlayerId(), "pickupid", 0)
+				local plX, plY, plZ = GetPlayerLocation()
+				local pkX, pkY, pkZ = GetPickupLocation(pickupid)
+				local distance = GetDistance3D(plX, plY, plZ, pkX, pkY, pkZ)
+
+				if distance < 300 then
+					AddPlayerChat("You have pressed the key while in range of pickupid "..pickupid..".") -- nil value, currently problematic.
+
+					CallRemoteEvent("OnPlayerInteractMarker", pickupid)
+				else
+					SetPlayerPropertyValue(GetPlayerId(), "pickupid", 0)
+				end
 			end
 		end
 	end
