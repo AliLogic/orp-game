@@ -97,14 +97,14 @@ AddRemoteEvent("LoadSpawnMenu", function ()
 end)]]--
 
 AddEvent("OnPlayerSpawn", function(playerid)
-	SetPostEffect("MotionBlur", "Amount", 0.5)
+	SetPostEffect("MotionBlur", "Amount", 0.3)
 end)
 
 AddEvent("OnKeyPress", function (key)
 	if key == "V" then
 		local bEnable = not IsFirstPersonCamera()
 		EnableFirstPersonCamera(bEnable)
-		SetNearClipPlane(15)
+		SetNearClipPlane(14)
 	end
 end)
 

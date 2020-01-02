@@ -432,7 +432,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 
 	if prefix == "owner" then
 		local target = tonumber(args[1])
-		
+
 		if vehicle == nil or target == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> owner <target>")
 		end
@@ -517,7 +517,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You have made vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..") a rental vehicle!</>")
 	elseif prefix == "faction" then
 		local faction = tonumber(args[1])
-		
+
 		if vehicle == nil or faction == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> faction <target>")
 		end
@@ -676,16 +676,18 @@ AddCommand("asethelper", function (player, target, level)
 	mariadb_async_query(sql, query)
 end)
 
-AddCommand("avpark", function (player) 
+AddCommand("avpark", function (player)
+
 	if (PlayerData[player].admin < 3) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
-	if not IsPlayerInVehicle(player) and VehicleData[GetPlayerVehicle(player)] == nil then
+	local vehicle = GetPlayerVehicle(player)
+
+	if not IsPlayerInVehicle(player) or VehicleData[vehicle] == nil then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a parkable vehicle.</>")
 	end
 
-	local vehicle = GetPlayerVehicle(player)
 	local x, y, z = GetVehicleLocation(vehicle)
 	local a = GetVehicleHeading(vehicle)
 
