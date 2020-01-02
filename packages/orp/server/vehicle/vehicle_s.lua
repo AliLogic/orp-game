@@ -18,16 +18,15 @@ function GetVehicleModelEx(vehicleid)
 	return VEHICLE_NAMES[GetVehicleModel(vehicleid)]
 end
 
-function GetFreeVehicleId()
-	for i = 1, MAX_VEHICLES, 1 do
-		if VehicleData[i] == nil then
-			CreateVehicleData(i)
-			return i
-		end
-	end
-
-	return 0
-end
+-- function GetFreeVehicleId()
+-- 	for i = 1, MAX_VEHICLES, 1 do
+-- 		if VehicleData[i] == nil then
+-- 			CreateVehicleData(i)
+-- 			return i
+-- 		end
+-- 	end
+-- 	return 0
+-- end
 
 function CreateVehicleData(vehicle)
 	VehicleData[vehicle] = {}
@@ -72,18 +71,13 @@ function Vehicle_Create(model, plate, x, y, z, a)
 		return false
 	end
 
-	local index = GetFreeVehicleId()
-	if index == 0 then
-		return false
-	end
-
 	local vehicle = CreateVehicle(model, x, y, z, a)
 	if vehicle == false then
 		return false
 	end
 
-	--CreateVehicleData(index)
-	VehicleData[index].vid = vehicle
+	CreateVehicleData(vehicle)
+	VehicleData[vehicle].vid = vehicle
 	SetVehicleLicensePlate(vehicle, plate)
 
 	local r, g, b, al = HexToRGBA(GetVehicleColor(vehicle))
@@ -100,7 +94,7 @@ function Vehicle_Create(model, plate, x, y, z, a)
 		b
 	)
 
-	mariadb_async_query(sql, query, OnVehicleCreated, index, model, plate, x, y, z, a, r, g, b)
+	mariadb_async_query(sql, query, OnVehicleCreated, vehicle, model, plate, x, y, z, a, r, g, b)
 	return vehicle
 end
 
