@@ -499,9 +499,3 @@ AddCommand("name", function (player)
 	SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
 	AddPlayerChat(player, "Name set to: "..PlayerData[player].firstname.." "..PlayerData[player].lastname)
 end)
-
---[[VEHICLE_NAMES = {
-	"Premier", "Taxi", "Police Cruiser", "Luxe", "Regal", "Nascar", "Raptor", "Ambulance", "Garbage Truck", "Maverick",
-	"Pinnacle", "Sultan", "Bearcat Police", "Bearcat Camo", "Bearcat Medic", "Bearcat Military", "Barracks Police", "Barracks Camo", "Premier SE", 
-	"Maverick SE", "Patriot", "Cargo Lite Desert", "Cargo Lite Army", "Securicar", "Dacia"
-}]]--

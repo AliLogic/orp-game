@@ -1,7 +1,22 @@
 local colour = ImportPackage('colours')
 
+VEHICLE_NAMES = {
+	"Premier", "Taxi", "Police Cruiser", "Luxe", "Regal", "Nascar", "Raptor", "Ambulance", "Garbage Truck", "Maverick",
+	"Pinnacle", "Sultan", "Bearcat Police", "Bearcat Camo", "Bearcat Medic", "Bearcat Military", "Barracks Police", "Barracks Camo", "Premier SE", 
+	"Maverick SE", "Patriot", "Cargo Lite Desert", "Cargo Lite Army", "Securicar", "Dacia"
+}
+
 VehicleData = {}
 MAX_VEHICLES = 4096
+
+function GetVehicleModelEx(vehicleid)
+
+	if IsValidVehicle(vehicleid) then
+		return false
+	end
+
+	return VEHICLE_NAMES[GetVehicleModel(vehicleid)]
+end
 
 function GetFreeVehicleId()
 	for i = 1, MAX_VEHICLES, 1 do
@@ -228,7 +243,7 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 			if VehicleData[vehicle].renter == 0 and PlayerData[player].renting == 0 then
 				SetPlayerInVehicle(player, vehicle, seat)
 				StopVehicleEngine(vehicle)
-				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">This is a rentable "..GetVehicleModel(vehicle).." for $50! Enter /rent to rent it.</>")
+				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">This is a rentable "..GetVehicleModelEx(vehicle).." for $50! Enter /rent to rent it.</>")
 				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Note: You will require a valid drivers license.</>")
 				return
 			end
