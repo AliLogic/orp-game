@@ -43,6 +43,10 @@ end)
 
 AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hitY, hitZ, startX, startY, startY, normalX, normalY, normalZ)
 	if player ~= 0 then
+		if IsPlayerInVehicle(hitid) then
+			return false
+		end
+
 		if weapon == 22 then
 			if hittype == HIT_PLAYER then
 				if IsValidPlayer(hitid) then

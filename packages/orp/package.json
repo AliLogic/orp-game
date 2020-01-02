@@ -47,6 +47,7 @@
 		"client/misc/misc_c.lua"
 	],
 	"files": [
-		"client/pistol.png"
+		"client/weapons/icons/pistol.png",
+		"client/weapons/sounds/x26.wav"
 	]
 }
