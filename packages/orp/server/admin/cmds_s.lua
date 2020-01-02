@@ -454,7 +454,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		print("Player Char SQLID is "..PlayerData[target].id)
 		print("Vehicle Owner Is Now Char SQLID: "..VehicleData[vehicle].owner)
 
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModelEx(vehicle).." (ID: "..vehicle..").</>")
 		return
 
 		--CallRemoteEvent(player, "askClientActionConfirmation", 1, "Would you like to change this vehicle's owner?", target, vehicle)
@@ -514,7 +514,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
 
 		VehicleData[vehicle].rental = 1
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You have made vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..") a rental vehicle!</>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You have made vehicle "..GetVehicleModelEx(vehicle).." (ID: "..vehicle..") a rental vehicle!</>")
 	elseif prefix == "faction" then
 		local faction = tonumber(args[1])
 
@@ -534,7 +534,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		VehicleData[vehicle].faction = FactionData[faction].id
 		print("Vehicle Owner Is Now FACTION SQLID: "..FactionData[faction].id)
 
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..FactionData[faction].name.." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..FactionData[faction].name.." now owns the vehicle "..GetVehicleModelEx(vehicle).." (ID: "..vehicle..").</>")
 		return
 	else
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
@@ -556,7 +556,7 @@ AddRemoteEvent("clientActionConfirmationResult", function (result, player, targe
 		print("Player Char SQLID is "..PlayerData[target].id)
 		print("Vehicle Owner Is Now Char SQLID: "..VehicleData[vehicle].owner)
 
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModel(vehicle).." (ID: "..vehicle..").</>")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModelEx(vehicle).." (ID: "..vehicle..").</>")
 		return
 	else
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You've decided to cancel any changes made to the vehicle!</>")
