@@ -5,6 +5,9 @@ Addtional configuration on the server is necessary.
 
 ]]--
 
+local iconpath = GetPackageName().."/client/weapons/icons"
+local soundpath = GetPackageName().."/client/weapons/sounds"
+
 AddEvent("OnPackageStart", function()
 
 	local Weapon = GetWeaponIdentifier():NewWeapon(1)
@@ -1052,7 +1055,8 @@ AddEvent("OnPackageStart", function()
 	Weapon:SetMagazineSize(1)
 	Weapon:SetMagazineDropTime(0.32)
 	Weapon:SetScope(false)
-	Weapon:SetShotSound(USoundCue.LoadFromAsset("/Game/Weapons/Sounds/Cues/S_Taser_Fire_Cue"))
+	Weapon:SetShotSound(USoundCue.LoadFromFile(soundpath.."/x26.wav"))
+	--Weapon:SetShotSound(USoundCue.LoadFromAsset("/Game/Weapons/Sounds/Cues/S_Taser_Fire_Cue"))
 	Weapon:SetShotAnimation(UAnimSequence.LoadFromAsset("/Game/Weapons/Animations/A_Taser_Fire"))
 	Weapon:SetShotAnimationTime(0.5)
 	Weapon:SetMuzzleFlash(UParticleSystem.LoadFromAsset("/Game/Weapons/VFX/Particles/Weapons/PS_Taser"))
@@ -1118,7 +1122,7 @@ AddEvent("OnPackageStart", function()
 	Weapon:SetLeftHandIKLocation(FVector(-2.000000, 8.000000, -5.000000))
 	Weapon:SetLeftHandARIdleIKLocation(FVector(0.000000, 0.000000, 0.000000))
 	Weapon:SetLeftHandARIdleIKLocationCrouching(FVector(0.000000, 0.000000, 0.000000))
-	Weapon:SetHUDImage(UTexture2D.LoadFromFile(GetPackageName().."/client/pistol.png"))
+	Weapon:SetHUDImage(UTexture2D.LoadFromFile(iconpath.."/pistol.png"))
 	--Weapon:SetHUDImage(UTexture2D.LoadFromAsset("/Game/Weapons/Images/T_Pistol04"))
 	Weapon:SetAllowAimWhileCrouching(true)
 	Weapon:SetZoomInSound(nil)
