@@ -684,7 +684,7 @@ AddCommand("avpark", function (player)
 
 	local vehicle = GetPlayerVehicle(player)
 
-	if not IsPlayerInVehicle(player) or VehicleData[vehicle] == nil then
+	if IsPlayerInVehicle(player) == false or VehicleData[vehicle] == nil then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a parkable vehicle.</>")
 	end
 
