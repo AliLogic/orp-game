@@ -633,7 +633,7 @@ AddCommand("acreatebiz", cmd_acb)
 AddCommand("acb", cmd_acb)
 
 AddCommand("asethelper", function (player, target, level)
-	if (PlayerData[player].admin < 5) then
+	if (PlayerData[player].admin < 5 or PlayerData[player].helper ~= 2) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
@@ -653,7 +653,7 @@ AddCommand("asethelper", function (player, target, level)
 
 	level = tonumber(level)
 
-	if level > PlayerData[player].helper then
+	if level > PlayerData[player].helper and PlayerData[player].admin ~= 0 then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot set a level above yours.</>")
 	end
 
@@ -684,7 +684,7 @@ AddCommand("avpark", function (player)
 
 	local vehicle = GetPlayerVehicle(player)
 
-	if not IsPlayerInVehicle(player) or VehicleData[vehicle] == nil then
+	if IsPlayerInVehicle(player) == false or VehicleData[vehicle] == nil then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a parkable vehicle.</>")
 	end
 
