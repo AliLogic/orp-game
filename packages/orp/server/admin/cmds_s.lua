@@ -424,7 +424,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 
 	vehicle = tonumber(vehicle)
 
-	if IsValidVehicle(vehicle) == false then
+	if IsValidVehicle(vehicle) == false or VehicleData[vehicle] == nil then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..vehicle.." doesn't exist or isn't valid.</>")
 	end
 

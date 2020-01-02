@@ -87,7 +87,7 @@ AddCommand("me", function (player, ...)
 	local text = table.concat({...}, " ")
 
 	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player)..""..text.."</>")
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(player).." "..text.."</>")
 	--AddPlayerChatRange(x, y, 800.0, string.format("<span color=\"#c2a2da\">* %s%s</>", GetPlayerName(player), text))
 end)
 
@@ -100,7 +100,7 @@ AddCommand("do", function (player, ...)
 	local text = table.concat({...}, " ")
 
 	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">*"..text.." (( "..GetPlayerName(player).." ))</>")
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..text.." (( "..GetPlayerName(player).." ))</>")
 end)
 
 AddCommand("ame", function(player, ...)
