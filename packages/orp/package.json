@@ -47,7 +47,27 @@
 		"client/misc/misc_c.lua"
 	],
 	"files": [
-		"client/weapons/icons/pistol.png",
-		"client/weapons/sounds/x26.wav"
+		"client/weapons/icons/1.png",
+		"client/weapons/icons/2.png",
+		"client/weapons/icons/3.png",
+		"client/weapons/icons/4.png",
+		"client/weapons/icons/5.png",
+		"client/weapons/icons/6.png",
+		"client/weapons/icons/7.png",
+		"client/weapons/icons/8.png",
+		"client/weapons/icons/9.png",
+		"client/weapons/icons/10.png",
+		"client/weapons/icons/11.png",
+		"client/weapons/icons/12.png",
+		"client/weapons/icons/13.png",
+		"client/weapons/icons/14.png",
+		"client/weapons/icons/15.png",
+		"client/weapons/icons/16.png",
+		"client/weapons/icons/17.png",
+		"client/weapons/icons/18.png",
+		"client/weapons/icons/19.png",
+		"client/weapons/icons/20.png",
+		"client/weapons/icons/21.png",
+		"client/weapons/icons/22.png"
 	]
 }
