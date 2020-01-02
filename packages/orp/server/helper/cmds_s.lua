@@ -29,7 +29,7 @@ AddCommand("h", function (player, ...)
 
 	for _, i in pairs(GetAllPlayers()) do
 		if PlayerData[i].helper > 0 then
-			AddPlayerChat(i, string.format("<span color=\"%s\">** %s %s (%s, %d):%s</>",
+			AddPlayerChat(i, string.format("<span color=\"%s\">** %s %s (%s, %d): %s</>",
 				colour.COLOUR_BLUE(), GetPlayerHelperRank(player), GetPlayerName(player), PlayerData[player].name, player, text))
 		end
 	end
