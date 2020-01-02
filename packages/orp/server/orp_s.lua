@@ -43,7 +43,31 @@ end)
 
 AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hitY, hitZ, startX, startY, startY, normalX, normalY, normalZ)
 	if player ~= 0 then
-		if weapon == 21 then
+		if weapon == 22 then
+			if hittype == HIT_PLAYER then
+				if IsValidPlayer(hitid) then
+
+					local x, y, z = GetPlayerLocation(player)
+					AddPlayerChatRange(x, y, 1000.0, "<span color=\""..colour.COLOUR_PURPLE().."\">* "..GetPlayerName(hitid).." falls on the ground after being hit by "..GetPlayerName(player).."'s Beratta 92 RB.</>")
+
+					AddPlayerChat(player, "<span color=\""..colour.COLOUR_YELLOW().."\">-> You hit "..GetPlayerName(hitid).." with your Beratta 92 RB!</>")
+					AddPlayerChat(hitid, "<span color=\""..colour.COLOUR_YELLOW().."\"> -> You feel a blunt force impact.</>")
+
+					-- SetPlayerHeading(hitid, GetPlayerHeading(player) - 180)
+					-- SetPlayerAnimation(hitid, "LAY10")
+					SetPlayerRagdoll(hitid, true)
+
+					CallRemoteEvent(hitid, "ToggleTaseEffect", true)
+
+					Delay(5 * 1000, function()
+						CallRemoteEvent(hitid, "ToggleTaseEffect", false)
+						-- SetPlayerHeading(hitid, GetPlayerHeading(player) - 180)
+						-- SetPlayerAnimation(hitid, "PUSHUP_END")
+						SetPlayerRagdoll(hitid, false)
+					end)
+				end
+			end
+		elseif weapon == 21 then
 			if hittype == HIT_PLAYER then
 				if IsValidPlayer(hitid) then
 
