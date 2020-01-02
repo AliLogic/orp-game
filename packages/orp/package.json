@@ -43,7 +43,7 @@
 		"client/env/env_c.lua",
 		"client/customization/customization_c.lua",
 		"client/weapons/custom_weapons_c.lua",
-		"client/cinema/cinema_s.lua",
+		"client/cinema/cinema_c.lua",
 		"client/misc/misc_c.lua"
 	],
 	"files": [
