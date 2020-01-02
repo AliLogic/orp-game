@@ -3,10 +3,17 @@ AddEvent("OnKeyPress", function(key)
 	if key == 'E' then
 		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
 
+		AddPlayerChat("PICKUPID BASIC: "..pickupid)
+
 		if pickupid ~= false then
+
+			AddPlayerChat("PICKUPID BASIC 2: "..pickupid)
 			pickupid = tonumber(pickupid)
+			AddPlayerChat("PICKUPID BASIC 3: "..pickupid)
 
 			if pickupid ~= 0 then
+
+				AddPlayerChat("PICKUPID BASIC 4: "..pickupid)
 
 				local plX, plY, plZ = GetPlayerLocation()
 				local pkX, pkY, pkZ = GetPickupLocation(pickupid)
