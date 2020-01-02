@@ -11,10 +11,10 @@ local function cmd_engine(playerid)
 
 	if GetVehicleEngineState(vehicleid) then
 		StopVehicleEngine(vehicleid)
-		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." stopped the engine of the "..GetVehicleModelName(vehicleid).."</>")
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." stopped the engine of the "..GetVehicleModelEx(vehicleid).."</>")
 	else
 		StartVehicleEngine(vehicleid)
-		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." started the engine of the "..GetVehicleModelName(vehicleid).."</>")
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." started the engine of the "..GetVehicleModelEx(vehicleid).."</>")
 	end
 
 	return
