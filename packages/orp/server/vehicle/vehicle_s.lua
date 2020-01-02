@@ -11,7 +11,7 @@ MAX_VEHICLES = 4096
 
 function GetVehicleModelEx(vehicleid)
 
-	if IsValidVehicle(vehicleid) then
+	if not IsValidVehicle(vehicleid) then
 		return false
 	end
 
