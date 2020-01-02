@@ -18,7 +18,7 @@ end)
 
 AddCommand("cinema", function (playerid)
 
-	for k, v in ipairs(GetAllPlayers()), 1 do
-		CallRemoteEvent(v, "StartCinema", CINEMA_LINKS[1])
+	for k, v in pairs(GetAllPlayers()) do
+		CallRemoteEvent(v, "StartMovie", CINEMA_LINKS[1])
 	end
 end)
