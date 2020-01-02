@@ -244,10 +244,13 @@
         "NotifyCrosshairHit",
         "GetCameraLocation",
         "GetPlayerVehicleID",
-        "IsPlayerInAnyVehicle",
         "SetObjectAttached",
         "HIT_OBJECT",
         "SetObjectEditorSpeed",
-        "GetWebVisibility"
+        "GetWebVisibility",
+        "StopVehicleEngine",
+        "GetVehicleEngineState",
+        "StartVehicleEngine",
+        "GetPlayerState"
     ]
 }

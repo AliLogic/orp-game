@@ -250,11 +250,11 @@ function Business_Destroy(business)
 	mariadb_async_query(sql, query)
 
 	--DestroyMarker
-	
+
 	if IsValidText3D(BusinessData[business].text3d) then
-		DestroyText3D(BusinessData[i].text3d)
+		DestroyText3D(BusinessData[business].text3d)
 	end
-		
+
 	if IsValidText3D(BusinessData[business].text3d_out) then
 		DestroyText3D(BusinessData[business].text3d_out)
 	end
@@ -262,6 +262,6 @@ function Business_Destroy(business)
 	if IsValidText3D(BusinessData[business].text3d_in) then
 		DestroyText3D(BusinessData[business].text3d_in)
 	end
-		
+
 	DestroyBusinessData(business)
 end
