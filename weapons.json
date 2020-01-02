@@ -15,7 +15,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Pistol01",
+			"Name": "Desert Eagle",
 			"RateOfFire": 90.0,
 			"Damage": 40.0,
 			"Range": 6500.0,
@@ -29,7 +29,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Pistol02",
+			"Name": "M1911",
 			"RateOfFire": 130.0,
 			"Damage": 22.0,
 			"Range": 7100.0,
@@ -43,7 +43,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Pistol03",
+			"Name": "Glock 19",
 			"RateOfFire": 150.0,
 			"Damage": 21.0,
 			"Range": 7400.0,
@@ -57,7 +57,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Pistol04",
+			"Name": "Beretta 92",
 			"RateOfFire": 100.0,
 			"Damage": 23.0,
 			"Range": 7000.0,
@@ -71,7 +71,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Shotgun01",
+			"Name": "SPAS 12",
 			"RateOfFire": 50.0,
 			"Damage": 50.0,
 			"Range": 3000.0,
@@ -85,7 +85,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Shotgun02",
+			"Name": "Winchester 1300",
 			"RateOfFire": 60.0,
 			"Damage": 55.0,
 			"Range": 3100.0,
@@ -99,7 +99,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "SMG01",
+			"Name": "MP5-SD",
 			"RateOfFire": 480.0,
 			"Damage": 19.0,
 			"Range": 7500.0,
@@ -113,7 +113,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "SMG02",
+			"Name": "Mac-10",
 			"RateOfFire": 550.0,
 			"Damage": 12.0,
 			"Range": 6000.0,
@@ -127,7 +127,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "SMG03",
+			"Name": "UMP45",
 			"RateOfFire": 450.0,
 			"Damage": 20.0,
 			"Range": 9000.0,
@@ -141,7 +141,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Rifle01",
+			"Name": "M4A1",
 			"RateOfFire": 450.0,
 			"Damage": 21.0,
 			"Range": 10000.0,
@@ -155,7 +155,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Rifle02",
+			"Name": "AK47",
 			"RateOfFire": 450.0,
 			"Damage": 21.0,
 			"Range": 8700.0,
@@ -169,7 +169,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Rifle02 Gold",
+			"Name": "AK47 Gold",
 			"RateOfFire": 450.0,
 			"Damage": 23.0,
 			"Range": 8700.0,
@@ -183,7 +183,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Rifle03",
+			"Name": "G36C",
 			"RateOfFire": 440.0,
 			"Damage": 20.0,
 			"Range": 8800.0,
@@ -197,7 +197,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Rifle04",
+			"Name": "AS VAL",
 			"RateOfFire": 240.0,
 			"Damage": 24.0,
 			"Range": 9800.0,
@@ -211,7 +211,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Rifle05",
+			"Name": "AK-74u",
 			"RateOfFire": 600.0,
 			"Damage": 21.0,
 			"Range": 9400.0,
@@ -225,7 +225,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Rifle06",
+			"Name": "FN FAL",
 			"RateOfFire": 240.0,
 			"Damage": 25.0,
 			"Range": 11500.0,
@@ -239,7 +239,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Rifle07",
+			"Name": "ACR",
 			"RateOfFire": 450.0,
 			"Damage": 22.0,
 			"Range": 9800.0,
@@ -253,7 +253,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Rifle08",
+			"Name": "M4A4",
 			"RateOfFire": 550.0,
 			"Damage": 22.0,
 			"Range": 11000.0,
@@ -267,7 +267,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Sniper",
+			"Name": "L96A1",
 			"RateOfFire": 60.0,
 			"Damage": 80.0,
 			"Range": 13000.0,
@@ -295,7 +295,7 @@
 			"SpreadCrouchingModifier": -0.3
 		},
 		{
-			"Name": "Pistol04 RB",
+			"Name": "Beretta 92 RB",
 			"RateOfFire": 100.0,
 			"Damage": 0.0,
 			"Range": 7000.0,
