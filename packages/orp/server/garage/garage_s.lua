@@ -105,6 +105,7 @@ function OnGarageLoaded(garageid)
 		local garage = GetFreeBusinessId()
 		if garage == 0 then
 			print("A free garage id wasn't able to be found? ("..#GarageData.."/"..MAX_GARAGES..") garage SQL ID "..garageid..".")
+			return
 		end
 
 		GarageData[garage].id = garageid

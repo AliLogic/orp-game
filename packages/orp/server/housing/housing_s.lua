@@ -133,6 +133,7 @@ function OnHouseLoaded(houseid)
 		local house = GetFreeHousingId()
 		if house == 0 then
 			print("A free house id wasn't able to be found? ("..#HousingData.."/"..MAX_BUSINESSES..") house SQL ID "..houseid..".")
+			return
 		end
 
 		-- type, price, message, dimension, ix iy iz ia, ex ey ez ea, mx my mz
