@@ -117,7 +117,6 @@ function FormatTime(time)
 end
 
 AddRemoteEvent("ToggleTaseEffect", function (bToggle)
-
 	if bToggle == true then
 		SetPostEffect("MotionBlur", "Amount", 1.0)
 		SetCameraShakeRotation(0.0, 0.0, 1.0, 10.0, 0.0, 0.0)
