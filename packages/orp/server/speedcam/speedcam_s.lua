@@ -137,10 +137,10 @@ local function OnSpeedcamLoaded(speedcamid)
 
 		SpeedcamData[index].id = speedcamid
 
-		SpeedcamData[index].x = mariadb_get_value_name_int(speedcamid, "x")
-		SpeedcamData[index].y = mariadb_get_value_name_int(speedcamid, "y")
-		SpeedcamData[index].z = mariadb_get_value_name_int(speedcamid, "z")
-		SpeedcamData[index].speed = mariadb_get_value_name_int(speedcamid, "speed")
+		SpeedcamData[index].x = mariadb_get_value_name_int(1, "x")
+		SpeedcamData[index].y = mariadb_get_value_name_int(1, "y")
+		SpeedcamData[index].z = mariadb_get_value_name_int(1, "z")
+		SpeedcamData[index].speed = mariadb_get_value_name_int(1, "speed")
 
 		SpeedcamData[index].objectid = CreateObject(963, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z)
 		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 120.0, 0.0, 0.0, 0.0)

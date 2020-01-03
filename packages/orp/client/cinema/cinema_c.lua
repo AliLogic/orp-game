@@ -24,7 +24,7 @@ end)
 AddRemoteEvent("StartImg", function ()
 	-- 123652, 96768, 1671
 	-- 123660, 96737, 1674
-	imgUI = CreateWebUI3D(123662, 96740, 1693, 0, 125, 0, 592, 330, 1)
+	imgUI = CreateWebUI3D(123664, 96742, 1694, 0, 125, 0, 592, 328, 1)
 	LoadWebFile(imgUI, "http://asset/"..GetPackageName().."/client/OnsetLogo.png")
 	SetWebAlignment(cinemaUI, 0.0, 0.0)
 	SetWebAnchors(cinemaUI, 0.0, 0.0, 1.0, 1.0)
