@@ -31,6 +31,8 @@
 		"server/housing/housing_s.lua",
 		"server/housing/cmds_s.lua",
 		"server/cinema/cinema_s.lua",
+		"server/speedcam/speedcam_s.lua",
+		"server/speedcam/cmds_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [
