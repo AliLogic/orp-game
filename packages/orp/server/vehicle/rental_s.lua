@@ -20,17 +20,19 @@ AddCommand("rent", function (player)
 
 	local vehicle = GetPlayerVehicle(player)
 
-	if vehicle ~= 0 or (VehicleData[vehicle] ~= nil and
-		VehicleData[vehicle].renter == 0 and
-		VehicleData[vehicle].rental == 1
-	) then
+	if vehicle == 0 or
+	(VehicleData[vehicle] ~= nil and VehicleData[vehicle].renter == 0 and VehicleData[vehicle].rental == 1)
+	then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a vehicle you can actually rent.</>")
 	end
 
 	-- Check if player has valid license
-	-- Check if player has fifty bucks.
 
-	-- Subtract fifty bucks. (JUST TEMP PRICING THEY'LL BE VARIABLE IN THE FUTURE BY VEHICLE MODEL OR SOMETHING.)
+	if GetPlayerCash(player) < 50 then -- Check if player has fifty bucks.
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have enough cash to rent a vehicle.</>")
+	end
+
+	RemovePlayerCash(player, 50) -- Subtract fifty bucks. (JUST TEMP PRICING THEY'LL BE VARIABLE IN THE FUTURE BY VEHICLE MODEL OR SOMETHING.)
 
 	VehicleData[vehicle].renter = player
 	PlayerData[player].renting = vehicle
