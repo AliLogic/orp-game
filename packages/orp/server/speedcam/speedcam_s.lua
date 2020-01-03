@@ -105,7 +105,7 @@ function Speedcam_Destroy(speedcam)
 		return false
 	end
 
-	local query = mariadb_prepare(sql, "DELETE FROM speedcam WHERE id = ?;", SpeedcamData[speedcam].id)
+	local query = mariadb_prepare(sql, "DELETE FROM speedcams WHERE id = ?;", SpeedcamData[speedcam].id)
 	mariadb_async_query(sql, query)
 
 	if IsValidObject(SpeedcamData[speedcam].objectid) then
@@ -183,5 +183,5 @@ AddEvent("UnloadSpeedCameras", function()
 end)
 
 AddEvent('LoadSpeedcams', function ()
-	mariadb_async_query(sql, "SELECT * FROM speedcam;", OnSpeedcamLoad)
+	mariadb_async_query(sql, "SELECT * FROM speedcams;", OnSpeedcamLoad)
 end)
