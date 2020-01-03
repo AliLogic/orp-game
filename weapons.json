@@ -307,6 +307,20 @@
 			"SpreadMax": 2.0,
 			"SpreadMovementModifier": 0.2,
 			"SpreadCrouchingModifier": -0.3
+		},
+		{
+			"Name": "Winchester 1300 BB",
+			"RateOfFire": 60.0,
+			"Damage": 0.0,
+			"Range": 3100.0,
+			"Recoil": 0.3,
+			"MagazineSize": 10,
+			"CameraShake": 1.0,
+			"CameraShakeCrouching": 0.5,
+			"SpreadMin": 0.1,
+			"SpreadMax": 2.0,
+			"SpreadMovementModifier": 0.2,
+			"SpreadCrouchingModifier": -0.3
 		}
 	]
 }
