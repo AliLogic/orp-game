@@ -59,6 +59,14 @@ function SetPlayerChatBubble(player, message, seconds)
 	end)
 end
 
+function GetPlayerVehicleSpeed(playerid)
+	local vehicle = GetPlayerVehicle(playerid)
+	if vehicle == 0 then
+		return 0
+	end
+	return math.tointeger(math.floor(GetVehicleVelocity(vehicle)))
+end
+
 function GetPlayerCash(player)
 	if PlayerData[player] ~= nil then
 		return PlayerData[player].cash

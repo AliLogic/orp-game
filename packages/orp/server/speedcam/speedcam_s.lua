@@ -86,11 +86,39 @@ function Speedcam_Destroy(speedcam)
 		DestroyObject(SpeedcamData[speedcam].objectid)
 	end
 
+	if IsValidTimer(SpeedcamData[speedcam].timer) then
+		DestroyTimer(SpeedcamData[speedcam].timer)
+	end
+
 	if IsValidText3D(SpeedcamData[speedcam].text3d) then
 		DestroyText3D(SpeedcamData[speedcam].text3d)
 	end
 
 	DestroySpeedcamData(speedcam)
+end
+
+local function OnSpeedcamTick(speedcam)
+
+	for k, v in ipairs(GetAllPlayers()) do
+
+		local vehicle = GetPlayerVehicle(v)
+		local x, y, z = GetPlayerLocation(v)
+
+		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 400 then
+
+			if vehicle ~= 0 then
+
+				local speed = GetPlayerVehicleSpeed(v)
+				if speed > SpeedcamData[speedcam].speed then
+
+					local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
+
+					AddPlayerChat(v, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$%i</> speeding ticket.", price)
+					CallRemoteEvent(v, "FlashSpeedcam")
+				end
+			end
+		end
+	end
 end
 
 local function OnSpeedcamLoaded(speedcamid)
@@ -114,6 +142,8 @@ local function OnSpeedcamLoaded(speedcamid)
 
 		SpeedcamData[index].objectid = CreateObject(963, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z)
 		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z, 0.0, 0.0, 0.0)
+
+		SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 	end
 end
 
