@@ -55,6 +55,30 @@ local function OnSpeedcamCreated(index, x, y, z, speed)
 	SpeedcamData[index].speed = speed
 end
 
+local function OnSpeedcamTick(speedcam)
+
+	for k, v in ipairs(GetAllPlayers()) do
+
+		local vehicle = GetPlayerVehicle(v)
+		local x, y, z = GetPlayerLocation(v)
+
+		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 1000 then
+
+			if vehicle ~= 0 then
+
+				local speed = GetPlayerVehicleSpeed(v)
+				if speed > SpeedcamData[speedcam].speed then
+
+					local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
+
+					AddPlayerChat(v, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$%i</> speeding ticket.", price)
+					CallRemoteEvent(v, "FlashSpeedcam")
+				end
+			end
+		end
+	end
+end
+
 function Speedcam_Create(x, y, z, speed)
 
 	local index = GetFreeSpeedcamId()
@@ -64,6 +88,8 @@ function Speedcam_Create(x, y, z, speed)
 
 	SpeedcamData[index].objectid = CreateObject(963, x, y, z)
 	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 100.0, 0.0, 0.0, 0.0)
+
+	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 
 	local query = mariadb_prepare(sql, "INSERT INTO speedcams (x, y, z, speedcam) VALUES (?, ?, ?, ?);",
 		x, y, z, speed
@@ -95,30 +121,6 @@ function Speedcam_Destroy(speedcam)
 	end
 
 	DestroySpeedcamData(speedcam)
-end
-
-local function OnSpeedcamTick(speedcam)
-
-	for k, v in ipairs(GetAllPlayers()) do
-
-		local vehicle = GetPlayerVehicle(v)
-		local x, y, z = GetPlayerLocation(v)
-
-		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 400 then
-
-			if vehicle ~= 0 then
-
-				local speed = GetPlayerVehicleSpeed(v)
-				if speed > SpeedcamData[speedcam].speed then
-
-					local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
-
-					AddPlayerChat(v, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$%i</> speeding ticket.", price)
-					CallRemoteEvent(v, "FlashSpeedcam")
-				end
-			end
-		end
-	end
 end
 
 local function OnSpeedcamLoaded(speedcamid)
