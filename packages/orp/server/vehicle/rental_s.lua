@@ -20,10 +20,13 @@ AddCommand("rent", function (player)
 
 	local vehicle = GetPlayerVehicle(player)
 
-	if vehicle == 0 or
-	(VehicleData[vehicle] ~= nil and VehicleData[vehicle].renter == 0 and VehicleData[vehicle].rental == 1)
+	if vehicle == 0 or (VehicleData[vehicle] ~= nil and VehicleData[vehicle].rental ~= 1)
 	then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a vehicle you can actually rent.</>")
+	end
+
+	if VehicleData[vehicle].renter ~= 0 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This vehicle is already rented.</>")
 	end
 
 	-- Check if player has valid license
