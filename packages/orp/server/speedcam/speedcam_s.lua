@@ -22,6 +22,7 @@ local function CreateSpeedcamData(speedcam)
 	SpeedcamData[speedcam].id = 0
 	SpeedcamData[speedcam].objectid = 0
 	SpeedcamData[speedcam].text3d = 0
+	SpeedcamData[speedcam].timer = 0
 
 	SpeedcamData[speedcam].x = 0
 	SpeedcamData[speedcam].y = 0
@@ -87,7 +88,7 @@ function Speedcam_Create(x, y, z, speed)
 	end
 
 	SpeedcamData[index].objectid = CreateObject(963, x, y, z)
-	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 120.0, 0.0, 0.0, 0.0)
+	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 100.0, 0.0, 0.0, 0.0)
 
 	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 
@@ -131,7 +132,7 @@ local function OnSpeedcamLoaded(speedcamid)
 		local index = GetFreeSpeedcamId()
 
 		if index == 0 then
-			print("A free speedcam id wasn't able to be found? ("..#SpeedcamData.."/"..MAX_SPEEDCAMS..") business SQL ID "..speedcamid..".")
+			print("A free speedcam id wasn't able to be found? ("..#SpeedcamData.."/"..MAX_SPEEDCAMS..") speedcam SQL ID "..speedcamid..".")
 			return
 		end
 
@@ -143,7 +144,7 @@ local function OnSpeedcamLoaded(speedcamid)
 		SpeedcamData[index].speed = mariadb_get_value_name_int(1, "speed")
 
 		SpeedcamData[index].objectid = CreateObject(963, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z)
-		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 120.0, 0.0, 0.0, 0.0)
+		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 100.0, 0.0, 0.0, 0.0)
 
 		SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 	end

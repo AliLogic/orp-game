@@ -29,7 +29,7 @@ local function cmd_acsc(player, speed)
 
 	local x, y, z = GetPlayerLocation(player)
 
-	local speedcam = Speedcam_Create(x, y, z - 120, speed)
+	local speedcam = Speedcam_Create(x, y, z - 99, speed)
 	if speedcam == false then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Speedcam wasn't able to be created.</>")
 	else
@@ -92,7 +92,7 @@ local function cmd_aesc(player, speedcam, prefix, ...)
 		SpeedcamData[speedcam].y = y
 		SpeedcamData[speedcam].z = z
 
-		SetObjectLocation(SpeedcamData[speedcam].objectid, x, y, z - 120)
+		SetObjectLocation(SpeedcamData[speedcam].objectid, x, y, z - 99)
 
 		if IsValidText3D(SpeedcamData[speedcam].text3d) then
 			DestroyText3D(SpeedcamData[speedcam].text3d)
