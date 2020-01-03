@@ -36,11 +36,6 @@ AddCommand("help", function (player)
 	return
 end)
 
-AddCommand("anims", function (player)
-	AddPlayerChat(player, "Animations: /sit /lay /wave /stretch")
-	return
-end)
-
 AddCommand("w", function (player, weapon, slot, ammo)
 	if (PlayerData[player].admin < 5) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
@@ -216,67 +211,4 @@ AddEvent("OnPlayerChat", function(player, text)
 	AddPlayerChatRange(x, y, 800.0, "<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
 	--AddPlayerChatAll("<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
 	return false
-end)
-
-AddCommand("anim", function (playerid, anim)
-	SetPlayerAnimation(playerid, anim)
-end)
-
-AddCommand("sit", function (playerid, sitid)
-
-	if sitid == nil then
-		return AddPlayerChat(playerid, "Usage: /sit <1-7>")
-	end
-
-	sitid = tonumber(sitid)
-
-	if sitid < 1 or sitid > 7 then
-		return AddPlayerChat(playerid, "Usage: /sit <1-7>")
-	end
-
-	SetPlayerAnimation(playerid, "SIT0"..sitid)
-end)
-
-AddCommand("lay", function (playerid, layid)
-
-	if layid == nil then
-		return AddPlayerChat(playerid, "Usage: /lay <1-18>")
-	end
-
-	layid = tonumber(layid)
-
-	if layid < 1 or layid > 18 then
-		return AddPlayerChat(playerid, "Usage: /lay <1-18>")
-	end
-
-	if layid < 10 then
-		SetPlayerAnimation(playerid, "LAY0"..layid)
-	else
-		SetPlayerAnimation(playerid, "LAY"..layid)
-	end
-end)
-
-AddCommand("wave", function (playerid, waveid)
-
-	if waveid == nil then
-		return AddPlayerChat(playerid, "Usage: /wave <1-2>")
-	end
-
-	waveid = tonumber(waveid)
-
-	if waveid < 1 or waveid > 2 then
-		return AddPlayerChat(playerid, "Usage: /wave <1-2>")
-	end
-
-	SetPlayerAnimation(playerid, "WAVE"..waveid)
-end)
-
-AddCommand("stretch", function (playerid)
-
-	SetPlayerAnimation(playerid, "STRETCH")
-end)
-
-AddCommand("bow", function (playerid)
-
-	SetPlayerAnimation(playerid, "BOW")
 end)
