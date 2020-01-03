@@ -45,6 +45,7 @@ AddCommand("rent", function (player)
 		StartVehicleEngine(vehicle)
 	end
 
+    VehicleData[vehicle].is_locked = false
 	return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You have successfully rented this vehicle! It'll be accessible to you until you disconnect.</>")
 end)
 
