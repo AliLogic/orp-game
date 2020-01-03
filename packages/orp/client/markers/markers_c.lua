@@ -5,13 +5,9 @@ AddEvent("OnKeyPress", function(key)
 
 		if pickupid ~= false then
 
-			AddPlayerChat("PICKUPID BASIC 2: "..pickupid)
 			pickupid = tonumber(pickupid)
-			AddPlayerChat("PICKUPID BASIC 3: "..pickupid)
 
 			if pickupid ~= 0 then
-
-				AddPlayerChat("PICKUPID BASIC 4: "..pickupid)
 
 				local plX, plY, plZ = GetPlayerLocation()
 				local pkX, pkY, pkZ = GetPickupLocation(pickupid)
@@ -32,8 +28,6 @@ end)
 AddEvent("OnPickupStreamIn", function (pickup)
 
 	if (GetPickupPropertyValue(pickup, "markerid") ~= false) then
-
-		AddPlayerChat("[DEBUG-C] pickup: "..pickup)
 
 		local r = tonumber(GetPickupPropertyValue(pickup, "r"))
 		local g = tonumber(GetPickupPropertyValue(pickup, "g"))
@@ -61,8 +55,6 @@ end
 AddEvent("OnPickupNetworkUpdatePropertyValue", function(pickup, PropertyName, PropertyValue)
 
 	if (GetPickupPropertyValue(pickup, "markerid") ~= false) then
-
-		AddPlayerChat("[DEBUG-C] pickup: "..pickup)
 
 		local r = tonumber(GetPickupPropertyValue(pickup, "r"))
 		local g = tonumber(GetPickupPropertyValue(pickup, "g"))
