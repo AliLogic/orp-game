@@ -67,7 +67,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 	markerid = tonumber(markerid)
 
 	if IsValidMarker(markerid) == false then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Marker "..markerid.." doesn't exist.")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Marker "..markerid.." doesn't exist.</>")
 	end
 
 	if prefix == "color" then
