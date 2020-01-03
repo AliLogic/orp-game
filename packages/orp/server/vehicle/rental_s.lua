@@ -20,7 +20,7 @@ AddCommand("rent", function (player)
 
 	local vehicle = GetPlayerVehicle(player)
 
-	if vehicle ~= 0 or (VehicleData[vehicle] ~= nil and
+	if vehicle == 0 or (VehicleData[vehicle] ~= nil and
 		VehicleData[vehicle].renter == 0 and
 		VehicleData[vehicle].rental == 1
 	) then
