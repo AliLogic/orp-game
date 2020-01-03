@@ -4,5 +4,8 @@
 	"server_scripts": [
 		"colours.lua"
 	],
+	"client_scripts": [
+		"colours.lua"
+	],
 	"files": []
 }
