@@ -102,7 +102,7 @@ CREATE TABLE `houses` (
   `type` int(11) NOT NULL,
   `price` int(11) NOT NULL DEFAULT 0,
   `dimension` int(11) NOT NULL DEFAULT 0,
-  `message` varchar(128) NOT NULL DEFAULT 'This is a default business message.',
+  `message` varchar(128) NOT NULL DEFAULT 'This is a default house message.',
   `ix` varchar(16) NOT NULL DEFAULT '0.0',
   `iy` varchar(16) NOT NULL DEFAULT '0.0',
   `iz` varchar(16) NOT NULL DEFAULT '0.0',
@@ -111,6 +111,16 @@ CREATE TABLE `houses` (
   `ey` varchar(16) NOT NULL DEFAULT '0.0',
   `ez` varchar(16) NOT NULL DEFAULT '0.0',
   `ea` varchar(16) NOT NULL DEFAULT '0.0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `speedcams`;
+CREATE TABLE `speedcams` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `x` int(11) NOT NULL,
+  `y` int(11) NOT NULL,
+  `z` int(11) NOT NULL,
+  `speed` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
