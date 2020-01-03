@@ -17,8 +17,13 @@ AddEvent("OnPackageStart", function()
 end)
 
 AddCommand("cinema", function (playerid)
-
-	for k, v in pairs(GetAllPlayers()) do
+	for _, v in pairs(GetAllPlayers()) do
 		CallRemoteEvent(v, "StartMovie", CINEMA_LINKS[1])
+	end
+end)
+
+AddCommand("board", function (player)
+	for _, v in pairs(GetAllPlayers()) do
+		CallRemoteEvent(v, "StartImg")
 	end
 end)
