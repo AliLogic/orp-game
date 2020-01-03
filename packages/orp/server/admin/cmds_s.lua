@@ -106,6 +106,8 @@ AddCommand("goto", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
 	end
 
+	lookupid = tonumber(lookupid)
+
 	if playerid == lookupid then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot TP to yourself!</>")
 	end
@@ -129,6 +131,8 @@ AddCommand("get", function (playerid, lookupid)
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
 	end
+
+	lookupid = tonumber(lookupid)
 
 	if playerid == lookupid then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot TP to yourself!</>")
