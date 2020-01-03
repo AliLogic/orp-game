@@ -32,7 +32,7 @@ AddCommand("rent", function (player)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have enough cash to rent a vehicle.</>")
 	end
 
-	--RemovePlayerCash(player, 50) -- Subtract fifty bucks. (JUST TEMP PRICING THEY'LL BE VARIABLE IN THE FUTURE BY VEHICLE MODEL OR SOMETHING.)
+	RemovePlayerCash(player, 50) -- Subtract fifty bucks. (JUST TEMP PRICING THEY'LL BE VARIABLE IN THE FUTURE BY VEHICLE MODEL OR SOMETHING.)
 
 	VehicleData[vehicle].renter = player
 	PlayerData[player].renting = vehicle
