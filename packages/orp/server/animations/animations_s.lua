@@ -4,7 +4,7 @@
 ]]
 
 AddCommand("anims", function (player)
-	AddPlayerChat(player, "Animations: /sit /lay /wave /stretch /frontfall /handsup /(s)top(a)nim")
+	AddPlayerChat(player, "Animations: /sit /lay /wave /stretch /clap /frontfall /handsup /lean /yawn /bow /drunk /(s)top(a)nim")
 	return
 end)
 
@@ -46,16 +46,52 @@ end)
 
 AddCommand("wave", function (playerid, waveid)
 	if waveid == nil then
-		return AddPlayerChat(playerid, "Usage: /wave <1-2>")
+		return AddPlayerChat(playerid, "Usage: /wave <1-3>")
 	end
 
 	waveid = tonumber(waveid)
 
-	if waveid < 1 or waveid > 2 then
-		return AddPlayerChat(playerid, "Usage: /wave <1-2>")
+	if waveid < 1 or waveid > 3 then
+		return AddPlayerChat(playerid, "Usage: /wave <1-3>")
 	end
 
-	SetPlayerAnimation(playerid, "WAVE"..waveid)
+	if waveid == 1 then
+		SetPlayerAnimation(playerid, "WAVE")
+	else
+		SetPlayerAnimation(playerid, "WAVE"..waveid)
+	end
+end)
+
+AddCommand("lean", function (playerid, leanid)
+	if leanid == nil then
+		return AddPlayerChat(playerid, "Usage: /lean <1-4>")
+	end
+
+	leanid = tonumber(leanid)
+
+	if leanid < 1 or leanid > 4 then
+		return AddPlayerChat(playerid, "Usage: /clap <1-4>")
+	end
+
+	SetPlayerAnimation(playerid, "WALLLEAN0"..leanid)
+end)
+
+AddCommand("clap", function (playerid, clapid)
+	if clapid == nil then
+		return AddPlayerChat(playerid, "Usage: /clap <1-3>")
+	end
+
+	clapid = tonumber(clapid)
+
+	if clapid < 1 or clapid > 3 then
+		return AddPlayerChat(playerid, "Usage: /clap <1-3>")
+	end
+
+	if clapid == 1 then
+		SetPlayerAnimation(playerid, "CLAP")
+	else
+		SetPlayerAnimation(playerid, "CLAP"..clapid)
+	end
 end)
 
 AddCommand("stretch", function (playerid)
@@ -66,15 +102,23 @@ AddCommand("bow", function (playerid)
 	SetPlayerAnimation(playerid, "BOW")
 end)
 
-AddComamnd("frontfall", function (player) 
+AddCommand("frontfall", function (player)
 	SetPlayerAnimation(player, "LAY10")
 end)
 
-AddCommand("handsup", function (player) 
+AddCommand("handsup", function (player)
 	SetPlayerAnimation(player, "HANDSUP_STAND")
 end)
 
-function cmd_stopanim(player) 
+AddCommand("drunk", function (player)
+	SetPlayerAnimation(player, "DRUNK")
+end)
+
+AddCommand("yawn", function (player)
+	SetPlayerAnimation(player, "YAWN")
+end)
+
+local function cmd_stopanim(player)
 	SetPlayerAnimation(player, "STOP")
 end
 AddCommand("stopanim", cmd_stopanim)
