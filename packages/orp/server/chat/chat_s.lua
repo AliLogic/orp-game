@@ -165,6 +165,8 @@ AddCommand("pm", function (player, target, ...)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /pm [playerid] [text]")
 	end
 
+	target = tonumber(target)
+
 	if target == player then
 		return AddPlayerChat(player, "You cannot PM yourself.")
 	end
