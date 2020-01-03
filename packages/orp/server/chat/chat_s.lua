@@ -250,7 +250,7 @@ AddCommand("lay", function (playerid, layid)
 	if layid < 10 then
 		SetPlayerAnimation(playerid, "LAY0"..layid)
 	else
-		SetPlayerAnimation(playerid, "LAY1"..layid)
+		SetPlayerAnimation(playerid, "LAY"..layid)
 	end
 end)
 

@@ -18,6 +18,10 @@ AddCommand("rent", function (player)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are already renting a vehicle! Please /unrent first before renting another.</>")
 	end
 
+	if GetPlayerState(player) ~= PS_DRIVER then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in the driver seat of a vehicle that you wish to rent.</>")
+	end
+
 	local vehicle = GetPlayerVehicle(player)
 
 	if vehicle == 0 or (VehicleData[vehicle] ~= nil and VehicleData[vehicle].rental ~= 1)

@@ -3,8 +3,6 @@ AddEvent("OnKeyPress", function(key)
 	if key == 'E' then
 		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
 
-		AddPlayerChat("PICKUPID BASIC: "..pickupid == false and "false" or "true")
-
 		if pickupid ~= false then
 
 			AddPlayerChat("PICKUPID BASIC 2: "..pickupid)
