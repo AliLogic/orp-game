@@ -10,6 +10,15 @@ BUSINESS_TYPE_BAR = 4
 BUSINESS_TYPE_RESTAURANT = 5
 BUSINESS_TYPE_BANK = 6
 
+BusinessTypes = {
+	"Entrance",
+	"24/7",
+	"Ammunition",
+	"Bar",
+	"Restaurant",
+	"Bank"
+}
+
 BUSINESS_TYPE_MAX = 6
 
 BUSINESS_OWNERSHIP_STATE = 1
@@ -212,7 +221,10 @@ function OnBusinessLoaded(businessid)
 			17, BusinessData[business].mx, BusinessData[business].my, BusinessData[business].mz, 0, 0, 0)
 		end
 
-		-- CreateMarker
+		if BusinessData[business].markerid ~= 0 then
+			-- CreateMarker
+		end
+
 		-- Create3dTextLabel
 
 		print("Business "..business.." (SQL ID: "..businessid..") successfully loaded!")
