@@ -91,7 +91,7 @@ function Speedcam_Create(x, y, z, speed)
 
 	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 
-	local query = mariadb_prepare(sql, "INSERT INTO speedcams (x, y, z, speedcam) VALUES (?, ?, ?, ?);",
+	local query = mariadb_prepare(sql, "INSERT INTO speedcams (x, y, z, speed) VALUES (?, ?, ?, ?);",
 		x, y, z, speed
 	)
 	mariadb_async_query(sql, query, OnSpeedcamCreated, index, x, y, z, speed)
