@@ -260,6 +260,23 @@
         "HIT_WATER",
         "HIT_LANDSCAPE",
         "HIT_NPC",
-        "HIT_VEHICLE"
+        "HIT_VEHICLE",
+        "USoundCue",
+        "UTexture2D",
+        "UStaticMesh",
+        "UAnimSequence",
+        "UParticleSystem",
+        "RandomFloat",
+        "GetWorld",
+        "EAttachLocation",
+        "EPhysicalSurface",
+        "EDIT_LOCATION",
+        "GetMouseHitEntity",
+        "EDIT_ROTATION",
+        "EDIT_SCALE",
+        "DrawText",
+        "GetObjectBoundingBox",
+        "GetObjectModelGroup",
+        "GetObjectSize"
     ]
 }
