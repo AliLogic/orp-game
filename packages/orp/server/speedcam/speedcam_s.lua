@@ -71,7 +71,7 @@ local function OnSpeedcamTick(speedcam)
 
 					local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
 
-					AddPlayerChat(v, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$%i</> speeding ticket.", price)
+					AddPlayerChat(v, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
 					CallRemoteEvent(v, "FlashSpeedcam")
 				end
 			end

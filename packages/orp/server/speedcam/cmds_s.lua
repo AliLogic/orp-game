@@ -101,6 +101,9 @@ local function cmd_aesc(player, speedcam, prefix, ...)
 		SpeedcamData[speedcam].text3d = CreateText3D("Speedcam ("..speedcam..")\nSpeed: "..SpeedcamData[speedcam].speed.." KM/H", 20, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z + 100.0, 0.0, 0.0, 0.0)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Speedcam (ID: "..speedcam..") position changed.</>")
+	else
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(s)peed(c)am <speedcam> <prefix>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> speed, location")
 	end
 
 	return
