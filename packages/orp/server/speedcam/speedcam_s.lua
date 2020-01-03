@@ -70,7 +70,7 @@ function Speedcam_Create(x, y, z, speed)
 	)
 	mariadb_async_query(sql, query, OnSpeedcamCreated, index, x, y, z, speed)
 
-	return true
+	return index
 end
 
 function Speedcam_Destroy(speedcam)
