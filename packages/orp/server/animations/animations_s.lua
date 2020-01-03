@@ -4,12 +4,21 @@
 ]]
 
 AddCommand("anims", function (player)
-	AddPlayerChat(player, "Animations: /sit /lay /wave /stretch /clap /frontfall /handsup /lean /yawn /bow /drunk /(s)top(a)nim")
+	AddPlayerChat(player, "Animations: /sit /lay /wave /stretch /frontfall /handsup /lean /bow /drunk /(s)top(a)nim")
+	AddPlayerChat(player, "Animations: /salute /clap /yawn /facepalm")
 	return
 end)
 
 AddCommand("anim", function (playerid, anim)
 	SetPlayerAnimation(playerid, anim)
+end)
+
+AddCommand("facepalm", function (playerid)
+	SetPlayerAnimation(playerid, "FACEPALM")
+end)
+
+AddCommand("salute", function (playerid)
+	SetPlayerAnimation(playerid, "SALUTE")
 end)
 
 AddCommand("sit", function (playerid, sitid)
