@@ -177,7 +177,7 @@ local function Speedcam_Unload(speedcam)
 	mariadb_async_query(sql, query, OnSpeedcamUnloaded, speedcam)
 end
 
-AddEvent("UnloadSpeedCameras", function()
+AddEvent("UnloadSpeedcams", function()
 	for i = 1, #SpeedcamData, 1 do
 		Speedcam_Unload(i)
 	end
