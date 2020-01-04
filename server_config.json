@@ -1,5 +1,5 @@
 {
-	"servername": "[ENG] Onset Roleplay",
+	"servername": "[ENGLISH] Onset Roleplay [discord.io/onsetrpen] [TEXT BASED/IN DEVELOPMENT]",
 	"servername_short": "[ENG] Onset RP",
 	"gamemode": "Roleplay",
 	"website_url": "https://onsetroleplay.com",
@@ -9,7 +9,7 @@
 	"password": "onsetrpstaffonly419",
 	"timeout": 15000,
 	"iplimit": 5,
-	"masterlist": false,
+	"masterlist": true,
 	"plugins": [
 		"mariadb"
 	],
