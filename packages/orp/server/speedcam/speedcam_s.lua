@@ -56,11 +56,7 @@ local function OnSpeedcamTick(speedcam)
 
 			if vehicle ~= 0 then
 
-				local speed = GetPlayerVehicleSpeed(v)
-				if speed > SpeedcamData[speedcam].speed then
-
-					CallRemoteEvent(v, "OnSpeedcamFlash", speedcam)
-				end
+				CallRemoteEvent(v, "OnSpeedcamFlash", speedcam, SpeedcamData[speedcam].speed)
 			end
 		end
 	end
