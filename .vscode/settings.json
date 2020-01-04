@@ -280,6 +280,11 @@
         "GetObjectSize",
         "CreateWebUI3D",
         "StartCameraFade",
-        "StopCameraFade"
+        "StopCameraFade",
+        "CreateTextBox",
+        "SetTextBoxAlignment",
+        "SetTextBoxAnchors",
+        "SetTextBoxText",
+        "DestroyTextBox"
     ]
 }
