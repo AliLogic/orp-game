@@ -45,17 +45,6 @@ local function DestroySpeedcamData(speedcam)
 	SpeedcamData[speedcam] = nil
 end
 
-local function OnSpeedcamCreated(index, x, y, z, speed)
-
-	SpeedcamData[index].id = mariadb_get_insert_id()
-
-	SpeedcamData[index].x = x
-	SpeedcamData[index].y = y
-	SpeedcamData[index].z = z
-
-	SpeedcamData[index].speed = speed
-end
-
 local function OnSpeedcamTick(speedcam)
 
 	for k, v in ipairs(GetAllPlayers()) do
@@ -80,20 +69,29 @@ local function OnSpeedcamTick(speedcam)
 	end
 end
 
+local function OnSpeedcamCreated(index, x, y, z, speed)
+
+	SpeedcamData[index].id = mariadb_get_insert_id()
+
+	SpeedcamData[index].x = x
+	SpeedcamData[index].y = y
+	SpeedcamData[index].z = z
+
+	SpeedcamData[index].speed = speed
+
+	SpeedcamData[index].objectid = CreateObject(963, x, y, z)
+	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 100.0, 0.0, 0.0, 0.0)
+
+	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
+end
+
+
 function Speedcam_Create(x, y, z, speed)
 
 	local index = GetFreeSpeedcamId()
 	if index == 0 then
 		return false
 	end
-
-	SpeedcamData[index].objectid = CreateObject(963, x, y, z)
-	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 100.0, 0.0, 0.0, 0.0)
-
-	print("Speedcam ("..index..")\nSpeed: "..speed.." KM/H")
-	print(SpeedcamData[index].text3d)
-
-	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 
 	local query = mariadb_prepare(sql, "INSERT INTO speedcams (x, y, z, speed) VALUES (?, ?, ?, ?);",
 		x, y, z, speed
