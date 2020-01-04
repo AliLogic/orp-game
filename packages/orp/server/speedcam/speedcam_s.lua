@@ -52,17 +52,14 @@ local function OnSpeedcamTick(speedcam)
 		local vehicle = GetPlayerVehicle(v)
 		local x, y, z = GetPlayerLocation(v)
 
-		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 1000 then
+		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 1200 then
 
 			if vehicle ~= 0 then
 
 				local speed = GetPlayerVehicleSpeed(v)
 				if speed > SpeedcamData[speedcam].speed then
 
-					local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
-
-					AddPlayerChat(v, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
-					CallRemoteEvent(v, "FlashSpeedcam")
+					CallRemoteEvent(v, "OnSpeedcamFlash", speedcam)
 				end
 			end
 		end
@@ -189,4 +186,11 @@ end)
 
 AddEvent('LoadSpeedcams', function ()
 	mariadb_async_query(sql, "SELECT * FROM speedcams;", OnSpeedcamLoad)
+end)
+
+AddRemoteEvent("OnSpeedcamFlashed", function(speedcam, speed)
+
+	local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
+
+	AddPlayerChat("You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
 end)

@@ -1,9 +1,11 @@
 -- local speedcamFlash = 0
 -- local speedcamTimer = 0
 
-AddRemoteEvent("FlashSpeedcam", function()
+AddRemoteEvent("OnSpeedcamFlash", function(speedcam)
 
-	StartCameraFade(1, 0, 2, "#FFFFFF")
+	StartCameraFade(0, 1, 0.1, RGB(255, 255, 255))
+
+	CallRemoteEvent("OnSpeedcamFlashed", speedcam, GetPlayerVehicleSpeed(true))
 
 	-- if speedcamFlash ~= 0 then
 	-- 	speedcamFlash = CreateWebUI(0.0, 0.0, 1920, 1080, 1, 1)
