@@ -33,6 +33,7 @@
 		"server/cinema/cinema_s.lua",
 		"server/speedcam/speedcam_s.lua",
 		"server/speedcam/cmds_s.lua",
+		"client/speedo/speedo_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [
@@ -46,6 +47,7 @@
 		"client/customization/customization_c.lua",
 		"client/weapons/custom_weapons_c.lua",
 		"client/cinema/cinema_c.lua",
+		"client/speedo/speedo_c.lua",
 		"client/misc/misc_c.lua"
 	],
 	"files": [
