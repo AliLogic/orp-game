@@ -45,6 +45,23 @@ local function DestroySpeedcamData(speedcam)
 	SpeedcamData[speedcam] = nil
 end
 
+local function OnSpeedcamTick(speedcam)
+
+	for k, v in ipairs(GetAllPlayers()) do
+
+		local vehicle = GetPlayerVehicle(v)
+		local x, y, z = GetPlayerLocation(v)
+
+		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 1200 then
+
+			if vehicle ~= 0 then
+
+				CallRemoteEvent(v, "OnSpeedcamFlash", speedcam, SpeedcamData[speedcam].speed)
+			end
+		end
+	end
+end
+
 local function OnSpeedcamCreated(index, x, y, z, speed)
 
 	SpeedcamData[index].id = mariadb_get_insert_id()
@@ -54,31 +71,13 @@ local function OnSpeedcamCreated(index, x, y, z, speed)
 	SpeedcamData[index].z = z
 
 	SpeedcamData[index].speed = speed
+
+	SpeedcamData[index].objectid = CreateObject(963, x, y, z)
+	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 130.0, 0.0, 0.0, 0.0)
+
+	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 end
 
-local function OnSpeedcamTick(speedcam)
-
-	for k, v in ipairs(GetAllPlayers()) do
-
-		local vehicle = GetPlayerVehicle(v)
-		local x, y, z = GetPlayerLocation(v)
-
-		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 1000 then
-
-			if vehicle ~= 0 then
-
-				local speed = GetPlayerVehicleSpeed(v)
-				if speed > SpeedcamData[speedcam].speed then
-
-					local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
-
-					AddPlayerChat(v, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
-					CallRemoteEvent(v, "FlashSpeedcam")
-				end
-			end
-		end
-	end
-end
 
 function Speedcam_Create(x, y, z, speed)
 
@@ -86,14 +85,6 @@ function Speedcam_Create(x, y, z, speed)
 	if index == 0 then
 		return false
 	end
-
-	SpeedcamData[index].objectid = CreateObject(963, x, y, z)
-	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 100.0, 0.0, 0.0, 0.0)
-
-	print("Speedcam ("..index..")\nSpeed: "..speed.." KM/H")
-	print(SpeedcamData[index].text3d)
-
-	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 
 	local query = mariadb_prepare(sql, "INSERT INTO speedcams (x, y, z, speed) VALUES (?, ?, ?, ?);",
 		x, y, z, speed
@@ -147,10 +138,7 @@ local function OnSpeedcamLoaded(speedcamid)
 		SpeedcamData[index].speed = mariadb_get_value_name_int(1, "speed")
 
 		SpeedcamData[index].objectid = CreateObject(963, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z)
-		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 100.0, 0.0, 0.0, 0.0)
-
-		print("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H")
-		print(SpeedcamData[index].text3d)
+		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 130.0, 0.0, 0.0, 0.0)
 
 		SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 	end
@@ -191,4 +179,11 @@ end)
 
 AddEvent('LoadSpeedcams', function ()
 	mariadb_async_query(sql, "SELECT * FROM speedcams;", OnSpeedcamLoad)
+end)
+
+AddRemoteEvent("OnSpeedcamFlashed", function(playerid, speedcam, speed)
+
+	local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
+
+	AddPlayerChat(playerid, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
 end)

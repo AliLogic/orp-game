@@ -22,8 +22,7 @@ AddCommand("cinema", function (playerid)
 	end
 end)
 
-AddCommand("board", function (player)
-	for _, v in pairs(GetAllPlayers()) do
-		CallRemoteEvent(v, "StartImg")
-	end
+AddEvent("OnPlayerJoin", function(playerid)
+
+	CallRemoteEvent(playerid, "StartImg")
 end)

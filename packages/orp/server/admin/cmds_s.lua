@@ -28,7 +28,7 @@ AddCommand("kick", function (playerid, lookupid, ...)
 	if #{...} == 0 then
 		reason = "no reason specified"
 	else
-		reason = table.cocat({...}, " ")
+		reason = table.concat({...}, " ")
 	end
 
 	AddPlayerChatAll("AdmCmd: "..GetPlayerName(lookupid).." was kicked by "..GetPlayerName(playerid)..", Reason: "..reason..".")

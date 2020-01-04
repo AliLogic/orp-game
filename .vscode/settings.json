@@ -278,6 +278,8 @@
         "GetObjectBoundingBox",
         "GetObjectModelGroup",
         "GetObjectSize",
-        "CreateWebUI3D"
+        "CreateWebUI3D",
+        "StartCameraFade",
+        "StopCameraFade"
     ]
 }
