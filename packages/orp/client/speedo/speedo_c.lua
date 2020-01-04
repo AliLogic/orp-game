@@ -38,5 +38,3 @@ AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
 	DestroyTextBox(speedo)
 	speedo = nil
 end)
-
--- fix
