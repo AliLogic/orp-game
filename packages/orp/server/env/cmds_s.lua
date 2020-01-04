@@ -11,8 +11,8 @@ local function cmd_asw(playerid, weatherid)
 
 	weatherid = tonumber(weatherid)
 
-	if weatherid < 1 or weatherid > 10 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Weather ranges are between 1 to 10.")
+	if weatherid < 1 or weatherid > 12 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Weather ranges are between 1 to 12.")
 	end
 
 	EnvWeather = weatherid
