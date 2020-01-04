@@ -33,7 +33,7 @@
 		"server/cinema/cinema_s.lua",
 		"server/speedcam/speedcam_s.lua",
 		"server/speedcam/cmds_s.lua",
-		"client/speedo/speedo_s.lua",
+		"server/speedo/speedo_s.lua",
 		"server/business/business_s.lua",
 		"server/business/cmds_s.lua",
 		"server/misc/misc_s.lua"
