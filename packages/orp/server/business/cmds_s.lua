@@ -1,5 +1,26 @@
 local colour = ImportPackage("colours")
 
+AddCommand("buy", function(playerid)
+
+	local x, y, z = GetPlayerLocation(playerid)
+	local distance = 0
+
+	for k, v in pairs(BusinessData) do
+
+		if BusinessData[v].enterable == 1 then
+			distance = GetDistance3D(x, y, z, BusinessData[v].mx, BusinessData[v].my, BusinessData[v].mz)
+		end
+
+		if distance <= 120.0 then
+
+			AddPlayerChat(playerid, "You are near the business ID: "..v..".")
+			return
+		end
+	end
+
+	return AddPlayerChat(playerid, "You are not near any business.")
+end)
+
 local function cmd_acb(player, biztype, enterable, price, ...)
 
 	if (PlayerData[player].admin < 4) then
