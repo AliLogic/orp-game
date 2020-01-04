@@ -5,7 +5,7 @@ AddCommand("buy", function(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
 
-	for k, v in pairs(BusinessData) do
+	for _, v in pairs(#BusinessData) do
 
 		if BusinessData[v].enterable == 1 then
 			distance = GetDistance3D(x, y, z, BusinessData[v].mx, BusinessData[v].my, BusinessData[v].mz)
