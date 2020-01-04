@@ -184,9 +184,9 @@ AddEvent('LoadSpeedcams', function ()
 	mariadb_async_query(sql, "SELECT * FROM speedcams;", OnSpeedcamLoad)
 end)
 
-AddRemoteEvent("OnSpeedcamFlashed", function(speedcam, speed)
+AddRemoteEvent("OnSpeedcamFlashed", function(playerid, speedcam, speed)
 
 	local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
 
-	AddPlayerChat("You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
+	AddPlayerChat(playerid, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
 end)

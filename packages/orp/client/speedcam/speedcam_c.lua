@@ -3,11 +3,12 @@
 
 AddRemoteEvent("OnSpeedcamFlash", function(speedcam, speed)
 
-	StartCameraFade(0, 1, 0.1, RGB(255, 255, 255))
+	StopCameraFade()
 
 	local player_speed = GetPlayerVehicleSpeed(true)
 	if player_speed > speed then
-		CallRemoteEvent("OnSpeedcamFlashed", speedcam, player_speed)
+		StartCameraFade(0, 1, 0.1, RGB(255, 255, 255))
+		CallRemoteEvent("OnSpeedcamFlashed", GetPlayerId(), speedcam, player_speed)
 	end
 
 	-- if speedcamFlash ~= 0 then

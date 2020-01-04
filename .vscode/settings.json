@@ -279,6 +279,7 @@
         "GetObjectModelGroup",
         "GetObjectSize",
         "CreateWebUI3D",
-        "StartCameraFade"
+        "StartCameraFade",
+        "StopCameraFade"
     ]
 }
