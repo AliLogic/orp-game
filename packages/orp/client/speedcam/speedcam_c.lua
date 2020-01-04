@@ -12,10 +12,10 @@ AddRemoteEvent("FlashSpeedcam", function()
 		DestroyTimer(speedcamFlash)
 	end
 
+	SetWebVisibility(speedcamFlash, WEB_HITINVISIBLE)
+
 	speedcamFlash = CreateTimer(function()
 		SetWebVisibility(speedcamFlash, WEB_HIDDEN)
 		DestroyTimer(speedcamFlash)
-	end, 2000)
-
-	SetWebVisibility(speedcamFlash, WEB_HITINVISIBLE)
+	end, 4000)
 end)
