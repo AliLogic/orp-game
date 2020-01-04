@@ -22,8 +22,13 @@ AddCommand("cinema", function (playerid)
 	end
 end)
 
-AddCommand("board", function (player)
+AddCommand("board", function (player, x, y, z)
+
+	x = tonumber(x)
+	y = tonumber(y)
+	z = tonumber(z)
+
 	for _, v in pairs(GetAllPlayers()) do
-		CallRemoteEvent(v, "StartImg")
+		CallRemoteEvent(v, "StartImg", x, y, z)
 	end
 end)

@@ -21,10 +21,11 @@ AddRemoteEvent("StartMovie", function(link)
 	SetWebVisibility(cinemaUI, WEB_VISIBLE)
 end)
 
-AddRemoteEvent("StartImg", function ()
+AddRemoteEvent("StartImg", function (x, y, z)
 	-- 123652, 96768, 1671
 	-- 123660, 96737, 1674
-	imgUI = CreateWebUI3D(123675, 96742, 1689, 0, 125, 0, 592, 310, 1)
+	-- 123675, 96742, 1689
+	imgUI = CreateWebUI3D(x, y, z, 0, 125, 0, 592, 310, 1)
 	LoadWebFile(imgUI, "http://asset/"..GetPackageName().."/client/OnsetLogo.png")
 	SetWebAlignment(cinemaUI, 0.0, 0.0)
 	SetWebAnchors(cinemaUI, 0.0, 0.0, 1.0, 1.0)
