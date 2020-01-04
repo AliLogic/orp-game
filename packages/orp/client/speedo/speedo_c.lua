@@ -5,7 +5,7 @@ local function UpdateSpeedo()
 	local speed = GetPlayerVehicleSpeed()
 
 	if speedo == nil then
-		speedo = CreateTextBox(0, 0, speed.." KMH", "right")
+		speedo = CreateTextBox(0, 0, "<span style=\"font-size: 24px;\">"..speed.." KMH</>", "right")
 		SetTextBoxAnchors(speedo, 0.5, 0.5, 0.5, 0.5)
 		SetTextBoxAlignment(speedo, 0.5, 0.5)
 	end
@@ -19,9 +19,7 @@ local function UpdateSpeedo()
 end
 
 AddRemoteEvent("ToggleSpeedo", function (bToggle)
-
 	if bToggle then
-
 		if not IsValidTimer(timer) then
 			timer = CreateTimer(UpdateSpeedo, 500)
 		end
@@ -30,7 +28,7 @@ AddRemoteEvent("ToggleSpeedo", function (bToggle)
 			DestroyTimer(timer)
 		end
 
-		DestroyTextBox(speedo)
+		DestroyTextBox(speedo) -- speedo is equalling nil here.
 	end
 end)
 
