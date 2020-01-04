@@ -21,9 +21,7 @@ local function UpdateSpeedo()
 end
 
 AddRemoteEvent("ToggleSpeedo", function (bToggle)
-
 	if bToggle then
-
 		if not IsValidTimer(timer) then
 			timer = CreateTimer(UpdateSpeedo, 500)
 		end
@@ -46,3 +44,5 @@ AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
 		speedo = nil
 	end
 end)
+
+-- do it again
