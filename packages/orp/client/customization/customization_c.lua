@@ -216,6 +216,13 @@ local function SetPlayerClothing(playerid)
 end
 AddRemoteEvent("SetPlayerClothing", SetPlayerClothing)
 
+AddEvent("OnPlayerSpawn", function()
+
+	Delay(100, function()
+		SetPlayerClothing(GetPlayerId())
+	end)
+end)
+
 AddEvent("OnPlayerStreamIn", function(player)
 
 	Delay(100, function()
