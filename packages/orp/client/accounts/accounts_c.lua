@@ -7,9 +7,9 @@ Dialog.addTextInput(charcreate, 1, "First Name:")
 Dialog.addTextInput(charcreate, 1, "Last Name:")
 Dialog.addSelect(charcreate, 1, "Gender:", 1, "Male", "Female")
 
-local charviewnone = Dialog.create("Select character:", "Select a character to spawn as. If slot is empty, you will be prompted to create a new character.", "Select", "Quit")
+--[[local charviewnone = Dialog.create("Select character:", "Select a character to spawn as. If slot is empty, you will be prompted to create a new character.", "Select", "Quit")
 Dialog.setAutoclose(charviewnone, false)
-Dialog.addSelect(charviewnone, 1, "Select a character below:", 1, "(1) Create New Character", "(2) Create New Character", "(3) Create New Character")
+Dialog.addSelect(charviewnone, 1, "Select a character below:", 1, "(1) Create New Character", "(2) Create New Character", "(3) Create New Character")]]
 
 local charview = nil
 local creation_slot = 0
@@ -20,11 +20,18 @@ SetWebAnchors(charUI, 0, 0, 1, 1)
 SetWebURL(charUI, "http://asset/"..GetPackageName().."/client/charui/main.html")
 SetWebVisibility(charUI, WEB_HIDDEN)
 
+
+AddEvent("OnPackageStop", function ()
+	DestroyWebUI(charUI)
+end)
+
 AddRemoteEvent("askClientCreation", function ()
     Dialog.show(charcreate)
 end)
 
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
+    SetWebVisibility(charUI, WEB_VISIBLE)
+
     if chardata == nil then
         ExecuteWebJS(charUI, "toggleCharMenu();")
         return
@@ -33,11 +40,12 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
     local count = 0
     for _ in pairs(chardata) do count = count + 1 end
     
-    SetWebVisibility(charUI, WEB_VISIBLE)
-    
     if count ~= 0 then
         for i = 1, count, 1 do
             AddPlayerChat("Executing SetCharacterInfo")
+            AddPlayerChat(string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
+            i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
+            ))
             ExecuteWebJS(charUI, string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
                 i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
             ))

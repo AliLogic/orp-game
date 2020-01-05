@@ -78,15 +78,15 @@ $(document).ready(function () {
 		}
 	});
 
-	function test() {
-		alert('test worked');
-	}
-
 	CallEvent("charui:debug", 'Document is now ready!')
 	//toggleCharMenu();
 });
 
 CallEvent("charui:debug", 'Now onto lower part of JS.')
+
+function test() {
+	alert('test worked');
+}
 
 function setCharacterInfo(char) {
 	//char = JSON.parse(char);
