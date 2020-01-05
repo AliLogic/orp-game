@@ -78,6 +78,10 @@ $(document).ready(function () {
 		}
 	});
 
+	function test() {
+		alert('test worked');
+	}
+
 	CallEvent("charui:debug", 'Document is now ready!')
 	//toggleCharMenu();
 });
@@ -120,6 +124,3 @@ function toggleCharMenu() {
 	$('#body').toggle();
 }
 
-function test() {
-	alert('test worked');
-}
