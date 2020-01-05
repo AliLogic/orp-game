@@ -10,6 +10,7 @@ Contributors:
 
 local colour = ImportPackage('colours')
 
+FuelTimer = 0
 PumpData = {}
 MAX_PUMPS = 128
 MAX_LITRES = 34000
