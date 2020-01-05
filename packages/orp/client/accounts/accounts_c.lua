@@ -20,6 +20,15 @@ SetWebAnchors(charUI, 0, 0, 1, 1)
 SetWebURL(charUI, "http://asset/"..GetPackageName().."/client/charui/main.html")
 SetWebVisibility(charUI, WEB_HIDDEN)
 
+local charUIready = false
+
+AddEvent("OnWebLoadComplete", function(web)
+    if web == charUI then
+        charUIready = true
+    end
+end)
+
+
 AddEvent("OnPackageStop", function ()
 	DestroyWebUI(charUI)
 end)
@@ -29,6 +38,12 @@ AddRemoteEvent("askClientCreation", function ()
 end)
 
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
+    while charUIready == false do
+        if charUIready == true then
+            break
+        end
+    end
+
     SetWebVisibility(charUI, WEB_VISIBLE)
 
     if chardata == nil then
@@ -41,7 +56,6 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
     
     if count ~= 0 then
         for i = 1, count, 1 do
-            AddPlayerChat("Executing SetCharacterInfo")
             AddPlayerChat(string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
             i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
             ))
