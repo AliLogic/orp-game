@@ -47,8 +47,6 @@ end
 
 function Marker_Create(modelid, x, y, z, dimension)
 
-    print("model: "..modelid.." \nx: "..x.." \ny: "..y.." \nz: "..z.."")
-
 	local marker_id = GetFreeMarkerId()
 
 	if marker_id == false then
