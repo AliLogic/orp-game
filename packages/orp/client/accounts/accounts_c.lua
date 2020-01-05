@@ -14,19 +14,38 @@ Dialog.addSelect(charviewnone, 1, "Select a character below:", 1, "(1) Create Ne
 local charview = nil
 local creation_slot = 0
 
+local charUI = CreateWebUI(0, 0, 0, 0, 1, 16)
+SetWebAlignment(charUI, 0, 0)
+SetWebAnchors(charUI, 0, 0, 1, 1)
+SetWebURL(charUI, "http://asset/"..GetPackageName().."/client/charui/main.html")
+SetWebVisibility(charUI, WEB_HIDDEN)
+
 AddRemoteEvent("askClientCreation", function ()
     Dialog.show(charcreate)
 end)
 
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
     if chardata == nil then
-        return Dialog.show(charviewnone)
+        ExecuteWebJS(charUI, "toggleCharMenu();")
+        return
     end
 
     local count = 0
     for _ in pairs(chardata) do count = count + 1 end
     
-    if count == 0 then
+    SetWebVisiblity(charUI, WEB_VISIBLE)
+    
+    if count ~= 0 then
+        for i = 1, count, 1 do
+            ExecuteWebJS(charui, string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
+                i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
+            ))
+        end
+    end
+
+    ExecuteWebJS(charUI, "toggleCharMenu();")
+
+    --[[if count == 0 then
         AddPlayerChat("Count is 0")
         Dialog.show(charviewnone)
     else
@@ -43,7 +62,7 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
         Dialog.setAutoclose(charview, false)
         Dialog.addSelect(charview, 1, "Select a character below:", 1, "(1) "..char[1], "(2) "..char[2], "(3) "..char[3])
         Dialog.show(charview)
-    end
+    end]]
 end)
 
 AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
@@ -84,7 +103,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
             Dialog.close(charviewnone)
             CallRemoteEvent("accounts:kick")
         end
-    elseif dialog == charview then
+    --[[elseif dialog == charview then
         if button == 1 then
             local slot = firstname
 
@@ -101,10 +120,42 @@ AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
         else
             Dialog.close(charview)
             CallRemoteEvent("accounts:kick")
-        end
+        end]]
     else
         return
     end
+end)
+
+--[[            ExecuteWebJS(web, "toggleCharMenu();");
+            SetIgnoreLookInput(false)
+            SetIgnoreMoveInput(false)
+            ShowMouseCursor(false)
+            SetInputMode(INPUT_GAME)
+            SetWebVisibility(web, WEB_HITINVISIBLE)
+            ]]
+
+AddEvent('charui:create', function (slot)
+    ExecuteWebJS(web, "toggleCharMenu();");
+    SetIgnoreLookInput(false)
+    SetIgnoreMoveInput(false)
+    ShowMouseCursor(false)
+    SetInputMode(INPUT_GAME)
+    SetWebVisibility(web, WEB_HITINVISIBLE)
+
+    creation_slot = math.tointeger(slot)
+    Dialog.show(charcreate)
+end)
+
+AddEvent('charui:spawn', function (slot)
+    ExecuteWebJS(web, "toggleCharMenu();");
+    SetIgnoreLookInput(false)
+    SetIgnoreMoveInput(false)
+    ShowMouseCursor(false)
+    SetInputMode(INPUT_GAME)
+    SetWebVisibility(web, WEB_HITINVISIBLE)
+
+    AddPlayerChat('Logging in as '..name)
+    CallRemoteEvent("accounts:login", math.tointeger(slot))
 end)
 
 --[[AddRemoteEvent('FreezePlayer', function (player)

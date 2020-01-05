@@ -126,10 +126,10 @@ function OnCharacterCreated(player)
 
 	print("Character ID "..PlayerData[player].id.." created for "..player)
 
-		PlayerData[player].x = 125773.0
-		PlayerData[player].y = 80246.0
-		PlayerData[player].z = 1645.0
-		PlayerData[player].a = 90.0
+	PlayerData[player].x = 170694.515625
+	PlayerData[player].y = 194947.453125
+	PlayerData[player].z = 1396.9643554688
+	PlayerData[player].a = 90.0
 
 	SetPlayerLoggedIn(player)
 
@@ -194,8 +194,12 @@ function OnCharacterPartLoaded(player)
 			CreateCharacterData(player, i)
 
 			CharacterData[player][i].id = math.tointeger(result['id'])
+
 			CharacterData[player][i].firstname = result['firstname']
 			CharacterData[player][i].lastname = result['lastname']
+
+			CharacterData[player][i].level = math.tointeger(result['level'])
+			CharacterData[player][i].cash = math.tointeger(result['cash'])
 		end
 
 		ShowCharacterSelection(player)
@@ -342,6 +346,9 @@ function CreateCharacterData(player, character)
 
 	CharacterData[player][character].firstname = ""
 	CharacterData[player][character].lastname = ""
+
+	CharacterData[player][character].level = 0
+	CharacterData[player][character].cash = 0
 end
 
 function SavePlayerAccount(player)

@@ -72,15 +72,33 @@ $(window).on('load', () => {
 		let id = $(this).attr("id");
 		
 		if (id === "name1spawn") {
-			ue.game.callevent('charui:spawn', '[1]');
+			if (parseInt($(`.info.bottom#name${parseInt(/\d/.exec(id))} #name${parseInt(/\d/.exec(id))}level`).text()) === 0) {
+				console.log("Create at Slot 1")
+				ue.game.callevent('charui:create', '[1]');
+			} else {
+				console.log("Spawn at Slot 1")
+				ue.game.callevent('charui:spawn', `[1, '${character[0].name.text()}']`);
+			}
 		} else if (id === "name1delete") {
 			ue.game.callevent('charui:delete', '[1]');
 		} else if (id === "name2spawn") {
-			ue.game.callevent('charui:spawn', '[2]');
+			if (parseInt($(`.info.bottom#name${parseInt(/\d/.exec(id))} #name${parseInt(/\d/.exec(id))}level`).text()) === 0) {
+				console.log("Create at Slot 2")
+				ue.game.callevent('charui:create', '[2]');
+			} else {
+				console.log("Spawn at Slot 2")
+				ue.game.callevent('charui:spawn', `[2, '${character[1].name.text()}']`);
+			}
 		} else if (id === "name2delete") {
 			ue.game.callevent('charui:delete', '[2]');
 		} else if (id === "name3spawn") {
-			ue.game.callevent('charui:spawn', '[3]');
+			if (parseInt($(`.info.bottom#name${parseInt(/\d/.exec(id))} #name${parseInt(/\d/.exec(id))}level`).text()) === 0) {
+				console.log("Create at Slot 3")
+				ue.game.callevent('charui:create', '[3]');
+			} else {
+				console.log("Spawn at Slot 3")
+				ue.game.callevent('charui:spawn', `[3, '${character[2].name.text()}']`);
+			}
 		} else if (id === "name3delete") {
 			ue.game.callevent('charui:delete', '[3]');
 		}
@@ -89,6 +107,6 @@ $(window).on('load', () => {
 	const toggleCharMenu = () => {
 		$('#body').toggle();
 	}
-	toggleCharMenu();
+	//toggleCharMenu();
 
 });
