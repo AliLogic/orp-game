@@ -10,7 +10,7 @@ function test() {
 
 function setCharacterInfo(char) {
 	//char = JSON.parse(char);
-	alert("setcharinfo called");
+	CallEvent("charui:debug", 'setCharacterInfo received.')
 	console.log(character[char.slot].info);
 
 	/* Display stuff */
