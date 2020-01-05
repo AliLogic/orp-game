@@ -585,58 +585,13 @@ AddCommand("ahelp", function (player)
 
 	if PlayerData[player].admin > 3 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/setarmour /sethealth /toggleg")
 	end
 
 	if PlayerData[player].admin > 4 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/w /apos /asetadmin /acreatefaction /aeditfaction /setstats /acreatehouse /aedithouse /asetweather /asethelper /acreatespeedcam /aeditspeedcam")
 	end
 end)
-
-function cmd_acb(player, type, enterable, price, ...)
-	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
-	end
-
-	if type == nil or enterable == nil or price == nil or #{...} == 0 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(b)usiness <type> <enterable> <price> <name>")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Types: Entrance (1), Local (2), Ammunation (3), Bar (4)")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Types: Restaurant (5), Bank (6)")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Enterable: No (0), Yes (1)")
-		return 
-	end
-
-	type = tonumber(type)
-	enterable = tonumber(enterable)
-	price = tonumber(price)
-	local name = table.concat({...}, " ")
-
-	if type < 1 or type > BUSINESS_TYPE_MAX then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Types range from 1 to "..BUSINESS_TYPE_MAX.."</>")
-	end
-
-	if enterable < 0 or enterable > 1 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Enterable ranges from 0 to 1.</>")
-	end
-
-	if price < 0 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The business cannot be cheaper than $0!</>")
-	end
-
-	if string.len(name) < 0 or string.len(name) > 32 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Name length ranges from 1 to 32 characters.</>")
-	end
-
-	local business = Business_Create(player, type, enterable, price, name)
-
-	if business == false then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Business ID "..business.." wasn't able to be created!</>")
-	else
-		return AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Business %d created successfully!", colour.COLOUR_LIGHTRED(), business))
-	end
-end
-AddCommand("acreatebusiness", cmd_acb)
-AddCommand("acreatebiz", cmd_acb)
-AddCommand("acb", cmd_acb)
 
 AddCommand("asethelper", function (player, target, level)
 	if (PlayerData[player].admin < 5 or PlayerData[player].helper ~= 2) then
@@ -703,6 +658,83 @@ AddCommand("avpark", function (player)
 	VehicleData[vehicle].a = a
 
 	return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: </> Vehicle ID "..vehicle.." successfully parked!")
+end)
+
+AddCommand("toggleg", function (playerid)
+
+	if (PlayerData[playerid].admin < 4) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if OOCStatus == false then
+		AddPlayerChat(playerid, "The global OOC chat has been <span color=\""..colour.COLOUR_LIGHTRED().."\">disabled</>.")
+	else
+		AddPlayerChat(playerid, "The global OOC chat has been <span color=\""..colour.COLOUR_DARKGREEN().."\">enabled</>.")
+	end
+
+	OOCStatus = not OOCStatus
+end)
+
+AddCommand("setarmour", function (playerid, lookupid, armour)
+
+	if (PlayerData[playerid].admin < 4) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if lookupid == nil or armour == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /setarmour <playerid> <armour>")
+	end
+
+	lookupid = tonumber(lookupid)
+	armour = tonumber(armour)
+
+	if IsValidPlayer(lookupid) == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	if armour < 0 or armour > 100 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid health specified.</>")
+	end
+
+	if PlayerData[lookupid].logged_in == false then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
+	end
+
+	SetPlayerArmor(lookupid, armour)
+
+	AddPlayerChat(playerid, "You have set "..GetPlayerName(lookupid).."'s health to "..armour..".")
+	AddPlayerChat(lookupid, GetPlayerName(lookupid).." has set your health to "..armour..".")
+end)
+
+AddCommand("sethealth", function (playerid, lookupid, health)
+
+	if (PlayerData[playerid].admin < 4) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if lookupid == nil or health == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /sethealth <playerid> <health>")
+	end
+
+	lookupid = tonumber(lookupid)
+	health = tonumber(health)
+
+	if IsValidPlayer(lookupid) == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	if health < 0 or health > 100 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid health specified.</>")
+	end
+
+	if PlayerData[lookupid].logged_in == false then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
+	end
+
+	SetPlayerHealth(lookupid, health)
+
+	AddPlayerChat(playerid, "You have set "..GetPlayerName(lookupid).."'s health to "..health..".")
+	AddPlayerChat(lookupid, GetPlayerName(lookupid).." has set your health to "..health..".")
 end)
 
 AddCommand("near", function(playerid)

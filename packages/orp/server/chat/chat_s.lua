@@ -11,7 +11,7 @@ AddCommand("levelup", function (playerid)
     local required_exp = (level * 4) + 2
 
     if (required_exp > exp) then
-        return AddPlayerChat(playerid, "You do not have enough experience points to level up ("..exp.."/"..required_exp..")")
+        return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not have enough experience points to level up ("..exp.."/"..required_exp..")</>")
     end
 
     PlayerData[playerid].level = level + 1
@@ -151,15 +151,17 @@ end)
 
 AddCommand("g", function (player, ...)
 
+	if OOCStatus == false then
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The global OOC chat has been disabled.</>")
+	end
+
 	if (#{...} == 0) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /g [text]")
 	end
-	-- ./update.sh && ./start_linux.sh
 
 	local text = table.concat({...}, " ")
-	local x, y, z = GetPlayerLocation(player)
-	AddPlayerChatAll(GetPlayerName(player).." ("..player.."):"..text)
 
+	AddPlayerChatAll(GetPlayerName(player).." ("..player.."):"..text)
 end)
 
 AddCommand("pm", function (player, target, ...)
