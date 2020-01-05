@@ -732,4 +732,9 @@ AddCommand("near", function(playerid)
 	if (id ~= 0) then
 		AddPlayerChat(playerid, "You are standing near marker ID: "..id..".")
 	end
+
+	id = Door_Nearest(playerid)
+	if (id ~= 0) then
+		AddPlayerChat(playerid, "You are standing near door ID: "..id..".")
+	end
 end)
