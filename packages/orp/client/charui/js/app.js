@@ -105,7 +105,7 @@ $(window).on('load', () => {
 		}
 	});
 
-	const toggleCharMenu = () => {
+	function toggleCharMenu() {
 		ue.game.callevent("charui:debug", `['toggleCharMenu called.']`)
 		$('#body').toggle();
 	}
