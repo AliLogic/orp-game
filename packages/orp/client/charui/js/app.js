@@ -1,4 +1,5 @@
 $(window).on('load', () => {
+	alert("App JS Loaded Fine");
 	const MAX_CHARACTERS = 3;
 	const character = [];
 
@@ -105,6 +106,7 @@ $(window).on('load', () => {
 	});
 
 	const toggleCharMenu = () => {
+		ue.game.callevent("charui:debug", `['toggleCharMenu called.']`)
 		$('#body').toggle();
 	}
 	//toggleCharMenu();

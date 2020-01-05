@@ -44,7 +44,6 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
     end
 
     ExecuteWebJS(charUI, "toggleCharMenu();")
-    ExecuteWebJS(charUI, "alert('Test');")
     
 
     --[[if count == 0 then
@@ -158,6 +157,10 @@ AddEvent('charui:spawn', function (slot)
 
     AddPlayerChat('Logging in as '..name)
     CallRemoteEvent("accounts:login", math.tointeger(slot))
+end)
+
+AddEvent('charui:debug', function (text) 
+    AddPlayerChat(text)
 end)
 
 --[[AddRemoteEvent('FreezePlayer', function (player)
