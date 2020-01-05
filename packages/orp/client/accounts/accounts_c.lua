@@ -20,7 +20,6 @@ SetWebAnchors(charUI, 0, 0, 1, 1)
 SetWebURL(charUI, "http://asset/"..GetPackageName().."/client/charui/main.html")
 SetWebVisibility(charUI, WEB_HIDDEN)
 
-
 AddEvent("OnPackageStop", function ()
 	DestroyWebUI(charUI)
 end)
