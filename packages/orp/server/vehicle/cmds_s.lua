@@ -64,10 +64,10 @@ AddCommand("hood", function (playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 
 	if GetVehicleHoodRatio(vehicleid) > 0 then
-		CallRemoteEvent(playerid, "SetVehicleHood", false)
+		SetVehicleHoodRatio(vehicleid, 0.0)
 		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">closed</> your vehicle hood.")
 	else
-		CallRemoteEvent(playerid, "SetVehicleHood", true)
+		SetVehicleHoodRatio(vehicleid, 60.0)
 		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">opened</> your vehicle hood.")
 	end
 end)
@@ -81,10 +81,10 @@ AddCommand("trunk", function (playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 
 	if GetVehicleTrunkRatio(vehicleid) > 0 then
-		CallRemoteEvent(playerid, "SetVehicleTrunk", false)
+		SetVehicleTrunkRatio(vehicleid, 0.0)
 		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">closed</> your vehicle trunk.")
 	else
-		CallRemoteEvent(playerid, "SetVehicleTrunk", true)
+		SetVehicleTrunkRatio(vehicleid, 60.0)
 		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">opened</> your vehicle trunk.")
 	end
 end)
