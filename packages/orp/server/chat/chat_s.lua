@@ -32,9 +32,17 @@ end)
 AddCommand("help", function (player)
 	AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q")
 	AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
-	AddPlayerChat(player, "Commands: /anims /engine /lights /trunk /hood")
+	AddPlayerChat(player, "Commands: /anims /engine /lights /trunk /hood /dimension")
 	return
 end)
+
+local function cmd_vw(playerid)
+
+	AddPlayerChat(playerid, "Your dimension: "..GetPlayerDimension(playerid)..".")
+	return
+end
+AddCommand("vw", cmd_vw)
+AddCommand("dimension", cmd_vw)
 
 AddCommand("w", function (player, weapon, slot, ammo)
 	if (PlayerData[player].admin < 5) then
