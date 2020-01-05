@@ -1,5 +1,4 @@
 $(window).on('load', () => {
-	alert("App JS Loaded Fine");
 	const MAX_CHARACTERS = 3;
 	const character = [];
 
