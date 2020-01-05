@@ -175,7 +175,7 @@ function Door_Nearest(playerid)
 		if DoorData[v] ~= nil then
 			distance = GetDistance3D(x, y, z, DoorData[v].x, DoorData[v].y, DoorData[v].z)
 
-			if distance <= 120.0 then
+			if distance <= 200.0 then
 				return v
 			end
 		end

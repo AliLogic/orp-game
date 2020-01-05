@@ -197,7 +197,7 @@ function Speedcam_Nearest(playerid)
 		if SpeedcamData[v] ~= nil then
 			distance = GetDistance3D(x, y, z, SpeedcamData[v].x, SpeedcamData[v].y, SpeedcamData[v].z)
 
-			if distance <= 120.0 then
+			if distance <= 200.0 then
 				return v
 			end
 		end

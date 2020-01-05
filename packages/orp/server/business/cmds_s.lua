@@ -12,7 +12,7 @@ AddCommand("buy", function(playerid)
 				distance = GetDistance3D(x, y, z, BusinessData[v].mx, BusinessData[v].my, BusinessData[v].mz)
 			end
 
-			if distance <= 120.0 then
+			if distance <= 200.0 then
 
 				AddPlayerChat(playerid, "You are near the business ID: "..v..".")
 				return

@@ -263,14 +263,14 @@ function Marker_Nearest(playerid)
 		if MarkerData[v] ~= nil then
 			distance = GetDistance3D(x, y, z, MarkerData[v].x1, MarkerData[v].y1, MarkerData[v].z1)
 
-			if distance <= 120.0 then
+			if distance <= 200.0 then
 				return v
 			end
 
 			if MarkerData[v].x2 ~= 0 and MarkerData[v].y2 ~= 0 then
 				distance = GetDistance3D(x, y, z, MarkerData[v].x2, MarkerData[v].y2, MarkerData[v].z2)
 
-				if distance <= 120.0 then
+				if distance <= 200.0 then
 					return v
 				end
 			end
