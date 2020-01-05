@@ -1,6 +1,8 @@
 const MAX_CHARACTERS = 3;
 const character = [];
 
+CallEvent("charui:debug", 'charUI 1.0 Loaded!')
+
 $(document).ready(function () {
 	/*setCharacterInfo({
 		slot: 0,
