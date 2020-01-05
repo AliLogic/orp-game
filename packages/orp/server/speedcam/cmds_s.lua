@@ -76,11 +76,7 @@ local function cmd_aesc(player, speedcam, prefix, ...)
 
 		SpeedcamData[speedcam].speed = speed
 
-		if IsValidText3D(SpeedcamData[speedcam].text3d) then
-			DestroyText3D(SpeedcamData[speedcam].text3d)
-		end
-
-		SpeedcamData[speedcam].text3d = CreateText3D("Speedcam ("..speedcam..")\nSpeed: "..SpeedcamData[speedcam].speed.." KM/H", 20, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z + 130.0, 0.0, 0.0, 0.0)
+		SetText3DText(SpeedcamData[speedcam].text3d, "Speedcam ("..speedcam..")\nSpeed: "..SpeedcamData[speedcam].speed.." KM/H")
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Speedcam (ID: "..speedcam..") speed limit is now set to "..speed..".</>")
 
@@ -92,13 +88,13 @@ local function cmd_aesc(player, speedcam, prefix, ...)
 		SpeedcamData[speedcam].y = y
 		SpeedcamData[speedcam].z = (z - 99)
 
-		SetObjectLocation(SpeedcamData[speedcam].objectid, x, y, z)
+		SetObjectLocation(SpeedcamData[speedcam].objectid, x, y, (z - 99))
 
 		if IsValidText3D(SpeedcamData[speedcam].text3d) then
 			DestroyText3D(SpeedcamData[speedcam].text3d)
 		end
 
-		SpeedcamData[speedcam].text3d = CreateText3D("Speedcam ("..speedcam..")\nSpeed: "..SpeedcamData[speedcam].speed.." KM/H", 20, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z + 130.0, 0.0, 0.0, 0.0)
+		SpeedcamData[speedcam].text3d = CreateText3D("Speedcam ("..speedcam..")\nSpeed: "..SpeedcamData[speedcam].speed.." KM/H", 20, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z + 150.0, 0.0, 0.0, 0.0)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Speedcam (ID: "..speedcam..") position changed.</>")
 	else

@@ -225,7 +225,7 @@ function Housing_Nearest(playerid)
 		if HousingData[v] ~= nil then
 			distance = GetDistance3D(x, y, z, HousingData[v].ex, HousingData[v].ey, HousingData[v].ez)
 
-			if distance <= 120.0 then
+			if distance <= 200.0 then
 				return v
 			end
 		end

@@ -90,6 +90,17 @@ CREATE TABLE `bans` (
   CONSTRAINT `bans_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+DROP TABLE IF EXISTS `doors`;
+CREATE TABLE `doors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `model` int(11) NOT NULL,
+  `x` int(11) NOT NULL,
+  `y` int(11) NOT NULL,
+  `z` int(11) NOT NULL,
+  `dimension` int(11) NOT NULL,
+  `is_locked` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `houses`;
 CREATE TABLE `houses` (
@@ -346,7 +357,6 @@ CREATE TABLE `log_weaponshot` (
   CONSTRAINT `log_weaponshot_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-
 DROP TABLE IF EXISTS `markers`;
 CREATE TABLE `markers` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -371,6 +381,16 @@ INSERT INTO `markers` (`id`, `model`, `x1`, `y1`, `z1`, `dimension1`, `x2`, `y2`
 (1,	334,	198314,	209427,	1292.31,	0,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	NULL,	0)
 ON DUPLICATE KEY UPDATE `id` = VALUES(`id`), `model` = VALUES(`model`), `x1` = VALUES(`x1`), `y1` = VALUES(`y1`), `z1` = VALUES(`z1`), `dimension1` = VALUES(`dimension1`), `x2` = VALUES(`x2`), `y2` = VALUES(`y2`), `z2` = VALUES(`z2`), `dimension2` = VALUES(`dimension2`), `r` = VALUES(`r`), `g` = VALUES(`g`), `b` = VALUES(`b`), `a` = VALUES(`a`), `is_locked` = VALUES(`is_locked`);
 
+DROP TABLE IF EXISTS `pumps`;
+CREATE TABLE `pumps` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `x` int(11) NOT NULL,
+  `y` int(11) NOT NULL,
+  `z` int(11) NOT NULL,
+  `litres` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+
 DROP TABLE IF EXISTS `vehicles`;
 CREATE TABLE `vehicles` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -385,6 +405,7 @@ CREATE TABLE `vehicles` (
   `r` int(11) NOT NULL,
   `g` int(11) NOT NULL,
   `b` int(11) NOT NULL,
+  `litres` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 

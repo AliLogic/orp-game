@@ -73,11 +73,10 @@ local function OnSpeedcamCreated(index, x, y, z, speed)
 	SpeedcamData[index].speed = speed
 
 	SpeedcamData[index].objectid = CreateObject(963, x, y, z)
-	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 130.0, 0.0, 0.0, 0.0)
+	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 150.0, 0.0, 0.0, 0.0)
 
 	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 end
-
 
 function Speedcam_Create(x, y, z, speed)
 
@@ -138,7 +137,7 @@ local function OnSpeedcamLoaded(speedcamid)
 		SpeedcamData[index].speed = mariadb_get_value_name_int(1, "speed")
 
 		SpeedcamData[index].objectid = CreateObject(963, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z)
-		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 130.0, 0.0, 0.0, 0.0)
+		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 150.0, 0.0, 0.0, 0.0)
 
 		SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 	end
@@ -164,7 +163,7 @@ local function OnSpeedcamUnloaded(speedcam)
 end
 
 local function Speedcam_Unload(speedcam)
-	local query = mariadb_prepare(sql, "UPDATE speedcam SET x = '?', y = '?', z = '?', speed = '?' WHERE id = ?;",
+	local query = mariadb_prepare(sql, "UPDATE speedcams SET x = '?', y = '?', z = '?', speed = '?' WHERE id = ?;",
 		SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z, SpeedcamData[speedcam].speed,
 		SpeedcamData[speedcam].id
 	)
@@ -197,7 +196,7 @@ function Speedcam_Nearest(playerid)
 		if SpeedcamData[v] ~= nil then
 			distance = GetDistance3D(x, y, z, SpeedcamData[v].x, SpeedcamData[v].y, SpeedcamData[v].z)
 
-			if distance <= 120.0 then
+			if distance <= 200.0 then
 				return v
 			end
 		end

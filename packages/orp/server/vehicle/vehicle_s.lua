@@ -47,6 +47,8 @@ function CreateVehicleData(vehicle)
 	VehicleData[vehicle].g = 0
 	VehicleData[vehicle].b = 0
 
+	VehicleData[vehicle].litres = 0
+
 	VehicleData[vehicle].callsign = nil
 
 	VehicleData[vehicle].is_locked = true
@@ -111,6 +113,8 @@ function OnVehicleCreated(vehicle, model, plate, x, y, z, a, r, g, b)
 	VehicleData[vehicle].r = r
 	VehicleData[vehicle].g = g
 	VehicleData[vehicle].b = b
+
+	VehicleData[vehicle].litres = 100
 end
 
 function Vehicle_Destroy(vehicle)
@@ -162,6 +166,7 @@ function OnVehicleLoaded(id)
 		VehicleData[vehicle].owner = tonumber(result['owner'])
 		VehicleData[vehicle].faction = tonumber(result['faction'])
 		VehicleData[vehicle].rental = tonumber(result['rental'])
+		VehicleData[vehicle].litres = tonumber(result['litres'])
 
 		print(id.."'s owner: "..VehicleData[vehicle].owner)
 
@@ -172,12 +177,13 @@ function OnVehicleLoaded(id)
 end
 
 function Vehicle_Unload(vehicle)
-	local query = mariadb_prepare(sql, "UPDATE vehicles SET owner = ?, model = ?, plate = '?', faction = ?, rental = ?, x = '?', y = '?', z = '?', a = '?', r = ?, g = ?, b = ? WHERE id = ?",
+	local query = mariadb_prepare(sql, "UPDATE vehicles SET owner = ?, model = ?, plate = '?', faction = ?, rental = ?, litres = '?', x = '?', y = '?', z = '?', a = '?', r = ?, g = ?, b = ? WHERE id = ?",
 		VehicleData[vehicle].owner,
 		VehicleData[vehicle].model,
 		tostring(VehicleData[vehicle].plate),
 		VehicleData[vehicle].faction,
 		VehicleData[vehicle].rental,
+		VehicleData[vehicle].litres,
 		tostring(VehicleData[vehicle].x),
 		tostring(VehicleData[vehicle].y),
 		tostring(VehicleData[vehicle].z),
@@ -223,7 +229,7 @@ AddEvent("OnPlayerEnterVehicle", function(playerid, vehicleid, seatid)
 
 	if seatid == 1 then
 		if GetVehicleEngineState(vehicleid) == false then
-			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\"The engine is off. (/engine)")
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">The engine is off. (/engine)</>")
 		end
 	end
 end)

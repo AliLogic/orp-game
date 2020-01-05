@@ -5,7 +5,7 @@ local function UpdateSpeedo()
 	local speed = GetPlayerVehicleSpeed()
 
 	if speedo == nil then
-		speedo = CreateTextBox(0, -50, "<span color=\"#FF0000\" size=\"28\">"..speed.." KMH</>", "right")
+		speedo = CreateTextBox(0, -250, "<span color=\"#FF0000\" size=\"28\">"..speed.." KMH</>", "right")
 		SetTextBoxAnchors(speedo, 0.5, 0.5, 0.5, 0.5)
 		SetTextBoxAlignment(speedo, 0.5, 0.5)
 	end

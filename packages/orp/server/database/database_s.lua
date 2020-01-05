@@ -26,6 +26,7 @@ AddEvent("OnPackageStart", function ()
 		CallEvent('LoadGarages')
 		CallEvent('LoadSpeedcams')
 		CallEvent('LoadDoors')
+		CallEvent('LoadPumps')
 
 		--CallRemoteEvent('CreateMinimap')
 	else
@@ -46,6 +47,7 @@ AddEvent("OnPackageStop", function ()
 	CallEvent('UnloadGarages')
 	CallEvent('UnloadSpeedcams')
 	CallEvent('UnloadDoors')
+	CallEvent('UnloadPumps')
 
 	CallEvent('SavePlayers')
 

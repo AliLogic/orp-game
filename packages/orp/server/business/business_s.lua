@@ -292,7 +292,7 @@ function Business_Nearest(playerid)
 				distance = GetDistance3D(x, y, z, BusinessData[v].ex, BusinessData[v].ey, BusinessData[v].ez)
 			end
 
-			if distance <= 120.0 then
+			if distance <= 200.0 then
 				return v
 			end
 		end

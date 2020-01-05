@@ -292,6 +292,7 @@
         "GetVehicleHoodRatio",
         "GetVehicleTrunkRatio",
         "SetVehicleTrunkRatio",
-        "SetVehicleHoodRatio"
+        "SetVehicleHoodRatio",
+        "SetText3DText"
     ]
 }
