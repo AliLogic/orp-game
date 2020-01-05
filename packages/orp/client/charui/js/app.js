@@ -2,6 +2,47 @@ const MAX_CHARACTERS = 3;
 const character = [];
 
 CallEvent("charui:debug", 'charUI 1.0 Loaded!')
+CallEvent("charui:debug", 'Now onto lower part of JS.')
+
+function test() {
+	CallEvent("charui:debug", 'test() works.')
+}
+
+function setCharacterInfo(char) {
+	//char = JSON.parse(char);
+	alert("setcharinfo called");
+	console.log(character[char.slot].info);
+
+	/* Display stuff */
+	character[char.slot].name.text(char.firstname + " " + char.lastname);
+	character[char.slot].level.text(char.level);
+	character[char.slot].cash.text(numberWithCommas(char.cash));
+
+	/* JQuery Stuff */
+	character[char.slot].info.show();
+	$("#name" + (char.slot + 1) + "spawntext").text("Spawn Character");
+	character[char.slot].delete.removeClass('is-static');
+}
+
+function clearCharacterInfo(slot) {
+	character[slot].name.text("Empty Character Slot " + (slot + 1));
+	character[slot].level.text("0");
+	character[slot].cash.text("0");
+
+	character[slot].info.hide();
+	$("#name" + (slot + 1) + "spawntext").text("Create Character");
+	if (!character[slot].delete.hasClass('is-static')) character[slot].delete.addClass('is-static');
+}
+
+function numberWithCommas(x) {
+	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function toggleCharMenu() {
+	alert("Test");
+	CallEvent("charui:debug", 'ToggleCharMenu called.')
+	$('#body').toggle();
+}
 
 $(document).ready(function () {
 	CallEvent("charui:debug", 'document is loading...')
@@ -81,46 +122,3 @@ $(document).ready(function () {
 	CallEvent("charui:debug", 'Document is now ready!')
 	//toggleCharMenu();
 });
-
-CallEvent("charui:debug", 'Now onto lower part of JS.')
-
-function test() {
-	CallEvent("charui:debug", 'test() works.')
-}
-
-function setCharacterInfo(char) {
-	//char = JSON.parse(char);
-	alert("setcharinfo called");
-	console.log(character[char.slot].info);
-
-	/* Display stuff */
-	character[char.slot].name.text(char.firstname + " " + char.lastname);
-	character[char.slot].level.text(char.level);
-	character[char.slot].cash.text(numberWithCommas(char.cash));
-
-	/* JQuery Stuff */
-	character[char.slot].info.show();
-	$("#name" + (char.slot + 1) + "spawntext").text("Spawn Character");
-	character[char.slot].delete.removeClass('is-static');
-}
-
-function clearCharacterInfo(slot) {
-	character[slot].name.text("Empty Character Slot " + (slot + 1));
-	character[slot].level.text("0");
-	character[slot].cash.text("0");
-
-	character[slot].info.hide();
-	$("#name" + (slot + 1) + "spawntext").text("Create Character");
-	if (!character[slot].delete.hasClass('is-static')) character[slot].delete.addClass('is-static');
-}
-
-function numberWithCommas(x) {
-	return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
-
-function toggleCharMenu() {
-	alert("Test");
-	CallEvent("charui:debug", 'ToggleCharMenu called.')
-	$('#body').toggle();
-}
-
