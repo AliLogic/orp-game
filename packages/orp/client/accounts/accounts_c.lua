@@ -42,6 +42,7 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
         CreateTimer(function () 
             if charUIready == true then
                 AddPlayerChat("WebUI now ready 2")
+                break
             end
         end, 1000)
     end
