@@ -223,7 +223,7 @@ AddEvent("OnPlayerEnterVehicle", function(playerid, vehicleid, seatid)
 
 	if seatid == 1 then
 		if GetVehicleEngineState(vehicleid) == false then
-			AddPlayerChat(playerid, "The engine is off. (/engine)")
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\"The engine is off. (/engine)")
 		end
 	end
 end)
@@ -253,10 +253,12 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 			end
 
 			AddPlayerChat(player, "[DEBUG-S] The vehicle is unlocked so putting them in!")
+			StopVehicleEngine(vehicle)
 			SetPlayerInVehicle(player, vehicle, seat)
 		end
 	else
 		AddPlayerChat(player, "[DEBUG-S] The vehicle is probably an admin vehicle so putting them in!")
+		StopVehicleEngine(vehicle)
 		SetPlayerInVehicle(player, vehicle, seat)
 	end
 end)
