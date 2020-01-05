@@ -3,6 +3,10 @@ const character = [];
 
 CallEvent("charui:debug", 'charUI 1.0 Loaded!')
 
+function test() {
+	CallEvent("charui:debug", 'test() works.')
+}
+
 $(document).ready(function () {
 	CallEvent("charui:debug", 'document is loading...')
 	/*setCharacterInfo({
@@ -84,9 +88,7 @@ $(document).ready(function () {
 
 CallEvent("charui:debug", 'Now onto lower part of JS.')
 
-function test() {
-	CallEvent("charui:debug", 'test() works.')
-}
+
 
 function setCharacterInfo(char) {
 	//char = JSON.parse(char);
