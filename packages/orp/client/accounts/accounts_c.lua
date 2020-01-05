@@ -46,9 +46,7 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
             AddPlayerChat(string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
             i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
             ))
-            ExecuteWebJS(charUI, string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
-                i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
-            ))
+            ExecuteWebJS(charUI, "setCharacterInfo({slot:"..i..",firstname:"..chardata[i].firstname..",lastname:"..chardata[i].lastname..",level:"..chardata[i].level..",cash:"..chardata[i].cash.."});")
         end
     end
 
