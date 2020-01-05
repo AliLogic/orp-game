@@ -50,7 +50,7 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
         end
     end
 
-    ExecuteWebJS(charUI, "$('#body').show();")
+    ExecuteWebJS(charUI, "test();")
     ExecuteWebJS(charUI, "toggleCharMenu();")
     
     --[[if count == 0 then

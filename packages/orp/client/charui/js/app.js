@@ -85,7 +85,7 @@ $(document).ready(function () {
 CallEvent("charui:debug", 'Now onto lower part of JS.')
 
 function test() {
-	alert('test worked');
+	CallEvent("charui:debug", 'test() works.')
 }
 
 function setCharacterInfo(char) {
