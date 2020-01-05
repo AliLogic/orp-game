@@ -37,6 +37,8 @@
 		"server/business/business_s.lua",
 		"server/business/cmds_s.lua",
 		"server/animations/animations_s.lua",
+		"server/doors/doors_s.lua",
+		"server/doors/cmds_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [

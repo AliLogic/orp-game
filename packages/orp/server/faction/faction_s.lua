@@ -194,3 +194,11 @@ function GetPlayerFactionType(player)
 	if PlayerData[player].faction == 0 or FactionData[PlayerData[player].faction].type == nil then return FACTION_NONE end
 	return FactionData[PlayerData[player].faction].type
 end
+
+function GetFactionType(factionid)
+	if FactionData[factionid] ~= nil then
+		return FactionData[factionid].type
+	end
+
+	return FACTION_NONE
+end

@@ -7,6 +7,17 @@ local function cmd_engine(playerid)
 	end
 
 	local vehicleid = GetPlayerVehicle(playerid)
+
+	AddPlayerChat(playerid, "Health: "..GetVehicleHealth(vehicleid))
+
+	-- if GetVehicleHealth(vehicleid) < 500 then
+	-- 	return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This vehicle is totalled and can't be started.</>")
+	-- end
+
+	-- if GetVehicleFuel(vehicleid) <= 1 then
+	-- 	return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The fuel tank is empty.</>")
+	-- end
+
 	local x, y, z = GetPlayerLocation(playerid)
 
 	if VehicleData[vehicleid] ~= nil then
@@ -26,6 +37,57 @@ local function cmd_engine(playerid)
 	return
 end
 AddCommand("engine", cmd_engine)
+
+AddCommand("lights", function (playerid)
+	if GetPlayerState(playerid) ~= PS_DRIVER then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the driver seat of the vehicle.</>")
+	end
+
+	local vehicleid = GetPlayerVehicle(playerid)
+	local x, y, z = GetPlayerLocation(playerid)
+
+	if GetVehicleLightState(vehicleid) then
+		--SetVehicleLightState(vehicleid, false) -- This function doesn't exist in the game yet
+		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">turned off</> the lights.")
+	else
+		--SetVehicleLightState(vehicleid, true) -- This function doesn't exist in the game yet
+		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">turned on</> the lights.")
+	end
+end)
+
+AddCommand("hood", function (playerid)
+	if GetPlayerState(playerid) ~= PS_DRIVER then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the driver seat of the vehicle.</>")
+	end
+
+	local vehicleid = GetPlayerVehicle(playerid)
+	local x, y, z = GetPlayerLocation(playerid)
+
+	if GetVehicleHoodRatio(vehicleid) > 0 then
+		CallRemoteEvent(playerid, "SetVehicleHood", false)
+		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">closed</> your vehicle hood.")
+	else
+		CallRemoteEvent(playerid, "SetVehicleHood", true)
+		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">opened</> your vehicle hood.")
+	end
+end)
+
+AddCommand("trunk", function (playerid)
+	if GetPlayerState(playerid) ~= PS_DRIVER then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the driver seat of the vehicle.</>")
+	end
+
+	local vehicleid = GetPlayerVehicle(playerid)
+	local x, y, z = GetPlayerLocation(playerid)
+
+	if GetVehicleTrunkRatio(vehicleid) > 0 then
+		CallRemoteEvent(playerid, "SetVehicleTrunk", false)
+		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">closed</> your vehicle trunk.")
+	else
+		CallRemoteEvent(playerid, "SetVehicleTrunk", true)
+		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">opened</> your vehicle trunk.")
+	end
+end)
 
 local function cmd_v(player, ...)
 	local args = {...}

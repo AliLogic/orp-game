@@ -13,3 +13,21 @@ AddEvent("OnPlayerStartEnterVehicle", function(vehicleid, seatid)
 	CallRemoteEvent("OnPlayerStartEnterVehicle", vehicleid, seatid)
 	return false
 end)
+
+AddRemoteEvent("SetVehicleTrunk", function (bToggle)
+
+	if bToggle then
+		SetVehicleTrunkRatio(GetPlayerVehicle(), 60)
+	else
+		SetVehicleTrunkRatio(GetPlayerVehicle(), 0)
+	end
+end)
+
+AddRemoteEvent("SetVehicleHood", function (bToggle)
+
+	if bToggle then
+		SetVehicleHoodRatio(GetPlayerVehicle(), 60)
+	else
+		SetVehicleHoodRatio(GetPlayerVehicle(), 0)
+	end
+end)

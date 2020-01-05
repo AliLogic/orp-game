@@ -7,14 +7,16 @@ AddCommand("buy", function(playerid)
 
 	for _, v in pairs(BusinessData) do
 
-		if BusinessData[v].enterable == 1 then
-			distance = GetDistance3D(x, y, z, BusinessData[v].mx, BusinessData[v].my, BusinessData[v].mz)
-		end
+		if BusinessData[v] ~= nil then
+			if BusinessData[v].enterable == 1 then
+				distance = GetDistance3D(x, y, z, BusinessData[v].mx, BusinessData[v].my, BusinessData[v].mz)
+			end
 
-		if distance <= 120.0 then
+			if distance <= 120.0 then
 
-			AddPlayerChat(playerid, "You are near the business ID: "..v..".")
-			return
+				AddPlayerChat(playerid, "You are near the business ID: "..v..".")
+				return
+			end
 		end
 	end
 

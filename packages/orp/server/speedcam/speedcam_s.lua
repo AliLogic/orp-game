@@ -187,3 +187,21 @@ AddRemoteEvent("OnSpeedcamFlashed", function(playerid, speedcam, speed)
 
 	AddPlayerChat(playerid, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
 end)
+
+function Speedcam_Nearest(playerid)
+
+	local x, y, z = GetPlayerLocation(playerid)
+	local distance = 0
+
+	for _, v in pairs(SpeedcamData) do
+		if SpeedcamData[v] ~= nil then
+			distance = GetDistance3D(x, y, z, SpeedcamData[v].x, SpeedcamData[v].y, SpeedcamData[v].z)
+
+			if distance <= 120.0 then
+				return v
+			end
+		end
+	end
+
+	return 0
+end

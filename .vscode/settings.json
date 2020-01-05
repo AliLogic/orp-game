@@ -285,6 +285,13 @@
         "SetTextBoxAlignment",
         "SetTextBoxAnchors",
         "SetTextBoxText",
-        "DestroyTextBox"
+        "DestroyTextBox",
+        "SetDoorDimension",
+        "SetDoorLocation",
+        "GetVehicleLightState",
+        "GetVehicleHoodRatio",
+        "GetVehicleTrunkRatio",
+        "SetVehicleTrunkRatio",
+        "SetVehicleHoodRatio"
     ]
 }
