@@ -17,6 +17,7 @@ $(window).on('load', () => {
 
 	const setCharacterInfo = (char) => {
 		//char = JSON.parse(char);
+		alert("setcharinfo called")
 		console.log(character[char.slot].info);
 
 		/* Display stuff */

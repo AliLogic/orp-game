@@ -45,7 +45,6 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
 
     ExecuteWebJS(charUI, "toggleCharMenu();")
     
-
     --[[if count == 0 then
         AddPlayerChat("Count is 0")
         Dialog.show(charviewnone)
