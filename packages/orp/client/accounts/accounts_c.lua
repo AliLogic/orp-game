@@ -33,7 +33,7 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
     local count = 0
     for _ in pairs(chardata) do count = count + 1 end
     
-    SetWebVisiblity(charUI, WEB_VISIBLE)
+    SetWebVisibility(charUI, WEB_VISIBLE)
     
     if count ~= 0 then
         for i = 1, count, 1 do
