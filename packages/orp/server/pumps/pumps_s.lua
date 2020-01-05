@@ -50,7 +50,7 @@ function OnPumpTick(pumpid, playerid, vehicleid)
 		if IsValidPlayer(playerid) then
 			if PumpData[pumpid].litres > 0 then
 
-				SetText3DText(PumpData[pumpid].text3d, "Pump ("..pumpid..")\nLiters: "..PumpData[pumpid].litres)
+				SetText3DText(PumpData[pumpid].text3d, "Pump ("..pumpid..")\nLitres: "..PumpData[pumpid].litres)
 
 				PumpData[pumpid].litres = (PumpData[pumpid].litres - 1)
 
@@ -65,7 +65,7 @@ function OnPumpTick(pumpid, playerid, vehicleid)
 				end
 			else
 
-				SetText3DText(PumpData[pumpid].text3d, "Pump ("..pumpid..")\nLiters: "..PumpData[pumpid].litres)
+				SetText3DText(PumpData[pumpid].text3d, "Pump ("..pumpid..")\nLitres: "..PumpData[pumpid].litres)
 
 				DestroyTimer(PumpData[pumpid].timer)
 				PumpData[pumpid].is_occupied = false
@@ -153,7 +153,7 @@ local function OnPumpLoaded(pump)
 		PumpData[index].z = mariadb_get_value_name_int(1, "z")
 		PumpData[index].litres = mariadb_get_value_name_int(1, "litres")
 
-		PumpData[index].text3d = CreateText3D("Pump ("..index..")\nSpeed: "..PumpData[index].speed.." KM/H", 20, PumpData[index].x, PumpData[index].y, PumpData[index].z + 150.0, 0.0, 0.0, 0.0)
+		PumpData[index].text3d = CreateText3D("Pump ("..index..")\nLitres: "..PumpData[index].litres, 20, PumpData[index].x, PumpData[index].y, PumpData[index].z + 150.0, 0.0, 0.0, 0.0)
 
 		PumpData[index].is_occupied = false
 	end

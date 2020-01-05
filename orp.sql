@@ -90,6 +90,17 @@ CREATE TABLE `bans` (
   CONSTRAINT `bans_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+DROP TABLE IF EXISTS `doors`;
+CREATE TABLE `doors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `model` int(11) NOT NULL,
+  `x` int(11) NOT NULL,
+  `y` int(11) NOT NULL,
+  `z` int(11) NOT NULL,
+  `dimension` int(11) NOT NULL,
+  `is_locked` tinyint(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 
 DROP TABLE IF EXISTS `houses`;
 CREATE TABLE `houses` (
