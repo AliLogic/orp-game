@@ -183,3 +183,15 @@ function Door_Nearest(playerid)
 
 	return 0
 end
+
+AddEvent("OnPlayerInteractDoor", function(player, door, bWantsOpen)
+
+	local index = Door_Nearest(player)
+
+	if index ~= 0 and DoorData[index].is_locked == true then
+		return AddPlayerChat(player, "This door is locked!")
+	end
+
+	-- Let the players open/close the door by default.
+	SetDoorOpen(door, not IsDoorOpen(door))
+end)
