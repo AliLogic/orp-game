@@ -580,7 +580,7 @@ AddCommand("ahelp", function (player)
 	end
 
 	if PlayerData[player].admin > 2 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near")
 	end
 
 	if PlayerData[player].admin > 3 then
@@ -703,4 +703,33 @@ AddCommand("avpark", function (player)
 	VehicleData[vehicle].a = a
 
 	return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: </> Vehicle ID "..vehicle.." successfully parked!")
+end)
+
+AddCommand("near", function(playerid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	local id = 0
+
+	id = Business_Nearest(playerid)
+	if (id ~= 0) then
+		AddPlayerChat(playerid, "You are standing near business ID: "..id..".")
+	end
+
+	id = Housing_Nearest(playerid)
+	if (id ~= 0) then
+		AddPlayerChat(playerid, "You are standing near house ID: "..id..".")
+	end
+
+	id = Speedcam_Nearest(playerid)
+	if (id ~= 0) then
+		AddPlayerChat(playerid, "You are standing near speedcam ID: "..id..".")
+	end
+
+	id = Marker_Nearest(playerid)
+	if (id ~= 0) then
+		AddPlayerChat(playerid, "You are standing near marker ID: "..id..".")
+	end
 end)
