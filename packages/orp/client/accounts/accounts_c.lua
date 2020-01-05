@@ -37,7 +37,7 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
     
     if count ~= 0 then
         for i = 1, count, 1 do
-            SetPlayerChat("Executing SetCharacterInfo")
+            AddPlayerChat("Executing SetCharacterInfo")
             ExecuteWebJS(charUI, string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
                 i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
             ))
