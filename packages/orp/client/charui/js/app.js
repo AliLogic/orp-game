@@ -1,85 +1,7 @@
-$(document).ready(function () {
-
-	/*setCharacterInfo({
-		slot: 0,
-		firstname: "John",
-		lastname: "Doe",
-		level: 1,
-		cash: 90
-	});
-
-	setCharacterInfo({
-		slot: 1,
-		firstname: "John",
-		lastname: "Appleseed",
-		level: 5,
-		cash: 50000
-	});
-
-	setCharacterInfo({
-		slot: 2,
-		firstname: "Jane",
-		lastname: "Smith",
-		level: 10,
-		cash: 2500
-	});*/
-
-	$("button").on('click', function (e) {
-		let id = $(this).attr("id");
-		
-		if (id === "name1spawn") {
-			if (parseInt($(`.info.bottom#name${parseInt(/\d/.exec(id))} #name${parseInt(/\d/.exec(id))}level`).text()) === 0) {
-				console.log("Create at Slot 1")
-				ue.game.callevent('charui:create', '[1]');
-			} else {
-				console.log("Spawn at Slot 1")
-				ue.game.callevent('charui:spawn', `[1, '${character[0].name.text()}']`);
-			}
-		} else if (id === "name1delete") {
-			ue.game.callevent('charui:delete', '[1]');
-		} else if (id === "name2spawn") {
-			if (parseInt($(`.info.bottom#name${parseInt(/\d/.exec(id))} #name${parseInt(/\d/.exec(id))}level`).text()) === 0) {
-				console.log("Create at Slot 2")
-				ue.game.callevent('charui:create', '[2]');
-			} else {
-				console.log("Spawn at Slot 2")
-				ue.game.callevent('charui:spawn', `[2, '${character[1].name.text()}']`);
-			}
-		} else if (id === "name2delete") {
-			ue.game.callevent('charui:delete', '[2]');
-		} else if (id === "name3spawn") {
-			if (parseInt($(`.info.bottom#name${parseInt(/\d/.exec(id))} #name${parseInt(/\d/.exec(id))}level`).text()) === 0) {
-				console.log("Create at Slot 3")
-				ue.game.callevent('charui:create', '[3]');
-			} else {
-				console.log("Spawn at Slot 3")
-				ue.game.callevent('charui:spawn', `[3, '${character[2].name.text()}']`);
-			}
-		} else if (id === "name3delete") {
-			ue.game.callevent('charui:delete', '[3]');
-		}
-	});
-	//toggleCharMenu();
-});
-
 const MAX_CHARACTERS = 3;
 const character = [];
 
-for (let i = 1; i <= MAX_CHARACTERS; i++) {
-	console.log(i);
-	console.log($(".info.bottom#name" + i))
-	character.push({
-		name: $(".info.top#name" + i),
-		level: $("#name" + i + "level"),
-		cash: $("#name" + i + "cash"),
-		info: $(".info.bottom#name" + i),
-		spawn: $("#name" + i + "spawn"),
-		delete: $("#name" + i + "delete")
-	});
-}
-
 $(document).ready(function () {
-
 	/*setCharacterInfo({
 		slot: 0,
 		firstname: "John",
@@ -104,50 +26,60 @@ $(document).ready(function () {
 		cash: 2500
 	});*/
 
+	for (let i = 1; i <= MAX_CHARACTERS; i++) {
+		console.log(i);
+		console.log($(".info.bottom#name" + i))
+		character.push({
+			name: $(".info.top#name" + i),
+			level: $("#name" + i + "level"),
+			cash: $("#name" + i + "cash"),
+			info: $(".info.bottom#name" + i),
+			spawn: $("#name" + i + "spawn"),
+			delete: $("#name" + i + "delete")
+		});
+	}
+
 	$("button").on('click', function (e) {
 		let id = $(this).attr("id");
 		
 		if (id === "name1spawn") {
 			if (parseInt($(`.info.bottom#name${parseInt(/\d/.exec(id))} #name${parseInt(/\d/.exec(id))}level`).text()) === 0) {
 				console.log("Create at Slot 1")
-				ue.game.callevent('charui:create', '[1]');
+				CallEvent('charui:create', 1);
 			} else {
 				console.log("Spawn at Slot 1")
-				ue.game.callevent('charui:spawn', `[1, '${character[0].name.text()}']`);
+				CallEvent('charui:spawn', [1, character[0].name.text()]);
 			}
 		} else if (id === "name1delete") {
-			ue.game.callevent('charui:delete', '[1]');
+			CallEvent('charui:delete', 1);
 		} else if (id === "name2spawn") {
 			if (parseInt($(`.info.bottom#name${parseInt(/\d/.exec(id))} #name${parseInt(/\d/.exec(id))}level`).text()) === 0) {
 				console.log("Create at Slot 2")
-				ue.game.callevent('charui:create', '[2]');
+				CallEvent('charui:create', 2);
 			} else {
 				console.log("Spawn at Slot 2")
-				ue.game.callevent('charui:spawn', `[2, '${character[1].name.text()}']`);
+				CallEvent('charui:spawn', [2, character[1].name.text()]);
 			}
 		} else if (id === "name2delete") {
-			ue.game.callevent('charui:delete', '[2]');
+			CallEvent('charui:delete', 2);
 		} else if (id === "name3spawn") {
 			if (parseInt($(`.info.bottom#name${parseInt(/\d/.exec(id))} #name${parseInt(/\d/.exec(id))}level`).text()) === 0) {
 				console.log("Create at Slot 3")
-				ue.game.callevent('charui:create', '[3]');
+				CallEvent('charui:create', 3);
 			} else {
 				console.log("Spawn at Slot 3")
-				ue.game.callevent('charui:spawn', `[3, '${character[2].name.text()}']`);
+				CallEvent('charui:spawn', [3, character[2].name.text()]);
 			}
 		} else if (id === "name3delete") {
-			ue.game.callevent('charui:delete', '[3]');
+			CallEvent('charui:delete', 3);
 		}
 	});
-
-
 	//toggleCharMenu();
-
 });
 
 function setCharacterInfo(char) {
 	//char = JSON.parse(char);
-	alert("setcharinfo called")
+	alert("setcharinfo called");
 	console.log(character[char.slot].info);
 
 	/* Display stuff */
@@ -176,11 +108,11 @@ function numberWithCommas(x) {
 }
 
 function toggleCharMenu() {
-	alert("Test")
-	ue.game.callevent("charui:debug", `['toggleCharMenu called.']`)
+	alert("Test");
+	CallEvent("charui:debug", 'ToggleCharMenu called.')
 	$('#body').toggle();
 }
 
 function test() {
-	alert('test worked')
+	alert('test worked');
 }
