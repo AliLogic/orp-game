@@ -1,3 +1,15 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+local colour = ImportPackage('colours')
+
 AddCommand("whitelist", function(playerid, steam_id)
 	if (PlayerData[playerid].admin < 2) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")

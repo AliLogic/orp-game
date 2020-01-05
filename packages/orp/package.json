@@ -39,6 +39,8 @@
 		"server/animations/animations_s.lua",
 		"server/doors/doors_s.lua",
 		"server/doors/cmds_s.lua",
+		"server/pumps/pumps_s.lua",
+		"server/pumps/cmds_s.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [

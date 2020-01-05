@@ -78,7 +78,6 @@ local function OnSpeedcamCreated(index, x, y, z, speed)
 	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 end
 
-
 function Speedcam_Create(x, y, z, speed)
 
 	local index = GetFreeSpeedcamId()
@@ -164,7 +163,7 @@ local function OnSpeedcamUnloaded(speedcam)
 end
 
 local function Speedcam_Unload(speedcam)
-	local query = mariadb_prepare(sql, "UPDATE speedcam SET x = '?', y = '?', z = '?', speed = '?' WHERE id = ?;",
+	local query = mariadb_prepare(sql, "UPDATE speedcams SET x = '?', y = '?', z = '?', speed = '?' WHERE id = ?;",
 		SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z, SpeedcamData[speedcam].speed,
 		SpeedcamData[speedcam].id
 	)

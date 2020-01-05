@@ -1,5 +1,16 @@
 local colour = ImportPackage("colours")
 
+AddCommand("clearchat", function (playerid)
+
+	if (PlayerData[playerid].admin < 2) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	for i = 1, 10, 1 do
+		AddPlayerChatAll(" ")
+	end
+end)
+
 AddCommand("kick", function (playerid, lookupid, ...)
 
 	if (PlayerData[playerid].admin < 1) then
@@ -580,7 +591,7 @@ AddCommand("ahelp", function (player)
 	end
 
 	if PlayerData[player].admin > 2 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near /clearchat")
 	end
 
 	if PlayerData[player].admin > 3 then
@@ -768,5 +779,10 @@ AddCommand("near", function(playerid)
 	id = Door_Nearest(playerid)
 	if (id ~= 0) then
 		AddPlayerChat(playerid, "You are standing near door ID: "..id..".")
+	end
+
+	id = Pump_Nearest(playerid)
+	if (id ~= 0) then
+		AddPlayerChat(playerid, "You are standing near pump ID: "..id..".")
 	end
 end)
