@@ -10,9 +10,9 @@ local function cmd_engine(playerid)
 
 	AddPlayerChat(playerid, "Health: "..GetVehicleHealth(vehicleid))
 
-	-- if GetVehicleHealth(vehicleid) < 500 then
-	-- 	return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This vehicle is totalled and can't be started.</>")
-	-- end
+	if GetVehicleHealth(vehicleid) <= 100.0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This vehicle is totalled and can't be started.</>")
+	end
 
 	-- if GetVehicleFuel(vehicleid) <= 1 then
 	-- 	return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The fuel tank is empty.</>")

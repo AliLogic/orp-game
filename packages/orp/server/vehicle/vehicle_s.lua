@@ -223,7 +223,7 @@ AddEvent("OnPlayerEnterVehicle", function(playerid, vehicleid, seatid)
 
 	if seatid == 1 then
 		if GetVehicleEngineState(vehicleid) == false then
-			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\"The engine is off. (/engine)")
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">The engine is off. (/engine)</>")
 		end
 	end
 end)

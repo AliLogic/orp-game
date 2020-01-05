@@ -11,9 +11,15 @@ end
 
 function GetPlayerVehicleSpeed(kmh)
 
+	local vehicle = GetPlayerVehicle()
+
+	if vehicle == 0 then
+		return 0
+	end
+
 	if kmh == true then
-		return math.tointeger(math.floor(GetVehicleForwardSpeed(GetPlayerVehicle())))
+		return math.tointeger(math.floor(GetVehicleForwardSpeed(vehicle)))
 	else
-		return math.tointeger(math.floor(GetVehicleForwardSpeed(GetPlayerVehicle()) / 1.609))
+		return math.tointeger(math.floor(GetVehicleForwardSpeed(vehicle) / 1.609))
 	end
 end
