@@ -287,6 +287,11 @@
         "SetTextBoxText",
         "DestroyTextBox",
         "SetDoorDimension",
-        "SetDoorLocation"
+        "SetDoorLocation",
+        "GetVehicleLightState",
+        "GetVehicleHoodRatio",
+        "GetVehicleTrunkRatio",
+        "SetVehicleTrunkRatio",
+        "SetVehicleHoodRatio"
     ]
 }

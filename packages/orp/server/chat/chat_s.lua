@@ -32,7 +32,7 @@ end)
 AddCommand("help", function (player)
 	AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q")
 	AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
-	AddPlayerChat(player, "Commands: /anims")
+	AddPlayerChat(player, "Commands: /anims /engine /lights /trunk /hood")
 	return
 end)
 
