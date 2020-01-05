@@ -44,6 +44,8 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
     end
 
     ExecuteWebJS(charUI, "toggleCharMenu();")
+    ExecuteWebJS(charUI, "alert('Test');")
+    
 
     --[[if count == 0 then
         AddPlayerChat("Count is 0")
