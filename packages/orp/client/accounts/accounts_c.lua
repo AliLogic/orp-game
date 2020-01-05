@@ -24,10 +24,10 @@ local charUIready = false
 
 AddEvent("OnWebLoadComplete", function(web)
     if web == charUI then
+        AddPlayerChat("WebUI now ready 1")
         charUIready = true
     end
 end)
-
 
 AddEvent("OnPackageStop", function ()
 	DestroyWebUI(charUI)
@@ -40,6 +40,7 @@ end)
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
     while charUIready == false do
         if charUIready == true then
+            AddPlayerChat("WebUI now ready 2")
             break
         end
     end
