@@ -5,8 +5,12 @@
 
 /* Bulma Adjustments */
 
-html, body {
-	background-color: grey;
+html {
+	background-color: transparent !important;
+}
+
+body {
+	background-color: transparent !important;
 }
 
 .button.is-fullwidth:first-child {
