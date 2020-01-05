@@ -37,16 +37,7 @@ AddRemoteEvent("askClientCreation", function ()
     Dialog.show(charcreate)
 end)
 
-AddRemoteEvent("askClientShowCharSelection", function(chardata)
-    while charUIready == false do
-        CreateTimer(function () 
-            if charUIready == true then
-                AddPlayerChat("WebUI now ready 2")
-                break
-            end
-        end, 1000)
-    end
-    
+AddRemoteEvent("askClientShowCharSelection", function(chardata)    
     SetWebVisibility(charUI, WEB_VISIBLE)
 
     if chardata == nil then
