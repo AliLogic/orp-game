@@ -13,9 +13,9 @@ local function UpdateSpeedo()
 	if speed ~= false then
 		if speed < 0 then
 			speed = speed * -1
-			SetTextBoxText(speedo, "<span color=\"#FF0000\" size=\"28\">"..speed.." KMH (R)")
+			SetTextBoxText(speedo, "<span color=\"#FF0000\" size=\"28\">"..speed.." KMH (R)</>")
 		else
-			SetTextBoxText(speedo, "<span color=\"#FF0000\" size=\"28\">"..speed.." KMH")
+			SetTextBoxText(speedo, "<span color=\"#FF0000\" size=\"28\">"..speed.." KMH</>")
 		end
 	end
 end

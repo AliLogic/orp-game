@@ -10,7 +10,7 @@ Contributors:
 ]]--
 
 CINEMA_LINKS = {
-	"https://www.youtube.com/embed/4LfJnj66HVQ?controls=0&autoplay=1"
+	"https://www.youtube.com/embed/RsjMP8wJEGg?autoplay=1"
 }
 
 AddEvent("OnPackageStart", function()
