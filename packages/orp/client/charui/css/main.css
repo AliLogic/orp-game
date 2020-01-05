@@ -1,0 +1,67 @@
+/*
+	Onset Roleplay Character Selection
+	Written by Bork
+*/
+
+/* Bulma Adjustments */
+
+html, body {
+	background-color: grey;
+}
+
+.button.is-fullwidth:first-child {
+	margin-bottom: 5px;
+}
+
+.button.is-fullwidth {
+	font-size: 16px !important;
+}
+
+/* End */
+
+/* Customized CSS */
+
+.padcard {
+	margin-left: 20%;
+	margin-right: 20%;
+}
+
+img.image {
+	padding-bottom: 25px;
+	max-width: 50%;
+
+	width: 35%;
+	height: auto;
+}
+
+.charrow {
+	border-radius: 2px;
+	margin-bottom: 15px;
+	
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+
+	background-color: white;
+	text-align: left;
+}
+
+.info {
+	font-size: 22px;
+}
+
+.info.bottom {
+	font-size: 18px;
+	display: block;
+}
+
+.info.seperator {
+	content: "|";
+}
+
+span.cash::before {
+	content: "$";
+}
+
+/* End */

@@ -1,0 +1,110 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>OnsetRP - Char Selection</title>
+
+		<link rel="stylesheet" href="./css/main.css">
+		<script src="./dist/fa5.js"></script>
+		<link rel="stylesheet" href="./dist/bulma.min.css" />
+		<script src="./dist/jquery.min.js"></script>
+		<script src="./js/util.js"></script>
+	</head>
+	<body>
+		<div id="body" style="display: none;">
+
+			<section class="hero is-fullheight">
+				<div class="hero-body">
+					<div class="container has-text-centered">
+						<div class="padcard">
+
+							<center><img src="./img/OnsetLogo.png" class="image"></center>
+
+							<div class="charrow">
+								<div class="columns">
+
+									<div class="column is-three-quarters">
+										<span class="info top" id="name1">Empty Character Slot 1</span>
+										<span class="info bottom" id="name1" style="display: none;">Level <span id="name1level">0</span> | <span class="cash" id="name1cash">5000</span></span>
+									</div>
+
+									<div class="column">
+										<button class="button is-fullwidth is-medium is-success" id="name1spawn">
+											<span class="icon">
+												<i class="fas fa-check-circle"></i>
+											</span>
+											<span id="name1spawntext">Create Character</span>
+										</button>
+										<button class="button is-fullwidth is-medium is-danger is-static" id="name1delete">
+											<span class="icon">
+												<i class="far fa-times-circle"></i>
+											</span>
+											<span>Delete Character</span> 
+										</button>
+									</div>
+
+								</div>
+							</div>
+
+							<div class="charrow">
+								<div class="columns">
+
+									<div class="column is-three-quarters">
+										<span class="info top" id="name2">Empty Character Slot 2</span>
+										<span class="info bottom" id="name2" style="display: none;">Level <span id="name2level">0</span> | <span class="cash" id="name2cash">5000</span></span>
+									</div>
+
+									<div class="column">
+										<button class="button is-fullwidth is-medium is-success" id="name2spawn">
+											<span class="icon">
+												<i class="fas fa-check-circle"></i>
+											</span>
+											<span id="name2spawntext">Create Character</span>
+										</button>
+										<button class="button is-fullwidth is-medium is-danger is-static" id="name2delete">
+											<span class="icon">
+												<i class="far fa-times-circle"></i>
+											</span>
+											<span>Delete Character</span> 
+										</button>
+									</div>
+
+								</div>
+							</div>
+
+							<div class="charrow">
+								<div class="columns">
+
+									<div class="column is-three-quarters">
+										<span class="info top" id="name3">Empty Character Slot 3</span>
+										<span class="info bottom" id="name3" style="display: none;">Level <span id="name3level">0</span> | <span class="cash" id="name3cash">5000</span></span>
+									</div>
+
+									<div class="column">
+										<button class="button is-fullwidth is-medium is-success" id="name3spawn">
+											<span class="icon">
+												<i class="fas fa-check-circle"></i>
+											</span>
+											<span id="name3spawntext">Create Character</span>
+										</button>
+										<button class="button is-fullwidth is-medium is-danger is-static" id="name3delete">
+											<span class="icon">
+												<i class="far fa-times-circle"></i>
+											</span>
+											<span>Delete Character</span> 
+										</button>
+									</div>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+
+		<script src="./js/app.js"></script>
+	</body>
+</html>
