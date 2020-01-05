@@ -1,3 +1,7 @@
+function test() {
+	alert('test worked')
+}
+
 $(window).on('load', () => {
 	const MAX_CHARACTERS = 3;
 	const character = [];
