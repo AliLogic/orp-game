@@ -37,7 +37,7 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
     
     if count ~= 0 then
         for i = 1, count, 1 do
-            ExecuteWebJS(charui, string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
+            ExecuteWebJS(charUI, string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
                 i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
             ))
         end
@@ -135,24 +135,24 @@ end)
             ]]
 
 AddEvent('charui:create', function (slot)
-    ExecuteWebJS(web, "toggleCharMenu();");
+    ExecuteWebJS(charUI, "toggleCharMenu();");
     SetIgnoreLookInput(false)
     SetIgnoreMoveInput(false)
     ShowMouseCursor(false)
     SetInputMode(INPUT_GAME)
-    SetWebVisibility(web, WEB_HITINVISIBLE)
+    SetWebVisibility(charUI, WEB_HITINVISIBLE)
 
     creation_slot = math.tointeger(slot)
     Dialog.show(charcreate)
 end)
 
 AddEvent('charui:spawn', function (slot)
-    ExecuteWebJS(web, "toggleCharMenu();");
+    ExecuteWebJS(charUI, "toggleCharMenu();");
     SetIgnoreLookInput(false)
     SetIgnoreMoveInput(false)
     ShowMouseCursor(false)
     SetInputMode(INPUT_GAME)
-    SetWebVisibility(web, WEB_HITINVISIBLE)
+    SetWebVisibility(charUI, WEB_HITINVISIBLE)
 
     AddPlayerChat('Logging in as '..name)
     CallRemoteEvent("accounts:login", math.tointeger(slot))
