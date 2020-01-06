@@ -88,6 +88,10 @@
 		"client/charui/js/app.js",
 		"client/charui/js/util.js",
 		"client/charui/main.html",
+		"client/speedo/speedo.html",
+		"client/speedo/js/speedo.js",
+		"client/speedo/dist/gauge.min.js",
+		"client/speedo/css/speedo.css",
 		"client/objects/teslaevc/TeslaEVC.pak"
 	]
 }
