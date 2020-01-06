@@ -25,7 +25,7 @@ local charUIready = false
 AddEvent("OnWebLoadComplete", function(web)
 	if web == charUI then
         AddPlayerChat("WebUI now ready 1")
-        --ExecuteWebJS(charUI, "toggleCharMenu();")
+        ExecuteWebJS(charUI, "toggleCharMenu();")
 		charUIready = true
 	end
 end)
