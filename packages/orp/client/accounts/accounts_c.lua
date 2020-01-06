@@ -20,13 +20,27 @@ SetWebAnchors(charUI, 0, 0, 1, 1)
 SetWebURL(charUI, "http://asset/"..GetPackageName().."/client/charui/main.html")
 SetWebVisibility(charUI, WEB_HIDDEN)
 
-local charUIready = false
+local charUIdata = {}
+local count = 0
 
 AddEvent("OnWebLoadComplete", function(web)
 	if web == charUI then
-        AddPlayerChat("WebUI now ready 1")
+        --AddPlayerChat("WebUI now ready 1")
         --ExecuteWebJS(charUI, "toggleCharMenu();")
-		charUIready = true
+        --charUIready = true
+        
+        SetWebVisibility(charUI, WEB_VISIBLE)
+        SetInputMode(charUI, INPUT_UI)
+        ShowMouseCursor(true)
+
+        if count == 0 then
+            ExecuteWebJS(charUI, "toggleCharMenu();")
+        else
+            for i = 1, count, 1 do
+                ExecuteWebJS(charUI, "setCharacterInfo("..charUIdata[i]..");")
+                ExecuteWebJS(charUI, "toggleCharMenu();")
+            end
+        end
 	end
 end)
 
@@ -39,36 +53,26 @@ AddRemoteEvent("askClientCreation", function ()
 end)
 
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
-    while charUIready == false do
-        if charUIready == true then
-            break
-        end
-    end
-    -- This gives me a script instruction executes count error, as it is a while loop.
-
-	SetWebVisibility(charUI, WEB_VISIBLE)
-	SetInputMode(charUI, INPUT_UI)
-	ShowMouseCursor(true)
-
-	if chardata == nil then
-		ExecuteWebJS(charUI, "toggleCharMenu();")
+    if chardata == nil then
+        count = 0
+		--ExecuteWebJS(charUI, "toggleCharMenu();")
 		return
 	end
 
-	local count = 0
 	for _ in pairs(chardata) do count = count + 1 end
 
 	if count ~= 0 then
-		for i = 1, count, 1 do
-			AddPlayerChat(string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
+        for i = 1, count, 1 do
+            charUIdata[i] = "{slot:"..i..",firstname:"..chardata[i].firstname..",lastname:"..chardata[i].lastname..",level:"..chardata[i].level..",cash:"..chardata[i].cash.."}"
+			--[[AddPlayerChat(string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
 			i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
 			))
-			ExecuteWebJS(charUI, "setCharacterInfo({slot:"..i..",firstname:"..chardata[i].firstname..",lastname:"..chardata[i].lastname..",level:"..chardata[i].level..",cash:"..chardata[i].cash.."});")
+			ExecuteWebJS(charUI, "setCharacterInfo({slot:"..i..",firstname:"..chardata[i].firstname..",lastname:"..chardata[i].lastname..",level:"..chardata[i].level..",cash:"..chardata[i].cash.."});")]]
 		end
 	end
 
-	ExecuteWebJS(charUI, "test();")
-	ExecuteWebJS(charUI, "toggleCharMenu();")
+	--[[ExecuteWebJS(charUI, "test();")
+	ExecuteWebJS(charUI, "toggleCharMenu();")]]
 
 	--[[if count == 0 then
 		AddPlayerChat("Count is 0")
@@ -178,6 +182,9 @@ AddEvent('charui:spawn', function (slot)
 	ShowMouseCursor(false)
 	SetInputMode(INPUT_GAME)
 	SetWebVisibility(charUI, WEB_HITINVISIBLE)
+
+    count = 0
+    charUIdata = {}
 
 	AddPlayerChat('Logging in as '..GetPlayerName())
 	CallRemoteEvent("accounts:login", math.tointeger(slot))
