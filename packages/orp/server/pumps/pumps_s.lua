@@ -198,7 +198,7 @@ end)
 AddEvent('LoadPumps', function ()
 	mariadb_async_query(sql, "SELECT * FROM pumps;", OnPumpLoad)
 
-	FuelTimer = CreateTimer("OnFuelTick", 60 * 1000)
+	FuelTimer = CreateTimer(OnFuelTick, 60 * 1000)
 end)
 
 function OnFuelTick()
