@@ -74,6 +74,7 @@ end
 
 function SetSpeedoSpeed(speed)
 	if speedoReady == true then
+		AddPlayerChat(speed) --
 		speed = math.tointeger(speed) -- Incase a number wasn't passed.
 		ExecuteWebJS(speedo, "setSpeedoSpeed("..speed..");")
 	end
