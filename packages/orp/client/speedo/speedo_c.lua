@@ -73,6 +73,6 @@ function SetSpeedoSpeed(speed)
 end
 
 AddEvent("speedo:debug", function (text) 
-	AddPlayerChat(text)
+	AddPlayerChat("SPEEDO: "..text.."")
 	speedoReady = true
 end)
