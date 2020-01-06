@@ -52,6 +52,11 @@ AddRemoteEvent("askClientCreation", function ()
 	Dialog.show(charCreate)
 end)
 
+AddRemoteEvent('setClientCameraLocation', function () 
+    SetCameraLocation(0, 0, 0, false)
+end)
+
+
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
 
 	SetCameraLocation(122371.22, 99170.25, 1668.49, true)
