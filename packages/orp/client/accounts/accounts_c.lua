@@ -25,7 +25,7 @@ local charUIready = false
 AddEvent("OnWebLoadComplete", function(web)
 	if web == charUI then
         AddPlayerChat("WebUI now ready 1")
-        ExecuteWebJS(charUI, "toggleCharMenu();")
+        --ExecuteWebJS(charUI, "toggleCharMenu();")
 		charUIready = true
 	end
 end)
@@ -38,7 +38,14 @@ AddRemoteEvent("askClientCreation", function ()
 	Dialog.show(charCreate)
 end)
 
-AddRemoteEvent("askClientShowCharSelection", function(chardata)    
+AddRemoteEvent("askClientShowCharSelection", function(chardata)
+    while charUIready == false do
+        if charUIready == true then
+            break
+        end
+    end
+    -- This gives me a script instruction executes count error, as it is a while loop.
+
 	SetWebVisibility(charUI, WEB_VISIBLE)
 	SetInputMode(charUI, INPUT_UI)
 	ShowMouseCursor(true)
