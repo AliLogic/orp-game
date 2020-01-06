@@ -1,5 +1,9 @@
-function toggleSpeedometer() {
-	$('canvas[data-type="radial-gauge"]').toggle();
+function toggleSpeedometer(status) {
+	if (status) {
+		$('canvas[data-type="radial-gauge"]').show();
+	} else {
+		$('canvas[data-type="radial-gauge"]').hide();
+	}
 }
 
 function setSpeedoSpeed(value) {

@@ -38,7 +38,7 @@ AddRemoteEvent("ToggleSpeedo", function (bToggle)
 	if bToggle then
 		if not IsValidTimer(timer) then
 			timer = CreateTimer(UpdateSpeedo, 250)
-			ToggleSpeedometer()
+			ExecuteWebJS(speedo, "toggleSpeedometer(true);")
 		end
 	else
 		if IsValidTimer(timer) then
@@ -46,7 +46,7 @@ AddRemoteEvent("ToggleSpeedo", function (bToggle)
 		end
 
 		if speedo ~= nil then
-			ToggleSpeedometer()
+			ExecuteWebJS(speedo, "toggleSpeedometer(false);")
 		end
 	end
 end)
@@ -61,11 +61,12 @@ end)]]
 
 function ToggleSpeedometer() 
 	if speedoReady == true then
-		ExecuteWebJS(speedo, "toggleSpeedometer();")
 		if speedoToggleStatus == true then
+			ExecuteWebJS(speedo, "toggleSpeedometer(false);")
 			SetWebVisibility(speedo, WEB_HIDDEN)
 			speedoToggleStatus = false
 		else
+			ExecuteWebJS(speedo, "toggleSpeedometer(true);")
 			SetWebVisibility(speedo, WEB_HITINVISIBLE)
 			speedoToggleStatus = true
 		end
