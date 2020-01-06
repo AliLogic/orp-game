@@ -7,12 +7,12 @@
 
 html {
 	background-color: transparent !important;
-	overflow-x: hidden;
+	overflow: hidden !important;
 }
 
 body {
 	background-color: transparent !important;
-	overflow-x: hidden;
+	overflow: hidden !important;
 }
 
 .button.is-fullwidth:first-child {
