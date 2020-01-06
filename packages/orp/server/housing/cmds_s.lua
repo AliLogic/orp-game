@@ -1,5 +1,76 @@
 local colour = ImportPackage("colours")
 
+local function cmd_house(playerid, prefix, ...)
+
+	if prefix == nil or #{...} == 0 then
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(h)ouse <prefix>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> un(lock), kickdoor, ring, rent, buy, sell")
+	end
+
+	local house = Housing_Nearest(playerid)
+
+	if prefix == "lock" or prefix == "unlock" then
+
+		if HousingData[house].locked then
+			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the lights.")
+		else
+			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the lights.")
+		end
+
+		HousingData[house].locked = (not HousingData[house].locked)
+
+	elseif prefix == "kickdoor" then
+
+		if not HousingData[house].locked then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house is already unlocked.</>")
+		end
+
+		SetPlayerAnimation(playerid, "KICKDOOR")
+
+		local x, y, z = GetPlayerLocation(playerid)
+		AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the house's door down.")
+
+		Delay(2000, function ()
+
+			if GetPlayerFactionType(playerid) ~= FACTION_POLICE or Housing_Nearest(playerid) ~= house then
+				return
+			end
+
+			if Random(0, 6) <= 2 then
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">failed</> to kick the door down.")
+				AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has failed to kick the door down.")
+			else
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">succeeded</> to kick the door down.")
+				AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
+			end
+		end)
+
+	elseif prefix == "ring" or prefix == "bell" then
+
+		local x, y, z = GetPlayerLocation(playerid)
+		AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." rings the doorbell of the house.")
+
+		-- add door bell sound for those fuckers near the playerid and those inside the house
+
+	elseif prefix == "rent" then
+
+		AddPlayerChat(playerid, "Coming soon!")
+
+	elseif prefix == "buy" then
+
+		AddPlayerChat(playerid, "Coming soon!")
+
+	elseif prefix == "sell" then
+
+		AddPlayerChat(playerid, "Coming soon!")
+
+	else
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> un(lock), kickdoor, ring, rent, buy, sell")
+	end
+end
+AddCommand("house", cmd_house)
+AddCommand("h", cmd_house)
+
 local function cmd_ach(player, htype, price, ...)
 
 	if (PlayerData[player].admin < 4) then
