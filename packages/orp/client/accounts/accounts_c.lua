@@ -63,7 +63,7 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
 
 	if count ~= 0 then
         for i = 1, count, 1 do
-            charUIdata[i] = "{slot:"..i..",firstname:"..chardata[i].firstname..",lastname:"..chardata[i].lastname..",level:"..chardata[i].level..",cash:"..chardata[i].cash.."}"
+            charUIdata[i] = "{slot:"..i..",firstname:'"..chardata[i].firstname.."',lastname:'"..chardata[i].lastname.."',level:"..chardata[i].level..",cash:"..chardata[i].cash.."}"
 			--[[AddPlayerChat(string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
 			i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
 			))
