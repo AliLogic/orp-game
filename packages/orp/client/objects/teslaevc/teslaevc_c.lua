@@ -15,6 +15,6 @@ AddEvent("OnPackageStart", function ()
 	local res = LoadPak(pakname, "/TeslaEVC/", "../../../OnsetModding/Plugins/TeslaEVC/Content")
 	AddPlayerChat("Loading of "..pakname..": "..tostring(res))
 
-	res = ReplaceObjectModelMesh(2, "/TeslaEVC/TeslaEVC") 
+	res = ReplaceObjectModelMesh(39, "/TeslaEVC/TeslaEVC") 
 	AddPlayerChat("ReplaceObjectModelMesh: "..tostring(res))
 end)
