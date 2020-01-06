@@ -51,12 +51,15 @@ local function OnSpeedcamTick(speedcam)
 
 		local vehicle = GetPlayerVehicle(v)
 		local x, y, z = GetPlayerLocation(v)
+		local faction = GetFactionType(VehicleData[vehicle].faction)
 
 		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 1200 then
 
 			if vehicle ~= 0 then
 
-				CallRemoteEvent(v, "OnSpeedcamFlash", speedcam, SpeedcamData[speedcam].speed)
+				if faction ~= FACTION_GOV and faction ~= FACTION_MEDIC and faction ~= FACTION_POLICE then
+					CallRemoteEvent(v, "OnSpeedcamFlash", speedcam, SpeedcamData[speedcam].speed)
+				end
 			end
 		end
 	end
