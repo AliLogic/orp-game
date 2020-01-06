@@ -191,6 +191,10 @@ AddEvent('charui:spawn', function (slot)
 	CallRemoteEvent("accounts:login", math.tointeger(slot))
 end)
 
+AddEvent('charui:delete', function (slot) 
+    return AddPlayerChat('This functionality is disabled!')
+end)
+
 AddEvent('charui:debug', function (text) 
 	AddPlayerChat(text)
 end)
