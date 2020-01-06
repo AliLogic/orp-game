@@ -35,6 +35,7 @@ AddEvent("OnWebLoadComplete", function(web)
 
         if count ~= 0 then
             for i = 1, count, 1 do
+                AddPlayerChat(charUIdata[i])
                 ExecuteWebJS(charUI, "setCharacterInfo("..charUIdata[i]..");")
             end
         end
