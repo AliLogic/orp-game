@@ -9,6 +9,10 @@ function setSpeedoSpeed(value) {
 	$('canvas[data-type="radial-gauge"]').attr('data-value', `${value}`);
 }
 
+function speedoShouldBeReady() {
+	alert("Speedo Should Be Ready")
+}
+
 $(document).ready(function () {
 	CallEvent('speedo:debug', 'Speedo is now ready!');
 });

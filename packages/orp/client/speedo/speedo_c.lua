@@ -67,6 +67,7 @@ end)
 
 function ToggleSpeedometer() 
 	if speedoReady == true then
+		ExecuteWebJS(speedo, "speedoShouldBeReady();")
 		ExecuteWebJS(speedo, "toggleSpeedometer();")
 		SetWebVisibility(speedo, WEB_HITINVISIBLE)
 	end
@@ -75,6 +76,7 @@ end
 function SetSpeedoSpeed(speed)
 	if speedoReady == true then
 		speed = math.tointeger(speed) -- Incase a number wasn't passed.
+		ExecuteWebJS(speedo, "speedoShouldBeReady();")
 		ExecuteWebJS(speedo, "setSpeedoSpeed("..speed..");")
 	end
 end
