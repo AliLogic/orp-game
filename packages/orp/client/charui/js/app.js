@@ -11,7 +11,7 @@ function test() {
 function setCharacterInfo(char) {
 	//char = JSON.parse(char);
 	CallEvent("charui:debug", "Test: " + char);
-	console.log(character[char.slot].info);
+	console.log(character[char.slot - 1].info);
 
 	/* Display stuff */
 	character[char.slot - 1].name.text(char.firstname + " " + char.lastname);
@@ -39,6 +39,7 @@ function numberWithCommas(x) {
 }
 
 function toggleCharMenu() {
+	CallEvent("charui:debug", character);
 	CallEvent("charui:debug", 'ToggleCharMenu called.')
 	$('#body').toggle();
 }
