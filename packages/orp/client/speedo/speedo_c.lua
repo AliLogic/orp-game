@@ -1,4 +1,4 @@
-local speedo = CreateWebUI(0, 0, 0, 0, 2, 30)
+local speedo = CreateWebUI(0, 0, 0, 0, 1, 30)
 SetWebAlignment(speedo, 0, 0)
 SetWebAnchors(speedo, 0, 0, 1, 1)
 SetWebURL(speedo, "http://asset/"..GetPackageName().."/client/speedo/speedo.html")
@@ -60,7 +60,6 @@ end)
 
 function ToggleSpeedometer() 
 	if speedoReady == true then
-		ExecuteWebJS(speedo, "speedoShouldBeReady();")
 		ExecuteWebJS(speedo, "toggleSpeedometer();")
 		SetWebVisibility(speedo, WEB_HITINVISIBLE)
 	end
@@ -69,7 +68,6 @@ end
 function SetSpeedoSpeed(speed)
 	if speedoReady == true then
 		speed = math.tointeger(speed) -- Incase a number wasn't passed.
-		ExecuteWebJS(speedo, "speedoShouldBeReady();")
 		ExecuteWebJS(speedo, "setSpeedoSpeed("..speed..");")
 	end
 end
