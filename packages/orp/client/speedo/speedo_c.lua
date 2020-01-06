@@ -5,6 +5,7 @@ SetWebURL(speedo, "http://asset/"..GetPackageName().."/client/speedo/speedo.html
 SetWebVisibility(speedo, WEB_HIDDEN)
 
 local speedoReady = false
+local speedoToggleStatus = false -- Its not visible.
 
 AddEvent("OnPackageStop", function()
 	DestroyWebUI(speedo)
@@ -56,12 +57,18 @@ AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
 	end
 end)
 
--- Speedometer Functions
+-- Speedometer Wrapper Functions
 
 function ToggleSpeedometer() 
 	if speedoReady == true then
 		ExecuteWebJS(speedo, "toggleSpeedometer();")
-		SetWebVisibility(speedo, WEB_HITINVISIBLE)
+		if speedoToggleStatus == true then
+			SetWebVisibility(speedo, WEB_HIDDEN)
+			speedoToggleStatus = false
+		else
+			SetWebVisibility(speedo, WEB_HITINVISIBLE)
+			speedoToggleStatus = true
+		end
 	end
 end
 
@@ -73,6 +80,6 @@ function SetSpeedoSpeed(speed)
 end
 
 AddEvent("speedo:debug", function (text) 
+	if speedoReady == false then speedoReady = true end
 	AddPlayerChat("SPEEDO: "..text.."")
-	speedoReady = true
 end)
