@@ -2,7 +2,7 @@ local speedo = CreateWebUI(0, 0, 0, 0, 2, 30)
 SetWebAlignment(speedo, 0, 0)
 SetWebAnchors(speedo, 0, 0, 1, 1)
 SetWebURL(speedo, "http://asset/"..GetPackageName().."/client/speedo/speedo.html")
-SetWebVisibility(charUI, WEB_HIDDEN)
+SetWebVisibility(speedo, WEB_HIDDEN)
 
 local speedoReady = false
 
