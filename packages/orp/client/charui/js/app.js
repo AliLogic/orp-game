@@ -14,14 +14,14 @@ function setCharacterInfo(char) {
 	console.log(character[char.slot].info);
 
 	/* Display stuff */
-	character[char.slot].name.text(char.firstname + " " + char.lastname);
-	character[char.slot].level.text(char.level);
-	character[char.slot].cash.text(numberWithCommas(char.cash));
+	character[char.slot - 1].name.text(char.firstname + " " + char.lastname);
+	character[char.slot - 1].level.text(char.level);
+	character[char.slot - 1].cash.text(numberWithCommas(char.cash));
 
 	/* JQuery Stuff */
-	character[char.slot].info.show();
-	$("#name" + (char.slot + 1) + "spawntext").text("Spawn Character");
-	character[char.slot].delete.removeClass('is-static');
+	character[char.slot - 1].info.show();
+	$("#name" + (char.slot) + "spawntext").text("Spawn Character");
+	character[char.slot - 1].delete.removeClass('is-static');
 }
 
 function clearCharacterInfo(slot) {

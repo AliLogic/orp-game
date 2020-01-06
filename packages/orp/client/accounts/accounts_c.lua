@@ -186,7 +186,7 @@ AddEvent('charui:spawn', function (slot)
     count = 0
     charUIdata = {}
 
-	AddPlayerChat('Logging in as '..GetPlayerName())
+	AddPlayerChat('Logging in as '..GetPlayerName()..' [DEBUG] slot '..slot)
 	CallRemoteEvent("accounts:login", math.tointeger(slot))
 end)
 
