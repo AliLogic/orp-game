@@ -30,7 +30,7 @@ LumberjackTree = {
 	{146, 0.0, 0.0, 0.0},
 	{147, 0.0, 0.0, 0.0},
 	{148, 0.0, 0.0, 0.0},
-	{149, }
+	{149, 0.0, 0.0, 0.0}
 }
 
 AddCommand("jobhelp", function (playerid)

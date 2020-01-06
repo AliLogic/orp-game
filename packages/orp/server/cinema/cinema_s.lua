@@ -18,7 +18,6 @@ end)
 
 AddCommand("cinema", function (playerid)
 	for _, v in pairs(GetAllPlayers()) do
-		AddPlayerChat(v, "Server: CinemaUI now being called over as a remote event.")
 		CallRemoteEvent(v, "StartMovie", CINEMA_LINKS[1])
 	end
 end)

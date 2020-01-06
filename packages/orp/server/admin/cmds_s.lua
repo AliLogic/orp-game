@@ -434,7 +434,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 
 	if vehicle == nil or prefix == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <prefix>")
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color, plate, rental, faction")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color, plate, rental, faction, fuel")
 	end
 
 	vehicle = tonumber(vehicle)
@@ -538,7 +538,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		end
 
 		if FactionData[faction] == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid faction ID entered.</target>")
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid faction ID entered.</>")
 		end
 
 		if VehicleData[vehicle].owner ~= 0 then
@@ -550,6 +550,21 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		print("Vehicle Owner Is Now FACTION SQLID: "..FactionData[faction].id)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..FactionData[faction].name.." now owns the vehicle "..GetVehicleModelEx(vehicle).." (ID: "..vehicle..").</>")
+		return
+	elseif prefix == "fuel" then
+
+		local fuel = args[1]
+		if vehicle == nil or fuel == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> fuel <litres>")
+		end
+
+		fuel = tonumber(args[1])
+		if fuel < 0 or fuel > 1000 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Fuel must be between 0 to 1000 litres.</>")
+		end
+
+		VehicleData[vehicle].fuel = fuel
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\"> Vehicle "..GetVehicleModelEx(vehicle).." (ID: "..vehicle..") fuel is now set to "..fuel..".</>")
 		return
 	else
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
