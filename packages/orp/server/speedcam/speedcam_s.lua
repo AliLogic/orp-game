@@ -51,12 +51,15 @@ local function OnSpeedcamTick(speedcam)
 
 		local vehicle = GetPlayerVehicle(v)
 		local x, y, z = GetPlayerLocation(v)
+		local faction = GetFactionType(VehicleData[vehicle].faction)
 
 		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 1200 then
 
 			if vehicle ~= 0 then
 
-				CallRemoteEvent(v, "OnSpeedcamFlash", speedcam, SpeedcamData[speedcam].speed)
+				if faction ~= FACTION_GOV and faction ~= FACTION_MEDIC and faction ~= FACTION_POLICE then
+					CallRemoteEvent(v, "OnSpeedcamFlash", speedcam, SpeedcamData[speedcam].speed)
+				end
 			end
 		end
 	end
@@ -73,7 +76,7 @@ local function OnSpeedcamCreated(index, x, y, z, speed)
 	SpeedcamData[index].speed = speed
 
 	SpeedcamData[index].objectid = CreateObject(963, x, y, z)
-	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 150.0, 0.0, 0.0, 0.0)
+	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." KM/H", 20, x, y, z + 180.0, 0.0, 0.0, 0.0)
 
 	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 end
@@ -137,7 +140,7 @@ local function OnSpeedcamLoaded(speedcamid)
 		SpeedcamData[index].speed = mariadb_get_value_name_int(1, "speed")
 
 		SpeedcamData[index].objectid = CreateObject(963, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z)
-		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 150.0, 0.0, 0.0, 0.0)
+		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 180.0, 0.0, 0.0, 0.0)
 
 		SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 	end

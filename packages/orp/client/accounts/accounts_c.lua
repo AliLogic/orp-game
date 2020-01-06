@@ -28,7 +28,7 @@ AddEvent("OnWebLoadComplete", function(web)
         --AddPlayerChat("WebUI now ready 1")
         --ExecuteWebJS(charUI, "toggleCharMenu();")
         --charUIready = true
-        
+
         SetWebVisibility(charUI, WEB_VISIBLE)
         SetInputMode(charUI, INPUT_UI)
         ShowMouseCursor(true)
@@ -53,6 +53,9 @@ AddRemoteEvent("askClientCreation", function ()
 end)
 
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
+
+	SetCameraLocation(122371.22, 99170.25, 1668.49, true)
+
     if chardata == nil then
         count = 0
 		--ExecuteWebJS(charUI, "toggleCharMenu();")
@@ -177,12 +180,13 @@ end)
 
 AddEvent('charui:spawn', function (slot)
 	ExecuteWebJS(charUI, "toggleCharMenu();");
+
 	SetIgnoreLookInput(false)
 	SetIgnoreMoveInput(false)
 	ShowMouseCursor(false)
 	SetInputMode(INPUT_GAME)
-    SetWebVisibility(charUI, WEB_HIDDEN)
-    DestroyWebUI(charUI)
+	SetWebVisibility(charUI, WEB_HIDDEN)
+	DestroyWebUI(charUI)
 
     count = 0
     charUIdata = {}
