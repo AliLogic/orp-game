@@ -28,7 +28,7 @@ AddEvent("OnWebLoadComplete", function(web)
         --AddPlayerChat("WebUI now ready 1")
         --ExecuteWebJS(charUI, "toggleCharMenu();")
         --charUIready = true
-        
+
         SetWebVisibility(charUI, WEB_VISIBLE)
         SetInputMode(charUI, INPUT_UI)
         ShowMouseCursor(true)
@@ -177,6 +177,7 @@ end)
 
 AddEvent('charui:spawn', function (slot)
 	ExecuteWebJS(charUI, "toggleCharMenu();");
+
 	SetIgnoreLookInput(false)
 	SetIgnoreMoveInput(false)
 	ShowMouseCursor(false)
