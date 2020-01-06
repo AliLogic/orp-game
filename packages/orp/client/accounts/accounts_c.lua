@@ -33,14 +33,13 @@ AddEvent("OnWebLoadComplete", function(web)
         SetInputMode(charUI, INPUT_UI)
         ShowMouseCursor(true)
 
-        if count == 0 then
-            ExecuteWebJS(charUI, "toggleCharMenu();")
-        else
+        if count ~= 0 then
             for i = 1, count, 1 do
                 ExecuteWebJS(charUI, "setCharacterInfo("..charUIdata[i]..");")
-                ExecuteWebJS(charUI, "toggleCharMenu();")
             end
         end
+
+        ExecuteWebJS(charUI, "toggleCharMenu();")
 	end
 end)
 
