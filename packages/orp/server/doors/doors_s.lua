@@ -171,7 +171,7 @@ function Door_Nearest(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
 
-	for _, v in pairs(SpeedcamData) do
+	for _, v in pairs(DoorData) do
 		if DoorData[v] ~= nil then
 			distance = GetDistance3D(x, y, z, DoorData[v].x, DoorData[v].y, DoorData[v].z)
 

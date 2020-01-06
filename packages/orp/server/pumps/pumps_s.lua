@@ -227,7 +227,7 @@ function Pump_Nearest(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
 
-	for _, v in pairs(SpeedcamData) do
+	for _, v in pairs(PumpData) do
 		if PumpData[v] ~= nil then
 			distance = GetDistance3D(x, y, z, PumpData[v].x, PumpData[v].y, PumpData[v].z)
 
