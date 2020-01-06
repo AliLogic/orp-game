@@ -14,7 +14,7 @@ Dialog.addSelect(charViewNone, 1, "Select a character below:", 1, "(1) Create Ne
 local charview = nil
 local creation_slot = 0
 
-local charUI = CreateWebUI(0, 0, 0, 0, 2, 16)
+local charUI = CreateWebUI(0, 0, 0, 0, 1, 16)
 SetWebAlignment(charUI, 0, 0)
 SetWebAnchors(charUI, 0, 0, 1, 1)
 SetWebURL(charUI, "http://asset/"..GetPackageName().."/client/charui/main.html")
