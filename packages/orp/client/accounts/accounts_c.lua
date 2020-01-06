@@ -181,7 +181,8 @@ AddEvent('charui:spawn', function (slot)
 	SetIgnoreMoveInput(false)
 	ShowMouseCursor(false)
 	SetInputMode(INPUT_GAME)
-	SetWebVisibility(charUI, WEB_HITINVISIBLE)
+    SetWebVisibility(charUI, WEB_INVISIBLE)
+    DestroyWebUI(charUI)
 
     count = 0
     charUIdata = {}
