@@ -12,8 +12,8 @@ AddCommand("callsign", function (player, callsign)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You must be in a vehicle.")
 	end
 
-	if VehicleData[vehicle] == nil or (GetFactionType(VehicleData[vehicle].faction) ~= FACTION_GOV or GetFactionType(VehicleData[vehicle].faction) ~= FACTION_POLICE) then -- VehicleData[vehicle].faction ~= GetPlayerFactionType(player)
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You must be in a government owned vehicle.")
+	if VehicleData[vehicle] == nil or (GetFactionType(VehicleData[vehicle].faction) ~= FACTION_GOV and GetFactionType(VehicleData[vehicle].faction) ~= FACTION_POLICE) then -- VehicleData[vehicle].faction ~= GetPlayerFactionType(player)
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You must be in a government or police owned vehicle.")
 	end
 
 	if callsign == nil then
