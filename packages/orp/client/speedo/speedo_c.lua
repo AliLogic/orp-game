@@ -6,13 +6,6 @@ SetWebVisibility(speedo, WEB_HIDDEN)
 
 local speedoReady = false
 
-AddEvent("OnWebLoadComplete", function(web)
-	if web == speedo then
-		speedoReady = true
-		AddPlayerChat("Speedo ready")
-	end
-end)
-
 AddEvent("OnPackageStop", function()
 	DestroyWebUI(speedo)
 end)
@@ -83,4 +76,5 @@ end
 
 AddEvent("speedo:debug", function (text) 
 	AddPlayerChat(text)
+	speedoReady = true
 end)
