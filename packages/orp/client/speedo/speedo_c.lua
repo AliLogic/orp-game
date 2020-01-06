@@ -9,6 +9,7 @@ local speedoReady = false
 AddEvent("OnWebLoadComplete", function(web)
 	if web == speedo then
 		speedoReady = true
+		AddPlayerChat("Speedo ready")
 	end
 end)
 
@@ -16,7 +17,6 @@ AddEvent("OnPackageStop", function()
 	DestroyWebUI(speedo)
 end)
 
-local speedo = nil
 local timer = 0
 
 local function UpdateSpeedo()
