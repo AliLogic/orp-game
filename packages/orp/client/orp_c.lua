@@ -6,6 +6,7 @@ Developers:
 * Logic
 
 Contributors:
+* Raw
 * Blue Mountains GmbH
 ]]--
 

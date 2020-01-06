@@ -55,6 +55,7 @@
 		"client/cinema/cinema_c.lua",
 		"client/speedo/speedo_c.lua",
 		"client/speedcam/speedcam_c.lua",
+		"client/objects/teslaevc/teslaevc_c.lua",
 		"client/misc/misc_c.lua"
 	],
 	"files": [
@@ -86,6 +87,7 @@
 		"client/charui/img/OnsetLogo.png",
 		"client/charui/js/app.js",
 		"client/charui/js/util.js",
-		"client/charui/main.html"
+		"client/charui/main.html",
+		"client/objects/teslaevc/TeslaEVC.pak"
 	]
 }
