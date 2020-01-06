@@ -51,11 +51,11 @@ AddRemoteEvent("ToggleSpeedo", function (bToggle)
 	end
 end)
 
-AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
+--[[AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
 	if speedo ~= nil then
 		ToggleSpeedometer()
 	end
-end)
+end)]]
 
 -- Speedometer Wrapper Functions
 
