@@ -293,6 +293,7 @@
         "GetVehicleTrunkRatio",
         "SetVehicleTrunkRatio",
         "SetVehicleHoodRatio",
-        "SetText3DText"
+        "SetText3DText",
+        "SetCameraLocation"
     ]
 }

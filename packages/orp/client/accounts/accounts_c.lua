@@ -53,6 +53,9 @@ AddRemoteEvent("askClientCreation", function ()
 end)
 
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
+
+	SetCameraLocation(122371.22, 99170.25, 1668.49, true)
+
     if chardata == nil then
         count = 0
 		--ExecuteWebJS(charUI, "toggleCharMenu();")
