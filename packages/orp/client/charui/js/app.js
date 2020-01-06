@@ -39,7 +39,6 @@ function numberWithCommas(x) {
 }
 
 function toggleCharMenu() {
-	CallEvent("charui:debug", character);
 	CallEvent("charui:debug", 'ToggleCharMenu called.')
 	$('#body').toggle();
 }
