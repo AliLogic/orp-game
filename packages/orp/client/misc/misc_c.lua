@@ -31,5 +31,5 @@ function GetPlayerVehicleRPM()
 		return 0
 	end
 
-	return GetVehicleEngineRPM(vehicle)
+	return math.floor(GetVehicleEngineRPM(vehicle))
 end
