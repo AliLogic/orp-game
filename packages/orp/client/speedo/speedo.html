@@ -44,7 +44,7 @@
 	<body>
         <div id="content"></div>
         <div id="footer">
-            <canvas style="display: none" data-type="radial-gauge"
+            <canvas id="speed" style="display: none" data-type="radial-gauge"
                 data-width="300"
                 data-height="300"
                 data-units="Km/h"
@@ -57,6 +57,35 @@
                 data-stroke-ticks="false"
                 data-highlights='[
                     { "from": 160, "to": 220, "color": "rgba(255,30,0,.25)" }
+                ]'
+                data-color-plate="#222"
+                data-color-major-ticks="#f5f5f5"
+                data-color-minor-ticks="#ddd"
+                data-color-title="#fff"
+                data-color-units="#ccc"
+                data-color-numbers="#eee"
+                data-color-needle-start="rgba(240, 128, 128, 1)"
+                data-color-needle-end="rgba(255, 160, 122, .9)"
+                data-value-box="false"
+                data-animation-rule="linear"
+                data-animation-duration="500"
+                data-font-value="Led"
+                data-animated-value="true"
+            ></canvas>
+
+            <canvas id="rpm" style="display: none" data-type="radial-gauge"
+                data-width="200"
+                data-height="200"
+                data-units="RPM"
+                data-title="false"
+                data-value="0"
+                data-min-value="0"
+                data-max-value="8000"
+                data-major-ticks="0,1000,2000,3000,4000,5000,6000,7000,8000"
+                data-minor-ticks="2"
+                data-stroke-ticks="false"
+                data-highlights='[
+                    { "from": 6000, "to": 8000, "color": "rgba(255,30,0,.25)" }
                 ]'
                 data-color-plate="#222"
                 data-color-major-ticks="#f5f5f5"

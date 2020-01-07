@@ -14,8 +14,9 @@ end)
 local timer = 0
 
 local function UpdateSpeedo()
-	local speed = GetPlayerVehicleSpeed()
-
+	local speed = GetPlayerVehicleSpeed(true)
+	local rpm = GetPlayerVehicleRPM()
+	
 	--[[if speedo == nil then
 		speedo = CreateTextBox(0, -250, "<span color=\"#FF0000\" size=\"28\">"..speed.." KMH</>", "right")
 		SetTextBoxAnchors(speedo, 0.5, 0.5, 0.5, 0.5)
@@ -23,6 +24,7 @@ local function UpdateSpeedo()
 	end]]
 
 	if speed ~= false then
+		SetSpeedoRPM(rpm)
 		if speed < 0 then
 			speed = speed * -1
 			SetSpeedoSpeed(speed)
@@ -77,6 +79,13 @@ function SetSpeedoSpeed(speed)
 	if speedoReady == true then
 		speed = math.tointeger(speed) -- Incase a number wasn't passed.
 		ExecuteWebJS(speedo, "setSpeedoSpeed("..speed..");")
+	end
+end
+
+function SetSpeedoRPM(rpm)
+	if speedoReady == true then
+		rpm = math.tointeger(rpm) -- Incase a number wasn't passed.
+		ExecuteWebJS(speedo, "setSpeedoRPM("..rpm..");")
 	end
 end
 

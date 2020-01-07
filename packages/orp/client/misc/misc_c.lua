@@ -23,3 +23,13 @@ function GetPlayerVehicleSpeed(kmh)
 		return math.tointeger(math.floor(GetVehicleForwardSpeed(vehicle) / 1.609))
 	end
 end
+
+function GetPlayerVehicleRPM()
+	local vehicle = GetPlayerVehicle()
+
+	if vehicle == 0 then
+		return 0
+	end
+
+	return GetVehicleEngineRPM(vehicle)
+end

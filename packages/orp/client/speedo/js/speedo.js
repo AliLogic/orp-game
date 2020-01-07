@@ -10,11 +10,14 @@ function setSpeedoSpeed(value) {
 	if (value < 0) value = 0;
 	else if (value > 220) value = 220;
 
-	$('canvas[data-type="radial-gauge"]').attr('data-value', `${value}`);
+	$('#speed').attr('data-value', `${value}`);
 }
 
-function speedoShouldBeReady() {
-	alert("Speedo Should Be Ready")
+function setSpeedoRPM(value) {
+	if (value < 0) value = 0;
+	else if (value > 8000) value = 8000;
+	
+	$('#rpm').attr('data-value', `${value}`);
 }
 
 $(document).ready(function () {
