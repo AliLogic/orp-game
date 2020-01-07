@@ -226,6 +226,8 @@ function OnCharacterPartLoaded(player)
 end
 
 function ShowCharacterSelection (player)
+	SetPlayerLocation(player, 122191.86, 99569.03, 1676.32)
+
 	CallRemoteEvent(player, 'askClientShowCharSelection', CharacterData[player])
 end
 

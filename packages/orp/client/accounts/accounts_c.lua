@@ -25,22 +25,22 @@ local count = 0
 
 AddEvent("OnWebLoadComplete", function(web)
 	if web == charUI then
-        --AddPlayerChat("WebUI now ready 1")
-        --ExecuteWebJS(charUI, "toggleCharMenu();")
-        --charUIready = true
+		--AddPlayerChat("WebUI now ready 1")
+		--ExecuteWebJS(charUI, "toggleCharMenu();")
+		--charUIready = true
 
-        SetWebVisibility(charUI, WEB_VISIBLE)
-        SetInputMode(charUI, INPUT_UI)
-        ShowMouseCursor(true)
+		SetWebVisibility(charUI, WEB_VISIBLE)
+		SetInputMode(charUI, INPUT_UI)
+		ShowMouseCursor(true)
 
-        if count ~= 0 then
-            for i = 1, count, 1 do
-                AddPlayerChat(charUIdata[i])
-                ExecuteWebJS(charUI, "setCharacterInfo("..charUIdata[i]..");")
-            end
-        end
+		if count ~= 0 then
+			for i = 1, count, 1 do
+				AddPlayerChat(charUIdata[i])
+				ExecuteWebJS(charUI, "setCharacterInfo("..charUIdata[i]..");")
+			end
+		end
 
-        ExecuteWebJS(charUI, "toggleCharMenu();")
+		ExecuteWebJS(charUI, "toggleCharMenu();")
 	end
 end)
 
@@ -56,8 +56,8 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
 
 	SetCameraLocation(122371.22, 99170.25, 1668.49, true)
 
-    if chardata == nil then
-        count = 0
+	if chardata == nil then
+		count = 0
 		--ExecuteWebJS(charUI, "toggleCharMenu();")
 		return
 	end
@@ -65,8 +65,8 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
 	for _ in pairs(chardata) do count = count + 1 end
 
 	if count ~= 0 then
-        for i = 1, count, 1 do
-            charUIdata[i] = "{slot:"..i..",firstname:'"..chardata[i].firstname.."',lastname:'"..chardata[i].lastname.."',level:"..chardata[i].level..",cash:"..chardata[i].cash.."}"
+		for i = 1, count, 1 do
+			charUIdata[i] = "{slot:"..i..",firstname:'"..chardata[i].firstname.."',lastname:'"..chardata[i].lastname.."',level:"..chardata[i].level..",cash:"..chardata[i].cash.."}"
 			--[[AddPlayerChat(string.format("setCharacterInfo({slot:%d,firstname:\"%s\",lastname:\"%s\",level:%d,cash:%d});",
 			i, chardata[i].firstname, chardata[i].lastname, chardata[i].level, chardata[i].cash
 			))
@@ -188,16 +188,16 @@ AddEvent('charui:spawn', function (slot)
 	SetWebVisibility(charUI, WEB_HIDDEN)
 	DestroyWebUI(charUI)
 
-    count = 0
-    charUIdata = {}
+	count = 0
+	charUIdata = {}
 
-    SetCameraLocation(0, 0, 0, false)
+	SetCameraLocation(0, 0, 0, false)
 	AddPlayerChat('Logging in as '..GetPlayerName()..' [DEBUG] slot '..slot)
 	CallRemoteEvent("accounts:login", math.tointeger(slot))
 end)
 
 AddEvent('charui:delete', function (slot) 
-    return AddPlayerChat('This functionality is disabled!')
+	return AddPlayerChat('This functionality is disabled!')
 end)
 
 AddEvent('charui:debug', function (text) 
