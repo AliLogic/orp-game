@@ -508,19 +508,3 @@ AddCommand("name", function (player)
 	SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
 	AddPlayerChat(player, "Name set to: "..PlayerData[player].firstname.." "..PlayerData[player].lastname)
 end)
-
-AddCommand("rotate", function (player, pitch, yaw, roll, bWorldSpace)
-
-	pitch = tonumber(pitch)
-	yaw = tonumber(yaw)
-	roll = tonumber(roll)
-	bWorldSpace = tonumber(bWorldSpace)
-
-	if bWorldSpace == 1 then
-		bWorldSpace = true
-	else
-		bWorldSpace = false
-	end
-
-	CallRemoteEvent(player, "changeCameraRotation", pitch, yaw, roll, bWorldSpace)
-end)
