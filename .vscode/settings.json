@@ -294,6 +294,8 @@
         "SetVehicleTrunkRatio",
         "SetVehicleHoodRatio",
         "SetText3DText",
-        "SetCameraLocation"
+        "SetCameraLocation",
+        "LoadPak",
+        "ReplaceObjectModelMesh"
     ]
 }

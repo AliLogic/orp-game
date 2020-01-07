@@ -434,7 +434,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 
 	if vehicle == nil or prefix == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <prefix>")
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color, plate, rental, faction, fuel")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color, plate, rental, faction, fuel, health")
 	end
 
 	vehicle = tonumber(vehicle)
@@ -448,7 +448,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 	if prefix == "owner" then
 		local target = tonumber(args[1])
 
-		if vehicle == nil or target == nil then
+		if target == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> owner <target>")
 		end
 
@@ -533,7 +533,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 	elseif prefix == "faction" then
 		local faction = tonumber(args[1])
 
-		if vehicle == nil or faction == nil then
+		if faction == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> faction <target>")
 		end
 
@@ -554,11 +554,11 @@ local function cmd_aev(player, vehicle, prefix, ...)
 	elseif prefix == "fuel" then
 
 		local fuel = args[1]
-		if vehicle == nil or fuel == nil then
+		if fuel == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> fuel <litres>")
 		end
 
-		fuel = tonumber(args[1])
+		fuel = tonumber(fuel)
 		if fuel < 0 or fuel > 1000 then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Fuel must be between 0 to 1000 litres.</>")
 		end
@@ -566,9 +566,24 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		VehicleData[vehicle].fuel = fuel
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\"> Vehicle "..GetVehicleModelEx(vehicle).." (ID: "..vehicle..") fuel is now set to "..fuel..".</>")
 		return
+	elseif prefix == "health" then
+
+		local health = args[1]
+		if health == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> health <0-5000>")
+		end
+
+		health = tonumber(health)
+		if health < 0 or health > 5000 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Health must be between 0 to 5000.</>")
+		end
+
+		SetVehicleHealth(vehicle, health)
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\"> Vehicle "..GetVehicleModelEx(vehicle).." (ID: "..vehicle..") health is now set to "..health..".</>")
+		return
 	else
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color, plate, rental, faction")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color, plate, rental, faction, fuel, health")
 		return
 	end
 end
@@ -771,6 +786,11 @@ AddCommand("near", function(playerid)
 
 	local id = 0
 
+	id = Speedcam_Nearest(playerid)
+	if (id ~= 0) then
+		AddPlayerChat(playerid, "You are standing near speedcam ID: "..id..".")
+	end
+
 	id = Business_Nearest(playerid)
 	if (id ~= 0) then
 		AddPlayerChat(playerid, "You are standing near business ID: "..id..".")
@@ -779,11 +799,6 @@ AddCommand("near", function(playerid)
 	id = Housing_Nearest(playerid)
 	if (id ~= 0) then
 		AddPlayerChat(playerid, "You are standing near house ID: "..id..".")
-	end
-
-	id = Speedcam_Nearest(playerid)
-	if (id ~= 0) then
-		AddPlayerChat(playerid, "You are standing near speedcam ID: "..id..".")
 	end
 
 	id = Marker_Nearest(playerid)
