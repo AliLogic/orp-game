@@ -51,7 +51,11 @@ local function OnSpeedcamTick(speedcam)
 
 		local vehicle = GetPlayerVehicle(v)
 		local x, y, z = GetPlayerLocation(v)
-		local faction = GetFactionType(VehicleData[vehicle].faction)
+		local faction = FACTION_NONE
+
+		if VehicleData[v] ~= nil then
+			faction = GetFactionType(VehicleData[vehicle].faction)
+		end
 
 		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 1200 then
 
