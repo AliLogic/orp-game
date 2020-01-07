@@ -53,7 +53,7 @@ local function OnSpeedcamTick(speedcam)
 		local x, y, z = GetPlayerLocation(v)
 		local faction = FACTION_NONE
 
-		if VehicleData[v] ~= nil then
+		if VehicleData[vehicle] ~= nil then
 			faction = GetFactionType(VehicleData[vehicle].faction)
 		end
 
