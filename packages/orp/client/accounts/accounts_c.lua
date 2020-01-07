@@ -57,6 +57,9 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
 	SetIgnoreLookInput(true)
 	SetIgnoreMoveInput(true)
 
+	ShowHealthHUD(true)
+	ShowWeaponHUD(true)
+
 	SetCameraLocation(122371.22, 99170.25, 1668.49, true)
 	SetCameraRotation(0, 265, 0, true)
 
@@ -197,6 +200,9 @@ AddEvent('charui:spawn', function (slot)
 
 	SetCameraLocation(0, 0, 0, false)
 	SetCameraRotation(0, 0, 0, false)
+
+	ShowHealthHUD(true)
+	ShowWeaponHUD(true)
 
 	AddPlayerChat('Logging in as '..GetPlayerName()..' [DEBUG] slot '..slot)
 	CallRemoteEvent("accounts:login", math.tointeger(slot))
