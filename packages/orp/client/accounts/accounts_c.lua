@@ -54,6 +54,9 @@ end)
 
 AddRemoteEvent("askClientShowCharSelection", function(chardata)
 
+	SetIgnoreLookInput(true)
+	SetIgnoreMoveInput(true)
+
 	SetCameraLocation(122371.22, 99170.25, 1668.49, true)
 
 	if chardata == nil then
@@ -216,3 +219,8 @@ end)
 	end
 	return true
 end)]]--
+
+AddRemoteEvent("changeCameraRotation", function (pitch, yaw, roll, bWorldSpace)
+
+	SetCameraRotation(pitch, yaw, roll, bWorldSpace)
+end)

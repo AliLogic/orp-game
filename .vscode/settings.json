@@ -296,6 +296,7 @@
         "SetText3DText",
         "SetCameraLocation",
         "LoadPak",
-        "ReplaceObjectModelMesh"
+        "ReplaceObjectModelMesh",
+        "SetCameraRotation"
     ]
 }
