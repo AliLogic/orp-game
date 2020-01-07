@@ -58,7 +58,7 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
 	SetIgnoreMoveInput(true)
 
 	SetCameraLocation(122371.22, 99170.25, 1668.49, true)
-	SetCameraRotation(0, 290, 0, true)
+	SetCameraRotation(0, 250, 0, true)
 
 	if chardata == nil then
 		count = 0
@@ -196,6 +196,8 @@ AddEvent('charui:spawn', function (slot)
 	charUIdata = {}
 
 	SetCameraLocation(0, 0, 0, false)
+	SetCameraRotation(0, 0, 0, false)
+
 	AddPlayerChat('Logging in as '..GetPlayerName()..' [DEBUG] slot '..slot)
 	CallRemoteEvent("accounts:login", math.tointeger(slot))
 end)
