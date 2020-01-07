@@ -84,6 +84,7 @@ end
 
 function SetSpeedoRPM(rpm)
 	if speedoReady == true then
+		AddPlayerChat(rpm)
 		rpm = math.tointeger(rpm) -- Incase a number wasn't passed.
 		ExecuteWebJS(speedo, "setSpeedoRPM("..rpm..");")
 	end
