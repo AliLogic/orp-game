@@ -259,7 +259,7 @@ function Marker_Nearest(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
 
-	for _, v in pairs(MarkerData) do
+	for v = 1, #MarkerData, 1 do
 		if MarkerData[v] ~= nil then
 			distance = GetDistance3D(x, y, z, MarkerData[v].x1, MarkerData[v].y1, MarkerData[v].z1)
 

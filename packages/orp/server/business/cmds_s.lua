@@ -5,7 +5,7 @@ AddCommand("buy", function(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
 
-	for _, v in pairs(BusinessData) do
+	for v = 1, #BusinessData, 1 do
 
 		if BusinessData[v] ~= nil then
 			if BusinessData[v].enterable == 1 then

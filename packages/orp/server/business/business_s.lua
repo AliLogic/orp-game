@@ -284,7 +284,7 @@ function Business_Nearest(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
 
-	for _, v in pairs(BusinessData) do
+	for v = 1, #BusinessData, 1 do
 		if BusinessData[v] ~= nil then
 			if BusinessData[v].enterable == 0 then
 				distance = GetDistance3D(x, y, z, BusinessData[v].mx, BusinessData[v].my, BusinessData[v].mz)

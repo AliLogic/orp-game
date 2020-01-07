@@ -201,7 +201,7 @@ function Speedcam_Nearest(playerid)
 
 	AddPlayerChat(playerid, "[0]")
 
-	for _, v in pairs(SpeedcamData) do
+	for v = 1, #SpeedcamData, 1 do
 		AddPlayerChat(playerid, "[1]"..v)
 		if SpeedcamData[v] ~= nil then
 			AddPlayerChat(playerid, "[2]"..v)
