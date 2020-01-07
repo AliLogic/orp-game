@@ -296,6 +296,14 @@
         "SetText3DText",
         "SetCameraLocation",
         "LoadPak",
-        "ReplaceObjectModelMesh"
+        "ReplaceObjectModelMesh",
+        "DrawPoint3D",
+        "DrawLine3D",
+        "ini_open",
+        "ini_write",
+        "ini_read",
+        "ini_close",
+        "GetStreamedDoors",
+        "GetDistanceSquared3D"
     ]
 }
