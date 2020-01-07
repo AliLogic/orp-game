@@ -221,7 +221,7 @@ function Housing_Nearest(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
 
-	for _, v in pairs(HousingData) do
+	for v = 1, #HousingData, 1 do
 		if HousingData[v] ~= nil then
 			distance = GetDistance3D(x, y, z, HousingData[v].ex, HousingData[v].ey, HousingData[v].ez)
 

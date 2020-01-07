@@ -304,6 +304,7 @@
         "ini_read",
         "ini_close",
         "GetStreamedDoors",
-        "GetDistanceSquared3D"
+        "GetDistanceSquared3D",
+        "SetCameraRotation"
     ]
 }

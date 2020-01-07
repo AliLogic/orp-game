@@ -53,7 +53,7 @@ local function OnSpeedcamTick(speedcam)
 		local x, y, z = GetPlayerLocation(v)
 		local faction = FACTION_NONE
 
-		if VehicleData[v] ~= nil then
+		if VehicleData[vehicle] ~= nil then
 			faction = GetFactionType(VehicleData[vehicle].faction)
 		end
 
@@ -199,16 +199,11 @@ function Speedcam_Nearest(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
 
-	AddPlayerChat(playerid, "[0]")
-
-	for _, v in pairs(SpeedcamData) do
-		AddPlayerChat(playerid, "[1]"..v)
+	for v = 1, #SpeedcamData, 1 do
 		if SpeedcamData[v] ~= nil then
-			AddPlayerChat(playerid, "[2]"..v)
 			distance = GetDistance3D(x, y, z, SpeedcamData[v].x, SpeedcamData[v].y, SpeedcamData[v].z)
 
 			if distance <= 200.0 then
-				AddPlayerChat(playerid, "[3]"..v)
 				return v
 			end
 		end
