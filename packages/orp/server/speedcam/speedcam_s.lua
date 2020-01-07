@@ -199,6 +199,8 @@ function Speedcam_Nearest(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
 
+	AddPlayerChat(playerid, "[0]")
+
 	for _, v in pairs(SpeedcamData) do
 		AddPlayerChat(playerid, "[1]"..v)
 		if SpeedcamData[v] ~= nil then
