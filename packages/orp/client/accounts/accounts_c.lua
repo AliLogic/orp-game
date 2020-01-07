@@ -57,8 +57,8 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
 	SetIgnoreLookInput(true)
 	SetIgnoreMoveInput(true)
 
-	ShowHealthHUD(true)
-	ShowWeaponHUD(true)
+	ShowHealthHUD(false)
+	ShowWeaponHUD(false)
 
 	SetCameraLocation(122371.22, 99170.25, 1668.49, true)
 	SetCameraRotation(0, 265, 0, true)
