@@ -199,16 +199,11 @@ function Speedcam_Nearest(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
 
-	AddPlayerChat(playerid, "[0]")
-
 	for v = 1, #SpeedcamData, 1 do
-		AddPlayerChat(playerid, "[1]"..v)
 		if SpeedcamData[v] ~= nil then
-			AddPlayerChat(playerid, "[2]"..v)
 			distance = GetDistance3D(x, y, z, SpeedcamData[v].x, SpeedcamData[v].y, SpeedcamData[v].z)
 
 			if distance <= 200.0 then
-				AddPlayerChat(playerid, "[3]"..v)
 				return v
 			end
 		end
