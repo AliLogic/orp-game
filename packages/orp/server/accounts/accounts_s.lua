@@ -233,7 +233,7 @@ end
 
 AddRemoteEvent("accounts:login", function (player, id)
 
-	if PlayerData[player].id ~= 0 then
+	if PlayerData[player].id == 0 then
 		local query = mariadb_prepare(sql, "SELECT * FROM characters WHERE id = ?;",
 			CharacterData[player][id].id)
 
