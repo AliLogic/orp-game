@@ -232,10 +232,13 @@ function ShowCharacterSelection (player)
 end
 
 AddRemoteEvent("accounts:login", function (player, id)
-	local query = mariadb_prepare(sql, "SELECT * FROM characters WHERE id = ?;",
-		CharacterData[player][id].id)
 
-	mariadb_async_query(sql, query, OnCharacterLoaded, player, id)
+	if PlayerData[player].id ~= 0 then
+		local query = mariadb_prepare(sql, "SELECT * FROM characters WHERE id = ?;",
+			CharacterData[player][id].id)
+
+		mariadb_async_query(sql, query, OnCharacterLoaded, player, id)
+	end
 end)
 
 function OnCharacterLoaded(player, id)
