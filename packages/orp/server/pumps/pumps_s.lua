@@ -216,6 +216,7 @@ function OnFuelTick()
 				elseif VehicleData[v].fuel <= 0 then
 					VehicleData[v].fuel = 0
 					StopVehicleEngine(v)
+					AddPlayerChat(GetVehicleDriver(v), "This vehicle has run out of fuel!");
 				end
 			end
 		end
