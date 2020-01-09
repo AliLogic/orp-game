@@ -90,7 +90,6 @@ end
 
 function SetPlayerClothing(player, otherplayer)
 	if PlayerData[otherplayer] == nil or PlayerClothingData[otherplayer] == nil then
-		AddPlayerChat(player, "otherplayer "..otherplayer.." error.")
 		return
 	end
 
@@ -105,7 +104,7 @@ function SetPlayerClothing(player, otherplayer)
 	-- Add skin colour sync
 
 	if player == otherplayer then
-		for k, v in pairs(GetStreamedPlayersForPlayer(otherplayer)) do
+		for k, v in pairs(GetStreamedPlayersForPlayer(player)) do
 			SetPlayerClothing(v, otherplayer)
 		end
 	end
