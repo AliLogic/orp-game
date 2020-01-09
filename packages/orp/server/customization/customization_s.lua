@@ -77,7 +77,7 @@ function CreatePlayerClothingData(player)
 	PlayerClothingData[player] = {}
 
 	PlayerClothingData[player].hair = 0
-	PlayerClothingData[player].hair_color = 0
+	PlayerClothingData[player].hair_color = RGB(0, 0, 0)
 	PlayerClothingData[player].top = 0
 	PlayerClothingData[player].pants = 0
 	PlayerClothingData[player].shoes = 0
@@ -90,6 +90,7 @@ end
 
 function SetPlayerClothing(player, otherplayer)
 	if PlayerData[otherplayer] == nil or PlayerClothingData[otherplayer] == nil then
+		AddPlayerChat(player, "otherplayer "..otherplayer.." error.")
 		return
 	end
 
@@ -109,6 +110,17 @@ function SetPlayerClothing(player, otherplayer)
 end
 
 -- Commands
+
+AddCommand("hair", function (playerid, hairid)
+
+	if hairid == nil then
+		return AddPlayerChat(playerid, "/hair <1 - 7>")
+	end
+
+	hairid = tonumber(hairid)
+	PlayerClothingData[playerid].hair = hairid
+	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
+end)
 
 AddCommand("pants", function (playerid, pantid)
 
