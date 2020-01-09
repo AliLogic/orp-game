@@ -104,11 +104,11 @@ function SetPlayerClothing(player, otherplayer)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
 	-- Add skin colour sync
 
-	-- if player == otherplayer then
-	-- 	for k, v in pairs(GetStreamedPlayersForPlayer(player)) do
-	-- 		SetPlayerClothing(player, v)
-	-- 	end
-	-- end
+	if player == otherplayer then
+		for k, v in pairs(GetStreamedPlayersForPlayer(player)) do
+			SetPlayerClothing(player, v)
+		end
+	end
 
 	AddPlayerChat(player, "end calling SetPlayerClothing on server side ("..player..", "..otherplayer..")")
 end
