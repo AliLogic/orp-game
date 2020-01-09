@@ -50,7 +50,7 @@ AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hi
 		end
 		if weapon == 24 then
 			if hittype == HIT_VEHICLE then
-				AddPlayerChat(player, GetVehicleModelEx(hitid).."'s speed: "..math.floor(GetVehicleForwardSpeed(hitid)))
+				CallRemoteEvent(player, 'SendSpeedgunMessage', GetVehicleModelEx(hitid), hitid)
 			end
 		elseif weapon == 23 then
 			if hittype == HIT_PLAYER then

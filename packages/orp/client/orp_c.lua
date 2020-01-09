@@ -128,3 +128,7 @@ AddRemoteEvent("ToggleTaseEffect", function (bToggle)
 		SetPostEffect("MotionBlur", "Amount", 0.5)
 	end
 end)
+
+AddRemoteEvent('SendSpeedgunMessage', function (vehiclename, vehicle) 
+	AddPlayerChat(vehiclename.."'s speed: "..math.tointeger(math.floor(GetVehicleForwardSpeed(vehicle))))
+end)
