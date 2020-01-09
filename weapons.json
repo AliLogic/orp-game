@@ -321,6 +321,20 @@
 			"SpreadMax": 2.0,
 			"SpreadMovementModifier": 0.2,
 			"SpreadCrouchingModifier": -0.3
+		},
+		{
+			"Name": "Speedgun",
+			"RateOfFire": 30.0,
+			"Damage": 0.0,
+			"Range": 10000.0,
+			"Recoil": 0.0,
+			"MagazineSize": 200,
+			"CameraShake": 0.2,
+			"CameraShakeCrouching": 0.1,
+			"SpreadMin": 0.1,
+			"SpreadMax": 2.0,
+			"SpreadMovementModifier": 0.2,
+			"SpreadCrouchingModifier": -0.3
 		}
 	]
 }

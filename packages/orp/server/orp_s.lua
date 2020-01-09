@@ -48,7 +48,11 @@ AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hi
 		if IsPlayerInVehicle(hitid) then
 			return false
 		end
-		if weapon == 23 then
+		if weapon == 24 then
+			if hittype == HIT_VEHICLE then
+				AddPlayerChat(player, GetVehicleModelEx(hitid).."'s speed: "..math.floor(GetVehicleForwardSpeed(hitid)))
+			end
+		elseif weapon == 23 then
 			if hittype == HIT_PLAYER then
 				if IsValidPlayer(hitid) then
 
