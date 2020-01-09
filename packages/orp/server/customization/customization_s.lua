@@ -123,7 +123,7 @@ AddCommand("hair", function (playerid, hairid)
 
 	hairid = tonumber(hairid)
 	PlayerClothingData[playerid].hair = hairid
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
+	SetPlayerClothing(playerid, playerid)
 end)
 
 AddCommand("pants", function (playerid, pantid)
@@ -134,7 +134,7 @@ AddCommand("pants", function (playerid, pantid)
 
 	pantid = tonumber(pantid)
 	PlayerClothingData[playerid].pants = pantid
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
+	SetPlayerClothing(playerid, playerid)
 end)
 
 AddCommand("shirt", function (playerid, shirtid)
@@ -145,7 +145,7 @@ AddCommand("shirt", function (playerid, shirtid)
 
 	shirtid = tonumber(shirtid)
 	PlayerClothingData[playerid].top = shirtid
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
+	SetPlayerClothing(playerid, playerid)
 end)
 
 AddCommand("shoe", function (playerid, shoeid)
@@ -156,7 +156,7 @@ AddCommand("shoe", function (playerid, shoeid)
 	shoeid = tonumber(shoeid)
 
 	PlayerClothingData[playerid].shoes = shoeid
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
+	SetPlayerClothing(playerid, playerid)
 end)
 
 AddCommand("skin", function (playerid, r, g, b)
@@ -172,7 +172,7 @@ AddCommand("skin", function (playerid, r, g, b)
 	b = tonumber(b)
 
 	PlayerClothingData[playerid].skin_color = RGB(r, g, b)
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
+	SetPlayerClothing(playerid, playerid)
 end)
 
 AddCommand("pupil", function (playerid, pupil)
@@ -186,7 +186,7 @@ AddCommand("pupil", function (playerid, pupil)
 	pupil = tonumber(pupil)
 
 	--PlayerClothingData[playerid].pupil = pupil
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
+	SetPlayerClothing(playerid, playerid)
 end)
 
 -- Events
