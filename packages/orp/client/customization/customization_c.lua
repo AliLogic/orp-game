@@ -11,6 +11,9 @@ Contributors:
 -- Functions
 
 local function SetPlayerClothing(player, part, piece, r, g, b, a)
+
+	AddPlayerChat("calling SetPlayerClothing on client side ("..player..")")
+
 	local SkeletalMeshComponent
 	local pieceName
 
@@ -23,6 +26,8 @@ local function SetPlayerClothing(player, part, piece, r, g, b, a)
 	if part == 0 then
 		SkeletalMeshComponent:SetColorParameterOnMaterials("Hair Color", FLinearColor(r / 255, g / 255, b / 255, a / 255))
 	end
+
+	AddPlayerChat("end calling SetPlayerClothing on client side ("..player..")")
 end
 
 -- Events

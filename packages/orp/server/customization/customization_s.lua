@@ -94,6 +94,8 @@ function SetPlayerClothing(player, otherplayer)
 		return
 	end
 
+	AddPlayerChat(player, "calling SetPlayerClothing on server side ("..player..", "..otherplayer..")")
+
 	local r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].hair_color)
 
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, a)
@@ -102,11 +104,13 @@ function SetPlayerClothing(player, otherplayer)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
 	-- Add skin colour sync
 
-	if player == otherplayer then
-		for k, v in pairs(GetStreamedPlayersForPlayer(player)) do
-			SetPlayerClothing(player, v)
-		end
-	end
+	-- if player == otherplayer then
+	-- 	for k, v in pairs(GetStreamedPlayersForPlayer(player)) do
+	-- 		SetPlayerClothing(player, v)
+	-- 	end
+	-- end
+
+	AddPlayerChat(player, "end calling SetPlayerClothing on server side ("..player..", "..otherplayer..")")
 end
 
 -- Commands
@@ -191,5 +195,5 @@ AddRemoteEvent("ServerSetPlayerClothing", SetPlayerClothing)
 
 AddEvent("OnPlayerSpawn", function(playerid)
 
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
+	SetPlayerClothing(playerid, playerid)
 end)
