@@ -305,6 +305,8 @@
         "ini_close",
         "GetStreamedDoors",
         "GetDistanceSquared3D",
-        "SetCameraRotation"
+        "SetCameraRotation",
+        "IsFloatNearlyZero",
+        "GetStreamedPlayersForPlayer"
     ]
 }

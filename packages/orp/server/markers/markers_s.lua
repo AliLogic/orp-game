@@ -240,7 +240,7 @@ AddRemoteEvent("OnPlayerInteractMarker", function (playerid, pickupid)
 	for i = 1, #MarkerData, 1 do
 		if IsValidMarker(i) then
 			if MarkerData[i].pickup1 == pickupid then
-				if MarkerData[i].x2 ~= 0 then
+				if not IsFloatNearlyZero(MarkerData[i].x2) then
 					SetPlayerLocation(playerid, MarkerData[i].x2, MarkerData[i].y2, MarkerData[i].z2)
 					AddPlayerChat(playerid, "TELEPORTED")
 				end

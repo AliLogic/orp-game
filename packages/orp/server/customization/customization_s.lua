@@ -1,3 +1,115 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic_
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
+PlayerClothingData = {}
+
+Tops = {}
+Tops[1]		= nil
+Tops[2]		= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Knitted_Shirt_LPR"
+Tops[3]		= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_FormalShirt_LPR"
+Tops[4]		= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_FormalShirt2_LPR"
+Tops[5]		= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
+Tops[6]		= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_TShirt_Knitted2_LPR"
+Tops[7]		= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_TShirt_Knitted_LPR"
+Tops[8]		= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_TShirt_LPR"
+Tops[9]		= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_CH3D_Prisoner_LPR"
+Tops[10]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Police_Shirt-Long_LPR"
+Tops[11]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Police_Shirt-Short_LPR"
+
+
+Tops[12]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_SpecialAgent_LPR"
+Tops[13]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_LPR"
+Tops[14]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_Open_LPR"
+Tops[15]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Police_LPR"
+Tops[16]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Scientist_LPR"
+Tops[17]	= "/Game/CharacterModels/Mafia/Meshes/SK_Mafia"
+
+Tops[18]	= "/Game/CharacterModels/Clothing/Meshes/SK_Pullover"
+Tops[19]	= "/Game/CharacterModels/Clothing/Meshes/SK_Pullover"
+Tops[20]	= "/Game/CharacterModels/Clothing/Meshes/SK_TShirt01"
+Tops[21]	= "/Game/CharacterModels/Clothing/Meshes/SK_Undershirt01"
+Tops[22]	= "/Game/CharacterModels/Clothing/Meshes/SK_Undershirt01"
+Tops[23]	= "/Game/CharacterModels/Clothing/Meshes/SK_ShirtCombo01"
+
+Tops[24]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
+Tops[25]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
+Tops[26]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
+Tops[27]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
+Tops[28]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
+Tops[29]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
+Tops[30]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
+
+Pants = {}
+Pants[1]	= nil
+Pants[2] 	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_CargoPants_LPR"
+Pants[3]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_DenimPants_LPR"
+Pants[4]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_FormalPants_LPR"
+Pants[5]	= "/Game/CharacterModels/Clothing/Meshes/SK_Jeans01"
+Pants[6]	= "/Game/CharacterModels/Clothing/Meshes/SK_Shorts01"
+
+Shoes = {}
+Shoes[1]	= nil
+Shoes[2]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_BusinessShoes_LPR"
+Shoes[3]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_NormalShoes_LPR"
+Shoes[4]	= "/Game/CharacterModels/Clothing/Meshes/SK_Shoes01"
+
+Hair = {}
+Hair[1]		= nil
+Hair[2]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Hair_Business_LP"
+Hair[3]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Hair_Scientist_LP"
+Hair[4]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_01_LPR"
+Hair[5]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Police_Hair_LPR"
+Hair[6]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_03_LPR"
+Hair[7]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_02_LPR"
+
+-- Functions
+
+function CreatePlayerClothingData(player)
+	PlayerClothingData[player] = {}
+
+	PlayerClothingData[player].hair = 0
+	PlayerClothingData[player].hair_color = 0
+	PlayerClothingData[player].top = 0
+	PlayerClothingData[player].pants = 0
+	PlayerClothingData[player].shoes = 0
+	PlayerClothingData[player].skin_color = 0
+end
+
+function DestroyPlayerClothingData(player)
+	PlayerClothingData[player] = nil
+end
+
+function SetPlayerClothing(player, otherplayer)
+	if PlayerData[otherplayer] == nil or PlayerClothingData[otherplayer] == nil then
+		return
+	end
+
+	local r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].hair_color)
+
+	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, a)
+	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
+	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
+	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
+	-- Add skin colour sync
+
+	if player == otherplayer then
+		for k, v in pairs(GetStreamedPlayersForPlayer(player)) do
+			SetPlayerClothing(player, v)
+		end
+	end
+end
+
+-- Commands
+
 AddCommand("pants", function (playerid, pantid)
 
 	if pantid == nil then
@@ -5,21 +117,19 @@ AddCommand("pants", function (playerid, pantid)
 	end
 
 	pantid = tonumber(pantid)
-	SetPlayerPropertyValue(playerid, "pant_id", pantid, true)
-
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
+	PlayerClothingData[playerid].pants = pantid
+	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
 end)
 
 AddCommand("shirt", function (playerid, shirtid)
 
 	if shirtid == nil then
-		return AddPlayerChat(playerid, "/shoe <1 - 4>")
+		return AddPlayerChat(playerid, "/shoe <1 - 30>")
 	end
+
 	shirtid = tonumber(shirtid)
-
-	SetPlayerPropertyValue(playerid, "shirt_id", shirtid, true)
-
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
+	PlayerClothingData[playerid].top = shirtid
+	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
 end)
 
 AddCommand("shoe", function (playerid, shoeid)
@@ -29,9 +139,8 @@ AddCommand("shoe", function (playerid, shoeid)
 	end
 	shoeid = tonumber(shoeid)
 
-	SetPlayerPropertyValue(playerid, "shoe_id", shoeid, true)
-
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
+	PlayerClothingData[playerid].shoes = shoeid
+	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
 end)
 
 AddCommand("skin", function (playerid, r, g, b)
@@ -40,15 +149,14 @@ AddCommand("skin", function (playerid, r, g, b)
 		return AddPlayerChat(playerid, "/skin <r> <g> <b>")
 	end
 
+	AddPlayerChat(playerid, "SKIN SYNC NOT IN YET.")
+
 	r = tonumber(r)
 	g = tonumber(g)
 	b = tonumber(b)
 
-	SetPlayerPropertyValue(playerid, "skin_color_r", r, true)
-	SetPlayerPropertyValue(playerid, "skin_color_g", g, true)
-	SetPlayerPropertyValue(playerid, "skin_color_b", b, true)
-
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
+	PlayerClothingData[playerid].skin_color = RGB(r, g, b)
+	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
 end)
 
 AddCommand("pupil", function (playerid, pupil)
@@ -57,35 +165,19 @@ AddCommand("pupil", function (playerid, pupil)
 		return AddPlayerChat(playerid, "/pupil <size>")
 	end
 
+	AddPlayerChat(playerid, "PUPIL SYNC NOT IN YET.")
+
 	pupil = tonumber(pupil)
 
-	SetPlayerPropertyValue(playerid, "pupil_size", pupil, true)
-
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
+	--PlayerClothingData[playerid].pupil = pupil
+	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
 end)
 
-AddEvent("OnPlayerJoin", function(playerid)
+-- Events
 
-	SetPlayerPropertyValue(playerid, "pant_id", 2, true)
-	SetPlayerPropertyValue(playerid, "shoe_id", 1, true)
-	SetPlayerPropertyValue(playerid, "skin_color_r", 205, true)
-	SetPlayerPropertyValue(playerid, "skin_color_g", 154, true)
-	SetPlayerPropertyValue(playerid, "skin_color_b", 110, true)
-	SetPlayerPropertyValue(playerid, "pupil_size", 1, true)
-	SetPlayerPropertyValue(playerid, "shirt_id", 1, true)
-	SetPlayerPropertyValue(playerid, "hair_id", 2, true)
-	SetPlayerPropertyValue(playerid, "hair_color_r", 0, true)
-	SetPlayerPropertyValue(playerid, "hair_color_g", 0, true)
-	SetPlayerPropertyValue(playerid, "hair_color_b", 0, true)
-	SetPlayerPropertyValue(playerid, "hair_color_a", 0, true)
-	SetPlayerPropertyValue(playerid, "pant_color_r", 255, true)
-	SetPlayerPropertyValue(playerid, "pant_color_g", 255, true)
-	SetPlayerPropertyValue(playerid, "pant_color_b", 255, true)
-	SetPlayerPropertyValue(playerid, "pant_color_a", 255, true)
-
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
-end)
+AddRemoteEvent("ServerSetPlayerClothing", SetPlayerClothing)
 
 AddEvent("OnPlayerSpawn", function(playerid)
-	CallRemoteEvent(playerid, "SetPlayerClothing", playerid)
+
+	CallRemoteEvent(playerid, "SetPlayerClothing", playerid, playerid)
 end)

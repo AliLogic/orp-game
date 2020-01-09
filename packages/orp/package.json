@@ -56,6 +56,7 @@
 		"client/speedo/speedo_c.lua",
 		"client/speedcam/speedcam_c.lua",
 		"client/objects/teslaevc/teslaevc_c.lua",
+		"client/customization/customization_c.lua",
 		"client/misc/misc_c.lua"
 	],
 	"files": [

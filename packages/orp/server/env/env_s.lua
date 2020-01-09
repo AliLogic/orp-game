@@ -11,6 +11,14 @@ local function UpdateTime()
 	EnvMin = t.min
 	EnvTemperature = 30
 
+	if (EnvHour % 6 == 0) then
+		EnvWeather = EnvWeather + 1
+
+		if EnvWeather > 12 then
+			EnvWeather = 1
+		end
+	end
+
 	AddPlayerChatAll("[DEBUG-S] HOUR: "..EnvHour.." MIN: "..EnvMin.." WEATHER: "..EnvWeather)
 
 	for k, v in pairs(GetAllPlayers()) do

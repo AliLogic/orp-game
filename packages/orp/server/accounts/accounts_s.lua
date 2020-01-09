@@ -232,10 +232,13 @@ function ShowCharacterSelection (player)
 end
 
 AddRemoteEvent("accounts:login", function (player, id)
-	local query = mariadb_prepare(sql, "SELECT * FROM characters WHERE id = ?;",
-		CharacterData[player][id].id)
 
-	mariadb_async_query(sql, query, OnCharacterLoaded, player, id)
+	if PlayerData[player].id == 0 then
+		local query = mariadb_prepare(sql, "SELECT * FROM characters WHERE id = ?;",
+			CharacterData[player][id].id)
+
+		mariadb_async_query(sql, query, OnCharacterLoaded, player, id)
+	end
 end)
 
 function OnCharacterLoaded(player, id)
@@ -276,7 +279,7 @@ function OnCharacterLoaded(player, id)
 		CallEvent("LoadInventory", player)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay "..GetPlayerName(player)..".</>")
-		
+
 	end
 end
 
@@ -334,6 +337,8 @@ function CreatePlayerData(player)
 
 	PlayerData[player].pd_timer = 0
 	PlayerData[player].renting = 0 -- Vehicle ID that a player is renting.
+
+	CreatePlayerClothingData(player)
 
 	print("Data created for: "..player)
 end
@@ -413,6 +418,8 @@ function DestroyPlayerData(player)
 	if (PlayerData[player] == nil) then
 		return
 	end
+
+	DestroyPlayerClothingData(player)
 
 	DestroyTimer(PlayerData[player].pd_timer)
 	PlayerData[player] = nil
