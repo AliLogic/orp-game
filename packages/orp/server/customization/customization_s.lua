@@ -116,6 +116,20 @@ end
 
 -- Commands
 
+AddCommand("haircolor", function (playerid, r, g, b)
+
+	if r == nil or g == nil or b == nil then
+		return AddPlayerChat(playerid, "/haircolor <r> <g> <b>")
+	end
+
+	r = tonumber(r) / 255
+	g = tonumber(g) / 255
+	b = tonumber(b) / 255
+
+	PlayerClothingData[playerid].hair_color = RGB(r, g, b)
+	SetPlayerClothing(playerid, playerid)
+end)
+
 AddCommand("hair", function (playerid, hairid)
 
 	if hairid == nil then
