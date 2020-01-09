@@ -306,6 +306,7 @@
         "GetStreamedDoors",
         "GetDistanceSquared3D",
         "SetCameraRotation",
-        "IsFloatNearlyZero"
+        "IsFloatNearlyZero",
+        "GetStreamedPlayersForPlayer"
     ]
 }
