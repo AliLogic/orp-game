@@ -1266,6 +1266,10 @@ function OnPlayWeaponHitEffects(PlayerId, Weapon, HitType, HitId, StartLocation,
 	HitNormal = HitNormal:ToOrientationRotator()
 	HitNormal.Roll = RandomFloat(-180.0, 180.0)
 
+	if Weapon == 24 then -- Speedgun.
+		return false
+	end
+
 	if HitType == HIT_AIR then
 
 	elseif HitType == HIT_PLAYER then
