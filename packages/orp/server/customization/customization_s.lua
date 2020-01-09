@@ -106,7 +106,7 @@ function SetPlayerClothing(player, otherplayer)
 
 	if player == otherplayer then
 		for k, v in pairs(GetStreamedPlayersForPlayer(player)) do
-			SetPlayerClothing(player, v)
+			SetPlayerClothing(v, player)
 		end
 	end
 
