@@ -129,6 +129,16 @@ AddRemoteEvent("ToggleTaseEffect", function (bToggle)
 	end
 end)
 
+AddEvent("OnPlayWeaponHitEffects", function (player, Weapon, HitType, HitId, StartLocation, HitLocation, HitLocationRelative, HitNormal, HitResult)
+	if player ~= 0 then
+		if Weapon == 24 then
+			return false
+		else
+			return true
+		end
+	end
+end)
+
 AddRemoteEvent('SendSpeedgunMessage', function (vehiclename, vehicle) 
 	AddPlayerChat(vehiclename.."'s speed: "..math.tointeger(math.floor(GetVehicleForwardSpeed(vehicle))))
 end)
