@@ -419,7 +419,7 @@ local function cmd_acv(player, model, plate)
 	if vehicle == false then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..model.." wasn't able to be created!</>")
 	else
-		AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Vehicle %d (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), model, vehicle))
+		AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Vehicle %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), GetVehicleModelEx(vehicle), vehicle))
 		Slap(player)
 	end
 	return

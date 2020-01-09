@@ -129,6 +129,12 @@ AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
 
 			Dialog.close(charCreate)
 			CallRemoteEvent("accounts:characterCreated", string.match(firstname, '[A-Z][a-z]*'), string.match(lastname, '[A-Z][a-z]*'), gender)
+
+			SetCameraLocation(0, 0, 0, false)
+			SetCameraRotation(0, 0, 0, false)
+
+			ShowHealthHUD(true)
+			ShowWeaponHUD(true)
 		else
 			Dialog.close(charCreate)
 			CallRemoteEvent("accounts:kick")

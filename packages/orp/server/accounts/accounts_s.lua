@@ -265,7 +265,7 @@ function OnCharacterLoaded(player, id)
 
 		PlayerData[player].x = tonumber(result['x'])
 		PlayerData[player].y = tonumber(result['y'])
-		PlayerData[player].z = tonumber(result['z'])
+		PlayerData[player].z = tonumber(result['z']) + 100
 		PlayerData[player].a = tonumber(result['a'])
 
 		PlayerData[player].radio = tonumber(result['radio'])
@@ -441,7 +441,7 @@ function SetPlayerLoggedIn(player)
 	Delay(1000, function ()
 		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
 	end)
-	
+
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
 	--CallEvent("OnPlayerJoined", player)
 end
