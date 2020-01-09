@@ -124,7 +124,7 @@ end)
 AddCommand("shirt", function (playerid, shirtid)
 
 	if shirtid == nil then
-		return AddPlayerChat(playerid, "/shoe <1 - 30>")
+		return AddPlayerChat(playerid, "/shirt <1 - 30>")
 	end
 
 	shirtid = tonumber(shirtid)
