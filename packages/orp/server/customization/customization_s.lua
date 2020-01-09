@@ -105,8 +105,8 @@ function SetPlayerClothing(player, otherplayer)
 	-- Add skin colour sync
 
 	if player == otherplayer then
-		for k, v in pairs(GetStreamedPlayersForPlayer(player)) do
-			SetPlayerClothing(v, player)
+		for k, v in pairs(GetStreamedPlayersForPlayer(otherplayer)) do
+			SetPlayerClothing(v, otherplayer)
 		end
 	end
 
