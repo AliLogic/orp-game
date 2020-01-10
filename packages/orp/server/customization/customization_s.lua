@@ -90,7 +90,6 @@ end
 
 function SetPlayerClothing(player, otherplayer)
 	if PlayerData[otherplayer] == nil or PlayerClothingData[otherplayer] == nil then
-		AddPlayerChat(player, "otherplayer "..otherplayer.." error.")
 		return
 	end
 
@@ -98,15 +97,20 @@ function SetPlayerClothing(player, otherplayer)
 
 	local r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].hair_color)
 
-	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, a)
+	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, 255)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
-	-- Add skin colour sync
+
+	r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].skin_color)
+
+	CallRemoteEvent(player, "SetPlayerSkinColor", otherplayer, r, g, b)
 
 	if player == otherplayer then
 		for k, v in pairs(GetStreamedPlayersForPlayer(player)) do
-			SetPlayerClothing(v, player)
+			if v ~= player then
+				SetPlayerClothing(v, player)
+			end
 		end
 	end
 
@@ -114,6 +118,20 @@ function SetPlayerClothing(player, otherplayer)
 end
 
 -- Commands
+
+AddCommand("haircolor", function (playerid, r, g, b)
+
+	if r == nil or g == nil or b == nil then
+		return AddPlayerChat(playerid, "/haircolor <r> <g> <b>")
+	end
+
+	r = tonumber(r)
+	g = tonumber(g)
+	b = tonumber(b)
+
+	PlayerClothingData[playerid].hair_color = RGB(r, g, b)
+	SetPlayerClothing(playerid, playerid)
+end)
 
 AddCommand("hair", function (playerid, hairid)
 
@@ -164,8 +182,6 @@ AddCommand("skin", function (playerid, r, g, b)
 	if r == nil or g == nil or b == nil then
 		return AddPlayerChat(playerid, "/skin <r> <g> <b>")
 	end
-
-	AddPlayerChat(playerid, "SKIN SYNC NOT IN YET.")
 
 	r = tonumber(r)
 	g = tonumber(g)
