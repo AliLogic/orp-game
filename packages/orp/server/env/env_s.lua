@@ -33,7 +33,7 @@ end
 
 function UpdateWeather() 
 	local res = http_get(url + apikey)
-	print(res.body)
+	print("Response: "..res.body)
 end
 
 AddEvent("OnPackageStart", function()
