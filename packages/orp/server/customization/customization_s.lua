@@ -97,7 +97,7 @@ function SetPlayerClothing(player, otherplayer)
 
 	local r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].hair_color)
 
-	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, a)
+	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, 255)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
@@ -122,9 +122,9 @@ AddCommand("haircolor", function (playerid, r, g, b)
 		return AddPlayerChat(playerid, "/haircolor <r> <g> <b>")
 	end
 
-	r = tonumber(r) / 255
-	g = tonumber(g) / 255
-	b = tonumber(b) / 255
+	r = tonumber(r)
+	g = tonumber(g)
+	b = tonumber(b)
 
 	PlayerClothingData[playerid].hair_color = RGB(r, g, b)
 	SetPlayerClothing(playerid, playerid)
