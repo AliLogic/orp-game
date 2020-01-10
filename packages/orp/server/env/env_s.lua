@@ -36,7 +36,13 @@ end
 
 function UpdateWeather() 
 	local res = http_get("http://api.openweathermap.org/data/2.5/weather?q=Nevada,us&APPID="..apikey)
-	print("Response: "..res)
+
+	local f = io.open('HTTP_LOG.txt', "a+")
+	if f then
+		print('File being written to...')
+		f:write(res)
+		f:close()
+	end
 end
 
 AddEvent("OnPackageStart", function()
