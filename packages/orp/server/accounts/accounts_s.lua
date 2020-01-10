@@ -225,10 +225,11 @@ function OnCharacterPartLoaded(player)
 	end
 end
 
-function ShowCharacterSelection (player)
-	SetPlayerLocation(player, 122191.86, 99569.03, 1676.32)
+function ShowCharacterSelection (player, logout)
+	logout = logout or false
 
-	CallRemoteEvent(player, 'askClientShowCharSelection', CharacterData[player])
+	SetPlayerLocation(player, 122191.86, 99569.03, 1676.32)
+	CallRemoteEvent(player, 'askClientShowCharSelection', CharacterData[player], logout)
 end
 
 AddRemoteEvent("accounts:login", function (player, id)
@@ -525,6 +526,6 @@ AddCommand("logout", function (player)
 	Delay(5000, function () 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You are now being logged out.")
 		SendAdminMessage("<span color=\""..colour.COLOUR_LIGHTRED().."\">AdmCmd: "..PlayerData[player].name.." is logging out.</>")
-		ShowCharacterSelection(player)
+		ShowCharacterSelection(player, true)
 	end)
 end)

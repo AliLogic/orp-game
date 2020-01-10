@@ -52,7 +52,7 @@ AddRemoteEvent("askClientCreation", function ()
 	Dialog.show(charCreate)
 end)
 
-AddRemoteEvent("askClientShowCharSelection", function(chardata)
+AddRemoteEvent("askClientShowCharSelection", function(chardata, logout)
 
 	SetIgnoreLookInput(true)
 	SetIgnoreMoveInput(true)
@@ -79,6 +79,25 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata)
 			))
 			ExecuteWebJS(charUI, "setCharacterInfo({slot:"..i..",firstname:"..chardata[i].firstname..",lastname:"..chardata[i].lastname..",level:"..chardata[i].level..",cash:"..chardata[i].cash.."});")]]
 		end
+	end
+
+	if logout == true then
+		charUI = CreateWebUI(0, 0, 0, 0, 1, 16)
+		SetWebAlignment(charUI, 0, 0)
+		SetWebAnchors(charUI, 0, 0, 1, 1)
+		SetWebURL(charUI, "http://asset/"..GetPackageName().."/client/charui/main.html")
+		SetWebVisibility(charUI, WEB_VISIBLE)
+		SetInputMode(charUI, INPUT_UI)
+		ShowMouseCursor(true)
+
+		if count ~= 0 then
+			for i = 1, count, 1 do
+				AddPlayerChat(charUIdata[i])
+				ExecuteWebJS(charUI, "setCharacterInfo("..charUIdata[i]..");")
+			end
+		end
+
+		ExecuteWebJS(charUI, "toggleCharMenu();")
 	end
 
 	--[[ExecuteWebJS(charUI, "test();")
