@@ -309,6 +309,7 @@
         "IsFloatNearlyZero",
         "GetStreamedPlayersForPlayer",
         "http_get",
-        "http_post"
+        "http_post",
+        "http_set_user_agent"
     ]
 }
