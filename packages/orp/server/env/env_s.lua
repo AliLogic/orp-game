@@ -39,7 +39,7 @@ function UpdateWeather()
 	local f = io.open('HTTP_LOG.txt', "a+")
 	if f then
 		print('File being written to...')
-		f:write(''..res..'\n\n')
+		f:write(''..tostring(res)..'\n\n')
 		f:close()
 	end
 end
