@@ -1,3 +1,5 @@
+local colour = ImportPackage('colours')
+
 function GetPlayerAdminRank(player)
 
     local admin_level = tonumber(PlayerData[player].admin)
@@ -15,4 +17,12 @@ function GetPlayerAdminRank(player)
     else
         return 'None'
     end
+end
+
+function SendAdminMessage(text)
+    for _, i in pairs(GetAllPlayers()) do
+		if PlayerData[i].admin > 0 then
+            AddPlayerChat(i, text)
+		end
+	end
 end

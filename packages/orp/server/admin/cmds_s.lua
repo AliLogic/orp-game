@@ -259,12 +259,9 @@ AddCommand("a", function (player, ...)
 
 	local text = table.concat({...}, " ")
 
-	for _, i in pairs(GetAllPlayers()) do
-		if PlayerData[i].admin > 0 then
-			AddPlayerChat(i, string.format("<span color=\"%s\">** %s %s (%s, %d): %s</>",
-				colour.COLOUR_LIGHTRED(), GetPlayerAdminRank(player), GetPlayerName(player), PlayerData[player].name, player, text))
-		end
-	end
+	SendAdminMessage(string.format("<span color=\"%s\">** %s %s (%s, %d): %s</>",
+		colour.COLOUR_LIGHTRED(), GetPlayerAdminRank(player), GetPlayerName(player), PlayerData[player].name, player, text)
+	)
 end)
 
 AddCommand("setstats", function (player, target, prefix, ...)

@@ -2,6 +2,7 @@
 Copyright (C) 2019 Onset Roleplay
 
 Developers:
+* Bork
 * Logic_
 
 Contributors:
