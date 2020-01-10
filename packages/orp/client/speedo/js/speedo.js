@@ -7,7 +7,7 @@ function toggleSpeedometer(status) {
 }
 
 function setSpeedoSpeed(value) {
-	if (value < 0) value = 0;
+	if (value < 0) value = value * -1;
 	else if (value > 220) value = 220;
 
 	$('#speed').attr('data-value', `${value}`);

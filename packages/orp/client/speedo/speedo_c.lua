@@ -25,14 +25,7 @@ local function UpdateSpeedo()
 
 	if speed ~= false then
 		SetSpeedoRPM(rpm)
-		if speed < 0 then
-			speed = speed * -1
-			SetSpeedoSpeed(speed)
-			--SetTextBoxText(speedo, "<span color=\"#FF0000\" size=\"28\">"..speed.." KMH (R)</>")
-		else
-			SetSpeedoSpeed(speed)
-			--SetTextBoxText(speedo, "<span color=\"#FF0000\" size=\"28\">"..speed.." KMH</>")
-		end
+		SetSpeedoSpeed(speed)
 	end
 end
 
