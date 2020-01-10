@@ -101,7 +101,10 @@ function SetPlayerClothing(player, otherplayer)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
-	-- Add skin colour sync
+
+	r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].skin_color)
+
+	CallRemoteEvent(player, "SetPlayerSkinColor", otherplayer, r, g, b)
 
 	if player == otherplayer then
 		for k, v in pairs(GetStreamedPlayersForPlayer(player)) do
@@ -179,8 +182,6 @@ AddCommand("skin", function (playerid, r, g, b)
 	if r == nil or g == nil or b == nil then
 		return AddPlayerChat(playerid, "/skin <r> <g> <b>")
 	end
-
-	AddPlayerChat(playerid, "SKIN SYNC NOT IN YET.")
 
 	r = tonumber(r)
 	g = tonumber(g)
