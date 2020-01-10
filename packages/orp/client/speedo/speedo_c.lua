@@ -32,7 +32,7 @@ end
 AddRemoteEvent("ToggleSpeedo", function (bToggle)
 	if bToggle then
 		if not IsValidTimer(timer) then
-			timer = CreateTimer(UpdateSpeedo, 25)
+			timer = CreateTimer(UpdateSpeedo, 100)
 			ToggleSpeedometer()
 		end
 	else
