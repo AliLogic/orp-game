@@ -517,7 +517,7 @@ AddCommand("name", function (player)
 end)
 
 AddCommand("logout", function (player) 
-	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You will be logged out in 10 seconds.")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You will be logged out in 5 seconds.")
 	SetPlayerChatBubble(player, "(( Player is logging out. ))", 4)
 
 	PlayerData[player].logged_in = false
