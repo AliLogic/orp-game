@@ -41,6 +41,7 @@
 		"server/doors/cmds_s.lua",
 		"server/pumps/pumps_s.lua",
 		"server/pumps/cmds_s.lua",
+		"server/misc/json.lua",
 		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [

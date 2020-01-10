@@ -307,6 +307,8 @@
         "GetDistanceSquared3D",
         "SetCameraRotation",
         "IsFloatNearlyZero",
-        "GetStreamedPlayersForPlayer"
+        "GetStreamedPlayersForPlayer",
+        "http_get",
+        "http_post"
     ]
 }

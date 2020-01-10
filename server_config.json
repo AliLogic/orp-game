@@ -11,7 +11,8 @@
 	"iplimit": 5,
 	"masterlist": true,
 	"plugins": [
-		"mariadb"
+		"mariadb",
+		"onset-http-plugin"
 	],
 	"packages": [
 		"colours",
