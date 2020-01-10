@@ -19,7 +19,6 @@ local function UpdateTime()
 	EnvTemperature = 30
 
 	if (EnvHour % 6 == 1) then
-		UpdateWeather()
 		EnvWeather = EnvWeather + 1
 
 		if EnvWeather > 12 then
@@ -46,6 +45,7 @@ function UpdateWeather()
 end
 
 AddEvent("OnPackageStart", function()
+	UpdateWeather()
 	UpdateTime()
 	EnvTimer = CreateTimer(UpdateTime, 60 * 1000)
 end)
