@@ -25,7 +25,6 @@ Tops[9]		= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_CH3D_Prisoner_LPR"
 Tops[10]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Police_Shirt-Long_LPR"
 Tops[11]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Police_Shirt-Short_LPR"
 
-
 Tops[12]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_SpecialAgent_LPR"
 Tops[13]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_LPR"
 Tops[14]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_Open_LPR"
@@ -34,19 +33,11 @@ Tops[16]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Scientist_
 Tops[17]	= "/Game/CharacterModels/Mafia/Meshes/SK_Mafia"
 
 Tops[18]	= "/Game/CharacterModels/Clothing/Meshes/SK_Pullover"
-Tops[19]	= "/Game/CharacterModels/Clothing/Meshes/SK_Pullover"
-Tops[20]	= "/Game/CharacterModels/Clothing/Meshes/SK_TShirt01"
-Tops[21]	= "/Game/CharacterModels/Clothing/Meshes/SK_Undershirt01"
-Tops[22]	= "/Game/CharacterModels/Clothing/Meshes/SK_Undershirt01"
-Tops[23]	= "/Game/CharacterModels/Clothing/Meshes/SK_ShirtCombo01"
+Tops[19]	= "/Game/CharacterModels/Clothing/Meshes/SK_TShirt01"
+Tops[20]	= "/Game/CharacterModels/Clothing/Meshes/SK_Undershirt01"
+Tops[21]	= "/Game/CharacterModels/Clothing/Meshes/SK_ShirtCombo01"
 
-Tops[24]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
-Tops[25]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
-Tops[26]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
-Tops[27]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
-Tops[28]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
-Tops[29]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
-Tops[30]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
+Tops[22]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
 
 Pants = {}
 Pants[1]	= nil
@@ -81,7 +72,7 @@ function CreatePlayerClothingData(player)
 	PlayerClothingData[player].top = 0
 	PlayerClothingData[player].pants = 0
 	PlayerClothingData[player].shoes = 0
-	PlayerClothingData[player].skin_color = 0
+	PlayerClothingData[player].skin_color = RGB(255, 255, 255)
 end
 
 function DestroyPlayerClothingData(player)
@@ -158,7 +149,7 @@ end)
 AddCommand("shirt", function (playerid, shirtid)
 
 	if shirtid == nil then
-		return AddPlayerChat(playerid, "/shirt <1 - 30>")
+		return AddPlayerChat(playerid, "/shirt <1 - 22>")
 	end
 
 	shirtid = tonumber(shirtid)
@@ -211,5 +202,7 @@ AddRemoteEvent("ServerSetPlayerClothing", SetPlayerClothing)
 
 AddEvent("OnPlayerSpawn", function(playerid)
 
-	SetPlayerClothing(playerid, playerid)
+	Delay(100, function()
+		SetPlayerClothing(playerid, playerid)
+	end)
 end)
