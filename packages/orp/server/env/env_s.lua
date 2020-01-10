@@ -35,8 +35,8 @@ local function UpdateTime()
 end
 
 function UpdateWeather() 
-	local res = http_get(url + apikey)
-	print("Response: "..res.body)
+	local res = http_get("http://api.openweathermap.org/data/2.5/weather?q=Nevada,us&APPID="..apikey)
+	print("Response: "..json_decode(res.body))
 end
 
 AddEvent("OnPackageStart", function()
