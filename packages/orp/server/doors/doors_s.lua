@@ -116,7 +116,7 @@ function OnDoorLoaded(indexid, door_id)
 
 		DoorData[indexid].is_locked = result['is_locked']
 
-		DoorData[indexid].door = CreateDoor(DoorData[indexid].model, DoorData[indexid].x, DoorData[indexid].y, DoorData[indexid].z)
+		DoorData[indexid].door = CreateDoor(DoorData[indexid].model, DoorData[indexid].x, DoorData[indexid].y, DoorData[indexid].z, DoorData[indexid].a, true)
 		SetDoorDimension(DoorData[indexid].door, DoorData[indexid].dimension)
 	end
 end

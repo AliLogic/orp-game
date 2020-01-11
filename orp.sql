@@ -110,6 +110,7 @@ CREATE TABLE `doors` (
   `x` int(11) NOT NULL,
   `y` int(11) NOT NULL,
   `z` int(11) NOT NULL,
+  `a` int(11) NOT NULL,
   `dimension` int(11) NOT NULL,
   `is_locked` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`)
