@@ -203,7 +203,7 @@ end)
 
 function OnFuelTick()
 
-	for k, v in pairs(VehicleData) do
+	for v = 1, #VehicleData, 1 do
 		if VehicleData[v] ~= nil then
 			if GetVehicleEngineState(v) == true then
 				if VehicleData[v].fuel > 0 then

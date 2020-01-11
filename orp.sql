@@ -90,6 +90,19 @@ CREATE TABLE `bans` (
   CONSTRAINT `bans_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+DROP TABLE IF EXISTS `clothing`;
+CREATE TABLE `clothing` (
+  `id` int(11) NOT NULL,
+  `hair` int(11) NOT NULL,
+  `top` int(11) NOT NULL,
+  `pants` int(11) NOT NULL,
+  `shoe` int(11) NOT NULL,
+  `hair_color` int(11) NOT NULL,
+  `skin_color` int(11) NOT NULL,
+  KEY `id` (`id`),
+  CONSTRAINT `clothing_ibfk_1` FOREIGN KEY (`id`) REFERENCES `characters` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 DROP TABLE IF EXISTS `doors`;
 CREATE TABLE `doors` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
