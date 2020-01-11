@@ -84,16 +84,16 @@ AddEvent('UnloadHouses', function ()
 	end
 end)
 
-function House_Create(player, type, price, ...)
+function House_Create(player, htype, price, ...)
 	local name = table.concat({...}, " ")
-	type = tonumber(type)
+	htype = tonumber(htype)
 	price = tonumber(price)
 
 	if string.len(name) < 0 or string.len(name) > 32 then
 		return false
 	end
 
-	if type < 1 or type > HOUSING_TYPE_MAX then
+	if htype < 1 or htype > HOUSING_TYPE_MAX then
 		return false
 	end
 
@@ -107,16 +107,16 @@ function House_Create(player, type, price, ...)
 	end
 
 	local query = mariadb_prepare(sql, "INSERT INTO houses (name, type, price) VALUES ('?', ?, ?);",
-		name, type, price
+		name, htype, price
 	)
-	mariadb_async_query(sql, query, OnHouseCreated, index, type, price, name)
+	mariadb_async_query(sql, query, OnHouseCreated, index, htype, price, name)
 end
 
-function OnHouseCreated(i, type, price, name)
+function OnHouseCreated(i, htype, price, name)
 	HousingData[i].id = mariadb_get_insert_id()
 
 	HousingData[i].name = name
-	HousingData[i].type = type
+	HousingData[i].type = htype
 
 	HousingData[i].price = price
 end
@@ -166,8 +166,8 @@ function OnHouseLoaded(houseid)
 
 		-- CreateDynamicDoor()
 
-		HousingData[house].text3d_in = CreateText3D("House ("..houseid..")", 10, HousingData[house].ix, HousingData[house].iy, HousingData[house].iz, 0.0, 0.0, 0.0)
-		HousingData[house].text3d_outside = CreateText3D("House ("..houseid..")", 10, HousingData[house].ex, HousingData[house].ey, HousingData[house].ez, 0.0, 0.0, 0.0)
+		HousingData[house].text3d_in = CreateText3D("House ("..houseid..")", 10, HousingData[house].ix, HousingData[house].iy, HousingData[house].iz + 10, 0.0, 0.0, 0.0)
+		HousingData[house].text3d_outside = CreateText3D("House ("..houseid..")", 10, HousingData[house].ex, HousingData[house].ey, HousingData[house].ez + 10, 0.0, 0.0, 0.0)
 
 		print("House "..house.." (SQL ID: "..houseid..") successfully loaded!")
 
