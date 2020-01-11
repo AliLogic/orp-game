@@ -417,6 +417,7 @@ function SavePlayerAccount(player)
 
 		mariadb_query(sql, query)
 		CallEvent("SaveInventory", player)
+		SavePlayerClothing(player)
 	end
 end
 
