@@ -17,7 +17,7 @@ local function cmd_acd(playerid, modelid)
 	end
 
 	local x, y, z = GetPlayerLocation(playerid)
-        local dimension = GetPlayerDimension(playerid)
+	local dimension = GetPlayerDimension(playerid)
 
 	local doorid = Door_Create(modelid, x, y, z, dimension)
 	if doorid == false then
@@ -25,7 +25,7 @@ local function cmd_acd(playerid, modelid)
 	else
 		AddPlayerChat(playerid, string.format("<span color=\"%s\">Server: </>Door %d (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), modelid, doorid))
 	end
-        return
+	return
 end
 
 AddCommand("acreatedoor", cmd_acd)
@@ -61,7 +61,7 @@ local function cmd_aed(playerid, doorid, prefix, ...)
 
 	if doorid == nil or prefix == nil then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(d)oor <door> <prefix>")
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> location")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> location, lock")
 	end
 
 	doorid = tonumber(doorid)
@@ -72,17 +72,33 @@ local function cmd_aed(playerid, doorid, prefix, ...)
 
 	if prefix == "location" then
 		local x, y, z = GetPlayerLocation(playerid)
+		local a = GetPlayerHeading(playerid)
 		local dimension = GetPlayerDimension(playerid)
 
 		DoorData[doorid].x = x
 		DoorData[doorid].y = y
 		DoorData[doorid].z = z
+		DoorData[doorid].a = a
 		DoorData[doorid].dimension = dimension
 
 		SetDoorLocation(DoorData[doorid].door, x, y, z)
 		SetPickupDimension(DoorData[doorid].door, dimension)
 
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Door "..doorid.." interior location changed.</>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Door "..doorid.." location changed.</>")
+	elseif prefix == "lock" then
+
+		local is_locked = DoorData[doorid].is_locked
+		DoorData[doorid].is_locked = not is_locked
+
+		if not is_locked then
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Door "..doorid.." is now locked.</>")
+		else
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Door "..doorid.." is now unlocked.</>")
+		end
+		return
+	else
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(d)oor <door> <prefix>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> location, lock")
 	end
 end
 
