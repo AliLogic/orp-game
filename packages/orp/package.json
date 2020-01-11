@@ -57,6 +57,7 @@
 		"client/speedcam/speedcam_c.lua",
 		"client/objects/teslaevc/teslaevc_c.lua",
 		"client/customization/customization_c.lua",
+		"client/customization/charcustom_c.lua",
 		"client/misc/misc_c.lua"
 	],
 	"files": [
@@ -93,6 +94,10 @@
 		"client/speedo/js/speedo.js",
 		"client/speedo/dist/gauge.min.js",
 		"client/speedo/css/speedo.css",
+		"client/customization/css/charcustom.css",
+		"client/customization/css/divider.min.css",
+		"client/customization/js/charcustom.js",
+		"client/customization/charcustom.html",
 		"client/objects/teslaevc/TeslaEVC.pak"
 	]
 }

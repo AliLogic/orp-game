@@ -1,0 +1,118 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>OnsetRP - Character Customization</title>
+
+		<link rel="stylesheet" href="http://asset/orp/client/customization/css/charcustom.css" />
+		<link rel="stylesheet" href="http://asset/orp/client/charui/dist/bulma.min.css" />
+		<link rel="stylesheet" href="http://asset/orp/client/customization/css/divider.min.css" />
+
+		<script src="http://asset/orp/client/charui/dist/jquery.min.js"></script>
+
+        <script>
+            (function(obj) {
+                ue.game = {};
+                ue.game.callevent = function(name, ...args) {
+                    if (typeof name != "string") return;
+
+                    if (args.length == 0) {
+                    obj.callevent(name, "");
+                    }	else {
+                    let params = [];
+                    
+                    for (let i = 0; i < args.length; i++) {
+                        params[i] = args[i];
+                    }
+                    
+                    obj.callevent(name, JSON.stringify(params));
+                    }
+                };
+            })(ue.game);
+            CallEvent = ue.game.callevent;
+
+            function OnDocumentReady(fn) {
+                if (document.readyState === "complete" || document.readyState === "interactive") {
+                    setTimeout(fn, 1);
+                } else {
+                    document.addEventListener("DOMContentLoaded", fn);
+                }
+            } 
+        </script>
+
+		<script src="http://asset/orp/client/customization/js/charcustom.js"></script>
+	</head>
+	<body style="display: none;">
+		<section class="hero is-primary is-fullheight">
+			<div class="hero-body">
+				<div class="container has-text-centered">
+
+					<div class="wrapper">
+						<center><img src="http://asset/orp/client/charui/img/OnsetLogo.png" class="image"></center>
+
+						<div class="card">
+							<div class="card-content">
+				
+								<h1 class="title" id="name">
+									Character Name
+								</h1>
+
+								<div class="is-divider"></div>
+
+								<div class="field" style="text-align: left;">
+									<label class="label">Skin Colour</label>
+									<div class="control">
+										<input class="slider" step="1" min="1" max="2" value="1" type="range" id="1">
+									</div>
+								</div>
+
+								<div class="field" style="text-align: left;">
+									<label class="label">Hair</label>
+									<div class="control">
+										<input class="slider" step="1" min="1" max="2" value="1" type="range" id="2">
+									</div>
+								</div>
+
+								<div class="field" style="text-align: left;">
+									<label class="label">Hair Colour</label>
+									<div class="control">
+										<input class="slider" step="1" min="1" max="2" value="1" type="range" id="3">
+									</div>
+								</div>
+
+								<div class="field" style="text-align: left;">
+									<label class="label">Shirt</label>
+									<div class="control">
+										<input class="slider" step="1" min="1" max="2" value="1" type="range" id="4">
+									</div>
+								</div>
+
+								<div class="field" style="text-align: left;">
+									<label class="label">Pants</label>
+									<div class="control">
+										<input class="slider" step="1" min="1" max="2" value="1" type="range" id="5">
+									</div>
+								</div>
+
+								<div class="field" style="text-align: left;">
+									<label class="label">Shoes</label>
+									<div class="control">
+										<input class="slider" step="1" min="1" max="2" value="1" type="range" id="6">
+									</div>
+								</div>
+
+								<div style="margin-top: 32px;">
+									<button class="button is-success" id="finish">Finish</button>
+									<button class="button is-danger" id="exit">Exit</button>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</section>
+	</body>
+</html>
