@@ -47,23 +47,18 @@ end
 
 local function OnSpeedcamTick(speedcam)
 
-	for k, v in ipairs(GetAllPlayers()) do
+	for k, v in pairs(GetPlayersInRange3D(SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z, 1200)) do
 
 		local vehicle = GetPlayerVehicle(v)
-		local x, y, z = GetPlayerLocation(v)
-		local faction = FACTION_NONE
+		if vehicle ~= 0 and GetPlayerState(v) == PS_DRIVER then
+			local faction = FACTION_NONE
 
-		if VehicleData[vehicle] ~= nil then
-			faction = GetFactionType(VehicleData[vehicle].faction)
-		end
+			if VehicleData[vehicle] ~= nil then
+				faction = GetFactionType(VehicleData[vehicle].faction)
+			end
 
-		if GetDistance3D(x, y, z, SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z) < 1200 then
-
-			if vehicle ~= 0 then
-
-				if faction ~= FACTION_GOV and faction ~= FACTION_MEDIC and faction ~= FACTION_POLICE then
-					CallRemoteEvent(v, "OnSpeedcamFlash", speedcam, SpeedcamData[speedcam].speed)
-				end
+			if faction ~= FACTION_GOV and faction ~= FACTION_MEDIC and faction ~= FACTION_POLICE then
+				CallRemoteEvent(v, "OnSpeedcamFlash", speedcam, SpeedcamData[speedcam].speed)
 			end
 		end
 	end
