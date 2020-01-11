@@ -47,7 +47,7 @@ function CreateVehicleData(vehicle)
 	VehicleData[vehicle].g = 0
 	VehicleData[vehicle].b = 0
 
-	VehicleData[vehicle].litres = 0
+	VehicleData[vehicle].fuel = 0
 
 	VehicleData[vehicle].callsign = nil
 
@@ -114,7 +114,7 @@ function OnVehicleCreated(vehicle, model, plate, x, y, z, a, r, g, b)
 	VehicleData[vehicle].g = g
 	VehicleData[vehicle].b = b
 
-	VehicleData[vehicle].litres = 100
+	VehicleData[vehicle].fuel = 100
 end
 
 function Vehicle_Destroy(vehicle)
@@ -166,7 +166,7 @@ function OnVehicleLoaded(id)
 		VehicleData[vehicle].owner = tonumber(result['owner'])
 		VehicleData[vehicle].faction = tonumber(result['faction'])
 		VehicleData[vehicle].rental = tonumber(result['rental'])
-		VehicleData[vehicle].litres = tonumber(result['litres'])
+		VehicleData[vehicle].fuel = tonumber(result['litres'])
 
 		print(id.."'s owner: "..VehicleData[vehicle].owner)
 
@@ -183,7 +183,7 @@ function Vehicle_Unload(vehicle)
 		tostring(VehicleData[vehicle].plate),
 		VehicleData[vehicle].faction,
 		VehicleData[vehicle].rental,
-		VehicleData[vehicle].litres,
+		VehicleData[vehicle].fuel,
 		tostring(VehicleData[vehicle].x),
 		tostring(VehicleData[vehicle].y),
 		tostring(VehicleData[vehicle].z),
