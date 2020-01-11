@@ -311,6 +311,7 @@
         "http_get",
         "http_post",
         "http_set_user_agent",
-        "GetPlayersInRange3D"
+        "GetPlayersInRange3D",
+        "SetVehicleLightEnabled"
     ]
 }

@@ -36,23 +36,6 @@ local function cmd_engine(playerid)
 end
 AddCommand("engine", cmd_engine)
 
-AddCommand("lights", function (playerid)
-	if GetPlayerState(playerid) ~= PS_DRIVER then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the driver seat of the vehicle.</>")
-	end
-
-	local vehicleid = GetPlayerVehicle(playerid)
-	local x, y, z = GetPlayerLocation(playerid)
-
-	if GetVehicleLightState(vehicleid) then
-		--SetVehicleLightState(vehicleid, false) -- This function doesn't exist in the game yet
-		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">turned off</> the lights.")
-	else
-		--SetVehicleLightState(vehicleid, true) -- This function doesn't exist in the game yet
-		AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">turned on</> the lights.")
-	end
-end)
-
 AddCommand("hood", function (playerid)
 	if GetPlayerState(playerid) ~= PS_DRIVER then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the driver seat of the vehicle.</>")
@@ -170,6 +153,18 @@ local function cmd_v(player, ...)
 
 		Vehicle_Unload(vehicle)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle parked!</>")
+	elseif args[1] == "lights" then
+
+		local vehicle = GetPlayerVehicle(player)
+
+		if GetVehicleLightState(vehicle) then
+			SetVehicleLightEnabled(vehicle, false)
+			AddPlayerChat(player, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">turned off</> the lights.")
+		else
+			SetVehicleLightEnabled(vehicle, true)
+			AddPlayerChat(player, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">turned on</> the lights.")
+		end
+
 	elseif args[1] == "spawn" then
 		local vehicle = tonumber(args[2])
 
@@ -206,7 +201,7 @@ local function cmd_v(player, ...)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle "..vehicle.." (Model: "..VehicleData[vehicle].model..") spawned!</>")
 	else
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /v(ehicle) <argument>")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> lock, park, spawn")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> lock, park, spawn, lights")
 		return
 	end
 end
