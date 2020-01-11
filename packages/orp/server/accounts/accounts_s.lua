@@ -105,6 +105,16 @@ function OnAccountCreated(player)
 	--CallRemoteEvent(player, "askClientCreation")
 end
 
+function CreateIPBan(player, ip, admin, bantime, reason)
+
+	if bantime ~= 0 then
+		bantime = os.time("!*t") + bantime
+	end
+
+	local query = mariadb_prepare(sql, "INSERT INTO ipbans VALUES('"..ip.."', "..PlayerData[player].accountid..", "..PlayerData[admin].accountid..", "..bantime..", '"..reason.."')")
+	mariadb_async_query(sql, query)
+end
+
 AddRemoteEvent("accounts:characterCreated", function (player, firstname, lastname, gender)
 	PlayerData[player].firstname = firstname
 	PlayerData[player].lastname = lastname
@@ -123,6 +133,8 @@ end)
 
 function OnCharacterCreated(player)
 	PlayerData[player].id = mariadb_get_insert_id()
+
+	CreatePlayerClothing(player)
 
 	print("Character ID "..PlayerData[player].id.." created for "..player)
 
@@ -415,6 +427,7 @@ function SavePlayerAccount(player)
 
 		mariadb_query(sql, query)
 		CallEvent("SaveInventory", player)
+		SavePlayerClothing(player)
 	end
 end
 
@@ -444,7 +457,9 @@ function SetPlayerLoggedIn(player)
 
 	Delay(1000, function ()
 		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
+		SetPlayerClothing(player, player)
 	end)
+
 
 	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
 	--CallEvent("OnPlayerJoined", player)

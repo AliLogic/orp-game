@@ -310,6 +310,8 @@
         "GetStreamedPlayersForPlayer",
         "http_get",
         "http_post",
-        "http_set_user_agent"
+        "http_set_user_agent",
+        "GetPlayersInRange3D",
+        "SetVehicleLightEnabled"
     ]
 }

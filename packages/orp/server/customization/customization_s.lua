@@ -85,8 +85,6 @@ function SetPlayerClothing(player, otherplayer)
 		return
 	end
 
-	AddPlayerChat(player, "calling SetPlayerClothing on server side ("..player..", "..otherplayer..")")
-
 	local r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].hair_color)
 
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, 255)
@@ -105,8 +103,13 @@ function SetPlayerClothing(player, otherplayer)
 			end
 		end
 	end
+end
 
-	AddPlayerChat(player, "end calling SetPlayerClothing on server side ("..player..", "..otherplayer..")")
+function CreatePlayerClothing(player)
+	local query = mariadb_prepare(sql, "INSERT INTO clothing (id) VALUES (?);",
+		PlayerData[player].id
+	)
+	mariadb_query(sql, query)
 end
 
 function SavePlayerClothing(player)
