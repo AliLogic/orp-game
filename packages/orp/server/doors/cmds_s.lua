@@ -87,10 +87,10 @@ local function cmd_aed(playerid, doorid, prefix, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Door "..doorid.." location changed.</>")
 	elseif prefix == "lock" then
 
-		local is_locked = DoorData[doorid].is_locked
-		DoorData[doorid].is_locked = not is_locked
+		local is_locked = not DoorData[doorid].is_locked
+		DoorData[doorid].is_locked = is_locked
 
-		if not is_locked then
+		if is_locked then
 			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Door "..doorid.." is now locked.</>")
 		else
 			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Door "..doorid.." is now unlocked.</>")

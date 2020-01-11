@@ -27,7 +27,7 @@ function CreateDoorData(door_id)
 
 	DoorData[door_id].dimension = 0
 
-	DoorData[door_id].is_locked = true
+	DoorData[door_id].is_locked = 1
 end
 
 function DestroyDoorData(door_id)
@@ -68,6 +68,7 @@ function OnDoorCreated(door_id, modelid, x, y, z, a, dimension)
 	DoorData[door_id].x = x
 	DoorData[door_id].y = y
 	DoorData[door_id].z = z
+	DoorData[door_id].a = a
 
 	DoorData[door_id].dimension = dimension
 end
@@ -114,7 +115,7 @@ function OnDoorLoaded(indexid, door_id)
 		DoorData[indexid].z = tonumber(result['z'])
 		DoorData[indexid].a = tonumber(result['a'])
 
-		DoorData[indexid].is_locked = result['is_locked']
+		DoorData[indexid].is_locked = tonumber(result['is_locked'])
 
 		DoorData[indexid].door = CreateDoor(DoorData[indexid].model, DoorData[indexid].x, DoorData[indexid].y, DoorData[indexid].z, DoorData[indexid].a, true)
 		SetDoorDimension(DoorData[indexid].door, DoorData[indexid].dimension)
