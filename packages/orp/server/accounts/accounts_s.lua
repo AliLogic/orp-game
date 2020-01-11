@@ -277,6 +277,7 @@ function OnCharacterLoaded(player, id)
 		SetPlayerLoggedIn(player)
 
 		LoadCharacterFaction(player, id)
+		LoadPlayerClothing(player)
 		CallEvent("LoadInventory", player)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay "..GetPlayerName(player)..".</>")
@@ -392,27 +393,29 @@ function SavePlayerAccount(player)
 
 	mariadb_query(sql, query)
 
-	PlayerData[player].x, PlayerData[player].y, PlayerData[player].z = GetPlayerLocation(player)
-	PlayerData[player].a = GetPlayerHeading(player)
+	if PlayerData[player].id ~= 0 then
+		PlayerData[player].x, PlayerData[player].y, PlayerData[player].z = GetPlayerLocation(player)
+		PlayerData[player].a = GetPlayerHeading(player)
 
-	local query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, minutes = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
-		PlayerData[player].firstname,
-		PlayerData[player].lastname,
-		PlayerData[player].gender,
-		PlayerData[player].health,
-		PlayerData[player].armour,
-		PlayerData[player].cash,
-		PlayerData[player].bank,
-		PlayerData[player].minutes,
-		tostring(PlayerData[player].x),
-		tostring(PlayerData[player].y),
-		tostring(PlayerData[player].z),
-		tostring(PlayerData[player].a),
-		PlayerData[player].id
-	)
+		query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, minutes = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
+			PlayerData[player].firstname,
+			PlayerData[player].lastname,
+			PlayerData[player].gender,
+			PlayerData[player].health,
+			PlayerData[player].armour,
+			PlayerData[player].cash,
+			PlayerData[player].bank,
+			PlayerData[player].minutes,
+			tostring(PlayerData[player].x),
+			tostring(PlayerData[player].y),
+			tostring(PlayerData[player].z),
+			tostring(PlayerData[player].a),
+			PlayerData[player].id
+		)
 
-	CallEvent("SaveInventory", player)
-	mariadb_query(sql, query)
+		mariadb_query(sql, query)
+		CallEvent("SaveInventory", player)
+	end
 end
 
 function DestroyPlayerData(player)

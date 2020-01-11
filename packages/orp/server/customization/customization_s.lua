@@ -109,6 +109,50 @@ function SetPlayerClothing(player, otherplayer)
 	AddPlayerChat(player, "end calling SetPlayerClothing on server side ("..player..", "..otherplayer..")")
 end
 
+function SavePlayerClothing(player)
+	if PlayerData[player] == nil or PlayerClothingData[player] == nil then
+		return
+	end
+
+	if PlayerData[player].id == 0 or PlayerData[player].logged_in == false then
+		return
+	end
+
+	local query = mariadb_prepare(sql, "UPDATE clothing SET hair_color = '?', hair = ?, top = ?, pants = ?, shoes = ?, skin_color = '?' WHERE id = ? LIMIT 1;",
+		PlayerClothingData[player].hair_color,
+		PlayerClothingData[player].hair,
+		PlayerClothingData[player].top,
+		PlayerClothingData[player].pants,
+		PlayerClothingData[player].shoes,
+		PlayerClothingData[player].skin_color,
+		PlayerData[player].id
+	)
+	mariadb_query(sql, query)
+
+	return
+end
+
+local function OnClothingLoad(player)
+
+	if mariadb_get_row_count() ~= 0 then
+		PlayerClothingData[player].hair_color = mariadb_get_value_name_int(1, "hair_color")
+		PlayerClothingData[player].hair = mariadb_get_value_name_int(1, "hair")
+		PlayerClothingData[player].top = mariadb_get_value_name_int(1, "top")
+		PlayerClothingData[player].pants = mariadb_get_value_name_int(1, "pants")
+		PlayerClothingData[player].shoes = mariadb_get_value_name_int(1, "shoes")
+		PlayerClothingData[player].skin_color = mariadb_get_value_name_int(1, "skin_color")
+	end
+end
+
+function LoadPlayerClothing(player)
+
+	local query = mariadb_prepare(sql, "SELECT * FROM clothing WHERE id = ? LIMIT 1;",
+		PlayerData[player].id
+	)
+
+	mariadb_async_query(sql, query, OnClothingLoad, player)
+end
+
 -- Commands
 
 AddCommand("haircolor", function (playerid, r, g, b)
@@ -203,7 +247,7 @@ AddRemoteEvent("ServerSetPlayerClothing", SetPlayerClothing)
 
 AddEvent("OnPlayerSpawn", function(playerid)
 
-	Delay(100, function()
+	Delay(1000, function()
 		SetPlayerClothing(playerid, playerid)
 	end)
 end)
