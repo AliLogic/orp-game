@@ -109,6 +109,13 @@ function SetPlayerClothing(player, otherplayer)
 	AddPlayerChat(player, "end calling SetPlayerClothing on server side ("..player..", "..otherplayer..")")
 end
 
+function CreatePlayerClothing(player)
+	local query = mariadb_prepare(sql, "INSERT INTO clothing (id) VALUES (?);",
+		PlayerData[player].id
+	)
+	mariadb_query(sql, query)
+end
+
 function SavePlayerClothing(player)
 	if PlayerData[player] == nil or PlayerClothingData[player] == nil then
 		return

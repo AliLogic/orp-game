@@ -124,6 +124,8 @@ end)
 function OnCharacterCreated(player)
 	PlayerData[player].id = mariadb_get_insert_id()
 
+	CreatePlayerClothing(player)
+
 	print("Character ID "..PlayerData[player].id.." created for "..player)
 
 	PlayerData[player].x = 170694.515625
