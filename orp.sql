@@ -93,12 +93,12 @@ CREATE TABLE `bans` (
 DROP TABLE IF EXISTS `clothing`;
 CREATE TABLE `clothing` (
   `id` int(11) NOT NULL,
-  `hair` int(11) NOT NULL,
-  `top` int(11) NOT NULL,
-  `pants` int(11) NOT NULL,
-  `shoe` int(11) NOT NULL,
-  `hair_color` int(11) NOT NULL,
-  `skin_color` int(11) NOT NULL,
+  `hair` int(11) DEFAULT 1,
+  `top` int(11) DEFAULT 1,
+  `pants` int(11) DEFAULT 1,
+  `shoe` int(11) DEFAULT 1,
+  `hair_color` int(11) DEFAULT 1,
+  `skin_color` int(11) DEFAULT 13158600,
   KEY `id` (`id`),
   CONSTRAINT `clothing_ibfk_1` FOREIGN KEY (`id`) REFERENCES `characters` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
