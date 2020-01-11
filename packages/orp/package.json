@@ -3,7 +3,6 @@
 	"version": "1.0",
 	"server_scripts": [
 		"server/orp_s.lua",
-		"server/worlddoors.lua",
 		"server/chat/chat_s.lua",
 		"server/database/database_s.lua",
 		"server/accounts/accounts_s.lua",
