@@ -105,6 +105,16 @@ function OnAccountCreated(player)
 	--CallRemoteEvent(player, "askClientCreation")
 end
 
+function CreateIPBan(player, ip, admin, bantime, reason)
+
+	if bantime ~= 0 then
+		bantime = os.time("!*t") + bantime
+	end
+
+	local query = mariadb_prepare(sql, "INSERT INTO ipbans VALUES('"..ip.."', "..PlayerData[player].accountid..", "..PlayerData[admin].accountid..", "..bantime..", '"..reason.."')")
+	mariadb_async_query(sql, query)
+end
+
 AddRemoteEvent("accounts:characterCreated", function (player, firstname, lastname, gender)
 	PlayerData[player].firstname = firstname
 	PlayerData[player].lastname = lastname
