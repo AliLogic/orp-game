@@ -58,11 +58,33 @@ local function cmd_house(playerid, prefix, ...)
 
 	elseif prefix == "buy" then
 
-		AddPlayerChat(playerid, "Coming soon!")
+		if HousingData[house].owner == 0 and HousingData[house].ownership_type == HOUSE_OWNERSHIP_SOLE then
+
+			if HousingData[house].price > GetPlayerCash(playerid) then
+				AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You have insufficient funds to purchase this property.")
+			end
+
+			RemovePlayerCash(playerid, HousingData[house].price)
+			HousingData[house].owner = PlayerData[playerid].id
+
+			AddPlayerChat(playerid, "You have successfully purchased the house ("..house..") for <span color=\""..colour.COLOUR_DARKGREEN().."\">$"..HousingData[house].price.."</>.")
+		else
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house can not be purchased.</>")
+		end
 
 	elseif prefix == "sell" then
 
-		AddPlayerChat(playerid, "Coming soon!")
+		if HousingData[house].owner == PlayerData[playerid].id then
+
+			local price = math.floor(HousingData[house].price / 2)
+
+			AddPlayerCash(playerid, price)
+			HousingData[house].owner = 0
+
+			AddPlayerChat(playerid, "You have successfully sold the house ("..house..") for <span color=\""..colour.COLOUR_DARKGREEN().."\">$"..price.."</>.")
+		else
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You do not own this house.")
+		end
 
 	else
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> un(lock), kickdoor, ring, rent, buy, sell")
