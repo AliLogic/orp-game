@@ -1,4 +1,18 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local colour = ImportPackage("colours")
+
+-- Functions
 
 local function OnPlayerLoadWhitelist(player)
 	if mariadb_get_row_count() > 0 then
@@ -42,12 +56,11 @@ function OnWhitelistLogLoaded(playerid)
 	-- webgui.ShowMessageBox(playerid, messages)
 end
 
+-- Events
+
 AddEvent("OnPlayerSteamAuth", function(playerid)
 
 	local query = mariadb_prepare(sql, "SELECT * FROM whitelists WHERE steam_id = '?' LIMIT 1;",
 		tostring(GetPlayerSteamId(playerid)))
 	mariadb_query(sql, query, OnPlayerLoadWhitelist, playerid)
 end)
-
---
--- END OF THE FILE

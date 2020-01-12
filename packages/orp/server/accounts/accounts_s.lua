@@ -38,6 +38,7 @@ AddEvent("OnPlayerSteamAuth", OnPlayerSteamAuth)
 
 function OnPlayerQuit(player)
 	CallEvent("UnrentPlayerVehicle", player)
+	DestroyDrivingTest(player)
 	SavePlayerAccount(player)
 	DestroyPlayerData(player)
 end
@@ -548,3 +549,18 @@ AddCommand("logout", function (player)
 		ShowCharacterSelection(player, true)
 	end)
 end)
+
+function DestroyDrivingTest(playerid)
+	PlayerData[playerid].driving_test = false
+	PlayerData[playerid].test_vehicle = 0
+	PlayerData[playerid].test_warns = 0
+	PlayerData[playerid].test_stage = 0
+end
+
+function CancelDrivingTest(playerid)
+	if PlayerData[playerid].driving_test == true then
+		DestroyVehicle(PlayerData[playerid].test_vehicle)
+		DestroyVehicleData(PlayerData[playerid].test_vehicle)
+		DestroyDrivingTest(playerid)
+	end
+end

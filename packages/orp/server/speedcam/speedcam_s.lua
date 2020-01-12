@@ -3,16 +3,21 @@ Copyright (C) 2019 Onset Roleplay
 
 Developers:
 * Bork
-* Logic
+* Logic_
 
 Contributors:
 * Blue Mountains GmbH
 ]]--
 
+-- Variables
+
 local colour = ImportPackage('colours')
 
 SpeedcamData = {}
 MAX_SPEEDCAMS = 128
+SPEEDCAM_RANGE = 1000
+
+-- Functions
 
 local function CreateSpeedcamData(speedcam)
 
@@ -47,7 +52,7 @@ end
 
 local function OnSpeedcamTick(speedcam)
 
-	for k, v in pairs(GetPlayersInRange3D(SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z, 1200)) do
+	for k, v in pairs(GetPlayersInRange3D(SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z, SPEEDCAM_RANGE)) do
 
 		local vehicle = GetPlayerVehicle(v)
 		if vehicle ~= 0 and GetPlayerState(v) == PS_DRIVER then
@@ -172,23 +177,6 @@ local function Speedcam_Unload(speedcam)
 	mariadb_async_query(sql, query, OnSpeedcamUnloaded, speedcam)
 end
 
-AddEvent("UnloadSpeedcams", function()
-	for i = 1, #SpeedcamData, 1 do
-		Speedcam_Unload(i)
-	end
-end)
-
-AddEvent('LoadSpeedcams', function ()
-	mariadb_async_query(sql, "SELECT * FROM speedcams;", OnSpeedcamLoad)
-end)
-
-AddRemoteEvent("OnSpeedcamFlashed", function(playerid, speedcam, speed)
-
-	local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
-
-	AddPlayerChat(playerid, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
-end)
-
 function Speedcam_Nearest(playerid)
 
 	local x, y, z = GetPlayerLocation(playerid)
@@ -206,3 +194,22 @@ function Speedcam_Nearest(playerid)
 
 	return 0
 end
+
+-- Events
+
+AddEvent("UnloadSpeedcams", function()
+	for i = 1, #SpeedcamData, 1 do
+		Speedcam_Unload(i)
+	end
+end)
+
+AddEvent('LoadSpeedcams', function ()
+	mariadb_async_query(sql, "SELECT * FROM speedcams;", OnSpeedcamLoad)
+end)
+
+AddRemoteEvent("OnSpeedcamFlashed", function(playerid, speedcam, speed)
+
+	local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
+
+	AddPlayerChat(playerid, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
+end)
