@@ -1,12 +1,12 @@
 AddEvent("OnPackageStart", function ()
 	local pakname = "FemaleChar"
-	local res = LoadPak(pakname, "/TeslaEVC/", "../../../OnsetModding/Plugins/TeslaEVC/Content")
+	local res = LoadPak(pakname, "/FemaleChar/", "../../../OnsetModding/Plugins/FemaleChar/Content")
 	AddPlayerChat("Loading of "..pakname..": "..tostring(res))
 end)
 
 function SetPlayerFemale(player)
     local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Body")
-	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset('/TeslaEVC/TeslaEVC'))
+	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset('/FemaleChar/FemaleChar'))
 	AddPlayerChat('Set to female')
 
 	for _, v in pairs(GetAllFilesInPak("FemaleChar")) do
