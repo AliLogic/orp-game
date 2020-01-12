@@ -33,12 +33,10 @@ function numberWithCommas(x) {
 }
 
 function toggleCharMenu() {
-	CallEvent("charui:debug", 'ToggleCharMenu called.')
 	$('#body').toggle();
 }
 
 $(document).ready(function () {
-	CallEvent("charui:debug", 'document is loading...')
 	/*setCharacterInfo({
 		slot: 0,
 		firstname: "John",
@@ -111,7 +109,5 @@ $(document).ready(function () {
 			CallEvent('charui:delete', '3');
 		}
 	});
-
-	CallEvent("charui:debug", 'Document is now ready!')
 	//toggleCharMenu();
 });

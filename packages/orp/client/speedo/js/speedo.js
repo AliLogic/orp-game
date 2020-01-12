@@ -21,5 +21,4 @@ function setSpeedoRPM(value) {
 }
 
 $(document).ready(function () {
-	CallEvent('speedo:debug', 'Speedo is now ready!');
 });

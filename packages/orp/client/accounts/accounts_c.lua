@@ -92,7 +92,6 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata, logout)
 
 		if count ~= 0 then
 			for i = 1, count, 1 do
-				AddPlayerChat(charUIdata[i])
 				ExecuteWebJS(charUI, "setCharacterInfo("..charUIdata[i]..");")
 			end
 		end
@@ -229,7 +228,6 @@ AddEvent('charui:spawn', function (slot)
 	ShowHealthHUD(true)
 	ShowWeaponHUD(true)
 
-	AddPlayerChat('Logging in as '..GetPlayerName()..' [DEBUG] slot '..slot)
 	CallRemoteEvent("accounts:login", math.tointeger(slot))
 end)
 
