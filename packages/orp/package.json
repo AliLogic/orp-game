@@ -55,7 +55,8 @@
 		"client/cinema/cinema_c.lua",
 		"client/speedo/speedo_c.lua",
 		"client/speedcam/speedcam_c.lua",
-		"client/objects/teslaevc/teslaevc_c.lua",
+		"client/models/teslaevc/teslaevc_c.lua",
+		"client/models/femalechar/femalechar_c.lua",
 		"client/customization/customization_c.lua",
 		"client/customization/charcustom_c.lua",
 		"client/misc/json.lua",
@@ -99,6 +100,7 @@
 		"client/customization/css/divider.min.css",
 		"client/customization/js/charcustom.js",
 		"client/customization/charcustom.html",
-		"client/objects/teslaevc/TeslaEVC.pak"
+		"client/models/teslaevc/TeslaEVC.pak",
+		"client/models/femalechar/FemaleChar.pak"
 	]
 }
