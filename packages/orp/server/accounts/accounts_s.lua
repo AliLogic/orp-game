@@ -352,6 +352,11 @@ function CreatePlayerData(player)
 	PlayerData[player].pd_timer = 0
 	PlayerData[player].renting = 0 -- Vehicle ID that a player is renting.
 
+	PlayerData[player].driving_test = false
+	PlayerData[player].test_vehicle = 0
+	PlayerData[player].test_warns = 0
+	PlayerData[player].test_stage = 0
+
 	CreatePlayerClothingData(player)
 
 	print("Data created for: "..player)
