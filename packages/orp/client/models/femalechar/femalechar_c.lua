@@ -8,3 +8,4 @@ function SetPlayerFemale(player)
     local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Body")
     SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset('/FemaleChar/FemaleChar'))
 end
+AddRemoteEvent('SetPlayerFemale', SetPlayerFemale)

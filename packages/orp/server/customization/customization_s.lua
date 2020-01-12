@@ -244,6 +244,10 @@ AddCommand("pupil", function (playerid, pupil)
 	SetPlayerClothing(playerid, playerid)
 end)
 
+AddCommand("female", function (player)
+	CallRemoteEvent(player, 'SetPlayerFemale', player)
+end)
+
 -- Events
 
 AddRemoteEvent("ServerSetPlayerClothing", SetPlayerClothing)
