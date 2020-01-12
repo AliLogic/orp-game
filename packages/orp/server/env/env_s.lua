@@ -37,7 +37,7 @@ function UpdateWeather()
 	local res = http_get("http://api.openweathermap.org/data/2.5/weather?q=Nevada,us&APPID="..apikey)
 	res = json_decode(res.body)
 
-	print('Weather ID: '..res)
+	print('Weather ID: '..json_decode(res))
 end
 
 AddEvent("OnPackageStart", function()
