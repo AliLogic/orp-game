@@ -58,6 +58,7 @@
 		"client/objects/teslaevc/teslaevc_c.lua",
 		"client/customization/customization_c.lua",
 		"client/customization/charcustom_c.lua",
+		"client/misc/json.lua",
 		"client/misc/misc_c.lua"
 	],
 	"files": [
