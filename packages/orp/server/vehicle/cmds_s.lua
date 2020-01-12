@@ -1,4 +1,60 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local colour = ImportPackage('colours')
+
+-- Functions and Events
+
+local function cmd_drivingtest(playerid)
+
+	if PlayerData[playerid].driving_test then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have already started the driving test!</>")
+	end
+
+	local x, y, z = GetPlayerLocation(playerid)
+
+	if GetDistance3D(x, y, z, 0.0, 0.0, 0.0) > 120.0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in range of the pickup.</>")
+	end
+
+	if GetPlayerLicense(playerid, LICENSE_TYPE_GDL) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have your General Driving License (GDL) already!</>")
+	end
+
+	if GetPlayerCash(playerid) < 250 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have $250 for the driving test.</>")
+	end
+
+	local vehicleid = CreateVehicle(1, 0.0, 0.0, 0.0, 90.0)
+
+	PlayerData[playerid].test_vehicle = vehicleid
+	SetVehicleColor(vehicleid, RGB(255, 255, 255, 255))
+	PlayerData[playerid].test_warns = 0
+
+	if vehicleid ~= 0 then
+
+		CreateVehicleData(vehicleid)
+		VehicleData[vehicleid].fuel = 100
+
+		PlayerData[playerid].driving_test = true
+		PlayerData[playerid].test_stage = 1
+		SetPlayerInVehicle(playerid, PlayerData[playerid].test_vehicle, 1)
+
+		AddPlayerChat(playerid, "You have started the driving test.")
+	end
+
+	return
+end
+AddCommand("drivingtest", cmd_drivingtest)
 
 local function cmd_engine(playerid)
 
