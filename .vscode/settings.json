@@ -313,6 +313,11 @@
         "http_set_user_agent",
         "GetPlayersInRange3D",
         "SetVehicleLightEnabled",
-        "GetAllFilesInPak"
+        "GetAllFilesInPak",
+        "IsGameDevMode",
+        "EHorizTextAligment",
+        "UTextRenderComponent",
+        "EComponentMobility",
+        "AStaticMeshActor"
     ]
 }
