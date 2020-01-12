@@ -6,6 +6,7 @@ end)
 
 function SetPlayerFemale(player)
     local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Body")
-    SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset('/FemaleChar/FemaleChar'))
+	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset('/FemaleChar/FemaleChar'))
+	AddPlayerChat('Set to female')
 end
 AddRemoteEvent('SetPlayerFemale', SetPlayerFemale)
