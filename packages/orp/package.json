@@ -40,6 +40,7 @@
 		"server/doors/cmds_s.lua",
 		"server/pumps/pumps_s.lua",
 		"server/pumps/cmds_s.lua",
+		"server/trafficlights/trafficlights_s.lua",
 		"server/misc/json.lua",
 		"server/misc/misc_s.lua"
 	],
@@ -59,6 +60,7 @@
 		"client/models/femalechar/femalechar_c.lua",
 		"client/customization/customization_c.lua",
 		"client/customization/charcustom_c.lua",
+		"client/trafficlights/trafficlights_c.lua",
 		"client/misc/json.lua",
 		"client/misc/misc_c.lua"
 	],
