@@ -2,7 +2,7 @@ local colour = ImportPackage("colours")
 
 local function cmd_house(playerid, prefix, ...)
 
-	if prefix == nil or #{...} == 0 then
+	if prefix == nil then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(h)ouse <prefix>")
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> un(lock), kickdoor, ring, rent, buy, sell")
 	end
@@ -21,6 +21,10 @@ local function cmd_house(playerid, prefix, ...)
 
 	elseif prefix == "kickdoor" then
 
+		if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">You are not in the appropriate faction to execute this command.</>")
+		end
+
 		if not HousingData[house].locked then
 			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house is already unlocked.</>")
 		end
@@ -32,7 +36,7 @@ local function cmd_house(playerid, prefix, ...)
 
 		Delay(2000, function ()
 
-			if GetPlayerFactionType(playerid) ~= FACTION_POLICE or Housing_Nearest(playerid) ~= house then
+			if Housing_Nearest(playerid) ~= house then
 				return
 			end
 
