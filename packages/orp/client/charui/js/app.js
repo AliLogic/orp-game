@@ -1,8 +1,6 @@
 const MAX_CHARACTERS = 3;
 const character = [];
 
-CallEvent("charui:debug", 'charUI 1.0 Loaded!')
-
 function setCharacterInfo(char) {
 	//char = JSON.parse(char);
 	console.log(character[char.slot - 1].info);

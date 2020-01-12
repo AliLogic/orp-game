@@ -14,11 +14,11 @@ AddEvent("OnPackageStart", function ()
 	local pakname = "TeslaEVC"
 
 	local res = LoadPak(pakname, "/TeslaEVC/", "../../../OnsetModding/Plugins/TeslaEVC/Content")
-	AddPlayerChat("Loading of "..pakname..": "..tostring(res))
+	-- AddPlayerChat("Loading of "..pakname..": "..tostring(res))
 
 	res = ReplaceObjectModelMesh(39, "/TeslaEVC/TeslaEVC") 
-	AddPlayerChat("ReplaceObjectModelMesh: "..tostring(res))
+	-- AddPlayerChat("ReplaceObjectModelMesh: "..tostring(res))
 
-	res = SetObjectScale(39, 0.75, 0.75, 0.75)
-	AddPlayerChat("SetObjectScale: "..tostring(res))
+	-- res = SetObjectScale(39, 0.75, 0.75, 0.75)
+	-- AddPlayerChat("SetObjectScale: "..tostring(res))
 end)
