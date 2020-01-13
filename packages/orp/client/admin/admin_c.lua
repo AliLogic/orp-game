@@ -1,5 +1,11 @@
 local colour = ImportPackage('colours')
-local Dialog = ImportPackage('dialogui')
+local borkui = ImportPackage('borkui')
+
+local test = borkui.create()
+borkui.addUITitle(test, 'test')
+borkui.addUIButton(test, 'Test')
+
+--[[local Dialog = ImportPackage('dialogui')
 Dialog.setGlobalTheme("default-dark")
 
 local confirmation = nil
@@ -30,4 +36,16 @@ AddEvent("OnDialogSubmit", function(dialog, button)
 
 	target = nil
 	vehicle = nil
+end)]]
+
+AddEvent("borkui:OnDialogSubmit", function (dialog, button, ...)
+	AddPlayerChat('Dialog value: '..dialog)
+	AddPlayerChat('Variable Value: '..test)
+	AddPlayerChat('Button pressed: '..button)
+	AddPlayerChat('Arguments: '..table.concat({...}, " "))
+end)
+
+AddRemoteEvent('borkui', function ()
+	AddPlayerChat('(Client): Received event \'borkui\' from server.')
+	borkui.show(test)
 end)

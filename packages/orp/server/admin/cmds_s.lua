@@ -813,3 +813,8 @@ AddCommand("near", function(playerid)
 		AddPlayerChat(playerid, "You are standing near pump ID: "..id..".")
 	end
 end)
+
+AddCommand('borkui', function (player)
+	AddPlayerChat(player, '(Server): Sending event \'borkui\' to client.')
+	CallRemoteEvent(player, 'borkui')
+end)
