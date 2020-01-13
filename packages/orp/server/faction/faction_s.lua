@@ -183,9 +183,9 @@ AddEvent('UnloadFactions', function ()
 	end
 end)
 
-function LoadCharacterFaction(player, id)
+function LoadCharacterFaction(player)
 	local query = mariadb_prepare(sql, "SELECT * FROM faction_members WHERE char_id = '?' LIMIT 1",
-		id
+		PlayerData[player].id
 	)
 	mariadb_async_query(sql, query, OnLoadCharacterFaction, player)
 end

@@ -289,7 +289,7 @@ function OnCharacterLoaded(player, id)
 
 		SetPlayerLoggedIn(player)
 
-		LoadCharacterFaction(player, id)
+		LoadCharacterFaction(player)
 		LoadPlayerClothing(player)
 		CallEvent("LoadInventory", player)
 
