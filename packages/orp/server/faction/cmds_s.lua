@@ -30,7 +30,7 @@ AddCommand("online", function (playerid)
 
 	for _, v in ipairs(GetAllPlayers()) do
 		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id and playerid ~= v then
-			AddPlayerChat(v, FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid..")")
+			AddPlayerChat(playerid, FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid..")")
 		end
 	end
 
