@@ -197,9 +197,13 @@ AddCommand("megaphone", cmd_m)
 AddCommand("badge", function (playerid, lookupid)
 	local factionId = PlayerData[playerid].faction
 
+	AddPlayerChat(playerid, "id:"..factionId)
+
 	if factionId == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
+
+	AddPlayerChat(playerid, "type:"..FactionData[factionId].type)
 
 	if FactionData[factionId].type ~= FACTION_POLICE then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
