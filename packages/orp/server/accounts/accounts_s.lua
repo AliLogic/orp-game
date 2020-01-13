@@ -161,10 +161,8 @@ function OnAccountLoaded(player)
 		--This case should not happen but still handle it
 		KickPlayer(player, "An error occured while loading your account 😨")
 	else
-		local result = mariadb_get_assoc(1)
-
-		PlayerData[player].admin = math.tointeger(result['admin'])
-		PlayerData[player].helper = math.tointeger(result['helper'])
+		PlayerData[player].admin = mariadb_get_value_name_int(1, "admin")
+		PlayerData[player].helper = mariadb_get_value_name_int(1, "helper")
 		--PlayerData[player].cash = math.tointeger(result['cash'])
 		--PlayerData[player].bank_balance = math.tointeger(result['bank_balance'])
 		--PlayerData[player].name = tostring(result['name'])

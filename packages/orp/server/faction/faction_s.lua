@@ -106,15 +106,15 @@ function OnFactionLoaded(factionid)
 	else
 		CreateFactionData(factionid)
 
-		FactionData[factionid].id = mariadb_get_value_name_int('id')
-		FactionData[factionid].name = mariadb_get_value_name('name')
-		FactionData[factionid].short_name = mariadb_get_value_name('short_name')
-		FactionData[factionid].motd = mariadb_get_value_name('motd')
-		FactionData[factionid].type = mariadb_get_value_name_int('type')
+		FactionData[factionid].id = mariadb_get_value_name_int(1, "id")
+		FactionData[factionid].name = mariadb_get_value_name(1, "name")
+		FactionData[factionid].short_name = mariadb_get_value_name(1, "short_name")
+		FactionData[factionid].motd = mariadb_get_value_name(1, "motd")
+		FactionData[factionid].type = mariadb_get_value_name_int(1, "type")
 
-		FactionData[factionid].leadership_rank = mariadb_get_value_name_int('leadership_rank')
-		FactionData[factionid].radio_dimension = mariadb_get_value_name_int('radio_dimension')
-		FactionData[factionid].bank = mariadb_get_value_name_int('bank')
+		FactionData[factionid].leadership_rank = mariadb_get_value_name_int(1, "leadership_rank")
+		FactionData[factionid].radio_dimension = mariadb_get_value_name_int(1, "radio_dimension")
+		FactionData[factionid].bank = mariadb_get_value_name_int(1, "bank")
 
 		local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ?",
 			FactionData[factionid].id)
@@ -194,10 +194,8 @@ function OnLoadCharacterFaction(playerid)
 		PlayerData[playerid].faction = 0
 		PlayerData[playerid].faction_rank = 0
 	else
-		local result = mariadb_get_assoc(1)
-
-		PlayerData[playerid].faction = result['faction_id']
-		PlayerData[playerid].faction_rank = result['rank_id']
+		PlayerData[playerid].faction = mariadb_get_value_name_int(1, "faction_id")
+		PlayerData[playerid].faction_rank = mariadb_get_value_name_int(1, "rank_id")
 
 		AddPlayerChat(playerid, "Faction Id: "..PlayerData[playerid].faction.." Faction Rank: "..PlayerData[playerid].faction_rank..".")
 	end
