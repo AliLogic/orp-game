@@ -47,7 +47,7 @@ AddCommand("finvite", function (playerid, lookupid)
 	end
 
 	if lookupid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /fremove <playerid>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /finvite <playerid>")
 	end
 
 	lookupid = tonumber(lookupid)
@@ -339,7 +339,7 @@ AddCommand("f", function(playerid, ...)
 
 	--[[if (#msg == 0 or #msg > 128) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Message has invalid length 128")
-	end]]--
+	end]]--t
 
 	for _, v in ipairs(GetAllPlayers()) do
 		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id then

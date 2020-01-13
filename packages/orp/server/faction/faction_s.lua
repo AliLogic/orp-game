@@ -104,18 +104,17 @@ function OnFactionLoaded(factionid)
 	if mariadb_get_row_count() == 0 then
 		print('Error with loading faction ID'..factionid)
 	else
-		local result = mariadb_get_assoc(1)
 		CreateFactionData(factionid)
 
-		FactionData[factionid].id = result['id']
-		FactionData[factionid].name = result['name']
-		FactionData[factionid].short_name = result['short_name']
-		FactionData[factionid].motd = result['motd']
-		FactionData[factionid].type = tonumber(result['type'])
+		FactionData[factionid].id = mariadb_get_value_name_int('id')
+		FactionData[factionid].name = mariadb_get_value_name('name')
+		FactionData[factionid].short_name = mariadb_get_value_name('short_name')
+		FactionData[factionid].motd = mariadb_get_value_name('motd')
+		FactionData[factionid].type = mariadb_get_value_name_int('type')
 
-		FactionData[factionid].leadership_rank = tonumber(result['leadership_rank'])
-		FactionData[factionid].radio_dimension = tonumber(result['radio_dimension'])
-		FactionData[factionid].bank = tonumber(result['bank'])
+		FactionData[factionid].leadership_rank = mariadb_get_value_name_int('leadership_rank')
+		FactionData[factionid].radio_dimension = mariadb_get_value_name_int('radio_dimension')
+		FactionData[factionid].bank = mariadb_get_value_name_int('bank')
 
 		local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ?",
 			FactionData[factionid].id)
