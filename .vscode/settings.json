@@ -318,6 +318,7 @@
         "EHorizTextAligment",
         "UTextRenderComponent",
         "EComponentMobility",
-        "AStaticMeshActor"
+        "AStaticMeshActor",
+        "IsPlayerInRangeOfPlayer"
     ]
 }

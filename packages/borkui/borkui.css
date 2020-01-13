@@ -1,0 +1,29 @@
+html {
+	overflow: hidden !important;
+}
+
+.card {
+	border-radius: 4px;
+}
+
+.card-content {
+	padding: 10px !important;
+}
+
+h1.title {
+	color: #4a4a4a !important;
+}
+
+.wrapper {
+	margin-left: 33%;
+	margin-right: 33%;
+}
+
+.is-divider {
+	margin-top: 16px !important;
+	margin-bottom: 16px !important;
+}
+
+.column {
+	padding: 6px !important;
+}
