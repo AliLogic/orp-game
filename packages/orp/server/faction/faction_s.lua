@@ -204,7 +204,7 @@ function OnLoadCharacterFaction(playerid)
 end
 
 function GetPlayerFactionType(player)
-	if PlayerData[player].faction == 0 or FactionData[PlayerData[player].faction].type == nil then
+	if PlayerData[player].faction == 0 then
 		return FACTION_NONE
 	end
 	return FactionData[PlayerData[player].faction].type
