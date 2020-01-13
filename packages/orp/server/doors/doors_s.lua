@@ -187,9 +187,7 @@ end
 
 AddEvent("OnPlayerInteractDoor", function(player, door, bWantsOpen)
 
-	local index = Door_Nearest(player)
-
-	if index ~= 0 and DoorData[index].is_locked == 1 then
+	if DoorData[door].is_locked == 1 then
 		return AddPlayerChat(player, "This door is locked!")
 	end
 
