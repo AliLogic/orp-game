@@ -197,13 +197,9 @@ AddCommand("megaphone", cmd_m)
 AddCommand("badge", function (playerid, lookupid)
 	local factionId = PlayerData[playerid].faction
 
-	AddPlayerChat(playerid, "id:"..factionId)
-
 	if factionId == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
-
-	AddPlayerChat(playerid, "type:"..FactionData[factionId].type)
 
 	if FactionData[factionId].type ~= FACTION_POLICE then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
@@ -213,23 +209,28 @@ AddCommand("badge", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /badge <playerid>")
 	end
 
+	lookupid = tonumber(lookupid)
+
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
 	end
 
 	local x, y, z = GetPlayerLocation(playerid)
+	local rankId = PlayerData[playerid].faction_rank
 
 	if lookupid == playerid then
-		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. "looks at their badge.</>")
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " looks at their badge.</>")
 	else
-		-- If distance is more than whats normal then send them an error message!
+		if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+		end
 
-		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. "shows " .. GetPlayerName(lookupid) .." their badge.</>")
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " shows " .. GetPlayerName(lookupid) .." their badge.</>")
 	end
 
 	AddPlayerChat(lookupid, "______________________________________")
 	AddPlayerChat(lookupid, "  Name: "..GetPlayerName(playerid))
-	AddPlayerChat(lookupid, "  Rank: "..PlayerData[playerid].faction_rank)
+	AddPlayerChat(lookupid, "  Rank: "..FactionRankData[factionId][rankId].rank_name.." "..rankId)
 	AddPlayerChat(lookupid, "  Agency: "..FactionData[factionId].name)
 	AddPlayerChat(lookupid, "______________________________________")
 end)
