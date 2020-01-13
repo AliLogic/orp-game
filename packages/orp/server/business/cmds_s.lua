@@ -1,27 +1,80 @@
 local colour = ImportPackage("colours")
 
-AddCommand("buy", function(playerid)
+local function cmd_buy(playerid)
 
 	local x, y, z = GetPlayerLocation(playerid)
 	local distance = 0
+	local biz = Business_Nearest(playerid)
 
-	for v = 1, #BusinessData, 1 do
-
-		if BusinessData[v] ~= nil then
-			if BusinessData[v].enterable == 1 then
-				distance = GetDistance3D(x, y, z, BusinessData[v].mx, BusinessData[v].my, BusinessData[v].mz)
-			end
-
-			if distance <= 200.0 then
-
-				AddPlayerChat(playerid, "You are near the business ID: "..v..".")
-				return
-			end
-		end
+	if biz == 0 then
+		return AddPlayerChat(playerid, "You are not near any business.")
 	end
 
-	return AddPlayerChat(playerid, "You are not near any business.")
-end)
+	if BusinessData[biz].enterable == 1 then
+		distance = GetDistance3D(x, y, z, BusinessData[biz].mx, BusinessData[biz].my, BusinessData[biz].mz)
+	end
+
+	if distance <= 200.0 then
+
+		AddPlayerChat(playerid, "You are near the business ID: "..biz..". Show them the purchase menu!")
+		return
+	end
+end
+
+local function cmd_biz(playerid, prefix, ...)
+
+	if prefix == nil then
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /biz <prefix>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> buy, sell, shop")
+	end
+
+	local biz = Business_Nearest(playerid)
+
+	if biz == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any businesses.</>")
+	end
+
+	if prefix == "shop" then
+
+		cmd_buy(playerid)
+
+	elseif prefix == "buy" then
+
+		if BusinessData[biz].owner == 0 and BusinessData[biz].ownership_type == BUSINESS_OWNERSHIP_SOLE then
+
+			if BusinessData[biz].price > GetPlayerCash(playerid) then
+				AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You have insufficient funds to purchase this property.")
+			end
+
+			RemovePlayerCash(playerid, BusinessData[biz].price)
+			BusinessData[biz].owner = PlayerData[playerid].id
+
+			AddPlayerChat(playerid, "You have successfully purchased the business ("..biz..") for <span color=\""..colour.COLOUR_DARKGREEN().."\">$"..BusinessData[biz].price.."</>.")
+		else
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This business can not be purchased.</>")
+		end
+
+	elseif prefix == "sell" then
+
+		if BusinessData[biz].owner == PlayerData[playerid].id then
+
+			local price = math.floor(BusinessData[biz].price / 2)
+
+			AddPlayerCash(playerid, price)
+			BusinessData[biz].owner = 0
+
+			AddPlayerChat(playerid, "You have successfully sold the business ("..biz..") for <span color=\""..colour.COLOUR_DARKGREEN().."\">$"..price.."</>.")
+		else
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You do not own this business.")
+		end
+
+	else
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /biz <prefix>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> buy, sell, shop")
+	end
+end
+
+AddCommand("biz", cmd_biz)
 
 local function cmd_acb(player, biztype, enterable, price, ...)
 	if (PlayerData[player].admin < 4) then
