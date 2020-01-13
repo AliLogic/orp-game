@@ -17,7 +17,7 @@ AddEvent("OnPackageStop", function()
 	DestroyWebUI(web)
 end)
 
-function CreateUI(align)
+local function CreateUI(align)
 	if align < 0 or align > 2 then
 		align = 0
 	end
@@ -33,7 +33,7 @@ function CreateUI(align)
 	return id
 end
 
-function AddUITitle(id, text)
+local function AddUITitle(id, text)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -44,7 +44,7 @@ function AddUITitle(id, text)
 	dialogs[id].title = text
 end
 
-function AddUIInformation(id, text)
+local function AddUIInformation(id, text)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -56,7 +56,7 @@ function AddUIInformation(id, text)
 	dialogs[id].info = text
 end
 
-function AddUIDivider(id)
+local function AddUIDivider(id)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -64,7 +64,7 @@ function AddUIDivider(id)
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_DIVIDER})
 end
 
-function AddUIButton(id, text, colour, size, rounded, fullwidth, anchor)
+local function AddUIButton(id, text, colour, size, rounded, fullwidth, anchor)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -86,7 +86,7 @@ function AddUIButton(id, text, colour, size, rounded, fullwidth, anchor)
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_BUTTON, text, colour, size, rounded, fullwidth, anchor})
 end
 
-function AddUITextInput(id, label, size, type, placeholder)
+local function AddUITextInput(id, label, size, type, placeholder)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -111,7 +111,7 @@ function AddUITextInput(id, label, size, type, placeholder)
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_TEXTINPUT, label, size, type, placeholder})
 end
 
-function AddUIDropdown(id, options, size, rounded, label)
+local function AddUIDropdown(id, options, size, rounded, label)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -139,7 +139,7 @@ function AddUIDropdown(id, options, size, rounded, label)
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_DROPDOWN, jsonoptions, size, rounded, label})
 end
 
-function ShowUI(id)
+local function ShowUI(id)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -196,7 +196,7 @@ function HideUI()
     SetWebVisibility(web, WEB_HITINVISIBLE)
 end
 
-function DestroyUI(id)
+local function DestroyUI(id)
     if lastOpened == id then
         closeDialog()
     end
