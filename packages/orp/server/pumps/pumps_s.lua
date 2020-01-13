@@ -209,7 +209,7 @@ function OnFuelTick()
 				if VehicleData[v].fuel > 0 then
 					VehicleData[v].fuel = (VehicleData[v].fuel - 1)
 
-					if VehicleData[v].fuel > 5 then
+					if VehicleData[v].fuel <= 5 then
 
 						AddPlayerChat(GetVehicleDriver(v), "This vehicle is low on fuel. You must visit a fuel station and refuel it!");
 					end
