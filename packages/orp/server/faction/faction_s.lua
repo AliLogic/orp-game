@@ -66,6 +66,11 @@ function OnFactionCreated(faction, name, short_name, leadership_rank, fac_type)
 	FactionData[faction].short_name = short_name
 	FactionData[faction].leadership_rank = leadership_rank
 	FactionData[faction].type = fac_type
+
+	local query
+	for i = 1, leadership_rank, 1 do
+		mariadb_async_query(sql, "INSERT INTO faction_ranks (id, rank_id, rank_name) VALUES('"..FactionData[faction].id.."', "..i..", 'Rank"..i.."')")
+	end
 end
 
 function Faction_Destroy(factionid)
