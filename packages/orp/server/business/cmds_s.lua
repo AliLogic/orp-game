@@ -25,7 +25,7 @@ local function cmd_biz(playerid, prefix, ...)
 
 	if prefix == nil then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /biz <prefix>")
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> buy, sell, shop")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> (un)lock, buy, sell, shop")
 	end
 
 	local biz = Business_Nearest(playerid)
@@ -34,7 +34,17 @@ local function cmd_biz(playerid, prefix, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any businesses.</>")
 	end
 
-	if prefix == "shop" then
+	if prefix == "lock" or prefix == "unlock" then
+
+		if BusinessData[biz].locked then
+			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
+		else
+			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
+		end
+
+		BusinessData[biz].locked = (not BusinessData[biz].locked)
+
+	elseif prefix == "shop" then
 
 		cmd_buy(playerid)
 
@@ -67,6 +77,38 @@ local function cmd_biz(playerid, prefix, ...)
 		else
 			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You do not own this business.")
 		end
+
+	elseif prefix == "kickdoor" then
+
+		if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">You are not in the appropriate faction to execute this command.</>")
+		end
+
+		if not BusinessData[biz].locked then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house is already unlocked.</>")
+		end
+
+		local x, y, z = GetPlayerLocation(playerid)
+		AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the house's door down.")
+
+		Delay(2000, function ()
+
+			if Business_Nearest(playerid) ~= biz then
+				return
+			end
+
+			SetPlayerAnimation(playerid, "KICKDOOR")
+
+			if Random(0, 6) <= 2 then
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">failed</> to kick the door down.")
+				AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has failed to kick the door down.")
+			else
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">succeeded</> to kick the door down.")
+				AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
+
+				BusinessData[biz].locked = 0
+			end
+		end)
 
 	else
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /biz <prefix>")

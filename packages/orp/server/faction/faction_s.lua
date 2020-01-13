@@ -76,6 +76,20 @@ function Faction_Destroy(factionid)
 	local query = mariadb_prepare(sql, "DELETE FROM factions WHERE id = ?", FactionData[factionid].id)
 	mariadb_async_query(sql, query)
 
+	query = mariadb_prepare(sql, "DELETE FROM faction_members WHERE faction_id = '?'", FactionData[factionid].id)
+	mariadb_async_query(sql, query)
+
+	for k, v in pairs(GetAllPlayers()) do
+
+		if PlayerData[v].faction == factionid then
+			PlayerData[v].faction = 0
+			PlayerData[v].faction_rank = 0
+
+
+			AddPlayerChat(v, "You have been kicked out of your faction because it's deleted.")
+		end
+	end
+
 	DestroyFactionData(factionid)
 
 	return true

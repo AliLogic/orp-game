@@ -34,6 +34,7 @@ local function cmd_acsc(player, speed)
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Speedcam wasn't able to be created.</>")
 	else
 		AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Speedcam (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), speedcam))
+		Slap(player)
 	end
 	return
 end

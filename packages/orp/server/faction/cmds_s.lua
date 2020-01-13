@@ -1,5 +1,142 @@
 local colour = ImportPackage('colours')
 
+AddCommand("fhelp", function (playerid)
+	local faction_type = GetPlayerFactionType(playerid)
+
+	if faction_type ~= FACTION_NONE then
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /online, /f, /fquit, /flocker, /finvite, /fremove, /frank</>")
+	end
+
+	if faction_type == FACTION_CIVILIAN then
+	elseif faction_type == FACTION_POLICE then
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /hcuff, /drag, /detain, /mdc, /arrest, /radio, /d, /callsign, /take</>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /ticket, /spike, /roadblock, /fingerprint, /impound, /revokeweapon</>")
+	elseif faction_type == FACTION_MEDIC then
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /radio, /d, /bandage, /revive</>")
+	elseif faction_type == FACTION_GOV then
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /radio, /d</>")
+	end
+
+	return 1
+end)
+
+AddCommand("online", function (playerid)
+	local factionid = PlayerData[playerid].faction
+	local faction_rank = PlayerData[playerid].faction_rank
+
+	if factionid == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+	end
+
+	for _, v in ipairs(GetAllPlayers()) do
+		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id and playerid ~= v then
+			AddPlayerChat(v, FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid..")")
+		end
+	end
+
+	return 1
+end)
+
+AddCommand("finvite", function (playerid, lookupid)
+
+	local factionid = PlayerData[playerid].faction
+	local faction_rank = PlayerData[playerid].faction_rank
+
+	if factionid == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+	end
+
+	if lookupid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /fremove <playerid>")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
+	end
+
+	if lookupid == playerid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot kick yourself out of the faction, use /fquit!</>")
+	end
+
+	if PlayerData[playerid].faction == PlayerData[lookupid].faction then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is already in your faction!</>")
+	end
+
+	if GetFactionType(lookupid) ~= FACTION_NONE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is already in a faction!</>")
+	end
+
+	-- Do the invite code here
+
+	return
+end)
+
+AddCommand("fremove", function (playerid, lookupid)
+
+	local factionid = PlayerData[playerid].faction
+	local faction_rank = PlayerData[playerid].faction_rank
+
+	if factionid == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+	end
+
+	if lookupid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /fremove <playerid>")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
+	end
+
+	if lookupid == playerid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot kick yourself out of the faction, use /fquit!</>")
+	end
+
+	if PlayerData[playerid].faction ~= PlayerData[lookupid].faction then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot kick someone who is not in your faction!</>")
+	end
+
+	if PlayerData[playerid].faction_rank < PlayerData[lookupid].faction_rank then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot kick someone whose rank is higher than you!</>")
+	end
+
+	PlayerData[lookupid].faction = 0
+	PlayerData[lookupid].faction_rank = 0
+
+	AddPlayerChat(playerid, ""..GetPlayerName(playerid).." has kicked you out of the faction!")
+	AddPlayerChat(playerid, "You have kicked "..GetPlayerName(lookupid).." from your faction!")
+
+	local query = mariadb_prepare(sql, "DELETE FROM faction_members WHERE char_id = '?'", PlayerData[lookupid].id)
+	mariadb_async_query(sql, query)
+
+	return
+end)
+
+AddCommand("fquit", function (playerid)
+	local factionid = PlayerData[playerid].faction
+	local faction_rank = PlayerData[playerid].faction_rank
+
+	if factionid == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+	end
+
+	-- if player is the faction leader then dont let them kick themselves
+
+	PlayerData[playerid].faction = 0
+	PlayerData[playerid].faction_rank = 0
+
+	AddPlayerChat(playerid, "You have left your faction!")
+
+	local query = mariadb_prepare(sql, "DELETE FROM faction_members WHERE char_id = '?'", PlayerData[playerid].id)
+	mariadb_async_query(sql, query)
+
+	return 1
+end)
+
 AddCommand("mdc", function (playerid)
 
 	local factionId = PlayerData[playerid].faction
@@ -22,8 +159,9 @@ AddCommand("mdc", function (playerid)
 
 	local vehicleid = GetPlayerVehicleID(playerid)
 
-	-- if (vehicle faction == 0 or vehicle faction type is not FACTION_POLICE) then
-	-- return AddPlayerChat(playerid, "This vehicle doesn't have an MDC.")
+	if (GetFactionType(VehicleData[vehicleid].faction) ~= FACTION_POLICE) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This vehicle doesn't have a MDC.</>")
+	end
 
 	--ShowPlayerMDC(playerid)
 	return true
@@ -112,7 +250,9 @@ local function cmd_handcuff(playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
 	end
 
-	-- If distance is more than whats normal then send them an error message!
+	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+	end
 
 	local is_handcuffed = IsPlayerHandcuffed(lookupid)
 
@@ -159,11 +299,35 @@ AddCommand("facmod", function(playerid)
 	AddPlayerChat(playerid, "Coming soon...")
 end)
 
+AddCommand("d", function(playerid, ...)
+	local factiontype = GetPlayerFactionType(playerid)
+
+	if factiontype ~= FACTION_POLICE and factiontype ~= FACTION_GOV and factiontype ~= FACTION_MEDIC then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+
+	if #{...} == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /d <message>")
+	end
+
+	local msg = table.concat({...}, " ")
+	local factionid = PlayerData[playerid].faction
+	local faction_rank = PlayerData[playerid].faction_rank
+
+	for _, v in ipairs(GetAllPlayers()) do
+		factiontype = GetPlayerFactionType(playerid)
+
+		if factiontype ~= FACTION_POLICE and factiontype ~= FACTION_GOV and factiontype ~= FACTION_MEDIC then
+			AddPlayerChat(v, "(( "..FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
+		end
+	end
+end)
+
 AddCommand("f", function(playerid, ...)
 	local factionid = PlayerData[playerid].faction
 	local faction_rank = PlayerData[playerid].faction_rank
 
-	if FactionData[factionid].id ~= 0 then
+	if factionid == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
@@ -182,6 +346,22 @@ AddCommand("f", function(playerid, ...)
 			AddPlayerChat(v, "(( "..FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
 		end
 	end
+end)
+
+AddCommand("bandage", function (playerid)
+	if GetPlayerFactionType(playerid) ~= FACTION_MEDIC then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction to use this command!.</>")
+	end
+
+	return 1
+end)
+
+AddCommand("revive", function (playerid)
+	if GetPlayerFactionType(playerid) ~= FACTION_MEDIC then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction to use this command!.</>")
+	end
+
+	return 1
 end)
 
 local function cmd_acf(player, maxrank, shortname, ...)
@@ -206,13 +386,43 @@ local function cmd_acf(player, maxrank, shortname, ...)
 	end
 
 	local factionname = table.contact({...}, " ")
-
 	local faction = Faction_Create(factionname, shortname, maxrank)
 
-	AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), factionname, faction))
+	if faction == false then
+		AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s wasn't able to be created!", colour.COLOUR_LIGHTRED(), factionname))
+	else
+		AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), factionname, faction))
+	end
+
 end
 AddCommand("acreatefaction", cmd_acf)
 AddCommand("acf", cmd_acf)
+
+local function cmd_adf(player, faction)
+	if (PlayerData[player].admin < 5) then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if faction == nil then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(f)action <faction>")
+	end
+
+	faction = tonumber(faction)
+
+	if FactionData[faction] == nil or FactionData[faction].id == 0 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: That faction does not exist.</>")
+	end
+
+	local factionname = FactionData[faction].shortname
+
+	if Faction_Destroy(faction) then
+		AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) deleted successfully!", colour.COLOUR_LIGHTRED(), factionname, faction))
+	else
+		AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) failed to delete!", colour.COLOUR_LIGHTRED(), factionname, faction))
+	end
+end
+AddCommand("adestroyfaction", cmd_adf)
+AddCommand("adf", cmd_adf)
 
 local function cmd_aef(player, faction, prefix, ...)
 	if (PlayerData[player].admin < 5) then

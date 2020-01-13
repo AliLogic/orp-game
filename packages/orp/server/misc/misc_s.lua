@@ -1,5 +1,21 @@
 local colour = ImportPackage('colours')
 
+function IsPlayerInRangeOfPlayer(playerid, lookupid)
+
+	if not IsValidPlayer(playerid) or not IsValidPlayer(lookupid) then
+		return 0
+	end
+
+	local x, y, z = GetPlayerLocation(playerid)
+	local x2, y2, z2 = GetPlayerLocation(lookupid)
+
+	if GetDistance3D(x, y, z, x2, y2, z2) >= 140.0 then
+		return 0
+	end
+
+	return 1
+end
+
 function Slap(player)
 	local x, y, z = GetPlayerLocation(player)
 	SetPlayerLocation(player, x, y, z + 200)

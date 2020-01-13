@@ -30,9 +30,9 @@ AddCommand("levelup", function (playerid)
 end)
 
 AddCommand("help", function (player)
-	AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q")
+	AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q /fhelp")
 	AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
-	AddPlayerChat(player, "Commands: /anims /engine /lights /trunk /hood /dimension /h(ouse)")
+	AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /h(ouse) /biz")
 	return
 end)
 
