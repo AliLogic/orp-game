@@ -124,7 +124,9 @@ AddCommand("fquit", function (playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
-	-- if player is the faction leader then dont let them kick themselves
+	if FactionData[factionid].leadership_rank == PlayerData[playerid].faction_rank then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You can't leave the faction while you are the leader.")
+	end
 
 	PlayerData[playerid].faction = 0
 	PlayerData[playerid].faction_rank = 0
