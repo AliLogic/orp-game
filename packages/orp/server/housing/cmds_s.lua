@@ -9,6 +9,10 @@ local function cmd_house(playerid, prefix, ...)
 
 	local house = Housing_Nearest(playerid)
 
+	if house == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
+	end
+
 	if prefix == "lock" or prefix == "unlock" then
 
 		if HousingData[house].locked then
