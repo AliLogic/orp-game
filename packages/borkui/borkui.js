@@ -33,7 +33,7 @@ function createUI(align = 0) {
 }
 
 function addTitle(text) {
-	$('#title').html(`<h1 class="title" id="title">${text}</h1>`);
+	$('#title').text(`${text}`);
 	alert('Add title called: '+ text);
 }
 
@@ -263,7 +263,7 @@ const buttonHandler = function (e, id) {
 
 function clearUI() {
 	$('#content').html('');
-	$('#title').html('');
+	$('#title').text('');
 	CallEvent('borkui:OnHideMenu');
 }
 
