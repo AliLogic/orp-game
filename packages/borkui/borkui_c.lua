@@ -18,6 +18,8 @@ AddEvent("OnPackageStop", function()
 end)
 
 function CreateUI(align)
+	align = align or 0
+
 	if align < 0 or align > 2 then
 		align = 0
 	end
