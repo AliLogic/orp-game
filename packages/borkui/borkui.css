@@ -1,6 +1,6 @@
 html, body {
 	overflow: hidden !important;
-	background-color: transparent;
+	background-color: transparent !important;
 }
 
 .card {
