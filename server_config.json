@@ -1,6 +1,6 @@
 {
-	"servername": "[ENG] Onset Roleplay [discord.io/onsetrpen] [TEXT BASED/IN DEVELOPMENT]",
-	"servername_short": "[ENG] Onset RP",
+	"servername": "[EN] Onset Roleplay [discord.io/onsetrpen] [TEXT BASED/IN DEVELOPMENT]",
+	"servername_short": "[EN] Onset RP",
 	"gamemode": "Onset Roleplay",
 	"website_url": "https://onsetroleplay.com",
 	"ipaddress": "0.0.0.0",
@@ -17,7 +17,7 @@
 	"packages": [
 		"colours",
 		"dialogui",
-		"debug",
+		"borkui",
 		"orp"
 	],
 	"stream_distance": 12000.0,
