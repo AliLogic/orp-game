@@ -105,17 +105,15 @@ function OnDoorLoaded(indexid, door_id)
 	else
 		print("Door id is now being loaded... "..door_id)
 
-		local result = mariadb_get_assoc(1)
+		DoorData[indexid].id = mariadb_get_value_name_int(1, "id")
+		DoorData[indexid].model = mariadb_get_value_name_int(1, "model")
 
-		DoorData[indexid].id = tonumber(result['id'])
-		DoorData[indexid].model = tonumber(result['model'])
+		DoorData[indexid].x = mariadb_get_value_name_int(1, "x")
+		DoorData[indexid].y = mariadb_get_value_name_int(1, "y")
+		DoorData[indexid].z = mariadb_get_value_name_int(1, "z")
+		DoorData[indexid].a = mariadb_get_value_name_int(1, "a")
 
-		DoorData[indexid].x = tonumber(result['x'])
-		DoorData[indexid].y = tonumber(result['y'])
-		DoorData[indexid].z = tonumber(result['z'])
-		DoorData[indexid].a = tonumber(result['a'])
-
-		DoorData[indexid].is_locked = tonumber(result['is_locked'])
+		DoorData[indexid].is_locked = mariadb_get_value_name_int(1, "is_locked")
 
 		DoorData[indexid].door = CreateDoor(DoorData[indexid].model, DoorData[indexid].x, DoorData[indexid].y, DoorData[indexid].z, DoorData[indexid].a, true)
 		SetDoorDimension(DoorData[indexid].door, DoorData[indexid].dimension)
@@ -187,9 +185,7 @@ end
 
 AddEvent("OnPlayerInteractDoor", function(player, door, bWantsOpen)
 
-	local index = Door_Nearest(player)
-
-	if index ~= 0 and DoorData[index].is_locked == 1 then
+	if DoorData[door].is_locked == 1 then
 		return AddPlayerChat(player, "This door is locked!")
 	end
 

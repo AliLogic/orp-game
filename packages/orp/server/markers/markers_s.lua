@@ -122,25 +122,23 @@ function OnMarkerLoaded(indexid, marker_id)
 	else
 		print("Marker id is now being loaded... "..marker_id)
 
-		local result = mariadb_get_assoc(1)
+		MarkerData[indexid].id = mariadb_get_value_name_int(1, "id")
+		MarkerData[indexid].model = mariadb_get_value_name_int(1, "model")
 
-		MarkerData[indexid].id = tonumber(result['id'])
-		MarkerData[indexid].model = tonumber(result['model'])
+		MarkerData[indexid].x1 = mariadb_get_value_name_int(1, "x1")
+		MarkerData[indexid].y1 = mariadb_get_value_name_int(1, "y1")
+		MarkerData[indexid].z1 = mariadb_get_value_name_int(1, "z1")
 
-		MarkerData[indexid].x1 = tonumber(result['x1'])
-		MarkerData[indexid].y1 = tonumber(result['y1'])
-		MarkerData[indexid].z1 = tonumber(result['z1'])
+		MarkerData[indexid].x2 = mariadb_get_value_name_int(1, "x2")
+		MarkerData[indexid].y2 = mariadb_get_value_name_int(1, "y2")
+		MarkerData[indexid].z2 = mariadb_get_value_name_int(1, "z2")
 
-		MarkerData[indexid].x2 = tonumber(result['x1'])
-		MarkerData[indexid].y2 = tonumber(result['y2'])
-		MarkerData[indexid].z2 = tonumber(result['z2'])
+		MarkerData[indexid].r = mariadb_get_value_name_int(1, "r")
+		MarkerData[indexid].g = mariadb_get_value_name_int(1, "g")
+		MarkerData[indexid].b = mariadb_get_value_name_int(1, "b")
+		MarkerData[indexid].a = mariadb_get_value_name_int(1, "a")
 
-		MarkerData[indexid].r = tonumber(result['r'])
-		MarkerData[indexid].g = tonumber(result['g'])
-		MarkerData[indexid].b = tonumber(result['b'])
-		MarkerData[indexid].a = tonumber(result['a'])
-
-		MarkerData[indexid].is_locked = result['is_locked']
+		MarkerData[indexid].is_locked = mariadb_get_value_name_int(1, "is_locked")
 
 		MarkerData[indexid].pickup1 = CreatePickup(MarkerData[indexid].model, MarkerData[indexid].x1, MarkerData[indexid].y1, MarkerData[indexid].z1)
 		SetPickupDimension(MarkerData[indexid].pickup1, MarkerData[indexid].dimension1)
@@ -240,7 +238,7 @@ AddRemoteEvent("OnPlayerInteractMarker", function (playerid, pickupid)
 	for i = 1, #MarkerData, 1 do
 		if IsValidMarker(i) then
 			if MarkerData[i].pickup1 == pickupid then
-				if not IsFloatNearlyZero(MarkerData[i].x2) then
+				if IsValidPickup(MarkerData[i].pickup2) then
 					SetPlayerLocation(playerid, MarkerData[i].x2, MarkerData[i].y2, MarkerData[i].z2)
 					AddPlayerChat(playerid, "TELEPORTED")
 				end

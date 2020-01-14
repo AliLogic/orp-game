@@ -66,6 +66,11 @@ function OnFactionCreated(faction, name, short_name, leadership_rank, fac_type)
 	FactionData[faction].short_name = short_name
 	FactionData[faction].leadership_rank = leadership_rank
 	FactionData[faction].type = fac_type
+
+	local query
+	for i = 1, leadership_rank, 1 do
+		mariadb_async_query(sql, "INSERT INTO faction_ranks (id, rank_id, rank_name) VALUES('"..FactionData[faction].id.."', "..i..", 'Rank"..i.."')")
+	end
 end
 
 function Faction_Destroy(factionid)
@@ -104,18 +109,17 @@ function OnFactionLoaded(factionid)
 	if mariadb_get_row_count() == 0 then
 		print('Error with loading faction ID'..factionid)
 	else
-		local result = mariadb_get_assoc(1)
 		CreateFactionData(factionid)
 
-		FactionData[factionid].id = result['id']
-		FactionData[factionid].name = result['name']
-		FactionData[factionid].short_name = result['short_name']
-		FactionData[factionid].motd = result['motd']
-		FactionData[factionid].type = tonumber(result['type'])
+		FactionData[factionid].id = mariadb_get_value_name_int(1, "id")
+		FactionData[factionid].name = mariadb_get_value_name(1, "name")
+		FactionData[factionid].short_name = mariadb_get_value_name(1, "short_name")
+		FactionData[factionid].motd = mariadb_get_value_name(1, "motd")
+		FactionData[factionid].type = mariadb_get_value_name_int(1, "type")
 
-		FactionData[factionid].leadership_rank = tonumber(result['leadership_rank'])
-		FactionData[factionid].radio_dimension = tonumber(result['radio_dimension'])
-		FactionData[factionid].bank = tonumber(result['bank'])
+		FactionData[factionid].leadership_rank = mariadb_get_value_name_int(1, "leadership_rank")
+		FactionData[factionid].radio_dimension = mariadb_get_value_name_int(1, "radio_dimension")
+		FactionData[factionid].bank = mariadb_get_value_name_int(1, "bank")
 
 		local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ?",
 			FactionData[factionid].id)
@@ -183,9 +187,9 @@ AddEvent('UnloadFactions', function ()
 	end
 end)
 
-function LoadCharacterFaction(player, id)
+function LoadCharacterFaction(player)
 	local query = mariadb_prepare(sql, "SELECT * FROM faction_members WHERE char_id = '?' LIMIT 1",
-		id
+		PlayerData[player].id
 	)
 	mariadb_async_query(sql, query, OnLoadCharacterFaction, player)
 end
@@ -195,17 +199,17 @@ function OnLoadCharacterFaction(playerid)
 		PlayerData[playerid].faction = 0
 		PlayerData[playerid].faction_rank = 0
 	else
-		local result = mariadb_get_assoc(1)
-
-		PlayerData[playerid].faction = result['faction_id']
-		PlayerData[playerid].faction_rank = result['rank_id']
+		PlayerData[playerid].faction = mariadb_get_value_name_int(1, "faction_id")
+		PlayerData[playerid].faction_rank = mariadb_get_value_name_int(1, "rank_id")
 
 		AddPlayerChat(playerid, "Faction Id: "..PlayerData[playerid].faction.." Faction Rank: "..PlayerData[playerid].faction_rank..".")
 	end
 end
 
 function GetPlayerFactionType(player)
-	if PlayerData[player].faction == 0 or FactionData[PlayerData[player].faction].type == nil then return FACTION_NONE end
+	if PlayerData[player].faction == 0 then
+		return FACTION_NONE
+	end
 	return FactionData[PlayerData[player].faction].type
 end
 

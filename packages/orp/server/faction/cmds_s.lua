@@ -30,7 +30,7 @@ AddCommand("online", function (playerid)
 
 	for _, v in ipairs(GetAllPlayers()) do
 		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id and playerid ~= v then
-			AddPlayerChat(v, FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid..")")
+			AddPlayerChat(playerid, FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid..")")
 		end
 	end
 
@@ -47,7 +47,7 @@ AddCommand("finvite", function (playerid, lookupid)
 	end
 
 	if lookupid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /fremove <playerid>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /finvite <playerid>")
 	end
 
 	lookupid = tonumber(lookupid)
@@ -124,7 +124,9 @@ AddCommand("fquit", function (playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
-	-- if player is the faction leader then dont let them kick themselves
+	if FactionData[factionid].leadership_rank == PlayerData[playerid].faction_rank then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You can't leave the faction while you are the leader.")
+	end
 
 	PlayerData[playerid].faction = 0
 	PlayerData[playerid].faction_rank = 0
@@ -209,23 +211,28 @@ AddCommand("badge", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /badge <playerid>")
 	end
 
+	lookupid = tonumber(lookupid)
+
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
 	end
 
 	local x, y, z = GetPlayerLocation(playerid)
+	local rankId = PlayerData[playerid].faction_rank
 
 	if lookupid == playerid then
-		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. "looks at their badge.</>")
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " looks at their badge.</>")
 	else
-		-- If distance is more than whats normal then send them an error message!
+		if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+		end
 
-		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. "shows " .. GetPlayerName(lookupid) .." their badge.</>")
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " shows " .. GetPlayerName(lookupid) .." their badge.</>")
 	end
 
 	AddPlayerChat(lookupid, "______________________________________")
 	AddPlayerChat(lookupid, "  Name: "..GetPlayerName(playerid))
-	AddPlayerChat(lookupid, "  Rank: "..PlayerData[playerid].faction_rank)
+	AddPlayerChat(lookupid, "  Rank: "..FactionRankData[factionId][rankId].rank_name.." "..rankId)
 	AddPlayerChat(lookupid, "  Agency: "..FactionData[factionId].name)
 	AddPlayerChat(lookupid, "______________________________________")
 end)
@@ -339,7 +346,7 @@ AddCommand("f", function(playerid, ...)
 
 	--[[if (#msg == 0 or #msg > 128) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Message has invalid length 128")
-	end]]--
+	end]]--t
 
 	for _, v in ipairs(GetAllPlayers()) do
 		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id then

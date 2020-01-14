@@ -11,14 +11,16 @@ AddEvent("OnKeyPress", function(key)
 
 				local plX, plY, plZ = GetPlayerLocation()
 				local pkX, pkY, pkZ = GetPickupLocation(pickupid)
-				local distance = GetDistance3D(plX, plY, plZ, pkX, pkY, pkZ)
+				if pkX ~= nil then
+					local distance = GetDistance3D(plX, plY, plZ, pkX, pkY, pkZ)
 
-				if distance < 300 then
-					AddPlayerChat("You have pressed the key while in range of pickupid "..pickupid..".") -- nil value, currently problematic.
+					if distance < 300 then
+						AddPlayerChat("You have pressed the key while in range of pickupid "..pickupid..".") -- nil value, currently problematic.
 
-					CallRemoteEvent("OnPlayerInteractMarker", pickupid)
-				else
-					SetPlayerPropertyValue(GetPlayerId(), "pickupid", 0)
+						CallRemoteEvent("OnPlayerInteractMarker", pickupid)
+					else
+						SetPlayerPropertyValue(GetPlayerId(), "pickupid", 0)
+					end
 				end
 			end
 		end
