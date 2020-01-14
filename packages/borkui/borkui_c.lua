@@ -181,6 +181,8 @@ function ShowUI(id)
 		end
 	end
 
+	ExecuteWebJS(web, 'addTitle('..dialogs[id].title..');')
+
 	SetWebVisibility(web, WEB_VISIBLE)
 	ExecuteWebJS(web, 'showUI('..id..');')
 	SetIgnoreLookInput(true)

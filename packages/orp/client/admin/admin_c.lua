@@ -2,9 +2,9 @@ local colour = ImportPackage('colours')
 local borkui = ImportPackage('borkui')
 
 local test = borkui.create(0)
-borkui.addUITitle(test, 'test')
+borkui.addUITitle(test, 'Bork UI Test')
 borkui.addUIDivider(test)
-borkui.addUIButton(test, 'Test')
+borkui.addUIButton(test, 'Exit', 'is-danger')
 
 --[[local Dialog = ImportPackage('dialogui')
 Dialog.setGlobalTheme("default-dark")

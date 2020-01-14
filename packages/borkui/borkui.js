@@ -64,7 +64,6 @@ function addInformation(text, anchor = 0) {
 }
 
 function addDivider() {
-	alert('add divider called');
 	$('#content').append('<div class="is-divider"></div>');
 }
 
