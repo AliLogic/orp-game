@@ -20,6 +20,89 @@ AddCommand("fhelp", function (playerid)
 	return 1
 end)
 
+AddCommand("frank", function (playerid, lookupid)
+
+	local factionid = PlayerData[playerid].faction
+	local faction_rank = PlayerData[playerid].faction_rank
+
+	if factionid == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+	end
+end)
+
+AddCommand("drag", function (playerid, lookupid)
+end)
+
+AddCommand("detain", function (playerid, lookupid)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+end)
+
+AddCommand("arrest", function (playerid, lookupid)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+end)
+
+AddCommand("take", function (playerid, lookupid)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+end)
+
+AddCommand("ticket", function (playerid, lookupid)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+end)
+
+AddCommand("spikes", function (playerid, lookupid)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+end)
+
+AddCommand("roadblock", function (playerid, lookupid)
+end)
+
+AddCommand("fingerprint", function (playerid, lookupid)
+end)
+
+AddCommand("impound", function (playerid, lookupid)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+end)
+
+AddCommand("revokeweapon", function (playerid, lookupid)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+end)
+
+AddCommand("flocker", function (playerid)
+	local factionid = PlayerData[playerid].faction
+
+	if factionid == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+	end
+
+	local x, y, z = GetPlayerLocation(playerid)
+	local distance = GetDistance3D(x, y, z, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z)
+
+	if distance <= 200.0 then
+		AddPlayerChat(playerid, "You are interacting with the faction locker.")
+	end
+end)
+
 AddCommand("online", function (playerid)
 	local factionid = PlayerData[playerid].faction
 	local faction_rank = PlayerData[playerid].faction_rank
@@ -57,7 +140,7 @@ AddCommand("finvite", function (playerid, lookupid)
 	end
 
 	if lookupid == playerid then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot kick yourself out of the faction, use /fquit!</>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot invite yourself!</>")
 	end
 
 	if PlayerData[playerid].faction == PlayerData[lookupid].faction then
@@ -438,7 +521,7 @@ local function cmd_aef(player, faction, prefix, ...)
 
 	if faction == nil or prefix == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(f)action <faction> <prefix>")
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> type, name, shortname, leader, maxrank, bank.")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> type, name, shortname, leader, maxrank, bank, locker.")
 	end
 
 	faction = tonumber(faction)
@@ -537,6 +620,12 @@ local function cmd_aef(player, faction, prefix, ...)
 
 		AddPlayerChat(target, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> "..GetPlayerName(player).." has set you as the faction leader of "..FactionData[faction].name..".")
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..GetPlayerName(target).." as the leader of "..FactionData[faction].name..".")
+	elseif prefix == "locker" then
+
+		local x, y, z = GetPlayerLocation(player)
+		UpdateFactionLocker(faction, x, y, z)
+
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set a new locker position for the "..FactionData[faction].name..".")
 	end
 
 end
