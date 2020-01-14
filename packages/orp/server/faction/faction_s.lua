@@ -146,11 +146,14 @@ function OnFactionRankLoaded(factionid)
 	local row_count = mariadb_get_row_count()
 
 	if row_count then
+		local rank_id = 0
 		for i = 1, row_count, 1 do
-			local rank_id = mariadb_get_value_name_int(i, "rank_id")
+			rank_id = mariadb_get_value_name_int(i, "rank_id")
 
 			FactionRankData[factionid][rank_id].rank_name = mariadb_get_value_name(i, "rank_name")
 			FactionRankData[factionid][rank_id].rank_pay = mariadb_get_value_name_int(i, "rank_pay")
+
+			print("[FACTION RANK]-FID: "..factionid.." -RANK NAME: "..FactionRankData[factionid][rank_id].rank_name.." -RANK ID: "..rank_id.." -RANK PAY: "..FactionRankData[factionid][rank_id].rank_pay)
 		end
 	end
 end
