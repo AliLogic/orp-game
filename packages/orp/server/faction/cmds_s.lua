@@ -113,7 +113,7 @@ AddCommand("online", function (playerid)
 
 	for _, v in ipairs(GetAllPlayers()) do
 		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id and playerid ~= v then
-			AddPlayerChat(playerid, FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid..")")
+			AddPlayerChat(playerid, FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid..")")
 		end
 	end
 
@@ -272,9 +272,10 @@ local function cmd_m(playerid, ...)
 	end
 
 	local msg = table.concat({...}, " ")
-
+	local rankId = PlayerData[playerid].faction_rank
 	local x, y, z = GetPlayerLocation(playerid)
-	AddPlayerChatRange(x, y, 2000.0, FactionRankData[factionId].faction_rank .." " .. GetPlayerName(playerid) .. " (megaphone): "..msg)
+
+	AddPlayerChatRange(x, y, 2000.0, FactionRankData[factionId][rankId].rank_name .." " .. GetPlayerName(playerid) .. " (megaphone): "..msg)
 end
 AddCommand("m", cmd_m)
 AddCommand("megaphone", cmd_m)
@@ -315,7 +316,7 @@ AddCommand("badge", function (playerid, lookupid)
 
 	AddPlayerChat(lookupid, "______________________________________")
 	AddPlayerChat(lookupid, "  Name: "..GetPlayerName(playerid))
-	AddPlayerChat(lookupid, "  Rank: "..FactionRankData[factionId][rankId].rank_name.." "..rankId)
+	AddPlayerChat(lookupid, "  Rank: "..FactionRankData[factionId][rankId].rank_name.." ("..rankId..")")
 	AddPlayerChat(lookupid, "  Agency: "..FactionData[factionId].name)
 	AddPlayerChat(lookupid, "______________________________________")
 end)
@@ -408,7 +409,7 @@ AddCommand("d", function(playerid, ...)
 		factiontype = GetPlayerFactionType(playerid)
 
 		if factiontype ~= FACTION_POLICE and factiontype ~= FACTION_GOV and factiontype ~= FACTION_MEDIC then
-			AddPlayerChat(v, "(( "..FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
+			AddPlayerChat(v, "(( "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
 		end
 	end
 end)
@@ -433,7 +434,7 @@ AddCommand("f", function(playerid, ...)
 
 	for _, v in ipairs(GetAllPlayers()) do
 		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id then
-			AddPlayerChat(v, "(( "..FactionRankData[factionid][faction_rank].." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
+			AddPlayerChat(v, "(( "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
 		end
 	end
 end)

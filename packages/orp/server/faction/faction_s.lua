@@ -133,9 +133,11 @@ function OnFactionLoaded(factionid)
 			FactionData[factionid].locker_text3d = CreateText3D("Faction Locker (/flocker)", 10, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z, 0.0, 0.0, 0.0)
 		end
 
-		local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ?",
-			FactionData[factionid].id)
+		for i = 1, FactionData[factionid].leadership_rank, 1 do
+			FactionRankData[factionid][i] = {}
+		end
 
+		local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ? ORDER BY `rank_id` ASC", FactionData[factionid].id)
 		mariadb_async_query(sql, query, OnFactionRankLoaded, FactionData[factionid].id)
 	end
 end
@@ -144,11 +146,8 @@ function OnFactionRankLoaded(factionid)
 	local row_count = mariadb_get_row_count()
 
 	if row_count then
-		for i = 1, row_count do
+		for i = 1, row_count, 1 do
 			local rank_id = mariadb_get_value_name_int(i, "rank_id")
-
-			FactionRankData[factionid] = {}
-			FactionRankData[factionid][rank_id] = {}
 
 			FactionRankData[factionid][rank_id].rank_name = mariadb_get_value_name(i, "rank_name")
 			FactionRankData[factionid][rank_id].rank_pay = mariadb_get_value_name_int(i, "rank_pay")
