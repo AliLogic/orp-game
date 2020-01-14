@@ -34,6 +34,7 @@ function createUI(align = 0) {
 
 function addTitle(text) {
 	$('#title').html(`<h1 class="title" id="title">${text}</h1>`);
+	alert('Add title called: '+ text);
 }
 
 function addInformation(text, anchor = 0) {
