@@ -251,13 +251,13 @@ end)
 	DestroyUI
 ]]
 
-AddFunctionExport('create', CreateUI)
+AddFunctionExport('createUI', CreateUI)
 AddFunctionExport('addUITitle', AddUITitle)
 AddFunctionExport('addUIInformation', AddUIInformation)
 AddFunctionExport('addUIDivider', AddUIDivider)
 AddFunctionExport('addUIButton', AddUIButton)
 AddFunctionExport('addUITextInput', AddUITextInput)
 AddFunctionExport('addUIDropdown', AddUIDropdown)
-AddFunctionExport('show', ShowUI)
-AddFunctionExport('hide', HideUI)
-AddFunctionExport('destroy', DestroyUI)
+AddFunctionExport('showUI', ShowUI)
+AddFunctionExport('hideUI', HideUI)
+AddFunctionExport('destroyUI', DestroyUI)
