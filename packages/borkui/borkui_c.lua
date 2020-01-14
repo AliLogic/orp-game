@@ -17,7 +17,7 @@ AddEvent("OnPackageStop", function()
 	DestroyWebUI(web)
 end)
 
-local function CreateUI(align)
+function CreateUI(align)
 	if align < 0 or align > 2 then
 		align = 0
 	end
@@ -34,7 +34,7 @@ local function CreateUI(align)
 	return id
 end
 
-local function AddUITitle(id, text)
+function AddUITitle(id, text)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -46,7 +46,7 @@ local function AddUITitle(id, text)
 	AddPlayerChat('(borkui): AddUITitle called')
 end
 
-local function AddUIInformation(id, text)
+function AddUIInformation(id, text)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -59,7 +59,7 @@ local function AddUIInformation(id, text)
 	AddPlayerChat('(borkui): AddUIInformation called')
 end
 
-local function AddUIDivider(id)
+function AddUIDivider(id)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -68,7 +68,7 @@ local function AddUIDivider(id)
 	AddPlayerChat('(borkui): AddUIDivider called')
 end
 
-local function AddUIButton(id, text, colour, size, rounded, fullwidth, anchor)
+function AddUIButton(id, text, colour, size, rounded, fullwidth, anchor)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -91,7 +91,7 @@ local function AddUIButton(id, text, colour, size, rounded, fullwidth, anchor)
 	AddPlayerChat('(borkui): AddUIButton called')
 end
 
-local function AddUITextInput(id, label, size, type, placeholder)
+function AddUITextInput(id, label, size, type, placeholder)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -117,7 +117,7 @@ local function AddUITextInput(id, label, size, type, placeholder)
 	AddPlayerChat('(borkui): AddUITextInput called')
 end
 
-local function AddUIDropdown(id, options, size, rounded, label)
+function AddUIDropdown(id, options, size, rounded, label)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -146,7 +146,7 @@ local function AddUIDropdown(id, options, size, rounded, label)
 	AddPlayerChat('(borkui): AddUIDropdown called')
 end
 
-local function ShowUI(id)
+function ShowUI(id)
 	if dialogs[id] == nil then
 		return false
 	end
@@ -206,7 +206,7 @@ function HideUI()
 	AddPlayerChat('(borkui): HideUI called')
 end
 
-local function DestroyUI(id)
+function DestroyUI(id)
     if lastOpened == id then
         closeDialog()
     end
