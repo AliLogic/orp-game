@@ -144,12 +144,11 @@ local function cmd_v(player, ...)
 
 		local x, y, z = GetPlayerLocation(player) -- Get the player's location
 		local ownsVehicle = false -- Player owns the vehicle bool
-		local vx, vy, vz = 0
 
 		for _, v in pairs(GetAllVehicles()) do
 			if IsValidVehicle(v) then
 				if VehicleData[v] ~= nil then
-					vx, vy, vz = GetVehicleLocation(vehicle)
+					local vx, vy, vz = GetVehicleLocation(v)
 
 					if GetDistance3D(x, y, z, vx, vy, vz) <= 200.0 then
 						if (VehicleData[v].owner == PlayerData[player].id) or
