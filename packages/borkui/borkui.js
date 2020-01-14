@@ -246,7 +246,7 @@ function addDropdown(options, size = 1, rounded = false, label = '') {
 	}
 }*/
 
-const buttonHandler = function (e) {
+const buttonHandler = function (e, id) {
 	e.preventDefault();
 	let returnValues = [id, (parseInt($(this).attr('id')) - elements.length) + 1];
 
@@ -270,13 +270,13 @@ function clearUI() {
 function showUI(id) {
 	if ($('body').is(':hidden')) {
 		$('body').show();
-		$('button').on('click', buttonHandler);
+		$('button').on('click', buttonHandler(id));
 	}
 }
 
 function hideUI(id) {
 	if ($('body').is(':visible')) {
 		$('body').hide();
-		$('button').off('click', buttonHandler);
+		$('button').off('click', buttonHandler(id));
 	}
 }
