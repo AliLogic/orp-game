@@ -2,7 +2,7 @@ local web = CreateWebUI(0, 0, 0, 0, 1, 16)
 SetWebAlignment(web, 0, 0)
 SetWebAnchors(web, 0, 0, 1, 1)
 SetWebURL(web, "http://asset/"..GetPackageName().."/borkui.html")
-SetWebVisibility(web, WEB_HITINVISIBLE)
+SetWebVisibility(web, WEB_HIDDEN)
 
 local nextId = 1
 local dialogs = {}
@@ -38,10 +38,12 @@ end
 
 function AddUITitle(id, text)
 	if dialogs[id] == nil then
+		AddPlayerChat('dialog is invalid')
 		return false
 	end
 
 	if string.len(text) < 1 then
+		AddPlayerChat('string length of text is below 1')
 		return false
 	end
 	dialogs[id].title = text
@@ -167,6 +169,9 @@ function ShowUI(id)
 
 	local column
 
+	AddPlayerChat('(borkui): TITLE SHOULD BE \''..dialogs[id].title..'\'.')
+	ExecuteWebJS(web, "addTitle("..dialogs[id].title..")")
+
 	for i = 1, #dialogs[id].columns, 1 do
 		column = dialogs[id].columns[i]
 
@@ -180,8 +185,6 @@ function ShowUI(id)
 			ExecuteWebJS(web, string.format('addDropdown(%s, %d, %s, "%s");', column[2], column[3], tostring(column[4]), column[5]))
 		end
 	end
-
-	ExecuteWebJS(web, 'addTitle('..dialogs[id].title..');')
 
 	SetWebVisibility(web, WEB_VISIBLE)
 	ExecuteWebJS(web, 'showUI('..id..');')
@@ -251,13 +254,13 @@ end)
 	DestroyUI
 ]]
 
-AddFunctionExport('create', CreateUI)
+AddFunctionExport('createUI', CreateUI)
 AddFunctionExport('addUITitle', AddUITitle)
 AddFunctionExport('addUIInformation', AddUIInformation)
 AddFunctionExport('addUIDivider', AddUIDivider)
 AddFunctionExport('addUIButton', AddUIButton)
 AddFunctionExport('addUITextInput', AddUITextInput)
 AddFunctionExport('addUIDropdown', AddUIDropdown)
-AddFunctionExport('show', ShowUI)
-AddFunctionExport('hide', HideUI)
-AddFunctionExport('destroy', DestroyUI)
+AddFunctionExport('showUI', ShowUI)
+AddFunctionExport('hideUI', HideUI)
+AddFunctionExport('destroyUI', DestroyUI)

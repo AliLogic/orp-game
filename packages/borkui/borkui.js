@@ -33,7 +33,7 @@ function createUI(align = 0) {
 }
 
 function addTitle(text) {
-	$('#title').html(`<h1 class="title" id="title">${text}</h1>`);
+	$('#title').text(`${text}`);
 	alert('Add title called: '+ text);
 }
 
@@ -246,9 +246,9 @@ function addDropdown(options, size = 1, rounded = false, label = '') {
 	}
 }*/
 
-const buttonHandler = function (e) {
+const buttonHandler = function (e, id) {
 	e.preventDefault();
-	let returnValues = [id, parseInt($(this).attr('id')) - elements.length];
+	let returnValues = [id, (parseInt($(this).attr('id')) - elements.length) + 1];
 
 	elements.forEach((element) => {
 		if (!element[1]) {
@@ -259,24 +259,24 @@ const buttonHandler = function (e) {
 
 	console.log(returnValues);
 	CallEvent('borkui:OnDialogSubmit', returnValues);
-}
+};
 
 function clearUI() {
 	$('#content').html('');
-	$('#title').html('');
+	$('#title').text('');
 	CallEvent('borkui:OnHideMenu');
 }
 
 function showUI(id) {
 	if ($('body').is(':hidden')) {
 		$('body').show();
-		$('button').on('click', buttonHandler);
+		$('button').on('click', buttonHandler(id));
 	}
 }
 
 function hideUI(id) {
 	if ($('body').is(':visible')) {
 		$('body').hide();
-		$('button').off('click', buttonHandler);
+		$('button').off('click', buttonHandler(id));
 	}
 }
