@@ -30,6 +30,7 @@ local function CreateUI(align)
 		columns = {}
 	}
 
+	AddPlayerChat('(borkui): UI created, with align '..align..' and id '..id)
 	return id
 end
 
@@ -42,6 +43,7 @@ local function AddUITitle(id, text)
 		return false
 	end
 	dialogs[id].title = text
+	AddPlayerChat('(borkui): AddUITitle called')
 end
 
 local function AddUIInformation(id, text)
@@ -54,6 +56,7 @@ local function AddUIInformation(id, text)
 	end
 
 	dialogs[id].info = text
+	AddPlayerChat('(borkui): AddUIInformation called')
 end
 
 local function AddUIDivider(id)
@@ -62,6 +65,7 @@ local function AddUIDivider(id)
 	end
 
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_DIVIDER})
+	AddPlayerChat('(borkui): AddUIDivider called')
 end
 
 local function AddUIButton(id, text, colour, size, rounded, fullwidth, anchor)
@@ -84,6 +88,7 @@ local function AddUIButton(id, text, colour, size, rounded, fullwidth, anchor)
 	end
 
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_BUTTON, text, colour, size, rounded, fullwidth, anchor})
+	AddPlayerChat('(borkui): AddUIButton called')
 end
 
 local function AddUITextInput(id, label, size, type, placeholder)
@@ -109,6 +114,7 @@ local function AddUITextInput(id, label, size, type, placeholder)
 	end
 
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_TEXTINPUT, label, size, type, placeholder})
+	AddPlayerChat('(borkui): AddUITextInput called')
 end
 
 local function AddUIDropdown(id, options, size, rounded, label)
@@ -137,6 +143,7 @@ local function AddUIDropdown(id, options, size, rounded, label)
 	jsonoptions = jsonoptions..']'
 
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_DROPDOWN, jsonoptions, size, rounded, label})
+	AddPlayerChat('(borkui): AddUIDropdown called')
 end
 
 local function ShowUI(id)
@@ -180,6 +187,7 @@ local function ShowUI(id)
 	SetInputMode(INPUT_GAMEANDUI)
 
 	lastOpened = id
+	AddPlayerChat('(borkui): ShowUI called')
 end
 
 function HideUI()
@@ -193,19 +201,23 @@ function HideUI()
     SetIgnoreMoveInput(false)
     ShowMouseCursor(false)
     SetInputMode(INPUT_GAME)
-    SetWebVisibility(web, WEB_HITINVISIBLE)
+	SetWebVisibility(web, WEB_HITINVISIBLE)
+
+	AddPlayerChat('(borkui): HideUI called')
 end
 
 local function DestroyUI(id)
     if lastOpened == id then
         closeDialog()
     end
-    dialogs[id] = nil
+	dialogs[id] = nil
+	AddPlayerChat('(borkui): DestroyUI called')
 end
 
 AddEvent("borkui:ready", function()
     if lastOpened ~= -1 then
-        ShowUI(lastOpened)
+		ShowUI(lastOpened)
+		AddPlayerChat('(borkui): borkui is ready (ready received)!')
     end
 end)
 
@@ -215,7 +227,9 @@ AddEvent("borkui:OnHideMenu", function()
             SetIgnoreLookInput(true)
             SetIgnoreMoveInput(true)
             ShowMouseCursor(true)
-            SetInputMode(INPUT_GAMEANDUI)
+			SetInputMode(INPUT_GAMEANDUI)
+			
+			AddPlayerChat('(borkui): OnHideMenu received.')
         end)
     end
 end)

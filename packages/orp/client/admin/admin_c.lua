@@ -47,5 +47,6 @@ end)
 
 AddRemoteEvent('borkui', function ()
 	AddPlayerChat('(Client): Received event \'borkui\' from server.')
+	AddPlayerChat('(Client): Value of test: '..test)
 	borkui.show(test)
 end)
