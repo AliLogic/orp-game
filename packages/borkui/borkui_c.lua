@@ -167,6 +167,8 @@ function ShowUI(id)
 
 	local column
 
+	ExecuteWebJS(web, 'addTitle('..dialogs[id].title..');')
+
 	for i = 1, #dialogs[id].columns, 1 do
 		column = dialogs[id].columns[i]
 
@@ -180,8 +182,6 @@ function ShowUI(id)
 			ExecuteWebJS(web, string.format('addDropdown(%s, %d, %s, "%s");', column[2], column[3], tostring(column[4]), column[5]))
 		end
 	end
-
-	ExecuteWebJS(web, 'addTitle('..dialogs[id].title..');')
 
 	SetWebVisibility(web, WEB_VISIBLE)
 	ExecuteWebJS(web, 'showUI('..id..');')

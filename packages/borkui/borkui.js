@@ -259,7 +259,7 @@ const buttonHandler = function (e) {
 
 	console.log(returnValues);
 	CallEvent('borkui:OnDialogSubmit', returnValues);
-}
+};
 
 function clearUI() {
 	$('#content').html('');

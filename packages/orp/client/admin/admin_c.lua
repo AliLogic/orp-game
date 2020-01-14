@@ -4,6 +4,7 @@ local borkui = ImportPackage('borkui')
 local test = borkui.create(0)
 borkui.addUITitle(test, 'Bork UI Test')
 borkui.addUIDivider(test)
+borkui.addTextInput()
 borkui.addUIButton(test, 'Exit', 'is-danger')
 
 --[[local Dialog = ImportPackage('dialogui')
