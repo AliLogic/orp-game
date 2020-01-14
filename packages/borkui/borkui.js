@@ -248,7 +248,7 @@ function addDropdown(options, size = 1, rounded = false, label = '') {
 
 const buttonHandler = function (e) {
 	e.preventDefault();
-	let returnValues = [id, parseInt($(this).attr('id')) - elements.length];
+	let returnValues = [id, (parseInt($(this).attr('id')) - elements.length) + 1];
 
 	elements.forEach((element) => {
 		if (!element[1]) {
