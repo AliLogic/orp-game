@@ -6,6 +6,7 @@ borkui.addUITitle(test, 'Bork UI Test')
 borkui.addUIDivider(test)
 borkui.addTextInput(test, 'Test Input')
 borkui.addDropdown(test, {'bork', 'doggo', '69'})
+borkui.addUIDivider(test)
 borkui.addUIButton(test, 'Exit', 'is-danger')
 
 --[[local Dialog = ImportPackage('dialogui')
