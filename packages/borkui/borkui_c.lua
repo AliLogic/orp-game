@@ -177,7 +177,7 @@ function ShowUI(id)
 		elseif dialogs[id].columns[i][1] == COLUMN_TYPE_TEXTINPUT then
 			ExecuteWebJS(web, string.format('addTextInput("%s", %d, %d, "%s");', column[2], column[3], column[4], column[5]))
 		elseif dialogs[id].columns[i][1] == COLUMN_TYPE_DROPDOWN then
-			ExecuteWebJS(web, string.format('addTextInput(%s, %d, %s, "%s");', column[2], column[3], tostring(column[4]), column[5]))
+			ExecuteWebJS(web, string.format('addDropdown(%s, %d, %s, "%s");', column[2], column[3], tostring(column[4]), column[5]))
 		end
 	end
 

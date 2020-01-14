@@ -3,6 +3,7 @@ local borkui = ImportPackage('borkui')
 
 local test = borkui.create(0)
 borkui.addUITitle(test, 'test')
+borkui.addUIDivider(test)
 borkui.addUIButton(test, 'Test')
 
 --[[local Dialog = ImportPackage('dialogui')
