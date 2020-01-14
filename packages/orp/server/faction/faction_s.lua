@@ -26,6 +26,10 @@ function CreateFactionData(factionid)
 	FactionData[factionid].radio_dimension = 0
 	FactionData[factionid].bank = 0
 
+	FactionData[factionid].locker_x = 0
+	FactionData[factionid].locker_y = 0
+	FactionData[factionid].locker_z = 0
+
 	FactionRankData[factionid] = {}
 end
 
@@ -120,6 +124,14 @@ function OnFactionLoaded(factionid)
 		FactionData[factionid].leadership_rank = mariadb_get_value_name_int(1, "leadership_rank")
 		FactionData[factionid].radio_dimension = mariadb_get_value_name_int(1, "radio_dimension")
 		FactionData[factionid].bank = mariadb_get_value_name_int(1, "bank")
+
+		FactionData[factionid].locker_x = mariadb_get_value_name_int(1, "locker_x")
+		FactionData[factionid].locker_y = mariadb_get_value_name_int(1, "locker_y")
+		FactionData[factionid].locker_z = mariadb_get_value_name_int(1, "locker_z")
+
+		if FactionData[factionid].locker_x ~= 0 then
+			FactionData[factionid].locker_text3d = CreateText3D("Faction Locker (/flocker)", 10, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z, 0.0, 0.0, 0.0)
+		end
 
 		local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ?",
 			FactionData[factionid].id)
@@ -219,4 +231,13 @@ function GetFactionType(factionid)
 	end
 
 	return FACTION_NONE
+end
+
+function UpdateFactionLocker(factionid, x, y, z)
+
+	FactionData[factionid].locker_x = x
+	FactionData[factionid].locker_y = y
+	FactionData[factionid].locker_z = z
+
+	mariadb_async_query(sql, "UPDATE factions SET locker_x = "..x..", locker_y "..y..", locker_z "..z.." WHERE id = "..FactionData[factionid].id.." LIMIT 1")
 end
