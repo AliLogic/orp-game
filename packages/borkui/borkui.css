@@ -1,5 +1,6 @@
-html {
+html, body {
 	overflow: hidden !important;
+	background-color: transparent;
 }
 
 .card {
