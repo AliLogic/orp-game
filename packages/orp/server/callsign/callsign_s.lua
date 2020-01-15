@@ -2,9 +2,9 @@ local colour = ImportPackage('colours')
 MAX_CALLSIGNS = 300
 
 AddCommand("callsign", function (player, callsign, x, y, z)
-	--[[if GetPlayerFactionType(player) ~= FACTION_POLICE or GetPlayerFactionType(player) ~= FACTION_MEDIC or GetPlayerFactionType(player) ~= FACTION_GOV then
+	if GetPlayerFactionType(player) ~= FACTION_POLICE or GetPlayerFactionType(player) ~= FACTION_MEDIC or GetPlayerFactionType(player) ~= FACTION_GOV then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You must be apart of a government agency to use this command.")
-	end]]--
+	end
 
 	local vehicle = GetPlayerVehicle(player)
 
@@ -18,7 +18,11 @@ AddCommand("callsign", function (player, callsign, x, y, z)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You must be in a faction owned vehicle.")
 	end
 
-	if callsign == nil then
+	if VehicleData[vehicle].callsign ~= nil and IsValidText3D(VehicleData[vehicle].callsign) then
+		DestroyText3D(VehicleData[vehicle].callsign)
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Your previous callsign was destroyed!")
+		return
+	elseif callsign == nil then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /callsign <text>")
 	end
 
@@ -28,11 +32,6 @@ AddCommand("callsign", function (player, callsign, x, y, z)
 
 	if string.len(callsign) < 0 or string.len(callsign) > 12 then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> Callsign length ranges from 1 - 12.")
-	end
-
-	if VehicleData[vehicle].callsign ~= nil and IsValidText3D(VehicleData[vehicle].callsign) then
-		DestroyText3D(VehicleData[vehicle].callsign)
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Your previous callsign was destroyed!")
 	end
 
 	VehicleData[vehicle].callsign = CreateText3D(callsign, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
