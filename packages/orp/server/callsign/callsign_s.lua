@@ -35,7 +35,7 @@ AddCommand("callsign", function (player, callsign, x, y, z)
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Your previous callsign was destroyed!")
 	end
 
-	VehicleData[vehicle].callsign = CreateText3D(callsign, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+	VehicleData[vehicle].callsign = CreateText3D(callsign, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 	SetText3DAttached(VehicleData[vehicle].callsign, ATTACH_VEHICLE, vehicle, x, y, z, 0.0, 0.0, 0.0) -- coords need adjustments
 
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Callsign "..callsign.." attached!")
