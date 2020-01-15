@@ -409,7 +409,7 @@ AddCommand("d", function(playerid, ...)
 		factiontype = GetPlayerFactionType(playerid)
 
 		if factiontype == FACTION_POLICE or factiontype == FACTION_GOV or factiontype == FACTION_MEDIC then
-			AddPlayerChat(v, "(( "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
+			AddPlayerChat(v, "(( "..FactionData[factionid].shortname.." "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
 		end
 	end
 end)
