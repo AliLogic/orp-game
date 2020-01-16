@@ -1,0 +1,58 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>OnsetRP Scoreboard</title>
+
+		<link rel="stylesheet" href="simplebar.css"/>
+		<script src="simplebar.min.js"></script>
+
+		<noscript>
+			<style>
+			  /**
+			  * Reinstate scrolling for non-JS clients
+			  */
+			  .simplebar-content-wrapper {
+				overflow: auto;
+			  }
+			</style>
+		  </noscript>
+
+		<link rel="stylesheet" href="bulma.min.css">
+		<script src="jquery.min.js"></script>
+
+		<link rel="stylesheet" href="scoreboard.css">
+		<script src="scoreboard.js"></script>
+	</head>
+	<body style="display: none">
+		<section class="hero is-success is-fullheight">
+			<div class="hero-body">
+				<div class="container has-text-centered">
+
+					<center><img class="image" src="OnsetLogo.png"></center>
+
+					<div style="margin-left: 22.5%; margin-right: 22.5%;">
+
+						<div class="table">
+							<div class="head">
+								<div class="columns">
+									<div class="column">ID</div>
+									<div class="column">Name</div>
+									<div class="column">Level</div>
+									<div class="column">Ping</div>
+								</div>
+							</div>
+
+							<div class="body" data-simplebar data-simplebar-auto-hide="false">
+								<div class="data"></div>
+							</div>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+		  </section>
+	</body>
+</html>
