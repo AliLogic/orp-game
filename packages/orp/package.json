@@ -5,6 +5,8 @@
 		"server/orp_s.lua",
 		"server/chat/chat_s.lua",
 		"server/database/database_s.lua",
+		"server/whitelist/whitelist_s.lua",
+		"server/whitelist/cmds_s.lua",
 		"server/accounts/accounts_s.lua",
 		"server/admin/admin_s.lua",
 		"server/admin/cmds_s.lua",
