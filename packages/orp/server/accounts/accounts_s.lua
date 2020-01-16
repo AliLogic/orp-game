@@ -26,13 +26,6 @@ end)
 function OnPlayerSteamAuth(player)
 	CreatePlayerData(player)
 	--FreezePlayer(player)
-
-	-- First check if there is an account for this player
-	local query = mariadb_prepare(sql, "SELECT id FROM accounts WHERE steamid = '?' LIMIT 1;",
-		tostring(GetPlayerSteamId(player))
-	)
-
-	mariadb_async_query(sql, query, OnAccountLoadId, player)
 end
 AddEvent("OnPlayerSteamAuth", OnPlayerSteamAuth)
 
@@ -43,6 +36,15 @@ function OnPlayerQuit(player)
 	DestroyPlayerData(player)
 end
 AddEvent("OnPlayerQuit", OnPlayerQuit)
+
+function LoadPlayerAccount(player)
+	-- First check if there is an account for this player
+	local query = mariadb_prepare(sql, "SELECT id FROM accounts WHERE steamid = '?' LIMIT 1;",
+		tostring(GetPlayerSteamId(player))
+	)
+
+	mariadb_async_query(sql, query, OnAccountLoadId, player)
+end
 
 function OnAccountLoadId(player)
 	if (mariadb_get_row_count() == 0) then
