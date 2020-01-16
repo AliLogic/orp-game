@@ -113,8 +113,10 @@ function OnFactionLoaded(factionid)
 	if mariadb_get_row_count() == 0 then
 		print('Error with loading faction ID'..factionid)
 	else
+		print('1. Creating faction data upon being loaded')
 		CreateFactionData(factionid)
 
+		print('2. Loading the faction data from the database')
 		FactionData[factionid].id = mariadb_get_value_name_int(1, "id")
 		FactionData[factionid].name = mariadb_get_value_name(1, "name")
 		FactionData[factionid].short_name = mariadb_get_value_name(1, "short_name")
@@ -133,9 +135,15 @@ function OnFactionLoaded(factionid)
 			FactionData[factionid].locker_text3d = CreateText3D("Faction Locker (/flocker)", 10, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z, 0.0, 0.0, 0.0)
 		end
 
-		local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ?",
-			FactionData[factionid].id)
+		print('3. Initiating the loop for faction ranks')
+		for i = 1, FactionData[factionid].leadership_rank, 1 do
+			FactionRankData[factionid][i] = {}
+			FactionRankData[factionid][i].rank_name = "Rank"..i
+			FactionRankData[factionid][i].rank_pay = 0
+		end
 
+		print('4. Selecting the faction ranks from database')
+		local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ? ORDER BY `rank_id` ASC", FactionData[factionid].id)
 		mariadb_async_query(sql, query, OnFactionRankLoaded, FactionData[factionid].id)
 	end
 end
@@ -144,14 +152,15 @@ function OnFactionRankLoaded(factionid)
 	local row_count = mariadb_get_row_count()
 
 	if row_count then
-		for i = 1, row_count do
-			local rank_id = mariadb_get_value_name_int(i, "rank_id")
-
-			FactionRankData[factionid] = {}
-			FactionRankData[factionid][rank_id] = {}
+		print('5. Loading the faction ranks from database')
+		local rank_id = 0
+		for i = 1, row_count, 1 do
+			rank_id = mariadb_get_value_name_int(i, "rank_id")
 
 			FactionRankData[factionid][rank_id].rank_name = mariadb_get_value_name(i, "rank_name")
 			FactionRankData[factionid][rank_id].rank_pay = mariadb_get_value_name_int(i, "rank_pay")
+
+			print("[FACTION RANK]-FID: "..factionid.." -RANK NAME: "..FactionRankData[factionid][rank_id].rank_name.." -RANK ID: "..rank_id.." -RANK PAY: "..FactionRankData[factionid][rank_id].rank_pay)
 		end
 	end
 end

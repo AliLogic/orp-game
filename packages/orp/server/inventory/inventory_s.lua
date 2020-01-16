@@ -3,6 +3,18 @@ MAX_INVENTORY_SLOTS = 12
 
 -- Inventory Items with their ID's
 INV_ITEM_RADIO = 1
+INV_ITEM_REPAIR = 2
+INV_ITEM_HEALTH = 3
+INV_ITEM_TASER = 4
+INV_ITEM_BANDAGE = 5
+
+ITEM_NAMES = {
+    "Radio",
+    "Repair Kit",
+    "Health Kit",
+    "Taser",
+    "Bandage"
+}
 
 --[[
     Functions from this module:

@@ -35,16 +35,16 @@ AddCommand("whitelistlog", function(playerid, otherplayer)
 	local query = ""
 
 	if (otherplayer == nil) then
-		query = "SELECT a1.steam_name, a2.steam_name, FROM_UNIXTIME(log_whitelists.timestamp, '%a %H:%i') FROM log_whitelists INNER JOIN users a1 ON log_whitelists.id = a1.id INNER JOIN users a2 ON log_whitelists.admin_id = a2.id ORDER BY log_whitelists.time DESC LIMIT 10;"
+		query = "SELECT a1.steamid, a2.steamid, FROM_UNIXTIME(log_whitelists.timestamp, '%a %H:%i') FROM log_whitelists INNER JOIN accounts a1 ON log_whitelists.id = a1.id INNER JOIN accounts a2 ON log_whitelists.admin_id = a2.id ORDER BY log_whitelists.timestamp DESC LIMIT 10;"
 	else
 		otherplayer = math.tointeger(otherplayer)
 
 		if (not IsValidPlayer(otherplayer)) then
 			return AddPlayerChat(playerid, "Selected player does not exist")
 		end
-
-		query = mariadb_prepare(sql, "SELECT a1.steam_name, a2.steam_name, FROM_UNIXTIME(log_whitelists.timestamp, '%a %H:%i') FROM log_whitelists INNER JOIN users a1 ON log_whitelists.id = a1.id INNER JOIN users a2 ON log_whitelists.admin_id = a2.id WHERE a1.id = ? ORDER BY log_whitelists.time DESC LIMIT 10;",
-			PlayerData[otherplayer].accountid)
+		query = mariadb_prepare(sql, "SELECT a1.steamid, a2.steamid, FROM_UNIXTIME(log_whitelists.timestamp, '%a %H:%i') FROM log_whitelists INNER JOIN accounts a1 ON log_whitelists.id = a1.id INNER JOIN accounts a2 ON log_whitelists.admin_id = a2.id WHERE a1.id = ? ORDER BY log_whitelists.timestamp DESC LIMIT 10;",
+			PlayerData[otherplayer].accountid
+		)
 	end
 
 	mariadb_async_query(sql, query, OnWhitelistLogLoaded, playerid)
