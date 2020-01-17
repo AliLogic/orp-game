@@ -1,0 +1,20 @@
+{
+	"author": "infin1tyy",
+	"version": "1.0",
+	"server_scripts": [
+		"scoreboard_s.lua"
+	],
+	"client_scripts": [
+		"scoreboard_c.lua"
+	],
+	"files": [
+		"scoreboard.html",
+		"scoreboard.js",
+		"scoreboard.css",
+		"bulma.min.css",
+		"jquery.min.js",
+		"simplebar.css",
+		"simplebar.min.js",
+		"OnsetLogo.png"
+	]
+}
