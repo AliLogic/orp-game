@@ -1,7 +1,7 @@
 local colour = ImportPackage('colours')
 MAX_CALLSIGNS = 300
 
-AddCommand("callsign", function (player, callsign, x, y, z)
+AddCommand("callsign", function (player, callsign)
 	if GetPlayerFactionType(player) ~= FACTION_POLICE or GetPlayerFactionType(player) ~= FACTION_MEDIC or GetPlayerFactionType(player) ~= FACTION_GOV then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You must be apart of a government agency to use this command.")
 	end
@@ -26,16 +26,12 @@ AddCommand("callsign", function (player, callsign, x, y, z)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /callsign <text>")
 	end
 
-	x = tonumber(x)
-	y = tonumber(y)
-	z = tonumber(z)
-
 	if string.len(callsign) < 0 or string.len(callsign) > 12 then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> Callsign length ranges from 1 - 12.")
 	end
 
 	VehicleData[vehicle].callsign = CreateText3D(callsign, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-	SetText3DAttached(VehicleData[vehicle].callsign, ATTACH_VEHICLE, vehicle, x, y, z, 0.0, 0.0, 0.0) -- coords need adjustments
+	SetText3DAttached(VehicleData[vehicle].callsign, ATTACH_VEHICLE, vehicle, -260, -60, 140, 0.0, 0.0, 0.0) -- coords need adjustments
 
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Callsign "..callsign.." attached!")
 end)
