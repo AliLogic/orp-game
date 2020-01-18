@@ -18,6 +18,21 @@ end
 AddRemoteEvent('scorebork:ToggleScoreboard', ToggleScoreboard)
 
 function InsertPlayer(id, name, level, ping)
-	ExecuteWebJS("insertPlayer({id: "..id..", name: \""..name.."\", level: "..level..", ping: "..ping.."});")
+	ExecuteWebJS(web, "insertPlayer({id: "..id..", name: \""..name.."\", level: "..level..", ping: "..ping.."});")
 end
 AddRemoteEvent('scorebork:InsertPlayer', InsertPlayer)
+
+function RemovePlayer(id)
+	ExecuteWebJS(web, "removePlayer("..id..");")
+end
+AddRemoteEvent('scorebork:RemovePlayer', RemovePlayer)
+
+function UpdatePlayer(id, value, newvalue)
+	ExecuteWebJS(web, "updateValue("..id..", \""..value.."\", \""..newvalue.."\");")
+end
+AddRemoteEvent('scorebork:UpdatePlayer', UpdatePlayer)
+
+AddFunctionExport('ToggleScoreboard', ToggleScoreboard)
+AddFunctionExport('InsertPlayer', InsertPlayer)
+AddFunctionExport('RemovePlayer', RemovePlayer)
+AddFunctionExport('UpdatePlayer', UpdatePlayer)
