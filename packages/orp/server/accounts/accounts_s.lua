@@ -58,6 +58,25 @@ function OnAccountLoadId(player)
 	end
 end
 
+function OnBanLogLoaded(playerid)
+	if mariadb_get_row_count() == 0 then
+		return AddPlayerChat(playerid, "No whitelists logged")
+	end
+
+	local messages = ""
+
+	for i = 1, mariadb_get_row_count() do
+		local admin_name = mariadb_get_value_name(i, "admin_name")
+		local player_name = mariadb_get_value_name(i, "player_name")
+		local time = mariadb_get_value_name(i, "ban_time")
+		local reason = mariadb_get_value_name(i, "reason")
+
+		messages = messages.."("..time..") "..admin_name.." banned "..player_name.." for "..reason.."<br>"
+	end
+
+	-- webgui.ShowMessageBox(playerid, messages)
+end
+
 function OnAccountCheckBan(player)
 	if (mariadb_get_row_count() == 0) then
 		--No ban found for this account
@@ -113,6 +132,23 @@ function CreateIPBan(player, ip, admin, expire, reason)
 
 	local query = mariadb_prepare(sql, "INSERT INTO ipbans VALUES('"..ip.."', "..PlayerData[player].accountid..", "..PlayerData[admin].accountid..", "..expire..", '"..reason.."')")
 	mariadb_async_query(sql, query)
+end
+
+local function OnAccBanDelete(playerid, account)
+
+	if mariadb_get_affected_rows() == 0 then
+		AddPlayerChat(playerid, "Error: The specified account "..account.." is either not banned or doesn't exist in the database.")
+	else
+		AddPlayerChat(playerid, "The specified account "..account.." is unbanned.")
+	end
+end
+
+function DeleteAccBan(playerid, account)
+
+	local query = mariadb_prepare(sql, "DELETE b FROM bans b\
+	INNER JOIN accounts a ON a.id = b.id\
+	WHERE a.steamname = '"..account.."' LIMIT 1")
+	mariadb_async_query(sql, query, OnAccBanDelete, playerid, account)
 end
 
 function CreateAccBan(playerid, adminid, expire, reason)
