@@ -115,7 +115,7 @@ function CreateIPBan(player, ip, admin, expire, reason)
 	mariadb_async_query(sql, query)
 end
 
-function CreateAccBan(playerid, adminid, expire)
+function CreateAccBan(playerid, adminid, expire, reason)
 
 	if expire ~= 0 then
 		expire = os.time("!*t") + expire
