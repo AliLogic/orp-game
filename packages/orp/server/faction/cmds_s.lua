@@ -1,4 +1,5 @@
 local colour = ImportPackage('colours')
+local borkui = ImportPackage('borkui')
 
 AddCommand("fhelp", function (playerid)
 	local faction_type = GetPlayerFactionType(playerid)
@@ -111,11 +112,25 @@ AddCommand("online", function (playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
+	local message = ""
+
 	for _, v in ipairs(GetAllPlayers()) do
-		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id and playerid ~= v then
-			AddPlayerChat(playerid, FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid..")")
+		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id then
+			message = message .. FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid..")"
 		end
+
+		if playerid == v then
+			message = message .. " (YOU)"
+		end
+		message = message .. "<br>"
 	end
+
+	local test = borkui.createUI(playerid, 0)
+	borkui.addUITitle(playerid, test, 'Online Faction Members')
+	borkui.addUIDivider(playerid, test)
+	borkui.addUIInformation(playerid, test, message)
+	borkui.addUIDivider(playerid, test)
+	borkui.addUIButton(playerid, test, 'Exit', 'is-danger')
 
 	return 1
 end)
