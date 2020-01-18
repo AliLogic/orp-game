@@ -1,5 +1,144 @@
 local colour = ImportPackage("colours")
 
+AddCommand("banlog", function(playerid, otherplayer)
+	if (PlayerData[playerid].admin < 1) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	local query = ""
+
+	if (otherplayer == nil) then
+		query = "SELECT admin.steamname as admin_name, player.steamname as admin_name, FROM_UNIXTIME(bans.ban_time) AS ban_time, bans.reason\
+		FROM bans\
+		INNER JOIN accounts admin ON bans.admin_id = admin.id\
+		INNER JOIN accounts player ON bans.id = player.id\
+		ORDER BY bans.ban_time DESC LIMIT 10;"
+	else
+		otherplayer = math.tointeger(otherplayer)
+
+		if (not IsValidPlayer(otherplayer)) then
+			return AddPlayerChat(playerid, "Selected player does not exist")
+		end
+
+		query = mariadb_prepare(sql, "SELECT admin.steamname as admin_name, player.steamname as admin_name, FROM_UNIXTIME(bans.ban_time) AS ban_time, bans.reason\
+		FROM bans\
+		INNER JOIN accounts admin ON bans.admin_id = admin.id\
+		INNER JOIN accounts player ON bans.id = player.id\
+		WHERE bans.id = ?\
+		ORDER BY bans.ban_time DESC LIMIT 10;",
+			PlayerData[otherplayer].accountid
+		)
+	end
+
+	mariadb_async_query(sql, query, OnBanLogLoaded, playerid)
+end)
+
+AddCommand("ban", function (playerid, lookupid, ...)
+	if (PlayerData[playerid].admin < 2) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if (lookupid == nil) then
+		return AddPlayerChat(playerid, "Usage: /ban <playerid> <reason*>")
+	end
+
+	local reason = ""
+
+	if #{...} == 0 then
+		reason = "No reason specified"
+	else
+		reason = table.concat({...}, " ")
+
+		if string.len(reason) < 3 or string.len(reason) > 128 then
+			return AddPlayerChat(playerid, "Error: Invalid reason length.")
+		end
+	end
+
+	CreateAccBan(lookupid, playerid, 0, reason)
+
+	KickPlayer(lookupid, "You were banned by "..PlayerData[playerid].steamname.." for "..reason..".")
+	return
+end)
+
+AddCommand("unban", function (playerid, ...)
+
+	if (PlayerData[playerid].admin < 2) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if (#{...} == 0) then
+		return AddPlayerChat(playerid, "Usage: /unban <account>")
+	end
+
+	local account = table.concat(..., " ")
+	local length = string.leng(account)
+
+	if length < 1 or length > 32 then
+		return AddPlayerChat(playerid, "Error: Invalid account specified.")
+	end
+
+	DeleteAccBan(playerid, account)
+	return
+end)
+
+AddCommand("whitelist", function(playerid, steam_id)
+	if (PlayerData[playerid].admin < 2) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if (steam_id == nil or steam_id == 0) then
+		return AddPlayerChat(playerid, "Usage: /whitelist <steam id>")
+	end
+
+	if (#steam_id < 10 or #steam_id > 20) then
+		return AddPlayerChat(playerid, "Parameter \"steam id\" invalid length 10-20")
+	end
+
+	AddWhitelist(playerid, steam_id)
+	AddPlayerChat(playerid, "You have added whitelist to for account "..steam_id..".")
+end)
+
+AddCommand("whitelistlog", function(playerid, otherplayer)
+	if (PlayerData[playerid].admin < 1) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	local query = ""
+
+	if (otherplayer == nil) then
+		query = "SELECT player.steamname AS player_name, admin.steamname AS admin_name, timestamp\
+		FROM log_whitelists\
+		INNER JOIN whitelists\
+		ON whitelists.id = log_whitelists.id\
+		INNER JOIN accounts player\
+		ON player.steamid = whitelists.steam_id\
+		INNER JOIN accounts admin\
+		ON log_whitelists.admin_id = admin.id\
+		ORDER BY log_whitelists.timestamp DESC LIMIT 10;"
+	else
+		otherplayer = math.tointeger(otherplayer)
+
+		if (not IsValidPlayer(otherplayer)) then
+			return AddPlayerChat(playerid, "Selected player does not exist")
+		end
+
+		query = mariadb_prepare(sql, "SELECT player.steamname AS player_name, admin.steamname AS admin_name, timestamp\
+		FROM log_whitelists\
+		INNER JOIN whitelists\
+		ON whitelists.id = log_whitelists.id\
+		INNER JOIN accounts player\
+		ON player.steamid = whitelists.steam_id\
+		INNER JOIN accounts admin\
+		ON log_whitelists.admin_id = admin.id\
+		WHERE log_whitelists.admin_id = ?\
+		ORDER BY log_whitelists.timestamp DESC LIMIT 10;",
+			PlayerData[otherplayer].accountid
+		)
+	end
+
+	mariadb_async_query(sql, query, OnWhitelistLogLoaded, playerid)
+end)
+
 AddCommand("spec", function (playerid, lookupid)
 	if (PlayerData[playerid].admin < 1) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
@@ -645,14 +784,14 @@ AddCommand("ahelp", function (player)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
-	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off /(whitelist)log /banlog /assist")
 
 	if PlayerData[player].admin > 1 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
 	end
 
 	if PlayerData[player].admin > 2 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near /clearchat")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near /clearchat /un(ban)")
 	end
 
 	if PlayerData[player].admin > 3 then
@@ -851,4 +990,76 @@ end)
 AddCommand('borkui', function (player)
 	AddPlayerChat(player, '(Server): Sending event \'borkui\' to client.')
 	CallRemoteEvent(player, 'borkui')
+end)
+
+AddCommand("assistance", function (playerid, ...)
+	local message = table.concat({...}, " ")
+	local length = string.len(message)
+
+	if #{...} == 0 then
+		return AddPlayerChat(playerid, "Usage: /assistance <message>")
+	end
+
+	if length < 5 or length > 50 then
+		return AddPlayerChat(playerid, "Error: Invalid request message length.")
+	end
+
+	if PlayerData[playerid].assistance ~= 0 then
+		return AddPlayerChat(playerid, "You have already requested an assistance. Please use /cancelassist if you no longer need help.")
+	end
+
+	SendAssistance(playerid, message)
+
+	AddPlayerChat(playerid, "Your help request has been sent to our online staff members... Please wait!")
+	AddPlayerChat(playerid, "Please use /cancelassist if you no longer need help.")
+end)
+
+function SendAssistance(playerid, message)
+
+	SendStaffMessage("[HELPER]: "..PlayerData[playerid].name.." is requiring assistance. Use /assist "..playerid.." to assist them.")
+	SendStaffMessage("[ASSIST]: "..PlayerData[playerid].name.." ("..playerid.."): "..message)
+
+	PlayerData[playerid].assistance = 1
+end
+
+AddCommand("cancelassist", function (playerid)
+	if PlayerData[playerid].assistance == 0 then
+		return AddPlayerChat(playerid, "Error: You have not requested any assistance.")
+	end
+
+	PlayerData[playerid].assistance = 0
+	SendStaffMessage("[ASSIST]: "..PlayerData[playerid].name.." has canceled their assist request.")
+end)
+
+AddCommand("assist", function (playerid, lookupid, ...)
+
+	if PlayerData[playerid].admin == 0 and PlayerData[playerid].helper == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if lookupid == nil or #{...} == 0 then
+		return AddPlayerChat(playerid, "Usage: /assist <playerid> <message>")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if (not IsValidPlayer(lookupid)) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	local message = table.concat({...}, " ")
+	local length = string.len(message)
+
+	if length < 5 or length > 50 then
+		return AddPlayerChat(playerid, "Error: Invalid request message length.")
+	end
+
+	if PlayerData[lookupid].assistance == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Player has not requested any assistance.</>")
+	end
+
+	AddPlayerChat(lookupid, "[ASSIST] "..PlayerData[playerid].steamname..": "..message)
+	PlayerData[lookupid].assistance = 0
+
+	return
 end)

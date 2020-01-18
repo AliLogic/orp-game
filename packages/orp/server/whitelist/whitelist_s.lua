@@ -46,8 +46,8 @@ function OnWhitelistLogLoaded(playerid)
 	local messages = ""
 
 	for i = 1, mariadb_get_row_count() do
-		local admin_name = mariadb_get_value_name_int(i, "admin_id")
-		local player_name = mariadb_get_value_name(i, "steam_id")
+		local admin_name = mariadb_get_value_name(i, "admin_name")
+		local player_name = mariadb_get_value_name(i, "player_name")
 		local time = mariadb_get_value_name(i, "timestamp")
 
 		messages = messages.."("..time..") "..admin_name.." whitelisted "..player_name.."<br>"

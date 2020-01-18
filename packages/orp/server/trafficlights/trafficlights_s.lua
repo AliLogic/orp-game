@@ -5,7 +5,7 @@ local LIGHT_GREEN = 1
 local LIGHT_YELLOW = 2
 local LIGHT_RED = 3
 
-local LightChangeInterval = 1000 -- Milliseconds
+local LightChangeInterval = 10000 -- Milliseconds
 
 local TrafficLightTimer = 0
 
@@ -41,7 +41,7 @@ AddEvent("OnPackageStop", function()
 	TrafficLights = nil
 end)
 
-AddFunctionExport("CreateTrafficLight", function (model, x, y, z, rx, ry, rz)
+function CreateTrafficLight(model, x, y, z, rx, ry, rz)
 	rx = rx or 0.0
 	ry = ry or 0.0
 	rz = rz or 0.0
@@ -57,20 +57,20 @@ AddFunctionExport("CreateTrafficLight", function (model, x, y, z, rx, ry, rz)
 	SetObjectPropertyValue(object, "_trafficLightState", TrafficLights[object].state)
 
 	return object
-end)
+end
 
-AddFunctionExport("DestroyTrafficLight", function (object)
+function DestroyTrafficLight (object)
 	if TrafficLights[object] == nil then
 		return false
 	end
 	TrafficLights[object] = nil
 	return DestroyObject(object)
-end)
+end
 
-AddFunctionExport("SetTrafficLightState", function (object, state)
+function SetTrafficLightState (object, state)
 	if TrafficLights[object] == nil then
 		return false
 	end
 	TrafficLights[object].state = state
 	SetObjectPropertyValue(object, "_trafficLightState", TrafficLights[object].state)
-end)
+end

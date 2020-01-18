@@ -23,19 +23,16 @@ AddEvent("SavePlayers", function ()
 	print("All accounts have been saved!")
 end)
 
-function OnPlayerSteamAuth(player)
+AddEvent("OnPlayerSteamAuth", function (player)
 	CreatePlayerData(player)
-	--FreezePlayer(player)
-end
-AddEvent("OnPlayerSteamAuth", OnPlayerSteamAuth)
+end)
 
-function OnPlayerQuit(player)
+AddEvent("OnPlayerQuit", function (player)
 	CallEvent("UnrentPlayerVehicle", player)
 	DestroyDrivingTest(player)
 	SavePlayerAccount(player)
 	DestroyPlayerData(player)
-end
-AddEvent("OnPlayerQuit", OnPlayerQuit)
+end)
 
 function LoadPlayerAccount(player)
 	-- First check if there is an account for this player
@@ -59,6 +56,25 @@ function OnAccountLoadId(player)
 
 		mariadb_async_query(sql, query, OnAccountCheckBan, player)
 	end
+end
+
+function OnBanLogLoaded(playerid)
+	if mariadb_get_row_count() == 0 then
+		return AddPlayerChat(playerid, "No whitelists logged")
+	end
+
+	local messages = ""
+
+	for i = 1, mariadb_get_row_count() do
+		local admin_name = mariadb_get_value_name(i, "admin_name")
+		local player_name = mariadb_get_value_name(i, "player_name")
+		local time = mariadb_get_value_name(i, "ban_time")
+		local reason = mariadb_get_value_name(i, "reason")
+
+		messages = messages.."("..time..") "..admin_name.." banned "..player_name.." for "..reason.."<br>"
+	end
+
+	-- webgui.ShowMessageBox(playerid, messages)
 end
 
 function OnAccountCheckBan(player)
@@ -108,13 +124,40 @@ function OnAccountCreated(player)
 	--CallRemoteEvent(player, "askClientCreation")
 end
 
-function CreateIPBan(player, ip, admin, bantime, reason)
+function CreateIPBan(player, ip, admin, expire, reason)
 
-	if bantime ~= 0 then
-		bantime = os.time("!*t") + bantime
+	if expire ~= 0 then
+		expire = os.time("!*t") + expire
 	end
 
-	local query = mariadb_prepare(sql, "INSERT INTO ipbans VALUES('"..ip.."', "..PlayerData[player].accountid..", "..PlayerData[admin].accountid..", "..bantime..", '"..reason.."')")
+	local query = mariadb_prepare(sql, "INSERT INTO ipbans VALUES('"..ip.."', "..PlayerData[player].accountid..", "..PlayerData[admin].accountid..", "..expire..", '"..reason.."')")
+	mariadb_async_query(sql, query)
+end
+
+local function OnAccBanDelete(playerid, account)
+
+	if mariadb_get_affected_rows() == 0 then
+		AddPlayerChat(playerid, "Error: The specified account "..account.." is either not banned or doesn't exist in the database.")
+	else
+		AddPlayerChat(playerid, "The specified account "..account.." is unbanned.")
+	end
+end
+
+function DeleteAccBan(playerid, account)
+
+	local query = mariadb_prepare(sql, "DELETE b FROM bans b\
+	INNER JOIN accounts a ON a.id = b.id\
+	WHERE a.steamname = '"..account.."' LIMIT 1")
+	mariadb_async_query(sql, query, OnAccBanDelete, playerid, account)
+end
+
+function CreateAccBan(playerid, adminid, expire, reason)
+
+	if expire ~= 0 then
+		expire = os.time("!*t") + expire
+	end
+
+	local query = mariadb_prepare(sql, "INSERT INTO bans (id, admin_id, ban_time, expire_time) VALUES("..PlayerData[playerid].accountid..", "..PlayerData[adminid].accountid..", UNIX_TIMESTAMP(), "..expire..", '"..reason.."')")
 	mariadb_async_query(sql, query)
 end
 
@@ -356,6 +399,7 @@ function CreatePlayerData(player)
 	PlayerData[player].test_vehicle = 0
 	PlayerData[player].test_warns = 0
 	PlayerData[player].test_stage = 0
+	PlayerData[player].assistance = 0
 
 	CreatePlayerClothingData(player)
 

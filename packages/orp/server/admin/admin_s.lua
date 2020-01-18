@@ -26,3 +26,13 @@ function SendAdminMessage(text)
 		end
 	end
 end
+
+function SendStaffMessage(text)
+
+    for _, i in pairs(GetAllPlayers()) do
+
+        if PlayerData[i].admin > 0 or PlayerData[i].helper > 0 then
+            AddPlayerChat(i, text)
+        end
+    end
+end
