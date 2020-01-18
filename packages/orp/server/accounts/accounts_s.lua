@@ -399,6 +399,7 @@ function CreatePlayerData(player)
 	PlayerData[player].test_vehicle = 0
 	PlayerData[player].test_warns = 0
 	PlayerData[player].test_stage = 0
+	PlayerData[player].assistance = 0
 
 	CreatePlayerClothingData(player)
 

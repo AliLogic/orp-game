@@ -784,7 +784,7 @@ AddCommand("ahelp", function (player)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
-	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off /(whitelist)log /banlog")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off /(whitelist)log /banlog /assist")
 
 	if PlayerData[player].admin > 1 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
@@ -990,4 +990,76 @@ end)
 AddCommand('borkui', function (player)
 	AddPlayerChat(player, '(Server): Sending event \'borkui\' to client.')
 	CallRemoteEvent(player, 'borkui')
+end)
+
+AddCommand("assistance", function (playerid, ...)
+	local message = table.concat({...}, " ")
+	local length = string.len(message)
+
+	if #{...} == 0 then
+		return AddPlayerChat(playerid, "Usage: /assistance <message>")
+	end
+
+	if length < 5 or length > 50 then
+		return AddPlayerChat(playerid, "Error: Invalid request message length.")
+	end
+
+	if PlayerData[playerid].assistance ~= 0 then
+		return AddPlayerChat(playerid, "You have already requested an assistance. Please use /cancelassist if you no longer need help.")
+	end
+
+	SendAssistance(playerid, message)
+
+	AddPlayerChat(playerid, "Your help request has been sent to our online staff members... Please wait!")
+	AddPlayerChat(playerid, "Please use /cancelassist if you no longer need help.")
+end)
+
+function SendAssistance(playerid, message)
+
+	SendStaffMessage("[HELPER]: "..PlayerData[playerid].name.." is requiring assistance. Use /assist "..playerid.." to assist them.")
+	SendStaffMessage("[ASSIST]: "..PlayerData[playerid].name.." ("..playerid.."): "..message)
+
+	PlayerData[playerid].assistance = 1
+end
+
+AddCommand("cancelassist", function (playerid)
+	if PlayerData[playerid].assistance == 0 then
+		return AddPlayerChat(playerid, "Error: You have not requested any assistance.")
+	end
+
+	PlayerData[playerid].assistance = 0
+	SendStaffMessage("[ASSIST]: "..PlayerData[playerid].name.." has canceled their assist request.")
+end)
+
+AddCommand("assist", function (playerid, lookupid, ...)
+
+	if PlayerData[playerid].admin == 0 and PlayerData[playerid].helper == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if lookupid == nil or #{...} == 0 then
+		return AddPlayerChat(playerid, "Usage: /assist <playerid> <message>")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if (not IsValidPlayer(lookupid)) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	local message = table.concat({...}, " ")
+	local length = string.len(message)
+
+	if length < 5 or length > 50 then
+		return AddPlayerChat(playerid, "Error: Invalid request message length.")
+	end
+
+	if PlayerData[lookupid].assistance == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Player has not requested any assistance.</>")
+	end
+
+	AddPlayerChat(lookupid, "[ASSIST] "..PlayerData[playerid].steamname..": "..message)
+	PlayerData[lookupid].assistance = 0
+
+	return
 end)
