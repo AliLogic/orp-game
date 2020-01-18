@@ -23,19 +23,16 @@ AddEvent("SavePlayers", function ()
 	print("All accounts have been saved!")
 end)
 
-function OnPlayerSteamAuth(player)
+AddEvent("OnPlayerSteamAuth", function (player)
 	CreatePlayerData(player)
-	--FreezePlayer(player)
-end
-AddEvent("OnPlayerSteamAuth", OnPlayerSteamAuth)
+end)
 
-function OnPlayerQuit(player)
+AddEvent("OnPlayerQuit", function (player)
 	CallEvent("UnrentPlayerVehicle", player)
 	DestroyDrivingTest(player)
 	SavePlayerAccount(player)
 	DestroyPlayerData(player)
-end
-AddEvent("OnPlayerQuit", OnPlayerQuit)
+end)
 
 function LoadPlayerAccount(player)
 	-- First check if there is an account for this player
@@ -108,13 +105,23 @@ function OnAccountCreated(player)
 	--CallRemoteEvent(player, "askClientCreation")
 end
 
-function CreateIPBan(player, ip, admin, bantime, reason)
+function CreateIPBan(player, ip, admin, expire, reason)
 
-	if bantime ~= 0 then
-		bantime = os.time("!*t") + bantime
+	if expire ~= 0 then
+		expire = os.time("!*t") + expire
 	end
 
-	local query = mariadb_prepare(sql, "INSERT INTO ipbans VALUES('"..ip.."', "..PlayerData[player].accountid..", "..PlayerData[admin].accountid..", "..bantime..", '"..reason.."')")
+	local query = mariadb_prepare(sql, "INSERT INTO ipbans VALUES('"..ip.."', "..PlayerData[player].accountid..", "..PlayerData[admin].accountid..", "..expire..", '"..reason.."')")
+	mariadb_async_query(sql, query)
+end
+
+function CreateAccBan(playerid, adminid, expire)
+
+	if expire ~= 0 then
+		expire = os.time("!*t") + expire
+	end
+
+	local query = mariadb_prepare(sql, "INSERT INTO bans (id, admin_id, ban_time, expire_time) VALUES("..PlayerData[playerid].accountid..", "..PlayerData[adminid].accountid..", UNIX_TIMESTAMP(), "..expire..", '"..reason.."')")
 	mariadb_async_query(sql, query)
 end
 

@@ -79,13 +79,6 @@ CREATE TABLE `bans` (
   `reason` varchar(128) NOT NULL,
   `ping` smallint(5) unsigned NOT NULL,
   `packetloss` float(4,2) NOT NULL,
-  `locx` float(14,4) NOT NULL,
-  `locy` float(14,4) NOT NULL,
-  `locz` float(14,4) NOT NULL,
-  `health` float(10,2) NOT NULL,
-  `armor` float(10,2) NOT NULL,
-  `weapon_id` smallint(5) unsigned NOT NULL,
-  `weapon_ammo` mediumint(8) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `bans_ibfk_1` FOREIGN KEY (`id`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
