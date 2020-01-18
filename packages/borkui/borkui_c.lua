@@ -1,3 +1,15 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Bork
+* Logic_
+
+Contributors:
+* Raw
+* Blue Mountains GmbH
+]]--
+
 local web = CreateWebUI(0, 0, 0, 0, 1, 16)
 SetWebAlignment(web, 0, 0)
 SetWebAnchors(web, 0, 0, 1, 1)
@@ -17,8 +29,9 @@ AddEvent("OnPackageStop", function()
 	DestroyWebUI(web)
 end)
 
-function CreateUI(align)
+function CreateUI(align, source)
 	align = align or 0
+	source = source or false
 
 	if align < 0 or align > 2 then
 		align = 0
@@ -32,9 +45,14 @@ function CreateUI(align)
 		columns = {}
 	}
 
+	if source then
+		CallRemoteEvent("borkui:clientOnUICreated", GetPlayerId(), id)
+	end
+		
 	AddPlayerChat('(borkui): UI created, with align '..align..' and id '..id)
 	return id
 end
+AddRemoteEvent('borkui:serverCreateUI', CreateUI)
 
 function AddUITitle(id, text)
 	if dialogs[id] == nil then
@@ -49,6 +67,7 @@ function AddUITitle(id, text)
 	dialogs[id].title = text
 	AddPlayerChat('(borkui): AddUITitle called')
 end
+AddRemoteEvent('borkui:serverAddUITitle', AddUITitle)
 
 function AddUIInformation(id, text)
 	if dialogs[id] == nil then
@@ -62,6 +81,7 @@ function AddUIInformation(id, text)
 	dialogs[id].info = text
 	AddPlayerChat('(borkui): AddUIInformation called')
 end
+AddRemoteEvent('borkui:serverAddUIInformation', AddUIInformation)
 
 function AddUIDivider(id)
 	if dialogs[id] == nil then
@@ -71,6 +91,7 @@ function AddUIDivider(id)
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_DIVIDER})
 	AddPlayerChat('(borkui): AddUIDivider called')
 end
+AddRemoteEvent('borkui:serverAddUIDivider', AddUIDivider)
 
 function AddUIButton(id, text, colour, size, rounded, fullwidth, anchor)
 	if dialogs[id] == nil then
@@ -94,6 +115,7 @@ function AddUIButton(id, text, colour, size, rounded, fullwidth, anchor)
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_BUTTON, text, colour, size, rounded, fullwidth, anchor})
 	AddPlayerChat('(borkui): AddUIButton called')
 end
+AddRemoteEvent('borkui:serverAddUIButton', AddUIButton)
 
 function AddUITextInput(id, label, size, type, placeholder)
 	if dialogs[id] == nil then
@@ -120,6 +142,7 @@ function AddUITextInput(id, label, size, type, placeholder)
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_TEXTINPUT, label, size, type, placeholder})
 	AddPlayerChat('(borkui): AddUITextInput called')
 end
+AddRemoteEvent('borkui:serverAddUITextInput', AddUITextInput)
 
 function AddUIDropdown(id, options, size, rounded, label)
 	if dialogs[id] == nil then
@@ -149,6 +172,7 @@ function AddUIDropdown(id, options, size, rounded, label)
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_DROPDOWN, jsonoptions, size, rounded, label})
 	AddPlayerChat('(borkui): AddUIDropdown called')
 end
+AddRemoteEvent('borkui:serverAddUIDropdown', AddUIDropdown)
 
 function ShowUI(id)
 	if dialogs[id] == nil then
@@ -196,6 +220,7 @@ function ShowUI(id)
 	lastOpened = id
 	AddPlayerChat('(borkui): ShowUI called')
 end
+AddRemoteEvent('borkui:serverShowUI', ShowUI)
 
 function HideUI()
 	if dialogs[lastOpened] == nil then
@@ -212,6 +237,7 @@ function HideUI()
 
 	AddPlayerChat('(borkui): HideUI called')
 end
+AddRemoteEvent('borkui:serverHideUI', HideUI)
 
 function DestroyUI(id)
     if lastOpened == id then
@@ -220,6 +246,7 @@ function DestroyUI(id)
 	dialogs[id] = nil
 	AddPlayerChat('(borkui): DestroyUI called')
 end
+AddRemoteEvent('borkui:serverDestroyUI', DestroyUI)
 
 AddEvent("borkui:ready", function()
     if lastOpened ~= -1 then
@@ -239,6 +266,10 @@ AddEvent("borkui:OnHideMenu", function()
 			AddPlayerChat('(borkui): OnHideMenu received.')
         end)
     end
+end)
+
+AddEvent("borkui:OnDialogSubmit", function (dialog, button, ...)
+	CallRemoteEvent("borkui:clientOnDialogSubmit", GetPlayerId(), dialog, button, {...})
 end)
 
 --[[
