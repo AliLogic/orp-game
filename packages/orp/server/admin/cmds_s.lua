@@ -1,5 +1,39 @@
 local colour = ImportPackage("colours")
 
+AddCommand("spec", function (playerid, lookupid)
+	if (PlayerData[playerid].admin < 1) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	--[[if (lookupid == nil) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /spec <player>")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if lookupid == playerid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot kick yourself!</>")
+	end
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	if PlayerData[lookupid].admin > PlayerData[playerid].admin then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You can not spectate "..GetPlayerName(lookupid)..".</>")
+	end]]--
+
+	SetPlayerSpectate(playerid, true)
+end)
+
+AddCommand("specoff", function (playerid)
+	if (PlayerData[playerid].admin < 1) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	SetPlayerSpectate(playerid, false)
+end)
+
 AddCommand("clearchat", function (playerid)
 
 	if (PlayerData[playerid].admin < 2) then
@@ -611,7 +645,7 @@ AddCommand("ahelp", function (player)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
-	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off")
 
 	if PlayerData[player].admin > 1 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
