@@ -21,14 +21,45 @@ AddCommand("fhelp", function (playerid)
 	return 1
 end)
 
-AddCommand("frank", function (playerid, lookupid)
+AddCommand("frank", function (playerid, lookupid, rank)
 
 	local factionid = PlayerData[playerid].faction
 	local faction_rank = PlayerData[playerid].faction_rank
 
-	if factionid == 0 then
+	if factionid == 0 or rank == nil then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
+
+	lookupid = tonumber(lookupid)
+
+	if (not IsValidPlayer(lookupid)) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have specified an invalid player ID.</>")
+	end
+
+	if lookupid == playerid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot change your own rank, request an admin or a colleague!</>")
+	end
+
+	if PlayerData[playerid].faction ~= PlayerData[lookupid].faction then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot change rank of someone who is not in your faction!</>")
+	end
+
+	if PlayerData[playerid].faction_rank < PlayerData[lookupid].faction_rank then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot change rank of someone whose rank is higher than yours!</>")
+	end
+
+	rank = tonumber(rank)
+
+	if rank < 0 or rank > FactionData[factionid].leadership_rank then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid faction rank specified.</>")
+	end
+
+	PlayerData[lookupid].faction_rank = rank
+
+	AddPlayerChat(playerid, "You have changed the rank of "..GetPlayerName(lookupid).." to "..rank..".")
+	AddPlayerChat(lookupid, ""..GetPlayerName(playerid).." changed your rank to "..rank..".")
+
+	return
 end)
 
 AddCommand("drag", function (playerid, lookupid)
