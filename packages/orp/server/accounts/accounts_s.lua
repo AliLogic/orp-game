@@ -100,7 +100,7 @@ function OnAccountCheckIpBan(player)
 	if (mariadb_get_row_count() == 0) then
 		--No IP ban found for this account
 		if (PlayerData[player].accountid == 0) then
-			CreatePlayerAccount(player) -- 
+			CreatePlayerAccount(player) --
 		else
 			LoadPlayerAccount(player)
 		end
@@ -208,6 +208,7 @@ function OnAccountLoaded(player)
 	else
 		PlayerData[player].admin = mariadb_get_value_name_int(1, "admin")
 		PlayerData[player].helper = mariadb_get_value_name_int(1, "helper")
+		PlayerData[player].ajail = mariadb_get_value_name_int(1, "ajail")
 		--PlayerData[player].cash = math.tointeger(result['cash'])
 		--PlayerData[player].bank_balance = math.tointeger(result['bank_balance'])
 		--PlayerData[player].name = tostring(result['name'])
@@ -400,6 +401,7 @@ function CreatePlayerData(player)
 	PlayerData[player].test_warns = 0
 	PlayerData[player].test_stage = 0
 	PlayerData[player].assistance = 0
+	PlayerData[player].ajail = 0
 
 	CreatePlayerClothingData(player)
 
@@ -516,6 +518,15 @@ end
 
 function OnPlayerPayday(player)
 
+	if (PlayerData[player].ajail > 0) then
+
+		PlayerData[player].ajail = (PlayerData[player].ajail - 1)
+
+		if (PlayerData[player].ajail == 0) then
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Your admin jail has now finished.</>")
+		end
+	end
+
 	PlayerData[player].minutes = (PlayerData[player].minutes + 1)
 
 	if (PlayerData[player].minutes > 60) then
@@ -611,4 +622,8 @@ function CancelDrivingTest(playerid)
 		DestroyVehicleData(PlayerData[playerid].test_vehicle)
 		DestroyDrivingTest(playerid)
 	end
+end
+
+function PutPlayerInAdminJail(playerid)
+	SetPlayerLocation(playerid, 0.0, 0.0, 0.0)
 end

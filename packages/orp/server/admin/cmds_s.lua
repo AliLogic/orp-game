@@ -784,7 +784,7 @@ AddCommand("ahelp", function (player)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
-	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off /(whitelist)log /banlog /assist")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off /(whitelist)log /banlog /assist /ajail")
 
 	if PlayerData[player].admin > 1 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
@@ -1060,6 +1060,50 @@ AddCommand("assist", function (playerid, lookupid, ...)
 
 	AddPlayerChat(lookupid, "[ASSIST] "..PlayerData[playerid].steamname..": "..message)
 	PlayerData[lookupid].assistance = 0
+
+	return
+end)
+
+AddCommand("ajail", function (playerid, lookupid, minutes)
+
+	if (PlayerData[playerid].admin < 1) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if lookupid == nil or minutes == nil then
+		return AddPlayerChat(playerid, "Usage: /ajail <playerid> <minutes>")
+	end
+
+	lookupid = tonumber(lookupid)
+	minutes = tonumber(minutes)
+
+	if (not IsValidPlayer(lookupid)) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	if (minutes < 0 or minutes > 1440) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Minutes can be between 0 to 1440 (24 hours).</>")
+	end
+
+	if (PlayerData[lookupid].ajail == 0 and minutes == 0) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not admin jailed.</>")
+	end
+
+	if minutes ~= 0 then
+
+		if PlayerData[lookupid].ajail ~= 0 then
+			PutPlayerInAdminJail(lookupid)
+		end
+		PlayerData[lookupid].ajail = (PlayerData[lookupid].ajail + minutes)
+
+		AddPlayerChat(lookupid, ""..GetPlayerName(playerid).." has admin jailed you for "..minutes.." minutes.")
+		AddPlayerChat(playerid, ""..GetPlayerName(lookupid).." has been admin jailed by you for "..minutes..".")
+	else
+		PlayerData[lookupid].ajail = 0
+
+		AddPlayerChat(lookupid, ""..GetPlayerName(playerid).." has admin un-jailed you.")
+		AddPlayerChat(playerid, ""..GetPlayerName(lookupid).." has been admin un-jailed by you.")
+	end
 
 	return
 end)
