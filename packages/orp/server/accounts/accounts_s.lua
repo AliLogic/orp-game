@@ -34,7 +34,7 @@ AddEvent("OnPlayerQuit", function (player)
 	DestroyPlayerData(player)
 end)
 
-function LoadPlayerAccount(player)
+function LoadPlayerAccountId(player)
 	-- First check if there is an account for this player
 	local query = mariadb_prepare(sql, "SELECT id FROM accounts WHERE steamid = '?' LIMIT 1;",
 		tostring(GetPlayerSteamId(player))

@@ -23,7 +23,7 @@ local function OnPlayerLoadWhitelist(player)
 			-- AddPlayerChat(player, "<span color=\"#FFFFFFFF\" style=\"normal\">Your account has been put off the</> <span color=\"#FF0000FF\" style=\"bold\">whitelist</> <span color=\"#FFFFFFFF\" style=\"normal\">. Visit the <span color=\"#FF0000FF\" style=\"bold\">roleplaystudios.co</> and contact the staff team.")
 			KickPlayer(player, "This account has been put off the whitelist.")
 		else
-			LoadPlayerAccount(player)
+			LoadPlayerAccountId(player)
 		end
 	else
 		-- AddPlayerChat(player, "<span color=\"#FFFFFFFF\" style=\"normal\">Your account has not been</> <span color=\"#FF0000FF\" style=\"bold\">whitelisted</><span color=\"#FFFFFFFF\" style=\"normal\"> yet.</> Visit the <span color=\"#FF0000FF\" style=\"bold\">roleplaystudios.co</> to apply.")
