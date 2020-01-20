@@ -23,6 +23,8 @@ SetWebVisibility(charUI, WEB_HIDDEN)
 local charUIdata = {}
 local count = 0
 
+local is_frozen = false
+
 AddEvent("OnWebLoadComplete", function(web)
 	if web == charUI then
 		--AddPlayerChat("WebUI now ready 1")
@@ -235,15 +237,15 @@ AddEvent('charui:delete', function (slot)
 	return AddPlayerChat('This functionality is disabled!')
 end)
 
---[[AddRemoteEvent('FreezePlayer', function (player)
-	if PlayerData[player].is_frozen == false then
+AddRemoteEvent('FreezePlayer', function ()
+	if is_frozen == false then
 		SetIgnoreMoveInput(false)
 		SetIgnoreLookInput(false)
-		PlayerData[player].is_frozen = true
+		is_frozen = true
 	else
 		SetIgnoreMoveInput(true)
 		SetIgnoreLookInput(true)
-		PlayerData[player].is_frozen = false
+		is_frozen = false
 	end
 	return true
-end)]]--
+end)
