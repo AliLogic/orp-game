@@ -592,11 +592,6 @@ AddRemoteEvent('accounts:kick', function (player)
 	KickPlayer(player, "You decided to quit the server!")
 end)
 
-AddCommand("name", function (player) 
-	SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
-	AddPlayerChat(player, "Name set to: "..PlayerData[player].firstname.." "..PlayerData[player].lastname)
-end)
-
 AddCommand("logout", function (player)
 	SavePlayerAccount(player)
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You will be logged out in 5 seconds.")

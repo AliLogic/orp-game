@@ -27,10 +27,6 @@ AddEvent("OnPlayerSpawn", function(player)
 					DestroyText3D(PlayerData[player].label)
 				end
 			end
-
-			if PlayerData[player].id ~= 0 then
-				SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
-			end
 		end
 	end
 end)
@@ -124,14 +120,6 @@ AddEvent("OnPlayerWeaponShot", function(player, weapon, hittype, hitid, hitX, hi
 					end)
 				end
 			end
-		end
-	end
-end)
-
-AddEvent("OnPlayerStreamIn", function (player, otherplayer)
-	if PlayerData[otherplayer] ~= nil then
-		if PlayerData[otherplayer].id ~= 0 then
-			SetPlayerName(otherplayer, PlayerData[otherplayer].firstname.." "..PlayerData[otherplayer].lastname)
 		end
 	end
 end)
