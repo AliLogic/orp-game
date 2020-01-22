@@ -42,6 +42,7 @@ local function cmd_biz(playerid, prefix, ...)
 			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
 		end
 
+		SetPlayerAnimation(playerid, "LOCKDOOR")
 		BusinessData[biz].locked = (not BusinessData[biz].locked)
 
 	elseif prefix == "shop" then

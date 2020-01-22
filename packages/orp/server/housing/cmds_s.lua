@@ -20,6 +20,7 @@ local function cmd_house(playerid, prefix, ...)
 		else
 			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
 		end
+		SetPlayerAnimation(playerid, "LOCKDOOR")
 
 		HousingData[house].locked = (not HousingData[house].locked)
 

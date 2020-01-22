@@ -90,6 +90,7 @@ local function cmd_aed(playerid, doorid, prefix, ...)
 		local is_locked = not DoorData[doorid].is_locked
 		DoorData[doorid].is_locked = is_locked
 
+		SetPlayerAnimation(playerid, "LOCKDOOR")
 		if is_locked then
 			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Door "..doorid.." is now locked.</>")
 			SetDoorOpen(playerid, false)
