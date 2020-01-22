@@ -381,7 +381,7 @@ function CreatePlayerData(player)
 	PlayerData[player].steamid = GetPlayerSteamId(player)
 	PlayerData[player].job_vehicle = nil
 
-	PlayerData[player].job = ""
+	PlayerData[player].job = 0
 	PlayerData[player].onAction = false
 	PlayerData[player].cmd_cooldown = 0.0
 
@@ -549,12 +549,12 @@ function OnPlayerPayday(player)
 			paycheck = paycheck + factionpay
 		end
 
-		-- if PlayerData[player].job ~= 0 then
-		-- else
-		-- 	AddPlayerChat(player, "Unemployement benefit: $100")
+		if PlayerData[player].job ~= 0 then
+		else
+			AddPlayerChat(player, "Unemployement benefit: $100")
 
-		-- 	paycheck = paycheck + 100
-		-- end
+			paycheck = paycheck + 100
+		end
 
 		AddPlayerChat(player, "Final Paycheck: $"..paycheck)
 		AddPlayerChat(player, "(( Paychecks are still a work in progress. ))")
@@ -623,4 +623,26 @@ end
 
 function PutPlayerInAdminJail(playerid)
 	SetPlayerLocation(playerid, 0.0, 0.0, 0.0)
+	CallRemoteEvent(playerid, "FreezePlayer", true)
+end
+
+function SetPlayerJob(playerid, job)
+
+	if (PlayerData[playerid] ~= nil) then
+		PlayerData[playerid].job = job
+
+		local query = mariadb_prepare(sql, "UPDATE characters SET job = ? WHERE id = ?",
+			job, PlayerData[playerid].id
+		)
+		mariadb_async_query(sql, query)
+	end
+end
+
+function GetPlayerJob(playerid)
+	if (PlayerData[playerid] ~= nil) then
+
+		return PlayerData[playerid].job
+	end
+
+	return 0
 end

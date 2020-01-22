@@ -38,10 +38,10 @@ function CreateVehicleData(vehicle)
 	VehicleData[vehicle].plate = "ONSET"
 	VehicleData[vehicle].faction = 0
 
-	VehicleData[vehicle].x = ""
-	VehicleData[vehicle].y = ""
-	VehicleData[vehicle].z = ""
-	VehicleData[vehicle].a = ""
+	VehicleData[vehicle].x = 0
+	VehicleData[vehicle].y = 0
+	VehicleData[vehicle].z = 0
+	VehicleData[vehicle].a = 0
 
 	VehicleData[vehicle].r = 0
 	VehicleData[vehicle].g = 0
@@ -56,6 +56,8 @@ function CreateVehicleData(vehicle)
 
 	VehicleData[vehicle].rental = 0
 	VehicleData[vehicle].renter = 0
+
+	VehicleData[vehicle].being_repaired = 0
 end
 
 function DestroyVehicleData(vehicle)
@@ -168,6 +170,8 @@ function OnVehicleLoaded(id)
 		VehicleData[vehicle].rental = tonumber(result['rental'])
 		VehicleData[vehicle].fuel = tonumber(result['litres'])
 
+		--VehicleData[vehicle].nos = mariadb_get_value_name_int(1, "nos")
+
 		print(id.."'s owner: "..VehicleData[vehicle].owner)
 
 		SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
@@ -265,3 +269,42 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 		SetPlayerInVehicle(player, vehicle, seat)
 	end
 end)
+
+function IsEngineVehicle(vehicleid)
+
+	local model = GetVehicleModel(vehicleid)
+
+	if 1 <= model <= 25 then
+		return 1
+	end
+
+	return 0
+end
+
+function IsVehicleCar(vehicleid)
+
+	local model = GetVehicleModel(vehicleid)
+
+	if 1 <= model <= 9 or 11 <= model <= 19 or 21 <= model <= 25 then
+		return 1
+	end
+
+	return 0
+end
+
+function GetNearestVehicle(playerid)
+
+	local px, py, pz = GetPlayerLocation(playerid)
+	local x, y, z = nil
+
+	for _, vehicle in pairs(GetAllVehicles()) do
+
+		x, y, z = GetVehicleLocation(vehicle)
+
+		if tonumber(GetDistance3D(px, py, pz, x, y, z)) <= 200.0 then
+			return vehicle
+		end
+	end
+
+	return 0
+end
