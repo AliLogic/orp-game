@@ -12,6 +12,7 @@ JOB_TYPE_LUMBERJACK = 1
 JOB_TYPE_TAXI = 2
 JOB_TYPE_TRUCKER = 3
 JOB_TYPE_MECHANIC = 4
+JOB_TYPE_MINER = 5
 
 AddCommand("jobhelp", function (playerid)
 
@@ -27,6 +28,8 @@ AddCommand("jobhelp", function (playerid)
 		AddPlayerChat(playerid, "Trucker: ")
 	elseif job == JOB_TYPE_MECHANIC then
 		AddPlayerChat(playerid, "Mechanic: /repair /nitrous /acceptmechanic")
+	elseif job == JOB_TYPE_MINER then
+		AddPlayerChat(playerid, "Miner: /mine")
 	end
 
 	return
@@ -90,6 +93,19 @@ function CreateJobCoords(job)
 end
 
 function GetJobName(job)
-
 	return JobData[job].name
+end
+
+function IsPlayerNearJobPoint(playerid)
+
+	local x, y, z = GetPlayerLocation(playerid)
+	local job = GetPlayerJob(playerid)
+
+	for i = 1, MAX_JOB_COORDS, 1 do
+		if tonumber(math.floor(GetDistance3D(JobCoords[job][i].x, JobCoords[job][i].y, JobCoords[job][i].z, x, y, z))) < 130 then
+			return i
+		end
+	end
+
+	return 0
 end
