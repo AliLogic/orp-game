@@ -219,6 +219,7 @@ AddEvent("OnPlayerChat", function(player, text)
 	local x, y, z = GetPlayerLocation(player)
 
 	AddPlayerChatRange(x, y, 800.0, "<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
+	SetPlayerLipMovement(player)
 	--AddPlayerChatAll("<span color=\"#ffffffFF\">"..GetPlayerName(player).." says: "..text.."</>")
 	return false
 end)

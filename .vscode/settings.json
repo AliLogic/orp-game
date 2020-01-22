@@ -319,6 +319,7 @@
         "UTextRenderComponent",
         "EComponentMobility",
         "AStaticMeshActor",
-        "IsPlayerInRangeOfPlayer"
+        "IsPlayerInRangeOfPlayer",
+        "SetPlayerLipMovement"
     ]
 }
