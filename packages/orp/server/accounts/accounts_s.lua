@@ -60,7 +60,7 @@ end
 
 function OnBanLogLoaded(playerid)
 	if mariadb_get_row_count() == 0 then
-		return AddPlayerChat(playerid, "No whitelists logged")
+		return AddPlayerChat(playerid, "No account bans logged")
 	end
 
 	local messages = ""
@@ -623,7 +623,7 @@ end
 
 function PutPlayerInAdminJail(playerid)
 	SetPlayerLocation(playerid, 0.0, 0.0, 0.0)
-	CallRemoteEvent(playerid, "FreezePlayer", true)
+	FreezePlayer(playerid)
 end
 
 function SetPlayerJob(playerid, job)

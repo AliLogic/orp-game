@@ -239,12 +239,12 @@ end)
 
 AddRemoteEvent('FreezePlayer', function ()
 	if is_frozen == false then
-		SetIgnoreMoveInput(false)
-		SetIgnoreLookInput(false)
-		is_frozen = true
-	else
 		SetIgnoreMoveInput(true)
 		SetIgnoreLookInput(true)
+		is_frozen = true
+	else
+		SetIgnoreMoveInput(false)
+		SetIgnoreLookInput(false)
 		is_frozen = false
 	end
 	return true

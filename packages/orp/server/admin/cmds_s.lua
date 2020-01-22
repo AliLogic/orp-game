@@ -997,27 +997,27 @@ AddCommand("assistance", function (playerid, ...)
 	local length = string.len(message)
 
 	if #{...} == 0 then
-		return AddPlayerChat(playerid, "Usage: /assistance <message>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage: </>/assistance <message>")
 	end
 
 	if length < 5 or length > 50 then
-		return AddPlayerChat(playerid, "Error: Invalid request message length.")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid request message length.</>")
 	end
 
 	if PlayerData[playerid].assistance ~= 0 then
-		return AddPlayerChat(playerid, "You have already requested an assistance. Please use /cancelassist if you no longer need help.")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have already requested an assistance. Please use /cancelassist if you no longer need help.</>")
 	end
 
 	SendAssistance(playerid, message)
 
-	AddPlayerChat(playerid, "Your help request has been sent to our online staff members... Please wait!")
-	AddPlayerChat(playerid, "Please use /cancelassist if you no longer need help.")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_YELLOW().."\">Your help request has been sent to our online staff members... Please wait!</>")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_YELLOW().."\">Please use /cancelassist if you no longer need help.</>")
 end)
 
 function SendAssistance(playerid, message)
 
-	SendStaffMessage("[HELPER]: "..PlayerData[playerid].name.." is requiring assistance. Use /assist "..playerid.." to assist them.")
-	SendStaffMessage("[ASSIST]: "..PlayerData[playerid].name.." ("..playerid.."): "..message)
+	SendStaffMessage("<span color=\""..colour.COLOUR_BLUE().."\">[HELPER]: </>"..PlayerData[playerid].name.." is requiring assistance. Use /assist "..playerid.." to assist them.")
+	SendStaffMessage("<span color=\""..colour.COLOUR_BLUE().."\">[ASSIST]: </>"..PlayerData[playerid].name.." ("..playerid.."): "..message)
 
 	PlayerData[playerid].assistance = 1
 end
@@ -1028,7 +1028,7 @@ AddCommand("cancelassist", function (playerid)
 	end
 
 	PlayerData[playerid].assistance = 0
-	SendStaffMessage("[ASSIST]: "..PlayerData[playerid].name.." has canceled their assist request.")
+	SendStaffMessage("<span color=\""..colour.COLOUR_BLUE().."\">[ASSIST]: </>"..PlayerData[playerid].name.." has canceled their assist request.")
 end)
 
 AddCommand("assist", function (playerid, lookupid, ...)
@@ -1058,7 +1058,7 @@ AddCommand("assist", function (playerid, lookupid, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Player has not requested any assistance.</>")
 	end
 
-	AddPlayerChat(lookupid, "[ASSIST] "..PlayerData[playerid].steamname..": "..message)
+	AddPlayerChat(lookupid, "<span color=\""..colour.COLOUR_YELLOW().."\">[ASSIST]</> "..PlayerData[playerid].steamname..": "..message)
 	PlayerData[lookupid].assistance = 0
 
 	return
