@@ -29,9 +29,10 @@ AddEvent("OnPackageStop", function()
 	DestroyWebUI(web)
 end)
 
-function CreateUI(align, source)
+function CreateUI(align, source, extraid)
 	align = align or 0
 	source = source or false
+	extraid = extraid or false
 
 	if align < 0 or align > 2 then
 		align = 0
@@ -46,9 +47,9 @@ function CreateUI(align, source)
 	}
 
 	if source then
-		CallRemoteEvent("borkui:clientOnUICreated", GetPlayerId(), id)
+		CallRemoteEvent("borkui:clientOnUICreated", GetPlayerId(), id, extraid)
 	end
-		
+
 	AddPlayerChat('(borkui): UI created, with align '..align..' and id '..id)
 	return id
 end
@@ -166,7 +167,7 @@ function AddUIDropdown(id, options, size, rounded, label)
 			jsonoptions = jsonoptions.."'"..options[i].."'"..','
 		end
 	end
-	
+
 	jsonoptions = jsonoptions..']'
 
 	table.insert(dialogs[id].columns, {COLUMN_TYPE_DROPDOWN, jsonoptions, size, rounded, label})
@@ -262,7 +263,7 @@ AddEvent("borkui:OnHideMenu", function()
             SetIgnoreMoveInput(true)
             ShowMouseCursor(true)
 			SetInputMode(INPUT_GAMEANDUI)
-			
+
 			AddPlayerChat('(borkui): OnHideMenu received.')
         end)
     end

@@ -12,14 +12,14 @@ Contributors:
 
 --[[
 	Usable Events:
-	borkui:clientOnUICreated - returns playerid and dialogid.
+	borkui:clientOnUICreated - returns playerid, dialogid and extraid.
 	borkui:clientOnDialogSubmit - returns playerid, dialogid, button clicked and any arguments passed via JS.
 
 	For any client side events, scan through borkui.js for any CallEvent's.
 ]]
 
-function CreateUI(player, align)
-	CallRemoteEvent(player, "borkui:serverCreateUI", align, true)
+function CreateUI(player, align, extraid)
+	CallRemoteEvent(player, "borkui:serverCreateUI", align, true, extraid)
 end
 
 function AddUITitle(player, dialog, text)
