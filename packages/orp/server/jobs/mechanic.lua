@@ -36,9 +36,9 @@ AddCommand("repair", function (playerid)
 		return AddPlayerChat(playerid, "You must exit the vehicle first.")
 	end
 
-	--[[if not Inventory_HasItem(playerid, INV_ITEM_REPAIR) then
+	if not Inventory_HasItem(playerid, INV_ITEM_REPAIR) then
 		return AddPlayerChat(playerid, "You don't have a repair kit on you.")
-	end]]--
+	end
 
 	local vehicle = GetNearestVehicle(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
@@ -62,7 +62,7 @@ AddCommand("repair", function (playerid)
 			return AddPlayerChat(playerid, "This vehicle is already being repaired.")
 		end
 
-		-- Inventory_Remove(playerid, "Repair Kit")
+		Inventory_RemoveItem(playerid, Inventory_HasItem(playerid, INV_ITEM_REPAIR))
 		SetPlayerAnimation(playerid, "COMBINE")
 		VehicleData[vehicle].being_repaired = true
 		AddPlayerChatRange(x, y, 800.0, "** "..GetPlayerName(playerid).." starts to repair the vehicle.")
@@ -87,9 +87,9 @@ AddCommand("nitrous", function (playerid)
 		return AddPlayerChat(playerid, "You must exit the vehicle first.")
 	end
 
-	--[[if not Inventory_HasItem(playerid, INV_ITEM_NOS) then
+	if not Inventory_HasItem(playerid, INV_ITEM_NOSCAN) then
 		return AddPlayerChat(playerid, "You don't have a NOS Canister on you.")
-	end]]--
+	end
 
 	local vehicle = GetNearestVehicle(playerid)
 
@@ -104,7 +104,7 @@ AddCommand("nitrous", function (playerid)
 			return AddPlayerChat(playerid, "The hood must be opened before adding nitrous.")
 		end
 
-		-- Inventory_Remove(playerid, "NOS Canister")
+		Inventory_RemoveItem(playerid, Inventory_HasItem(playerid, INV_ITEM_NOSCAN))
 		SetPlayerAnimation(playerid, "COMBINE")
 
 		Delay(1000, function ()
@@ -117,7 +117,6 @@ AddCommand("nitrous", function (playerid)
 
 		return
 	end
-
 
 	AddPlayerChat(playerid, "You are not in range of any vehicle's hood.");
 end)

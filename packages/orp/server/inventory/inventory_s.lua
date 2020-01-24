@@ -6,14 +6,44 @@ INV_ITEM_RADIO = 1
 INV_ITEM_REPAIR = 2
 INV_ITEM_HEALTH = 3
 INV_ITEM_TASER = 4
-INV_ITEM_BANDAGE = 5
+INV_ITEM_GPS = 5
+INV_ITEM_BRICKPHONE = 6
+INV_ITEM_SMARTPHONE = 7
+INV_ITEM_NOSCAN = 8
+INV_ITEM_WEED = 9
+INV_ITEM_CIGAR = 10
+INV_ITEM_CIGARETTE = 11
+INV_ITEM_COCAINE = 12
+INV_ITEM_HEROINE = 13
+INV_ITEM_AMPHETAMINE = 14
+INV_ITEM_XANAX = 15
+INV_ITEM_PARACETAMOL = 16
+INV_ITEM_STEROIDS = 17
+INV_ITEM_FUELCAN = 18
+INV_ITEM_MASK = 19
+INV_ITEM_VEST = 20
 
 ITEM_NAMES = {
-    "Radio",
+    "Portable Radio",
     "Repair Kit",
     "Health Kit",
     "Taser",
-    "Bandage"
+    "GPS",
+    "Brick Phone",
+    "pearPhone I",
+    "NOS Cannister",
+    "Marijuana",
+    "Cigar",
+    "Cigarette",
+    "Cocaine",
+    "Heroine",
+    "Amphetamine",
+    "Xanax",
+    "Paracetamol",
+    "Steroids",
+    "Fuel Can",
+    "Mask",
+    "Armored Vest"
 }
 
 --[[

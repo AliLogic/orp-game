@@ -1,6 +1,7 @@
 CUTTING_TIME = 30
 RESPAWN_TIME = 300
-LUMBERJACK_TREES = {}
+
+LumberjackTrees = {}
 CREATED_TREES = 0
 LumberjackData = {}
 
@@ -28,9 +29,9 @@ local function GetNearestTree(playerid, range)
 	local tdistance = 0.0
 	local x, y, z = GetPlayerLocation(playerid)
 
-	for treeid = 1, #LUMBERJACK_TREES, 1 do
+	for treeid = 1, #LumberjackTrees, 1 do
 
-		tdistance = GetDistance3D(x, y, z, LUMBERJACK_TREES[treeid].obj_x, LUMBERJACK_TREES[treeid].obj_y, LUMBERJACK_TREES[treeid].obj_z)
+		tdistance = GetDistance3D(x, y, z, LumberjackTrees[treeid].obj_x, LumberjackTrees[treeid].obj_y, LumberjackTrees[treeid].obj_z)
 
 		if tdistance <= range then
 			if tdistance <= distance then
@@ -61,21 +62,21 @@ local function ChopTree(playerid)
 				DestroyObject(LumberjackData[playerid].object)
 			end
 
-			if IsValidTimer(LUMBERJACK_TREES[treeid].timer) then
-				DestroyTimer(LUMBERJACK_TREES[treeid].timer)
+			if IsValidTimer(LumberjackTrees[treeid].timer) then
+				DestroyTimer(LumberjackTrees[treeid].timer)
 			end
 
-			SetObjectRotation(LUMBERJACK_TREES[playerid].obj_id, LUMBERJACK_TREES[playerid].obj_rx, LUMBERJACK_TREES[playerid].obj_ry, LUMBERJACK_TREES[playerid].obj_rz - 800.0)
+			SetObjectRotation(LumberjackTrees[playerid].obj_id, LumberjackTrees[playerid].obj_rx, LumberjackTrees[playerid].obj_ry, LumberjackTrees[playerid].obj_rz - 800.0)
 
 			LumberjackData[playerid].seconds = 0
 			LumberjackData[playerid].tree_id = 0
-			LUMBERJACK_TREES[treeid].spawned = false
-			LUMBERJACK_TREES[treeid].is_chopped = false
+			LumberjackTrees[treeid].spawned = false
+			LumberjackTrees[treeid].is_chopped = false
 
 			Delay(RESPAWN_TIME * 1000, function()
 
-				LUMBERJACK_TREES[treeid].spawned = true
-				SetObjectRotation(LUMBERJACK_TREES[playerid].obj_id, LUMBERJACK_TREES[playerid].obj_rx, LUMBERJACK_TREES[playerid].obj_ry, LUMBERJACK_TREES[playerid].obj_rz)
+				LumberjackTrees[treeid].spawned = true
+				SetObjectRotation(LumberjackTrees[playerid].obj_id, LumberjackTrees[playerid].obj_rx, LumberjackTrees[playerid].obj_ry, LumberjackTrees[playerid].obj_rz)
 			end)
 		end
 	end
@@ -83,13 +84,9 @@ end
 
 AddCommand("chop", function (playerid)
 
-	if PlayerData[playerid].job == 0 then
-		return AddPlayerChat(playerid, "Error: You do not have any job.")
+	if GetPlayerJob(playerid) ~= JOB_TYPE_LUMBERJACK then
+		return AddPlayerChat(playerid, "You are not a Lumberjack.")
 	end
-
-	-- if then
-	-- 	return AddPlayerChat(playerid, "Error: You are not permitted to use this command.")
-	-- end
 
 	local treeid = GetNearestTree(playerid)
 
@@ -97,15 +94,15 @@ AddCommand("chop", function (playerid)
 		return AddPlayerChat(playerid, "Error: You are not near any trees.")
 	end
 
-	if LUMBERJACK_TREES[treeid].spawned == false then
+	if LumberjackTrees[treeid].spawned == false then
 		return AddPlayerChat(playerid, "Error: This tree has been chopped.")
 	end
 
-	if LUMBERJACK_TREES[treeid].is_chopped == true then
+	if LumberjackTrees[treeid].is_chopped == true then
 		return AddPlayerChat(playerid, "Error: This tree is being chopped.")
 	end
 
-	LUMBERJACK_TREES[treeid].timer = CreateTimer(ChopTree, 1000, playerid)
+	LumberjackTrees[treeid].timer = CreateTimer(ChopTree, 1000, playerid)
 
 	if IsValidObject(LumberjackData[playerid].object) then
 		DestroyObject(LumberjackData[playerid].object)
@@ -114,7 +111,7 @@ AddCommand("chop", function (playerid)
 	LumberjackData[playerid].object = CreateObject(1047, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 	SetObjectAttached(LumberjackData[playerid].object, ATTACH_PLAYER, playerid, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, "hand_l")
 	LumberjackData[playerid].tree_id = treeid
-	LUMBERJACK_TREES[treeid].is_chopped = true
+	LumberjackTrees[treeid].is_chopped = true
 
 	SetPlayerAnimation(playerid, "PICKAXE_SWING")
 end)
@@ -123,7 +120,7 @@ local function AddLumberjackTree(modelid, x, y, z, rx, ry, rz)
 
 	CREATED_TREES = CREATED_TREES + 1
 
-	LUMBERJACK_TREES[CREATED_TREES] = {
+	LumberjackTrees[CREATED_TREES] = {
 
 		obj_id = CreateObject(modelid, x, y, z, rx, ry, rz),
 		obj_x = x,
@@ -143,11 +140,11 @@ local function RemoveLumberjackTree(treeid)
 
 	CREATED_TREES = CREATED_TREES - 1
 
-	DestroyObject(LUMBERJACK_TREES[treeid].obj_id)
-	DestroyTimer(LUMBERJACK_TREES[treeid].timer)
-	DestroyText3D(LUMBERJACK_TREES[treeid].text_id)
+	DestroyObject(LumberjackTrees[treeid].obj_id)
+	DestroyTimer(LumberjackTrees[treeid].timer)
+	DestroyText3D(LumberjackTrees[treeid].text_id)
 
-	LUMBERJACK_TREES[treeid] = {}
+	LumberjackTrees[treeid] = {}
 end
 
 AddEvent("OnPackageStart", function()
@@ -168,7 +165,7 @@ end)
 
 AddEvent("OnPackageStop", function()
 
-	for treeid = 1, #LUMBERJACK_TREES, 1 do
+	for treeid = 1, #LumberjackTrees, 1 do
 		RemoveLumberjackTree(treeid)
 	end
 end)
@@ -186,7 +183,7 @@ AddEvent("OnPlayerQuit", function(playerid)
 
 	if LumberjackData[playerid].tree_id ~= 0 then
 
-		DestroyTimer(LUMBERJACK_TREES[LumberjackData[playerid].tree_id].timer)
+		DestroyTimer(LumberjackTrees[LumberjackData[playerid].tree_id].timer)
 	end
 
 	DestroyObject(LumberjackData[playerid].object)
