@@ -584,10 +584,6 @@ function OnPlayerPayday(player)
 	return
 end
 
-function FreezePlayer(player)
-	return CallRemoteEvent(player, 'FreezePlayer')
-end
-
 AddRemoteEvent('accounts:kick', function (player)
 	KickPlayer(player, "You decided to quit the server!")
 end)

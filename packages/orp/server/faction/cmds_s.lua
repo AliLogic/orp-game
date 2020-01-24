@@ -83,14 +83,20 @@ AddCommand("online", function (playerid)
 		message = message .. "<br>"
 	end
 
-	local test = borkui.createUI(playerid, 0)
-	borkui.addUITitle(playerid, test, 'Online Faction Members')
-	borkui.addUIDivider(playerid, test)
-	borkui.addUIInformation(playerid, test, message)
-	borkui.addUIDivider(playerid, test)
-	borkui.addUIButton(playerid, test, 'Exit', 'is-danger')
-
+	DialogString = message
+	borkui.createUI(playerid, 0, DIALOG_FACTION_ONLINE)
 	return 1
+end)
+
+AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
+
+	if extraid == DIALOG_FACTION_ONLINE then
+		borkui.addUITitle(playerid, dialogid, 'Online Faction Members')
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIInformation(playerid, dialogid, DialogString)
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIButton(playerid, dialogid, 'Okay', 'is-danger')
+	end
 end)
 
 AddCommand("finvite", function (playerid, lookupid)

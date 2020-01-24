@@ -1,4 +1,26 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Bork
+* Logic_
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local colour = ImportPackage('colours')
+
+DialogString = ""
+DIALOG_FACTION_ONLINE = 1
+
+-- Functions
+
+function FreezePlayer(player)
+	return CallRemoteEvent(player, "FreezePlayer")
+end
 
 function IsPlayerInRangeOfPlayer(playerid, lookupid)
 
