@@ -51,7 +51,7 @@ function CreateUI(align, source, extraid)
 		CallRemoteEvent("borkui:clientOnUICreated", GetPlayerId(), id, extraid)
 	end
 
-	AddPlayerChat('(borkui): UI created, with align '..align..' and id '..id)
+	AddPlayerChat('(borkui): UI created, with align '..align..' and id '..id..' and extraid '..extraid..'.')
 	return id
 end
 AddRemoteEvent('borkui:serverCreateUI', CreateUI)

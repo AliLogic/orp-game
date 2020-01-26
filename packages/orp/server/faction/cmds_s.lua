@@ -86,13 +86,13 @@ AddCommand("online", function (playerid)
 	DialogString = message
 	borkui.createUI(playerid, 0, DIALOG_FACTION_ONLINE)
 
-	AddPlayerChat(playerid, "(1) /online - creating")
+	AddPlayerChat(playerid, "(1) /online - creating (playerid: playerid, align: 0, extraid: "..DIALOG_FACTION_ONLINE..")")
 	return 1
 end)
 
 AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
 
-	AddPlayerChat(playerid, "(2) /online - created ("..dialogid..", "..extraid..")")
+	AddPlayerChat(playerid, "(2) /online - created (dialogid: "..dialogid..", extraid: "..extraid..")")
 
 	if extraid == DIALOG_FACTION_ONLINE then
 
