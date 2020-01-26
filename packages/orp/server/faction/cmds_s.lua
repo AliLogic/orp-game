@@ -86,7 +86,7 @@ AddCommand("online", function (playerid)
 	DialogString = message
 	borkui.createUI(playerid, 0, DIALOG_FACTION_ONLINE)
 
-	AddPlayerChat(playerid, "(1) /online - creating (playerid: playerid, align: 0, extraid: "..DIALOG_FACTION_ONLINE..")")
+	AddPlayerChat(playerid, "(1) /online - creating (playerid: "..playerid..", align: 0, extraid: "..DIALOG_FACTION_ONLINE..")")
 	return 1
 end)
 
