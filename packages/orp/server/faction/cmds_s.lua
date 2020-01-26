@@ -72,7 +72,7 @@ AddCommand("online", function (playerid)
 
 	local message = ""
 
-	for _, v in ipairs(GetAllPlayers()) do
+	for _, v in pairs(GetAllPlayers()) do
 		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id then
 			message = message .. FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid..")"
 		end
@@ -85,17 +85,38 @@ AddCommand("online", function (playerid)
 
 	DialogString = message
 	borkui.createUI(playerid, 0, DIALOG_FACTION_ONLINE)
+
+	AddPlayerChat(playerid, "(1) /online - creating")
 	return 1
 end)
 
 AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
 
+	AddPlayerChat(playerid, "(2) /online - created")
+
 	if extraid == DIALOG_FACTION_ONLINE then
+
+		AddPlayerChat(playerid, "(3) /online - showing...")
+
 		borkui.addUITitle(playerid, dialogid, 'Online Faction Members')
 		borkui.addUIDivider(playerid, dialogid)
 		borkui.addUIInformation(playerid, dialogid, DialogString)
 		borkui.addUIDivider(playerid, dialogid)
 		borkui.addUIButton(playerid, dialogid, 'Okay', 'is-danger')
+		borkui.ShowUI(playerid, dialogid)
+	end
+end)
+
+AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
+
+	AddPlayerChat(playerid, "(4) /online - response ...")
+
+	if extraid == DIALOG_FACTION_ONLINE then
+
+		AddPlayerChat(playerid, "(5) /online - destroying...")
+
+		borkui.HideUI(playerid, dialogid)
+		borkui.DestroyUI(playerid, dialogid)
 	end
 end)
 

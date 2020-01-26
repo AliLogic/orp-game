@@ -13,7 +13,7 @@ Contributors:
 --[[
 	Usable Events:
 	borkui:clientOnUICreated - returns playerid, dialogid and extraid.
-	borkui:clientOnDialogSubmit - returns playerid, dialogid, button clicked and any arguments passed via JS.
+	borkui:clientOnDialogSubmit - returns playerid, dialogid, extraid, button clicked and any arguments passed via JS.
 
 	For any client side events, scan through borkui.js for any CallEvent's.
 ]]

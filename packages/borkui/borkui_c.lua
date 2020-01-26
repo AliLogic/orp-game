@@ -32,7 +32,7 @@ end)
 function CreateUI(align, source, extraid)
 	align = align or 0
 	source = source or false
-	extraid = extraid or false
+	extraid = extraid or 0
 
 	if align < 0 or align > 2 then
 		align = 0
@@ -42,6 +42,7 @@ function CreateUI(align, source, extraid)
 	nextId = nextId + 1
 
 	dialogs[id] = {
+		extraid = extraid,
 		title = '',
 		columns = {}
 	}
@@ -270,7 +271,7 @@ AddEvent("borkui:OnHideMenu", function()
 end)
 
 AddEvent("borkui:OnDialogSubmit", function (dialog, button, ...)
-	CallRemoteEvent("borkui:clientOnDialogSubmit", GetPlayerId(), dialog, button, {...})
+	CallRemoteEvent("borkui:clientOnDialogSubmit", GetPlayerId(), dialog, dialogs[dialog].extraid, button, {...})
 end)
 
 --[[
