@@ -18,6 +18,13 @@ Contributors:
 	For any client side events, scan through borkui.js for any CallEvent's.
 ]]
 
+AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
+	AddPlayerChat(playerid, '(borkui): clientOnUICreated, with dialogid '..dialogid..' and extraid '..extraid..'.')
+end)
+
+AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
+end)
+
 function CreateUI(player, align, extraid)
 	AddPlayerChat(player, '(borkui): Create UI, with align '..align..' and extraid '..extraid..'.')
 	CallRemoteEvent(player, "borkui:serverCreateUI", align, true, extraid)
