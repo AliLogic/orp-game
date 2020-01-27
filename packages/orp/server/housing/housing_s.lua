@@ -216,6 +216,8 @@ function House_Destroy(house)
 	end
 
 	DestroyHousingData(house)
+
+	DestroyHouseFurniture(house)
 end
 
 function Housing_Nearest(playerid)

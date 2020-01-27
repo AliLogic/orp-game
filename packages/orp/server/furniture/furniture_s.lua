@@ -132,11 +132,11 @@ local function  Furniture_GetCount(houseid)
 
 	for i = 1, MAX_FURNITURE, 1 do
 		if (FurnitureData[i].exist and FurnitureData[i].house == houseid) then
-			count = count + 1;
+			count = count + 1
 		end
 	end
 
-	return count;
+	return count
 end
 
 local function Furniture_GetFreeID()
@@ -182,6 +182,29 @@ function OnHouseFurnitureLoaded(houseid)
 				rz = mariadb_get_value_name_int(i, "rz"),
 				object = CreateObject(FurnitureData[furnitureid].model, FurnitureData[furnitureid].x, FurnitureData[furnitureid].y, FurnitureData[furnitureid].z, FurnitureData[furnitureid].rx, FurnitureData[furnitureid].ry, FurnitureData[furnitureid].rz)
 			}
+		end
+	end
+end
+
+local function Furniture_Destroy(furnitureid)
+
+	local query = mariadb_prepare(sql, "DELETE FROM furniture WHERE id = ?;", FurnitureData[furnitureid].id)
+	mariadb_async_query(sql, query)
+
+	if IsValidObject(FurnitureData[furnitureid].object) then
+		DestroyObject(FurnitureData[furnitureid].object)
+	end
+
+	FurnitureData[furnitureid] = nil
+end
+
+function DestroyHouseFurniture(houseid)
+
+	for i = 1, MAX_FURNITURE, 1 do
+		if FurnitureData[i] ~= nil then
+			if FurnitureData[i].house == houseid then
+				Furniture_Destroy(i)
+			end
 		end
 	end
 end
