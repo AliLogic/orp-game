@@ -169,6 +169,8 @@ function OnHouseLoaded(houseid)
 		HousingData[house].text3d_in = CreateText3D("House ("..house..")", 10, HousingData[house].ix, HousingData[house].iy, HousingData[house].iz + 10, 0.0, 0.0, 0.0)
 		HousingData[house].text3d_outside = CreateText3D("House ("..house..")\nType: "..HousingType[HousingData[house].type].."", 10, HousingData[house].ex, HousingData[house].ey, HousingData[house].ez + 10, 0.0, 0.0, 0.0)
 
+		LoadHouseFurniture(houseid)
+
 		print("House "..house.." (SQL ID: "..houseid..") successfully loaded!")
 
 	end
