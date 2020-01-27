@@ -1,8 +1,3 @@
---[[
-    lay10 - /frontfall
-    handsup_stand = /handsup
-]]
-
 AddCommand("anims", function (player)
 	AddPlayerChat(player, "Animations: /sit /lay /wave /stretch /frontfall /handsup /lean /bow /drunk /(s)top(a)nim")
 	AddPlayerChat(player, "Animations: /salute /clap /yawn /facepalm")
