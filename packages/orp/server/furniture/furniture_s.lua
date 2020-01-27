@@ -157,6 +157,8 @@ end
 
 function OnHouseFurnitureLoaded(houseid)
 
+	print("[OnHouseFurnitureLoaded] Loading house furniture (houseid: "..houseid..")")
+
 	local row_count = mariadb_get_row_count()
 
 	if row_count == 0 then
@@ -166,6 +168,8 @@ function OnHouseFurnitureLoaded(houseid)
 
 		for i = 1, row_count, 1 do
 			furnitureid = Furniture_GetFreeID()
+
+			CreateFurnitureData(furnitureid)
 
 			FurnitureData[furnitureid] = {
 				id = mariadb_get_value_name_int(i, "id"),
@@ -182,6 +186,8 @@ function OnHouseFurnitureLoaded(houseid)
 			}
 		end
 	end
+
+	print("[furniture_s.lua] (OnHouseFurnitureLoaded) Loading house furniture")
 end
 
 local function Furniture_Destroy(furnitureid)
