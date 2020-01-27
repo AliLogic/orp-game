@@ -186,7 +186,7 @@ end
 
 local function Furniture_Destroy(furnitureid)
 
-	local query = mariadb_prepare(sql, "DELETE FROM furniture WHERE id = ?;", FurnitureData[furnitureid].id)
+	local query = mariadb_prepare(sql, "DELETE FROM furnitures WHERE id = ?;", FurnitureData[furnitureid].id)
 	mariadb_async_query(sql, query)
 
 	if IsValidObject(FurnitureData[furnitureid].object) then
