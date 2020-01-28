@@ -48,7 +48,7 @@ function CreateUI(align, source, extraid)
 	}
 
 	if source then
-		CallRemoteEvent("borkui:clientOnUICreated", GetPlayerId(), id, extraid)
+		CallRemoteEvent("borkui:clientOnUICreated", id, extraid)
 	end
 
 	AddPlayerChat('(borkui): UI created, with align '..align..' and id '..id..' and extraid '..extraid..'.')
@@ -271,7 +271,7 @@ AddEvent("borkui:OnHideMenu", function()
 end)
 
 AddEvent("borkui:OnDialogSubmit", function (dialog, button, ...)
-	CallRemoteEvent("borkui:clientOnDialogSubmit", GetPlayerId(), dialog, dialogs[dialog].extraid, button, {...})
+	CallRemoteEvent("borkui:clientOnDialogSubmit", dialog, dialogs[dialog].extraid, button, {...})
 end)
 
 --[[
