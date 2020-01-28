@@ -250,3 +250,15 @@ function UpdateFactionLocker(factionid, x, y, z)
 
 	mariadb_async_query(sql, "UPDATE factions SET locker_x = "..x..", locker_y "..y..", locker_z "..z.." WHERE id = "..FactionData[factionid].id.." LIMIT 1")
 end
+
+function Ticket_Add(suspectid, price, reason)
+
+	local query = mariadb_prepare(sql, "INSERT INTO tickets (id, fee, reason) VALUES(".. PlayerData[suspectid].id ..", ".. price .. ", ".. reason ..")");
+	mariadb_async_query(sql, query)
+end
+
+function Ticket_Remove(playerid, ticketid)
+
+	local query = mariadb_prepare(sql, "DELETE FROM tickets WHERE id = ".. PlayerData[playerid].id .." AND ticket = ".. ticketid .."");
+	mariadb_async_query(sql, query)
+end

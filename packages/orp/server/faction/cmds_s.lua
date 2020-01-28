@@ -671,13 +671,6 @@ AddCommand("take", function (playerid, lookupid)
 	end
 end)
 
-AddCommand("ticket", function (playerid, lookupid)
-
-	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
-	end
-end)
-
 AddCommand("spikes", function (playerid, lookupid)
 
 	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
@@ -718,4 +711,37 @@ AddCommand("flocker", function (playerid)
 	if distance <= 200.0 then
 		AddPlayerChat(playerid, "You are interacting with the faction locker.")
 	end
+end)
+
+AddCommand("ticket", function (playerid, lookupid, price, ...)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+
+	if lookupid == nil or price == nil or #{...} == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ticket <playerid> <price> <reason>")
+	end
+
+	lookupid = tonumber(lookupid)
+	price = tonumber(price)
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
+	end
+
+	if price < 1 or price > 1000 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The price can't be below $1 or above $1,000.</>")
+	end
+
+	local reason = table.concat({...}, " ")
+
+	if string.len(reason) > 64 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Ticket reason too long.")
+	end
+
+	Ticket_Add(lookupid, price, reason)
+
+	AddPlayerChat(playerid, "You have written ".. GetPlayerName(lookupid) .." a ticket for $".. price ..", reason: "..reason..".")
+	AddPlayerChat(lookupid, "".. GetPlayerName(playerid) .." has written you a ticket for $".. price ..", reason: "..reason.."")
 end)
