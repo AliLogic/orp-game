@@ -246,19 +246,7 @@ function addDropdown(options, size = 1, rounded = false, label = '') {
 	}
 }*/
 
-const buttonHandler = function (id) {
-	let returnValues = [id, (parseInt($(this).attr('id')) - elements.length) + 1]; // id is dialogid, second id is button clicked.
-
-	elements.forEach((element) => {
-		if (!element[1]) {
-			console.log($(`#${element[0]}`).val());
-			returnValues.push($(`#${element[0]}`).val());
-		}
-	});
-
-	console.log(returnValues);
-	CallEvent('borkui:OnDialogSubmit', returnValues);
-};
+const buttonHandler = 
 
 function clearUI() {
 	$('#content').html('');
@@ -269,13 +257,26 @@ function clearUI() {
 function showUI(id) {
 	if ($('body').is(':hidden')) {
 		$('body').show();
-		$('button').on('click', buttonHandler(id));
+		$('button').on('click', function (e) {
+			e.preventDefault();
+			let returnValues = [id, (parseInt($(this).attr('id')) - elements.length) + 1]; // id is dialogid, second id is button clicked.
+		
+			elements.forEach((element) => {
+				if (!element[1]) {
+					console.log($(`#${element[0]}`).val());
+					returnValues.push($(`#${element[0]}`).val());
+				}
+			});
+		
+			console.log(returnValues);
+			CallEvent('borkui:OnDialogSubmit', returnValues);
+		});
 	}
 }
 
 function hideUI(id) {
 	if ($('body').is(':visible')) {
 		$('body').hide();
-		$('button').off('click', buttonHandler(id));
+		$('button').off();
 	}
 }
