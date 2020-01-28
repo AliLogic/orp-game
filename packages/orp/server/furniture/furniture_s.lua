@@ -13,6 +13,7 @@ Contributors:
 local colour = ImportPackage("colours")
 
 MAX_FURNITURE = 1000
+MAX_HOUSE_FURNITURE = 30
 local FurnitureData = {}
 
 local FURNITURE_TYPE_TABLES = 1
@@ -114,7 +115,16 @@ local function DestroyFurnitureData(furnitureid)
 	FurnitureData[furnitureid] = nil
 end
 
-local function GetFurnitureNameByModel(model)
+function IsValidFurniture(furnitureid)
+
+	if FurnitureData[furnitureid] == nil then
+		return false
+	end
+
+	return true
+end
+
+function GetFurnitureNameByModel(model)
 
 	for i = 1, #FurnitureList, 1 do
 
@@ -149,6 +159,22 @@ local function Furniture_GetFreeID()
 	return 0
 end
 
+function GetFurnitureHouseID(furnitureid)
+	if FurnitureData[furnitureid] == nil then
+		return 0
+	end
+
+	return FurnitureData[furnitureid].house
+end
+
+function GetFurnitureLocation(furnitureid)
+	if FurnitureData[furnitureid] == nil then
+		return 0, 0, 0
+	end
+
+	return FurnitureData[furnitureid].x, FurnitureData[furnitureid].y, FurnitureData[furnitureid].z
+end
+
 function LoadHouseFurniture(houseid)
 
 	local query = mariadb_prepare(sql, "SELECT * FROM furnitures WHERE house = ?;", houseid)
@@ -161,29 +187,29 @@ function OnHouseFurnitureLoaded(houseid)
 
 	local row_count = mariadb_get_row_count()
 
-	if row_count == 0 then
-		print("There was no furniture for the house "..houseid)
-	else
+	if row_count ~= 0 then
 		local furnitureid = 0
 
 		for i = 1, row_count, 1 do
 			furnitureid = Furniture_GetFreeID()
 
-			CreateFurnitureData(furnitureid)
+			if furnitureid ~= 0 then
+				CreateFurnitureData(furnitureid)
 
-			FurnitureData[furnitureid] = {
-				id = mariadb_get_value_name_int(i, "id"),
-				house = houseid,
-				exist = true,
-				model = mariadb_get_value_name_int(i, "model"),
-				x = mariadb_get_value_name_int(i, "x"),
-				y = mariadb_get_value_name_int(i, "y"),
-				z = mariadb_get_value_name_int(i, "z"),
-				rx = mariadb_get_value_name_int(i, "rx"),
-				ry = mariadb_get_value_name_int(i, "ry"),
-				rz = mariadb_get_value_name_int(i, "rz"),
-				object = CreateObject(FurnitureData[furnitureid].model, FurnitureData[furnitureid].x, FurnitureData[furnitureid].y, FurnitureData[furnitureid].z, FurnitureData[furnitureid].rx, FurnitureData[furnitureid].ry, FurnitureData[furnitureid].rz)
-			}
+				FurnitureData[furnitureid] = {
+					id = mariadb_get_value_name_int(i, "id"),
+					house = houseid,
+					exist = true,
+					model = mariadb_get_value_name_int(i, "model"),
+					x = mariadb_get_value_name_int(i, "x"),
+					y = mariadb_get_value_name_int(i, "y"),
+					z = mariadb_get_value_name_int(i, "z"),
+					rx = mariadb_get_value_name_int(i, "rx"),
+					ry = mariadb_get_value_name_int(i, "ry"),
+					rz = mariadb_get_value_name_int(i, "rz"),
+					object = CreateObject(FurnitureData[furnitureid].model, FurnitureData[furnitureid].x, FurnitureData[furnitureid].y, FurnitureData[furnitureid].z, FurnitureData[furnitureid].rx, FurnitureData[furnitureid].ry, FurnitureData[furnitureid].rz)
+				}
+			end
 		end
 	end
 
@@ -199,7 +225,7 @@ local function Furniture_Destroy(furnitureid)
 		DestroyObject(FurnitureData[furnitureid].object)
 	end
 
-	FurnitureData[furnitureid] = nil
+	DestroyFurnitureData(furnitureid)
 end
 
 function DestroyHouseFurniture(houseid)
