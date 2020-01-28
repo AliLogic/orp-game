@@ -246,8 +246,7 @@ function addDropdown(options, size = 1, rounded = false, label = '') {
 	}
 }*/
 
-const buttonHandler = function (e, id) {
-	e.preventDefault();
+const buttonHandler = function (id) {
 	let returnValues = [id, (parseInt($(this).attr('id')) - elements.length) + 1]; // id is dialogid, second id is button clicked.
 
 	elements.forEach((element) => {
