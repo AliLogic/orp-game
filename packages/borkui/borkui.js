@@ -246,8 +246,6 @@ function addDropdown(options, size = 1, rounded = false, label = '') {
 	}
 }*/
 
-const buttonHandler = 
-
 function clearUI() {
 	$('#content').html('');
 	$('#title').text('');
