@@ -103,7 +103,7 @@ AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid
 		borkui.addUIInformation(playerid, dialogid, DialogString)
 		borkui.addUIDivider(playerid, dialogid)
 		borkui.addUIButton(playerid, dialogid, 'Okay', 'is-danger')
-		borkui.ShowUI(playerid, dialogid)
+		borkui.showUI(playerid, dialogid)
 	end
 end)
 
