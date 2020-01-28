@@ -196,24 +196,24 @@ function OnHouseFurnitureLoaded(houseid)
 			if furnitureid ~= 0 then
 				CreateFurnitureData(furnitureid)
 
-				FurnitureData[furnitureid] = {
-					id = mariadb_get_value_name_int(i, "id"),
-					house = houseid,
-					exist = true,
-					model = mariadb_get_value_name_int(i, "model"),
-					x = mariadb_get_value_name_int(i, "x"),
-					y = mariadb_get_value_name_int(i, "y"),
-					z = mariadb_get_value_name_int(i, "z"),
-					rx = mariadb_get_value_name_int(i, "rx"),
-					ry = mariadb_get_value_name_int(i, "ry"),
-					rz = mariadb_get_value_name_int(i, "rz"),
-					object = CreateObject(FurnitureData[furnitureid].model, FurnitureData[furnitureid].x, FurnitureData[furnitureid].y, FurnitureData[furnitureid].z, FurnitureData[furnitureid].rx, FurnitureData[furnitureid].ry, FurnitureData[furnitureid].rz)
-				}
+				FurnitureData[furnitureid].id = mariadb_get_value_name_int(i, "id")
+				FurnitureData[furnitureid].house = houseid
+				FurnitureData[furnitureid].exist = true
+				FurnitureData[furnitureid].model = mariadb_get_value_name_int(i, "model")
+				FurnitureData[furnitureid].x = mariadb_get_value_name_int(i, "x")
+				FurnitureData[furnitureid].y = mariadb_get_value_name_int(i, "y")
+				FurnitureData[furnitureid].z = mariadb_get_value_name_int(i, "z")
+				FurnitureData[furnitureid].rx = mariadb_get_value_name_int(i, "rx")
+				FurnitureData[furnitureid].ry = mariadb_get_value_name_int(i, "ry")
+				FurnitureData[furnitureid].rz = mariadb_get_value_name_int(i, "rz")
+				FurnitureData[furnitureid].object = CreateObject(FurnitureData[furnitureid].model, FurnitureData[furnitureid].x, FurnitureData[furnitureid].y, FurnitureData[furnitureid].z, FurnitureData[furnitureid].rx, FurnitureData[furnitureid].ry, FurnitureData[furnitureid].rz)
+
+				print("The furniture object ID is "..FurnitureData[furnitureid].object..".")
 			end
 		end
 	end
 
-	print("[furniture_s.lua] (OnHouseFurnitureLoaded) Loading house furniture")
+	print("[OnHouseFurnitureLoaded] Loaded house furniture (houseid: "..houseid..")")
 end
 
 local function Furniture_Destroy(furnitureid)
