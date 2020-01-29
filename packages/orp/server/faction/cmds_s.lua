@@ -713,6 +713,16 @@ AddCommand("flocker", function (playerid)
 	end
 end)
 
+AddCommand("tickets", function (playerid)
+
+	if (not IsPlayerInRangeOfPoint(130.0, 0.0, 0.0, 0.0)) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be at the City Hall.</>")
+	end
+
+	local query = mariadb_prepare(sql, "SELECT * FROM tickets WHERE id = ".. PlayerData[playerid].id .." ORDER BY ticket ASC")
+	mariadb_async_query(sql, query, OnTicketsViewLoaded, playerid)
+end)
+
 AddCommand("ticket", function (playerid, lookupid, price, ...)
 
 	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
@@ -728,6 +738,10 @@ AddCommand("ticket", function (playerid, lookupid, price, ...)
 
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
+	end
+
+	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
 	end
 
 	if price < 1 or price > 1000 then

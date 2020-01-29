@@ -262,3 +262,12 @@ function Ticket_Remove(playerid, ticketid)
 	local query = mariadb_prepare(sql, "DELETE FROM tickets WHERE id = ".. PlayerData[playerid].id .." AND ticket = ".. ticketid .."");
 	mariadb_async_query(sql, query)
 end
+
+function OnTicketsViewLoaded(playerid)
+
+	if mariadb_get_row_count() == 0 then
+		AddPlayerChat(playerid, "You have no pending tickets on you.")
+	else
+		-- [[ Show the player a dialog with the tickets they can pay... ]] --
+	end
+end

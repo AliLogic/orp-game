@@ -18,6 +18,17 @@ DIALOG_FACTION_ONLINE = 8
 
 -- Functions
 
+function IsPlayerInRangeOfPoint(playerid, range, x, y, z)
+
+	local px, py, pz = GetPlayerLocation(playerid)
+
+	if (GetDistance3D(x, y, z, px, py, pz) <= range) then
+		return true
+	end
+
+	return false
+end
+
 function FreezePlayer(player)
 	return CallRemoteEvent(player, "FreezePlayer")
 end
