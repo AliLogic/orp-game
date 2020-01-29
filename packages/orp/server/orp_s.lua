@@ -12,6 +12,10 @@ Contributors:
 
 local colour = ImportPackage('colours')
 
+AddEvent("OnPackageStart", function()
+	SetObjectScale(CreateObject(39, 122080, 90856, 1100), 0.75, 0.75, 0.75)
+end)
+
 AddEvent("OnPlayerJoin", function (player)
 	AddPlayerChatAll(GetPlayerName(player).." has joined the server!")
 	SetPlayerDimension(player, player)

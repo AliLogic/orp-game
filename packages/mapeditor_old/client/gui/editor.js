@@ -37,7 +37,8 @@ function Base64Decode(str) {
 
 function BuildSelectableObjects(num_objects) {
 	for (let i = 1; i < num_objects + 1; i++) {
-		let object = '<div data-id="' + i + '" style="background-image: url(http://game/objects/' + i + ');">' + i + '</div>';
+		let object;
+		i === 39 ? object = `<div data-id="${i}" style="background-image: url(http://asset/mapeditor/client/gui/${i}.png);">${i}</div>` : object = '<div data-id="' + i + '" style="background-image: url(http://game/objects/' + i + ');">' + i + '</div>';
 		$('#objectList').append(object);
 	}
 }

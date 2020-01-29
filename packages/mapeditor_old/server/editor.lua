@@ -49,7 +49,13 @@ function Server_EditorSpawnObject(player, modelid, x, y, z, rx, ry, rz)
 	ry = ry or 0.0
 	rz = rz or 0.0
 
-	local object = CreateMapEditorObject(player, modelid, x, y, z, rx, ry, rz, 1.0, 1.0, 1.0)
+	local object
+
+	if modelid ~= 39 then
+		object = CreateMapEditorObject(player, modelid, x, y, z, rx, ry, rz, 1.0, 1.0, 1.0)
+	else
+		object = CreateMapEditorObject(player, modelid, x, y, z, rx, ry, rz, 0.75, 0.75, 0.75)
+	end
 
 	AddPlayerChat(player, '<span style="italic" size="11">Object spawned: '..object..'</>')
 end
