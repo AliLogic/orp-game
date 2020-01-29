@@ -13,7 +13,7 @@ Contributors:
 local colour = ImportPackage('colours')
 
 AddEvent("OnPackageStart", function()
-	SetObjectScale(39, 0.6, 0.6, 0.6)
+	SetObjectScale(39, 0.4, 0.4, 0.4)
 end)
 
 AddEvent("OnPlayerJoin", function (player)
