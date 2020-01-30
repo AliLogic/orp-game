@@ -235,6 +235,11 @@ function OnAccountLoaded(player)
 			PlayerData[player].accountid)
 
 		mariadb_async_query(sql, query, OnCharacterPartLoaded, player)
+
+		local query = mariadb_prepare(sql, "SELECT * FROM donations WHERE accountid = ?;",
+			PlayerData[player].accountid)
+
+		mariadb_async_query(sql, query, OnDonationsLoaded, player)
 	end
 end
 
