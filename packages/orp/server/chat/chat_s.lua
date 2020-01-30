@@ -33,7 +33,22 @@ AddCommand("help", function (player)
 	AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q /fhelp")
 	AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
 	AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /h(ouse) /biz")
+	AddPlayerChat(player, "Commands: /dice /time")
 	return
+end)
+
+AddCommand("time", function (playerid)
+
+	local time = os.date ("%A, %m %B %Y")
+
+	AddPlayerChat(playerid, "Today is " .. time .. ".")
+	AddPlayerChat(playerid, "" .. PlayerData[playerid].minutes .. " minute(s) left until paycheck.")
+end)
+
+AddCommand("dice", function (playerid)
+
+	local x, y, z = GetPlayerLocation(playerid)
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid) .. "rolls a dice landing on the number " .. Random(1, 6) .."</>")
 end)
 
 local function cmd_vw(playerid)
