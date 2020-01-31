@@ -19,6 +19,24 @@ DIALOG_TICKETS_PAY = 2
 
 -- Functions
 
+function GetPlayerLocationName(playerid)
+
+	local x, y, z = GetPlayerLocation(playerid)
+
+	local locations = {
+		{"Nevada",	{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}},
+		{"Nevada",	{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}}
+	}
+
+	for i = 2, #locations, 1 do
+		if locations[i][1] <= x and locations[i][2] <= y and locations[i][3] <= z and locations[i][4] >= x and locations[i][5] >= y and locations[i][6] >= z then
+			return locations[i][1]
+		end
+	end
+
+	return locations[1][1]
+end
+
 function IsPlayerInRangeOfPoint(playerid, range, x, y, z)
 
 	local px, py, pz = GetPlayerLocation(playerid)
