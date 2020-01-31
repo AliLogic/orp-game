@@ -111,12 +111,9 @@ end
 function Marker_Load(i, marker_id)
 	local query = mariadb_prepare(sql, "SELECT * FROM markers WHERE id = ?", marker_id)
 	mariadb_async_query(sql, query, OnMarkerLoaded, i, marker_id)
-	print(i.." "..marker_id.." is now being loaded.")
 end
 
 function OnMarkerLoaded(indexid, marker_id)
-	print("Code now transported to OnMarkerLoaded.")
-
 	if mariadb_get_row_count() == 0 then
 		print('Error with loading marker ID'..marker_id)
 	else
@@ -197,10 +194,8 @@ AddEvent('LoadMarkers', function ()
 end)
 
 function OnLoadMarkers()
-	print("OnLoadMarkers has been called.")
 	for i = 1, mariadb_get_row_count(), 1 do
 		CreateMarkerData(i)
-		print('Loading Marker ID '..i)
 		Marker_Load(i, mariadb_get_value_name_int(i, "id"))
 	end
 end
