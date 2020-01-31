@@ -1059,6 +1059,8 @@ AddCommand("assist", function (playerid, lookupid, ...)
 	end
 
 	AddPlayerChat(lookupid, "<span color=\""..colour.COLOUR_YELLOW().."\">[ASSIST]</> "..PlayerData[playerid].steamname..": "..message)
+	AddPlayerChat(playerid, "Your assist message has been sent: ".. message ..".")
+
 	PlayerData[lookupid].assistance = 0
 
 	return

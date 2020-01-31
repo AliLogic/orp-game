@@ -1,3 +1,16 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Bork
+* Logic
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local colour = ImportPackage('colours')
 
 PlayerData = {}
@@ -6,44 +19,11 @@ CharacterData = {}
 CHARACTER_STATE_ALIVE = 1
 CHARACTER_STATE_WOUNDED = 2
 CHARACTER_STATE_DEAD = 3
+CHARACTER_STATE_RECOVER = 4
 
-AddEvent("OnPackageStart", function ()
-	CreateTimer(function()
-		for _, v in pairs(GetAllPlayers()) do
-			SavePlayerAccount(v)
-		end
-		print("All accounts have been saved!")
-	end, 1800000)
-end)
+-- Functions
 
-AddEvent("SavePlayers", function () 
-	for _, v in pairs(GetAllPlayers()) do
-		SavePlayerAccount(v)
-	end
-	print("All accounts have been saved!")
-end)
-
-AddEvent("OnPlayerSteamAuth", function (player)
-	CreatePlayerData(player)
-end)
-
-AddEvent("OnPlayerQuit", function (player)
-	CallEvent("UnrentPlayerVehicle", player)
-	DestroyDrivingTest(player)
-	SavePlayerAccount(player)
-	DestroyPlayerData(player)
-end)
-
-function LoadPlayerAccountId(player)
-	-- First check if there is an account for this player
-	local query = mariadb_prepare(sql, "SELECT id FROM accounts WHERE steamid = '?' LIMIT 1;",
-		tostring(GetPlayerSteamId(player))
-	)
-
-	mariadb_async_query(sql, query, OnAccountLoadId, player)
-end
-
-function OnAccountLoadId(player)
+local function OnAccountLoadId(player)
 	if (mariadb_get_row_count() == 0) then
 		--There is no account for this player, continue by checking if their IP was banned		
 		CheckForIPBan(player)
@@ -56,6 +36,15 @@ function OnAccountLoadId(player)
 
 		mariadb_async_query(sql, query, OnAccountCheckBan, player)
 	end
+end
+
+function LoadPlayerAccountId(player)
+	-- First check if there is an account for this player
+	local query = mariadb_prepare(sql, "SELECT id FROM accounts WHERE steamid = '?' LIMIT 1;",
+		tostring(GetPlayerSteamId(player))
+	)
+
+	mariadb_async_query(sql, query, OnAccountLoadId, player)
 end
 
 function OnBanLogLoaded(playerid)
@@ -647,3 +636,70 @@ function GetPlayerJob(playerid)
 
 	return 0
 end
+
+function PutPlayerInHospital(player)
+	PlayerData[player].state = CHARACTER_STATE_RECOVER
+
+	AddPlayerChat(player, "You are now being recovered at a nearby hospital...")
+
+	SetPlayerLocation(player, 216010, 158517, 3004)
+	SetPlayerHeading(player, -90)
+	SetPlayerAnimation(player, "LAY_3")
+
+	FreezePlayer(player, true)
+
+	--Camera: 215498, 158293, 2954
+end
+
+
+-- Events
+
+AddEvent("OnPlayerDeath", function (player, instigator)
+
+	if PlayerData[player].state == CHARACTER_STATE_ALIVE then
+
+		PlayerData[player].state = CHARACTER_STATE_WOUNDED
+
+		AddPlayerChat(player, "You are now wounded... You can use /acceptdeath shortly.")
+
+		FreezePlayer(player, true)
+
+	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
+
+		PlayerData[player].state = CHARACTER_STATE_DEAD
+
+		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
+
+		FreezePlayer(player, true)
+	else
+
+		PutPlayerInHospital(player)
+	end
+end)
+
+AddEvent("OnPackageStart", function ()
+	CreateTimer(function()
+		for _, v in pairs(GetAllPlayers()) do
+			SavePlayerAccount(v)
+		end
+		print("All accounts have been saved!")
+	end, 1800000)
+end)
+
+AddEvent("SavePlayers", function () 
+	for _, v in pairs(GetAllPlayers()) do
+		SavePlayerAccount(v)
+	end
+	print("All accounts have been saved!")
+end)
+
+AddEvent("OnPlayerSteamAuth", function (player)
+	CreatePlayerData(player)
+end)
+
+AddEvent("OnPlayerQuit", function (player)
+	CallEvent("UnrentPlayerVehicle", player)
+	DestroyDrivingTest(player)
+	SavePlayerAccount(player)
+	DestroyPlayerData(player)
+end)

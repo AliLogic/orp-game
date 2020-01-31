@@ -39,7 +39,7 @@ end)
 
 AddCommand("time", function (playerid)
 
-	local time = os.date ("%A, %m %B %Y")
+	local time = os.date ("%A, %d %B %Y")
 
 	AddPlayerChat(playerid, "Today is " .. time .. ".")
 	AddPlayerChat(playerid, "" .. PlayerData[playerid].minutes .. " minute(s) left until paycheck.")
@@ -48,7 +48,7 @@ end)
 AddCommand("dice", function (playerid)
 
 	local x, y, z = GetPlayerLocation(playerid)
-	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid) .. "rolls a dice landing on the number " .. Random(1, 6) .."</>")
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid) .. " rolls a dice landing on the number " .. Random(1, 6) .."</>")
 end)
 
 local function cmd_vw(playerid)
@@ -176,7 +176,7 @@ AddCommand("g", function (player, ...)
 
 	local text = table.concat({...}, " ")
 
-	AddPlayerChatAll(GetPlayerName(player).." ("..player.."):"..text)
+	AddPlayerChatAll("(( [GLOBAL]" .. GetPlayerName(player).." ("..player.."): "..text .. " ))")
 end)
 
 AddCommand("pm", function (player, target, ...)
