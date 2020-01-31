@@ -46,6 +46,7 @@ local function CreateDrugData(plantid)
 
 	DrugData[plantid] = {}
 
+	DrugData[plantid].id = 0
 	DrugData[plantid].object = 0
 	DrugData[plantid].text3d = 0
 	DrugData[plantid].stage = 1
@@ -103,3 +104,64 @@ function OnPlantTick(plantid)
 		SetText3DText(DrugData[plantid].text3d, "Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nReady")
 	end
 end
+
+function IsValidPlant(plantid)
+	if DrugData[plantid] == nil then
+		return false
+	end
+
+	return true
+end
+
+function Plant_Destroy(plantid)
+
+	local query = mariadb_prepare(sql, "DELETE FROM plants WHERE id = ?", DrugData[plantid].id)
+	mariadb_async_query(sql, query)
+
+	DestroyDrugData(plantid)
+
+	return true
+end
+
+local function OnPlantLoaded(i, plantid)
+	if mariadb_get_row_count() == 0 then
+		print("Error with loading plant ID" .. plantid)
+	else
+		DrugData[plantid].id = plantid
+		DrugData[plantid].stage = mariadb_get_value_name_int(1, "stage")
+		DrugData[plantid].type = mariadb_get_value_name_int(1, "type")
+		DrugData[plantid].x = mariadb_get_value_name_int(1, "x")
+		DrugData[plantid].y = mariadb_get_value_name_int(1, "y")
+		DrugData[plantid].z = mariadb_get_value_name_int(1, "z")
+
+		local scale = DRUG_STAGES[DrugData[plantid].stage].scale
+		DrugData[plantid].object = CreateObject(WEED_PLANT_MODEL, DrugData[plantid].x, DrugData[plantid].y, DrugData[plantid].z)
+		SetObjectScale(DrugData[plantid].object, scale, scale, scale)
+		SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
+
+		local text_z = DrugData[plantid].z + 35 + 100 * scale
+		DrugData[plantid].object = 0
+		DrugData[plantid].text3d = CreateText3D("Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nStage 1", 20, DrugData[plantid].x, DrugData[plantid].y, text_z, 0, 0, 0)
+		DrugData[plantid].timer = CreateTimer(OnPlantTick, TIME_PER_STAGE, plantid)
+	end
+end
+
+local function Plant_Load(i, plantid)
+	local query = mariadb_prepare(sql, "SELECT * FROM plants WHERE id = ?", plantid)
+	mariadb_async_query(sql, query, OnPlantLoaded, i, plantid)
+end
+
+local function OnLoadPlants()
+
+	for i = 1, mariadb_get_row_count(), 1 do
+		CreateDrugData(i)
+		Plant_Load(i, mariadb_get_value_index_int(i, "id"))
+	end
+end
+
+-- Events
+
+AddEvent('LoadPlants', function ()
+	local query = mariadb_prepare(sql, "SELECT * FROM plants;")
+	mariadb_async_query(sql, query, OnLoadPlants)
+end)
