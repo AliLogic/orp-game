@@ -45,6 +45,8 @@ function OnDonationsLoaded(playerid)
 			AddPlayerChat(playerid, "Your donation level " .. DonationData[playerid].level .. " is active till " .. os.date("%m %B %Y") .. ". Thank you for helping and supporting us!")
 		else
 			AddPlayerChat(playerid, "Your donation level " .. DonationData[playerid].level .. " expired on " .. os.date("%m %B %Y") .. ". Please consider visiting the UCP for more information.")
+
+			DonationData[playerid].level = 0
 		end
 	end
 end
