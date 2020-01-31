@@ -85,39 +85,7 @@ AddCommand("online", function (playerid)
 
 	DialogString = message
 	borkui.createUI(playerid, 0, DIALOG_FACTION_ONLINE)
-
-	AddPlayerChat(playerid, "(1) /online - creating (playerid: "..playerid..", align: 0, extraid: "..DIALOG_FACTION_ONLINE..")")
 	return 1
-end)
-
-AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
-
-	AddPlayerChat(playerid, "(2) /online - created (dialogid: "..dialogid..", extraid: "..extraid..")")
-
-	if extraid == DIALOG_FACTION_ONLINE then
-
-		AddPlayerChat(playerid, "(3) /online - showing...")
-
-		borkui.addUITitle(playerid, dialogid, 'Online Faction Members')
-		borkui.addUIDivider(playerid, dialogid)
-		borkui.addUIInformation(playerid, dialogid, DialogString)
-		borkui.addUIDivider(playerid, dialogid)
-		borkui.addUIButton(playerid, dialogid, 'Okay', 'is-danger')
-		borkui.showUI(playerid, dialogid)
-	end
-end)
-
-AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
-
-	AddPlayerChat(playerid, "(4) /online - response ...")
-
-	if extraid == DIALOG_FACTION_ONLINE then
-
-		AddPlayerChat(playerid, "(5) /online - destroying...")
-
-		borkui.HideUI(playerid, dialogid)
-		borkui.DestroyUI(playerid, dialogid)
-	end
 end)
 
 AddCommand("finvite", function (playerid, lookupid)
@@ -633,6 +601,53 @@ end
 AddCommand("aeditfaction", cmd_aef)
 AddCommand("aef", cmd_aef)
 
+AddCommand("tickets", function (playerid)
+
+	if (not IsPlayerInRangeOfPoint(130.0, 0.0, 0.0, 0.0)) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be at the City Hall.</>")
+	end
+
+	local query = mariadb_prepare(sql, "SELECT * FROM tickets WHERE id = ".. PlayerData[playerid].id .." ORDER BY ticket ASC")
+	mariadb_async_query(sql, query, OnTicketsViewLoaded, playerid)
+end)
+
+AddCommand("ticket", function (playerid, lookupid, price, ...)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+
+	if lookupid == nil or price == nil or #{...} == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ticket <playerid> <price> <reason>")
+	end
+
+	lookupid = tonumber(lookupid)
+	price = tonumber(price)
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
+	end
+
+	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+	end
+
+	if price < 1 or price > 1000 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The price can't be below $1 or above $1,000.</>")
+	end
+
+	local reason = table.concat({...}, " ")
+
+	if string.len(reason) > 64 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Ticket reason too long.")
+	end
+
+	Ticket_Add(lookupid, price, reason)
+
+	AddPlayerChat(playerid, "You have written ".. GetPlayerName(lookupid) .." a ticket for $".. price ..", reason: "..reason..".")
+	AddPlayerChat(lookupid, "".. GetPlayerName(playerid) .." has written you a ticket for $".. price ..", reason: "..reason.."")
+end)
+
 --[[
 	/$$$$$$                                                       /$$             /$$
 	|_  $$_/                                                      | $$            | $$
@@ -705,57 +720,7 @@ AddCommand("flocker", function (playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
-	local x, y, z = GetPlayerLocation(playerid)
-	local distance = GetDistance3D(x, y, z, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z)
-
-	if distance <= 200.0 then
+	if (not IsPlayerInRangeOfPoint(150.0, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z)) then
 		AddPlayerChat(playerid, "You are interacting with the faction locker.")
 	end
-end)
-
-AddCommand("tickets", function (playerid)
-
-	if (not IsPlayerInRangeOfPoint(130.0, 0.0, 0.0, 0.0)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be at the City Hall.</>")
-	end
-
-	local query = mariadb_prepare(sql, "SELECT * FROM tickets WHERE id = ".. PlayerData[playerid].id .." ORDER BY ticket ASC")
-	mariadb_async_query(sql, query, OnTicketsViewLoaded, playerid)
-end)
-
-AddCommand("ticket", function (playerid, lookupid, price, ...)
-
-	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
-	end
-
-	if lookupid == nil or price == nil or #{...} == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ticket <playerid> <price> <reason>")
-	end
-
-	lookupid = tonumber(lookupid)
-	price = tonumber(price)
-
-	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
-	end
-
-	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
-	end
-
-	if price < 1 or price > 1000 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The price can't be below $1 or above $1,000.</>")
-	end
-
-	local reason = table.concat({...}, " ")
-
-	if string.len(reason) > 64 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Ticket reason too long.")
-	end
-
-	Ticket_Add(lookupid, price, reason)
-
-	AddPlayerChat(playerid, "You have written ".. GetPlayerName(lookupid) .." a ticket for $".. price ..", reason: "..reason..".")
-	AddPlayerChat(lookupid, "".. GetPlayerName(playerid) .." has written you a ticket for $".. price ..", reason: "..reason.."")
 end)

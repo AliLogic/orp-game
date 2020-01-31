@@ -1,4 +1,17 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local colour = ImportPackage('colours')
+local borkui = ImportPackage('borkui')
 
 FactionData = {}
 FactionRankData = {}
@@ -11,6 +24,8 @@ FACTION_CIVILIAN = 1
 FACTION_POLICE = 2
 FACTION_MEDIC = 3
 FACTION_GOV = 4
+
+-- Functions
 
 function CreateFactionData(factionid)
 	FactionData[factionid] = {}
@@ -269,5 +284,51 @@ function OnTicketsViewLoaded(playerid)
 		AddPlayerChat(playerid, "You have no pending tickets on you.")
 	else
 		-- [[ Show the player a dialog with the tickets they can pay... ]] --
+		local message = ""
+
+		DialogString = message
+		borkui.createUI(playerid, 0, DIALOG_TICKETS_PAY)
 	end
 end
+
+-- Events
+
+AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
+
+	if extraid == DIALOG_FACTION_ONLINE then
+
+		borkui.addUITitle(playerid, dialogid, 'Online Faction Members')
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIInformation(playerid, dialogid, DialogString)
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIButton(playerid, dialogid, 'Okay', 'is-danger')
+		borkui.showUI(playerid, dialogid)
+	elseif extraid == DIALOG_TICKETS_PAY then
+
+		borkui.addUITitle(playerid, dialogid, "Tickets")
+		borkui.addUIDivider(playerid, dialogid)
+		-- borkui.AddUIDropdown(playerid, dialogid, {})
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIButton(playerid, dialogid, 'Pay', 'is-success')
+		borkui.addUIButton(playerid, dialogid, 'Cancel', 'is-danger')
+		borkui.showUI(playerid, dialogid)
+	end
+end)
+
+AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
+
+	if extraid == DIALOG_FACTION_ONLINE then
+
+		borkui.HideUI(playerid, dialogid)
+		borkui.DestroyUI(playerid, dialogid)
+
+	elseif extraid == DIALOG_TICKETS_PAY then
+
+		if button == 1 then
+		end
+
+		borkui.HideUI(playerid, dialogid)
+		borkui.DestroyUI(playerid, dialogid)
+
+	end
+end)

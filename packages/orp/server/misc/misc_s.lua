@@ -14,7 +14,8 @@ Contributors:
 local colour = ImportPackage('colours')
 
 DialogString = ""
-DIALOG_FACTION_ONLINE = 8
+DIALOG_FACTION_ONLINE = 1
+DIALOG_TICKETS_PAY = 2
 
 -- Functions
 
