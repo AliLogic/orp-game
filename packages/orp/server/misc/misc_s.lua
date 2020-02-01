@@ -48,8 +48,8 @@ function IsPlayerInRangeOfPoint(playerid, range, x, y, z)
 	return false
 end
 
-function FreezePlayer(player)
-	return CallRemoteEvent(player, "FreezePlayer")
+function FreezePlayer(player, status)
+	return CallRemoteEvent(player, "FreezePlayer", status)
 end
 
 function IsPlayerInRangeOfPlayer(playerid, lookupid)

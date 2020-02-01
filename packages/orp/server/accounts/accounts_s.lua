@@ -613,7 +613,7 @@ end
 
 function PutPlayerInAdminJail(playerid)
 	SetPlayerLocation(playerid, 0.0, 0.0, 0.0)
-	FreezePlayer(playerid)
+	FreezePlayer(playerid, true)
 end
 
 function SetPlayerJob(playerid, job)

@@ -237,8 +237,8 @@ AddEvent('charui:delete', function (slot)
 	return AddPlayerChat('This functionality is disabled!')
 end)
 
-AddRemoteEvent('FreezePlayer', function ()
-	if is_frozen == false then
+AddRemoteEvent('FreezePlayer', function (status)
+	if status == false then
 		SetIgnoreMoveInput(true)
 		SetIgnoreLookInput(true)
 		is_frozen = true
