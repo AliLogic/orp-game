@@ -296,8 +296,6 @@ end)
 function OnCharacterLoaded(player, id)
 	if (mariadb_get_row_count() == 0) then
 		KickPlayer(player, "An error occured while loading your character 😨")
-		--CallRemoteEvent(player, "askClientCreation")
-		--print('Remote event called to Client!')
 	else
 		local result = mariadb_get_assoc(1)
 
@@ -322,8 +320,16 @@ function OnCharacterLoaded(player, id)
 
 		PlayerData[player].radio = tonumber(result['radio'])
 
-		SetPlayerHealth(player, tonumber(result['health']))
-		SetPlayerArmor(player, tonumber(result['armour']))
+		if PlayerData[player].state == CHARACTER_STATE_ALIVE then
+
+			SetPlayerHealth(player, tonumber(result['health']))
+			SetPlayerArmor(player, tonumber(result['armour']))
+		else
+
+			PlayerData[player].state = (PlayerData[player].state - 1)
+			SetPlayerHealth(player, 0)
+			SetPlayerArmor(player, 0)
+		end
 
 		SetPlayerLoggedIn(player)
 
@@ -654,6 +660,28 @@ end
 
 -- Events
 
+AddEvent("OnPlayerSpawn", function(player)
+
+	if PlayerData[player].state == CHARACTER_STATE_ALIVE then
+
+		-- Nothing
+
+	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
+
+		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
+		SetPlayerAnimation(player, "")
+		FreezePlayer(player, true)
+
+		PlayerData[player].respawnme = true
+
+	else
+
+		-- If the player is either dead or in recovering state
+
+		PutPlayerInHospital(player)
+	end
+end)
+
 AddEvent("OnPlayerDeath", function (player, instigator)
 
 	if PlayerData[player].state == CHARACTER_STATE_ALIVE then
@@ -664,15 +692,29 @@ AddEvent("OnPlayerDeath", function (player, instigator)
 
 		FreezePlayer(player, true)
 
+		Delay(10 * 1000, function()
+
+			if PlayerData[player].state == CHARACTER_STATE_WOUNDED then
+				PlayerData[player].acceptdeath = true
+				AddPlayerChat(player, "You can now /acceptdeath.")
+			else
+				PlayerData[player].acceptdeath = false
+			end
+		end)
+
 	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
 
 		PlayerData[player].state = CHARACTER_STATE_DEAD
 
 		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
 
+		PlayerData[player].respawnme = true
+
 		FreezePlayer(player, true)
 	else
 
+		PlayerData[player].acceptdeath = false
+		PlayerData[player].respawnme = false
 		PutPlayerInHospital(player)
 	end
 end)

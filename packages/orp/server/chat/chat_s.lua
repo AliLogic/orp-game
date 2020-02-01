@@ -211,6 +211,28 @@ AddCommand('stats', function (player)
 	ViewPlayerStats(player, player)
 end)
 
+AddCommand("respawnme", function (playerid)
+
+	if PlayerData[playerid].respawnme == false then
+		return
+	end
+
+	PlayerData[playerid].state = CHARACTER_STATE_DEAD
+	PlayerData[playerid].respawnme = false
+end)
+
+AddCommand("acceptdeath", function (playerid)
+
+	if PlayerData[playerid].acceptdeath == false then
+		return
+	end
+
+	PutPlayerInHospital(playerid)
+	PlayerData[playerid].acceptdeath = false
+end)
+
+-- Events
+
 AddEvent("OnPlayerChatCommand", function (player, cmd, exists)	
 	if (GetTimeSeconds() - PlayerData[player].cmd_cooldown < 0.5) then
 		AddPlayerChat(player, "Slow down with your commands.")
