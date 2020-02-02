@@ -796,7 +796,7 @@ AddCommand("ahelp", function (player)
 
 	if PlayerData[player].admin > 3 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/setarmour /sethealth /toggleg")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/setarmour /sethealth /toggleg /gotohouse")
 	end
 
 	if PlayerData[player].admin > 4 then
@@ -1100,11 +1100,15 @@ AddCommand("ajail", function (playerid, lookupid, minutes)
 
 		AddPlayerChat(lookupid, ""..GetPlayerName(playerid).." has admin jailed you for "..minutes.." minutes.")
 		AddPlayerChat(playerid, ""..GetPlayerName(lookupid).." has been admin jailed by you for "..minutes..".")
+
+		FreezePlayer(lookupid, true)
 	else
 		PlayerData[lookupid].ajail = 0
 
 		AddPlayerChat(lookupid, ""..GetPlayerName(playerid).." has admin un-jailed you.")
 		AddPlayerChat(playerid, ""..GetPlayerName(lookupid).." has been admin un-jailed by you.")
+
+		FreezePlayer(lookupid, false)
 	end
 
 	return

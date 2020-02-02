@@ -1,3 +1,16 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic
+* Bork
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local colour = ImportPackage("colours")
 
 HousingData = {}
@@ -17,6 +30,10 @@ HousingType = {
 HOUSE_OWNERSHIP_STATE = 1
 HOUSE_OWNERSHIP_SOLE = 2
 HOUSE_OWNERSHIP_FACTION = 3
+
+local PlayerHouseKeys = {}
+
+-- Functions
 
 function GetFreeHousingId()
 	for i = 1, MAX_HOUSING, 1 do
@@ -68,21 +85,11 @@ function DestroyHousingData(house)
 	HousingData[house] = nil
 end
 
-AddEvent('LoadHouses', function ()
-	mariadb_async_query(sql, "SELECT * FROM houses;", OnHouseLoad)
-end)
-
 function OnHouseLoad()
 	for i = 1, mariadb_get_row_count(), 1 do
 		House_Load(mariadb_get_value_name_int(i, "id"))
 	end
 end
-
-AddEvent('UnloadHouses', function () 
-	for i = 1, #HousingData, 1 do
-		House_Unload(i)
-	end
-end)
 
 function House_Create(player, htype, price, ...)
 	local name = table.concat({...}, " ")
@@ -237,3 +244,52 @@ function Housing_Nearest(playerid)
 
 	return 0
 end
+
+local function OnPlayerHouseKeysLoaded(playerid)
+
+	local rows = mariadb_get_row_count()
+
+	PlayerHouseKeys[playerid] = {}
+	for i = 1, #rows, 1 do
+		PlayerHouseKeys[playerid][mariadb_get_value_name_int(i, "house")] = true
+	end
+end
+
+function LoadPlayerHouseKeys(playerid)
+
+	local query = mariadb_prepare(sql, "SELECT * housekeys WHERE id = ?", PlayerData[playerid].id)
+	mariadb_async_query(sql, query, OnPlayerHouseKeysLoaded, playerid)
+end
+
+function PlayerHasHouseKey(playerid, houseid)
+
+	return PlayerHouseKeys[playerid][houseid] ~= nil
+end
+
+function PlayerAddHouseKey(playerid, houseid)
+
+	PlayerHouseKeys[playerid][houseid] = true
+
+	local query = mariadb_prepare(sql, "INSERT INTO housekeys (id, house) VALUES(?, ?)", PlayerData[playerid].id, houseid)
+	mariadb_async_query(sql, query)
+end
+
+function PlayerRemoveHouseKey(playerid, houseid)
+
+	PlayerHouseKeys[playerid][houseid] = nil
+
+	local query = mariadb_prepare(sql, "DELETE FROM housekeys WHERE id = ? AND house = ?", PlayerData[playerid].id, houseid)
+	mariadb_async_query(sql, query)
+end
+
+-- Events
+
+AddEvent('LoadHouses', function ()
+	mariadb_async_query(sql, "SELECT * FROM houses;", OnHouseLoad)
+end)
+
+AddEvent('UnloadHouses', function () 
+	for i = 1, #HousingData, 1 do
+		House_Unload(i)
+	end
+end)

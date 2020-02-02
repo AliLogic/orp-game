@@ -1,10 +1,31 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic
+* Bork
+
+Contributors:
+* Blue Mountains GmbH
+
+To do:
+* /givehousekey
+* /takehousekey
+* /myhousekeys
+* ability to view people that have keys to your house by using it near your house door
+]]--
+
+-- Variables
+
 local colour = ImportPackage("colours")
+
+-- Commands
 
 local function cmd_house(playerid, prefix, ...)
 
 	if prefix == nil then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(h)ouse <prefix>")
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> un(lock), kickdoor, ring, rent, buy, sell")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> ring, rent, buy, sell") -- un(lock), kickdoor,
 	end
 
 	local house = Housing_Nearest(playerid)
@@ -13,7 +34,7 @@ local function cmd_house(playerid, prefix, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
 	end
 
-	if prefix == "lock" or prefix == "unlock" then
+	--[[if prefix == "lock" or prefix == "unlock" then
 
 		if HousingData[house].locked then
 			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
@@ -55,8 +76,9 @@ local function cmd_house(playerid, prefix, ...)
 				HousingData[house].locked = 0
 			end
 		end)
+	end]]--
 
-	elseif prefix == "ring" or prefix == "bell" then
+	if prefix == "ring" or prefix == "bell" then
 
 		local x, y, z = GetPlayerLocation(playerid)
 		AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." rings the doorbell of the house.")
@@ -212,3 +234,33 @@ local function cmd_aeh(player, house, prefix, ...)
 end
 AddCommand("aedithouse", cmd_aeh)
 AddCommand("aeh", cmd_aeh)
+
+AddCommand("gotohouse", function (playerid, houseid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if houseid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotohouse <house>")
+	end
+
+	houseid = tonumber(houseid)
+
+	if HousingData[houseid] == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: House " .. houseid .. "doesn't exist.</>")
+	end
+
+	SetPlayerLocation(playerid, HousingData[houseid].ex, HousingData[houseid].ey, HousingData[houseid].ez)
+
+	AddPlayerChat(playerid, "You have been teleported to house ID: " .. houseid ..".")
+end)
+
+AddCommand("givehousekey", function (playerid, lookupid)
+end)
+
+AddCommand("takehousekey", function (playerid, lookupid)
+end)
+
+AddCommand("myhousekeys", function (playerid)
+end)

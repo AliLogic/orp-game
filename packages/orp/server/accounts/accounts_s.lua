@@ -336,6 +336,7 @@ function OnCharacterLoaded(player, id)
 		LoadCharacterFaction(player)
 		LoadPlayerClothing(player)
 		CallEvent("LoadInventory", player)
+		LoadPlayerKeys(player)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay, "..PlayerData[player].firstname.." "..PlayerData[player].lastname..".</>")
 	end
@@ -657,6 +658,9 @@ function PutPlayerInHospital(player)
 	--Camera: 215498, 158293, 2954
 end
 
+function LoadPlayerKeys(playerid)
+	LoadPlayerHouseKeys(playerid)
+end
 
 -- Events
 
