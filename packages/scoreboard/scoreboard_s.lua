@@ -18,3 +18,12 @@ AddFunctionExport('ToggleScoreboard', ToggleScoreboard)
 AddFunctionExport('InsertPlayer', InsertPlayer)
 AddFunctionExport('RemovePlayer', RemovePlayer)
 AddFunctionExport('UpdatePlayer', UpdatePlayer)
+
+AddRemoteEvent("scorebork:updateScoreboard", function ()
+
+	for _, v in pairs(GetAllPlayers()) do
+		if PlayerData[v] ~= nil then
+			InsertPlayer(v, GetPlayerName(v), PlayerData[v].level, GetPlayerPing(v))
+		end
+	end
+end)

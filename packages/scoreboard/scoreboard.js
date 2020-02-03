@@ -99,3 +99,10 @@ function updateValue(player, value, newvalue) {
 	//return CallEvent('scorebork:update', 0);
 	return true;
 }
+
+function removePlayers() {
+
+	$.each(players, function(index) {
+		removePlayer(index)
+	});
+}
