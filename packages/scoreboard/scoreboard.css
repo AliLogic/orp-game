@@ -35,6 +35,10 @@ img.image {
 	margin-bottom: 4px;
 }
 
+.body .columns.selected {
+	background-color: red;
+}
+
 .body .columns .column:nth-child(4)::after {
 	content: " ms";
 }
