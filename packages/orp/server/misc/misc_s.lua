@@ -16,6 +16,7 @@ local colour = ImportPackage('colours')
 DialogString = ""
 DIALOG_FACTION_ONLINE = 1
 DIALOG_TICKETS_PAY = 2
+DIALOG_WHITELIST_LOG = 3
 
 -- Functions
 

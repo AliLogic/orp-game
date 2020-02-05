@@ -11,6 +11,7 @@ Contributors:
 -- Variables
 
 local colour = ImportPackage("colours")
+local borkui = ImportPackage("borkui")
 
 -- Functions
 
@@ -53,7 +54,8 @@ function OnWhitelistLogLoaded(playerid)
 		messages = messages.."("..time..") "..admin_name.." whitelisted "..player_name.."<br>"
 	end
 
-	-- webgui.ShowMessageBox(playerid, messages)
+	borkui.createUI(playerid, 0, DIALOG_WHITELIST_LOG)
+	DialogString = messages
 end
 
 function AddWhitelist(playerid, steam_id)
@@ -71,4 +73,32 @@ AddEvent("OnPlayerSteamAuth", function(playerid)
 		tostring(GetPlayerSteamId(playerid))
 	)
 	mariadb_query(sql, query, OnPlayerLoadWhitelist, playerid)
+end)
+
+-- Events
+
+AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
+
+	if extraid == DIALOG_WHITELIST_LOG then
+
+		borkui.addUITitle(playerid, dialogid, "Recent Whitelists")
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIInformation(playerid, dialogid, DialogString)
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIButton(playerid, dialogid, 'Okay', 'is-danger')
+		borkui.showUI(playerid, dialogid)
+
+	end
+
+end)
+
+AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
+
+	if extraid == DIALOG_WHITELIST_LOG then
+
+		borkui.HideUI(playerid, dialogid)
+		borkui.DestroyUI(playerid, dialogid)
+
+	end
+
 end)
