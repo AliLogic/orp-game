@@ -400,11 +400,7 @@ AddCommand("f", function(playerid, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Message has invalid length 128")
 	end]]--t
 
-	for _, v in ipairs(GetAllPlayers()) do
-		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id then
-			AddPlayerChat(v, "(( "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
-		end
-	end
+	AddPlayerChatFaction(FactionData[factionid].id, "(( "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
 end)
 
 AddCommand("bandage", function (playerid)
@@ -699,11 +695,33 @@ end)
 AddCommand("fingerprint", function (playerid, lookupid)
 end)
 
-AddCommand("impound", function (playerid, lookupid)
+AddCommand("impound", function (playerid, price)
 
 	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
 	end
+
+	if price == nil then
+		return AddPlayerChat(playerid, "")
+	end
+
+	price = tonumber(price)
+
+	if price < 1 or price > 10000 then
+		return AddPlayerChat(playerid, "")
+	end
+
+	local vehicleid = GetPlayerVehicle(playerid)
+
+	if vehicleid == 0 then
+		return AddPlayerChat(playerid, "")
+	end
+
+	local factionid = PlayerData[playerid].faction
+
+	AddPlayerChatFaction(FactionData[factionid].id, "RADIO: ".. GetPlayerName(playerid) .." has impounded a ".. VEHICLE_NAMES[vehicleid] .." for $".. price ..".")
+
+	ImpoundVehicle(vehicleid, price)
 end)
 
 AddCommand("revokeweapon", function (playerid, lookupid)

@@ -291,6 +291,17 @@ function OnTicketsViewLoaded(playerid)
 	end
 end
 
+function AddPlayerChatFaction(factionid, message)
+	for _, v in ipairs(GetAllPlayers()) do
+		if factionid == FactionData[PlayerData[v].faction].id then
+			AddPlayerChat(v, message)
+		end
+	end
+end
+
+function ImpoundVehicle(vehicleid, price)
+end
+
 -- Events
 
 AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
