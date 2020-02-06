@@ -784,7 +784,7 @@ AddCommand("ahelp", function (player)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
-	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off /(whitelist)log /banlog /assist /ajail")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off /(whitelist)log /banlog /(assist)s /ajail")
 
 	if PlayerData[player].admin > 1 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
@@ -990,6 +990,27 @@ end)
 AddCommand('borkui', function (player)
 	AddPlayerChat(player, '(Server): Sending event \'borkui\' to client.')
 	CallRemoteEvent(player, 'borkui')
+end)
+
+AddCommand("assists", function (playerid)
+
+	if PlayerData[playerid].admin == 0 and PlayerData[playerid].helper == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	local count = false
+
+	for _, i in pairs(GetAllPlayers()) do
+		if PlayerData[i].assistance ~= 0 then
+			AddPlayerChat(playerid, "Assistances required by: ".. GetPlayerName(i) .." (".. i ..") ")
+
+			count = true
+		end
+	end
+
+	if count == false then
+		return AddPlayerChat(playerid, "No one has requested an assistance!")
+	end
 end)
 
 AddCommand("assistance", function (playerid, ...)

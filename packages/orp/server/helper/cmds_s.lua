@@ -6,7 +6,7 @@ local function cmd_hhelp(player)
 	end
 
 	if PlayerData[player].helper > 0 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_BLUE().."\">Helper:</> /hc /assist")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_BLUE().."\">Helper:</> /hc /(assist)s")
 	end
 
 	if PlayerData[player].helper > 1 then
