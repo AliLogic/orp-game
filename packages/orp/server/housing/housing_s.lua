@@ -301,7 +301,7 @@ AddEvent('LoadHouses', function ()
 	mariadb_async_query(sql, "SELECT * FROM houses;", OnHouseLoad)
 end)
 
-AddEvent('UnloadHouses', function () 
+AddEvent('UnloadHouses', function ()
 	for i = 1, #HousingData, 1 do
 		House_Unload(i)
 	end

@@ -33,7 +33,7 @@ local function UpdateTime()
 	end
 end
 
-function UpdateWeather() 
+function UpdateWeather()
 	local res = http_get("http://api.openweathermap.org/data/2.5/weather?q=Nevada,us&APPID="..apikey)
 	res = json_decode(res.body)
 

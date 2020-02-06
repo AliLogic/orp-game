@@ -668,6 +668,10 @@ end
 
 AddEvent("OnPlayerSpawn", function(player)
 
+	if PlayerData[player] == nil then
+		return
+	end
+
 	if PlayerData[player].state == CHARACTER_STATE_ALIVE then
 
 		-- Nothing

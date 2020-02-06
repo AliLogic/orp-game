@@ -1,7 +1,11 @@
+-- Variables
+
 local colour = ImportPackage('colours')
 
 MAX_MARKERS = 100
 MarkerData = {}
+
+-- Functions
 
 function GetFreeMarkerId()
 
@@ -188,17 +192,45 @@ function OnMarkerUnloaded(marker_id)
 	end
 end
 
-AddEvent('LoadMarkers', function ()
-	local query = mariadb_prepare(sql, "SELECT * FROM markers;")
-	mariadb_async_query(sql, query, OnLoadMarkers)
-end)
-
 function OnLoadMarkers()
 	for i = 1, mariadb_get_row_count(), 1 do
 		CreateMarkerData(i)
 		Marker_Load(i, mariadb_get_value_name_int(i, "id"))
 	end
 end
+
+function Marker_Nearest(playerid)
+
+	local x, y, z = GetPlayerLocation(playerid)
+	local distance = 0
+
+	for v = 1, #MarkerData, 1 do
+		if MarkerData[v] ~= nil then
+			distance = GetDistance3D(x, y, z, MarkerData[v].x1, MarkerData[v].y1, MarkerData[v].z1)
+
+			if distance <= 200.0 then
+				return v
+			end
+
+			if MarkerData[v].x2 ~= 0 and MarkerData[v].y2 ~= 0 then
+				distance = GetDistance3D(x, y, z, MarkerData[v].x2, MarkerData[v].y2, MarkerData[v].z2)
+
+				if distance <= 200.0 then
+					return v
+				end
+			end
+		end
+	end
+
+	return 0
+end
+
+-- Events
+
+AddEvent('LoadMarkers', function ()
+	local query = mariadb_prepare(sql, "SELECT * FROM markers;")
+	mariadb_async_query(sql, query, OnLoadMarkers)
+end)
 
 AddEvent('UnloadMarkers', function ()
 	for i = 1, #MarkerData do
@@ -246,29 +278,3 @@ AddRemoteEvent("OnPlayerInteractMarker", function (playerid, pickupid)
 		end
 	end
 end)
-
-function Marker_Nearest(playerid)
-
-	local x, y, z = GetPlayerLocation(playerid)
-	local distance = 0
-
-	for v = 1, #MarkerData, 1 do
-		if MarkerData[v] ~= nil then
-			distance = GetDistance3D(x, y, z, MarkerData[v].x1, MarkerData[v].y1, MarkerData[v].z1)
-
-			if distance <= 200.0 then
-				return v
-			end
-
-			if MarkerData[v].x2 ~= 0 and MarkerData[v].y2 ~= 0 then
-				distance = GetDistance3D(x, y, z, MarkerData[v].x2, MarkerData[v].y2, MarkerData[v].z2)
-
-				if distance <= 200.0 then
-					return v
-				end
-			end
-		end
-	end
-
-	return 0
-end
