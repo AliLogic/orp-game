@@ -282,6 +282,19 @@ function PlayerRemoveHouseKey(playerid, houseid)
 	mariadb_async_query(sql, query)
 end
 
+function House_IsOwner(playerid, houseid)
+
+	if HousingData[houseid] == nil then
+		return false
+	end
+
+	if HousingData[houseid].owner == PlayerData[playerid].id then
+		return true
+	end
+
+	return false
+end
+
 -- Events
 
 AddEvent('LoadHouses', function ()

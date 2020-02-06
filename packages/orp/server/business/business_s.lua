@@ -300,3 +300,16 @@ function Business_Nearest(playerid)
 
 	return 0
 end
+
+function Business_IsOwner(playerid, businessid)
+
+	if BusinessData[businessid] == nil then
+		return false
+	end
+
+	if BusinessData[businessid].owner == PlayerData[playerid].id then
+		return true
+	end
+
+	return false
+end

@@ -29,12 +29,53 @@ AddCommand("levelup", function (playerid)
     return
 end)
 
-AddCommand("help", function (player)
-	AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q /fhelp")
-	AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
-	AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /h(ouse) /biz")
-	AddPlayerChat(player, "Commands: /dice /time")
+AddCommand("help", function (player, section)
+
+	if section == nil then
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /help <section>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Sections:</> General")
+	end
+
+	string.lower(section)
+
+	if section == "general" then
+		AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q /fhelp")
+		AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
+		AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /h(ouse) /biz")
+		AddPlayerChat(player, "Commands: /dice /time /properties /frisk")
+	end
 	return
+end)
+
+AddCommand("properties", function (playerid)
+
+	local count = 0
+
+	for houseid = 1, MAX_HOUSING, 1 do
+		if House_IsOwner(playerid, houseid) == true then
+
+			AddPlayerChat(playerid, "* House ID: ".. houseid ..".")
+
+			count = count + 1
+		end
+	end
+
+	for businessid = 1, MAX_BUSINESSES, 1 do
+
+		if Business_IsOwner(playerid, businessid) == true then
+
+			AddPlayerChat(playerid, "* Business ID: ".. businessid ..".")
+
+			count = count + 1
+		end
+	end
+
+	if count == 0 then
+		AddPlayerChat(playerid, "You do not own any properties.")
+	end
+
+	return
+
 end)
 
 AddCommand("time", function (playerid)
