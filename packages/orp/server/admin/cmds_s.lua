@@ -1083,6 +1083,10 @@ AddCommand("ajail", function (playerid, lookupid, minutes)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
 	end
 
+	if playerid == lookupid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot admin jail yourself!</>")
+	end
+
 	if (minutes < 0 or minutes > 1440) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Minutes can be between 0 to 1440 (24 hours).</>")
 	end
