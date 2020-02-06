@@ -12,6 +12,7 @@ Contributors:
 -- Variables
 
 local colour = ImportPackage('colours')
+local borkui = ImportPackage('borkui')
 
 PlayerData = {}
 CharacterData = {}
@@ -63,7 +64,8 @@ function OnBanLogLoaded(playerid)
 		messages = messages.."("..time..") "..admin_name.." banned "..player_name.." for "..reason.."<br>"
 	end
 
-	-- webgui.ShowMessageBox(playerid, messages)
+	DialogString = messages
+	borkui.createUI(playerid, 0, DIALOG_BAN_LOG)
 end
 
 function OnAccountCheckBan(player)
@@ -748,4 +750,30 @@ AddEvent("OnPlayerQuit", function (player)
 	DestroyDrivingTest(player)
 	SavePlayerAccount(player)
 	DestroyPlayerData(player)
+end)
+
+AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
+
+	if extraid == DIALOG_BAN_LOG then
+
+		borkui.addUITitle(playerid, dialogid, "Recent Bans")
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIInformation(playerid, dialogid, DialogString)
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIButton(playerid, dialogid, 'Okay', 'is-danger')
+		borkui.showUI(playerid, dialogid)
+
+	end
+
+end)
+
+AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
+
+	if extraid == DIALOG_BAN_LOG then
+
+		borkui.HideUI(playerid, dialogid)
+		borkui.DestroyUI(playerid, dialogid)
+
+	end
+
 end)
