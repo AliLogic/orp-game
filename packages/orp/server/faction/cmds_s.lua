@@ -11,11 +11,11 @@ AddCommand("fhelp", function (playerid)
 	if faction_type == FACTION_CIVILIAN then
 	elseif faction_type == FACTION_POLICE then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /hcuff, /drag, /detain, /mdc, /arrest, /radio, /d, /callsign, /take</>")
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /ticket, /spike, /roadblock, /fingerprint, /impound, /revokeweapon</>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /ticket, /spike, /roadblock, /fingerprint, /impound, /revokeweapon, /checkproperties</>")
 	elseif faction_type == FACTION_MEDIC then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /radio, /d, /bandage, /revive</>")
 	elseif faction_type == FACTION_GOV then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /radio, /d</>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /radio, /d, /checkproperties</>")
 	end
 
 	return 1
@@ -644,6 +644,84 @@ AddCommand("ticket", function (playerid, lookupid, price, ...)
 	AddPlayerChat(lookupid, "".. GetPlayerName(playerid) .." has written you a ticket for $".. price ..", reason: "..reason.."")
 end)
 
+AddCommand("impound", function (playerid, price)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+
+	if price == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /impound <price>")
+	end
+
+	price = tonumber(price)
+
+	if price < 1 or price > 10000 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The price can't be below $1 or above $10,000.</>")
+	end
+
+	local vehicleid = GetPlayerVehicle(playerid)
+
+	if vehicleid == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a vehicle to use this command.</>")
+	end
+
+	local factionid = PlayerData[playerid].faction
+
+	AddPlayerChatFaction(FactionData[factionid].id, "RADIO: ".. GetPlayerName(playerid) .." has impounded a ".. VEHICLE_NAMES[vehicleid] .." for $".. price ..".")
+
+	ImpoundVehicle(vehicleid, price)
+end)
+
+AddCommand("checkproperties", function (playerid, lookupid)
+
+	local factiontype = GetPlayerFactionType(playerid)
+
+	if factiontype ~= FACTION_POLICE and factiontype ~= FACTION_GOV then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+
+	if lookupid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /checkproperties <playerid>")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
+	end
+
+	local count = 0
+
+	AddPlayerChat(playerid, "Properties registered to "..GetPlayerName(lookupid).." ("..lookupid.."):")
+
+	for houseid = 1, MAX_HOUSING, 1 do
+		if House_IsOwner(lookupid, houseid) == true then
+
+			AddPlayerChat(playerid, "* House ID: ".. houseid ..".")
+
+			count = count + 1
+		end
+	end
+
+	for businessid = 1, MAX_BUSINESSES, 1 do
+
+		if Business_IsOwner(lookupid, businessid) == true then
+
+			AddPlayerChat(playerid, "* Business ID: ".. businessid ..".")
+
+			count = count + 1
+		end
+	end
+
+	if count == 0 then
+		AddPlayerChat(playerid, ""..GetPlayerName(lookupid).." does not own any properties.")
+	end
+
+	return
+
+end)
+
 --[[
 	/$$$$$$                                                       /$$             /$$
 	|_  $$_/                                                      | $$            | $$
@@ -693,35 +771,6 @@ AddCommand("roadblock", function (playerid, lookupid)
 end)
 
 AddCommand("fingerprint", function (playerid, lookupid)
-end)
-
-AddCommand("impound", function (playerid, price)
-
-	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
-	end
-
-	if price == nil then
-		return AddPlayerChat(playerid, "")
-	end
-
-	price = tonumber(price)
-
-	if price < 1 or price > 10000 then
-		return AddPlayerChat(playerid, "")
-	end
-
-	local vehicleid = GetPlayerVehicle(playerid)
-
-	if vehicleid == 0 then
-		return AddPlayerChat(playerid, "")
-	end
-
-	local factionid = PlayerData[playerid].faction
-
-	AddPlayerChatFaction(FactionData[factionid].id, "RADIO: ".. GetPlayerName(playerid) .." has impounded a ".. VEHICLE_NAMES[vehicleid] .." for $".. price ..".")
-
-	ImpoundVehicle(vehicleid, price)
 end)
 
 AddCommand("revokeweapon", function (playerid, lookupid)

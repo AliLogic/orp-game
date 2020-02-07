@@ -42,7 +42,7 @@ AddCommand("help", function (player, section)
 		AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q /fhelp")
 		AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
 		AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /h(ouse) /biz")
-		AddPlayerChat(player, "Commands: /dice /time /properties /frisk")
+		AddPlayerChat(player, "Commands: /dice /time /properties /frisk /whisper /showlicenses")
 	end
 	return
 end)
@@ -220,6 +220,33 @@ AddCommand("g", function (player, ...)
 	AddPlayerChatAll("(( [GLOBAL]" .. GetPlayerName(player).." ("..player.."): "..text .. " ))")
 end)
 
+AddCommand("whisper", function (playerid, lookupid, ...)
+
+	if lookupid == nil or #{...} == 0 then
+		return
+	end
+
+	local text = table.concat({...}, " ")
+
+	lookupid = tonumber(lookupid)
+
+	if not IsValidPlayer(lookupid) or not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+		return AddPlayerChat(playerid, "That player is disconnected or not near you.");
+	end
+
+	if (lookupid == playerid) then
+		return AddPlayerChat(playerid, "You can't whisper yourself.")
+	end
+
+	AddPlayerChat(lookupid, "<span color=\""..colour.COLOUR_PMOUT().."\">* Whisper from "..GetPlayerName(playerid)..": "..text.."")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_PMOUT().."\">* Whisper to "..GetPlayerName(lookupid)..": "..text.."")
+
+	local x, y, z = GetPlayerLocation(playerid)
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." mutters something in "..GetPlayerName(lookupid)"'s ear.")
+
+	return
+end)
+
 AddCommand("pm", function (player, target, ...)
 
 	if (target == nil or #{...} == 0) then
@@ -272,9 +299,31 @@ AddCommand("acceptdeath", function (playerid)
 	PlayerData[playerid].acceptdeath = false
 end)
 
+AddCommand("showlicenses", function (playerid, lookupid)
+
+	if (lookupid == nil) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /showlicenses <playerid>")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	AddPlayerChat(lookupid, "Licenses registered to " .. GetPlayerName(playerid) .. " (ID: " .. playerid .. "):")
+
+	AddPlayerChat(lookupid, "Incomplete") -- Incomplete
+
+	local x, y, z = GetPlayerLocation(playerid)
+	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." takes out their licenses and shows them to "..GetPlayerName(lookupid).."</>")
+
+	return
+end)
+
 -- Events
 
-AddEvent("OnPlayerChatCommand", function (player, cmd, exists)	
+AddEvent("OnPlayerChatCommand", function (player, cmd, exists)
 	if (GetTimeSeconds() - PlayerData[player].cmd_cooldown < 0.5) then
 		AddPlayerChat(player, "Slow down with your commands.")
 		return false
