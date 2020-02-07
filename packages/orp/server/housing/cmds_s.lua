@@ -263,4 +263,17 @@ AddCommand("takehousekey", function (playerid, lookupid)
 end)
 
 AddCommand("myhousekeys", function (playerid)
+
+	local count = false
+
+	for houseid = 1, MAX_HOUSING, 1 do
+		if PlayerHasHouseKey(playerid, houseid) then
+			AddPlayerChat(playerid, "* House ID: ".. houseid ..".")
+			count = true
+		end
+	end
+
+	if not count then
+		AddPlayerChat(playerid, "You do not have any house keys.")
+	end
 end)

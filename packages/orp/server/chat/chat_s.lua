@@ -41,7 +41,7 @@ AddCommand("help", function (player, section)
 	if section == "general" then
 		AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q /fhelp")
 		AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
-		AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /h(ouse) /biz")
+		AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /h(ouse) /biz /myhousekeys")
 		AddPlayerChat(player, "Commands: /dice /time /properties /frisk /whisper /showlicenses")
 	end
 	return
