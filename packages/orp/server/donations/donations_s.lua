@@ -29,8 +29,6 @@ end
 
 function OnDonationsLoaded(playerid)
 
-	CreateDonationData(playerid)
-
 	if mariadb_get_row_count() == 0 then
 
 		DonationData[playerid].level = 0
