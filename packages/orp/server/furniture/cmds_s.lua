@@ -8,6 +8,10 @@ Contributors:
 * Blue Mountains GmbH
 ]]--
 
+local borkui = ImportPackage("borkui")
+
+-- Commands
+
 AddCommand("furniture", function (playerid)
 
 	local
@@ -44,6 +48,8 @@ AddCommand("furniture", function (playerid)
 			if (count == 0) then
 				return AddPlayerChat(playerid, "This house doesn't have any furniture spawned in.")
 			end
+
+			borkui.createUI(playerid, 0, DIALOG_HOME_FURNITURE)
 			-- Show them the listed furniture dialog
 		end
 	end

@@ -11,6 +11,7 @@ Contributors:
 -- Variables
 
 local colour = ImportPackage("colours")
+local borkui = ImportPackage("borkui")
 
 MAX_FURNITURE = 1000
 MAX_HOUSE_FURNITURE = 30
@@ -240,3 +241,24 @@ function DestroyHouseFurniture(houseid)
 end
 
 -- Events
+
+AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
+
+	if extraid == DIALOG_HOME_FURNITURE then
+		borkui.addUITitle(playerid, dialogid, 'Home Furniture')
+		borkui.addUIDivider(playerid, dialogid)
+		--borkui.AddUIDropdown(playerid, dialogid, options, size, 1, label) --borkui.addUIInformation(playerid, dialogid, DialogString)
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIButton(playerid, dialogid, 'Select', 'is-primary')
+		borkui.addUIButton(playerid, dialogid, 'Cancel', 'is-danger')
+		borkui.showUI(playerid, dialogid)
+	end
+end)
+
+AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
+
+	if extraid == DIALOG_HOME_FURNITURE then
+		borkui.HideUI(playerid, dialogid)
+		borkui.DestroyUI(playerid, dialogid)
+	end
+end)
