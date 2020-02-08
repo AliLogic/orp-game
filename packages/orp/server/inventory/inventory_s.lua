@@ -104,7 +104,7 @@ end
 function Inventory_GiveItem(player, item, amount)
 	if InventoryData[player] == nil then
 		print("Inventory Data for Player IS NIL")
-		return false 
+		return false
 	end
 
 	for i = 1, MAX_INVENTORY_SLOTS, 1 do
