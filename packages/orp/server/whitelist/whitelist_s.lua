@@ -94,6 +94,8 @@ end)
 
 AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
 
+	print("borkui:clientOnDialogSubmit (pid:"..playerid..", did:"..dialogid..", eid:"..extraid..", bn:"..button..", txt:".. ... ..")")
+
 	if extraid == DIALOG_WHITELIST_LOG then
 
 		borkui.HideUI(playerid, dialogid)
