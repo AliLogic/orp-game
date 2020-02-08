@@ -242,39 +242,19 @@ function OnCharacterPartLoaded(player)
 		print('Remote event called to Client!')
 	else
 		for i = 1, mariadb_get_row_count(), 1 do
-			local result = mariadb_get_assoc(i)
 
 			CreateCharacterData(player, i)
 
-			CharacterData[player][i].id = math.tointeger(result['id'])
+			CharacterData[player][i].id = mariadb_get_value_name_int(i, "id")
 
-			CharacterData[player][i].firstname = result['firstname']
-			CharacterData[player][i].lastname = result['lastname']
+			CharacterData[player][i].firstname = mariadb_get_value_name(i, "firstname")
+			CharacterData[player][i].lastname = mariadb_get_value_name(i, "lastname")
 
-			CharacterData[player][i].level = math.tointeger(result['level'])
-			CharacterData[player][i].cash = math.tointeger(result['cash'])
+			CharacterData[player][i].level = mariadb_get_value_name_int(i, "level")
+			CharacterData[player][i].cash = mariadb_get_value_name_int(i, "cash")
 		end
 
 		ShowCharacterSelection(player)
-
-		--[[local result = mariadb_get_assoc(1)
-
-		PlayerData[player].id = math.tointeger(result['id'])
-		PlayerData[player].firstname = result['firstname']
-
-		PlayerData[player].lastname = result['lastname']
-		PlayerData[player].gender = math.tointeger(result['gender'])
-
-		PlayerData[player].cash = math.tointeger(result['cash'])
-		PlayerData[player].bank = math.tointeger(result['bank'])
-
-		SetPlayerHealth(player, tonumber(result['health']))
-		SetPlayerArmor(player, tonumber(result['armour']))
-
-		SetPlayerLoggedIn(player)
-
-		AddPlayerChat(player, '<span color=\""..colour.COLOUR_PMOUT().."\" style="bold italic" size="15">Welcome back to Onset Roleplay '..GetPlayerName(player)..'.</>')
-		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)]]--
 	end
 end
 
@@ -571,7 +551,7 @@ function OnPlayerPayday(player)
 		local level = PlayerData[player].level
 		local required_exp = (level * 4) + 2
 
-		if (required_exp < exp) then
+		if (required_exp <= exp) then
 			AddPlayerChat(player, "You now have enough experience points to level up ("..exp.."/"..required_exp..")")
 		end
 
@@ -668,7 +648,11 @@ end
 
 AddEvent("OnPlayerSpawn", function(player)
 
-	if PlayerData[player] == nil then
+	if (PlayerData[player] == nil) then
+		return
+	end
+
+	if (PlayerData[player].accountid == 0 or PlayerData[player].logged_in == false) then
 		return
 	end
 
