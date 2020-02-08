@@ -639,6 +639,8 @@ function OnPlayerRecover(player)
 
 	SetPlayerLocation(player, 212101, 159561, 1322)
 	SetPlayerHeading(player, 81.82)
+
+	FreezePlayer(player, false)
 end
 
 function PutPlayerInHospital(player)
