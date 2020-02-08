@@ -416,6 +416,8 @@ AddCommand("revive", function (playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction to use this command!.</>")
 	end
 
+	SetPlayerAnimation(playerid, "REVIVE")
+
 	return 1
 end)
 

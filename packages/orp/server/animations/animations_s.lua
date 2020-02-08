@@ -1,6 +1,6 @@
 AddCommand("anims", function (player)
-	AddPlayerChat(player, "Animations: /sit /lay /wave /stretch /frontfall /handsup /lean /bow /drunk /(s)top(a)nim")
-	AddPlayerChat(player, "Animations: /salute /clap /yawn /facepalm")
+	AddPlayerChat(player, "Animations: /sit /lay /wave /stretch /frontfall /handsup /lean /bow /drunk")
+	AddPlayerChat(player, "Animations: /salute /clap /yawn /facepalm /cpr /shrug /(s)top(a)nim")
 	return
 end)
 
@@ -120,6 +120,14 @@ end)
 
 AddCommand("yawn", function (player)
 	SetPlayerAnimation(player, "YAWN")
+end)
+
+AddCommand("cpr", function (player)
+	SetPlayerAnimation(player, "REVIVE")
+end)
+
+AddCommand("shrug", function (player)
+	SetPlayerAnimation(player, "SHRUG")
 end)
 
 local function cmd_stopanim(player)
