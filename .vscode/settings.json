@@ -320,6 +320,7 @@
         "EComponentMobility",
         "AStaticMeshActor",
         "IsPlayerInRangeOfPlayer",
-        "SetPlayerLipMovement"
+        "SetPlayerLipMovement",
+        "SetVehicleDimension"
     ]
 }

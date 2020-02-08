@@ -304,6 +304,9 @@ function AddPlayerChatFaction(factionid, message)
 end
 
 function ImpoundVehicle(vehicleid, price)
+
+	SetVehicleLocation(vehicleid, 94358, 120088, 6431)
+	SetVehicleDimension(vehicleid, DIMENSION_IMPOUND)
 end
 
 -- Events

@@ -263,6 +263,10 @@ end
 
 function PlayerHasHouseKey(playerid, houseid)
 
+	if houseid ~= nil then
+		return false
+	end
+
 	return PlayerHouseKeys[playerid][houseid] ~= nil
 end
 

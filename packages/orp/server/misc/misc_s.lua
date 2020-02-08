@@ -20,6 +20,8 @@ DIALOG_WHITELIST_LOG = 3
 DIALOG_BAN_LOG = 4
 DIALOG_HOME_FURNITURE = 5
 
+DIMENSION_IMPOUND = 500
+
 -- Functions
 
 function GetPlayerLocationName(playerid)
