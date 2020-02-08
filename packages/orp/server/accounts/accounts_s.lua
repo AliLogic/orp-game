@@ -377,6 +377,7 @@ function CreatePlayerData(player)
 	PlayerData[player].label = nil -- 3d text label
 
 	PlayerData[player].pd_timer = 0
+	PlayerData[player].hospital_timer = 0
 	PlayerData[player].renting = 0 -- Vehicle ID that a player is renting.
 
 	PlayerData[player].driving_test = false
@@ -626,6 +627,19 @@ function GetPlayerJob(playerid)
 	return 0
 end
 
+function OnPlayerRecover(player)
+
+	PlayerData[player].state = CHARACTER_STATE_ALIVE
+
+	AddPlayerChat(player, "You have now recovered...")
+
+	DestroyTimer(PlayerData[player].hospital_timer)
+	PlayerData[player].hospital_timer = 0
+
+	SetPlayerLocation(player, 212101, 159561, 1322)
+	SetPlayerHeading(player, 81.82)
+end
+
 function PutPlayerInHospital(player)
 	PlayerData[player].state = CHARACTER_STATE_RECOVER
 
@@ -636,6 +650,8 @@ function PutPlayerInHospital(player)
 	SetPlayerAnimation(player, "LAY_3")
 
 	FreezePlayer(player, true)
+
+	PlayerData[player].hospital_timer = CreateTimer(OnPlayerRecover, 10 * 1000, player)
 
 	--Camera: 215498, 158293, 2954
 end
