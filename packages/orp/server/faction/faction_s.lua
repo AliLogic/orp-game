@@ -283,8 +283,12 @@ function OnTicketsViewLoaded(playerid)
 	if mariadb_get_row_count() == 0 then
 		AddPlayerChat(playerid, "You have no pending tickets on you.")
 	else
-		-- [[ Show the player a dialog with the tickets they can pay... ]] --
+
 		local message = ""
+		-- [[ Show the player a dialog with the tickets they can pay... ]] --
+		for i = 1, mariadb_get_row_count(), 1 do
+			message = message .. mariadb_get_value_index(i, "reason") " ($" .. mariadb_get_value_index_int(i, "fee") .. ")<br>"
+		end
 
 		DialogString = message
 		borkui.createUI(playerid, 0, DIALOG_TICKETS_PAY)
