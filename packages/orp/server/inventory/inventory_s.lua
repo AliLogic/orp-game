@@ -70,8 +70,8 @@ end)
 
 AddEvent("LoadInventory", function (player)
 	for i = 1, MAX_INVENTORY_SLOTS, 1 do
-		print("Init inventory slot "..i) 
-		CreatePlayerInventory(player, i) 
+		print("Init inventory slot "..i)
+		CreatePlayerInventory(player, i)
 	end
 
 	local query = mariadb_prepare(sql, "SELECT * FROM inventory WHERE charid = ?;", PlayerData[player].id)

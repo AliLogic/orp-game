@@ -77,6 +77,8 @@ local function OnLoadPlayerLicenses(playerid)
 		mariadb_get_value_index_int(1, "MML", PlayerLicenseData[playerid].LICENSE_TYPE_MML)
 		mariadb_get_value_index_int(1, "PL", PlayerLicenseData[playerid].LICENSE_TYPE_PL)
 	else
+		local query = mariadb_prepare(sql, "INSERT INTO licenses WHERE id = "..PlayerData[playerid].id.."")
+		mariadb_async_query(sql, query)
 	end
 end
 

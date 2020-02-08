@@ -319,6 +319,7 @@ function OnCharacterLoaded(player, id)
 		LoadPlayerClothing(player)
 		CallEvent("LoadInventory", player)
 		LoadPlayerKeys(player)
+		LoadPlayerLicenses(player)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay, "..PlayerData[player].firstname.." "..PlayerData[player].lastname..".</>")
 	end
