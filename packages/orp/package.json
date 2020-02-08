@@ -55,7 +55,6 @@
 		"client/orp_c.lua",
 		"client/accounts/accounts_c.lua",
 		"client/vehicle/vehicle_c.lua",
-		"client/admin/admin_c.lua",
 		"client/banking/banking_c.lua",
 		"client/markers/markers_c.lua",
 		"client/env/env_c.lua",

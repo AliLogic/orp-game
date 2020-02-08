@@ -51,9 +51,10 @@ function OnWhitelistLogLoaded(playerid)
 		local player_name = mariadb_get_value_name(i, "player_name")
 		local time = mariadb_get_value_name(i, "timestamp")
 
-		messages = messages.."("..time..") "..admin_name.." whitelisted "..player_name.."<br>"
+		messages = messages .."("..time..") "..admin_name.." whitelisted "..player_name.."<br>"
 	end
 
+	print(DialogString)
 	borkui.createUI(playerid, 0, DIALOG_WHITELIST_LOG)
 	DialogString = messages
 end

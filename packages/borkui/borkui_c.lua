@@ -10,12 +10,7 @@ Contributors:
 * Blue Mountains GmbH
 ]]--
 
-local web = CreateWebUI(0, 0, 0, 0, 1, 16)
-SetWebAlignment(web, 0, 0)
-SetWebAnchors(web, 0, 0, 1, 1)
-SetWebURL(web, "http://asset/"..GetPackageName().."/borkui.html")
-SetWebVisibility(web, WEB_HIDDEN)
-
+local web = 0
 local nextId = 1
 local dialogs = {}
 local lastOpened = 0
@@ -24,6 +19,14 @@ local COLUMN_TYPE_DIVIDER = 1
 local COLUMN_TYPE_BUTTON = 2
 local COLUMN_TYPE_TEXTINPUT = 3
 local COLUMN_TYPE_DROPDOWN = 4
+
+AddEvent("OnPackageStart", function()
+	web = CreateWebUI(0, 0, 0, 0, 1, 16)
+	SetWebAlignment(web, 0, 0)
+	SetWebAnchors(web, 0, 0, 1, 1)
+	SetWebURL(web, "http://asset/"..GetPackageName().."/borkui.html")
+	SetWebVisibility(web, WEB_HIDDEN)
+end)
 
 AddEvent("OnPackageStop", function()
 	DestroyWebUI(web)
