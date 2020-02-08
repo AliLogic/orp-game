@@ -84,6 +84,8 @@ end
 
 function LoadPlayerLicenses(playerid)
 
+	CreatePlayerLicenseData(playerid)
+
 	local query = mariadb_prepare(sql, "SELECT * FROM licenses WHERE id = "..PlayerData[playerid].id.."")
 	mariadb_async_query(sql, query, OnLoadPlayerLicenses, playerid)
 end

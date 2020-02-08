@@ -2,7 +2,7 @@ local colour = ImportPackage('colours')
 MAX_CALLSIGNS = 300
 
 AddCommand("callsign", function (player, callsign)
-	if GetPlayerFactionType(player) ~= FACTION_POLICE or GetPlayerFactionType(player) ~= FACTION_MEDIC or GetPlayerFactionType(player) ~= FACTION_GOV then
+	if GetPlayerFactionType(player) ~= FACTION_POLICE and GetPlayerFactionType(player) ~= FACTION_MEDIC and GetPlayerFactionType(player) ~= FACTION_GOV then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You must be apart of a government agency to use this command.")
 	end
 

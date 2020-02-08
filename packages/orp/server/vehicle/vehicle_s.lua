@@ -172,8 +172,6 @@ function OnVehicleLoaded(id)
 
 		--VehicleData[vehicle].nos = mariadb_get_value_name_int(1, "nos")
 
-		print(id.."'s owner: "..VehicleData[vehicle].owner)
-
 		SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
 		SetVehicleColor(vehicle, RGB(VehicleData[vehicle].r, VehicleData[vehicle].g, VehicleData[vehicle].b))
 		StopVehicleEngine(vehicle)
@@ -217,7 +215,6 @@ end)
 
 function OnLoadVehicles()
 	for i = 1, mariadb_get_row_count(), 1 do
-		print('Loading Vehicle ID '..i)
 		Vehicle_Load(mariadb_get_value_name_int(i, "id"))
 	end
 end

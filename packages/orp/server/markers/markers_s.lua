@@ -121,8 +121,6 @@ function OnMarkerLoaded(indexid, marker_id)
 	if mariadb_get_row_count() == 0 then
 		print('Error with loading marker ID'..marker_id)
 	else
-		print("Marker id is now being loaded... "..marker_id)
-
 		MarkerData[indexid].id = mariadb_get_value_name_int(1, "id")
 		MarkerData[indexid].model = mariadb_get_value_name_int(1, "model")
 

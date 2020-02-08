@@ -31,7 +31,7 @@ AddCommand("giveradio", function(player)
         Inventory_RemoveItem(player, Inventory_HasItem(player, INV_ITEM_RADIO))
     else
         AddPlayerChat(player, "giving radio, confirm in /inventory.")
-        Inventory_GiveItem(player, INV_ITEM_RADIO, 1)
+        Inventory_GiveItem(player, INV_ITEM_RADIO, 0)
     end
 end)
 
