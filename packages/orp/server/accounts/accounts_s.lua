@@ -648,11 +648,10 @@ function PutPlayerInHospital(player)
 
 	AddPlayerChat(player, "You are now being recovered at a nearby hospital...")
 
+	FreezePlayer(player, true)
 	SetPlayerLocation(player, 216010, 158517, 3004)
 	SetPlayerHeading(player, -90)
 	SetPlayerAnimation(player, "LAY_3")
-
-	FreezePlayer(player, true)
 
 	PlayerData[player].hospital_timer = CreateTimer(OnPlayerRecover, 10 * 1000, player)
 
