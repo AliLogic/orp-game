@@ -313,7 +313,11 @@ AddCommand("showlicenses", function (playerid, lookupid)
 
 	AddPlayerChat(lookupid, "Licenses registered to " .. GetPlayerName(playerid) .. " (ID: " .. playerid .. "):")
 
-	AddPlayerChat(lookupid, "Incomplete") -- Incomplete
+	local status = false
+	for i = 1, 6, 1 do
+		status = GetPlayerLicense(playerid, i)
+		AddPlayerChat(lookupid, "".. LicensesNames[i] .." status: ".. status ..".")
+	end
 
 	local x, y, z = GetPlayerLocation(playerid)
 	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." takes out their licenses and shows them to "..GetPlayerName(lookupid).."</>")

@@ -22,7 +22,7 @@ local function cmd_drivingtest(playerid)
 
 	local x, y, z = GetPlayerLocation(playerid)
 
-	if GetDistance3D(-167501.3, -34790.8, 1036.2, 0.0, 0.0, 0.0) > 120.0 then
+	if GetDistance3D(195320, 207826, 1215, 0.0, 0.0, 0.0) > 120.0 then -- -167501.3, -34790.8, 1036.2
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in range of the pickup.</>")
 	end
 
@@ -34,10 +34,11 @@ local function cmd_drivingtest(playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have $250 for the driving test.</>")
 	end
 
-	local vehicleid = CreateVehicle(1, -170727.9, -36039.3, 1048.9, 90.0)
+	local vehicleid = CreateVehicle(1, 195320, 207826, 1215, 90.0)
 
 	PlayerData[playerid].test_vehicle = vehicleid
 	SetVehicleColor(vehicleid, RGB(255, 255, 255, 255))
+	SetVehicleLicensePlate(vehicleid, "GDL-TEST-"..playerid.."")
 	PlayerData[playerid].test_warns = 0
 
 	if vehicleid ~= 0 then
