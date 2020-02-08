@@ -701,6 +701,7 @@ AddEvent("OnPlayerDeath", function (player, instigator)
 	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
 
 		PlayerData[player].state = CHARACTER_STATE_DEAD
+
 	else
 
 		PlayerData[player].acceptdeath = false

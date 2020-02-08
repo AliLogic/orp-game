@@ -238,7 +238,7 @@ AddEvent('charui:delete', function (slot)
 end)
 
 AddRemoteEvent('FreezePlayer', function (status)
-	if status == false then
+	if status == true then
 		SetIgnoreMoveInput(true)
 		SetIgnoreLookInput(true)
 		is_frozen = true
