@@ -987,11 +987,6 @@ AddCommand("near", function(playerid)
 	end
 end)
 
-AddCommand('borkui', function (player)
-	AddPlayerChat(player, '(Server): Sending event \'borkui\' to client.')
-	CallRemoteEvent(player, 'borkui')
-end)
-
 AddCommand("assists", function (playerid)
 
 	if PlayerData[playerid].admin == 0 and PlayerData[playerid].helper == 0 then
