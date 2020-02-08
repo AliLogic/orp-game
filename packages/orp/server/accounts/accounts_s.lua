@@ -733,6 +733,8 @@ AddEvent("OnPackageStart", function ()
 		end
 		print("All accounts have been saved!")
 	end, 1800000)
+
+	CreateText3D("Hospital Respawn Point\nDo not AFK", 10, 212101, 159561, 1322, 0.0, 0.0, 0.0)
 end)
 
 AddEvent("SavePlayers", function () 
