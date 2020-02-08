@@ -268,7 +268,7 @@ function showUI(id) {
 			});
 		
 			//console.log(returnValues);
-			CallEvent('borkui:OnDialogSubmit', id, (parseInt($(this).attr('id')) - elements.length) + 1, "test");
+			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), "test");
 		});
 	}
 }
