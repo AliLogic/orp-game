@@ -257,17 +257,17 @@ function showUI(id) {
 		$('body').show();
 		$('button').on('click', function (e) {
 			e.preventDefault();
-			let returnValues = [id, (parseInt($(this).attr('id')) - elements.length) + 1]; // id is dialogid, second id is button clicked.
+			//let returnValues = [id, (parseInt($(this).attr('id')) - elements.length) + 1]; // id is dialogid, second id is button clicked.
 		
 			elements.forEach((element) => {
 				if (!element[1]) {
 					console.log($(`#${element[0]}`).val());
-					returnValues.push($(`#${element[0]}`).val());
+					//returnValues.push($(`#${element[0]}`).val());
 				}
 			});
 		
-			console.log(returnValues);
-			CallEvent('borkui:OnDialogSubmit', returnValues);
+			//console.log(returnValues);
+			CallEvent('borkui:OnDialogSubmit', id, (parseInt($(this).attr('id')) - elements.length) + 1, "test");
 		});
 	}
 }
