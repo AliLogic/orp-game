@@ -29,7 +29,7 @@ function OnAtmLoaded()
 		CreateATM(id, modelid, x, y, z, rx, ry, rz)
 	end
 
-	print("Loaded "..#ATMData.." ATMs")
+	print("** ATMs Loaded: "..mariadb_get_row_count()..".")
 end
 
 AddEvent("OnPlayerLoggedIn", function(player)

@@ -195,6 +195,8 @@ function OnLoadMarkers()
 		CreateMarkerData(i)
 		Marker_Load(i, mariadb_get_value_name_int(i, "id"))
 	end
+
+	print("** Markers Loaded: "..mariadb_get_row_count()..".")
 end
 
 function Marker_Nearest(playerid)

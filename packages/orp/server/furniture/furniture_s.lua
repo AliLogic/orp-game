@@ -184,8 +184,6 @@ end
 
 function OnHouseFurnitureLoaded(houseid)
 
-	print("[OnHouseFurnitureLoaded] Loading house furniture (houseid: "..houseid..")")
-
 	local row_count = mariadb_get_row_count()
 
 	if row_count ~= 0 then

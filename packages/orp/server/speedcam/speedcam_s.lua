@@ -159,6 +159,8 @@ local function OnSpeedcamLoad()
 	for i = 1, mariadb_get_row_count(), 1 do
 		Speedcam_Load(mariadb_get_value_name_int(i, "id"))
 	end
+
+	print("** Speedcams Loaded: "..mariadb_get_row_count()..".")
 end
 
 local function OnSpeedcamUnloaded(speedcam)

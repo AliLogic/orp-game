@@ -217,6 +217,8 @@ function OnLoadVehicles()
 	for i = 1, mariadb_get_row_count(), 1 do
 		Vehicle_Load(mariadb_get_value_name_int(i, "id"))
 	end
+
+	print("** Vehicles Loaded: "..mariadb_get_row_count()..".")
 end
 
 AddEvent('UnloadVehicles', function ()

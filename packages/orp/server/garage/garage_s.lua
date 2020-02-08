@@ -61,6 +61,7 @@ function OnGarageLoad()
 	for i = 1, mariadb_get_row_count(), 1 do
 		Garage_Load(mariadb_get_value_name_int(i, "id"))
 	end
+	print("** Garages Loaded: "..mariadb_get_row_count()..".")
 end
 
 function Garage_Create(price, ...)

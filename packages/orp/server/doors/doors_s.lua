@@ -103,8 +103,6 @@ function OnDoorLoaded(indexid, door_id)
 	if mariadb_get_row_count() == 0 then
 		print('Error with loading door ID'..door_id)
 	else
-		print("Door id is now being loaded... "..door_id)
-
 		DoorData[indexid].id = mariadb_get_value_name_int(1, "id")
 		DoorData[indexid].model = mariadb_get_value_name_int(1, "model")
 
@@ -150,12 +148,11 @@ AddEvent('LoadDoors', function ()
 end)
 
 function OnLoadDoors()
-	print("OnLoadDoors has been called.")
 	for i = 1, mariadb_get_row_count(), 1 do
 		CreateDoorData(i)
-		print('Loading Door ID '..i)
 		Door_Load(i, mariadb_get_value_name_int(i, "id"))
 	end
+	print("** Doors Loaded: "..mariadb_get_row_count()..".")
 end
 
 AddEvent('UnloadDoors', function ()

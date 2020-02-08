@@ -309,4 +309,6 @@ AddEvent('UnloadHouses', function ()
 	for i = 1, #HousingData, 1 do
 		House_Unload(i)
 	end
+
+	print("** Houses Loaded: "..mariadb_get_row_count()..".")
 end)
