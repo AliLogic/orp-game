@@ -662,6 +662,22 @@ AddEvent("OnPlayerSpawn", function(player)
 
 	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
 
+		AddPlayerChat(player, "You are now wounded... You can use /acceptdeath shortly.")
+
+		FreezePlayer(player, true)
+
+		Delay(10 * 1000, function()
+
+			if PlayerData[player].state == CHARACTER_STATE_WOUNDED then
+				PlayerData[player].acceptdeath = true
+				AddPlayerChat(player, "You can now /acceptdeath.")
+			else
+				PlayerData[player].acceptdeath = false
+			end
+		end)
+
+	elseif PlayerData[player].state == CHARACTER_STATE_DEAD then
+
 		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
 		SetPlayerAnimation(player, "")
 		FreezePlayer(player, true)
@@ -682,29 +698,9 @@ AddEvent("OnPlayerDeath", function (player, instigator)
 
 		PlayerData[player].state = CHARACTER_STATE_WOUNDED
 
-		AddPlayerChat(player, "You are now wounded... You can use /acceptdeath shortly.")
-
-		FreezePlayer(player, true)
-
-		Delay(10 * 1000, function()
-
-			if PlayerData[player].state == CHARACTER_STATE_WOUNDED then
-				PlayerData[player].acceptdeath = true
-				AddPlayerChat(player, "You can now /acceptdeath.")
-			else
-				PlayerData[player].acceptdeath = false
-			end
-		end)
-
 	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
 
 		PlayerData[player].state = CHARACTER_STATE_DEAD
-
-		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
-
-		PlayerData[player].respawnme = true
-
-		FreezePlayer(player, true)
 	else
 
 		PlayerData[player].acceptdeath = false
