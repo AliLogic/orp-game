@@ -261,6 +261,7 @@ function showUI(id) {
 		
 			elements.forEach((element) => {
 				if (!element[1]) {
+					// add a new string variable, and concat the elements together and then pass it in the place of "text" in CallEvent(...)
 					console.log($(`#${element[0]}`).val());
 					//returnValues.push($(`#${element[0]}`).val());
 				}

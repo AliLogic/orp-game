@@ -271,7 +271,7 @@ AddEvent("borkui:OnHideMenu", function()
 end)
 
 AddEvent("borkui:OnDialogSubmit", function (dialog, button, ...)
-	AddPlayerChat('(borkui): UI submitted, with dialog '..dialog..', button '..button..' and ... '.. ... ..'.')
+	AddPlayerChat('(borkui): UI submitted, with dialog '..dialog..', extraid '..dialogs[dialog].extraid..', button '..button..' and text '.. ... ..'.')
 	CallRemoteEvent("borkui:clientOnDialogSubmit", dialog, dialogs[dialog].extraid, button, {...})
 end)
 
