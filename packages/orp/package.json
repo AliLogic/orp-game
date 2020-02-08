@@ -47,6 +47,7 @@
 		"server/pumps/cmds_s.lua",
 		"server/trafficlights/trafficlights_s.lua",
 		"server/furniture/furniture_s.lua",
+		"server/licenses/licenses_s.lua",
 		"server/misc/json.lua",
 		"server/misc/misc_s.lua"
 	],
