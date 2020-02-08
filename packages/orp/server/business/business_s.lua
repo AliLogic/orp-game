@@ -227,9 +227,6 @@ function OnBusinessLoaded(businessid)
 		end
 
 		-- Create3dTextLabel
-
-		print("Business "..business.." (SQL ID: "..businessid..") successfully loaded!")
-
 	end
 end
 

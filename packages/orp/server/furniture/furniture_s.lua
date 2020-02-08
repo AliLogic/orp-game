@@ -206,13 +206,9 @@ function OnHouseFurnitureLoaded(houseid)
 				FurnitureData[furnitureid].ry = mariadb_get_value_name_int(i, "ry")
 				FurnitureData[furnitureid].rz = mariadb_get_value_name_int(i, "rz")
 				FurnitureData[furnitureid].object = CreateObject(FurnitureData[furnitureid].model, FurnitureData[furnitureid].x, FurnitureData[furnitureid].y, FurnitureData[furnitureid].z, FurnitureData[furnitureid].rx, FurnitureData[furnitureid].ry, FurnitureData[furnitureid].rz)
-
-				print("The furniture object ID is "..FurnitureData[furnitureid].object..".")
 			end
 		end
 	end
-
-	print("[OnHouseFurnitureLoaded] Loaded house furniture (houseid: "..houseid..")")
 end
 
 local function Furniture_Destroy(furnitureid)
