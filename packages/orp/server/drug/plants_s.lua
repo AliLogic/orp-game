@@ -204,13 +204,12 @@ local function Plant_Load(i, plantid)
 end
 
 local function OnLoadPlants()
-
 	print("OnLoadPlants[1]")
 	for i = 1, mariadb_get_row_count(), 1 do
 		print("OnLoadPlants[2] "..i..".")
 		CreateDrugData(i)
 		print("OnLoadPlants[3] "..i..".")
-		Plant_Load(i, mariadb_get_value_index_int(i, "id"))
+		Plant_Load(i, mariadb_get_value_name_int(i, "id"))
 		print("OnLoadPlants[4] "..i..".")
 	end
 
@@ -257,8 +256,7 @@ end
 -- Events
 
 AddEvent('LoadPlants', function ()
-	local query = mariadb_prepare(sql, "SELECT * FROM plants;")
-	mariadb_async_query(sql, query, OnLoadPlants)
+	mariadb_async_query(sql, "SELECT * FROM plants;", OnLoadPlants)
 end)
 
 AddEvent('UnloadPlants', function ()
