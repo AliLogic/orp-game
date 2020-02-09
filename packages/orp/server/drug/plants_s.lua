@@ -62,6 +62,8 @@ DRUG_STAGES = {
 
 local function CreateDrugData(plantid)
 
+	print("CreateDrugData["..plantid.."] (1)")
+
 	DrugData[plantid] = {}
 
 	DrugData[plantid].id = 0
@@ -73,6 +75,8 @@ local function CreateDrugData(plantid)
 	DrugData[plantid].x = 0
 	DrugData[plantid].y = 0
 	DrugData[plantid].z = 0
+
+	print("CreateDrugData["..plantid.."] (2)")
 end
 
 local function DestroyDrugData(plantid)
@@ -194,15 +198,20 @@ local function Plant_Unload(plantid)
 end
 
 local function Plant_Load(i, plantid)
+	print("Plant_Load("..i..", "..plantid..")")
 	local query = mariadb_prepare(sql, "SELECT * FROM plants WHERE id = ?", plantid)
 	mariadb_async_query(sql, query, OnPlantLoaded, i, plantid)
 end
 
 local function OnLoadPlants()
 
+	print("OnLoadPlants[1]")
 	for i = 1, mariadb_get_row_count(), 1 do
+		print("OnLoadPlants[2] "..i..".")
 		CreateDrugData(i)
+		print("OnLoadPlants[3] "..i..".")
 		Plant_Load(i, mariadb_get_value_index_int(i, "id"))
+		print("OnLoadPlants[4] "..i..".")
 	end
 
 	print("** Plants Loaded: "..mariadb_get_row_count()..".")
