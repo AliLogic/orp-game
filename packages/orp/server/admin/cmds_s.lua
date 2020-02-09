@@ -956,6 +956,11 @@ AddCommand("near", function(playerid)
 
 	local id = 0
 
+	id = GetNearestVehicle(playerid)
+	if (id ~= 0) then
+		AddPlayerChat(playerid, "You are standing near vehicle ID: "..id.." (Model: "..GetVehicleModelEx(id)..".")
+	end
+
 	id = Speedcam_Nearest(playerid)
 	if (id ~= 0) then
 		AddPlayerChat(playerid, "You are standing near speedcam ID: "..id..".")
