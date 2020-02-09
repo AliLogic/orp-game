@@ -89,6 +89,8 @@ function OnHouseLoad()
 	for i = 1, mariadb_get_row_count(), 1 do
 		House_Load(mariadb_get_value_name_int(i, "id"))
 	end
+
+	print("** Houses Loaded: "..mariadb_get_row_count()..".")
 end
 
 function House_Create(player, htype, price, ...)
@@ -306,6 +308,4 @@ AddEvent('UnloadHouses', function ()
 	for i = 1, #HousingData, 1 do
 		House_Unload(i)
 	end
-
-	print("** Houses Loaded: "..mariadb_get_row_count()..".")
 end)

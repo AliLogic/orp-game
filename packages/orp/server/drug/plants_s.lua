@@ -157,6 +157,8 @@ local function OnLoadPlants()
 		CreateDrugData(i)
 		Plant_Load(i, mariadb_get_value_index_int(i, "id"))
 	end
+
+	print("** Plants Loaded: "..mariadb_get_row_count()..".")
 end
 
 -- Events
@@ -164,6 +166,4 @@ end
 AddEvent('LoadPlants', function ()
 	local query = mariadb_prepare(sql, "SELECT * FROM plants;")
 	mariadb_async_query(sql, query, OnLoadPlants)
-
-	print("** Plants Loaded: "..mariadb_get_row_count()..".")
 end)

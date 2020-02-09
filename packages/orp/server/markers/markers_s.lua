@@ -234,7 +234,6 @@ end)
 
 AddEvent('UnloadMarkers', function ()
 	for i = 1, #MarkerData do
-		print('Unloading Marker ID: '..i)
 		Marker_Unload(i)
 	end
 end)
