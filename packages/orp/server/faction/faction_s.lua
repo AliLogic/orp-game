@@ -331,16 +331,16 @@ AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extr
 
 	if extraid == DIALOG_FACTION_ONLINE then
 
-		borkui.HideUI(playerid, dialogid)
-		borkui.DestroyUI(playerid, dialogid)
+		borkui.hideUI(playerid, dialogid)
+		borkui.destroyUI(playerid, dialogid)
 
 	elseif extraid == DIALOG_TICKETS_PAY then
 
 		if button == 1 then
 		end
 
-		borkui.HideUI(playerid, dialogid)
-		borkui.DestroyUI(playerid, dialogid)
+		borkui.hideUI(playerid, dialogid)
+		borkui.destroyUI(playerid, dialogid)
 
 	end
 end)

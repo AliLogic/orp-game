@@ -99,8 +99,8 @@ AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extr
 
 	if extraid == DIALOG_WHITELIST_LOG then
 
-		borkui.HideUI(playerid, dialogid)
-		borkui.DestroyUI(playerid, dialogid)
+		borkui.hideUI(playerid, dialogid)
+		borkui.destroyUI(playerid, dialogid)
 
 	end
 
