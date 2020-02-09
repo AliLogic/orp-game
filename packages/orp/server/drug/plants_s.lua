@@ -96,6 +96,24 @@ local function DestroyDrugData(plantid)
 	DrugData[plantid] = nil
 end
 
+local function RefreshPlantTextLabel(plantid)
+	local stage = DrugData[plantid].stage
+	local text_z = DrugData[plantid].z + 35 + 100 * DRUG_STAGES[stage].scale
+	local string = ""
+
+	if IsValidText3D(DrugData[plantid].text3d) then
+		DestroyText3D(DrugData[plantid].text3d)
+	end
+
+	if DRUG_STAGES[stage + 1] ~= nil then
+		string = "Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nStage "..stage..""
+	else
+		string = "Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nReady"
+	end
+
+	DrugData[plantid].text3d = CreateText3D(string, 20, DrugData[plantid].x, DrugData[plantid].y, text_z, 0, 0, 0)
+end
+
 function CreatePlant(plantid, type, x, y, z)
 
 	CreateDrugData(plantid)
@@ -108,8 +126,7 @@ function CreatePlant(plantid, type, x, y, z)
 	SetObjectScale(DrugData[plantid].object, scale, scale, scale)
 	SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
 
-	local text_z = z + 35 + 100 * scale
-	DrugData[plantid].text3d = CreateText3D("Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nStage 1", 20, x, y, text_z, 0, 0, 0)
+	RefreshPlantTextLabel(plantid)
 
 	DrugData[plantid].timer = CreateTimer(OnPlantTick, TIME_PER_STAGE, plantid)
 end
@@ -117,21 +134,19 @@ end
 function OnPlantTick(plantid)
 
 	local stage = DrugData[plantid].stage + 1
+
+	if DRUG_STAGES[stage] == nil then
+
+		DestroyTimer(DrugData[plantid].timer)
+	end
+
 	local scale = DRUG_STAGES[stage].scale
-	local type = DrugData[plantid].type
 
 	SetObjectScale(DrugData[plantid].object, scale, scale, scale)
 	SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
 	DrugData[plantid].stage = stage
 
-	if not DRUG_STAGES[stage] then
-
-		DestroyTimer(DrugData[plantid].timer)
-		SetText3DText(DrugData[plantid].text3d, "Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nReady")
-	else
-
-		SetText3DText(DrugData[plantid].text3d, "Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nStage "..stage.."")
-	end
+	RefreshPlantTextLabel(plantid)
 end
 
 function IsValidPlant(plantid)
@@ -156,7 +171,6 @@ local function OnPlantLoaded(i, plantid)
 	if mariadb_get_row_count() == 0 then
 		print("Error with loading plant ID" .. plantid)
 	else
-		print("OnPlantLoaded 1")
 		DrugData[i].id = plantid
 		DrugData[i].stage = mariadb_get_value_name_int(1, "stage")
 		DrugData[i].type = mariadb_get_value_name_int(1, "type")
@@ -164,18 +178,14 @@ local function OnPlantLoaded(i, plantid)
 		DrugData[i].y = mariadb_get_value_name_int(1, "y")
 		DrugData[i].z = mariadb_get_value_name_int(1, "z")
 
-		print("OnPlantLoaded 2")
 		local scale = DRUG_STAGES[DrugData[i].stage].scale
 		DrugData[i].object = CreateObject(DRUG_PLANT_MODELS[DrugData[i].type], DrugData[i].x, DrugData[i].y, DrugData[i].z)
 		SetObjectScale(DrugData[i].object, scale, scale, scale)
 		SetObjectRotation(DrugData[i].object, 0.0, Random(0.0, 360.0), 0.0)
 
-		print("OnPlantLoaded 3")
-		local text_z = DrugData[i].z + 35 + 100 * scale
-		DrugData[i].text3d = CreateText3D("Plant (" .. plantid .. ") [" .. DRUG_NAMES[DrugData[i].type] .. "]\nStage 1", 20, DrugData[i].x, DrugData[i].y, text_z, 0, 0, 0)
 		DrugData[i].timer = CreateTimer(OnPlantTick, TIME_PER_STAGE, i)
 
-		print("OnPlantLoaded 4")
+		RefreshPlantTextLabel(plantid)
 	end
 end
 
@@ -202,19 +212,14 @@ local function Plant_Unload(plantid)
 end
 
 local function Plant_Load(i, plantid)
-	print("Plant_Load("..i..", "..plantid..")")
 	local query = mariadb_prepare(sql, "SELECT * FROM plants WHERE id = ?", plantid)
 	mariadb_async_query(sql, query, OnPlantLoaded, i, plantid)
 end
 
 local function OnLoadPlants()
-	print("OnLoadPlants[1]")
 	for i = 1, mariadb_get_row_count(), 1 do
-		print("OnLoadPlants[2] "..i..".")
 		CreateDrugData(i)
-		print("OnLoadPlants[3] "..i..".")
 		Plant_Load(i, mariadb_get_value_name_int(i, "id"))
-		print("OnLoadPlants[4] "..i..".")
 	end
 
 	print("** Plants Loaded: "..mariadb_get_row_count()..".")
