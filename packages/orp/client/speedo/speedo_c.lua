@@ -14,14 +14,8 @@ end)
 local timer = 0
 
 local function UpdateSpeedo()
-	local speed = GetPlayerVehicleSpeed(true)
+	local speed = GetPlayerVehicleSpeed(false)
 	local rpm = GetPlayerVehicleRPM()
-
-	--[[if speedo == nil then
-		speedo = CreateTextBox(0, -250, "<span color=\"#FF0000\" size=\"28\">"..speed.." KMH</>", "right")
-		SetTextBoxAnchors(speedo, 0.5, 0.5, 0.5, 0.5)
-		SetTextBoxAlignment(speedo, 0.5, 0.5)
-	end]]
 
 	if speed ~= false then
 		SetSpeedoRPM(rpm)
@@ -45,12 +39,6 @@ AddRemoteEvent("ToggleSpeedo", function (bToggle)
 		end
 	end
 end)
-
---[[AddEvent("OnPlayerLeaveVehicle", function(player, vehicle, seat)
-	if speedo ~= nil then
-		ToggleSpeedometer()
-	end
-end)]]
 
 -- Speedometer Wrapper Functions
 
