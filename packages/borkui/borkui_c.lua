@@ -193,7 +193,7 @@ function ShowUI(id)
 	end
 
 	if lastOpened ~= 0 then
-		HideUI(lastOpened)
+		HideUI()
 	end
 
 	local column
@@ -230,11 +230,12 @@ end
 AddRemoteEvent('borkui:serverShowUI', ShowUI)
 
 function HideUI()
+	AddPlayerChat("HideUI client side called")
 	if dialogs[lastOpened] == nil then
 		return false
 	end
 
-	ExecuteWebJS('hideUI('..lastOpened..');')
+	ExecuteWebJS('hideUI();')
 	lastOpened = 0
 	SetIgnoreLookInput(false)
 	SetIgnoreMoveInput(false)
@@ -242,7 +243,7 @@ function HideUI()
 	SetInputMode(INPUT_GAME)
 	SetWebVisibility(web, WEB_HITINVISIBLE)
 
-	AddPlayerChat('(borkui): HideUI called')
+	AddPlayerChat('(borkui): HideUI call finished')
 end
 AddRemoteEvent('borkui:serverHideUI', HideUI)
 

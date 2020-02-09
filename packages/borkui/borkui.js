@@ -272,7 +272,7 @@ function showUI(id) {
 	}
 }
 
-function hideUI(id) {
+function hideUI() {
 	if ($('body').is(':visible')) {
 		$('body').hide();
 		$('button').off();
