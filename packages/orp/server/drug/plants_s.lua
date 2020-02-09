@@ -12,12 +12,30 @@ Contributors:
 
 local colour = ImportPackage("colours")
 
-local WEED_PLANT_MODEL = 64
--- local POT_MODEL = 554
+DRUG_PLANT_MODELS = {
+	64,
+	554
+}
 
 DRUG_NAMES = {
 	"Marijuana",
 	"Cocaine"
+}
+
+DRUG_TYPE_ITEM = {
+	INV_ITEM_WEED,
+	INV_ITEM_COCAINE
+}
+
+DRUG_TYPE_AMOUNT = {
+	{
+		8,
+		12
+	},
+	{
+		10,
+		20
+	}
 }
 
 local DRUG_TYPE_WEED = 1
@@ -79,7 +97,7 @@ function CreatePlant(plantid, type, x, y, z)
 
 	local scale = DRUG_STAGES[DrugData[plantid].stage].scale
 
-	DrugData[plantid].object = CreateObject(WEED_PLANT_MODEL, x, y, z)
+	DrugData[plantid].object = CreateObject(DRUG_PLANT_MODELS[type], x, y, z)
 	SetObjectScale(DrugData[plantid].object, scale, scale, scale)
 	SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
 
@@ -135,7 +153,7 @@ local function OnPlantLoaded(i, plantid)
 		DrugData[plantid].z = mariadb_get_value_name_int(1, "z")
 
 		local scale = DRUG_STAGES[DrugData[plantid].stage].scale
-		DrugData[plantid].object = CreateObject(WEED_PLANT_MODEL, DrugData[plantid].x, DrugData[plantid].y, DrugData[plantid].z)
+		DrugData[plantid].object = CreateObject(DRUG_PLANT_MODELS[DrugData[plantid].type], DrugData[plantid].x, DrugData[plantid].y, DrugData[plantid].z)
 		SetObjectScale(DrugData[plantid].object, scale, scale, scale)
 		SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
 
@@ -159,6 +177,43 @@ local function OnLoadPlants()
 	end
 
 	print("** Plants Loaded: "..mariadb_get_row_count()..".")
+end
+
+function GetPlantTypeName(plantid)
+
+	if not IsValidPlant(plantid) then
+		return false
+	end
+
+	return DRUG_NAMES[DrugData[plantid].type]
+end
+
+function GetPlantTypeId(plantid)
+
+	if not IsValidPlant(plantid) then
+		return 0
+	end
+
+	return DrugData[plantid].type
+end
+
+function Plant_Nearest(playerid)
+	local x, y, z = GetPlayerLocation(playerid)
+	local ox, oy, oz = 0.0, 0.0, 0.0
+	local distance = 0
+
+	for v = 1, #DrugData, 1 do
+		if DrugData[v] ~= nil then
+			ox, oy, oz = GetObjectLocation(DrugData[v].object)
+			distance = GetDistance3D(x, y, z, ox, oy, oz)
+
+			if distance <= 200.0 then
+				return v
+			end
+		end
+	end
+
+	return 0
 end
 
 -- Events

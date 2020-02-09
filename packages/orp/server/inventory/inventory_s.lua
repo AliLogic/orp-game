@@ -22,6 +22,8 @@ INV_ITEM_STEROIDS = 17
 INV_ITEM_FUELCAN = 18
 INV_ITEM_MASK = 19
 INV_ITEM_VEST = 20
+INV_ITEM_WEEDSEED = 21
+INV_ITEM_COKESEED = 22
 
 ITEM_NAMES = {
 	"Portable Radio",
@@ -43,7 +45,9 @@ ITEM_NAMES = {
 	"Steroids",
 	"Fuel Can",
 	"Mask",
-	"Armored Vest"
+	"Armored Vest",
+	"Marijuana Seed",
+	"Opium Poppy Seed"
 }
 
 --[[
