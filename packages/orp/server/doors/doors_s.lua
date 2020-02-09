@@ -135,9 +135,7 @@ end
 
 function OnDoorUnloaded(door_id)
 	if mariadb_get_affected_rows() == 0 then
-		print('Door unload unsuccessful, id: '..door_id)
 	else
-		print('Door unload successful, id: '..door_id)
 		DestroyDoorData(door_id)
 	end
 end
@@ -157,7 +155,6 @@ end
 
 AddEvent('UnloadDoors', function ()
 	for i = 1, #DoorData do
-		print('Unloading Door ID: '..i)
 		Door_Unload(i)
 	end
 end)
