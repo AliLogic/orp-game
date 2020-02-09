@@ -234,12 +234,12 @@ function HideUI()
 		return false
 	end
 
+	ExecuteWebJS('hideUI('..lastOpened..');')
 	lastOpened = 0
-	ExecuteWebJS('clearUI();')
-    SetIgnoreLookInput(false)
-    SetIgnoreMoveInput(false)
-    ShowMouseCursor(false)
-    SetInputMode(INPUT_GAME)
+	SetIgnoreLookInput(false)
+	SetIgnoreMoveInput(false)
+	ShowMouseCursor(false)
+	SetInputMode(INPUT_GAME)
 	SetWebVisibility(web, WEB_HITINVISIBLE)
 
 	AddPlayerChat('(borkui): HideUI called')
@@ -247,32 +247,32 @@ end
 AddRemoteEvent('borkui:serverHideUI', HideUI)
 
 function DestroyUI(id)
-    if lastOpened == id then
-        closeDialog()
-    end
+	if lastOpened == id then
+		HideUI()
+	end
 	dialogs[id] = nil
 	AddPlayerChat('(borkui): DestroyUI called')
 end
 AddRemoteEvent('borkui:serverDestroyUI', DestroyUI)
 
 AddEvent("borkui:ready", function()
-    if lastOpened ~= -1 then
+	if lastOpened ~= -1 then
 		ShowUI(lastOpened)
 		AddPlayerChat('(borkui): borkui is ready (ready received)!')
-    end
+	end
 end)
 
 AddEvent("borkui:OnHideMenu", function()
-    if lastOpened ~= -1 then
-        Delay(1, function()
-            SetIgnoreLookInput(true)
-            SetIgnoreMoveInput(true)
-            ShowMouseCursor(true)
+	if lastOpened ~= -1 then
+		Delay(1, function()
+			SetIgnoreLookInput(true)
+			SetIgnoreMoveInput(true)
+			ShowMouseCursor(true)
 			SetInputMode(INPUT_GAMEANDUI)
 
 			AddPlayerChat('(borkui): OnHideMenu received.')
-        end)
-    end
+		end)
+	end
 end)
 
 AddEvent("borkui:OnDialogSubmit", function (dialog, button, ...)

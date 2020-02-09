@@ -252,7 +252,7 @@ end)
 AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
 
 	if extraid == DIALOG_HOME_FURNITURE then
-		borkui.hideUI(playerid, dialogid)
+		borkui.hideUI(playerid)
 		borkui.destroyUI(playerid, dialogid)
 	end
 end)

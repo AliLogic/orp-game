@@ -34,7 +34,6 @@ function createUI(align = 0) {
 
 function addTitle(text) {
 	$('#title').text(`${text}`);
-	alert('Add title called: '+ text);
 }
 
 function addInformation(text, anchor = 0) {
@@ -60,6 +59,8 @@ function addInformation(text, anchor = 0) {
 			break;
 		}
 	}
+
+	alert('addInformation called: '+ text);
 
 	$('#card').append(`<div${alignment}><span>${text}</span></div>`);
 }
