@@ -62,8 +62,6 @@ DRUG_STAGES = {
 
 local function CreateDrugData(plantid)
 
-	print("CreateDrugData["..plantid.."] (1)")
-
 	DrugData[plantid] = {}
 
 	DrugData[plantid].id = 0
@@ -75,8 +73,6 @@ local function CreateDrugData(plantid)
 	DrugData[plantid].x = 0
 	DrugData[plantid].y = 0
 	DrugData[plantid].z = 0
-
-	print("CreateDrugData["..plantid.."] (2)")
 end
 
 local function DestroyDrugData(plantid)
