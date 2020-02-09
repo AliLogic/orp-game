@@ -93,9 +93,9 @@ AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid
 
 end)
 
-AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
+AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, text)
 
-	print("borkui:clientOnDialogSubmit (pid:"..playerid..", did:"..dialogid..", eid:"..extraid..", bn:"..button..", txt:".. ... ..")")
+	print("borkui:clientOnDialogSubmit (pid:"..playerid..", did:"..dialogid..", eid:"..extraid..", bn:"..button..", txt:".. text ..")")
 
 	if extraid == DIALOG_WHITELIST_LOG then
 
