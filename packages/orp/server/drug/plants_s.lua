@@ -145,22 +145,26 @@ local function OnPlantLoaded(i, plantid)
 	if mariadb_get_row_count() == 0 then
 		print("Error with loading plant ID" .. plantid)
 	else
-		DrugData[plantid].id = plantid
-		DrugData[plantid].stage = mariadb_get_value_name_int(1, "stage")
-		DrugData[plantid].type = mariadb_get_value_name_int(1, "type")
-		DrugData[plantid].x = mariadb_get_value_name_int(1, "x")
-		DrugData[plantid].y = mariadb_get_value_name_int(1, "y")
-		DrugData[plantid].z = mariadb_get_value_name_int(1, "z")
+		print("OnPlantLoaded 1")
+		DrugData[i].id = plantid
+		DrugData[i].stage = mariadb_get_value_name_int(1, "stage")
+		DrugData[i].type = mariadb_get_value_name_int(1, "type")
+		DrugData[i].x = mariadb_get_value_name_int(1, "x")
+		DrugData[i].y = mariadb_get_value_name_int(1, "y")
+		DrugData[i].z = mariadb_get_value_name_int(1, "z")
 
-		local scale = DRUG_STAGES[DrugData[plantid].stage].scale
-		DrugData[plantid].object = CreateObject(DRUG_PLANT_MODELS[DrugData[plantid].type], DrugData[plantid].x, DrugData[plantid].y, DrugData[plantid].z)
-		SetObjectScale(DrugData[plantid].object, scale, scale, scale)
-		SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
+		print("OnPlantLoaded 2")
+		local scale = DRUG_STAGES[DrugData[i].stage].scale
+		DrugData[i].object = CreateObject(DRUG_PLANT_MODELS[DrugData[i].type], DrugData[i].x, DrugData[i].y, DrugData[i].z)
+		SetObjectScale(DrugData[i].object, scale, scale, scale)
+		SetObjectRotation(DrugData[i].object, 0.0, Random(0.0, 360.0), 0.0)
 
-		local text_z = DrugData[plantid].z + 35 + 100 * scale
-		DrugData[plantid].object = 0
-		DrugData[plantid].text3d = CreateText3D("Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nStage 1", 20, DrugData[plantid].x, DrugData[plantid].y, text_z, 0, 0, 0)
-		DrugData[plantid].timer = CreateTimer(OnPlantTick, TIME_PER_STAGE, plantid)
+		print("OnPlantLoaded 3")
+		local text_z = DrugData[i].z + 35 + 100 * scale
+		DrugData[i].text3d = CreateText3D("Plant (" .. plantid .. ") [" .. DRUG_NAMES[DrugData[i].type] .. "]\nStage 1", 20, DrugData[i].x, DrugData[i].y, text_z, 0, 0, 0)
+		DrugData[i].timer = CreateTimer(OnPlantTick, TIME_PER_STAGE, i)
+
+		print("OnPlantLoaded 4")
 	end
 end
 
