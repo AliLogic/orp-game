@@ -61,6 +61,7 @@ end
 
 function HideUI(player)
 	CallRemoteEvent(player, "borkui:serverHideUI")
+	AddPlayerChat(player, "Server has called the event to hide UI.")
 end
 
 function DestroyUI(player, dialog)

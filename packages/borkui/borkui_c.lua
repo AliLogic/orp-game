@@ -19,6 +19,7 @@ local COLUMN_TYPE_DIVIDER = 1
 local COLUMN_TYPE_BUTTON = 2
 local COLUMN_TYPE_TEXTINPUT = 3
 local COLUMN_TYPE_DROPDOWN = 4
+local COLUMN_TYPE_INFORMATION = 5
 
 AddEvent("OnPackageStart", function()
 	web = CreateWebUI(0, 0, 0, 0, 1, 16)
@@ -83,7 +84,7 @@ function AddUIInformation(id, text)
 		return false
 	end
 
-	dialogs[id].info = text
+	table.insert(dialogs[id].columns, {COLUMN_TYPE_INFORMATION, text})
 	AddPlayerChat('(borkui): AddUIInformation called')
 end
 AddRemoteEvent('borkui:serverAddUIInformation', AddUIInformation)
@@ -193,15 +194,13 @@ function ShowUI(id)
 	end
 
 	if lastOpened ~= 0 then
-		HideUI(lastOpened)
+		HideUI()
 	end
 
 	local column
 
 	AddPlayerChat('(borkui): TITLE SHOULD BE \''..dialogs[id].title..'\'.')
 	ExecuteWebJS(web, "addTitle('"..dialogs[id].title.."');")
-
-	ExecuteWebJS(web, "addInformation('"..dialogs[id].info.."');")
 
 	for i = 1, #dialogs[id].columns, 1 do
 		column = dialogs[id].columns[i]
@@ -214,6 +213,8 @@ function ShowUI(id)
 			ExecuteWebJS(web, string.format('addTextInput("%s", %d, %d, "%s");', column[2], column[3], column[4], column[5]))
 		elseif dialogs[id].columns[i][1] == COLUMN_TYPE_DROPDOWN then
 			ExecuteWebJS(web, string.format('addDropdown(%s, %d, %s, "%s");', column[2], column[3], tostring(column[4]), column[5]))
+		elseif dialogs[id].columns[i][1] == COLUMN_TYPE_INFORMATION then
+			ExecuteWebJS(web, string.format('addInformation("%s");', column[2]))
 		end
 	end
 
@@ -230,11 +231,12 @@ end
 AddRemoteEvent('borkui:serverShowUI', ShowUI)
 
 function HideUI()
+	AddPlayerChat("HideUI client side called")
 	if dialogs[lastOpened] == nil then
 		return false
 	end
 
-	ExecuteWebJS('hideUI('..lastOpened..');')
+	ExecuteWebJS('hideUI();')
 	lastOpened = 0
 	SetIgnoreLookInput(false)
 	SetIgnoreMoveInput(false)
@@ -242,7 +244,7 @@ function HideUI()
 	SetInputMode(INPUT_GAME)
 	SetWebVisibility(web, WEB_HITINVISIBLE)
 
-	AddPlayerChat('(borkui): HideUI called')
+	AddPlayerChat('(borkui): HideUI call finished')
 end
 AddRemoteEvent('borkui:serverHideUI', HideUI)
 
