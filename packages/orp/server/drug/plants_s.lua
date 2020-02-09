@@ -164,6 +164,28 @@ local function OnPlantLoaded(i, plantid)
 	end
 end
 
+local function OnPlantUnloaded(plantid)
+	if mariadb_get_affected_rows() == 0 then
+		print('Plant unload unsuccessful, id: '..plantid)
+	else
+		print('Plant unload successful, id: '..plantid)
+		DestroyDrugData(plantid)
+	end
+end
+
+local function Plant_Unload(plantid)
+	local query = mariadb_prepare(sql, "UPDATE plants SET stage = ?, type = ?, x = ?, y = ?, z = ? WHERE id = ?",
+		DrugData[plantid].id,
+		DrugData[plantid].stage,
+		DrugData[plantid].type,
+		DrugData[plantid].x,
+		DrugData[plantid].y,
+		DrugData[plantid].z
+	)
+
+	mariadb_async_query(sql, query, OnPlantUnloaded, plantid)
+end
+
 local function Plant_Load(i, plantid)
 	local query = mariadb_prepare(sql, "SELECT * FROM plants WHERE id = ?", plantid)
 	mariadb_async_query(sql, query, OnPlantLoaded, i, plantid)
@@ -221,4 +243,11 @@ end
 AddEvent('LoadPlants', function ()
 	local query = mariadb_prepare(sql, "SELECT * FROM plants;")
 	mariadb_async_query(sql, query, OnLoadPlants)
+end)
+
+AddEvent('UnloadPlants', function ()
+
+	for i = 1, #DrugData, 1 do
+		Plant_Unload(i)
+	end
 end)
