@@ -106,9 +106,9 @@ local function RefreshPlantTextLabel(plantid)
 	end
 
 	if DRUG_STAGES[stage + 1] ~= nil then
-		string = "Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nStage "..stage..""
+		string = "Plant (" .. plantid .. ") [" .. GetPlantTypeName(plantid) .. "]\nStage "..stage..""
 	else
-		string = "Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nReady"
+		string = "Plant (" .. plantid .. ") [" .. GetPlantTypeName(plantid) .. "]\nReady"
 	end
 
 	DrugData[plantid].text3d = CreateText3D(string, 20, DrugData[plantid].x, DrugData[plantid].y, text_z, 0, 0, 0)
@@ -135,9 +135,12 @@ function OnPlantTick(plantid)
 
 	local stage = DrugData[plantid].stage + 1
 
+	RefreshPlantTextLabel(plantid)
+
 	if DRUG_STAGES[stage] == nil then
 
 		DestroyTimer(DrugData[plantid].timer)
+		return
 	end
 
 	local scale = DRUG_STAGES[stage].scale
@@ -145,8 +148,6 @@ function OnPlantTick(plantid)
 	SetObjectScale(DrugData[plantid].object, scale, scale, scale)
 	SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
 	DrugData[plantid].stage = stage
-
-	RefreshPlantTextLabel(plantid)
 end
 
 function IsValidPlant(plantid)
