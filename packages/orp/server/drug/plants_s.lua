@@ -70,6 +70,9 @@ local function CreateDrugData(plantid)
 	DrugData[plantid].stage = 1
 	DrugData[plantid].timer = 0
 	DrugData[plantid].type = 0
+	DrugData[plantid].x = 0
+	DrugData[plantid].y = 0
+	DrugData[plantid].z = 0
 end
 
 local function DestroyDrugData(plantid)
