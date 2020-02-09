@@ -122,11 +122,15 @@ function OnPlantTick(plantid)
 
 	SetObjectScale(DrugData[plantid].object, scale, scale, scale)
 	SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
+	DrugData[plantid].stage = stage
 
-	if not DRUG_STAGES[stage + 1] then
+	if not DRUG_STAGES[stage] then
 
 		DestroyTimer(DrugData[plantid].timer)
 		SetText3DText(DrugData[plantid].text3d, "Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nReady")
+	else
+
+		SetText3DText(DrugData[plantid].text3d, "Plant (" .. plantid .. ") [" .. DRUG_NAMES[type] .. "]\nStage "..stage.."")
 	end
 end
 
