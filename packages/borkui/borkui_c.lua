@@ -199,7 +199,9 @@ function ShowUI(id)
 	local column
 
 	AddPlayerChat('(borkui): TITLE SHOULD BE \''..dialogs[id].title..'\'.')
-	ExecuteWebJS(web, "addTitle("..dialogs[id].title..");")
+	ExecuteWebJS(web, "addTitle('"..dialogs[id].title.."');")
+
+	ExecuteWebJS(web, "addInformation('"..dialogs[id].info.."');")
 
 	for i = 1, #dialogs[id].columns, 1 do
 		column = dialogs[id].columns[i]
