@@ -60,9 +60,7 @@ function addInformation(text, anchor = 0) {
 		}
 	}
 
-	alert('addInformation called: '+ text);
-
-	$('#card').append(`<div${alignment}><span>${text}</span></div>`);
+	$('#content').append(`<div${alignment}><span>${text}</span></div>`);
 }
 
 function addDivider() {
