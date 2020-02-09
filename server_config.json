@@ -1,28 +1,29 @@
 {
-	"servername": "[EN] Onset Roleplay [discord.io/onsetrpen] [TEXT BASED/IN DEVELOPMENT]",
-	"servername_short": "[EN] Onset RP",
-	"gamemode": "Onset Roleplay",
-	"website_url": "https://onsetroleplay.com",
-	"ipaddress": "0.0.0.0",
+	"servername": "Onset Server",
+	"servername_short": "Onset Server",
+	"gamemode": "do what you want",
+	"website_url": "https://playonset.com",
+	"ipaddress": "127.0.0.1",
 	"port": 7777,
-	"maxplayers": 300,
-	"password": "onsetrpstaffonly41820",
+	"maxplayers": 100,
+	"password": "",
 	"timeout": 15000,
 	"iplimit": 5,
-	"masterlist": true,
+	"masterlist": false,
 	"plugins": [
 		"mariadb",
-		"onset-http-plugin"
+		"ini-plugin"
 	],
 	"packages": [
-		"colours",
-		"dialogui",
-		"borkui",
-		"orp"
+		"packagemanager",
+		"zeus",
+		"default",
+		"freeroam",
+		"sandbox"
 	],
 	"stream_distance": 12000.0,
 	"stream_update_rate": 0.05,
-	"voice": false,
+	"voice": true,
 	"voice_sample_rate": 24000,
 	"voice_distance": 4000.0,
 	"voice_spatialization": true
