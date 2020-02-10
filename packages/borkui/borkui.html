@@ -21,20 +21,15 @@
 						console.log("CallEvent: args length is 0");
 						obj.callevent(name, "");
 					} else {
-						if (typeof args[0] === "object") {
-							console.log("CallEvent params1: " + args[0]);
-							obj.callevent(name, args[0]);
-						} else {
-							let params = [];
-							
-							for (let i = 0; i < args.length; i++) {
-								params[i] = args[i];
-							}
-							
-							console.log("CallEvent params2: " + JSON.stringify(params));
-							obj.callevent(name, JSON.stringify(params));
+						let params = [];
+						
+						for (let i = 0; i < args.length; i++) {
+							params[i] = args[i];
 						}
-					}
+						
+						console.log("CallEvent params2: " + JSON.stringify(params));
+						obj.callevent(name, JSON.stringify(params));
+				}
 				};
 			})(ue.game);
 			CallEvent = ue.game.callevent;
