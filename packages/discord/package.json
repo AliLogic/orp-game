@@ -1,0 +1,9 @@
+{
+	"author": "infin1tyy",
+	"version": "1.0",
+	"server_scripts": [
+		"discord_s.lua"
+	],
+	"client_scripts": [],
+	"files": []
+}
