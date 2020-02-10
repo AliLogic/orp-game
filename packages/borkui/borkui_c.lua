@@ -226,7 +226,7 @@ function ShowUI(id)
 	SetInputMode(INPUT_GAMEANDUI)
 
 	lastOpened = id
-	AddPlayerChat('(borkui): ShowUI called')
+	AddPlayerChat('(borkui): ShowUI called, with lastOpened assigned to '..lastOpened.. ' and should be '..id)
 end
 AddRemoteEvent('borkui:serverShowUI', ShowUI)
 
