@@ -251,7 +251,7 @@ function clearUI() {
 	CallEvent('borkui:OnHideMenu');
 }
 
-const addToArray = (id, button) => { // id should be the id passed through showUI, button should always be $(this).
+/*const addToArray = (id, button) => { // id should be the id passed through showUI, button should always be $(this).
 	return new Promise((resolve, reject) => {
 		let returnValues = []; // I didn't math.floor as I wanted to see the results.
 
@@ -267,7 +267,7 @@ const addToArray = (id, button) => { // id should be the id passed through showU
 		if (returnValues.length >= 2) resolve(returnValues);
 		else reject("An error has occured.", returnValues);
 	});
-}
+}*/
 
 function showUI(id) {
 	if ($('body').is(':hidden')) {
@@ -290,6 +290,14 @@ function showUI(id) {
 			//console.log(returnValues);
 			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), "test");*/
 
+			let returnValues = "";
+			elements.forEach((element) => {
+				returnValues += element;
+			});
+
+			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), returnValues);
+
+			/*
 			addToArray(id, $(this)) // Using promises will make it so that before anything is CallEvented, returnValues must be populated. This was likely the problem from before.
 				.then((returnValues) => { // as JS suffers from async hell.
 					console.log("ShowUI: " + JSON.stringify(returnValues));
@@ -299,6 +307,7 @@ function showUI(id) {
 					console.log(err); // A generic error message is pushed along with returnValues for debugging purposes.
 					console.log(`Erroneous returnValues: ${JSON.stringify(returnValues)}`);
 				})
+			*/
 		});
 	}
 }
