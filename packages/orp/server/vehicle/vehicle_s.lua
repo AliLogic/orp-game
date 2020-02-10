@@ -223,7 +223,6 @@ end
 
 AddEvent('UnloadVehicles', function ()
 	for i = 1, #VehicleData, 1 do
-		print('Unloading Vehicle ID: '..i)
 		Vehicle_Unload(i)
 	end
 end)
