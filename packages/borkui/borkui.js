@@ -262,7 +262,7 @@ const addToArray = (id, button) => { // id should be the id passed through showU
 			}
 		});
 
-		console.log(returnValues);
+		console.log("addToArray: " + JSON.stringify(returnValues));
 
 		if (returnValues.length >= 2) resolve(returnValues);
 		else reject("An error has occured.", returnValues);
@@ -292,12 +292,12 @@ function showUI(id) {
 
 			addToArray(id, $(this)) // Using promises will make it so that before anything is CallEvented, returnValues must be populated. This was likely the problem from before.
 				.then((returnValues) => { // as JS suffers from async hell.
-					console.log(returnValues);
+					console.log("ShowUI: " + JSON.stringify(returnValues));
 					CallEvent('borkui:OnDialogSubmit', returnValues);
 				})
 				.catch((err, returnValues) => {
 					console.log(err); // A generic error message is pushed along with returnValues for debugging purposes.
-					console.log(`Erroneous returnValues: ${returnValues}`);
+					console.log(`Erroneous returnValues: ${JSON.stringify(returnValues)}`);
 				})
 		});
 	}
