@@ -45,7 +45,7 @@ DRUG_TYPE_COKE = 2
 
 DrugData = {}
 
-local TIME_PER_STAGE = 3000 -- time in ms
+local TIME_PER_STAGE = 10 * 000 -- time in ms
 
 DRUG_STAGES = {
 	{scale = 0.10},
@@ -153,21 +153,21 @@ end
 
 function OnPlantTick(plantid)
 
-	local stage = DrugData[plantid].stage + 1
+	local plant_stage = DrugData[plantid].stage + 1
 
 	RefreshPlantTextLabel(plantid)
 
-	if DRUG_STAGES[stage] == nil then
+	if DRUG_STAGES[plant_stage] == nil then
 
 		DestroyTimer(DrugData[plantid].timer)
 		return
 	end
 
-	local scale = DRUG_STAGES[stage].scale
+	local scale = DRUG_STAGES[plant_stage].scale
 
 	SetObjectScale(DrugData[plantid].object, scale, scale, scale)
 	SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
-	DrugData[plantid].stage = stage
+	DrugData[plantid].stage = plant_stage
 end
 
 function IsValidPlant(plantid)
