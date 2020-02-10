@@ -22,8 +22,11 @@ AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid
 	AddPlayerChat(playerid, '(borkui): clientOnUICreated, with dialogid '..dialogid..' and extraid '..extraid..'.')
 end)
 
-AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, text)
-	AddPlayerChat(playerid, '(borkui): borkui:clientOnDialogSubmit, with dialogid '..dialogid..', extraid '..extraid..', button '..button..' and ... '.. text ..'.')
+AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, ...)
+	print(table.concat({...}, ","))
+	print("dialogid: "..dialogid)
+	print("button: "..button)
+	AddPlayerChat(playerid, '(borkui): borkui:clientOnDialogSubmit, with dialogid '..dialogid..', extraid '..extraid..', button '..button..' and ... '.. table.concat({...}, " ") ..'.')
 end)
 
 function CreateUI(player, align, extraid)

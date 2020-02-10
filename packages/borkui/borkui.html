@@ -18,6 +18,7 @@
 					if (typeof name != "string") return;
 				
 					if (args.length == 0) {
+						console.log("CallEvent: args length is 0");
 						obj.callevent(name, "");
 					} else {
 						let params = [];
@@ -26,8 +27,9 @@
 							params[i] = args[i];
 						}
 						
+						console.log("CallEvent params2: " + JSON.stringify(params));
 						obj.callevent(name, JSON.stringify(params));
-					}
+				}
 				};
 			})(ue.game);
 			CallEvent = ue.game.callevent;
