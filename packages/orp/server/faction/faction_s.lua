@@ -212,7 +212,6 @@ end
 
 AddEvent('UnloadFactions', function ()
 	for i = 1, #FactionData, 1 do
-		print('Unloading Factions ID: '..i)
 		Faction_Unload(i)
 	end
 end)

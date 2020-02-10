@@ -163,8 +163,8 @@ end
 function Inventory_GetItemName(item)
 
 	if item >= 1 and item <= #ITEM_NAMES then
-		return "Item " .. item
+		return ITEM_NAMES[item]
 	end
 
-	return ITEM_NAMES[item]
+	return "Item " .. item
 end
