@@ -12,6 +12,8 @@ Contributors:
 
 local colour = ImportPackage("colours")
 
+MAX_PLANTS = 100
+
 DRUG_PLANT_MODELS = {
 	64,
 	554
@@ -38,8 +40,8 @@ DRUG_TYPE_AMOUNT = {
 	}
 }
 
-local DRUG_TYPE_WEED = 1
-local DRUG_TYPE_COKE = 2
+DRUG_TYPE_WEED = 1
+DRUG_TYPE_COKE = 2
 
 DrugData = {}
 
@@ -110,21 +112,43 @@ local function RefreshPlantTextLabel(plantid)
 	DrugData[plantid].text3d = CreateText3D(string, 20, DrugData[plantid].x, DrugData[plantid].y, text_z, 0, 0, 0)
 end
 
-function CreatePlant(plantid, type, x, y, z)
+local function GetFreePlantId()
+	for i = 1, MAX_PLANTS, 1 do
+		if DrugData[i] == nil then
+			CreateDrugData(i)
+			return i
+		end
+	end
+	return 0
+end
 
-	CreateDrugData(plantid)
-	DrugData[plantid].stage = 1
-	DrugData[plantid].type = type
+local function OnPlantCreated(index, type, x, y, z)
 
-	local scale = DRUG_STAGES[DrugData[plantid].stage].scale
+	DrugData[index].stage = 1
+	DrugData[index].type = type
 
-	DrugData[plantid].object = CreateObject(DRUG_PLANT_MODELS[type], x, y, z)
-	SetObjectScale(DrugData[plantid].object, scale, scale, scale)
-	SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
+	local scale = DRUG_STAGES[DrugData[index].stage].scale
 
-	RefreshPlantTextLabel(plantid)
+	DrugData[index].object = CreateObject(DRUG_PLANT_MODELS[type], x, y, z)
+	SetObjectScale(DrugData[index].object, scale, scale, scale)
+	SetObjectRotation(DrugData[index].object, 0.0, Random(0.0, 360.0), 0.0)
 
-	DrugData[plantid].timer = CreateTimer(OnPlantTick, TIME_PER_STAGE, plantid)
+	RefreshPlantTextLabel(index)
+
+	DrugData[index].timer = CreateTimer(OnPlantTick, TIME_PER_STAGE, index)
+end
+
+function CreatePlant(type, x, y, z)
+
+	local index = GetFreePlantId()
+	if index == 0 then
+		return false
+	end
+
+	local query = mariadb_prepare(sql, "INSERT INTO houses (type, x, y, z) VALUES ('?', '?', ?, ?);",
+		type, x, y, z
+	)
+	mariadb_async_query(sql, query, OnPlantCreated, index, type, x, y, z)
 end
 
 function OnPlantTick(plantid)

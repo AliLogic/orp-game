@@ -38,3 +38,40 @@ AddCommand("harvest", function (playerid)
 
 	return
 end)
+
+AddCommand("plant", function (playerid, drug)
+
+	if drug == nil then
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /plant <drug>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Drug:</> marijuana, cocaine")
+	end
+
+	local slot = false
+	local x, y, z = GetPlayerLocation(playerid)
+
+	if drug == "marijuana" then
+
+		slot = Inventory_HasItem(playerid, INV_ITEM_WEEDSEED)
+		if slot == false then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not have any of these seeds.</>")
+		end
+
+		Inventory_RemoveItem(playerid, slot)
+		CreatePlant(DRUG_TYPE_WEED, x, y, z)
+	elseif drug == "cocaine" then
+
+		slot = Inventory_HasItem(playerid, INV_ITEM_COKESEED)
+		if slot == false then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not have any of these seeds.</>")
+		end
+
+		Inventory_RemoveItem(playerid, slot)
+		CreatePlant(DRUG_TYPE_COKE, x, y, z)
+	else
+
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /plant <drug>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Drug:</> marijuana, cocaine")
+	end
+
+	return
+end)
