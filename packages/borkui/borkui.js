@@ -253,7 +253,7 @@ function clearUI() {
 
 const addToArray = (id, button) => { // id should be the id passed through showUI, button should always be $(this).
 	return new Promise((resolve, reject) => {
-		let returnValues = [id, ((parseInt(button.attr('id')) - elements.length) + 1)];
+		let returnValues = [id, ((parseInt(button.attr('id')) - elements.length) + 1)]; // I didn't math.floor as I wanted to see the results.
 
 		elements.forEach((element) => {
 			if (!element[1]) {
@@ -292,6 +292,7 @@ function showUI(id) {
 
 			addToArray(id, $(this))
 				.then((returnValues) => {
+					console.log(returnValues);
 					CallEvent('borkui:OnDialogSubmit', returnValues);
 				})
 				.catch((err) => {
