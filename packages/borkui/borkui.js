@@ -251,11 +251,32 @@ function clearUI() {
 	CallEvent('borkui:OnHideMenu');
 }
 
+const addToArray = (id, button) => { // id should be the id passed through showUI, button should always be $(this).
+	return new Promise((resolve, reject) => {
+		let returnValues = [id, ((parseInt(button.attr('id')) - elements.length) + 1)];
+
+		elements.forEach((element) => {
+			if (!element[1]) {
+				console.log($(`#${element[0]}`).val());
+				returnValues.push($(`#${element[0]}`).val());
+			}
+		});
+
+		console.log(returnValues);
+
+		if (returnValues.length >= 2) resolve(returnValues);
+		else reject("An error has occured.");
+	});
+}
+
 function showUI(id) {
 	if ($('body').is(':hidden')) {
+		console.log("Body is hidden, showing it.");
+
 		$('body').show();
 		$('button').on('click', function (e) {
 			e.preventDefault();
+			/*
 			//let returnValues = [id, (parseInt($(this).attr('id')) - elements.length) + 1]; // id is dialogid, second id is button clicked.
 		
 			elements.forEach((element) => {
@@ -267,13 +288,23 @@ function showUI(id) {
 			});
 		
 			//console.log(returnValues);
-			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), "test");
+			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), "test");*/
+
+			addToArray(id, $(this))
+				.then((returnValues) => {
+					CallEvent('borkui:OnDialogSubmit', returnValues);
+				})
+				.catch((err) => {
+					console.log(err);
+				})
 		});
 	}
 }
 
 function hideUI() {
 	if ($('body').is(':visible')) {
+		console.log("Body is visible, hiding it.");
+
 		$('body').hide();
 		$('button').off();
 	}
