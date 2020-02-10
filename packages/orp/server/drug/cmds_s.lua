@@ -24,7 +24,7 @@ AddCommand("harvest", function (playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any plants.</>")
 	end
 
-	if DRUG_STAGES[DrugData[plantid].stage + 1] ~= false then
+	if DrugData[plantid].stage ~= 10 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This plant is not ready to be harvested yet.</>")
 	end
 

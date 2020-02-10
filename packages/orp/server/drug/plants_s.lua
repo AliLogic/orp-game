@@ -45,7 +45,7 @@ DRUG_TYPE_COKE = 2
 
 DrugData = {}
 
-local TIME_PER_STAGE = 3000 -- time in ms
+local TIME_PER_STAGE = 10 * 000 -- time in ms
 
 DRUG_STAGES = {
 	{scale = 0.10},
@@ -103,7 +103,7 @@ local function RefreshPlantTextLabel(plantid)
 		DestroyText3D(DrugData[plantid].text3d)
 	end
 
-	if DRUG_STAGES[stage + 1] ~= nil then
+	if stage ~= 10 then
 		string = "Plant (" .. plantid .. ") [" .. GetPlantTypeName(plantid) .. "]\nStage "..stage..""
 	else
 		string = "Plant (" .. plantid .. ") [" .. GetPlantTypeName(plantid) .. "]\nReady"
@@ -127,7 +127,7 @@ local function OnPlantCreated(index, type, x, y, z)
 	DrugData[index].stage = 1
 	DrugData[index].type = type
 
-	local scale = DRUG_STAGES[DrugData[index].stage].scale
+	local scale = DRUG_STAGES[1].scale
 
 	DrugData[index].object = CreateObject(DRUG_PLANT_MODELS[type], x, y, z)
 	SetObjectScale(DrugData[index].object, scale, scale, scale)
@@ -153,21 +153,26 @@ end
 
 function OnPlantTick(plantid)
 
-	local stage = DrugData[plantid].stage + 1
-
-	RefreshPlantTextLabel(plantid)
-
-	if DRUG_STAGES[stage] == nil then
-
+	local plant_stage = DrugData[plantid].stage
+	if plant_stage == 10 then
 		DestroyTimer(DrugData[plantid].timer)
 		return
 	end
 
-	local scale = DRUG_STAGES[stage].scale
+	plant_stage = plant_stage + 1
+
+	local scale = DRUG_STAGES[plant_stage].scale
 
 	SetObjectScale(DrugData[plantid].object, scale, scale, scale)
 	SetObjectRotation(DrugData[plantid].object, 0.0, Random(0.0, 360.0), 0.0)
-	DrugData[plantid].stage = stage
+	DrugData[plantid].stage = plant_stage
+
+	RefreshPlantTextLabel(plantid)
+
+	if plant_stage == 10 then
+
+		DestroyTimer(DrugData[plantid].timer)
+	end
 end
 
 function IsValidPlant(plantid)
