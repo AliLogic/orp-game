@@ -29,7 +29,7 @@ AddCommand("harvest", function (playerid)
 	end
 
 	local type = GetPlantTypeId(plantid)
-	local amount = Random(DRUG_TYPE_AMOUNT[type][0], DRUG_TYPE_AMOUNT[type][1])
+	local amount = Random(DRUG_TYPE_AMOUNT[type][1], DRUG_TYPE_AMOUNT[type][2])
 
 	AddPlayerChat(plantid, "You have harvested "..amount.." gm of "..GetPlantTypeName(plantid)..".")
 	Inventory_GiveItem(playerid, DRUG_TYPE_ITEM[type], amount)
