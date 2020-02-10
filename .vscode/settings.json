@@ -321,6 +321,15 @@
         "AStaticMeshActor",
         "IsPlayerInRangeOfPlayer",
         "SetPlayerLipMovement",
-        "SetVehicleDimension"
+        "SetVehicleDimension",
+        "GetAllPackages",
+        "IsPackageStarted",
+        "StartPackage",
+        "StopPackage",
+        "Package_manager",
+        "GetStreamedObjects",
+        "GetMouseLocation",
+        "SetMouseLocation",
+        "unpack"
     ]
 }
