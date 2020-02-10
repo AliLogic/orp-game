@@ -249,7 +249,7 @@ local function OnPlayerHouseKeysLoaded(playerid)
 	local rows = mariadb_get_row_count()
 
 	PlayerHouseKeys[playerid] = {}
-	for i = 1, #rows, 1 do
+	for i = 1, rows, 1 do
 		PlayerHouseKeys[playerid][mariadb_get_value_name_int(i, "house")] = true
 	end
 end
@@ -262,11 +262,11 @@ end
 
 function PlayerHasHouseKey(playerid, houseid)
 
-	if houseid ~= nil then
+	if #PlayerHouseKeys[playerid] == 0 then
 		return false
 	end
 
-	return PlayerHouseKeys[playerid][houseid] ~= nil
+	return PlayerHouseKeys[playerid][houseid]
 end
 
 function PlayerAddHouseKey(playerid, houseid)
