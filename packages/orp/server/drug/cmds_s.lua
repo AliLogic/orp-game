@@ -49,6 +49,8 @@ AddCommand("plant", function (playerid, drug)
 	local slot = false
 	local x, y, z = GetPlayerLocation(playerid)
 
+	drug = string.lower(drug)
+
 	if drug == "marijuana" then
 
 		slot = Inventory_HasItem(playerid, INV_ITEM_WEEDSEED)
@@ -56,7 +58,7 @@ AddCommand("plant", function (playerid, drug)
 			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not have any of these seeds.</>")
 		end
 
-		Inventory_RemoveItem(playerid, slot)
+		Inventory_GiveItem(playerid, INV_ITEM_WEEDSEED, -1)
 		CreatePlant(DRUG_TYPE_WEED, x, y, z)
 	elseif drug == "cocaine" then
 
@@ -65,7 +67,7 @@ AddCommand("plant", function (playerid, drug)
 			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not have any of these seeds.</>")
 		end
 
-		Inventory_RemoveItem(playerid, slot)
+		Inventory_GiveItem(playerid, INV_ITEM_COKESEED, -1)
 		CreatePlant(DRUG_TYPE_COKE, x, y, z)
 	else
 

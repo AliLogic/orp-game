@@ -258,14 +258,14 @@ end
 AddRemoteEvent('borkui:serverDestroyUI', DestroyUI)
 
 AddEvent("borkui:ready", function()
-	if lastOpened ~= -1 then
+	if lastOpened ~= 0 then
 		ShowUI(lastOpened)
 		AddPlayerChat('(borkui): borkui is ready (ready received)!')
 	end
 end)
 
 AddEvent("borkui:OnHideMenu", function()
-	if lastOpened ~= -1 then
+	if lastOpened ~= 0 then
 		Delay(1, function()
 			SetIgnoreLookInput(true)
 			SetIgnoreMoveInput(true)

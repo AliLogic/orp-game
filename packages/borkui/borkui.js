@@ -248,7 +248,6 @@ function addDropdown(options, size = 1, rounded = false, label = '') {
 function clearUI() {
 	$('#content').html('');
 	$('#title').text('');
-	CallEvent('borkui:OnHideMenu');
 }
 
 /*const addToArray = (id, button) => { // id should be the id passed through showUI, button should always be $(this).
@@ -318,5 +317,6 @@ function hideUI() {
 
 		$('body').hide();
 		$('button').off();
+		CallEvent('borkui:OnHideMenu');
 	}
 }

@@ -99,7 +99,7 @@ AddRemoteEvent("LoadSpawnMenu", function ()
 end)]]--
 
 AddEvent("OnPlayerSpawn", function(playerid)
-	SetPostEffect("MotionBlur", "Amount", 0.3)
+	SetPostEffect("MotionBlur", "Amount", 0.2)
 end)
 
 AddEvent("OnKeyPress", function (key)
@@ -125,10 +125,15 @@ AddRemoteEvent("ToggleTaseEffect", function (bToggle)
 		PlayCameraShake(5 * 1000, 2.0, 1.0, 1.1)
 	else
 		StopCameraShake(false)
-		SetPostEffect("MotionBlur", "Amount", 0.5)
+		SetPostEffect("MotionBlur", "Amount", 0.2)
 	end
 end)
 
 AddRemoteEvent('SendSpeedgunMessage', function (vehiclename, vehicle) 
 	AddPlayerChat(vehiclename.."'s speed: "..math.tointeger(math.floor(GetVehicleForwardSpeed(vehicle))))
 end)
+
+function OnScriptError(message)
+	AddPlayerChat('<span color="#ff0000bb" style="bold" size="10">'..message..'</>')
+end
+AddEvent("OnScriptError", OnScriptError)

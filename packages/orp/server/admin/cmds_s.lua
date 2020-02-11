@@ -791,7 +791,7 @@ AddCommand("ahelp", function (player)
 	end
 
 	if PlayerData[player].admin > 2 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near /clearchat /un(ban)")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near /clearchat /un(ban) /setlicense")
 	end
 
 	if PlayerData[player].admin > 3 then
@@ -800,7 +800,8 @@ AddCommand("ahelp", function (player)
 	end
 
 	if PlayerData[player].admin > 4 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/w /apos /asetadmin /acreatefaction /aeditfaction /setstats /acreatehouse /aedithouse /asetweather /asethelper /acreatespeedcam /aeditspeedcam")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/w /apos /asetadmin /acreatefaction /aeditfaction /setstats /acreatehouse /aedithouse /asetweather /asetfog")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/asethelper /acreatespeedcam /aeditspeedcam")
 	end
 end)
 
@@ -1083,6 +1084,46 @@ AddCommand("assist", function (playerid, lookupid, ...)
 	AddPlayerChat(playerid, "Your assist message has been sent: ".. message ..".")
 
 	PlayerData[lookupid].assistance = 0
+
+	return
+end)
+
+AddCommand("setlicense", function (playerid, lookupid, license)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if lookupid == nil or license == nil then
+		AddPlayerChat(playerid, "Usage: /setlicense <playerid> <license>")
+
+		local string = ""
+		for i = 1, #LicensesColumns, 1 do
+			string = string .. LicensesColumns[i] .. ", "
+		end
+
+		string = string:sub(1, -3)
+		return AddPlayerChat(playerid, "Licenses: "..string..".")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if (not IsValidPlayer(lookupid)) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	for i = 1, #LicensesColumns, 1 do
+		if license == LicensesColumns[i] then
+
+			AddPlayerChat(playerid, "You have set " .. GetPlayerName(lookupid) .. "'s " .. LicensesColumns[i] .. " .")
+			AddPlayerChat(lookupid, GetPlayerName(lookupid) .. " has set your " .. LicensesColumns[i] .. " .")
+
+			SetPlayerLicense(lookupid, i, 1)
+			return
+		end
+	end
+
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid license name specified.")
 
 	return
 end)

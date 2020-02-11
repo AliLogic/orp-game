@@ -6,27 +6,27 @@ end)
 
 AddCommand("levelup", function (playerid)
 
-    local level = PlayerData[playerid].level
-    local exp = PlayerData[playerid].exp
-    local required_exp = (level * 4) + 2
+	local level = PlayerData[playerid].level
+	local exp = PlayerData[playerid].exp
+	local required_exp = (level * 4) + 2
 
-    if (required_exp > exp) then
-        return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not have enough experience points to level up ("..exp.."/"..required_exp..")</>")
-    end
+	if (required_exp > exp) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not have enough experience points to level up ("..exp.."/"..required_exp..")</>")
+	end
 
-    PlayerData[playerid].level = level + 1
-    PlayerData[playerid].exp = exp - required_exp
+	PlayerData[playerid].level = level + 1
+	PlayerData[playerid].exp = exp - required_exp
 
-    AddPlayerChat(playerid, "You have leveled up to "..PlayerData[playerid].level..".")
+	AddPlayerChat(playerid, "You have leveled up to "..PlayerData[playerid].level..".")
 
-    local query = mariadb_prepare(sql, "UPDATE characters SET level = ?, exp = ? WHERE id = ? LIMIT 1",
-        PlayerData[playerid].level,
-        PlayerData[playerid].exp,
-        PlayerData[playerid].id
-    )
-    mariadb_async_query(sql, query)
+	local query = mariadb_prepare(sql, "UPDATE characters SET level = ?, exp = ? WHERE id = ? LIMIT 1",
+		PlayerData[playerid].level,
+		PlayerData[playerid].exp,
+		PlayerData[playerid].id
+	)
+	mariadb_async_query(sql, query)
 
-    return
+	return
 end)
 
 AddCommand("help", function (player, section)
@@ -36,13 +36,13 @@ AddCommand("help", function (player, section)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Sections:</> General")
 	end
 
-	string.lower(section)
+	section = string.lower(section)
 
 	if section == "general" then
 		AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q /fhelp")
 		AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
 		AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /h(ouse) /biz /myhousekeys")
-		AddPlayerChat(player, "Commands: /dice /time /properties /frisk /whisper /showlicenses")
+		AddPlayerChat(player, "Commands: /dice /time /properties /frisk /whisper /showlicenses /listcars")
 	end
 	return
 end)
@@ -109,8 +109,8 @@ AddCommand("w", function (player, weapon, slot, ammo)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /w <weapon> <slot> <ammo>")
 	end
 
-    SetPlayerWeapon(player, weapon, ammo, true, slot, true)
-    AddPlayerChat(player, 'Given you a '..weapon..' with '..ammo..' ammo.')
+	SetPlayerWeapon(player, weapon, ammo, true, slot, true)
+	AddPlayerChat(player, 'Given you a '..weapon..' with '..ammo..' ammo.')
 end)
 
 local function cmd_shout(playerid, ...)
@@ -169,29 +169,29 @@ AddCommand("do", function (player, ...)
 end)
 
 AddCommand("ame", function(player, ...)
-    local message = table.concat({...}, " ")
-    local x, y, z = GetPlayerLocation(player)
+	local message = table.concat({...}, " ")
+	local x, y, z = GetPlayerLocation(player)
 
-    if message == nil or #{...} == 0 then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ame [action]")
-    end
+	if message == nil or #{...} == 0 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ame [action]")
+	end
 
 	--SetPlayerChatBubble(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> *"..message.."</>", 4)
 	SetPlayerChatBubble(player, "* "..message.."", 4)
-    AddPlayerChat(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> Annotated /me: "..message.."</>")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> Annotated /me: "..message.."</>")
 end)
 
 AddCommand("ado", function(player, ...)
-    local message = table.concat({...}, " ")
-    local x, y, z = GetPlayerLocation(player)
+	local message = table.concat({...}, " ")
+	local x, y, z = GetPlayerLocation(player)
 
-    if message == nil or #{...} == 0 then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ado [action]")
-    end
+	if message == nil or #{...} == 0 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ado [action]")
+	end
 
 	--SetPlayerChatBubble(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> *"..message.." (( "..GetPlayerName(player).." ))</>", 4)
 	SetPlayerChatBubble(player, "* "..message.." (( "..GetPlayerName(player).." ))", 4)
-    AddPlayerChat(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> Annotated /do: "..message.."</>")
+	AddPlayerChat(player, "<span color=\""..colour.COLOUR_PURPLE().."\"> Annotated /do: "..message.."</>")
 end)
 
 AddCommand("b", function (player, ...)
@@ -261,7 +261,7 @@ AddCommand("pm", function (player, target, ...)
 
 	if IsValidPlayer(target) == false then
 		return AddPlayerChat(player, "Invalid player id.")
-    end
+	end
 
 	local text = table.concat({...}, " ")
 
@@ -313,14 +313,23 @@ AddCommand("showlicenses", function (playerid, lookupid)
 
 	AddPlayerChat(lookupid, "Licenses registered to " .. GetPlayerName(playerid) .. " (ID: " .. playerid .. "):")
 
-	local status = false
+	local status = ""
 	for i = 1, 6, 1 do
-		status = GetPlayerLicense(playerid, i)
+		if GetPlayerLicense(playerid, i) == 0 then
+			status = "No"
+		else
+			status = "Yes"
+		end
 		AddPlayerChat(lookupid, "".. LicensesNames[i] .." status: ".. status ..".")
 	end
 
 	local x, y, z = GetPlayerLocation(playerid)
-	AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." takes out their licenses and shows them to "..GetPlayerName(lookupid).."</>")
+
+	if playerid == lookupid then
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." takes out their licenses and checks it.</>")
+	else
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* "..GetPlayerName(playerid).." takes out their licenses and shows them to "..GetPlayerName(lookupid)..".</>")
+	end
 
 	return
 end)

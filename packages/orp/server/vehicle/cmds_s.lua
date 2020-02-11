@@ -14,6 +14,30 @@ local colour = ImportPackage('colours')
 
 -- Functions and Events
 
+AddCommand("listcars", function (playerid)
+
+	local count = 0
+	local vehicleid = 0
+
+	AddPlayerChat(playerid, "-----------------------------------------------------------")
+
+	for i = 1, MAX_VEHICLES, 1 do
+		if VehicleData[i] ~= nil then
+			if VehicleData[i].owner == playerid then
+				vehicleid = VehicleData[i].vehicleid
+				AddPlayerChat(playerid, "* ID: "..vehicleid.." | Model: "..GetVehicleModelEx(vehicleid).." | Location: "..GetLocationName(GetVehicleLocation(vehicleid)).."")
+				count = count + 1
+			end
+		end
+	end
+
+	if not count then
+		AddPlayerChat(playerid, "You don't own any vehicles.")
+	end
+
+	AddPlayerChat(playerid, "-----------------------------------------------------------")
+end)
+
 local function cmd_drivingtest(playerid)
 
 	if PlayerData[playerid].driving_test then
@@ -22,7 +46,7 @@ local function cmd_drivingtest(playerid)
 
 	local x, y, z = GetPlayerLocation(playerid)
 
-	if GetDistance3D(195320, 207826, 1215, 0.0, 0.0, 0.0) > 120.0 then -- -167501.3, -34790.8, 1036.2
+	if (not IsPlayerInRangeOfPoint(playerid, 150.0, 195320, 207826, 1250)) then -- -167501.3, -34790.8, 1036.2
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in range of the pickup.</>")
 	end
 
@@ -65,7 +89,7 @@ local function cmd_engine(playerid)
 
 	local vehicleid = GetPlayerVehicle(playerid)
 
-	if GetVehicleHealth(vehicleid) <= 100.0 then
+	if GetVehicleHealth(vehicleid) <= 200.0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This vehicle is totalled and can't be started.</>")
 	end
 

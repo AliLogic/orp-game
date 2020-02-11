@@ -12,7 +12,7 @@ AddEvent('OnGameTick', function ()
     --Minimap refresh
     local x, y, z = GetCameraRotation()
     local px,py,pz = GetPlayerLocation()
-    
+
     ExecuteWebJS(minimap, "SetHUDHeading("..tonumber((360-y))..");")
     ExecuteWebJS(minimap, "SetMap("..tonumber(px)..","..tonumber(py)..","..tonumber(y)..");")
 end)
