@@ -4,6 +4,7 @@
 	code - Code Block
 	quotation - Quotation
 	dm - Direct Message
+	embed - embed
 ]]
 function SendMessage(channel, style, message)
 	channel = channel or nil
@@ -46,10 +47,39 @@ function SendMessage(channel, style, message)
 	end
 end
 
-function SendEmbed(channel, Embed)
+function SendEmbed(channel, embed)
 	channel = channel or nil
-	if channel == nil then
+	embed = embed or nil
+
+	if channel == nil then return false end
+	if embed == nil then return false end
+	if embed.colour == nil or embed.title == nil or embed.description == nil or embed.fields == nil then return false end
+
+	local r = http_create()
+	http_set_resolver_protocol(r, "ipv4")
+	http_set_protocol(r, "http")
+	http_set_host(r, "127.0.0.1")
+	http_set_port(r, 3997)
+	http_set_target(r, "/discord/post/")
+	http_set_verb(r, "post")
+	http_set_timeout(r, 30)
+	http_set_version(r, 11)
+	http_set_keepalive(r, true)
+	http_set_field(r, "user-agent", "Onset Server "..GetGameVersionString())
+	http_set_field(r, "Token", "borkland!")
+
+	local body = json_encode({type = embed, channelid = channel, colour = embed.colour, title = embed.title, description = embed.description, fields = embed.fields})
+	
+	http_set_body(r, body)
+	http_set_field(r, "content-length", string.len(body))
+	http_set_field(r, "content-type", "application/json; charset=utf-8")
+	
+	if http_send(r, OnPostComplete, "OK", r) == false then
+		print("HTTP REQ NOT SENT :(")
+		http_destroy(r)
 		return false
+	else
+		return true
 	end
 
 	return false -- Incomplete function.
@@ -94,5 +124,6 @@ function print_active_results(http)
 end
 
 AddFunctionExport("SendMessage", SendMessage)
+AddFunctionExport("SendEmbed", SendEmbed)
 AddFunctionExport("Channel", Channel)
---AddFunctionExport("Embed", Embed)
+AddFunctionExport("Embed", Embed)

@@ -3,6 +3,7 @@
 	"version": "1.0",
 	"server_scripts": [
 		"json.lua",
+		"Embed.lua",
 		"discord.lua"
 	],
 	"client_scripts": [],
