@@ -1102,8 +1102,8 @@ AddCommand("setlicense", function (playerid, lookupid, license)
 			string = string .. LicensesColumns[i] .. ", "
 		end
 
-		string = string:sub(1, -2)
-		return AddPlayerChat(playerid, "Licenses: "..string)
+		string = string:sub(1, -3)
+		return AddPlayerChat(playerid, "Licenses: "..string..".")
 	end
 
 	lookupid = tonumber(lookupid)
