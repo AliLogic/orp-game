@@ -238,12 +238,12 @@ AddEvent("OnPlayerEnterVehicle", function(playerid, vehicleid, seatid)
 			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">You are operating a vehicle without the valid license. You might get in trouble.</>")
 		end
 
-		if VehicleData[vehicleid].fuel <= 1 then
-			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">The fuel tank is empty.</>")
-		end
-
 		if GetVehicleHealth(vehicleid) <= 200.0 then
 			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This vehicle is totalled and can't be started.</>")
+		end
+
+		if GetVehicleFuel(vehicleid) <= 1 then
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">The fuel tank is empty.</>")
 		end
 	end
 end)
@@ -317,4 +317,13 @@ function GetNearestVehicle(playerid)
 	end
 
 	return 0
+end
+
+function GetVehicleFuel(vehicleid)
+
+	if VehicleData[vehicleid] == nil then
+		return 100
+	end
+
+	return VehicleData[vehicleid].fuel
 end
