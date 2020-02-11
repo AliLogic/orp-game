@@ -377,7 +377,7 @@ AddCommand("d", function(playerid, ...)
 		factiontype = GetPlayerFactionType(playerid)
 
 		if factiontype == FACTION_POLICE or factiontype == FACTION_GOV or factiontype == FACTION_MEDIC then
-			AddPlayerChat(v, "(( "..FactionData[factionid].shortname.." "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
+			AddPlayerChat(v, "(( "..FactionData[factionid].short_name.." "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
 		end
 	end
 end)
@@ -470,7 +470,7 @@ local function cmd_adf(player, faction)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: That faction does not exist.</>")
 	end
 
-	local factionname = FactionData[faction].shortname
+	local factionname = FactionData[faction].short_name
 
 	if Faction_Destroy(faction) then
 		AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Faction %s (ID: %d) deleted successfully!", colour.COLOUR_LIGHTRED(), factionname, faction))
@@ -543,7 +543,7 @@ local function cmd_aef(player, faction, prefix, ...)
 
 		local shortname = args[1]
 
-		FactionData[faction].shortname = shortname
+		FactionData[faction].short_name = shortname
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..FactionData[faction].name.." ("..faction..")'s faction shortname to "..shortname..".")
 
 	elseif prefix == "maxrank" then
