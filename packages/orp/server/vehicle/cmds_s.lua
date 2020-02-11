@@ -65,7 +65,7 @@ local function cmd_engine(playerid)
 
 	local vehicleid = GetPlayerVehicle(playerid)
 
-	if GetVehicleHealth(vehicleid) <= 100.0 then
+	if GetVehicleHealth(vehicleid) <= 200.0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This vehicle is totalled and can't be started.</>")
 	end
 
