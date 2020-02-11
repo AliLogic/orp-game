@@ -10,7 +10,7 @@ function SendMessage(channel, style, message)
 	message = message or nil
 	style = style or "plain"
 	
-	if channel == nil or message == nil then
+	if channel == nil or message == nil or channel == false then
 		return false
 	end
 
