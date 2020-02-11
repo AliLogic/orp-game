@@ -30,14 +30,15 @@ function SendMessage(channel, style, message)
 	http_set_keepalive(r, true)
 	http_set_field(r, "user-agent", "Onset Server "..GetGameVersionString())
 	http_set_field(r, "Token", "borkland!")
-	
+
+	print(channel, style, message)
 	local body = string.format("channelid=%s&type=%s&message=%s", channel, style, message)
 	
 	http_set_body(r, body)
 	http_set_field(r, "content-length", string.len(body))
 	http_set_field(r, "content-type", "application/x-www-form-urlencoded; charset=utf-8")
 	
-	if http_send(r, OnPostComplete, "OK") == false then
+	if http_send(r, OnPostComplete, "OK", r) == false then
 		print("HTTP REQ NOT SENT :(")
 		http_destroy(r)
 		return false
@@ -67,8 +68,30 @@ function Embed()
 	return Embed:New()
 end
 
-function OnPostComplete(a)
-	print("OnPostComplete:", a)
+function OnPostComplete(a, http)
+	print("OnPostComplete:", a, http)
+
+	if http_is_error(http) then
+		print("OnHttpRequestComplete failed for id", http..": "..http_result_error(http))
+	else
+		print("OnHttpRequestComplete succeeded for id", http)
+		print_active_results(http)
+	end
+	
+	http_destroy(http)
+end
+
+function print_active_results(http)
+	local body = http_result_body(http)
+	local header = http_result_header(http)
+	local status = http_result_status(http)
+	
+	print("\tBody: ", body)
+	print("\tHTTP Status: ", status)
+	print("\t Headers:")
+	for k, v in pairs(header) do
+		print("\t", k, v)
+	end
 end
 
 AddFunctionExport("SendMessage", SendMessage)
