@@ -1099,7 +1099,7 @@ AddCommand("setlicense", function (playerid, lookupid, license)
 
 		local string = ""
 		for i = 1, #LicensesColumns, 1 do
-			string = string .. ", "
+			string = string .. LicensesColumns[i] .. ", "
 		end
 
 		string = string:sub(1, -2)
