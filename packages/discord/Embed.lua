@@ -24,3 +24,7 @@ end
 function Embed:AddField(field, value, inline)
 	table.insert(self.fields, {field = field, value = value, inline = inline or false})
 end
+
+function Embed:Embed()
+  return {colour = self.colour, title = self.title, description = self.description, fields = self.fields}
+end
