@@ -31,7 +31,7 @@ function SendMessage(channel, style, message)
 	http_set_field(r, "user-agent", "Onset Server "..GetGameVersionString())
 	http_set_field(r, "token", "borkland!")
 	
-	local body = string.format("channelid=%s?style=%s?message=%s", channel, style, message)
+	local body = string.format("channelid=%s&style=%s&message=%s", channel, style, message)
 	
 	http_set_body(r, body)
 	http_set_field(r, "content-length", string.len(body))
