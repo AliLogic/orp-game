@@ -23,7 +23,7 @@ function SendMessage(channel, style, message)
 	http_set_protocol(r, "http")
 	http_set_host(r, "localhost")
 	http_set_port(r, 3010)
-	http_set_target(r, "/discord/sendMessage")
+	http_set_target(r, "/discord/post")
 	http_set_verb(r, "post")
 	http_set_timeout(r, 30)
 	http_set_version(r, 11)
@@ -37,7 +37,7 @@ function SendMessage(channel, style, message)
 	http_set_field(r, "content-length", string.len(body))
 	http_set_field(r, "content-type", "application/x-www-form-urlencoded; charset=utf-8")
 	
-	if http_send(r, OnPostComplete, 1, 3.14, "OK s") == false then
+	if http_send(r, OnPostComplete, "OK") == false then
 		print("HTTP REQ NOT SENT :(")
 		http_destroy(r)
 		return false
@@ -67,8 +67,8 @@ function Embed()
 	return Embed:New()
 end
 
-function OnPostComplete(a, b, c)
-	print("OnPostComplete:", a, b, c)
+function OnPostComplete(a)
+	print("OnPostComplete:", a)
 end
 
 AddFunctionExport("SendMessage", SendMessage)
