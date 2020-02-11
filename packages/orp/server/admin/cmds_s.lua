@@ -1113,7 +1113,7 @@ AddCommand("setlicense", function (playerid, lookupid, license)
 	end
 
 	for i = 1, #LicensesColumns, 1 do
-		if string == LicensesColumns[i] then
+		if license == LicensesColumns[i] then
 
 			AddPlayerChat(playerid, "You have set " .. GetPlayerName(lookupid) .. "'s " .. LicensesColumns[i] .. " .")
 			AddPlayerChat(lookupid, GetPlayerName(lookupid) .. " has set your " .. LicensesColumns[i] .. " .")
