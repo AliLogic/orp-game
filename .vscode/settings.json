@@ -330,6 +330,23 @@
         "GetStreamedObjects",
         "GetMouseLocation",
         "SetMouseLocation",
-        "unpack"
+        "unpack",
+        "http_create",
+        "http_set_resolver_protocol",
+        "http_set_protocol",
+        "http_set_host",
+        "http_set_port",
+        "http_set_target",
+        "http_set_verb",
+        "http_set_timeout",
+        "http_set_version",
+        "http_set_keepalive",
+        "http_set_field",
+        "GetGameVersionString",
+        "url_encode",
+        "http_set_body",
+        "http_set_field",
+        "http_send",
+        "http_destroy"
     ]
 }
