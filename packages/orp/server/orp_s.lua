@@ -15,7 +15,7 @@ local Discord = ImportPackage('discord')
 
 AddEvent("OnPackageStart", function()
 	SetObjectScale(CreateObject(39, 122080, 90856, 1100), 0.75, 0.75, 0.75)
-	print(Discord.SendMessage(Discord.Channel("653324626977619968"), "plain", "Logic_ / Chinese Characters fuck u men !"))
+	print(Discord.SendMessage(Discord.Channel("653324626977619968"), "plain", "Logic is not the cools."))
 end)
 
 AddEvent("OnPlayerJoin", function (player)
