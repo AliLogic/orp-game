@@ -1,8 +1,22 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic_
+* Bork
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local EnvTimer
 EnvHour = 12
 EnvMin = 0
 EnvWeather = 1
 EnvTemperature = 30
+EnvFog = 0.0
 
 local apikey = '4e444684a31d5a4b581548a901e6f0e8'
 local url = 'http://api.openweathermap.org/data/2.5/weather?q=Nevada,us&APPID='
@@ -10,6 +24,8 @@ local url = 'http://api.openweathermap.org/data/2.5/weather?q=Nevada,us&APPID='
 http_set_user_agent("myCustomPlugin/1.0")
 
 -- http://api.openweathermap.org/data/2.5/weather?q=Nevada,us&APPID=4e444684a31d5a4b581548a901e6f0e8
+
+-- Functions
 
 local function UpdateTime()
 	local t = os.date ("*t")
@@ -26,10 +42,20 @@ local function UpdateTime()
 		end
 	end
 
-	AddPlayerChatAll("[DEBUG-S] HOUR: "..EnvHour.." MIN: "..EnvMin.." WEATHER: "..EnvWeather)
+	--[[
+		fog density weather ids
+		701 - mist
+		711 - smoke
+		721 - haze
+		741 - fog
+		600 ~ 622 - snow
+		200 ~ 232 - thunderstorm
+	]]--
+
+	AddPlayerChatAll("[DEBUG-S] HOUR: "..EnvHour.." MIN: "..EnvMin.." WEATHER: "..EnvWeather.." FOG: "..EnvFog)
 
 	for k, v in pairs(GetAllPlayers()) do
-		CallRemoteEvent(v, "UpdateClientTime", EnvHour, EnvWeather)
+		CallRemoteEvent(v, "UpdateClientTime", EnvHour, EnvWeather, EnvFog)
 	end
 end
 
@@ -51,5 +77,5 @@ AddEvent("OnPackageEnd", function()
 end)
 
 AddEvent("OnPlayerJoin", function(playerid)
-    CallRemoteEvent(playerid, "UpdateClientTime", EnvHour, EnvWeather)
+	CallRemoteEvent(playerid, "UpdateClientTime", EnvHour, EnvWeather, EnvFog)
 end)
