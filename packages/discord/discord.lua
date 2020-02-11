@@ -1,5 +1,5 @@
 --[[
-	Message Styles:
+	Message Types:
 	plain - Plain Text
 	code - Code Block
 	quotation - Quotation
@@ -19,7 +19,7 @@ function SendMessage(channel, style, message)
 	end
 
 	local r = http_create()
-	--http_set_resolver_protocol(r, "ipv4")
+	http_set_resolver_protocol(r, "ipv4")
 	http_set_protocol(r, "http")
 	http_set_host(r, "localhost")
 	http_set_port(r, 3997)
@@ -29,9 +29,9 @@ function SendMessage(channel, style, message)
 	http_set_version(r, 11)
 	http_set_keepalive(r, true)
 	http_set_field(r, "user-agent", "Onset Server "..GetGameVersionString())
-	http_set_field(r, "token", "borkland!")
+	http_set_field(r, "Token", "borkland!")
 	
-	local body = string.format("channelid=%s&style=%s&message=%s", channel, style, message)
+	local body = string.format("channelid=%s&type=%s&message=%s", channel, style, message)
 	
 	http_set_body(r, body)
 	http_set_field(r, "content-length", string.len(body))
