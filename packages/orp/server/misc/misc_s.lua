@@ -24,13 +24,11 @@ DIMENSION_IMPOUND = 500
 
 -- Functions
 
-function GetPlayerLocationName(playerid)
-
-	local x, y, z = GetPlayerLocation(playerid)
+function GetLocationName(x, y, z)
 
 	local locations = {
-		{"Nevada",	{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}},
-		{"Nevada",	{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}}
+		{"Nevada",				{0.0, 0.0, 0.0, 0.0, 0.0, 0.0}}, --[[ -269513, -225764, -30, 221220, 134652, 62000 ]]--
+		{"State Prison",		{-190813, 64752, 1500, -162363, 88169, 62000}}
 	}
 
 	for i = 2, #locations, 1 do
@@ -40,6 +38,13 @@ function GetPlayerLocationName(playerid)
 	end
 
 	return locations[1][1]
+end
+
+function GetPlayerLocationName(playerid)
+
+	local x, y, z = GetPlayerLocation(playerid)
+
+	return GetLocationName(x, y, z)
 end
 
 function IsPlayerInRangeOfPoint(playerid, range, x, y, z)

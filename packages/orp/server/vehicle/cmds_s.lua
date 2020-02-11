@@ -14,6 +14,29 @@ local colour = ImportPackage('colours')
 
 -- Functions and Events
 
+AddCommand("listcars", function (playerid)
+
+	local count = 0
+	local vehicleid = 0
+
+	AddPlayerChat(playerid, "-----------------------------------------------------------")
+
+	for i = 1, MAX_VEHICLES, 1 do
+		if VehicleData[i].owner == playerid then
+
+			vehicleid = VehicleData[i].vehicleid
+			AddPlayerChat(playerid, "* ID: "..vehicleid.." | Model: "..GetVehicleModelEx(vehicleid).." | Location: "..GetLocationName(GetVehicleLocation(vehicleid)).."")
+			count = count + 1
+		end
+	end
+
+	if not count then
+		AddPlayerChat(playerid, "You don't own any vehicles.")
+	end
+
+	AddPlayerChat(playerid, "-----------------------------------------------------------")
+end)
+
 local function cmd_drivingtest(playerid)
 
 	if PlayerData[playerid].driving_test then
