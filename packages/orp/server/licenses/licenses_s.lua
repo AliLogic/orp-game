@@ -40,14 +40,14 @@ LicensesColumns = {
 -- Functions
 
 function CreatePlayerLicenseData(playerid)
-	PlayerLicenseData[playerid] = {
-		LICENSE_TYPE_GDL = 0,
-		LICENSE_TYPE_CDL = 0,
-		LICENSE_TYPE_BL = 0,
-		LICENSE_TYPE_PF = 0,
-		LICENSE_TYPE_MML = 0,
-		LICENSE_TYPE_PL = 0
-	}
+
+	print("calling CreatePlayerLicenseData(playerid)")
+
+	for i = 1, 6, 1 do
+		PlayerLicenseData[playerid][i] = 0
+	end
+
+	print("called CreatePlayerLicenseData(playerid)")
 end
 
 function DestroyPlayerLicenseData(playerid)
