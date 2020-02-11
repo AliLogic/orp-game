@@ -347,6 +347,11 @@
         "http_set_body",
         "http_set_field",
         "http_send",
-        "http_destroy"
+        "http_destroy",
+        "http_is_error",
+        "http_result_error",
+        "http_result_body",
+        "http_result_header",
+        "http_result_status"
     ]
 }

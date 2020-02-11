@@ -31,13 +31,11 @@ function SendMessage(channel, style, message)
 	http_set_field(r, "user-agent", "Onset Server "..GetGameVersionString())
 	http_set_field(r, "Token", "borkland!")
 
-	
-	local body = string.format("type=%s&channelid=%s&message=%s", style, channel, message)
-	print("body: "..body)
+	local body = json_encode({type = style, channelid = channel, message = message})
 	
 	http_set_body(r, body)
 	http_set_field(r, "content-length", string.len(body))
-	http_set_field(r, "content-type", "application/x-www-form-urlencoded; charset=utf-8")
+	http_set_field(r, "content-type", "application/json; charset=utf-8")
 	
 	if http_send(r, OnPostComplete, "OK", r) == false then
 		print("HTTP REQ NOT SENT :(")
