@@ -227,7 +227,7 @@ function OnAccountLoaded(player)
 
 		mariadb_async_query(sql, query, OnCharacterPartLoaded, player)
 
-		local query = mariadb_prepare(sql, "SELECT * FROM donations WHERE accountid = ?;",
+		local query = mariadb_prepare(sql, "SELECT *, unix_timestamp(date) AS time FROM donations WHERE accountid = ?;",
 			PlayerData[player].accountid)
 
 		mariadb_async_query(sql, query, OnDonationsLoaded, player)

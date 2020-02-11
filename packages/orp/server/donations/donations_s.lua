@@ -37,12 +37,12 @@ function OnDonationsLoaded(playerid)
 	else
 
 		DonationData[playerid].level = mariadb_get_value_name_int(1, "level")
-		DonationData[playerid].date = mariadb_get_value_name_int(1, "date")
+		DonationData[playerid].date = mariadb_get_value_name_int(1, "time")
 
 		if os.time(os.date("!*t")) < DonationData[playerid].date then
-			AddPlayerChat(playerid, "Your donation level " .. DonationData[playerid].level .. " is active till " .. os.date("%m %B %Y") .. ". Thank you for helping and supporting us!")
+			AddPlayerChat(playerid, "Your donation level " .. DonationData[playerid].level .. " is active till " .. os.date("%d %B %Y") .. ". Thank you for helping and supporting us!")
 		else
-			AddPlayerChat(playerid, "Your donation level " .. DonationData[playerid].level .. " expired on " .. os.date("%m %B %Y") .. ". Please consider visiting the UCP for more information.")
+			AddPlayerChat(playerid, "Your donation level " .. DonationData[playerid].level .. " expired on " .. os.date("%d %B %Y") .. ". Please consider visiting the UCP for more information.")
 
 			DonationData[playerid].level = 0
 		end
