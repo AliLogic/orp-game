@@ -313,9 +313,13 @@ AddCommand("showlicenses", function (playerid, lookupid)
 
 	AddPlayerChat(lookupid, "Licenses registered to " .. GetPlayerName(playerid) .. " (ID: " .. playerid .. "):")
 
-	local status = false
+	local status = ""
 	for i = 1, 6, 1 do
-		status = GetPlayerLicense(playerid, i)
+		if GetPlayerLicense(playerid, i) == 0 then
+			status = "No"
+		else
+			status = "Yes"
+		end
 		AddPlayerChat(lookupid, "".. LicensesNames[i] .." status: ".. status ..".")
 	end
 

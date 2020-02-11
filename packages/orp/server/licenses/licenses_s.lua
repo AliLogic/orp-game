@@ -41,14 +41,10 @@ LicensesColumns = {
 
 function CreatePlayerLicenseData(playerid)
 
-	print("calling CreatePlayerLicenseData(playerid)")
-
 	PlayerLicenseData[playerid] = {}
 	for i = 1, 6, 1 do
 		PlayerLicenseData[playerid][i] = 0
 	end
-
-	print("called CreatePlayerLicenseData(playerid)")
 end
 
 function DestroyPlayerLicenseData(playerid)
