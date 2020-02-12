@@ -10,6 +10,7 @@ Contributors:
 
 -- Variables
 
+local colour = ImportPackage('colours')
 DonationData = {}
 
 -- Functions
@@ -40,9 +41,9 @@ function OnDonationsLoaded(playerid)
 		DonationData[playerid].date = mariadb_get_value_name_int(1, "time")
 
 		if os.time(os.date("!*t")) < DonationData[playerid].date then
-			AddPlayerChat(playerid, "Your donation level " .. DonationData[playerid].level .. " is active till " .. os.date("%d %B %Y", DonationData[playerid].date) .. ". Thank you for helping and supporting us!")
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Your donation level " .. DonationData[playerid].level .. " is active till " .. os.date("%d %B %Y", DonationData[playerid].date) .. ". Thank you for helping and supporting us!</>")
 		else
-			AddPlayerChat(playerid, "Your donation level " .. DonationData[playerid].level .. " expired on " .. os.date("%d %B %Y", DonationData[playerid].date) .. ". Please consider visiting the UCP for more information.")
+			AddPlayerChat(playerid, "<span color=\""..colour.COLOR_LIGHTRED()"\">Your donation level " .. DonationData[playerid].level .. " expired on " .. os.date("%d %B %Y", DonationData[playerid].date) .. ". Please consider visiting the UCP for more information.</>")
 
 			DonationData[playerid].level = 0
 		end
