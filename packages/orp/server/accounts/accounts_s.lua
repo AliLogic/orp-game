@@ -782,3 +782,18 @@ AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extr
 	end
 
 end)
+
+AddRemoteEvent("OnPlayerGameDevMode", function (playerid)
+
+	local dev = false
+
+	if PlayerData[playerid] ~= nil then
+		if PlayerData[playerid].admin >= 5 then
+			dev = true
+		end
+	end
+
+	if dev == false then
+		KickPlayer(playerid, "Disable game dev mode")
+	end
+end)

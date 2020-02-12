@@ -100,6 +100,10 @@ end)]]--
 
 AddEvent("OnPlayerSpawn", function(playerid)
 	SetPostEffect("MotionBlur", "Amount", 0.2)
+
+	if IsGameDevMode() then
+		CallRemoteEvent("OnPlayerGameDevMode")
+	end
 end)
 
 AddEvent("OnKeyPress", function (key)
