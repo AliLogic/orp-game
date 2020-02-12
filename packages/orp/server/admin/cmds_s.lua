@@ -490,7 +490,7 @@ AddCommand("setstats", function (player, target, prefix, ...)
 		SetPlayerCash(target, amount)
 
 		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s cash to $" .. amount .. ".")
-		AddPlayerChat(target, GetPlayerName(player) .. "has set your cash to $" .. amount .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. " has set your cash to $" .. amount .. ".")
 
 	elseif prefix == "bank" then
 
@@ -503,7 +503,7 @@ AddCommand("setstats", function (player, target, prefix, ...)
 		PlayerData[target].bank = amount
 
 		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s bank cash to $" .. amount .. ".")
-		AddPlayerChat(target, GetPlayerName(player) .. "has set your bank cash to $" .. amount .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. " has set your bank cash to $" .. amount .. ".")
 
 	elseif prefix == "level" or prefix == "lvl" then
 
@@ -516,7 +516,7 @@ AddCommand("setstats", function (player, target, prefix, ...)
 		PlayerData[target].level = level
 
 		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s level to " .. level .. ".")
-		AddPlayerChat(target, GetPlayerName(player) .. "has set your level to " .. level .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. " has set your level to " .. level .. ".")
 
 	elseif prefix == "exp" or prefix == "xp" then
 
@@ -529,7 +529,7 @@ AddCommand("setstats", function (player, target, prefix, ...)
 		PlayerData[target].exp = exp
 
 		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s experience points to " .. exp .. ".")
-		AddPlayerChat(target, GetPlayerName(player) .. "has set your experience points to " .. exp .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. " has set your experience points to " .. exp .. ".")
 
 	elseif prefix == "paycheck" or prefix == "payday" then
 
@@ -542,7 +542,7 @@ AddCommand("setstats", function (player, target, prefix, ...)
 		--PlayerData[target].payday = amount
 
 		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s paycheck to " .. amount .. ".")
-		AddPlayerChat(target, GetPlayerName(player) .. "has set your paycheck to " .. amount .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. " has set your paycheck to " .. amount .. ".")
 
 	elseif prefix == "frank" then
 
@@ -555,7 +555,7 @@ AddCommand("setstats", function (player, target, prefix, ...)
 		PlayerData[target].faction_rank = rank
 
 		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s faction rank to " .. rank .. ".")
-		AddPlayerChat(target, GetPlayerName(player) .. "has set your faction rank to " .. rank .. ".")
+		AddPlayerChat(target, GetPlayerName(player) .. " has set your faction rank to " .. rank .. ".")
 
 	end
 end)
