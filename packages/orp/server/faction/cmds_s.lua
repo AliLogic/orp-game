@@ -724,6 +724,66 @@ AddCommand("checkproperties", function (playerid, lookupid)
 
 end)
 
+AddCommand("detain", function (playerid, lookupid)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+	end
+
+	local vehicleid = GetNearestVehicle(playerid)
+
+	lookupid = tonumber(lookupid)
+
+	if (not IsValidPlayer(lookupid)) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have specified an invalid player ID.</>")
+	end
+
+	if lookupid == playerid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot change your own rank, request an admin or a colleague!</>")
+	end
+
+	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+	end
+
+	if not IsPlayerHandcuffed(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The player is not cuffed at the moment.</>")
+	end
+
+	if vehicleid == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any vehicle.</>")
+	end
+
+	if (GetVehicleNumberOfSeats(vehicleid) < 2) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You can't detain that player in this vehicle.</>")
+	end
+
+	local x, y, z = GetPlayerLocation(playerid)
+
+	if GetPlayerVehicle(lookupid) == vehicleid then
+
+		FreezePlayer(lookupid, true)
+
+		RemovePlayerFromVehicle(lookupid)
+
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " opens the door and pulls " .. GetPlayerName(lookupid) .. " out the vehicle.</>")
+	else
+
+		local seatid = GetAvailableSeat(vehicleid, 2)
+
+		if seatid == 0 then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: There are no more seats remaining.</>")
+		end
+
+		AddPlayerChat(lookupid, "You have been detained by " .. GetPlayerName(playerid) ..".")
+		FreezePlayer(lookupid, false)
+
+		SetPlayerInVehicle(lookupid, vehicleid, seatid)
+
+		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " opens the door and places " .. GetPlayerName(lookupid) .. " into the vehicle.</>")
+	end
+end)
+
 --[[
 	/$$$$$$                                                       /$$             /$$
 	|_  $$_/                                                      | $$            | $$
@@ -739,13 +799,6 @@ end)
 ]]--
 
 AddCommand("drag", function (playerid, lookupid)
-end)
-
-AddCommand("detain", function (playerid, lookupid)
-
-	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
-	end
 end)
 
 AddCommand("arrest", function (playerid, lookupid)
