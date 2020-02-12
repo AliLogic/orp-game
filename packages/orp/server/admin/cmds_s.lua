@@ -811,7 +811,7 @@ AddCommand("ahelp", function (player)
 
 	if PlayerData[player].admin > 4 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/w /apos /asetadmin /acreatefaction /aeditfaction /setstats /acreatehouse /aedithouse /asetweather /asetfog")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/asethelper /acreatespeedcam /aeditspeedcam")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/asethelper /acreatespeedcam /aeditspeedcam /adestroyplant")
 	end
 end)
 

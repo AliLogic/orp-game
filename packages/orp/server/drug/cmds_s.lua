@@ -77,3 +77,25 @@ AddCommand("plant", function (playerid, drug)
 
 	return
 end)
+
+AddCommand("adestroyplant", function (playerid, plantid)
+
+	if (PlayerData[playerid].admin < 5) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if plantid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /adestroyplant <plant>")
+	end
+
+	plantid = tonumber(plantid)
+
+	if DrugData[plantid] == nil	then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have specified an invalid plant ID.</>")
+	end
+
+	Plant_Destroy(plantid);
+	AddPlayerChat(playerid, "You have successfully destroyed plant ID: " .. plantid .. ".")
+
+	return
+end)
