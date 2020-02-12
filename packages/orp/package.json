@@ -51,7 +51,8 @@
 		"server/drug/plants_s.lua",
 		"server/drug/cmds_s.lua",
 		"server/misc/json.lua",
-		"server/misc/misc_s.lua"
+		"server/misc/misc_s.lua",
+		"server/maps/dmv_s.lua"
 	],
 	"client_scripts": [
 		"client/orp_c.lua",
