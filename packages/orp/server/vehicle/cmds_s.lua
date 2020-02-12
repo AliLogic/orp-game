@@ -58,7 +58,7 @@ local function cmd_drivingtest(playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have $250 for the driving test.</>")
 	end
 
-	local vehicleid = CreateVehicle(1, 195320, 207826, 1215, 90.0)
+	local vehicleid = CreateVehicle(1, 193821, 209478, 1213, -90.0)
 
 	PlayerData[playerid].test_vehicle = vehicleid
 	SetVehicleColor(vehicleid, RGB(255, 255, 255, 255))
