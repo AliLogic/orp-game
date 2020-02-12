@@ -11,19 +11,20 @@ Contributors:
 ]]--
 
 local colour = ImportPackage('colours')
---local Discord = ImportPackage('discord')
+local Discord = ImportPackage('discord')
 
---local dev_talk = Discord.Channel("653324626977619968")
+local dev_talk = Discord.Channel("653324626977619968")
+Discord.SendMessage(dev_talk, "plain", "Logic is stoped")
 
 AddEvent("OnPackageStart", function()
 	SetObjectScale(CreateObject(39, 122080, 90856, 1100), 0.75, 0.75, 0.75)
+	print(Discord.SendMessage(Discord.Channel("653324626977619968"), "plain", "Logic is not the cools."))
 end)
 
 AddEvent("OnPlayerJoin", function (player)
 	AddPlayerChatAll(GetPlayerName(player).." has joined the server!")
 	SetPlayerDimension(player, player)
 	SetPlayerSpawnLocation(player, 170694.51, 194947.45, 1396.96, 90.0)
-	--Discord.SendMessage(dev_talk, "plain", GetPlayerName(player).." has joined the server!")
 end)
 
 AddEvent("OnPlayerSpawn", function(player)
