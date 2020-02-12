@@ -185,9 +185,33 @@ function IsPlayerAlive(playerid)
 	return false
 end
 
+function IsVehicleSeatUsed(vehicleid, seat)
+
+	for k, v in pairs(GetAllPlayers()) do
+		if GetPlayerVehicle(v) == vehicleid and GetPlayerVehicleSeat(v) == seat then
+			return true
+		end
+	end
+	return false
+end
+
+function GetAvailableSeat(vehicleid, start)
+	if start == nil then
+		start = 1
+	end
+
+	local seats = GetVehicleNumberOfSeats(vehicleid);
+
+	for i = start, seats, 1 do
+		if (not IsVehicleSeatUsed(vehicleid, i)) then
+			return i
+		end
+	end
+
+	return 0
+end
+
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
 AddRemoteEvent("SetPlayerCash", SetPlayerCash)
 AddRemoteEvent("AddPlayerCash", AddPlayerCash)
 AddRemoteEvent("RemovePlayerCash", RemovePlayerCash)
-
--- In future, with all of these, add some cool server sided code to modify a nice UI or something.
