@@ -42,6 +42,16 @@ AddCommand("ban", function (playerid, lookupid, ...)
 		return AddPlayerChat(playerid, "Usage: /ban <playerid> <reason*>")
 	end
 
+	lookupid = tonumber(lookupid)
+
+	if lookupid == playerid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot ban yourself!</>")
+	end
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
 	local reason = ""
 
 	if #{...} == 0 then
@@ -787,7 +797,7 @@ AddCommand("ahelp", function (player)
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off /(whitelist)log /banlog /(assist)s /ajail")
 
 	if PlayerData[player].admin > 1 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats /clearinventory")
 	end
 
 	if PlayerData[player].admin > 2 then
@@ -1176,6 +1186,30 @@ AddCommand("ajail", function (playerid, lookupid, minutes)
 
 		FreezePlayer(lookupid, false)
 	end
+
+	return
+end)
+
+AddCommand("clearinventory", function (playerid, lookupid)
+
+	if (PlayerData[playerid].admin < 2) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if (lookupid == nil) then
+		return AddPlayerChat(playerid, "Usage: /ban <playerid> <reason*>")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	Inventory_Clear(lookupid)
+
+	AddPlayerChat(playerid, "You have cleared "..GetPlayerName(lookupid).."'s inventory from all items.")
+	AddPlayerChat(lookupid, ""..GetPlayerName(playerid).." has cleared your inventory from all items.")
 
 	return
 end)

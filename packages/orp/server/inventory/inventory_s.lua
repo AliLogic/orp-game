@@ -57,12 +57,11 @@ ITEM_NAMES = {
 	Inventory_RemoveItem(player, slot)
 	Inventory_HasItem(player, item)
 	Inventory_GetItemName(item)
+	Inventory_Clear(player)
 ]]--
 
 AddEvent("SaveInventory", function (player)
 	for i = 1, #InventoryData[player], 1 do
-		print("Saving item at slot: "..i)
-
 		local query = mariadb_prepare(sql, "UPDATE inventory SET itemid = ?, amount = ? WHERE id = ?;",
 			InventoryData[player][i].itemid,
 			InventoryData[player][i].amount,
@@ -74,7 +73,6 @@ end)
 
 AddEvent("LoadInventory", function (player)
 	for i = 1, MAX_INVENTORY_SLOTS, 1 do
-		print("Init inventory slot "..i)
 		CreatePlayerInventory(player, i)
 	end
 
@@ -167,4 +165,11 @@ function Inventory_GetItemName(item)
 	end
 
 	return "Item " .. item
+end
+
+function Inventory_Clear(playerid)
+
+	for i = 1, MAX_INVENTORY_SLOTS, 1 do
+		CreatePlayerInventory(playerid, i)
+	end
 end
