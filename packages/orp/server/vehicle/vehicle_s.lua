@@ -1,3 +1,15 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic_
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local colour = ImportPackage('colours')
 
 VEHICLE_NAMES = {
@@ -8,6 +20,8 @@ VEHICLE_NAMES = {
 
 VehicleData = {}
 MAX_VEHICLES = 4096
+
+-- Functions
 
 function GetVehicleModelEx(vehicleid)
 
@@ -56,6 +70,8 @@ function CreateVehicleData(vehicle)
 
 	VehicleData[vehicle].rental = 0
 	VehicleData[vehicle].renter = 0
+
+	VehicleData[vehicle].impounded = 0
 
 	VehicleData[vehicle].being_repaired = 0
 end
@@ -170,6 +186,8 @@ function OnVehicleLoaded(id)
 		VehicleData[vehicle].rental = tonumber(result['rental'])
 		VehicleData[vehicle].fuel = tonumber(result['litres'])
 
+		VehicleData[vehicle].impounded = tonumber(result['impounded'])
+
 		--VehicleData[vehicle].nos = mariadb_get_value_name_int(1, "nos")
 
 		SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
@@ -208,11 +226,6 @@ function OnVehicleUnloaded(vehicle)
 	end
 end
 
-AddEvent('LoadVehicles', function ()
-	local query = mariadb_prepare(sql, "SELECT * FROM vehicles;")
-	mariadb_async_query(sql, query, OnLoadVehicles)
-end)
-
 function OnLoadVehicles()
 	for i = 1, mariadb_get_row_count(), 1 do
 		Vehicle_Load(mariadb_get_value_name_int(i, "id"))
@@ -220,6 +233,78 @@ function OnLoadVehicles()
 
 	print("** Vehicles Loaded: "..mariadb_get_row_count()..".")
 end
+
+function IsEngineVehicle(vehicleid)
+
+	local model = GetVehicleModel(vehicleid)
+
+	if 1 <= model <= 25 then
+		return 1
+	end
+
+	return 0
+end
+
+function IsVehicleCar(vehicleid)
+
+	local model = GetVehicleModel(vehicleid)
+
+	if 1 <= model <= 9 or 11 <= model <= 19 or 21 <= model <= 25 then
+		return 1
+	end
+
+	return 0
+end
+
+function GetNearestVehicle(playerid)
+
+	local px, py, pz = GetPlayerLocation(playerid)
+	local x, y, z = nil
+
+	for _, vehicle in pairs(GetAllVehicles()) do
+
+		x, y, z = GetVehicleLocation(vehicle)
+
+		if tonumber(GetDistance3D(px, py, pz, x, y, z)) <= 200.0 then
+			return vehicle
+		end
+	end
+
+	return 0
+end
+
+function IsVehicleImpounded(vehicleid)
+
+	if VehicleData[vehicleid] == nil then
+		return false
+	end
+
+	return VehicleData[vehicleid].impounded
+end
+
+function GetVehicleFuel(vehicleid)
+
+	if VehicleData[vehicleid] == nil then
+		return 100
+	end
+
+	return VehicleData[vehicleid].fuel
+end
+
+function ImpoundVehicle(vehicleid, price)
+
+	SetVehicleLocation(vehicleid, 94358, 120088, 6431)
+	SetVehicleDimension(vehicleid, DIMENSION_IMPOUND)
+
+	VehicleData[vehicleid].impounded = price
+end
+
+-- Events
+
+AddEvent('LoadVehicles', function ()
+	local query = mariadb_prepare(sql, "SELECT * FROM vehicles;")
+	mariadb_async_query(sql, query, OnLoadVehicles)
+end)
 
 AddEvent('UnloadVehicles', function ()
 	for i = 1, #VehicleData, 1 do
@@ -279,51 +364,3 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 		SetPlayerInVehicle(player, vehicle, seat)
 	end
 end)
-
-function IsEngineVehicle(vehicleid)
-
-	local model = GetVehicleModel(vehicleid)
-
-	if 1 <= model <= 25 then
-		return 1
-	end
-
-	return 0
-end
-
-function IsVehicleCar(vehicleid)
-
-	local model = GetVehicleModel(vehicleid)
-
-	if 1 <= model <= 9 or 11 <= model <= 19 or 21 <= model <= 25 then
-		return 1
-	end
-
-	return 0
-end
-
-function GetNearestVehicle(playerid)
-
-	local px, py, pz = GetPlayerLocation(playerid)
-	local x, y, z = nil
-
-	for _, vehicle in pairs(GetAllVehicles()) do
-
-		x, y, z = GetVehicleLocation(vehicle)
-
-		if tonumber(GetDistance3D(px, py, pz, x, y, z)) <= 200.0 then
-			return vehicle
-		end
-	end
-
-	return 0
-end
-
-function GetVehicleFuel(vehicleid)
-
-	if VehicleData[vehicleid] == nil then
-		return 100
-	end
-
-	return VehicleData[vehicleid].fuel
-end
