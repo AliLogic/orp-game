@@ -319,7 +319,7 @@ AddEvent("OnPlayerEnterVehicle", function(playerid, vehicleid, seatid)
 			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">The engine is off. (/engine)</>")
 		end
 
-		if not GetPlayerLicense(playerid, LICENSE_TYPE_GDL) then
+		if GetPlayerLicense(playerid, LICENSE_TYPE_GDL) == 0 then
 			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">You are operating a vehicle without the valid license. You might get in trouble.</>")
 		end
 

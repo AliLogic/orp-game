@@ -50,7 +50,7 @@ local function cmd_drivingtest(playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in range of the pickup.</>")
 	end
 
-	if GetPlayerLicense(playerid, LICENSE_TYPE_GDL) then
+	if GetPlayerLicense(playerid, LICENSE_TYPE_GDL) ~= 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have your General Driving License (GDL) already!</>")
 	end
 

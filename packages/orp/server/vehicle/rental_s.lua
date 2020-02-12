@@ -22,7 +22,7 @@ AddCommand("rent", function (player)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in the driver seat of a vehicle that you wish to rent.</>")
 	end
 
-	if not GetPlayerLicense(player, LICENSE_TYPE_GDL) then
+	if GetPlayerLicense(player, LICENSE_TYPE_GDL) == 0 then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must have a ".. LicensesNames[LICENSE_TYPE_GDL].." to rent a vehicle.</>")
 	end
 
