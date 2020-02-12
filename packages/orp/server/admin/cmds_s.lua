@@ -343,11 +343,20 @@ AddCommand("apos", function (player, id)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
-	local x, y, z = GetPlayerLocation(player)
-	local a = GetPlayerHeading(player)
+	if GetPlayerVehicle(player) == 0 then
+		local x, y, z = GetPlayerLocation(player)
+		local a = GetPlayerHeading(player)
 
-	print("X: "..x.." Y: "..y.." Z: "..z.." A: "..a)
-	return AddPlayerChat(player, "X: "..x.." Y: "..y.." Z: "..z)
+		print("[PED] X: "..x.." Y: "..y.." Z: "..z.." A: "..a)
+		AddPlayerChat(player, "X: "..x.." Y: "..y.." Z: "..z)
+	else
+		local vehicle = GetPlayerVehicle(player)
+		local x, y, z = GetVehicleLocation(vehicle)
+		local a = GetVehicleHeading(vehicle)
+
+		print("[VEH] X: "..x.." Y: "..y.." Z: "..z.." A: "..a)
+		AddPlayerChat(player, "X: "..x.." Y: "..y.." Z: "..z)
+	end
 end)
 
 AddCommand("av", function (player, model)
