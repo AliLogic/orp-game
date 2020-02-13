@@ -33,7 +33,7 @@ AddCommand("help", function (player, section)
 
 	if section == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /help <section>")
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Sections:</> General")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Sections:</> General, Donator")
 	end
 
 	section = string.lower(section)
@@ -41,10 +41,29 @@ AddCommand("help", function (player, section)
 	if section == "general" then
 		AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q /fhelp")
 		AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
-		AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /h(ouse) /biz /myhousekeys")
-		AddPlayerChat(player, "Commands: /dice /time /properties /frisk /whisper /showlicenses /listcars")
+		AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /dice /time /frisk")
+		AddPlayerChat(player, "Commands: /whisper /showlicenses")
+	elseif section == "property" then
+		AddPlayerChat(player, "Commands: /h(ouse) /biz /myhousekeys /properties /listcars")
+	elseif section == "donator" then
+		AddPlayerChat(player, "Commands: /d")
 	end
 	return
+end)
+
+AddCommand("d", function (playerid, ...)
+
+	if DonationData[playerid].level == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a donator to use this command.</>")
+	end
+
+	local args = table.concat({...}, " ")
+
+	if #{...} == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /d <message>")
+	end
+
+	AddPlayerChatDonator("[DONATION] " .. GetPlayerName(playerid) .. ": " .. args)
 end)
 
 AddCommand("properties", function (playerid)

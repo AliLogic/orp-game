@@ -50,6 +50,17 @@ function OnDonationsLoaded(playerid)
 	end
 end
 
+function AddPlayerChatDonator(text)
+
+	for _, v in ipairs(GetAllPlayers()) do
+		if DonationData[v] ~= nil then
+			if DonationData[v].level ~= 0 then
+				AddPlayerChat(v, text)
+			end
+		end
+	end
+end
+
 -- Events
 
 AddEvent("OnPlayerSteamAuth", function (playerid)
