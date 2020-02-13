@@ -810,7 +810,7 @@ AddCommand("ahelp", function (player)
 	end
 
 	if PlayerData[player].admin > 2 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near /clearchat /un(ban) /setlicense")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near /clearchat /un(ban) /setlicense /revokelicense")
 	end
 
 	if PlayerData[player].admin > 3 then
@@ -1107,14 +1107,14 @@ AddCommand("assist", function (playerid, lookupid, ...)
 	return
 end)
 
-AddCommand("setlicense", function (playerid, lookupid, license)
+AddCommand("revokelicense", function (playerid, lookupid, license)
 
 	if (PlayerData[playerid].admin < 3) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
 	end
 
 	if lookupid == nil or license == nil then
-		AddPlayerChat(playerid, "Usage: /setlicense <playerid> <license>")
+		AddPlayerChat(playerid, "Usage: /revokelicense <playerid> <license>")
 
 		local string = ""
 		for i = 1, #LicensesColumns, 1 do
@@ -1134,8 +1134,48 @@ AddCommand("setlicense", function (playerid, lookupid, license)
 	for i = 1, #LicensesColumns, 1 do
 		if license == LicensesColumns[i] then
 
-			AddPlayerChat(playerid, "You have set " .. GetPlayerName(lookupid) .. "'s " .. LicensesColumns[i] .. " .")
-			AddPlayerChat(lookupid, GetPlayerName(lookupid) .. " has set your " .. LicensesColumns[i] .. " .")
+			AddPlayerChat(playerid, "You have revoked " .. GetPlayerName(lookupid) .. "'s " .. LicensesColumns[i] .. " .")
+			AddPlayerChat(lookupid, GetPlayerName(lookupid) .. " has revoked your " .. LicensesColumns[i] .. " .")
+
+			SetPlayerLicense(lookupid, i, 0)
+			return
+		end
+	end
+
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid license name specified.")
+
+	return
+end)
+
+AddCommand("grantlicense", function (playerid, lookupid, license)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if lookupid == nil or license == nil then
+		AddPlayerChat(playerid, "Usage: /grantlicense <playerid> <license>")
+
+		local string = ""
+		for i = 1, #LicensesColumns, 1 do
+			string = string .. LicensesColumns[i] .. ", "
+		end
+
+		string = string:sub(1, -3)
+		return AddPlayerChat(playerid, "Licenses: "..string..".")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if (not IsValidPlayer(lookupid)) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	for i = 1, #LicensesColumns, 1 do
+		if license == LicensesColumns[i] then
+
+			AddPlayerChat(playerid, "You have granted " .. GetPlayerName(lookupid) .. "'s " .. LicensesColumns[i] .. " .")
+			AddPlayerChat(lookupid, GetPlayerName(lookupid) .. " has granted your " .. LicensesColumns[i] .. " .")
 
 			SetPlayerLicense(lookupid, i, 1)
 			return
