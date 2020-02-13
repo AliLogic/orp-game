@@ -46,7 +46,7 @@ local function cmd_drivingtest(playerid)
 
 	local x, y, z = GetPlayerLocation(playerid)
 
-	if (not IsPlayerInRangeOfPoint(playerid, 200.0, 195320, 207826, 1250)) then -- -167501.3, -34790.8, 1036.2
+	if (not IsPlayerInRangeOfPoint(playerid, 200.0, LOC_DRIVINGTEST_X, LOC_DRIVINGTEST_Y, LOC_DRIVINGTEST_Z)) then -- -167501.3, -34790.8, 1036.2
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in range of the pickup.</>")
 	end
 
