@@ -810,7 +810,7 @@ AddCommand("ahelp", function (player)
 	end
 
 	if PlayerData[player].admin > 2 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near /clearchat /un(ban) /setlicense /revokelicense")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 3: </>/avpark /near /clearchat /un(ban) /setlicense /revokelicense /flipveh")
 	end
 
 	if PlayerData[player].admin > 3 then
@@ -1246,7 +1246,7 @@ AddCommand("clearinventory", function (playerid, lookupid)
 	end
 
 	if (lookupid == nil) then
-		return AddPlayerChat(playerid, "Usage: /ban <playerid> <reason*>")
+		return AddPlayerChat(playerid, "Usage: /clearinventory <playerid>")
 	end
 
 	lookupid = tonumber(lookupid)
@@ -1261,4 +1261,33 @@ AddCommand("clearinventory", function (playerid, lookupid)
 	AddPlayerChat(lookupid, ""..GetPlayerName(playerid).." has cleared your inventory from all items.")
 
 	return
+end)
+
+AddCommand("flipveh", function (playerid, vehicleid)
+
+	if (PlayerData[playerid].admin < 2) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	vehicleid = GetPlayerVehicle(playerid)
+
+	if (vehicleid > 0 and vehicleid == nil) then
+
+		SetVehicleRotation(vehicleid, 0.0, 0.0, 0.0)
+		AddPlayerChat(playerid, "You have flipped your current vehicle.")
+
+	else
+		if vehicleid == nil then
+			return AddPlayerChat(playerid, "Usage: /flipveh <vehicleid>")
+		end
+
+		vehicleid = tonumber(vehicleid)
+
+		if not IsValidVehicle(vehicleid) then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid vehicle ID entered.</>")
+		end
+
+		SetVehicleRotation(vehicleid, 0.0, 0.0, 0.0)
+		AddPlayerChat(playerid, "You have flipped vehicle ID: " .. vehicleid .. ".")
+	end
 end)
