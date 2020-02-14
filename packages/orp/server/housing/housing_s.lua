@@ -175,7 +175,7 @@ function OnHouseLoaded(houseid)
 		-- CreateDynamicDoor()
 
 		HousingData[house].text3d_in = CreateText3D("House ("..house..")", 10, HousingData[house].ix, HousingData[house].iy, HousingData[house].iz + 10, 0.0, 0.0, 0.0)
-		HousingData[house].text3d_outside = CreateText3D("House ("..house..")\nType: "..HousingType[HousingData[house].type].."\nAddress: "..HousingData[house].address.."", 10, HousingData[house].ex, HousingData[house].ey, HousingData[house].ez + 10, 0.0, 0.0, 0.0)
+		House_RefreshLabel(house)
 
 		LoadHouseFurniture(houseid)
 	end
@@ -295,6 +295,21 @@ function House_IsOwner(playerid, houseid)
 	end
 
 	return false
+end
+
+function House_RefreshLabel(house)
+
+	local string = "House ("..house..")\nAddress: "..HousingData[house].address..""
+
+	if HousingData[house].owner == 0 then
+		string = string .. "\nPrice: $"..HousingData[house].price
+	end
+
+	if IsValidText3D(HousingData[house].text3d_outside) then
+		SetText3DText(HousingData[house].text3d_outside, string)
+	else
+		HousingData[house].text3d_outside = CreateText3D(string, 10, HousingData[house].ex, HousingData[house].ey, HousingData[house].ez + 10, 0.0, 0.0, 0.0)
+	end
 end
 
 -- Events

@@ -101,6 +101,8 @@ local function cmd_house(playerid, prefix, ...)
 			HousingData[house].owner = PlayerData[playerid].id
 
 			AddPlayerChat(playerid, "You have successfully purchased the house ("..house..") for <span color=\""..colour.COLOUR_DARKGREEN().."\">$"..HousingData[house].price.."</>.")
+
+			House_RefreshLabel(house)
 		else
 			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house can not be purchased.</>")
 		end
@@ -115,6 +117,8 @@ local function cmd_house(playerid, prefix, ...)
 			HousingData[house].owner = 0
 
 			AddPlayerChat(playerid, "You have successfully sold the house ("..house..") for <span color=\""..colour.COLOUR_DARKGREEN().."\">$"..price.."</>.")
+
+			House_RefreshLabel(house)
 		else
 			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You do not own this house.")
 		end
