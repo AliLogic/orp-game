@@ -50,9 +50,10 @@
 		"server/licenses/licenses_s.lua",
 		"server/drug/plants_s.lua",
 		"server/drug/cmds_s.lua",
+		"server/maps/dmv_s.lua",
+		"server/gui/gui_s.lua",
 		"server/misc/json.lua",
-		"server/misc/misc_s.lua",
-		"server/maps/dmv_s.lua"
+		"server/misc/misc_s.lua"
 	],
 	"client_scripts": [
 		"client/orp_c.lua",
@@ -69,6 +70,7 @@
 		"client/models/femalechar/femalechar_c.lua",
 		"client/customization/customization_c.lua",
 		"client/trafficlights/trafficlights_c.lua",
+		"client/gui/gui_c.lua",
 		"client/misc/json.lua",
 		"client/misc/misc_c.lua"
 	],
@@ -111,6 +113,13 @@
 		"client/customization/js/charcustom.js",
 		"client/customization/charcustom.html",
 		"client/models/teslaevc/TeslaEVC.pak",
-		"client/models/femalechar/FemaleChar.pak"
+		"client/models/femalechar/FemaleChar.pak",
+		"client/gui/gui.html",
+		"client/gui/gui.css",
+		"client/gui/Roboto-Regular.ttf",
+		"client/gui/plus.png",
+		"client/gui/university.png",
+		"client/gui/credit-card.png",
+		"client/gui/shield-alt.png"
 	]
 }
