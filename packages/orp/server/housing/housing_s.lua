@@ -80,15 +80,59 @@ function CreateHousingData(house)
 	-- Temporary values
 	HousingData[house].text3d_in = 0 -- The marker for the inside coordinates where you /exit. Pretty useless but always useful for the future.
 	HousingData[house].text3d_outside = 0 -- The marker for outside coordinates, where you do /enter and shows house name.
+
+	HousingData[house].doors = {}
 end
 
 function DestroyHousingData(house)
 	HousingData[house] = nil
 end
 
+local function House_Load(i)
+	local house = GetFreeHousingId()
+	if house == 0 then
+		print("A free house id wasn't able to be found? ("..#HousingData.."/"..MAX_BUSINESSES..") house SQL ID "..house..".")
+		return
+	end
+
+	HousingData[house].id = mariadb_get_value_name_int(i, "id")
+	HousingData[house].doorid = mariadb_get_value_name_int(i, "doorid")
+
+	HousingData[house].owner = mariadb_get_value_name_int(i, "owner")
+	HousingData[house].ownership_type = mariadb_get_value_name_int(i, "ownership_type")
+
+	HousingData[house].locked = mariadb_get_value_name_int(i, "locked")
+
+	HousingData[house].type = mariadb_get_value_name_int(i, "type")
+
+	HousingData[house].price = mariadb_get_value_name_int(i, "price")
+	HousingData[house].message = mariadb_get_value_name(i, "message")
+
+	HousingData[house].address = mariadb_get_value_name(i, "address")
+
+	HousingData[house].dimension = mariadb_get_value_name_int(i, "dimension")
+
+	HousingData[house].ix = mariadb_get_value_name_int(i, "ix")
+	HousingData[house].iy = mariadb_get_value_name_int(i, "iy")
+	HousingData[house].iz = mariadb_get_value_name_int(i, "iz")
+	HousingData[house].ia = mariadb_get_value_name_int(i, "ia")
+
+	HousingData[house].ex = mariadb_get_value_name_int(i, "ex")
+	HousingData[house].ey = mariadb_get_value_name_int(i, "ey")
+	HousingData[house].ez = mariadb_get_value_name_int(i, "ez")
+	HousingData[house].ea = mariadb_get_value_name_int(i, "ea")
+
+	-- CreateDynamicDoor()
+
+	HousingData[house].text3d_in = CreateText3D("House ("..house..")", 10, HousingData[house].ix, HousingData[house].iy, HousingData[house].iz + 10, 0.0, 0.0, 0.0)
+	House_RefreshLabel(house)
+
+	LoadHouseFurniture(house)
+end
+
 function OnHouseLoad()
 	for i = 1, mariadb_get_row_count(), 1 do
-		House_Load(mariadb_get_value_name_int(i, "id"))
+		House_Load(i)
 	end
 
 	print("** Houses Loaded: "..mariadb_get_row_count()..".")
@@ -128,57 +172,6 @@ function OnHouseCreated(i, htype, price, address)
 
 	HousingData[i].price = price
 	HousingData[i].address = address
-end
-
-function House_Load(houseid)
-	local query = mariadb_prepare(sql, "SELECT * FROM houses WHERE id = ?;", houseid)
-	mariadb_async_query(sql, query, OnHouseLoaded, houseid)
-end
-
-function OnHouseLoaded(houseid)
-	if mariadb_get_row_count() == 0 then
-		print("Failed to load house SQL ID "..houseid)
-	else
-		local house = GetFreeHousingId()
-		if house == 0 then
-			print("A free house id wasn't able to be found? ("..#HousingData.."/"..MAX_BUSINESSES..") house SQL ID "..houseid..".")
-			return
-		end
-
-		HousingData[house].id = houseid
-		HousingData[house].doorid = mariadb_get_value_name_int(1, "doorid")
-
-		HousingData[house].owner = mariadb_get_value_name_int(1, "owner")
-		HousingData[house].ownership_type = mariadb_get_value_name_int(1, "ownership_type")
-
-		HousingData[house].locked = mariadb_get_value_name_int(1, "locked")
-
-		HousingData[house].type = mariadb_get_value_name_int(1, "type")
-
-		HousingData[house].price = mariadb_get_value_name_int(1, "price")
-		HousingData[house].message = mariadb_get_value_name(1, "message")
-
-		HousingData[house].address = mariadb_get_value_name(1, "address")
-
-		HousingData[house].dimension = mariadb_get_value_name_int(1, "dimension")
-
-		HousingData[house].ix = mariadb_get_value_name_int(1, "ix")
-		HousingData[house].iy = mariadb_get_value_name_int(1, "iy")
-		HousingData[house].iz = mariadb_get_value_name_int(1, "iz")
-		HousingData[house].ia = mariadb_get_value_name_int(1, "ia")
-
-		HousingData[house].ex = mariadb_get_value_name_int(1, "ex")
-		HousingData[house].ey = mariadb_get_value_name_int(1, "ey")
-		HousingData[house].ez = mariadb_get_value_name_int(1, "ez")
-		HousingData[house].ea = mariadb_get_value_name_int(1, "ea")
-
-		-- CreateDynamicDoor()
-
-		HousingData[house].text3d_in = CreateText3D("House ("..house..")", 10, HousingData[house].ix, HousingData[house].iy, HousingData[house].iz + 10, 0.0, 0.0, 0.0)
-		House_RefreshLabel(house)
-
-		LoadHouseFurniture(houseid)
-	end
 end
 
 function House_Unload(house)

@@ -178,7 +178,7 @@ end
 
 function LoadHouseFurniture(houseid)
 
-	local query = mariadb_prepare(sql, "SELECT * FROM furnitures WHERE house = ?;", houseid)
+	local query = mariadb_prepare(sql, "SELECT * FROM furnitures WHERE house = ?;", HousingData[houseid].id)
 	mariadb_async_query(sql, query, OnHouseFurnitureLoaded, houseid)
 end
 
