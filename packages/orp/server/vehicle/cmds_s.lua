@@ -23,7 +23,7 @@ AddCommand("listcars", function (playerid)
 
 	for i = 1, MAX_VEHICLES, 1 do
 		if VehicleData[i] ~= nil then
-			if VehicleData[i].owner == playerid then
+			if VehicleData[i].owner == PlayerData[playerid].id then
 				vehicleid = VehicleData[i].vehicleid
 				AddPlayerChat(playerid, "* ID: "..vehicleid.." | Model: "..GetVehicleModelEx(vehicleid).." | Location: "..GetLocationName(GetVehicleLocation(vehicleid)).."")
 				count = count + 1
