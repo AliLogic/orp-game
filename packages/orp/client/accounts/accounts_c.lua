@@ -14,16 +14,19 @@ Dialog.addSelect(charViewNone, 1, "Select a character below:", 1, "(1) Create Ne
 local charview = nil
 local creation_slot = 0
 
-local charUI = CreateWebUI(0, 0, 0, 0, 1, 16)
-SetWebAlignment(charUI, 0, 0)
-SetWebAnchors(charUI, 0, 0, 1, 1)
-SetWebURL(charUI, "http://asset/"..GetPackageName().."/client/charui/main.html")
-SetWebVisibility(charUI, WEB_HIDDEN)
-
+local charUI = 0
 local charUIdata = {}
 local count = 0
 
 local is_frozen = false
+
+AddEvent("OnPackageStart", function()
+	charUI = CreateWebUI(0, 0, 0, 0, 1, 16)
+	SetWebAlignment(charUI, 0, 0)
+	SetWebAnchors(charUI, 0, 0, 1, 1)
+	SetWebURL(charUI, "http://asset/"..GetPackageName().."/client/charui/main.html")
+	SetWebVisibility(charUI, WEB_HIDDEN)
+end)
 
 AddEvent("OnWebLoadComplete", function(web)
 	if web == charUI then
@@ -32,7 +35,7 @@ AddEvent("OnWebLoadComplete", function(web)
 		--charUIready = true
 
 		SetWebVisibility(charUI, WEB_VISIBLE)
-		SetInputMode(charUI, INPUT_UI)
+		SetInputMode(charUI, INPUT_GAMEANDUI)
 		ShowMouseCursor(true)
 
 		if count ~= 0 then
