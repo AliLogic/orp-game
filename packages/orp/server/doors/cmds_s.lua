@@ -12,7 +12,7 @@ local function cmd_acd(playerid, modelid)
 
 	modelid = tonumber(modelid)
 
-	if modelid < 1 or modelid > 40 then
+	if modelid < 1 or modelid > 81 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> Model must be between 1 to 40.")
 	end
 

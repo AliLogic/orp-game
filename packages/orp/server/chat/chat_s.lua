@@ -33,25 +33,25 @@ AddCommand("help", function (player, section)
 
 	if section == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /help <section>")
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Sections:</> General, Donator")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Sections:</> General, Property, Donator.")
 	end
 
 	section = string.lower(section)
 
 	if section == "general" then
-		AddPlayerChat(player, "Commands: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q /fhelp")
-		AddPlayerChat(player, "Commands: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
-		AddPlayerChat(player, "Commands: /anims /engine /trunk /hood /dimension /dice /time /frisk")
-		AddPlayerChat(player, "Commands: /whisper /showlicenses")
+		AddPlayerChat(player, "General: /me /do /s /l /ame /ado /g /b /pm /ahelp /stats /q /fhelp")
+		AddPlayerChat(player, "General: /(inv)entory /r(adio) /r(adio)t(une) /factions /levelup")
+		AddPlayerChat(player, "General: /anims /engine /dimension /dice /time /frisk /v")
+		AddPlayerChat(player, "General: /whisper /showlicenses")
 	elseif section == "property" then
-		AddPlayerChat(player, "Commands: /h(ouse) /biz /myhousekeys /properties /listcars")
+		AddPlayerChat(player, "Property: /h(ouse) /biz /myhousekeys /properties /listcars")
 	elseif section == "donator" then
-		AddPlayerChat(player, "Commands: /d")
+		AddPlayerChat(player, "Donator: /dc")
 	end
 	return
 end)
 
-AddCommand("d", function (playerid, ...)
+AddCommand("dc", function (playerid, ...)
 
 	if DonationData[playerid].level == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a donator to use this command.</>")

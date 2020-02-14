@@ -247,13 +247,14 @@ local function OnPlayerHouseKeysLoaded(playerid)
 
 	local rows = mariadb_get_row_count()
 
-	PlayerHouseKeys[playerid] = {}
 	for i = 1, rows, 1 do
 		PlayerHouseKeys[playerid][mariadb_get_value_name_int(i, "house")] = true
 	end
 end
 
 function LoadPlayerHouseKeys(playerid)
+
+	PlayerHouseKeys[playerid] = {}
 
 	local query = mariadb_prepare(sql, "SELECT * housekeys WHERE id = ?", PlayerData[playerid].id)
 	mariadb_async_query(sql, query, OnPlayerHouseKeysLoaded, playerid)
