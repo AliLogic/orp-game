@@ -1,0 +1,77 @@
+@font-face {
+	font-family: 'Roboto';
+	src: url("http://asset/orp/client/gui/Roboto-Regular.ttf");
+}
+
+html {
+	overflow: hidden;
+	height: 100%;
+}
+
+body {
+	overflow: hidden;
+	min-height: 100%;
+
+	background-color: transparent;
+	background-size: 100vw 100vh;
+
+	font-family: 'Roboto', sans-serif;
+}
+
+.ui-components {
+	padding: 5px;
+}
+
+.ui-components .ui-component {
+	float: right;
+	clear: both;
+}
+
+.ui-components .ui-component .money {
+	font-family: 'Roboto';
+	font-size: 24px;
+
+	margin-top: 100px;
+	color: rgba(0, 0, 0, 1.0);
+}
+
+.ui-components .ui-component .ui-bar {
+	margin-bottom: 6px;
+}
+
+.ui-component .ui-bar {
+	background: rgba(0, 0, 0, 0.15);
+	min-width: 225px;
+	min-height: 25px;
+}
+
+.ui-component div.progress {
+	height: 65%;
+	width: 85%;
+
+	color: rgba(0, 0, 0, 0.0); /* make the text invisible */
+	border-radius: 1px;
+}
+
+.ui-component .ui-bar#health div.progress {
+	background-image: linear-gradient(to left, rgba(65, 169, 79, 0.8) 0%, rgba(0, 0, 0, 0.8) 0%);
+}
+
+.ui-component .ui-bar#armour div.progress {
+	background-image: linear-gradient(to left, rgba(0, 120, 160, 0.8) 0%, rgba(0, 0, 0, 0.8) 0%);
+}
+
+.ui-component .ui-bar img {
+	padding-left: 6px;
+	width: 15.750px;
+	height: auto;
+	float: right;
+}
+
+.container {
+	display: flex;
+	height: 25px;
+	
+	justify-content: center;
+	align-items: center;
+}
