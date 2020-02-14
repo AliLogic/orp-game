@@ -91,8 +91,8 @@ end
 local function House_Load(i)
 	local house = GetFreeHousingId()
 	if house == 0 then
-		print("A free house id wasn't able to be found? ("..#HousingData.."/"..MAX_BUSINESSES..") house SQL ID "..house..".")
-		return
+		print("A free house id wasn't able to be found? ("..#HousingData.."/"..MAX_BUSINESSES..") house SQL ID "..mariadb_get_value_name_int(i, "id")..".")
+		return 0
 	end
 
 	HousingData[house].id = mariadb_get_value_name_int(i, "id")
@@ -122,7 +122,7 @@ local function House_Load(i)
 	HousingData[house].ez = mariadb_get_value_name_int(i, "ez")
 	HousingData[house].ea = mariadb_get_value_name_int(i, "ea")
 
-	-- CreateDynamicDoor()
+	LoadHouseDoors(house)
 
 	HousingData[house].text3d_in = CreateText3D("House ("..house..")", 10, HousingData[house].ix, HousingData[house].iy, HousingData[house].iz + 10, 0.0, 0.0, 0.0)
 	House_RefreshLabel(house)
@@ -202,8 +202,6 @@ function House_Destroy(house)
 
 	local query = mariadb_prepare(sql, "DELETE FROM houses WHERE id = ?;", HousingData[house].id)
 	mariadb_async_query(sql, query)
-
-	-- DestroyDynamicDoor()
 
 	if IsValidText3D(HousingData[house].text3d_outside) then
 		DestroyText3D(HousingData[house].text3d_outside)
