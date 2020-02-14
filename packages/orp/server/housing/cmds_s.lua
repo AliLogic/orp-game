@@ -91,7 +91,7 @@ local function cmd_house(playerid, prefix, ...)
 
 	elseif prefix == "buy" then
 
-		if HousingData[house].owner == 0 and HousingData[house].ownership_type == HOUSE_OWNERSHIP_SOLE then
+		if HousingData[house].owner == 0 and HousingData[house].ownership_type == HOUSE_OWNERSHIP_STATE then
 
 			if HousingData[house].price > GetPlayerCash(playerid) then
 				AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You have insufficient funds to purchase this property.")
