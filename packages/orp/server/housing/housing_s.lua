@@ -78,8 +78,8 @@ function CreateHousingData(house)
 	HousingData[house].ea = 0.0
 
 	-- Temporary values
-	HousingData[house].text3d_in = nil -- The marker for the inside coordinates where you /exit. Pretty useless but always useful for the future.
-	HousingData[house].text3d_outside = nil -- The marker for outside coordinates, where you do /enter and shows house name.
+	HousingData[house].text3d_in = 0 -- The marker for the inside coordinates where you /exit. Pretty useless but always useful for the future.
+	HousingData[house].text3d_outside = 0 -- The marker for outside coordinates, where you do /enter and shows house name.
 end
 
 function DestroyHousingData(house)
