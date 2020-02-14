@@ -36,14 +36,18 @@ local function cmd_house(playerid, prefix, ...)
 
 	--[[if prefix == "lock" or prefix == "unlock" then
 
-		if HousingData[house].locked then
-			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
-		else
-			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
-		end
-		SetPlayerAnimation(playerid, "LOCKDOOR")
+		if #HousingData[house].doors == 0 then
+			if HousingData[house].locked then
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
+			else
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
+			end
+			SetPlayerAnimation(playerid, "LOCKDOOR")
 
-		HousingData[house].locked = (not HousingData[house].locked)
+			HousingData[house].locked = (not HousingData[house].locked)
+		else
+			-- Lock/ unlock the door ID HousingData[house][doors][1]
+		end
 
 	elseif prefix == "kickdoor" then
 
