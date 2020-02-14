@@ -56,13 +56,14 @@ function CreateHousingData(house)
 	HousingData[house].owner = 0 -- 0, aka the state..
 	HousingData[house].ownership_type = 0 -- aka, the state... if +1'ed.
 
-	HousingData[house].name = "House"
 	HousingData[house].locked = 1 -- for yes, put 1.
 
 	HousingData[house].type = 0
 
 	HousingData[house].price = 0 -- costs 0 dollasssss
 	HousingData[house].message = "This is a default house message."
+
+	HousingData[house].address = ""
 
 	HousingData[house].dimension = 0 -- dimension of the interior.
 
@@ -93,12 +94,11 @@ function OnHouseLoad()
 	print("** Houses Loaded: "..mariadb_get_row_count()..".")
 end
 
-function House_Create(player, htype, price, ...)
-	local name = table.concat({...}, " ")
+function House_Create(player, htype, price, address)
 	htype = tonumber(htype)
 	price = tonumber(price)
 
-	if string.len(name) < 0 or string.len(name) > 32 then
+	if string.len(address) < 0 or string.len(address) > 128 then
 		return false
 	end
 
@@ -115,19 +115,19 @@ function House_Create(player, htype, price, ...)
 		return false
 	end
 
-	local query = mariadb_prepare(sql, "INSERT INTO houses (name, type, price) VALUES ('?', ?, ?);",
-		name, htype, price
+	local query = mariadb_prepare(sql, "INSERT INTO houses (type, price, address) VALUES ('?', ?, ?, '?');",
+		htype, price, address
 	)
-	mariadb_async_query(sql, query, OnHouseCreated, index, htype, price, name)
+	mariadb_async_query(sql, query, OnHouseCreated, index, htype, price, address)
 end
 
-function OnHouseCreated(i, htype, price, name)
+function OnHouseCreated(i, htype, price, address)
 	HousingData[i].id = mariadb_get_insert_id()
 
-	HousingData[i].name = name
 	HousingData[i].type = htype
 
 	HousingData[i].price = price
+	HousingData[i].address = address
 end
 
 function House_Load(houseid)
@@ -145,21 +145,20 @@ function OnHouseLoaded(houseid)
 			return
 		end
 
-		-- type, price, message, dimension, ix iy iz ia, ex ey ez ea, mx my mz
-
 		HousingData[house].id = houseid
 		HousingData[house].doorid = mariadb_get_value_name_int(1, "doorid")
 
 		HousingData[house].owner = mariadb_get_value_name_int(1, "owner")
 		HousingData[house].ownership_type = mariadb_get_value_name_int(1, "ownership_type")
 
-		HousingData[house].name = mariadb_get_value_name(1, "name")
 		HousingData[house].locked = mariadb_get_value_name_int(1, "locked")
 
 		HousingData[house].type = mariadb_get_value_name_int(1, "type")
 
 		HousingData[house].price = mariadb_get_value_name_int(1, "price")
 		HousingData[house].message = mariadb_get_value_name(1, "message")
+
+		HousingData[house].address = mariadb_get_value_name(1, "address")
 
 		HousingData[house].dimension = mariadb_get_value_name_int(1, "dimension")
 
@@ -176,16 +175,16 @@ function OnHouseLoaded(houseid)
 		-- CreateDynamicDoor()
 
 		HousingData[house].text3d_in = CreateText3D("House ("..house..")", 10, HousingData[house].ix, HousingData[house].iy, HousingData[house].iz + 10, 0.0, 0.0, 0.0)
-		HousingData[house].text3d_outside = CreateText3D("House ("..house..")\nType: "..HousingType[HousingData[house].type].."", 10, HousingData[house].ex, HousingData[house].ey, HousingData[house].ez + 10, 0.0, 0.0, 0.0)
+		HousingData[house].text3d_outside = CreateText3D("House ("..house..")\nType: "..HousingType[HousingData[house].type].."\nAddress: "..HousingData[house].address.."", 10, HousingData[house].ex, HousingData[house].ey, HousingData[house].ez + 10, 0.0, 0.0, 0.0)
 
 		LoadHouseFurniture(houseid)
 	end
 end
 
 function House_Unload(house)
-	local query = mariadb_prepare(sql, "UPDATE houses SET owner = ?, name = '?', locked = ?, type = ?, price = ?, message = '?', dimension = ?\
+	local query = mariadb_prepare(sql, "UPDATE houses SET owner = ?, address = '?', locked = ?, type = ?, price = ?, message = '?', dimension = ?\
 	ix = '?', iy = '?', iz = '?', ia = '?', ex = '?', ey = '?', ez = '?', ea = '?', ownership_type = ? WHERE id = ?;",
-		HousingData[house].owner, HousingData[house].name, HousingData[house].locked,
+		HousingData[house].owner, HousingData[house].address, HousingData[house].locked,
 		HousingData[house].type, HousingData[house].price,
 		HousingData[house].message, HousingData[house].dimension,
 		tostring(HousingData[house].ix), tostring(HousingData[house].iy), tostring(HousingData[house].iz), tostring(HousingData[house].ia),

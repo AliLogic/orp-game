@@ -700,7 +700,7 @@ AddCommand("checkproperties", function (playerid, lookupid)
 	for houseid = 1, MAX_HOUSING, 1 do
 		if House_IsOwner(lookupid, houseid) == true then
 
-			AddPlayerChat(playerid, "* House ID: ".. houseid ..".")
+			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
 
 			count = count + 1
 		end

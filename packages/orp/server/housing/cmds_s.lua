@@ -133,7 +133,7 @@ local function cmd_ach(player, htype, price, ...)
 	end
 
 	if htype == nil or price == nil or #{...} == 0 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(h)ouse <type> <price> <name>")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(h)ouse <type> <price> <address>")
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Type:</> (1) house (2) apt. room (3) apt. complex")
 	end
 
@@ -148,19 +148,19 @@ local function cmd_ach(player, htype, price, ...)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: House price must range from 0 - 10,000,000.</>")
 	end
 
-	local house_name = table.contact({...}, " ")
+	local address = table.contact({...}, " ")
 
-	if string.len(house_name) < 0 or string.len(house_name) > 24 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: House name lengths range from 1 - 24.</>")
+	if string.len(address) < 0 or string.len(address) > 128 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: House addresses lengths range from 1 - 128.</>")
 	end
 
-	local house = House_Create(player, htype, price, ...)
+	local house = House_Create(player, htype, price, address)
 
 	if house == false then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Maximum houses ("..MAX_HOUSING..") on the server are created.</>")
 	end
 
-	AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>House %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), house_name, house))
+	AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>House %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), address, house))
 end
 AddCommand("acreatehouse", cmd_ach)
 AddCommand("ach", cmd_ach)
@@ -173,7 +173,7 @@ local function cmd_aeh(player, house, prefix, ...)
 
 	if house == nil or prefix == nil then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(h)ouse <house> <prefix>")
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> type, name, price.")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> type, address, price.")
 	end
 
 	house = tonumber(house)
@@ -198,19 +198,19 @@ local function cmd_aeh(player, house, prefix, ...)
 		htype = tonumber(htype)
 		HousingData[house].type = htype
 
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..HousingData[house].name.." ("..house..")'s type to "..HousingType[htype]..".")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..HousingData[house].address.." ("..house..")'s type to "..HousingType[htype]..".")
 
 		return
 
-	elseif prefix == "name" then
+	elseif prefix == "address" then
 		if args[1] == nil then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(h)ouse <house> name <name>")
 		end
 
-		local name = table.concat({...}, " ")
+		local address = table.concat({...}, " ")
 
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..HousingData[house].name.." ("..house..")'s house name to "..name..".")
-		FactionData[house].name = name
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..HousingData[house].address.." ("..house..")'s house name to "..address..".")
+		FactionData[house].address = address
 
 		return
 
@@ -228,7 +228,7 @@ local function cmd_aeh(player, house, prefix, ...)
 
 		HousingData[house].price = amount
 
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..HousingData[house].name.." ("..house..")'s house price to "..amount..".")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..HousingData[house].address.." ("..house..")'s house price to "..amount..".")
 	end
 
 end
@@ -268,7 +268,7 @@ AddCommand("myhousekeys", function (playerid)
 
 	for houseid = 1, MAX_HOUSING, 1 do
 		if PlayerHasHouseKey(playerid, houseid) then
-			AddPlayerChat(playerid, "* House ID: ".. houseid ..".")
+			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
 			count = true
 		end
 	end

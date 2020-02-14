@@ -73,7 +73,7 @@ AddCommand("properties", function (playerid)
 	for houseid = 1, MAX_HOUSING, 1 do
 		if House_IsOwner(playerid, houseid) == true then
 
-			AddPlayerChat(playerid, "* House ID: ".. houseid ..".")
+			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
 
 			count = count + 1
 		end
