@@ -658,7 +658,9 @@ function PutPlayerInHospital(player)
 	FreezePlayer(player, true)
 	SetPlayerLocation(player, 216010, 158517, 3004)
 	SetPlayerHeading(player, -90)
-	SetPlayerAnimation(player, "LAY_3")
+	Delay(100, function ()
+		SetPlayerAnimation(player, "LAY_3")
+	end)
 
 	PlayerData[player].hospital_timer = CreateTimer(OnPlayerRecover, 10 * 1000, player)
 
@@ -691,7 +693,7 @@ AddEvent("OnPlayerSpawn", function(player)
 
 		FreezePlayer(player, true)
 
-		Delay(10 * 1000, function()
+		Delay(30 * 1000, function()
 
 			if PlayerData[player].state == CHARACTER_STATE_WOUNDED then
 				PlayerData[player].acceptdeath = true
@@ -704,7 +706,7 @@ AddEvent("OnPlayerSpawn", function(player)
 	elseif PlayerData[player].state == CHARACTER_STATE_DEAD then
 
 		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
-		SetPlayerAnimation(player, "")
+		SetPlayerAnimation(player, "LAY_3")
 		FreezePlayer(player, true)
 
 		PlayerData[player].respawnme = true

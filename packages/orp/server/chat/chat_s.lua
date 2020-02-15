@@ -283,8 +283,9 @@ AddCommand("respawnme", function (playerid)
 		return
 	end
 
-	PlayerData[playerid].state = CHARACTER_STATE_DEAD
+	PutPlayerInHospital(playerid)
 	PlayerData[playerid].respawnme = false
+	AddPlayerChat(playerid, "You are now being respawned...")
 end)
 
 AddCommand("acceptdeath", function (playerid)
@@ -293,8 +294,14 @@ AddCommand("acceptdeath", function (playerid)
 		return
 	end
 
-	PutPlayerInHospital(playerid)
+	PlayerData[playerid].state = CHARACTER_STATE_DEAD
 	PlayerData[playerid].acceptdeath = false
+
+	Delay(10 * 1000, function ()
+		PlayerData[playerid].respawnme = true
+	end)
+
+	AddPlayerChat(playerid, "You are now dead. You need to wait before you can now use /respawnme.")
 end)
 
 AddCommand("showlicenses", function (playerid, lookupid)
