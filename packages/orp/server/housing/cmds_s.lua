@@ -34,20 +34,32 @@ local function cmd_house(playerid, prefix, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
 	end
 
-	--[[if prefix == "lock" or prefix == "unlock" then
+	if prefix == "lock" or prefix == "unlock" then
 
 		if #HousingData[house].doors == 0 then
+
 			if HousingData[house].locked then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
 			else
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
 			end
-			SetPlayerAnimation(playerid, "LOCKDOOR")
 
 			HousingData[house].locked = (not HousingData[house].locked)
 		else
-			-- Lock/ unlock the door ID HousingData[house][doors][1]
+			local doorid = HousingData[house].doors[1]
+			local is_locked = not DoorData[doorid].is_locked
+
+			if is_locked then
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
+				SetDoorOpen(DoorData[doorid].doorid, false)
+			else
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
+			end
+
+			DoorData[doorid].is_locked = is_locked
 		end
+
+		SetPlayerAnimation(playerid, "LOCKDOOR")
 
 	elseif prefix == "kickdoor" then
 
@@ -55,34 +67,63 @@ local function cmd_house(playerid, prefix, ...)
 			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">You are not in the appropriate faction to execute this command.</>")
 		end
 
-		if not HousingData[house].locked then
-			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house is already unlocked.</>")
+		if #HousingData[house].doors == 0 then
+			if not HousingData[house].locked then
+				return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house is already unlocked.</>")
+			end
+
+			local x, y, z = GetPlayerLocation(playerid)
+			AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the house's door down.")
+
+			Delay(2000, function ()
+
+				if Housing_Nearest(playerid) ~= house then
+					return
+				end
+
+				SetPlayerAnimation(playerid, "KICKDOOR")
+
+				if Random(0, 6) <= 2 then
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">failed</> to kick the door down.")
+					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has failed to kick the door down.")
+				else
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">succeeded</> to kick the door down.")
+					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
+
+					HousingData[house].locked = 0
+				end
+			end)
+		else
+			local doorid = HousingData[house].doors[1]
+
+			if not DoorData[doorid].is_locked then
+				return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house is already unlocked.</>")
+			end
+
+			local x, y, z = GetPlayerLocation(playerid)
+			AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the house's door down.")
+
+			Delay(2000, function ()
+
+				if Housing_Nearest(playerid) ~= house then
+					return
+				end
+
+				if Random(0, 6) <= 2 then
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">failed</> to kick the door down.")
+					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has failed to kick the door down.")
+				else
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">succeeded</> to kick the door down.")
+					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
+
+					DoorData[doorid].is_locked = 0
+					SetDoorOpen(DoorData[doorid].doorid, true)
+				end
+			end)
 		end
 
-		local x, y, z = GetPlayerLocation(playerid)
-		AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the house's door down.")
 
-		Delay(2000, function ()
-
-			if Housing_Nearest(playerid) ~= house then
-				return
-			end
-
-			SetPlayerAnimation(playerid, "KICKDOOR")
-
-			if Random(0, 6) <= 2 then
-				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">failed</> to kick the door down.")
-				AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has failed to kick the door down.")
-			else
-				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">succeeded</> to kick the door down.")
-				AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
-
-				HousingData[house].locked = 0
-			end
-		end)
-	end]]--
-
-	if prefix == "ring" or prefix == "bell" then
+	elseif prefix == "ring" or prefix == "bell" then
 
 		local x, y, z = GetPlayerLocation(playerid)
 		AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." rings the doorbell of the house.")
