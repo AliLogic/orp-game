@@ -36,12 +36,26 @@ local function cmd_biz(playerid, prefix, ...)
 
 	if prefix == "lock" or prefix == "unlock" then
 
-		if BusinessData[biz].locked then
-			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
-			BusinessData[biz].locked = 0
+		if #BusinessData[biz].doors == 0 then
+
+			if BusinessData[biz].locked then
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the business.")
+				BusinessData[biz].locked = 0
+			else
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the business.")
+				BusinessData[biz].locked = 1
+			end
 		else
-			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
-			BusinessData[biz].locked = 1
+			local doorid = BusinessData[biz].doors[1]
+
+			if DoorData[doorid].is_locked then
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the business door.")
+				DoorData[doorid].is_locked = 0
+			else
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the business door.")
+				SetDoorOpen(DoorData[doorid].door, false)
+				DoorData[doorid].is_locked = 1
+			end
 		end
 
 		SetPlayerAnimation(playerid, "LOCKDOOR")
