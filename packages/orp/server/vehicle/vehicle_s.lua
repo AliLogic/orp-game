@@ -83,7 +83,7 @@ end
 function IsHoodVehicle(vehicleid)
 
 	local modelid = GetVehicleModel(vehicleid)
-	local array = {1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 17, 18, 19, 21, 22, 23, 24, 25}
+	local array = {1, 2, 3, 4, 5, 6, 7, 8, 19, 24, 25}
 
 	for _, v in ipairs(array) do
 		if modelid == v then
@@ -95,7 +95,7 @@ end
 
 function IsTrunkVehicle(vehicleid)
 	local modelid = GetVehicleModel(vehicleid)
-	local array = {1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 17, 18, 19, 21, 22, 23, 24, 25}
+	local array = {1, 2, 3, 4, 5, 7, 8, 11, 12, 19, 24, 25}
 
 	for _, v in ipairs(array) do
 		if modelid == v then
