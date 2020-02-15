@@ -182,7 +182,7 @@ function OnLoadDoors()
 end
 
 AddEvent('UnloadDoors', function ()
-	for i = 1, #DoorData do
+	for i = 1, #DoorData, 1 do
 		Door_Unload(i)
 	end
 end)
