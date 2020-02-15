@@ -77,5 +77,7 @@ AddEvent("OnPackageEnd", function()
 end)
 
 AddEvent("OnPlayerJoin", function(playerid)
-	CallRemoteEvent(playerid, "UpdateClientTime", EnvHour, EnvWeather, EnvFog)
+	Delay(1000, function () -- A small delay to compensate for less intrusive behavior for the player
+		CallRemoteEvent(playerid, "UpdateClientTime", EnvHour, EnvWeather, EnvFog)
+	end)
 end)
