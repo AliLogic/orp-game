@@ -737,21 +737,18 @@ end)
 
 AddEvent("OnPackageStart", function ()
 	CreateTimer(function()
+		local count = false
 		for _, v in pairs(GetAllPlayers()) do
 			SavePlayerAccount(v)
+			count = true
 		end
-		print("All accounts have been saved!")
+		if count == true then
+			print("All accounts have been saved!")
+		end
 	end, 1800000)
 
 	CreateText3D("Hospital Respawn Point\nDo not AFK", 10, LOC_RESPAWN_X, LOC_RESPAWN_Y, LOC_RESPAWN_Z, 0.0, 0.0, 0.0)
 	CreateText3D("Department of Motor Vehicles\n/drivingtest", 10, LOC_DRIVINGTEST_X, LOC_DRIVINGTEST_Y, LOC_DRIVINGTEST_Z, 0.0, 0.0, 0.0)
-end)
-
-AddEvent("SavePlayers", function () 
-	for _, v in pairs(GetAllPlayers()) do
-		SavePlayerAccount(v)
-	end
-	print("All accounts have been saved!")
 end)
 
 AddEvent("OnPlayerSteamAuth", function (player)
