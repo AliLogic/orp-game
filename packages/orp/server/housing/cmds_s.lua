@@ -68,7 +68,7 @@ local function cmd_house(playerid, prefix, ...)
 			HousingData[house].locked = (not HousingData[house].locked)
 		else
 			local doorid = HousingData[house].doors[1]
-			local is_locked = not DoorData[doorid].is_locked
+			local is_locked = DoorData[doorid].is_locked
 
 			if is_locked then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house door.")
@@ -77,7 +77,7 @@ local function cmd_house(playerid, prefix, ...)
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house door.")
 			end
 
-			DoorData[doorid].is_locked = is_locked
+			DoorData[doorid].is_locked = not is_locked
 		end
 
 		SetPlayerAnimation(playerid, "LOCKDOOR")
