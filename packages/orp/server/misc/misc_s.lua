@@ -150,18 +150,42 @@ end
 function SetPlayerCash(player, amount)
 	if PlayerData[player] ~= nil then
 		PlayerData[player].cash = amount
+		SetGUICash(player, amount)
 	end
 end
 
 function AddPlayerCash(player, amount)
 	if PlayerData[player] ~= nil then
 		PlayerData[player].cash = PlayerData[player].cash + amount
+		SetGUICash(player, PlayerData[player].cash)
 	end
 end
 
 function RemovePlayerCash(player, amount)
 	if PlayerData[player] ~= nil then
 		PlayerData[player].cash = PlayerData[player].cash - amount
+		SetGUICash(player, PlayerData[player].cash)
+	end
+end
+
+function SetPlayerBankCash(player, amount)
+	if PlayerData[player] ~= nil then
+		PlayerData[player].bank = amount
+		SetGUIBank(player, PlayerData[player].bank)
+	end
+end
+
+function AddPlayerBankCash(player, amount)
+	if PlayerData[player] ~= nil then
+		PlayerData[player].bank = amount
+		SetGUIBank(player, PlayerData[player].bank)
+	end
+end
+
+function RemovePlayerBankCash(player, amount)
+	if PlayerData[player] ~= nil then
+		PlayerData[player].bank = amount
+		SetGUIBank(player, PlayerData[player].bank)
 	end
 end
 

@@ -489,7 +489,7 @@ function SetPlayerLoggedIn(player)
 	SetGUIArmour(player, PlayerData[player].armour)
 
 	SetGUICash(player, PlayerData[player].cash)
-	SetGUIArmour(player, PlayerData[player].bank)
+	SetGUIBank(player, PlayerData[player].bank)
 
 	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, PlayerData[player].z)
 	SetPlayerHeading(player, PlayerData[player].a)
