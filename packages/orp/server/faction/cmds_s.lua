@@ -601,7 +601,7 @@ AddCommand("aef", cmd_aef)
 
 AddCommand("tickets", function (playerid)
 
-	if (not IsPlayerInRangeOfPoint(playerid, 130.0, 0.0, 0.0, 0.0)) then
+	if (not IsPlayerInRangeOfPoint(playerid, 130.0, LOC_TICKETS_X, LOC_TICKETS_Y, LOC_TICKETS_Z)) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be at the City Hall.</>")
 	end
 

@@ -747,8 +747,9 @@ AddEvent("OnPackageStart", function ()
 		end
 	end, 1800000)
 
-	CreateText3D("Hospital Respawn Point\nDo not AFK", 10, LOC_RESPAWN_X, LOC_RESPAWN_Y, LOC_RESPAWN_Z, 0.0, 0.0, 0.0)
-	CreateText3D("Department of Motor Vehicles\n/drivingtest", 10, LOC_DRIVINGTEST_X, LOC_DRIVINGTEST_Y, LOC_DRIVINGTEST_Z, 0.0, 0.0, 0.0)
+	CreateText3D("Hospital Respawn Point\nDo not AFK", 12, LOC_RESPAWN_X, LOC_RESPAWN_Y, LOC_RESPAWN_Z, 0.0, 0.0, 0.0)
+	CreateText3D("Department of Motor Vehicles\n/drivingtest", 12, LOC_DRIVINGTEST_X, LOC_DRIVINGTEST_Y, LOC_DRIVINGTEST_Z, 0.0, 0.0, 0.0)
+	CreateText3D("Pay your tickets here\n/tickets", 12, LOC_TICKETS_X, LOC_TICKETS_Y, LOC_TICKETS_Z, 0.0, 0.0, 0.0)
 end)
 
 AddEvent("OnPlayerSteamAuth", function (player)
