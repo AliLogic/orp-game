@@ -68,7 +68,7 @@ function SendEmbed(channel, embed)
 	http_set_field(r, "user-agent", "Onset Server "..GetGameVersionString())
 	http_set_field(r, "Token", "borkland!")
 
-	local body = json_encode({type = embed, channelid = channel, colour = embed.colour, title = embed.title, description = embed.description, fields = embed.fields})
+	local body = json_encode({type = 'embed', channelid = channel, colour = embed.colour, title = embed.title, description = embed.description, fields = embed.fields})
 	
 	http_set_body(r, body)
 	http_set_field(r, "content-length", string.len(body))
