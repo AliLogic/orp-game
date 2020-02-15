@@ -38,12 +38,13 @@ local function cmd_biz(playerid, prefix, ...)
 
 		if BusinessData[biz].locked then
 			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
+			BusinessData[biz].locked = 0
 		else
 			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
+			BusinessData[biz].locked = 1
 		end
 
 		SetPlayerAnimation(playerid, "LOCKDOOR")
-		BusinessData[biz].locked = (not BusinessData[biz].locked)
 
 	elseif prefix == "shop" then
 
