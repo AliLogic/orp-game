@@ -36,7 +36,7 @@ function GetLocationName(x, y, z)
 	}
 
 	for i = 2, #locations, 1 do
-		if locations[i][1] <= x and locations[i][2] <= y and locations[i][3] <= z and locations[i][4] >= x and locations[i][5] >= y and locations[i][6] >= z then
+		if locations[i][2] <= x and locations[i][3] <= y and locations[i][4] <= z and locations[i][5] >= x and locations[i][6] >= y and locations[i][7] >= z then
 			return locations[i][1]
 		end
 	end
