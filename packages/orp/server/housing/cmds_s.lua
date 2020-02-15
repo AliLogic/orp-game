@@ -51,7 +51,7 @@ local function cmd_house(playerid, prefix, ...)
 
 			if is_locked then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
-				SetDoorOpen(DoorData[doorid].doorid, false)
+				SetDoorOpen(DoorData[doorid].door, false)
 			else
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
 			end
@@ -117,7 +117,7 @@ local function cmd_house(playerid, prefix, ...)
 					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
 
 					DoorData[doorid].is_locked = 0
-					SetDoorOpen(DoorData[doorid].doorid, true)
+					SetDoorOpen(DoorData[doorid].door, true)
 				end
 			end)
 		end

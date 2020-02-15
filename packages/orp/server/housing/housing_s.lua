@@ -51,8 +51,6 @@ function CreateHousingData(house)
 	-- Permanent (saving) values
 
 	HousingData[house].id = 0
-	HousingData[house].doorid = 0 -- sqlid of the marker
-
 	HousingData[house].owner = 0 -- 0, aka the state..
 	HousingData[house].ownership_type = 0 -- aka, the state... if +1'ed.
 
@@ -96,7 +94,6 @@ local function House_Load(i)
 	end
 
 	HousingData[house].id = mariadb_get_value_name_int(i, "id")
-	HousingData[house].doorid = mariadb_get_value_name_int(i, "doorid")
 
 	HousingData[house].owner = mariadb_get_value_name_int(i, "owner")
 	HousingData[house].ownership_type = mariadb_get_value_name_int(i, "ownership_type")
