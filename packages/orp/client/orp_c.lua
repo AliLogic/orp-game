@@ -98,8 +98,6 @@ AddRemoteEvent("LoadSpawnMenu", function ()
     CallEvent("createUI", "spawnMenu")
 end)]]--
 
-ShowHealthHUD(false)
-
 AddEvent("OnPlayerSpawn", function(playerid)
 	SetPostEffect("MotionBlur", "Amount", 0.2)
 

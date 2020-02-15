@@ -36,14 +36,29 @@ local function cmd_biz(playerid, prefix, ...)
 
 	if prefix == "lock" or prefix == "unlock" then
 
-		if BusinessData[biz].locked then
-			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
+		if #BusinessData[biz].doors == 0 then
+
+			if BusinessData[biz].locked == 1 then
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the business.")
+				BusinessData[biz].locked = 0
+			else
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the business.")
+				BusinessData[biz].locked = 1
+			end
 		else
-			AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
+			local doorid = BusinessData[biz].doors[1]
+
+			if DoorData[doorid].is_locked == 1 then
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the business door.")
+				DoorData[doorid].is_locked = 0
+			else
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the business door.")
+				SetDoorOpen(DoorData[doorid].door, false)
+				DoorData[doorid].is_locked = 1
+			end
 		end
 
 		SetPlayerAnimation(playerid, "LOCKDOOR")
-		BusinessData[biz].locked = (not BusinessData[biz].locked)
 
 	elseif prefix == "shop" then
 
@@ -85,31 +100,60 @@ local function cmd_biz(playerid, prefix, ...)
 			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">You are not in the appropriate faction to execute this command.</>")
 		end
 
-		if not BusinessData[biz].locked then
-			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house is already unlocked.</>")
+		if BusinessData[biz].locked == 0 then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This business is already unlocked.</>")
 		end
 
 		local x, y, z = GetPlayerLocation(playerid)
-		AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the house's door down.")
+		AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the business's door down.")
 
-		Delay(2000, function ()
+		if #BusinessData[biz].doors == 0 then
+			Delay(2000, function ()
 
-			if Business_Nearest(playerid) ~= biz then
-				return
+				if Business_Nearest(playerid) ~= biz then
+					return
+				end
+
+				SetPlayerAnimation(playerid, "KICKDOOR")
+
+				if Random(0, 6) <= 2 then
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">failed</> to kick the door down.")
+					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has failed to kick the door down.")
+				else
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">succeeded</> to kick the door down.")
+					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
+
+					BusinessData[biz].locked = 0
+				end
+			end)
+		else
+			local doorid = BusinessData[biz].doors[1]
+
+			if DoorData[doorid].is_locked == 0 then
+				return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This business is already unlocked.</>")
 			end
 
-			SetPlayerAnimation(playerid, "KICKDOOR")
+			local x, y, z = GetPlayerLocation(playerid)
+			AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the business's door down.")
 
-			if Random(0, 6) <= 2 then
-				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">failed</> to kick the door down.")
-				AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has failed to kick the door down.")
-			else
-				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">succeeded</> to kick the door down.")
-				AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
+			Delay(2000, function ()
 
-				BusinessData[biz].locked = 0
-			end
-		end)
+				if Business_Nearest(playerid) ~= biz then
+					return
+				end
+
+				if Random(0, 6) <= 2 then
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">failed</> to kick the door down.")
+					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has failed to kick the door down.")
+				else
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">succeeded</> to kick the door down.")
+					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
+
+					DoorData[doorid].is_locked = 0
+					SetDoorOpen(DoorData[doorid].door, true)
+				end
+			end)
+		end
 
 	else
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /biz <prefix>")

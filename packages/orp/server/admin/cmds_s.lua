@@ -500,7 +500,7 @@ AddCommand("setstats", function (player, target, prefix, ...)
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have inputted an invalid amount.</>")
 		end
 
-		PlayerData[target].bank = amount
+		SetPlayerBankCash(target, amount)
 
 		AddPlayerChat(player, "You have successfully set " .. GetPlayerName(target) .. "'s bank cash to $" .. amount .. ".")
 		AddPlayerChat(target, GetPlayerName(player) .. " has set your bank cash to $" .. amount .. ".")

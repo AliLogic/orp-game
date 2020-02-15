@@ -75,6 +75,8 @@ function CreateBusinessData(business)
 	BusinessData[business].text3d = nil -- The marker for inside coordinates where you execute /buy.
 	BusinessData[business].text3d_in = nil -- The marker for the inside coordinates where you /exit. Pretty useless but always useful for the future.
 	BusinessData[business].text3d_outside = nil -- The marker for outside coordinates, where you do /enter and shows business name.
+
+	BusinessData[business].doors = {}
 end
 
 function DestroyBusinessData(business)
@@ -87,7 +89,7 @@ end)
 
 function OnBusinessLoad()
 	for i = 1, mariadb_get_row_count(), 1 do
-		Business_Load(mariadb_get_value_name_int(i, "id"))
+		Business_Load(i)
 	end
 	print("** Businesses Loaded: "..mariadb_get_row_count()..".")
 end
@@ -169,65 +171,57 @@ function OnBusinessCreated(i, type, enterable, price, name, ...)
 	end
 end
 
-function Business_Load(businessid)
-	local query = mariadb_prepare(sql, "SELECT * FROM businesses WHERE id = ?;", businessid)
-	mariadb_async_query(sql, query, OnBusinessLoaded, businessid)
-end
+function Business_Load(i)
 
-function OnBusinessLoaded(businessid)
-	if mariadb_get_row_count() == 0 then
-		print("Failed to load business SQL ID "..businessid)
-	else
-		local business = GetFreeBusinessId()
-		if business == 0 then
-			print("A free business id wasn't able to be found? ("..#BusinessData.."/"..MAX_BUSINESSES..") business SQL ID "..businessid..".")
-			return
-		end
-
-		-- type, enterable, price, message, dimension, ix iy iz ia, ex ey ez ea, mx my mz
-
-		BusinessData[business].id = businessid
-		BusinessData[business].markerid = mariadb_get_value_name_int(businessid, "markerid")
-
-		BusinessData[business].owner = mariadb_get_value_name_int(businessid, "owner")
-		BusinessData[business].ownership_type = mariadb_get_value_name_int(businessid, "ownership_type")
-
-		BusinessData[business].name = mariadb_get_value_name(businessid, "name")
-		BusinessData[business].locked = mariadb_get_value_name_int(businessid, "locked")
-
-		BusinessData[business].type = mariadb_get_value_name_int(businessid, "type")
-		BusinessData[business].enterable = mariadb_get_value_name_int(businessid, "enterable")
-
-		BusinessData[business].price = mariadb_get_value_name_int(businessid, "price")
-		BusinessData[business].message = mariadb_get_value_name(businessid, "message")
-
-		BusinessData[business].dimension = mariadb_get_value_name_int(businessid, "dimension")
-
-		BusinessData[business].ix = tonumber(mariadb_get_value_name(businessid, "ix"))
-		BusinessData[business].iy = tonumber(mariadb_get_value_name(businessid, "iy"))
-		BusinessData[business].iz = tonumber(mariadb_get_value_name(businessid, "iz"))
-		BusinessData[business].ia = tonumber(mariadb_get_value_name(businessid, "ia"))
-
-		BusinessData[business].ex = tonumber(mariadb_get_value_name(businessid, "ex"))
-		BusinessData[business].ey = tonumber(mariadb_get_value_name(businessid, "ey"))
-		BusinessData[business].ez = tonumber(mariadb_get_value_name(businessid, "ez"))
-		BusinessData[business].ea = tonumber(mariadb_get_value_name(businessid, "ea"))
-
-		BusinessData[business].mx = tonumber(mariadb_get_value_name(businessid, "mx"))
-		BusinessData[business].my = tonumber(mariadb_get_value_name(businessid, "my"))
-		BusinessData[business].mz = tonumber(mariadb_get_value_name(businessid, "mz"))
-
-		if BusinessData[business].enterable == 0 then
-			BusinessData[business].text3d = CreateText3D(string.format("%s\n/buy", BusinessData[business].name), 
-			17, BusinessData[business].mx, BusinessData[business].my, BusinessData[business].mz, 0, 0, 0)
-		end
-
-		if BusinessData[business].markerid ~= 0 then
-			-- CreateMarker
-		end
-
-		-- Create3dTextLabel
+	local business = GetFreeBusinessId()
+	if business == 0 then
+		print("A free business id wasn't able to be found? ("..#BusinessData.."/"..MAX_BUSINESSES..") business SQL ID "..mariadb_get_value_name_int(i, "id")..".")
+		return 0
 	end
+
+	BusinessData[business].id = mariadb_get_value_name_int(i, "id")
+	BusinessData[business].markerid = mariadb_get_value_name_int(i, "markerid")
+
+	BusinessData[business].owner = mariadb_get_value_name_int(i, "owner")
+	BusinessData[business].ownership_type = mariadb_get_value_name_int(i, "ownership_type")
+
+	BusinessData[business].name = mariadb_get_value_name(i, "name")
+	BusinessData[business].locked = mariadb_get_value_name_int(i, "locked")
+
+	BusinessData[business].type = mariadb_get_value_name_int(i, "type")
+	BusinessData[business].enterable = mariadb_get_value_name_int(i, "enterable")
+
+	BusinessData[business].price = mariadb_get_value_name_int(i, "price")
+	BusinessData[business].message = mariadb_get_value_name(i, "message")
+
+	BusinessData[business].dimension = mariadb_get_value_name_int(i, "dimension")
+
+	BusinessData[business].ix = tonumber(mariadb_get_value_name(i, "ix"))
+	BusinessData[business].iy = tonumber(mariadb_get_value_name(i, "iy"))
+	BusinessData[business].iz = tonumber(mariadb_get_value_name(i, "iz"))
+	BusinessData[business].ia = tonumber(mariadb_get_value_name(i, "ia"))
+
+	BusinessData[business].ex = tonumber(mariadb_get_value_name(i, "ex"))
+	BusinessData[business].ey = tonumber(mariadb_get_value_name(i, "ey"))
+	BusinessData[business].ez = tonumber(mariadb_get_value_name(i, "ez"))
+	BusinessData[business].ea = tonumber(mariadb_get_value_name(i, "ea"))
+
+	BusinessData[business].mx = tonumber(mariadb_get_value_name(i, "mx"))
+	BusinessData[business].my = tonumber(mariadb_get_value_name(i, "my"))
+	BusinessData[business].mz = tonumber(mariadb_get_value_name(i, "mz"))
+
+	if BusinessData[business].enterable == 0 then
+		BusinessData[business].text3d = CreateText3D(string.format("%s\n/buy", BusinessData[business].name), 
+		17, BusinessData[business].mx, BusinessData[business].my, BusinessData[business].mz, 0, 0, 0)
+	end
+
+	if BusinessData[business].markerid ~= 0 then
+		-- CreateMarker
+	end
+
+	LoadBusinessDoors(business)
+
+	-- Create3dTextLabel
 end
 
 function Business_Unload(business)

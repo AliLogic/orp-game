@@ -11,6 +11,7 @@ function GetFreeMarkerId()
 
 	for i = 1, MAX_MARKERS, 1 do
 		if MarkerData[i] == nil then
+			CreateMarkerData(i)
 			return i
 		end
 	end
@@ -72,8 +73,6 @@ end
 
 function OnMarkerCreated(marker_id, modelid, x, y, z, dimension)
 
-	AddPlayerChatAll("Marker ID: "..marker_id.." has been created.")
-
 	MarkerData[marker_id].id = mariadb_get_insert_id()
 	MarkerData[marker_id].model = modelid
 	MarkerData[marker_id].pickup1 = CreatePickup(modelid, x, y, z)
@@ -112,50 +111,48 @@ function Marker_Destroy(marker_id)
 	return true
 end
 
-function Marker_Load(i, marker_id)
-	local query = mariadb_prepare(sql, "SELECT * FROM markers WHERE id = ?", marker_id)
-	mariadb_async_query(sql, query, OnMarkerLoaded, i, marker_id)
-end
+function Marker_Load(i)
 
-function OnMarkerLoaded(indexid, marker_id)
-	if mariadb_get_row_count() == 0 then
-		print('Error with loading marker ID'..marker_id)
-	else
-		MarkerData[indexid].id = mariadb_get_value_name_int(1, "id")
-		MarkerData[indexid].model = mariadb_get_value_name_int(1, "model")
+	local indexid = GetFreeMarkerId()
+	if indexid == 0 then
+		print("A free marker id wasn't able to be found? ("..#MarkerData.."/"..MAX_MARKERS..") marker SQL ID "..mariadb_get_value_name_int(i, "id")..".")
+		return
+	end
 
-		MarkerData[indexid].x1 = mariadb_get_value_name_int(1, "x1")
-		MarkerData[indexid].y1 = mariadb_get_value_name_int(1, "y1")
-		MarkerData[indexid].z1 = mariadb_get_value_name_int(1, "z1")
+	MarkerData[indexid].id = mariadb_get_value_name_int(i, "id")
+	MarkerData[indexid].model = mariadb_get_value_name_int(i, "model")
 
-		MarkerData[indexid].x2 = mariadb_get_value_name_int(1, "x2")
-		MarkerData[indexid].y2 = mariadb_get_value_name_int(1, "y2")
-		MarkerData[indexid].z2 = mariadb_get_value_name_int(1, "z2")
+	MarkerData[indexid].x1 = mariadb_get_value_name_int(i, "x1")
+	MarkerData[indexid].y1 = mariadb_get_value_name_int(i, "y1")
+	MarkerData[indexid].z1 = mariadb_get_value_name_int(i, "z1")
 
-		MarkerData[indexid].r = mariadb_get_value_name_int(1, "r")
-		MarkerData[indexid].g = mariadb_get_value_name_int(1, "g")
-		MarkerData[indexid].b = mariadb_get_value_name_int(1, "b")
-		MarkerData[indexid].a = mariadb_get_value_name_int(1, "a")
+	MarkerData[indexid].x2 = mariadb_get_value_name_int(i, "x2")
+	MarkerData[indexid].y2 = mariadb_get_value_name_int(i, "y2")
+	MarkerData[indexid].z2 = mariadb_get_value_name_int(i, "z2")
 
-		MarkerData[indexid].is_locked = mariadb_get_value_name_int(1, "is_locked")
+	MarkerData[indexid].r = mariadb_get_value_name_int(i, "r")
+	MarkerData[indexid].g = mariadb_get_value_name_int(i, "g")
+	MarkerData[indexid].b = mariadb_get_value_name_int(i, "b")
+	MarkerData[indexid].a = mariadb_get_value_name_int(i, "a")
 
-		MarkerData[indexid].pickup1 = CreatePickup(MarkerData[indexid].model, MarkerData[indexid].x1, MarkerData[indexid].y1, MarkerData[indexid].z1)
-		SetPickupDimension(MarkerData[indexid].pickup1, MarkerData[indexid].dimension1)
-		SetPickupPropertyValue(MarkerData[indexid].pickup1, "markerid", indexid, true)
-		SetPickupPropertyValue(MarkerData[indexid].pickup1, "r", tostring(MarkerData[indexid].r), true)
-		SetPickupPropertyValue(MarkerData[indexid].pickup1, "g", tostring(MarkerData[indexid].g), true)
-		SetPickupPropertyValue(MarkerData[indexid].pickup1, "b", tostring(MarkerData[indexid].b), true)
-		SetPickupPropertyValue(MarkerData[indexid].pickup1, "a", tostring(MarkerData[indexid].a), true)
+	MarkerData[indexid].is_locked = mariadb_get_value_name_int(i, "is_locked")
 
-		if MarkerData[indexid].x2 ~= 0 and MarkerData[indexid].y2 ~= 0 then
-			MarkerData[indexid].pickup2 = CreatePickup(MarkerData[indexid].model, MarkerData[indexid].x2, MarkerData[indexid].y2, MarkerData[indexid].z2)
-			SetPickupDimension(MarkerData[indexid].pickup2, MarkerData[indexid].dimension2)
-			SetPickupPropertyValue(MarkerData[indexid].pickup2, "markerid", indexid, true)
-			SetPickupPropertyValue(MarkerData[indexid].pickup2, "r", tostring(MarkerData[indexid].r), true)
-			SetPickupPropertyValue(MarkerData[indexid].pickup2, "g", tostring(MarkerData[indexid].g), true)
-			SetPickupPropertyValue(MarkerData[indexid].pickup2, "b", tostring(MarkerData[indexid].b), true)
-			SetPickupPropertyValue(MarkerData[indexid].pickup2, "a", tostring(MarkerData[indexid].a), true)
-		end
+	MarkerData[indexid].pickup1 = CreatePickup(MarkerData[indexid].model, MarkerData[indexid].x1, MarkerData[indexid].y1, MarkerData[indexid].z1)
+	SetPickupDimension(MarkerData[indexid].pickup1, MarkerData[indexid].dimension1)
+	SetPickupPropertyValue(MarkerData[indexid].pickup1, "markerid", indexid, true)
+	SetPickupPropertyValue(MarkerData[indexid].pickup1, "r", tostring(MarkerData[indexid].r), true)
+	SetPickupPropertyValue(MarkerData[indexid].pickup1, "g", tostring(MarkerData[indexid].g), true)
+	SetPickupPropertyValue(MarkerData[indexid].pickup1, "b", tostring(MarkerData[indexid].b), true)
+	SetPickupPropertyValue(MarkerData[indexid].pickup1, "a", tostring(MarkerData[indexid].a), true)
+
+	if MarkerData[indexid].x2 ~= 0 and MarkerData[indexid].y2 ~= 0 then
+		MarkerData[indexid].pickup2 = CreatePickup(MarkerData[indexid].model, MarkerData[indexid].x2, MarkerData[indexid].y2, MarkerData[indexid].z2)
+		SetPickupDimension(MarkerData[indexid].pickup2, MarkerData[indexid].dimension2)
+		SetPickupPropertyValue(MarkerData[indexid].pickup2, "markerid", indexid, true)
+		SetPickupPropertyValue(MarkerData[indexid].pickup2, "r", tostring(MarkerData[indexid].r), true)
+		SetPickupPropertyValue(MarkerData[indexid].pickup2, "g", tostring(MarkerData[indexid].g), true)
+		SetPickupPropertyValue(MarkerData[indexid].pickup2, "b", tostring(MarkerData[indexid].b), true)
+		SetPickupPropertyValue(MarkerData[indexid].pickup2, "a", tostring(MarkerData[indexid].a), true)
 	end
 end
 
@@ -192,8 +189,7 @@ end
 
 function OnLoadMarkers()
 	for i = 1, mariadb_get_row_count(), 1 do
-		CreateMarkerData(i)
-		Marker_Load(i, mariadb_get_value_name_int(i, "id"))
+		Marker_Load(i)
 	end
 
 	print("** Markers Loaded: "..mariadb_get_row_count()..".")
@@ -233,7 +229,7 @@ AddEvent('LoadMarkers', function ()
 end)
 
 AddEvent('UnloadMarkers', function ()
-	for i = 1, #MarkerData do
+	for i = 1, #MarkerData, 1 do
 		Marker_Unload(i)
 	end
 end)

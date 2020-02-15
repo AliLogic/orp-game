@@ -22,9 +22,13 @@ DIALOG_HOME_FURNITURE = 5
 
 DIMENSION_IMPOUND = 500
 
-LOC_DRIVINGTEST_X = 195320
-LOC_DRIVINGTEST_Y = 207826
-LOC_DRIVINGTEST_Z = 1250
+LOC_DRIVINGTEST_X = 195750
+LOC_DRIVINGTEST_Y = 208048
+LOC_DRIVINGTEST_Z = 1314
+
+LOC_RESPAWN_X = 212101
+LOC_RESPAWN_Y = 159561
+LOC_RESPAWN_Z = 1322
 
 -- Functions
 
@@ -36,7 +40,7 @@ function GetLocationName(x, y, z)
 	}
 
 	for i = 2, #locations, 1 do
-		if locations[i][1] <= x and locations[i][2] <= y and locations[i][3] <= z and locations[i][4] >= x and locations[i][5] >= y and locations[i][6] >= z then
+		if locations[i][2] <= x and locations[i][3] <= y and locations[i][4] <= z and locations[i][5] >= x and locations[i][6] >= y and locations[i][7] >= z then
 			return locations[i][1]
 		end
 	end
@@ -150,18 +154,42 @@ end
 function SetPlayerCash(player, amount)
 	if PlayerData[player] ~= nil then
 		PlayerData[player].cash = amount
+		SetGUICash(player, amount)
 	end
 end
 
 function AddPlayerCash(player, amount)
 	if PlayerData[player] ~= nil then
 		PlayerData[player].cash = PlayerData[player].cash + amount
+		SetGUICash(player, PlayerData[player].cash)
 	end
 end
 
 function RemovePlayerCash(player, amount)
 	if PlayerData[player] ~= nil then
 		PlayerData[player].cash = PlayerData[player].cash - amount
+		SetGUICash(player, PlayerData[player].cash)
+	end
+end
+
+function SetPlayerBankCash(player, amount)
+	if PlayerData[player] ~= nil then
+		PlayerData[player].bank = amount
+		SetGUIBank(player, PlayerData[player].bank)
+	end
+end
+
+function AddPlayerBankCash(player, amount)
+	if PlayerData[player] ~= nil then
+		PlayerData[player].bank = amount
+		SetGUIBank(player, PlayerData[player].bank)
+	end
+end
+
+function RemovePlayerBankCash(player, amount)
+	if PlayerData[player] ~= nil then
+		PlayerData[player].bank = amount
+		SetGUIBank(player, PlayerData[player].bank)
 	end
 end
 
@@ -213,6 +241,37 @@ function GetAvailableSeat(vehicleid, start)
 	end
 
 	return 0
+end
+
+function ShowPropertiesList(playerid, lookupid)
+	local count = 0
+
+	for houseid = 1, MAX_HOUSING, 1 do
+		if House_IsOwner(lookupid, houseid) == true then
+
+			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
+
+			count = count + 1
+		end
+	end
+
+	for businessid = 1, MAX_BUSINESSES, 1 do
+
+		if Business_IsOwner(lookupid, businessid) == true then
+
+			AddPlayerChat(playerid, "* Business ID: ".. businessid ..".")
+
+			count = count + 1
+		end
+	end
+
+	if count == 0 then
+		if playerid == lookupid then
+			AddPlayerChat(playerid, "You do not own any properties.")
+		else
+			AddPlayerChat(playerid, ""..GetPlayerName(lookupid).." does not own any properties.")
+		end
+	end
 end
 
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)

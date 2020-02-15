@@ -11,7 +11,7 @@ AddCommand("fhelp", function (playerid)
 	if faction_type == FACTION_CIVILIAN then
 	elseif faction_type == FACTION_POLICE then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /hcuff, /drag, /detain, /mdc, /arrest, /radio, /d, /callsign, /take</>")
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /ticket, /spike, /roadblock, /fingerprint, /impound, /revokeweapon, /checkproperties</>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /ticket, /spike, /roadblock, /impound, /revokeweapon, /checkproperties</>")
 	elseif faction_type == FACTION_MEDIC then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /radio, /d, /bandage, /revive</>")
 	elseif faction_type == FACTION_GOV then
@@ -693,32 +693,9 @@ AddCommand("checkproperties", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
 	end
 
-	local count = 0
-
 	AddPlayerChat(playerid, "Properties registered to "..GetPlayerName(lookupid).." ("..lookupid.."):")
 
-	for houseid = 1, MAX_HOUSING, 1 do
-		if House_IsOwner(lookupid, houseid) == true then
-
-			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
-
-			count = count + 1
-		end
-	end
-
-	for businessid = 1, MAX_BUSINESSES, 1 do
-
-		if Business_IsOwner(lookupid, businessid) == true then
-
-			AddPlayerChat(playerid, "* Business ID: ".. businessid ..".")
-
-			count = count + 1
-		end
-	end
-
-	if count == 0 then
-		AddPlayerChat(playerid, ""..GetPlayerName(lookupid).." does not own any properties.")
-	end
+	ShowPropertiesList(playerid, lookupid)
 
 	return
 
@@ -823,9 +800,6 @@ AddCommand("spikes", function (playerid, lookupid)
 end)
 
 AddCommand("roadblock", function (playerid, lookupid)
-end)
-
-AddCommand("fingerprint", function (playerid, lookupid)
 end)
 
 AddCommand("revokeweapon", function (playerid, lookupid)

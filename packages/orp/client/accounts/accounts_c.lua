@@ -156,7 +156,6 @@ AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
 			SetCameraLocation(0, 0, 0, false)
 			SetCameraRotation(0, 0, 0, false)
 
-			ShowHealthHUD(true)
 			ShowWeaponHUD(true)
 		else
 			Dialog.close(charCreate)
@@ -230,7 +229,7 @@ AddEvent('charui:spawn', function (slot)
 	SetCameraLocation(0, 0, 0, false)
 	SetCameraRotation(0, 0, 0, false)
 
-	ShowHealthHUD(true)
+	ShowHealthHUD(false)
 	ShowWeaponHUD(true)
 
 	CallRemoteEvent("accounts:login", math.tointeger(slot))
