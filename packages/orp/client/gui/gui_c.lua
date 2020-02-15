@@ -6,12 +6,21 @@ SetWebVisibility(web, WEB_HITINVISIBLE)
 
 local guiReady = false
 
-AddEvent("OnPackageStop", function () DestroyWebUI(web) end)
-AddRemoteEvent("DestroyGUI", function () DestroyWebUI(web) end)
+AddEvent("OnPackageStop", function ()
+	DestroyWebUI(web)
+end)
+
+AddRemoteEvent("DestroyGUI", function ()
+	DestroyWebUI(web)
+end)
 
 AddEvent("gui:ready", function ()
 	guiReady = true
 	CallRemoteEvent("gui:ready")
+end)
+
+AddEvent("OnPackageStart", function()
+	ShowHealthHUD(false)
 end)
 
 function SetGUIHealth(health)
