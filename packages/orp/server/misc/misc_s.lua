@@ -181,14 +181,14 @@ end
 
 function AddPlayerBankCash(player, amount)
 	if PlayerData[player] ~= nil then
-		PlayerData[player].bank = amount
+		PlayerData[player].bank = PlayerData[player].bank + amount
 		SetGUIBank(player, PlayerData[player].bank)
 	end
 end
 
 function RemovePlayerBankCash(player, amount)
 	if PlayerData[player] ~= nil then
-		PlayerData[player].bank = amount
+		PlayerData[player].bank = PlayerData[player].bank - amount
 		SetGUIBank(player, PlayerData[player].bank)
 	end
 end
