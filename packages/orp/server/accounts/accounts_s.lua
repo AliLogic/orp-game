@@ -644,7 +644,7 @@ function OnPlayerRecover(player)
 	DestroyTimer(PlayerData[player].hospital_timer)
 	PlayerData[player].hospital_timer = 0
 
-	SetPlayerLocation(player, 212101, 159561, 1322)
+	SetPlayerLocation(player, LOC_RESPAWN_X, LOC_RESPAWN_Y, LOC_RESPAWN_Z)
 	SetPlayerHeading(player, 81.82)
 
 	FreezePlayer(player, false)
@@ -743,7 +743,8 @@ AddEvent("OnPackageStart", function ()
 		print("All accounts have been saved!")
 	end, 1800000)
 
-	CreateText3D("Hospital Respawn Point\nDo not AFK", 10, 212101, 159561, 1322, 0.0, 0.0, 0.0)
+	CreateText3D("Hospital Respawn Point\nDo not AFK", 10, LOC_RESPAWN_X, LOC_RESPAWN_Y, LOC_RESPAWN_Z, 0.0, 0.0, 0.0)
+	CreateText3D("Department of Motor Vehicles\n/drivingtest", 10, LOC_DRIVINGTEST_X, LOC_DRIVINGTEST_Y, LOC_DRIVINGTEST_Z, 0.0, 0.0, 0.0)
 end)
 
 AddEvent("SavePlayers", function () 
