@@ -128,8 +128,6 @@ local function OnLoadHouseDoors(house)
 	for i = 1, mariadb_get_row_count(), 1 do
 		table.insert(HousingData[house].doors, Door_Load(i))
 	end
-
-	print("[house] "..house.." [doors] "..HousingData[house].doors..".")
 end
 
 function LoadHouseDoors(house)
