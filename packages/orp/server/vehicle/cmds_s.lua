@@ -117,10 +117,8 @@ local function cmd_engine(playerid)
 end
 AddCommand("engine", cmd_engine)
 
-local function cmd_v(player, ...)
-	local args = {...}
-
-	if args[1] == "lock" then
+local function cmd_v(player, args)
+	if args == "lock" then
 		local vehicle = GetPlayerVehicle(player)
 		if vehicle ~= 0 and VehicleData[vehicle] ~= nil and (VehicleData[vehicle].owner == PlayerData[player].id or VehicleData[vehicle].renter == player) then
 			if VehicleData[vehicle].is_locked == true then
@@ -169,7 +167,7 @@ local function cmd_v(player, ...)
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any of your owned vehicles!</>")
 		end
 
-	elseif args[1] == "park" then
+	elseif args == "park" then
 		local vehicle = GetPlayerVehicle(player)
 
 		if (vehicle == 0 or VehicleData[vehicle] == nil) or VehicleData[vehicle].owner ~= PlayerData[player].id then
@@ -192,7 +190,7 @@ local function cmd_v(player, ...)
 
 		Vehicle_Unload(vehicle)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle parked!</>")
-	elseif args[1] == "lights" then
+	elseif args == "lights" then
 
 		local vehicle = GetPlayerVehicle(player)
 
@@ -204,7 +202,7 @@ local function cmd_v(player, ...)
 			AddPlayerChat(player, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">turned on</> the lights.")
 		end
 
-	elseif args[1] == "spawn" then
+	elseif args == "spawn" then
 		local vehicle = tonumber(args[2])
 
 		if vehicle == nil then
@@ -238,12 +236,16 @@ local function cmd_v(player, ...)
 
 		Vehicle_Load(VehicleData[vehicle].id)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle "..vehicle.." (Model: "..VehicleData[vehicle].model..") spawned!</>")
-	elseif args[1] == "trunk" then
+	elseif args == "trunk" then
 		if GetPlayerState(player) ~= PS_DRIVER then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the driver seat of the vehicle.</>")
 		end
 
 		local vehicleid = GetPlayerVehicle(player)
+		if not IsTrunkVehicle(vehicleid) then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This vehicle does not have a accessible trunk.")
+		end
+
 		local x, y, z = GetPlayerLocation(player)
 
 		if GetVehicleTrunkRatio(vehicleid) > 0 then
@@ -253,12 +255,16 @@ local function cmd_v(player, ...)
 			SetVehicleTrunkRatio(vehicleid, 60.0)
 			AddPlayerChat(player, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">opened</> your vehicle trunk.")
 		end
-	elseif args[1] == "hood" then
+	elseif args == "hood" then
 		if GetPlayerState(player) ~= PS_DRIVER then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the driver seat of the vehicle.</>")
 		end
 
 		local vehicleid = GetPlayerVehicle(player)
+		if not IsHoodVehicle(vehicleid) then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This vehicle does not have a accessible hood.")
+		end
+
 		local x, y, z = GetPlayerLocation(player)
 
 		if GetVehicleHoodRatio(vehicleid) > 0 then
@@ -270,7 +276,7 @@ local function cmd_v(player, ...)
 		end
 	else
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /v(ehicle) <argument>")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> lock, park, spawn, lights")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> lock, park, spawn, lights, trunk, hood.")
 		return
 	end
 end

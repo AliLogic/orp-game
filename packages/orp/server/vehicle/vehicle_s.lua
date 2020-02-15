@@ -80,6 +80,31 @@ function DestroyVehicleData(vehicle)
 	VehicleData[vehicle] = nil
 end
 
+function IsHoodVehicle(vehicleid)
+
+	local modelid = GetVehicleModel(vehicleid)
+	local array = {1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 17, 18, 19, 21, 22, 23, 24, 25}
+
+	for _, v in ipairs(array) do
+		if modelid == v then
+			return true
+		end
+	end
+	return false
+end
+
+function IsTrunkVehicle(vehicleid)
+	local modelid = GetVehicleModel(vehicleid)
+	local array = {1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 17, 18, 19, 21, 22, 23, 24, 25}
+
+	for _, v in ipairs(array) do
+		if modelid == v then
+			return true
+		end
+	end
+	return false
+end
+
 function Vehicle_Create(model, plate, x, y, z, a)
 	model = tonumber(model)
 
