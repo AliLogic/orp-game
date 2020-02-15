@@ -601,7 +601,7 @@ AddCommand("aef", cmd_aef)
 
 AddCommand("tickets", function (playerid)
 
-	if (not IsPlayerInRangeOfPoint(130.0, 0.0, 0.0, 0.0)) then
+	if (not IsPlayerInRangeOfPoint(playerid, 130.0, 0.0, 0.0, 0.0)) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be at the City Hall.</>")
 	end
 
@@ -816,7 +816,7 @@ AddCommand("flocker", function (playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
-	if (not IsPlayerInRangeOfPoint(150.0, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z)) then
+	if (not IsPlayerInRangeOfPoint(playerid, 150.0, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z)) then
 		AddPlayerChat(playerid, "You are interacting with the faction locker.")
 	end
 end)
