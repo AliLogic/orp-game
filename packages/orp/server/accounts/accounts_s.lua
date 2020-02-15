@@ -549,6 +549,8 @@ function OnPlayerPayday(player)
 		AddPlayerChat(player, "Final Paycheck: $"..paycheck)
 		AddPlayerChat(player, "(( Paychecks are still a work in progress. ))")
 
+		AddPlayerBankCash(player, paycheck)
+
 		PlayerData[player].minutes = 0
 		PlayerData[player].paycheck = 0
 
