@@ -59,7 +59,7 @@ local function cmd_house(playerid, prefix, ...)
 
 		if #HousingData[house].doors == 0 then
 
-			if HousingData[house].locked then
+			if HousingData[house].locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
 				HousingData[house].locked = 0
 			else
@@ -69,7 +69,7 @@ local function cmd_house(playerid, prefix, ...)
 		else
 			local doorid = HousingData[house].doors[1]
 
-			if DoorData[doorid].is_locked then
+			if DoorData[doorid].is_locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house door.")
 				DoorData[doorid].is_locked = 0
 			else
@@ -88,7 +88,7 @@ local function cmd_house(playerid, prefix, ...)
 		end
 
 		if #HousingData[house].doors == 0 then
-			if not HousingData[house].locked then
+			if HousingData[house].locked == 0 then
 				return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house is already unlocked.</>")
 			end
 
@@ -116,7 +116,7 @@ local function cmd_house(playerid, prefix, ...)
 		else
 			local doorid = HousingData[house].doors[1]
 
-			if not DoorData[doorid].is_locked then
+			if DoorData[doorid].is_locked == 0 then
 				return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house is already unlocked.</>")
 			end
 
@@ -141,7 +141,6 @@ local function cmd_house(playerid, prefix, ...)
 				end
 			end)
 		end
-
 
 	elseif prefix == "ring" or prefix == "bell" then
 
