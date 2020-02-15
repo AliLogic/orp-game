@@ -218,9 +218,11 @@ local function cmd_ach(player, htype, price, ...)
 
 	local address = table.contact({...}, " ")
 
-	if string.len(address) < 0 or string.len(address) > 128 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: House addresses lengths range from 1 - 128.</>")
+	if string.len(address) < 0 or string.len(address) > 32 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: House addresses lengths range from 1 - 32.</>")
 	end
+
+	address = address .. ", " .. GetLocationName(GetPlayerLocation(player))
 
 	local house = House_Create(player, htype, price, address)
 
