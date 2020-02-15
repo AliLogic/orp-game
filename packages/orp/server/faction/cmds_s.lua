@@ -11,7 +11,7 @@ AddCommand("fhelp", function (playerid)
 	if faction_type == FACTION_CIVILIAN then
 	elseif faction_type == FACTION_POLICE then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /hcuff, /drag, /detain, /mdc, /arrest, /radio, /d, /callsign, /take</>")
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /ticket, /spike, /roadblock, /fingerprint, /impound, /revokeweapon, /checkproperties</>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /ticket, /spike, /roadblock, /impound, /revokeweapon, /checkproperties</>")
 	elseif faction_type == FACTION_MEDIC then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /radio, /d, /bandage, /revive</>")
 	elseif faction_type == FACTION_GOV then
@@ -823,9 +823,6 @@ AddCommand("spikes", function (playerid, lookupid)
 end)
 
 AddCommand("roadblock", function (playerid, lookupid)
-end)
-
-AddCommand("fingerprint", function (playerid, lookupid)
 end)
 
 AddCommand("revokeweapon", function (playerid, lookupid)
