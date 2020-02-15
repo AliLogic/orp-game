@@ -175,50 +175,41 @@ function Vehicle_Destroy(vehicle)
 end
 
 function Vehicle_Load(id)
-	local query = mariadb_prepare(sql, "SELECT * FROM vehicles WHERE id = ?", id)
-	mariadb_async_query(sql, query, OnVehicleLoaded, id)
-end
+	local result = mariadb_get_assoc(1)
 
-function OnVehicleLoaded(id)
-	if mariadb_get_row_count() == 0 then
-		print('Error with loading vehicle ID '..id)
-	else
-		local result = mariadb_get_assoc(1)
-
-		local vehicle = CreateVehicle(result['model'], tonumber(result['x']), tonumber(result['y']), tonumber(result['z']), tonumber(result['a']))
-		if vehicle == false then
-			return print('Unable to successfully create vehicle ID '..vehicle..', DBID: '..result['id'])
-		end
-
-		CreateVehicleData(vehicle)
-
-		VehicleData[vehicle].id = id
-		VehicleData[vehicle].vid = vehicle
-		VehicleData[vehicle].model = tonumber(result['model'])
-		VehicleData[vehicle].plate = result['plate']
-
-		VehicleData[vehicle].x = tonumber(result['x'])
-		VehicleData[vehicle].y = tonumber(result['y'])
-		VehicleData[vehicle].z = tonumber(result['z'])
-		VehicleData[vehicle].a = tonumber(result['a'])
-
-		VehicleData[vehicle].r = tonumber(result['r'])
-		VehicleData[vehicle].g = tonumber(result['g'])
-		VehicleData[vehicle].b = tonumber(result['b'])
-
-		VehicleData[vehicle].owner = tonumber(result['owner'])
-		VehicleData[vehicle].faction = tonumber(result['faction'])
-		VehicleData[vehicle].rental = tonumber(result['rental'])
-		VehicleData[vehicle].fuel = tonumber(result['litres'])
-
-		VehicleData[vehicle].impounded = tonumber(result['impounded'])
-
-		--VehicleData[vehicle].nos = mariadb_get_value_name_int(1, "nos")
-
-		SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
-		SetVehicleColor(vehicle, RGB(VehicleData[vehicle].r, VehicleData[vehicle].g, VehicleData[vehicle].b))
-		StopVehicleEngine(vehicle)
+	local vehicle = CreateVehicle(result['model'], tonumber(result['x']), tonumber(result['y']), tonumber(result['z']), tonumber(result['a']))
+	if vehicle == false then
+		return print('Unable to successfully create vehicle ID '..vehicle..', DBID: '..result['id'])
 	end
+
+	CreateVehicleData(vehicle)
+
+	VehicleData[vehicle].id = id
+	VehicleData[vehicle].vid = vehicle
+	VehicleData[vehicle].model = tonumber(result['model'])
+	VehicleData[vehicle].plate = result['plate']
+
+	VehicleData[vehicle].x = tonumber(result['x'])
+	VehicleData[vehicle].y = tonumber(result['y'])
+	VehicleData[vehicle].z = tonumber(result['z'])
+	VehicleData[vehicle].a = tonumber(result['a'])
+
+	VehicleData[vehicle].r = tonumber(result['r'])
+	VehicleData[vehicle].g = tonumber(result['g'])
+	VehicleData[vehicle].b = tonumber(result['b'])
+
+	VehicleData[vehicle].owner = tonumber(result['owner'])
+	VehicleData[vehicle].faction = tonumber(result['faction'])
+	VehicleData[vehicle].rental = tonumber(result['rental'])
+	VehicleData[vehicle].fuel = tonumber(result['litres'])
+
+	VehicleData[vehicle].impounded = tonumber(result['impounded'])
+
+	--VehicleData[vehicle].nos = mariadb_get_value_name_int(1, "nos")
+
+	SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
+	SetVehicleColor(vehicle, RGB(VehicleData[vehicle].r, VehicleData[vehicle].g, VehicleData[vehicle].b))
+	StopVehicleEngine(vehicle)
 end
 
 function Vehicle_Unload(vehicle)
