@@ -12,8 +12,21 @@ AddCommand("facepalm", function (playerid)
 	SetPlayerAnimation(playerid, "FACEPALM")
 end)
 
-AddCommand("salute", function (playerid)
-	SetPlayerAnimation(playerid, "SALUTE")
+AddCommand("salute", function (playerid, saluteid)
+	if saluteid == nil then
+		return AddPlayerChat(playerid, "Usage: /salute <1-2>")
+	end
+
+	saluteid = tonumber(saluteid)
+	if saluteid < 1 or saluteid > 2 then
+		return AddPlayerChat(playerid, "Usage: /salute <1-2>")
+	end
+
+	if saluteid == 1 then
+		SetPlayerAnimation(playerid, "SALUTE")
+	else
+		SetPlayerAnimation(playerid, "SALUTE2")
+	end
 end)
 
 AddCommand("sit", function (playerid, sitid)
