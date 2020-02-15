@@ -21,6 +21,27 @@ local colour = ImportPackage("colours")
 
 -- Commands
 
+AddCommand("housedoors", function (playerid)
+
+	local house = Housing_Nearest(playerid)
+
+	if house == 0 then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
+	end
+
+	if HousingData[house].doors == nil then
+		AddPlayerChat(playerid, "House " .. house .. " doors table is nil.")
+	end
+
+	if #HousingData[house].doors == 0 then
+		AddPlayerChat(playerid, "House " .. house .. " doors table amount is 0.")
+	end
+
+	for k, v in pairs(HousingData[house].doors) do
+		AddPlayerChat(playerid, "House " .. house .." - Door " .. v ..".")
+	end
+end)
+
 local function cmd_house(playerid, prefix, ...)
 
 	if prefix == nil then
@@ -50,10 +71,10 @@ local function cmd_house(playerid, prefix, ...)
 			local is_locked = not DoorData[doorid].is_locked
 
 			if is_locked then
-				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house door.")
 				SetDoorOpen(DoorData[doorid].door, false)
 			else
-				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house door.")
 			end
 
 			DoorData[doorid].is_locked = is_locked
