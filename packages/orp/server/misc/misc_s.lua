@@ -239,6 +239,37 @@ function GetAvailableSeat(vehicleid, start)
 	return 0
 end
 
+function ShowPropertiesList(playerid, lookupid)
+	local count = 0
+
+	for houseid = 1, MAX_HOUSING, 1 do
+		if House_IsOwner(lookupid, houseid) == true then
+
+			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
+
+			count = count + 1
+		end
+	end
+
+	for businessid = 1, MAX_BUSINESSES, 1 do
+
+		if Business_IsOwner(lookupid, businessid) == true then
+
+			AddPlayerChat(playerid, "* Business ID: ".. businessid ..".")
+
+			count = count + 1
+		end
+	end
+
+	if count == 0 then
+		if playerid == lookupid then
+			AddPlayerChat(playerid, "You do not own any properties.")
+		else
+			AddPlayerChat(playerid, ""..GetPlayerName(lookupid).." does not own any properties.")
+		end
+	end
+end
+
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
 AddRemoteEvent("SetPlayerCash", SetPlayerCash)
 AddRemoteEvent("AddPlayerCash", AddPlayerCash)

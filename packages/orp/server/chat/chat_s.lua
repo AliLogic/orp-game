@@ -68,30 +68,9 @@ end)
 
 AddCommand("properties", function (playerid)
 
-	local count = 0
+	AddPlayerChat(playerid, "Properties registered to you, "..GetPlayerName(playerid).." ("..playerid.."):")
 
-	for houseid = 1, MAX_HOUSING, 1 do
-		if House_IsOwner(playerid, houseid) == true then
-
-			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
-
-			count = count + 1
-		end
-	end
-
-	for businessid = 1, MAX_BUSINESSES, 1 do
-
-		if Business_IsOwner(playerid, businessid) == true then
-
-			AddPlayerChat(playerid, "* Business ID: ".. businessid ..".")
-
-			count = count + 1
-		end
-	end
-
-	if count == 0 then
-		AddPlayerChat(playerid, "You do not own any properties.")
-	end
+	ShowPropertiesList(playerid, playerid)
 
 	return
 

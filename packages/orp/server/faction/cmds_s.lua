@@ -693,32 +693,9 @@ AddCommand("checkproperties", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
 	end
 
-	local count = 0
-
 	AddPlayerChat(playerid, "Properties registered to "..GetPlayerName(lookupid).." ("..lookupid.."):")
 
-	for houseid = 1, MAX_HOUSING, 1 do
-		if House_IsOwner(lookupid, houseid) == true then
-
-			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
-
-			count = count + 1
-		end
-	end
-
-	for businessid = 1, MAX_BUSINESSES, 1 do
-
-		if Business_IsOwner(lookupid, businessid) == true then
-
-			AddPlayerChat(playerid, "* Business ID: ".. businessid ..".")
-
-			count = count + 1
-		end
-	end
-
-	if count == 0 then
-		AddPlayerChat(playerid, ""..GetPlayerName(lookupid).." does not own any properties.")
-	end
+	ShowPropertiesList(playerid, lookupid)
 
 	return
 
