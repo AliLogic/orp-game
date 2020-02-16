@@ -250,24 +250,6 @@ function clearUI() {
 	$('#title').text('');
 }
 
-/*const addToArray = (id, button) => { // id should be the id passed through showUI, button should always be $(this).
-	return new Promise((resolve, reject) => {
-		let returnValues = []; // I didn't math.floor as I wanted to see the results.
-
-		elements.forEach((element) => {
-			if (!element[1]) { // If the element is not a button
-				console.log($(`#${element[0]}`).val());
-				returnValues.push($(`#${element[0]}`).val());
-			}
-		});
-
-		console.log("addToArray: " + JSON.stringify(returnValues));
-
-		if (returnValues.length >= 1) resolve(returnValues);
-		else reject("An error has occured.", returnValues);
-	});
-}*/
-
 function showUI(id) {
 	if ($('body').is(':hidden')) {
 		console.log("Body is hidden, showing it.");
@@ -288,26 +270,6 @@ function showUI(id) {
 		
 			console.log(returnValues);
 			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), returnValues);
-
-			/*
-			let returnValues = "";
-			elements.forEach((element) => {
-				returnValues += element;
-			});
-
-			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), returnValues);
-			
-
-			addToArray(id, $(this)) // Using promises will make it so that before anything is CallEvented, returnValues must be populated. This was likely the problem from before.
-				.then((returnValues) => { // as JS suffers from async hell.
-					console.log("ShowUI: " + JSON.stringify(returnValues));
-					CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), JSON.stringify(returnValues));
-				})
-				.catch((err, returnValues) => {
-					console.log(err); // A generic error message is pushed along with returnValues for debugging purposes.
-					console.log(`Erroneous returnValues: ${JSON.stringify(returnValues)}`);
-				})
-			*/
 		});
 	}
 }
