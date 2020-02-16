@@ -1,3 +1,16 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Bork
+* Logic
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local Dialog = ImportPackage("dialogui")
 Dialog.setGlobalTheme("default-dark")
 
@@ -20,6 +33,44 @@ local count = 0
 
 local is_frozen = false
 
+-- Functions
+
+local function UpdateCharactersList()
+
+	if count ~= 0 then
+		for i = 1, count, 1 do
+			ExecuteWebJS(charUI, "setCharacterInfo("..charUIdata[i]..");")
+		end
+	end
+
+	ExecuteWebJS(charUI, "toggleCharMenu();")
+end
+
+local function ToggleCharUI(status)
+
+	SetIgnoreLookInput(status)
+	SetIgnoreMoveInput(status)
+
+	ShowHealthHUD(status)
+	ShowWeaponHUD(status)
+
+	ShowMouseCursor(status)
+
+	if status == false then
+		SetCameraLocation(0, 0, 0, false)
+		SetCameraRotation(0, 0, 0, false)
+
+		SetInputMode(INPUT_GAME)
+	else
+		SetCameraLocation(122371.22, 99170.25, 1668.49, true)
+		SetCameraRotation(0, 265, 0, true)
+
+		SetInputMode(INPUT_UI)
+	end
+end
+
+-- Events
+
 AddEvent("OnPackageStart", function()
 	charUI = CreateWebUI(0, 0, 0, 0, 1, 16)
 	SetWebAlignment(charUI, 0, 0)
@@ -30,22 +81,11 @@ end)
 
 AddEvent("OnWebLoadComplete", function(web)
 	if web == charUI then
-		--AddPlayerChat("WebUI now ready 1")
-		--ExecuteWebJS(charUI, "toggleCharMenu();")
-		--charUIready = true
-
 		SetWebVisibility(charUI, WEB_VISIBLE)
-		SetInputMode(charUI, INPUT_GAMEANDUI)
+		SetInputMode(charUI, INPUT_UI)
 		ShowMouseCursor(true)
 
-		if count ~= 0 then
-			for i = 1, count, 1 do
-				AddPlayerChat(charUIdata[i])
-				ExecuteWebJS(charUI, "setCharacterInfo("..charUIdata[i]..");")
-			end
-		end
-
-		ExecuteWebJS(charUI, "toggleCharMenu();")
+		UpdateCharactersList()
 	end
 end)
 
@@ -59,18 +99,10 @@ end)
 
 AddRemoteEvent("askClientShowCharSelection", function(chardata, logout)
 
-	SetIgnoreLookInput(true)
-	SetIgnoreMoveInput(true)
-
-	ShowHealthHUD(false)
-	ShowWeaponHUD(false)
-
-	SetCameraLocation(122371.22, 99170.25, 1668.49, true)
-	SetCameraRotation(0, 265, 0, true)
+	ToggleCharUI(true)
 
 	if chardata == nil then
 		count = 0
-		--ExecuteWebJS(charUI, "toggleCharMenu();")
 		return
 	end
 
@@ -86,21 +118,14 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata, logout)
 		end
 	end
 
-	if logout == true then
+	if logout == true and count ~= 0 then
 		charUI = CreateWebUI(0, 0, 0, 0, 1, 16)
 		SetWebAlignment(charUI, 0, 0)
 		SetWebAnchors(charUI, 0, 0, 1, 1)
 		SetWebURL(charUI, "http://asset/"..GetPackageName().."/client/charui/main.html")
 		SetWebVisibility(charUI, WEB_VISIBLE)
-		SetInputMode(charUI, INPUT_UI)
-		ShowMouseCursor(true)
 
-		if count ~= 0 then
-			for i = 1, count, 1 do
-				ExecuteWebJS(charUI, "setCharacterInfo("..charUIdata[i]..");")
-			end
-		end
-
+		UpdateCharactersList()
 		ExecuteWebJS(charUI, "toggleCharMenu();")
 	end
 
@@ -153,10 +178,7 @@ AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
 			Dialog.close(charCreate)
 			CallRemoteEvent("accounts:characterCreated", string.match(firstname, '[A-Z][a-z]*'), string.match(lastname, '[A-Z][a-z]*'), gender)
 
-			SetCameraLocation(0, 0, 0, false)
-			SetCameraRotation(0, 0, 0, false)
-
-			ShowWeaponHUD(true)
+			ToggleCharUI(false)
 		else
 			Dialog.close(charCreate)
 			CallRemoteEvent("accounts:kick")
@@ -193,20 +215,10 @@ AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
 	end
 end)
 
---[[            ExecuteWebJS(web, "toggleCharMenu();");
-			SetIgnoreLookInput(false)
-			SetIgnoreMoveInput(false)
-			ShowMouseCursor(false)
-			SetInputMode(INPUT_GAME)
-			SetWebVisibility(web, WEB_HITINVISIBLE)
-			]]
-
 AddEvent('charui:create', function (slot)
+
+	ToggleCharUI(false)
 	ExecuteWebJS(charUI, "toggleCharMenu();");
-	SetIgnoreLookInput(false)
-	SetIgnoreMoveInput(false)
-	ShowMouseCursor(false)
-	SetInputMode(INPUT_GAME)
 	SetWebVisibility(charUI, WEB_HITINVISIBLE)
 
 	creation_slot = math.tointeger(slot)
@@ -214,23 +226,14 @@ AddEvent('charui:create', function (slot)
 end)
 
 AddEvent('charui:spawn', function (slot)
-	ExecuteWebJS(charUI, "toggleCharMenu();");
 
-	SetIgnoreLookInput(false)
-	SetIgnoreMoveInput(false)
-	ShowMouseCursor(false)
-	SetInputMode(INPUT_GAME)
+	ToggleCharUI(false)
+	ExecuteWebJS(charUI, "toggleCharMenu();");
 	SetWebVisibility(charUI, WEB_HIDDEN)
 	DestroyWebUI(charUI)
 
 	count = 0
 	charUIdata = {}
-
-	SetCameraLocation(0, 0, 0, false)
-	SetCameraRotation(0, 0, 0, false)
-
-	ShowHealthHUD(false)
-	ShowWeaponHUD(true)
 
 	CallRemoteEvent("accounts:login", math.tointeger(slot))
 end)
