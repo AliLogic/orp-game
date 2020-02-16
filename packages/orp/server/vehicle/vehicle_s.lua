@@ -175,37 +175,36 @@ function Vehicle_Destroy(vehicle)
 	return true
 end
 
-function Vehicle_Load(id)
-	local result = mariadb_get_assoc(1)
+function Vehicle_Load(i)
 
-	local vehicle = CreateVehicle(result['model'], tonumber(result['x']), tonumber(result['y']), tonumber(result['z']), tonumber(result['a']))
+	local vehicle = CreateVehicle(mariadb_get_value_name_int(i, "model"), mariadb_get_value_name_int(i, "x"), mariadb_get_value_name_int(i, "y"), mariadb_get_value_name_int(i, "z"), mariadb_get_value_name_int(i, "a"))
 	if vehicle == false then
-		return print('Unable to successfully create vehicle ID '..vehicle..', DBID: '..result['id'])
+		return print('Unable to successfully create vehicle ID '..vehicle..', DBID: '..mariadb_get_value_name_int(i, "id"))
 	end
 
 	SetVehicleRespawnParams(vehicle, false, 0, false)
 	CreateVehicleData(vehicle)
 
-	VehicleData[vehicle].id = id
+	VehicleData[vehicle].id = mariadb_get_value_name_int(i, "id")
 	VehicleData[vehicle].vid = vehicle
-	VehicleData[vehicle].model = tonumber(result['model'])
-	VehicleData[vehicle].plate = result['plate']
+	VehicleData[vehicle].model = mariadb_get_value_name_int(i, "model")
+	VehicleData[vehicle].plate = mariadb_get_value_name(i, "plate")
 
-	VehicleData[vehicle].x = tonumber(result['x'])
-	VehicleData[vehicle].y = tonumber(result['y'])
-	VehicleData[vehicle].z = tonumber(result['z'])
-	VehicleData[vehicle].a = tonumber(result['a'])
+	VehicleData[vehicle].x = mariadb_get_value_name_int(i, "x")
+	VehicleData[vehicle].y = mariadb_get_value_name_int(i, "y")
+	VehicleData[vehicle].z = mariadb_get_value_name_int(i, "z")
+	VehicleData[vehicle].a = mariadb_get_value_name_int(i, "a")
 
-	VehicleData[vehicle].r = tonumber(result['r'])
-	VehicleData[vehicle].g = tonumber(result['g'])
-	VehicleData[vehicle].b = tonumber(result['b'])
+	VehicleData[vehicle].r = mariadb_get_value_name_int(i, "r")
+	VehicleData[vehicle].g = mariadb_get_value_name_int(i, "g")
+	VehicleData[vehicle].b = mariadb_get_value_name_int(i, "b")
 
-	VehicleData[vehicle].owner = tonumber(result['owner'])
-	VehicleData[vehicle].faction = tonumber(result['faction'])
-	VehicleData[vehicle].rental = tonumber(result['rental'])
-	VehicleData[vehicle].fuel = tonumber(result['litres'])
+	VehicleData[vehicle].owner = mariadb_get_value_name_int(i, "owner")
+	VehicleData[vehicle].faction = mariadb_get_value_name_int(i, "faction")
+	VehicleData[vehicle].rental = mariadb_get_value_name_int(i, "rental")
+	VehicleData[vehicle].fuel = mariadb_get_value_name_int(i, "litres")
 
-	VehicleData[vehicle].impounded = tonumber(result['impounded'])
+	VehicleData[vehicle].impounded = mariadb_get_value_name_int(i, "impounded")
 
 	--VehicleData[vehicle].nos = mariadb_get_value_name_int(1, "nos")
 
@@ -248,7 +247,7 @@ end
 
 function OnLoadVehicles()
 	for i = 1, mariadb_get_row_count(), 1 do
-		Vehicle_Load(mariadb_get_value_name_int(i, "id"))
+		Vehicle_Load(i)
 	end
 
 	print("** Vehicles Loaded: " .. #VehicleData .. ".")
