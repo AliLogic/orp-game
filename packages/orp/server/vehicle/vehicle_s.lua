@@ -121,6 +121,7 @@ function Vehicle_Create(model, plate, x, y, z, a)
 		return false
 	end
 
+	SetVehicleRespawnParams(vehicle, false, 0, false)
 	CreateVehicleData(vehicle)
 	VehicleData[vehicle].vid = vehicle
 	SetVehicleLicensePlate(vehicle, plate)
@@ -182,6 +183,7 @@ function Vehicle_Load(id)
 		return print('Unable to successfully create vehicle ID '..vehicle..', DBID: '..result['id'])
 	end
 
+	SetVehicleRespawnParams(vehicle, false, 0, false)
 	CreateVehicleData(vehicle)
 
 	VehicleData[vehicle].id = id
