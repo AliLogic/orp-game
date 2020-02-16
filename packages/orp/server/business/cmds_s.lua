@@ -31,7 +31,7 @@ local function cmd_biz(playerid, prefix, ...)
 	local biz = Business_Nearest(playerid)
 
 	if biz == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any businesses.</>")
+		return AddPlayerChatError(playerid, "You are not near any businesses.")
 	end
 
 	if prefix == "lock" or prefix == "unlock" then

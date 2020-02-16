@@ -46,3 +46,38 @@ AddCommand("refuel", function (playerid)
 	PumpData[id].is_occupied = true
 	PumpData[id].timer = CreateTimer(OnPumpTick, 1000, id, playerid, vehicle)
 end)
+
+AddCommand("fill", function (playerid)
+
+	local vehicleid = GetNearestVehicle(playerid)
+
+	if (IsPlayerInVehicle(playerid) or vehicleid == 0) then
+		return AddPlayerChatError(playerid, "You are not standing near any vehicle.")
+	end
+
+	if (not Inventory_HasItem(playerid, INV_ITEM_FUELCAN)) then
+		return AddPlayerChatError(playerid, "You don't have any fuel cans on you.")
+	end
+
+	if (GetVehicleEngineState(vehicleid)) then
+		return AddPlayerChatError(playerid, "You must shut off the engine first.")
+	end
+
+	if (GetVehicleFuel(vehicleid) > 95) then
+		return AddPlayerChatError(playerid, "This vehicle doesn't need any fuel.")
+	end
+
+	if (PlayerData[playerid].fuel_can) then
+		return AddPlayerChatError(playerid, "You are already using a can of fuel.")
+	end
+
+	PlayerData[playerid].fuel_can = 1
+
+	Inventory_GiveItem(playerid, INV_ITEM_FUELCAN, -1)
+
+	local x, y, z = GetPlayerLocation(playerid)
+	AddPlayerChatRange(x, y, 800.0, "* " .. GetPlayerName(playerid) .. " opens a can of fuel and fills the vehicle.")
+
+	SetVehicleFuel(vehicleid, 100)
+	return
+end)
