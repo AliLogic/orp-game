@@ -81,7 +81,7 @@ AddCommand("time", function (playerid)
 	local time = os.date ("%A, %d %B %Y")
 
 	AddPlayerChat(playerid, "Today is " .. time .. ".")
-	AddPlayerChat(playerid, "" .. PlayerData[playerid].minutes .. " minute(s) left until paycheck.")
+	AddPlayerChat(playerid, "" .. (60 - PlayerData[playerid].minutes) .. " minute(s) left until paycheck.")
 end)
 
 AddCommand("dice", function (playerid)

@@ -522,7 +522,7 @@ function OnPlayerPayday(player)
 
 	PlayerData[player].minutes = (PlayerData[player].minutes + 1)
 
-	if (PlayerData[player].minutes > 60) then
+	if (PlayerData[player].minutes >= 60) then
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">|________ PAYCHECK ________|</>")
 
