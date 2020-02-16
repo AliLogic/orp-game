@@ -81,7 +81,7 @@ end)
 AddCommand("adestroyplant", function (playerid, plantid)
 
 	if (PlayerData[playerid].admin < 5) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
 	end
 
 	if plantid == nil then

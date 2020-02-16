@@ -314,19 +314,19 @@ end
 local function cmd_sms(playerid, phonenumber, ...)
 
 	if not IsPlayerAlive(playerid) then
-		return AddPlayerChat(playerid, "ERROR: You can't use your phone right now.")
+		return AddPlayerChatError(playerid, "You can't use your phone right now.")
 	end
 
 	if IsPlayerPhoneOff(playerid) then
-		return AddPlayerChat(playerid, "ERROR: Your cellphone is turned off.");
+		return AddPlayerChatError(playerid, "Your cellphone is turned off.");
 	end
 
 	if IsPlayerHandcuffed(playerid) then
-		return AddPlayerChat(playerid, "ERROR: You can't use your phone right now.")
+		return AddPlayerChatError(playerid, "You can't use your phone right now.")
 	end
 
 	if IsPlayerPhoneCooldown(playerid) then
-		return AddPlayerChat(playerid, "ERROR: Please wait before using this command.")
+		return AddPlayerChatError(playerid, "Please wait before using this command.")
 	end
 
 	if phonenumber == nil or #{...} then
@@ -349,19 +349,19 @@ AddCommand("rcs", cmd_sms)
 AddCommand("louspeaker", function (playerid)
 
 	if not IsPlayerAlive(playerid) then
-		return AddPlayerChat(playerid, "ERROR: You can't use your phone right now.")
+		return AddPlayerChatError(playerid, "You can't use your phone right now.")
 	end
 
 	if IsPlayerPhoneOff(playerid) then
-		return AddPlayerChat(playerid, "ERROR: Your cellphone is turned off.");
+		return AddPlayerChatError(playerid, "Your cellphone is turned off.");
 	end
 
 	if IsPlayerHandcuffed(playerid) then
-		return AddPlayerChat(playerid, "ERROR: You can't use your phone right now.")
+		return AddPlayerChatError(playerid, "You can't use your phone right now.")
 	end
 
 	if IsPlayerPhoneCooldown(playerid) then
-		return AddPlayerChat(playerid, "ERROR: Please wait before using this command.")
+		return AddPlayerChatError(playerid, "Please wait before using this command.")
 	end
 
 	PlayerPhoneData[playerid].loudspeaker = not PlayerPhoneData[playerid].loudspeaker

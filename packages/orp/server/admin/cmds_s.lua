@@ -2,7 +2,7 @@ local colour = ImportPackage("colours")
 
 AddCommand("banlog", function(playerid, otherplayer)
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	local query = ""
@@ -35,7 +35,7 @@ end)
 
 AddCommand("ban", function (playerid, lookupid, ...)
 	if (PlayerData[playerid].admin < 2) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (lookupid == nil) then
@@ -60,7 +60,7 @@ AddCommand("ban", function (playerid, lookupid, ...)
 		reason = table.concat({...}, " ")
 
 		if string.len(reason) < 3 or string.len(reason) > 128 then
-			return AddPlayerChat(playerid, "Error: Invalid reason length.")
+			return AddPlayerChatError(playerid, "Invalid reason length.")
 		end
 	end
 
@@ -73,7 +73,7 @@ end)
 AddCommand("unban", function (playerid, ...)
 
 	if (PlayerData[playerid].admin < 2) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (#{...} == 0) then
@@ -84,7 +84,7 @@ AddCommand("unban", function (playerid, ...)
 	local length = string.leng(account)
 
 	if length < 1 or length > 32 then
-		return AddPlayerChat(playerid, "Error: Invalid account specified.")
+		return AddPlayerChatError(playerid, "Invalid account specified.")
 	end
 
 	DeleteAccBan(playerid, account)
@@ -93,7 +93,7 @@ end)
 
 AddCommand("whitelist", function(playerid, steam_id)
 	if (PlayerData[playerid].admin < 2) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (steam_id == nil or steam_id == 0) then
@@ -110,7 +110,7 @@ end)
 
 AddCommand("whitelistlog", function(playerid, otherplayer)
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	local query = ""
@@ -151,7 +151,7 @@ end)
 
 AddCommand("spec", function (playerid, lookupid)
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	--[[if (lookupid == nil) then
@@ -177,7 +177,7 @@ end)
 
 AddCommand("specoff", function (playerid)
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	SetPlayerSpectate(playerid, false)
@@ -186,7 +186,7 @@ end)
 AddCommand("clearchat", function (playerid)
 
 	if (PlayerData[playerid].admin < 2) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	for i = 1, 10, 1 do
@@ -197,7 +197,7 @@ end)
 AddCommand("kick", function (playerid, lookupid, ...)
 
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (lookupid == nil) then
@@ -233,7 +233,7 @@ end)
 AddCommand("warp", function (playerid, fromid, toid)
 
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (fromid == nil or toid == nil) then
@@ -257,7 +257,7 @@ end)
 AddCommand("gotoxyz", function (playerid, x, y, z)
 
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (x == nil or y == nil or z == nil) then
@@ -272,7 +272,7 @@ end)
 AddCommand("slap", function (playerid, lookupid)
 
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (lookupid == nil) then
@@ -289,7 +289,7 @@ end)
 
 AddCommand("goto", function (playerid, lookupid)
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (lookupid == nil) then
@@ -315,7 +315,7 @@ end)
 AddCommand("get", function (playerid, lookupid)
 
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (lookupid == nil) then
@@ -894,7 +894,7 @@ end)
 AddCommand("toggleg", function (playerid)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if OOCStatus == false then
@@ -909,7 +909,7 @@ end)
 AddCommand("setarmour", function (playerid, lookupid, armour)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if lookupid == nil or armour == nil then
@@ -940,7 +940,7 @@ end)
 AddCommand("sethealth", function (playerid, lookupid, health)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if lookupid == nil or health == nil then
@@ -971,7 +971,7 @@ end)
 AddCommand("near", function(playerid)
 
 	if (PlayerData[playerid].admin < 3) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	local id = 0
@@ -1015,7 +1015,7 @@ end)
 AddCommand("assists", function (playerid)
 
 	if PlayerData[playerid].admin == 0 and PlayerData[playerid].helper == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	local count = false
@@ -1065,7 +1065,7 @@ end
 
 AddCommand("cancelassist", function (playerid)
 	if PlayerData[playerid].assistance == 0 then
-		return AddPlayerChat(playerid, "Error: You have not requested any assistance.")
+		return AddPlayerChatError(playerid, "You have not requested any assistance.")
 	end
 
 	PlayerData[playerid].assistance = 0
@@ -1075,7 +1075,7 @@ end)
 AddCommand("assist", function (playerid, lookupid, ...)
 
 	if PlayerData[playerid].admin == 0 and PlayerData[playerid].helper == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if lookupid == nil or #{...} == 0 then
@@ -1092,7 +1092,7 @@ AddCommand("assist", function (playerid, lookupid, ...)
 	local length = string.len(message)
 
 	if length < 5 or length > 50 then
-		return AddPlayerChat(playerid, "Error: Invalid request message length.")
+		return AddPlayerChatError(playerid, "Invalid request message length.")
 	end
 
 	if PlayerData[lookupid].assistance == 0 then
@@ -1110,7 +1110,7 @@ end)
 AddCommand("revokelicense", function (playerid, lookupid, license)
 
 	if (PlayerData[playerid].admin < 3) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if lookupid == nil or license == nil then
@@ -1150,7 +1150,7 @@ end)
 AddCommand("grantlicense", function (playerid, lookupid, license)
 
 	if (PlayerData[playerid].admin < 3) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if lookupid == nil or license == nil then
@@ -1190,7 +1190,7 @@ end)
 AddCommand("ajail", function (playerid, lookupid, minutes)
 
 	if (PlayerData[playerid].admin < 1) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if lookupid == nil or minutes == nil then
@@ -1242,7 +1242,7 @@ end)
 AddCommand("arevive", function (playerid, lookupid)
 
 	if (PlayerData[playerid].admin < 2) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (lookupid == nil) then
@@ -1272,7 +1272,7 @@ end)
 AddCommand("clearinventory", function (playerid, lookupid)
 
 	if (PlayerData[playerid].admin < 2) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if (lookupid == nil) then
@@ -1296,7 +1296,7 @@ end)
 AddCommand("flipveh", function (playerid, vehicleid)
 
 	if (PlayerData[playerid].admin < 2) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	vehicleid = GetPlayerVehicle(playerid)

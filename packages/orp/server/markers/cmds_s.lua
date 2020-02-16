@@ -3,7 +3,7 @@ local colour = ImportPackage('colours')
 local function cmd_acm(playerid, modelid)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
 	end
 
 	if modelid == nil then
@@ -34,7 +34,7 @@ AddCommand("acm", cmd_acm)
 local function cmd_adm(playerid, markerid)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
 	end
 
 	if markerid == nil then
@@ -56,7 +56,7 @@ AddCommand("adm", cmd_adm)
 local function cmd_aem(playerid, markerid, prefix, ...)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
 	end
 
 	if markerid == nil or prefix == nil then

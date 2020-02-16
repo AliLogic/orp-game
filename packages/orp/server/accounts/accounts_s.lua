@@ -128,7 +128,7 @@ end
 local function OnAccBanDelete(playerid, account)
 
 	if mariadb_get_affected_rows() == 0 then
-		AddPlayerChat(playerid, "Error: The specified account "..account.." is either not banned or doesn't exist in the database.")
+		AddPlayerChatError(playerid, "The specified account "..account.." is either not banned or doesn't exist in the database.")
 	else
 		AddPlayerChat(playerid, "The specified account "..account.." is unbanned.")
 	end

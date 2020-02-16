@@ -352,7 +352,7 @@ AddCommand("facmod", function(playerid)
 	end
 
 	if PlayerData[playerid].factionRank < FactionData[factionId].leadRank then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
 	end
 
 	AddPlayerChat(playerid, "Coming soon...")

@@ -91,15 +91,15 @@ AddCommand("chop", function (playerid)
 	local treeid = GetNearestTree(playerid)
 
 	if treeid == 0 then
-		return AddPlayerChat(playerid, "Error: You are not near any trees.")
+		return AddPlayerChatError(playerid, "You are not near any trees.")
 	end
 
 	if LumberjackTrees[treeid].spawned == false then
-		return AddPlayerChat(playerid, "Error: This tree has been chopped.")
+		return AddPlayerChatError(playerid, "This tree has been chopped.")
 	end
 
 	if LumberjackTrees[treeid].is_chopped == true then
-		return AddPlayerChat(playerid, "Error: This tree is being chopped.")
+		return AddPlayerChatError(playerid, "This tree is being chopped.")
 	end
 
 	LumberjackTrees[treeid].timer = CreateTimer(ChopTree, 1000, playerid)
