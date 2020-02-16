@@ -237,8 +237,6 @@ function OnLoadCharacterFaction(playerid)
 	else
 		PlayerData[playerid].faction = mariadb_get_value_name_int(1, "faction_id")
 		PlayerData[playerid].faction_rank = mariadb_get_value_name_int(1, "rank_id")
-
-		AddPlayerChat(playerid, "Faction Id: "..PlayerData[playerid].faction.." Faction Rank: "..PlayerData[playerid].faction_rank..".")
 	end
 end
 
@@ -293,6 +291,24 @@ function OnTicketsViewLoaded(playerid)
 		DialogString = message
 		borkui.createUI(playerid, 0, DIALOG_TICKETS_PAY)
 	end
+end
+
+function Faction_GetRankName(factionid, rankid)
+
+	if FactionData[factionid] == nil then
+		return 'None'
+	end
+
+	return FactionRankData[factionid][rankid].rank_name
+end
+
+function Faction_GetName(factionid)
+
+	if FactionData[factionid] == nil then
+		return 'None'
+	end
+
+	return FactionData[factionid].name
 end
 
 function AddPlayerChatFaction(factionid, message)

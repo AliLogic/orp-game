@@ -685,6 +685,23 @@ function LoadPlayerKeys(playerid)
 	LoadPlayerHouseKeys(playerid)
 end
 
+function Player_GetFactionRank(playerid)
+	if PlayerData[playerid] == nil then
+		return 0
+	end
+
+	return PlayerData[playerid].faction_rank
+end
+
+function Player_GetFactionId(playerid)
+
+	if PlayerData[playerid] == nil then
+		return 0
+	end
+
+	return PlayerData[playerid].faction
+end
+
 -- Events
 
 AddEvent("OnPlayerSpawn", function(player)
