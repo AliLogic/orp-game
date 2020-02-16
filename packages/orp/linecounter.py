@@ -21,4 +21,4 @@ for directory in clean_dirs:
 				for line in f.readlines():
 					count += 1
 
-print(f"Line Count: {count}")
+print("Line Count: {}".format(count))
