@@ -124,40 +124,31 @@ function Speedcam_Destroy(speedcam)
 	DestroySpeedcamData(speedcam)
 end
 
-local function OnSpeedcamLoaded(speedcamid)
+local function Speedcam_Load(i)
 
-	if mariadb_get_row_count() == 0 then
-		print("Failed to load speedcam SQL ID "..speedcamid)
-	else
-		local index = GetFreeSpeedcamId()
+	local index = GetFreeSpeedcamId()
 
-		if index == 0 then
-			print("A free speedcam id wasn't able to be found? ("..#SpeedcamData.."/"..MAX_SPEEDCAMS..") speedcam SQL ID "..speedcamid..".")
-			return
-		end
-
-		SpeedcamData[index].id = speedcamid
-
-		SpeedcamData[index].x = mariadb_get_value_name_int(1, "x")
-		SpeedcamData[index].y = mariadb_get_value_name_int(1, "y")
-		SpeedcamData[index].z = mariadb_get_value_name_int(1, "z")
-		SpeedcamData[index].speed = mariadb_get_value_name_int(1, "speed")
-
-		SpeedcamData[index].objectid = CreateObject(963, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z)
-		SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 180.0, 0.0, 0.0, 0.0)
-
-		SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
+	if index == 0 then
+		print("A free speedcam id wasn't able to be found? ("..#SpeedcamData.."/"..MAX_SPEEDCAMS..") speedcam SQL ID "..mariadb_get_value_name_int(i, "id")..".")
+		return
 	end
-end
 
-local function Speedcam_Load(speedcam)
-	local query = mariadb_prepare(sql, "SELECT * FROM speedcams WHERE id = '?';", speedcam)
-	mariadb_async_query(sql, query, OnSpeedcamLoaded, speedcam)
+	SpeedcamData[index].id = mariadb_get_value_name_int(i, "id")
+
+	SpeedcamData[index].x = mariadb_get_value_name_int(i, "x")
+	SpeedcamData[index].y = mariadb_get_value_name_int(i, "y")
+	SpeedcamData[index].z = mariadb_get_value_name_int(i, "z")
+	SpeedcamData[index].speed = mariadb_get_value_name_int(i, "speed")
+
+	SpeedcamData[index].objectid = CreateObject(963, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z)
+	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..SpeedcamData[index].speed.." KM/H", 20, SpeedcamData[index].x, SpeedcamData[index].y, SpeedcamData[index].z + 180.0, 0.0, 0.0, 0.0)
+
+	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 end
 
 local function OnSpeedcamLoad()
 	for i = 1, mariadb_get_row_count(), 1 do
-		Speedcam_Load(mariadb_get_value_name_int(i, "id"))
+		Speedcam_Load(i)
 	end
 
 	print("** Speedcams Loaded: "..mariadb_get_row_count()..".")

@@ -135,39 +135,30 @@ function Pump_Destroy(pump)
 	DestroyPumpData(pump)
 end
 
-local function OnPumpLoaded(pump)
+local function Pump_Load(i)
+	local index = GetFreePumpId()
 
-	if mariadb_get_row_count() == 0 then
-		print("Failed to load pump SQL ID "..pump)
-	else
-		local index = GetFreePumpId()
-
-		if index == 0 then
-			print("A free pump id wasn't able to be found? ("..#PumpData.."/"..MAX_SPEEDCAMS..") pump SQL ID "..pump..".")
-			return
-		end
-
-		PumpData[index].id = pump
-
-		PumpData[index].x = mariadb_get_value_name_int(1, "x")
-		PumpData[index].y = mariadb_get_value_name_int(1, "y")
-		PumpData[index].z = mariadb_get_value_name_int(1, "z")
-		PumpData[index].litres = mariadb_get_value_name_int(1, "litres")
-
-		PumpData[index].text3d = CreateText3D("Pump ("..index..")\nLitres: "..PumpData[index].litres, 20, PumpData[index].x, PumpData[index].y, PumpData[index].z + 150.0, 0.0, 0.0, 0.0)
-
-		PumpData[index].is_occupied = false
+	if index == 0 then
+		print("A free pump id wasn't able to be found? ("..#PumpData.."/"..MAX_SPEEDCAMS..") pump SQL ID "..mariadb_get_value_name_int(i, "id")..".")
+		return
 	end
-end
 
-local function Pump_Load(pump)
-	local query = mariadb_prepare(sql, "SELECT * FROM pumps WHERE id = '?';", pump)
-	mariadb_async_query(sql, query, OnPumpLoaded, pump)
+	PumpData[index].id = mariadb_get_value_name_int(i, "id")
+
+	PumpData[index].x = mariadb_get_value_name_int(i, "x")
+	PumpData[index].y = mariadb_get_value_name_int(i, "y")
+	PumpData[index].z = mariadb_get_value_name_int(i, "z")
+	PumpData[index].litres = mariadb_get_value_name_int(i, "litres")
+
+	PumpData[index].text3d = CreateText3D("Pump ("..index..")\nLitres: "..PumpData[index].litres, 20, PumpData[index].x, PumpData[index].y, PumpData[index].z + 150.0, 0.0, 0.0, 0.0)
+
+	PumpData[index].is_occupied = false
+
 end
 
 local function OnPumpLoad()
 	for i = 1, mariadb_get_row_count(), 1 do
-		Pump_Load(mariadb_get_value_name_int(i, "id"))
+		Pump_Load(i)
 	end
 
 	print("** Pumps Loaded: "..mariadb_get_row_count()..".")
