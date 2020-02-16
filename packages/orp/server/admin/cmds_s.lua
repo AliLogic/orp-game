@@ -681,7 +681,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 		VehicleData[vehicle].g = g
 		VehicleData[vehicle].b = b
 
-		SetVehicleColor(vehicle, RGB(r, g, b))
+		SetVehicleColor(VehicleData[vehicle].vid, RGB(r, g, b))
 
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." color changed.</>")
 	elseif prefix == "plate" then
@@ -767,7 +767,7 @@ local function cmd_aev(player, vehicle, prefix, ...)
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Health must be between 0 to 5000.</>")
 		end
 
-		SetVehicleHealth(vehicle, health)
+		SetVehicleHealth(VehicleData[vehicle].vid, health)
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\"> Vehicle "..GetVehicleModelEx(vehicle).." (ID: "..vehicle..") health is now set to "..health..".</>")
 		return
 	else
