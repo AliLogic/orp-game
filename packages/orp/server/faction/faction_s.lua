@@ -277,10 +277,10 @@ function OnTicketsViewLoaded(playerid)
 		AddPlayerChat(playerid, "You have no pending tickets on you.")
 	else
 
-		local message = ""
-		-- [[ Show the player a dialog with the tickets they can pay... ]] --
+		local message = {}
+
 		for i = 1, mariadb_get_row_count(), 1 do
-			message = message .. mariadb_get_value_index(i, "reason") " ($" .. mariadb_get_value_index_int(i, "fee") .. ")<br>"
+			table.insert(message, "" .. mariadb_get_value_index(i, "reason") " ($" .. mariadb_get_value_index_int(i, "fee") .. ")")
 		end
 
 		DialogString = message
@@ -312,7 +312,7 @@ AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid
 
 		borkui.addUITitle(playerid, dialogid, "Tickets")
 		borkui.addUIDivider(playerid, dialogid)
-		-- borkui.AddUIDropdown(playerid, dialogid, {})
+		borkui.AddUIDropdown(playerid, dialogid, DialogString, 1, false, "Select the ticket you wish to pay:")
 		borkui.addUIDivider(playerid, dialogid)
 		borkui.addUIButton(playerid, dialogid, 'Pay', 'is-success')
 		borkui.addUIButton(playerid, dialogid, 'Cancel', 'is-danger')
