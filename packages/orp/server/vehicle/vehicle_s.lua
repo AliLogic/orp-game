@@ -240,6 +240,8 @@ function OnVehicleUnloaded(vehicle)
 		print('Vehicle unload successful, id: '..vehicle)
 		DestroyVehicle(VehicleData[vehicle].vid)
 	end
+
+	VehicleData[vehicle] = nil
 end
 
 function OnLoadVehicles()
