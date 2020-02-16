@@ -263,7 +263,7 @@ const addToArray = (id, button) => { // id should be the id passed through showU
 
 		console.log("addToArray: " + JSON.stringify(returnValues));
 
-		if (returnValues.length >= 2) resolve(returnValues);
+		if (returnValues.length >= 1) resolve(returnValues);
 		else reject("An error has occured.", returnValues);
 	});
 }
