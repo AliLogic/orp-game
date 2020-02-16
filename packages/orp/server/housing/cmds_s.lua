@@ -38,7 +38,7 @@ AddCommand("housedoors", function (playerid)
 	end
 
 	for k, v in pairs(HousingData[house].doors) do
-		AddPlayerChat(playerid, "House " .. house .." - Door " .. v ..".")
+		AddPlayerChat(playerid, "House " .. house .." - Door " .. v .." - Locked: " .. DoorData[v].is_locked .. ".")
 	end
 end)
 
