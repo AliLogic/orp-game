@@ -226,7 +226,7 @@ AddCommand("whisper", function (playerid, lookupid, ...)
 
 	local text = table.concat({...}, " ")
 
-	lookupid = tonumber(lookupid)
+	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) or not IsPlayerInRangeOfPlayer(playerid, lookupid) then
 		return AddPlayerChat(playerid, "That player is disconnected or not near you.");
@@ -251,13 +251,13 @@ AddCommand("pm", function (player, target, ...)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /pm [playerid] [text]")
 	end
 
-	target = tonumber(target)
+	target = GetPlayerIdFromData(target)
 
 	if target == player then
 		return AddPlayerChat(player, "You cannot PM yourself.")
 	end
 
-	if IsValidPlayer(target) == false then
+	if not IsValidPlayer(target) then
 		return AddPlayerChat(player, "Invalid player id.")
 	end
 
@@ -312,7 +312,7 @@ AddCommand("showlicenses", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /showlicenses <playerid>")
 	end
 
-	lookupid = tonumber(lookupid)
+	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")

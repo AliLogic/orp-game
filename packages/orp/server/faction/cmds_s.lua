@@ -30,7 +30,7 @@ AddCommand("frank", function (playerid, lookupid, rank)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
-	lookupid = tonumber(lookupid)
+	lookupid = GetPlayerIdFromData(lookupid)
 
 	if (not IsValidPlayer(lookupid)) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have specified an invalid player ID.</>")
@@ -101,7 +101,7 @@ AddCommand("finvite", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /finvite <playerid>")
 	end
 
-	lookupid = tonumber(lookupid)
+	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
@@ -137,7 +137,7 @@ AddCommand("fremove", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /fremove <playerid>")
 	end
 
-	lookupid = tonumber(lookupid)
+	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
@@ -263,7 +263,7 @@ AddCommand("badge", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /badge <playerid>")
 	end
 
-	lookupid = tonumber(lookupid)
+	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
@@ -619,7 +619,7 @@ AddCommand("ticket", function (playerid, lookupid, price, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ticket <playerid> <price> <reason>")
 	end
 
-	lookupid = tonumber(lookupid)
+	lookupid = GetPlayerIdFromData(lookupid)
 	price = tonumber(price)
 
 	if not IsValidPlayer(lookupid) then
@@ -687,7 +687,7 @@ AddCommand("checkproperties", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /checkproperties <playerid>")
 	end
 
-	lookupid = tonumber(lookupid)
+	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
@@ -709,7 +709,7 @@ AddCommand("detain", function (playerid, lookupid)
 
 	local vehicleid = GetNearestVehicle(playerid)
 
-	lookupid = tonumber(lookupid)
+	lookupid = GetPlayerIdFromData(lookupid)
 
 	if (not IsValidPlayer(lookupid)) then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have specified an invalid player ID.</>")

@@ -285,6 +285,29 @@ function AddPlayerChatError(playerid, message)
 	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: " .. message .. ".</>")
 end
 
+function GetPlayerIdFromData(string)
+
+    local playerid = math.tointeger(string)
+
+    if playerid == nil then
+        playerid = GetPlayerFromPartialName(string)
+    end
+
+    return playerid ~= nil and playerid or 0
+end
+
+function GetPlayerFromPartialName(name)
+    name = name and name:gsub("#%x%x%x%x%x%x", ""):lower() or nil
+    if name then
+        for _, player in ipairs(GetAllPlayers()) do
+            local playerName = GetPlayerName(player):gsub("#%x%x%x%x%x%x", ""):lower()
+            if playerName:find(name, 1, true) then
+                return player
+            end
+        end
+    end
+end
+
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
 AddRemoteEvent("SetPlayerCash", SetPlayerCash)
 AddRemoteEvent("AddPlayerCash", AddPlayerCash)
