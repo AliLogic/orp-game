@@ -89,7 +89,7 @@ end
 local function House_Load(i)
 	local house = GetFreeHousingId()
 	if house == 0 then
-		print("A free house id wasn't able to be found? ("..#HousingData.."/"..MAX_BUSINESSES..") house SQL ID "..mariadb_get_value_name_int(i, "id")..".")
+		print("A free house id wasn't able to be found? ("..#HousingData.."/"..MAX_HOUSING..") house SQL ID "..mariadb_get_value_name_int(i, "id")..".")
 		return 0
 	end
 
