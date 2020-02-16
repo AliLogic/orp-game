@@ -172,13 +172,13 @@ function OnHouseCreated(i, htype, price, address)
 end
 
 function House_Unload(house)
-	local query = mariadb_prepare(sql, "UPDATE houses SET owner = ?, address = '?', locked = ?, type = ?, price = ?, message = '?', dimension = ?\
-	ix = '?', iy = '?', iz = '?', ia = '?', ex = '?', ey = '?', ez = '?', ea = '?', ownership_type = ? WHERE id = ?;",
+	local query = mariadb_prepare(sql, "UPDATE houses SET owner = ?, address = '?', locked = ?, type = ?, price = ?, message = '?', dimension = ?,\
+	ix = ?, iy = ?, iz = ?, ia = ?, ex = ?, ey = ?, ez = ?, ea = ?, ownership_type = ? WHERE id = ?;",
 		HousingData[house].owner, HousingData[house].address, HousingData[house].locked,
 		HousingData[house].type, HousingData[house].price,
 		HousingData[house].message, HousingData[house].dimension,
-		tostring(HousingData[house].ix), tostring(HousingData[house].iy), tostring(HousingData[house].iz), tostring(HousingData[house].ia),
-		tostring(HousingData[house].ex), tostring(HousingData[house].ey), tostring(HousingData[house].ez), tostring(HousingData[house].ea),
+		HousingData[house].ix, HousingData[house].iy, HousingData[house].iz, HousingData[house].ia,
+		HousingData[house].ex, HousingData[house].ey, HousingData[house].ez, HousingData[house].ea,
 		HousingData[house].ownership_type, HousingData[house].id
 	)
 	mariadb_async_query(sql, query, OnHouseUnloaded, house)
