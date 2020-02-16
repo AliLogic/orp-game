@@ -111,7 +111,7 @@ end
 
 function OnAccountCreated(player)
 	PlayerData[player].accountid = mariadb_get_insert_id()
-	ShowCharacterSelection(player)
+	ShowCharacterSelection(player, false)
 	--CallRemoteEvent(player, "askClientCreation")
 end
 
@@ -222,12 +222,12 @@ function OnAccountLoaded(player)
 
 		--AddPlayerChat(player, "Logged in as ")
 
-		local query = mariadb_prepare(sql, "SELECT * FROM characters WHERE accountid = ?;",
+		local query = mariadb_prepare(sql, "SELECT id, firstname, lastname, level, cash FROM characters WHERE accountid = ?;",
 			PlayerData[player].accountid)
 
 		mariadb_async_query(sql, query, OnCharacterPartLoaded, player)
 
-		local query = mariadb_prepare(sql, "SELECT *, unix_timestamp(date) AS time FROM donations WHERE accountid = ?;",
+		query = mariadb_prepare(sql, "SELECT *, unix_timestamp(date) AS time FROM donations WHERE accountid = ?;",
 			PlayerData[player].accountid)
 
 		mariadb_async_query(sql, query, OnDonationsLoaded, player)
@@ -237,7 +237,7 @@ end
 function OnCharacterPartLoaded(player)
 	if (mariadb_get_row_count() == 0) then
 		--KickPlayer(player, "An error occured while loading your character 😨")
-		ShowCharacterSelection(player)
+		ShowCharacterSelection(player, false)
 		--CallRemoteEvent(player, "askClientCreation")
 		print('Remote event called to Client!')
 	else
@@ -254,11 +254,11 @@ function OnCharacterPartLoaded(player)
 			CharacterData[player][i].cash = mariadb_get_value_name_int(i, "cash")
 		end
 
-		ShowCharacterSelection(player)
+		ShowCharacterSelection(player, false)
 	end
 end
 
-function ShowCharacterSelection (player, logout)
+function ShowCharacterSelection(player, logout)
 	logout = logout or false
 
 	SetPlayerLocation(player, 122191.86, 99569.03, 1676.32)
@@ -476,6 +476,8 @@ function DestroyPlayerData(player)
 	DestroyPlayerClothingData(player)
 
 	DestroyTimer(PlayerData[player].pd_timer)
+	DestroyTimer(PlayerData[player].death_timer)
+
 	PlayerData[player] = nil
 	CharacterData[player] = nil
 	InventoryData[player] = nil
@@ -582,17 +584,22 @@ AddRemoteEvent('accounts:kick', function (player)
 end)
 
 AddCommand("logout", function (player)
+	print("Logging out [1]")
 	SavePlayerAccount(player)
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You will be logged out in 5 seconds.")
 	SetPlayerChatBubble(player, "(( Player is logging out. ))", 4)
 
 	PlayerData[player].logged_in = false
 
+	print("Logging out [2]")
+
 	Delay(5000, function ()
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You are now being logged out.")
 		SendAdminMessage("<span color=\""..colour.COLOUR_LIGHTRED().."\">AdmCmd: "..PlayerData[player].name.." is logging out.</>")
 		ShowCharacterSelection(player, true)
 	end)
+
+	print("Logging out [3]")
 end)
 
 function DestroyDrivingTest(playerid)
