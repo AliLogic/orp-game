@@ -378,7 +378,7 @@ function CreatePlayerData(player)
 	PlayerData[player].label = nil -- 3d text label
 
 	PlayerData[player].pd_timer = 0
-	PlayerData[player].hospital_timer = 0
+	PlayerData[player].death_timer = 0
 	PlayerData[player].renting = 0 -- Vehicle ID that a player is renting.
 
 	PlayerData[player].driving_test = false
@@ -387,6 +387,7 @@ function CreatePlayerData(player)
 	PlayerData[player].test_stage = 0
 	PlayerData[player].assistance = 0
 	PlayerData[player].ajail = 0
+	PlayerData[player].death_state = 0
 
 	CreatePlayerClothingData(player)
 
@@ -635,14 +636,18 @@ function GetPlayerJob(playerid)
 	return 0
 end
 
-function OnPlayerRecover(player)
+function ClearCharacterDeath(playerid)
+
+	DestroyTimer(PlayerData[playerid].death_timer)
+	PlayerData[playerid].death_timer = 0
+end
+
+local function OnPlayerRecover(player)
 
 	PlayerData[player].state = CHARACTER_STATE_ALIVE
-
 	AddPlayerChat(player, "You have now recovered...")
 
-	DestroyTimer(PlayerData[player].hospital_timer)
-	PlayerData[player].hospital_timer = 0
+	ClearCharacterDeath(player)
 
 	SetPlayerLocation(player, LOC_RESPAWN_X, LOC_RESPAWN_Y, LOC_RESPAWN_Z)
 	SetPlayerHeading(player, 81.82)
@@ -652,6 +657,7 @@ end
 
 function PutPlayerInHospital(player)
 	PlayerData[player].state = CHARACTER_STATE_RECOVER
+	PlayerData[player].death_state = 0
 
 	AddPlayerChat(player, "You are now being recovered at a nearby hospital...")
 
@@ -662,7 +668,8 @@ function PutPlayerInHospital(player)
 		SetPlayerAnimation(player, "LAY_3")
 	end)
 
-	PlayerData[player].hospital_timer = CreateTimer(OnPlayerRecover, 10 * 1000, player)
+	ClearCharacterDeath(player)
+	PlayerData[player].death_timer = CreateTimer(OnPlayerRecover, 10 * 1000, player)
 
 	--Camera: 215498, 158293, 2954
 end
@@ -690,26 +697,16 @@ AddEvent("OnPlayerSpawn", function(player)
 	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
 
 		AddPlayerChat(player, "You are now wounded... You can use /acceptdeath shortly.")
-
 		FreezePlayer(player, true)
-
-		Delay(30 * 1000, function()
-
-			if PlayerData[player].state == CHARACTER_STATE_WOUNDED then
-				PlayerData[player].acceptdeath = true
-				AddPlayerChat(player, "You can now /acceptdeath.")
-			else
-				PlayerData[player].acceptdeath = false
-			end
-		end)
+		PlayerData[player].death_state = 1
+		SetPlayerAnimation(player, "LAY_3")
 
 	elseif PlayerData[player].state == CHARACTER_STATE_DEAD then
 
 		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
-		SetPlayerAnimation(player, "LAY_3")
 		FreezePlayer(player, true)
-
-		PlayerData[player].respawnme = true
+		PlayerData[player].death_state = 2
+		SetPlayerAnimation(player, "LAY_3")
 
 	else
 
@@ -731,12 +728,10 @@ AddEvent("OnPlayerDeath", function (player, instigator)
 
 	else
 
-		PlayerData[player].acceptdeath = false
-		PlayerData[player].respawnme = false
+		PlayerData[player].death_state = 0
 		PutPlayerInHospital(player)
 	end
 end)
-
 AddEvent("OnPackageStart", function ()
 	CreateTimer(function()
 		local count = false

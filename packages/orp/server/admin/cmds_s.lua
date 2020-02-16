@@ -1239,6 +1239,36 @@ AddCommand("ajail", function (playerid, lookupid, minutes)
 	return
 end)
 
+AddCommand("arevive", function (playerid, lookupid)
+
+	if (PlayerData[playerid].admin < 2) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
+	if (lookupid == nil) then
+		return AddPlayerChat(playerid, "Usage: /arevive <playerid>")
+	end
+
+	lookupid = tonumber(lookupid)
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+	end
+
+	if PlayerData[lookupid].state == CHARACTER_STATE_ALIVE then
+		return
+	end
+
+	ClearCharacterDeath(lookupid)
+	PlayerData[lookupid].state = CHARACTER_STATE_ALIVE
+	SetPlayerHealth(lookupid, 10.0)
+
+	AddPlayerChat(playerid, "You have revived "..GetPlayerName(lookupid)..".")
+	AddPlayerChat(lookupid, ""..GetPlayerName(playerid).." has revived you.")
+
+	return
+end)
+
 AddCommand("clearinventory", function (playerid, lookupid)
 
 	if (PlayerData[playerid].admin < 2) then

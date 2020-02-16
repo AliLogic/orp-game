@@ -277,31 +277,33 @@ AddCommand('stats', function (player)
 	ViewPlayerStats(player, player)
 end)
 
-AddCommand("respawnme", function (playerid)
-
-	if PlayerData[playerid].respawnme == false then
-		return
-	end
-
-	PutPlayerInHospital(playerid)
-	PlayerData[playerid].respawnme = false
-	AddPlayerChat(playerid, "You are now being respawned...")
-end)
-
 AddCommand("acceptdeath", function (playerid)
 
-	if PlayerData[playerid].acceptdeath == false then
-		return
+	if PlayerData[playerid].death_state ~= 1 then
+		return AddPlayerChat(playerid, "You can't use this command right now.")
 	end
 
 	PlayerData[playerid].state = CHARACTER_STATE_DEAD
-	PlayerData[playerid].acceptdeath = false
-
-	Delay(10 * 1000, function ()
-		PlayerData[playerid].respawnme = true
-	end)
-
 	AddPlayerChat(playerid, "You are now dead. You need to wait before you can now use /respawnme.")
+
+	ClearCharacterDeath(playerid)
+	PlayerData[playerid].death_timer = CreateTimer(function ()
+		PlayerData[playerid].death_state = 2
+		AddPlayerChat(playerid, "You can now use /respawnme.")
+		ClearCharacterDeath(playerid)
+	end, 10 * 1000, playerid)
+end)
+
+AddCommand("respawnme", function (playerid)
+
+	if PlayerData[playerid].death_state ~= 2 then
+		return AddPlayerChat(playerid, "You can't use this command right now.")
+	end
+
+	AddPlayerChat(playerid, "You are now being respawned...")
+
+	ClearCharacterDeath(playerid)
+	PutPlayerInHospital(playerid)
 end)
 
 AddCommand("showlicenses", function (playerid, lookupid)
