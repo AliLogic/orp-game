@@ -93,6 +93,11 @@ function CreateJobCoords(job)
 end
 
 function GetJobName(job)
+
+	if job == 0 then
+		return 'None'
+	end
+
 	return JobData[job].name
 end
 

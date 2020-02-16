@@ -107,11 +107,17 @@ function ViewPlayerStats(player, target)
 	AddPlayerChat(player, string.format("<span color=\"%s\">CHARACTER: Gender:[%s] CharID:[%d]</>",
 		colour.COLOUR_GRAD2(), (PlayerData[target].gender == 0 and 'Male' or 'Female'), PlayerData[player].id))
 
-	AddPlayerChat(player, string.format("<span color=\"%s\">CHARACTER: LEVEL:[%d] EXP:[%d/%d]</>",
-		colour.COLOUR_GRAD2(), PlayerData[target].level, PlayerData[target].exp, (PlayerData[target].exp * 4) + 2))
+	AddPlayerChat(player, string.format("<span color=\"%s\">CHARACTER: Level:[%d] XP:[%d/%d] Job:[%s]</>",
+		colour.COLOUR_GRAD2(), PlayerData[target].level, PlayerData[target].exp, (PlayerData[target].exp * 4) + 2), GetJobName(GetPlayerJob(target)))
 
-	AddPlayerChat(player, string.format("<span color=\"%s\">MONEY: Cash:[$%d] Bank:[$%d]</>",
+	AddPlayerChat(player, string.format("<span color=\"%s\">MONEY: Cash:[$%d] Bank:[$%d] </>",
 		colour.COLOUR_GRAD1(), PlayerData[target].cash, PlayerData[target].bank))
+
+	local faction_id = Player_GetFactionId(target)
+	local faction_rank = Player_GetFactionRank(target)
+
+	AddPlayerChat(player, string.format("<span color=\"%s\">FACTION: Faction:[%s] Rank:[%s (%d)] </>",
+		colour.COLOUR_GRAD1(), Faction_GetName(faction_id), Faction_GetRankName(faction_id, faction_rank), faction_rank))
 
 	if PlayerData[target].admin > 0 then
 		AddPlayerChat(player, string.format("<span color=\"%s\">ADMIN: DBID:[%d] Dimension:[%d] Locale:[%s]</>",
