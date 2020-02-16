@@ -236,7 +236,7 @@ function HideUI()
 		return false
 	end
 
-	ExecuteWebJS('hideUI();')
+	ExecuteWebJS(web, 'hideUI();')
 	lastOpened = 0
 	SetIgnoreLookInput(false)
 	SetIgnoreMoveInput(false)
