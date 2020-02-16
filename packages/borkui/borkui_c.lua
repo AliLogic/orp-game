@@ -281,7 +281,6 @@ AddEvent("borkui:OnDialogSubmit", function (dialog, button, text)
 	dialog = math.tointeger(dialog)
 	button = math.tointeger(button)
 
-	AddPlayerChat('(borkui): UI submitted, with dialog '..dialog..', extraid '..dialogs[dialog].extraid..', button '..button..' and text '..text..'.')
 	CallRemoteEvent("borkui:clientOnDialogSubmit", dialog, dialogs[dialog].extraid, button, text)
 end)
 

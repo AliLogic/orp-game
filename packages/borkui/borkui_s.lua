@@ -23,10 +23,6 @@ AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid
 end)
 
 AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, text)
-	print("text: "..text)
-	print("dialogid: "..dialogid)
-	print("button: "..button)
-	AddPlayerChat(playerid, '(borkui): borkui:clientOnDialogSubmit, with dialogid '..dialogid..', extraid '..extraid..', button '..button..' and text '.. text ..'.')
 end)
 
 function CreateUI(player, align, extraid)
