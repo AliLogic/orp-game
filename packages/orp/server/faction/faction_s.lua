@@ -13,6 +13,8 @@ Contributors:
 local colour = ImportPackage('colours')
 local borkui = ImportPackage('borkui')
 
+MAX_FACTIONS = 10
+
 FactionData = {}
 FactionRankData = {}
 
@@ -26,6 +28,16 @@ FACTION_MEDIC = 3
 FACTION_GOV = 4
 
 -- Functions
+
+function GetFreeFactionId()
+	for i = 1, MAX_FACTIONS, 1 do
+		if FactionData[i] == nil then
+			CreateFactionData(i)
+			return i
+		end
+	end
+	return 0
+end
 
 function CreateFactionData(factionid)
 	FactionData[factionid] = {}
@@ -119,44 +131,39 @@ function Faction_Destroy(factionid)
 	return true
 end
 
-function Faction_Load(factionid)
-    local query = mariadb_prepare(sql, "SELECT * FROM factions WHERE id = ?", factionid)
-    mariadb_async_query(sql, query, OnFactionLoaded, factionid)
-end
-
-function OnFactionLoaded(factionid)
-	if mariadb_get_row_count() == 0 then
-		print('Error with loading faction ID'..factionid)
-	else
-		CreateFactionData(factionid)
-
-		FactionData[factionid].id = mariadb_get_value_name_int(1, "id")
-		FactionData[factionid].name = mariadb_get_value_name(1, "name")
-		FactionData[factionid].short_name = mariadb_get_value_name(1, "short_name")
-		FactionData[factionid].motd = mariadb_get_value_name(1, "motd")
-		FactionData[factionid].type = mariadb_get_value_name_int(1, "type")
-
-		FactionData[factionid].leadership_rank = mariadb_get_value_name_int(1, "leadership_rank")
-		FactionData[factionid].radio_dimension = mariadb_get_value_name_int(1, "radio_dimension")
-		FactionData[factionid].bank = mariadb_get_value_name_int(1, "bank")
-
-		FactionData[factionid].locker_x = mariadb_get_value_name_int(1, "locker_x")
-		FactionData[factionid].locker_y = mariadb_get_value_name_int(1, "locker_y")
-		FactionData[factionid].locker_z = mariadb_get_value_name_int(1, "locker_z")
-
-		if FactionData[factionid].locker_x ~= 0 then
-			FactionData[factionid].locker_text3d = CreateText3D("Faction Locker (/flocker)", 10, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z, 0.0, 0.0, 0.0)
-		end
-
-		for i = 1, FactionData[factionid].leadership_rank, 1 do
-			FactionRankData[factionid][i] = {}
-			FactionRankData[factionid][i].rank_name = "Rank"..i
-			FactionRankData[factionid][i].rank_pay = 0
-		end
-
-		local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ? ORDER BY `rank_id` ASC", FactionData[factionid].id)
-		mariadb_async_query(sql, query, OnFactionRankLoaded, FactionData[factionid].id)
+function Faction_Load(i)
+	local factionid = GetFreeFactionId()
+	if factionid == 0 then
+		print("A free faction id wasn't able to be found? ("..#FactionData.."/"..MAX_FACTIONS..") faction SQL ID "..mariadb_get_value_name_int(i, "id")..".")
+		return 0
 	end
+
+	FactionData[factionid].id = mariadb_get_value_name_int(i, "id")
+	FactionData[factionid].name = mariadb_get_value_name(i, "name")
+	FactionData[factionid].short_name = mariadb_get_value_name(i, "short_name")
+	FactionData[factionid].motd = mariadb_get_value_name(i, "motd")
+	FactionData[factionid].type = mariadb_get_value_name_int(i, "type")
+
+	FactionData[factionid].leadership_rank = mariadb_get_value_name_int(i, "leadership_rank")
+	FactionData[factionid].radio_dimension = mariadb_get_value_name_int(i, "radio_dimension")
+	FactionData[factionid].bank = mariadb_get_value_name_int(i, "bank")
+
+	FactionData[factionid].locker_x = mariadb_get_value_name_int(i, "locker_x")
+	FactionData[factionid].locker_y = mariadb_get_value_name_int(i, "locker_y")
+	FactionData[factionid].locker_z = mariadb_get_value_name_int(i, "locker_z")
+
+	if FactionData[factionid].locker_x ~= 0 then
+		FactionData[factionid].locker_text3d = CreateText3D("Faction Locker (/flocker)", 10, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z, 0.0, 0.0, 0.0)
+	end
+
+	for j = 1, FactionData[factionid].leadership_rank, 1 do
+		FactionRankData[factionid][j] = {}
+		FactionRankData[factionid][j].rank_name = "Rank"..j
+		FactionRankData[factionid][j].rank_pay = 0
+	end
+
+	local query = mariadb_prepare(sql, "SELECT * FROM faction_ranks WHERE id = ? ORDER BY `rank_id` ASC", FactionData[factionid].id)
+	mariadb_async_query(sql, query, OnFactionRankLoaded, factionid)
 end
 
 function OnFactionRankLoaded(factionid)
