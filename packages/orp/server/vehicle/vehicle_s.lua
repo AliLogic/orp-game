@@ -307,6 +307,16 @@ function GetVehicleFuel(vehicleid)
 	return VehicleData[vehicleid].fuel
 end
 
+function SetVehicleFuel(vehicleid, fuel)
+
+	if VehicleData[vehicleid] ~= nil then
+		VehicleData[vehicleid].fuel = fuel
+		return true
+	end
+
+	return false
+end
+
 function ImpoundVehicle(vehicleid, price)
 
 	SetVehicleLocation(vehicleid, 94358, 120088, 6431)

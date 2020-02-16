@@ -281,6 +281,10 @@ function ShowPropertiesList(playerid, lookupid)
 	end
 end
 
+function AddPlayerChatError(playerid, message)
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: " .. message .. ".</>")
+end
+
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
 AddRemoteEvent("SetPlayerCash", SetPlayerCash)
 AddRemoteEvent("AddPlayerCash", AddPlayerCash)
