@@ -1,8 +1,9 @@
 AddEvent("OnKeyPress", function(key)
 
-	if key == 'E' then
-		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
+	-- Cancel out if player is in a vehicle
+	if not IsPlayerInVehicle() and key == 'E' then
 
+		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
 		if pickupid ~= false then
 
 			pickupid = tonumber(pickupid)
@@ -11,6 +12,7 @@ AddEvent("OnKeyPress", function(key)
 
 				local plX, plY, plZ = GetPlayerLocation()
 				local pkX, pkY, pkZ = GetPickupLocation(pickupid)
+
 				if pkX ~= nil then
 					local distance = GetDistance3D(plX, plY, plZ, pkX, pkY, pkZ)
 
@@ -37,6 +39,13 @@ AddEvent("OnPickupStreamIn", function (pickup)
 		local a = tonumber(GetPickupPropertyValue(pickup, "a"))
 
 		SetPickupColor(pickup, r, g, b, a)
+	end
+end)
+
+AddEvent("OnPickupStreamOut", function (pickup)
+
+	if pickup == GetPlayerPropertyValue(GetPlayerId(), "pickupid") then
+		SetPlayerPropertyValue(GetPlayerId(), "pickupid", 0)
 	end
 end)
 
