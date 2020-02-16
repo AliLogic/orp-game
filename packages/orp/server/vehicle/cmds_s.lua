@@ -119,6 +119,7 @@ AddCommand("engine", cmd_engine)
 
 local function cmd_v(player, args)
 	if args == "lock" then
+
 		local vehicle = GetPlayerVehicle(player)
 		if vehicle ~= 0 and VehicleData[vehicle] ~= nil and (VehicleData[vehicle].owner == PlayerData[player].id or VehicleData[vehicle].renter == player) then
 			if VehicleData[vehicle].is_locked == true then
@@ -134,29 +135,27 @@ local function cmd_v(player, args)
 		local x, y, z = GetPlayerLocation(player) -- Get the player's location
 		local ownsVehicle = false -- Player owns the vehicle bool
 
-		for _, v in pairs(GetAllVehicles()) do
-			if IsValidVehicle(v) then
-				if VehicleData[v] ~= nil then
-					local vx, vy, vz = GetVehicleLocation(v)
+		for _, v in pairs(VehicleData) do
+			local vx, vy, vz = GetVehicleLocation(v.vid)
 
-					if GetDistance3D(x, y, z, vx, vy, vz) <= 200.0 then
-						if (VehicleData[v].owner == PlayerData[player].id) or
-						(VehicleData[v].renter == player) or
-						(VehicleData[v].faction == PlayerData[player].faction) then
+			if GetDistance3D(x, y, z, vx, vy, vz) <= 200.0 then
+				if (v.owner == PlayerData[player].id) or
+				(v.renter == player) or
+				(v.faction == PlayerData[player].faction) then
 
-							if VehicleData[v].is_locked == true then
-								VehicleData[v].is_locked = false
+					if v.is_locked == true then
+						v.is_locked = false
 
-								AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle unlocked!</>")
-							else
-								VehicleData[v].is_locked = true
+						AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle unlocked!</>")
+						return
+					else
+						v.is_locked = true
 
-								AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle locked!</>")
-							end
-							ownsVehicle = true
-							break
-						end
+						AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle locked!</>")
+						return
 					end
+					ownsVehicle = true
+					break
 				end
 			end
 		end
