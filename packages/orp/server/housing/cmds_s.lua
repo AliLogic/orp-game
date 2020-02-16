@@ -50,7 +50,7 @@ local function cmd_house(playerid, prefix, ...)
 
 	if prefix == nil then
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(h)ouse <prefix>")
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> ring, rent, buy, sell") -- un(lock), kickdoor,
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> un(lock), kickdoor, ring, rent, buy, sell")
 	end
 
 	local house = Housing_Nearest(playerid)
@@ -71,7 +71,7 @@ local function cmd_house(playerid, prefix, ...)
 				HousingData[house].locked = 1
 			end
 		else
-			local doorid = House_GetNearestDoor(playerid, house)
+			local doorid = HousingData[house].doors[1]
 
 			if DoorData[doorid].is_locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house door.")
