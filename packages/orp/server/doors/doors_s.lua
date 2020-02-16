@@ -178,7 +178,7 @@ function OnLoadDoors()
 		Door_Load(i)
 	end
 
-	print("** Doors Loaded: "..mariadb_get_row_count()..".")
+	print("** Doors Loaded: " .. #DoorData .. ".")
 end
 
 AddEvent('UnloadDoors', function ()

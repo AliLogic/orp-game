@@ -161,7 +161,7 @@ local function OnPumpLoad()
 		Pump_Load(i)
 	end
 
-	print("** Pumps Loaded: "..mariadb_get_row_count()..".")
+	print("** Pumps Loaded: " .. #PumpData .. ".")
 end
 
 local function OnPumpUnloaded(pump)

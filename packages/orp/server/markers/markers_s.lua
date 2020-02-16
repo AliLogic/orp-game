@@ -192,7 +192,7 @@ function OnLoadMarkers()
 		Marker_Load(i)
 	end
 
-	print("** Markers Loaded: "..mariadb_get_row_count()..".")
+	print("** Markers Loaded: " .. #MarkerData .. ".")
 end
 
 function Marker_Nearest(playerid)

@@ -193,26 +193,30 @@ function Plant_Destroy(plantid)
 	return true
 end
 
-local function OnPlantLoaded(i, plantid)
-	if mariadb_get_row_count() == 0 then
-		print("Error with loading plant ID" .. plantid)
-	else
-		DrugData[i].id = plantid
-		DrugData[i].stage = mariadb_get_value_name_int(1, "stage")
-		DrugData[i].type = mariadb_get_value_name_int(1, "type")
-		DrugData[i].x = mariadb_get_value_name_int(1, "x")
-		DrugData[i].y = mariadb_get_value_name_int(1, "y")
-		DrugData[i].z = mariadb_get_value_name_int(1, "z")
-
-		local scale = DRUG_STAGES[DrugData[i].stage].scale
-		DrugData[i].object = CreateObject(DRUG_PLANT_MODELS[DrugData[i].type], DrugData[i].x, DrugData[i].y, DrugData[i].z)
-		SetObjectScale(DrugData[i].object, scale, scale, scale)
-		SetObjectRotation(DrugData[i].object, 0.0, Random(0.0, 360.0), 0.0)
-
-		DrugData[i].timer = CreateTimer(OnPlantTick, TIME_PER_STAGE, i)
-
-		RefreshPlantTextLabel(plantid)
+local function Plant_Load(i)
+	local indexid = GetFreePlantId()
+	if indexid == 0 then
+		print("A free plant id wasn't able to be found? ("..#DrugData.."/"..MAX_PLANTS..") plant SQL ID "..mariadb_get_value_name_int(i, "id")..".")
+		return
 	end
+
+	CreateDrugData(indexid)
+
+	DrugData[indexid].id = mariadb_get_value_name_int(i, "id")
+	DrugData[indexid].stage = mariadb_get_value_name_int(i, "stage")
+	DrugData[indexid].type = mariadb_get_value_name_int(i, "type")
+	DrugData[indexid].x = mariadb_get_value_name_int(i, "x")
+	DrugData[indexid].y = mariadb_get_value_name_int(i, "y")
+	DrugData[indexid].z = mariadb_get_value_name_int(i, "z")
+
+	local scale = DRUG_STAGES[DrugData[indexid].stage].scale
+	DrugData[indexid].object = CreateObject(DRUG_PLANT_MODELS[DrugData[indexid].type], DrugData[indexid].x, DrugData[indexid].y, DrugData[indexid].z)
+	SetObjectScale(DrugData[indexid].object, scale, scale, scale)
+	SetObjectRotation(DrugData[indexid].object, 0.0, Random(0.0, 360.0), 0.0)
+
+	DrugData[indexid].timer = CreateTimer(OnPlantTick, TIME_PER_STAGE, indexid)
+
+	RefreshPlantTextLabel(indexid)
 end
 
 local function OnPlantUnloaded(plantid)
@@ -237,18 +241,12 @@ local function Plant_Unload(plantid)
 	mariadb_async_query(sql, query, OnPlantUnloaded, plantid)
 end
 
-local function Plant_Load(i, plantid)
-	local query = mariadb_prepare(sql, "SELECT * FROM plants WHERE id = ?", plantid)
-	mariadb_async_query(sql, query, OnPlantLoaded, i, plantid)
-end
-
 local function OnLoadPlants()
 	for i = 1, mariadb_get_row_count(), 1 do
-		CreateDrugData(i)
-		Plant_Load(i, mariadb_get_value_name_int(i, "id"))
+		Plant_Load(i)
 	end
 
-	print("** Plants Loaded: "..mariadb_get_row_count()..".")
+	print("** Plants Loaded: " .. #DrugData .. ".")
 end
 
 function GetPlantTypeName(plantid)

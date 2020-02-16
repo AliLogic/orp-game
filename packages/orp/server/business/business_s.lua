@@ -91,7 +91,8 @@ function OnBusinessLoad()
 	for i = 1, mariadb_get_row_count(), 1 do
 		Business_Load(i)
 	end
-	print("** Businesses Loaded: "..mariadb_get_row_count()..".")
+
+	print("** Businesses Loaded: " .. #BusinessData .. ".")
 end
 
 AddEvent('UnloadBusinesses', function () 

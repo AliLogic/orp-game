@@ -207,7 +207,7 @@ function OnLoadFactions()
 		Faction_Load(i)
 	end
 
-	print("** Factions Loaded: "..mariadb_get_row_count()..".")
+	print("** Factions Loaded: " .. #FactionData .. ".")
 end
 
 AddEvent('UnloadFactions', function ()

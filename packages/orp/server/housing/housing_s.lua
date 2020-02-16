@@ -132,7 +132,7 @@ function OnHouseLoad()
 		House_Load(i)
 	end
 
-	print("** Houses Loaded: "..mariadb_get_row_count()..".")
+	print("** Houses Loaded: " .. #HousingData .. ".")
 end
 
 function House_Create(player, htype, price, address)

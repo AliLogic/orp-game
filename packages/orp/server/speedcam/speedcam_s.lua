@@ -151,7 +151,7 @@ local function OnSpeedcamLoad()
 		Speedcam_Load(i)
 	end
 
-	print("** Speedcams Loaded: "..mariadb_get_row_count()..".")
+	print("** Speedcams Loaded: " .. #SpeedcamData .. ".")
 end
 
 local function OnSpeedcamUnloaded(speedcam)

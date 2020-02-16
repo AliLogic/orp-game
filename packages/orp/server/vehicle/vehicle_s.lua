@@ -247,7 +247,7 @@ function OnLoadVehicles()
 		Vehicle_Load(mariadb_get_value_name_int(i, "id"))
 	end
 
-	print("** Vehicles Loaded: "..mariadb_get_row_count()..".")
+	print("** Vehicles Loaded: " .. #VehicleData .. ".")
 end
 
 function IsEngineVehicle(vehicleid)
