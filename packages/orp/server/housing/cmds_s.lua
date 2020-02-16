@@ -23,6 +23,10 @@ local colour = ImportPackage("colours")
 
 AddCommand("housedoors", function (playerid)
 
+	if (PlayerData[playerid].admin < 4) then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+	end
+
 	local house = Housing_Nearest(playerid)
 
 	if house == 0 then
@@ -67,7 +71,7 @@ local function cmd_house(playerid, prefix, ...)
 				HousingData[house].locked = 1
 			end
 		else
-			local doorid = HousingData[house].doors[1]
+			local doorid = House_GetNearestDoor(playerid, house)
 
 			if DoorData[doorid].is_locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house door.")
