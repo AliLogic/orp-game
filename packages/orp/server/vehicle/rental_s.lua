@@ -37,8 +37,6 @@ AddCommand("rent", function (player)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This vehicle is already rented.</>")
 	end
 
-	-- Check if player has valid license
-
 	if GetPlayerCash(player) < 50 then -- Check if player has fifty bucks.
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have enough cash to rent a vehicle.</>")
 	end

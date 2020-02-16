@@ -42,7 +42,7 @@ AddCommand("job", function (playerid, jobid)
 	end
 
 	jobid = tonumber(jobid)
-	SetPlayerJob(jobid)
+	SetPlayerJob(playerid, jobid)
 	AddPlayerChat(playerid, "done")
 
 	return
