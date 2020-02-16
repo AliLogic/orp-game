@@ -250,7 +250,7 @@ function clearUI() {
 	$('#title').text('');
 }
 
-const addToArray = (id, button) => { // id should be the id passed through showUI, button should always be $(this).
+/*const addToArray = (id, button) => { // id should be the id passed through showUI, button should always be $(this).
 	return new Promise((resolve, reject) => {
 		let returnValues = []; // I didn't math.floor as I wanted to see the results.
 
@@ -266,7 +266,7 @@ const addToArray = (id, button) => { // id should be the id passed through showU
 		if (returnValues.length >= 1) resolve(returnValues);
 		else reject("An error has occured.", returnValues);
 	});
-}
+}*/
 
 function showUI(id) {
 	if ($('body').is(':hidden')) {
@@ -275,19 +275,19 @@ function showUI(id) {
 		$('body').show();
 		$('button').on('click', function (e) {
 			e.preventDefault();
-			/*
-			//let returnValues = [id, (parseInt($(this).attr('id')) - elements.length) + 1]; // id is dialogid, second id is button clicked.
+			
+			let returnValues = [];
 		
 			elements.forEach((element) => {
 				if (!element[1]) {
 					// add a new string variable, and concat the elements together and then pass it in the place of "text" in CallEvent(...)
 					console.log($(`#${element[0]}`).val());
-					//returnValues.push($(`#${element[0]}`).val());
+					returnValues.push($(`#${element[0]}`).val());
 				}
 			});
 		
-			//console.log(returnValues);
-			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), "test");*/
+			console.log(returnValues);
+			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), returnValues);
 
 			/*
 			let returnValues = "";
@@ -296,7 +296,7 @@ function showUI(id) {
 			});
 
 			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), returnValues);
-			*/
+			
 
 			addToArray(id, $(this)) // Using promises will make it so that before anything is CallEvented, returnValues must be populated. This was likely the problem from before.
 				.then((returnValues) => { // as JS suffers from async hell.
@@ -307,6 +307,7 @@ function showUI(id) {
 					console.log(err); // A generic error message is pushed along with returnValues for debugging purposes.
 					console.log(`Erroneous returnValues: ${JSON.stringify(returnValues)}`);
 				})
+			*/
 		});
 	}
 }
