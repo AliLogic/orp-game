@@ -67,6 +67,52 @@ function addDivider() {
 	$('#content').append('<div class="is-divider"></div>');
 }
 
+function addSwitch(label, type, colour = 'is_success', anchor = 0, checked = 0) {
+	/*
+		Anchors:
+		0: left
+		1: right
+	*/
+
+	/*
+		Colours:
+		is-success
+		is-warning
+		is-danger
+		is-info
+	*/
+
+	/*
+		Types:
+		is-small
+		is-medium
+		is-large
+		is-thin
+		is-rounded
+		is-outlined
+	*/
+
+	let switch_class = ' class="switch ';
+	let checked_class = '';
+
+	swith_class = switch_class + type + colour;
+
+	if (anchor == 1) {
+		switch_class = switch_class + ' is-rtl'
+	}
+
+	if (checked == 0) {
+		checked_class = 'checked="checked"'
+	}
+
+	elementId += 1;
+	elements.push([elementId, true]);
+	
+	console.log('Switch ID: '+ elementId);
+
+	$('#content').append(`<div class="field"><input id="${elementId}" type="checkbox" name="${elementId}" class="${switch_class}" ${checked_class}><label id="${elementId}">${label}</label></div>`);
+}
+
 function addButton(text, colour = 'is-dark', size = 1, rounded = false, fullwidth = true, anchor = 0) {
 	/* 
 		Anchors:
