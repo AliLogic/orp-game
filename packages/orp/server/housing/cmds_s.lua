@@ -96,8 +96,7 @@ local function cmd_house(playerid, prefix, ...)
 				return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house is already unlocked.</>")
 			end
 
-			local x, y, z = GetPlayerLocation(playerid)
-			AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the house's door down.")
+			AddPlayerChatAction(playerid, ""..GetPlayerName(playerid).." attempts to kick the house's door down.")
 
 			Delay(2000, function ()
 
@@ -109,10 +108,10 @@ local function cmd_house(playerid, prefix, ...)
 
 				if Random(0, 6) <= 2 then
 					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">failed</> to kick the door down.")
-					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has failed to kick the door down.")
+					AddPlayerChatAction(playerid, ""..GetPlayerName(playerid).." has failed to kick the door down.")
 				else
 					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">succeeded</> to kick the door down.")
-					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
+					AddPlayerChatAction(playerid, ""..GetPlayerName(playerid).." has successfully kicked the door down.")
 
 					HousingData[house].locked = 0
 				end
@@ -125,7 +124,7 @@ local function cmd_house(playerid, prefix, ...)
 			end
 
 			local x, y, z = GetPlayerLocation(playerid)
-			AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the house's door down.")
+			AddPlayerChatAction(playerid, ""..GetPlayerName(playerid).." attempts to kick the house's door down.")
 
 			Delay(2000, function ()
 
@@ -135,10 +134,10 @@ local function cmd_house(playerid, prefix, ...)
 
 				if Random(0, 6) <= 2 then
 					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">failed</> to kick the door down.")
-					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has failed to kick the door down.")
+					AddPlayerChatAction(playerid, ""..GetPlayerName(playerid).." has failed to kick the door down.")
 				else
 					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">succeeded</> to kick the door down.")
-					AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has successfully kicked the door down.")
+					AddPlayerChatAction(playerid, ""..GetPlayerName(playerid).." has successfully kicked the door down.")
 
 					DoorData[doorid].is_locked = 0
 					SetDoorOpen(DoorData[doorid].door, true)
@@ -150,13 +149,13 @@ local function cmd_house(playerid, prefix, ...)
 
 		if #HousingData[house].doors == 0 then
 
-			AddPlayerChatRange(HousingData[house].ix, HousingData[house].iy, 800.0, "* "..GetPlayerName(playerid).." rings the doorbell of the house.")
+			AddPlayerChatRange(HousingData[house].ix, HousingData[house].iy, 800.0, "<span color=\""..colour.COLOUR_PURPLE().."\">* "..GetPlayerName(playerid).." rings the doorbell of the house.</>")
 		else
 			local doorid = HousingData[house].doors[1]
 
 			if (Door_Nearest(playerid) == doorid) then
-				local x, y, z = GetPlayerLocation(playerid)
-				AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." rings the doorbell of the house.")
+
+				AddPlayerChatAction(playerid, ""..GetPlayerName(playerid).." rings the doorbell of the house.")
 			else
 				return AddPlayerChatError(playerid, "You are not near the main house door.")
 			end
@@ -173,7 +172,7 @@ local function cmd_house(playerid, prefix, ...)
 		if HousingData[house].owner == 0 and HousingData[house].ownership_type ~= HOUSE_OWNERSHIP_STATE then
 
 			if HousingData[house].price > GetPlayerCash(playerid) then
-				AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You have insufficient funds to purchase this property.")
+				AddPlayerChatError(playerid, "You have insufficient funds to purchase this property.")
 			end
 
 			RemovePlayerCash(playerid, HousingData[house].price)
@@ -183,7 +182,7 @@ local function cmd_house(playerid, prefix, ...)
 
 			House_RefreshLabel(house)
 		else
-			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This house can not be purchased.</>")
+			AddPlayerChatError(playerid, "This house can not be purchased.")
 		end
 
 	elseif prefix == "sell" then
@@ -199,7 +198,7 @@ local function cmd_house(playerid, prefix, ...)
 
 			House_RefreshLabel(house)
 		else
-			AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You do not own this house.")
+			AddPlayerChatError(playerid, "You do not own this house.")
 		end
 
 	else
@@ -212,7 +211,7 @@ AddCommand("h", cmd_house)
 local function cmd_ach(player, htype, price, ...)
 
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if htype == nil or price == nil or #{...} == 0 then
@@ -224,17 +223,17 @@ local function cmd_ach(player, htype, price, ...)
 	price = tonumber(price)
 
 	if htype < 0 or htype > HOUSING_TYPE_MAX then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Specified house type invalid.</>")
+		return AddPlayerChatError(player, "Specified house type invalid.")
 	end
 
 	if price < 0 or price > 10000000 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: House price must range from 0 - 10,000,000.</>")
+		return AddPlayerChatError(player, "House price must range from 0 - 10,000,000.")
 	end
 
 	local address = table.contact({...}, " ")
 
 	if string.len(address) < 0 or string.len(address) > 32 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: House addresses lengths range from 1 - 32.</>")
+		return AddPlayerChatError(player, "House addresses lengths range from 1 - 32.")
 	end
 
 	address = address .. ", " .. GetLocationName(GetPlayerLocation(player))
@@ -242,7 +241,7 @@ local function cmd_ach(player, htype, price, ...)
 	local house = House_Create(player, htype, price, address)
 
 	if house == false then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Maximum houses ("..MAX_HOUSING..") on the server are created.</>")
+		return AddPlayerChatError(player, "Maximum houses ("..MAX_HOUSING..") on the server are created.")
 	end
 
 	AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>House %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), address, house))
@@ -264,7 +263,7 @@ local function cmd_aeh(player, house, prefix, ...)
 	house = tonumber(house)
 
 	if HousingData[house] == nil or HousingData[house].id == 0 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: That house does not exist.</>")
+		return AddPlayerChatError(player, "That house does not exist.")
 	end
 
 	local args = {...}
@@ -277,7 +276,7 @@ local function cmd_aeh(player, house, prefix, ...)
 		end
 
 		if htype < 1 or htype > HOUSING_TYPE_MAX then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Faction types range from 1 - 3.</>")
+			return AddPlayerChatError(player, "Faction types range from 1 - 3.")
 		end
 
 		htype = tonumber(htype)
@@ -308,7 +307,7 @@ local function cmd_aeh(player, house, prefix, ...)
 		local amount = tonumber(args[1])
 
 		if amount < 0 or amount > 10000000 then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: House price must range from 0 - 10,000,000.</>")
+			return AddPlayerChatError(player, "House price must range from 0 - 10,000,000.")
 		end
 
 		HousingData[house].price = amount
@@ -333,7 +332,7 @@ AddCommand("gotohouse", function (playerid, houseid)
 	houseid = tonumber(houseid)
 
 	if HousingData[houseid] == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: House " .. houseid .. "doesn't exist.</>")
+		return AddPlayerChatError(playerid, "House " .. houseid .. "doesn't exist.")
 	end
 
 	SetPlayerLocation(playerid, HousingData[houseid].ex, HousingData[houseid].ey, HousingData[houseid].ez)

@@ -291,6 +291,11 @@ function AddPlayerChatError(playerid, message)
 	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: " .. message .. ".</>")
 end
 
+function AddPlayerChatAction(playerid, message)
+	local x, y, z = GetPlayerLocation(playerid)
+	AddPlayerChatRange(x, y, 800.0, "<span color=\""..colour.COLOUR_PURPLE().."\">* " .. message .. "</>")
+end
+
 function GetPlayerIdFromData(string)
 
     local playerid = math.tointeger(string)
