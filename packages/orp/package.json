@@ -120,6 +120,7 @@
 		"client/gui/plus.png",
 		"client/gui/university.png",
 		"client/gui/credit-card.png",
-		"client/gui/shield-alt.png"
+		"client/gui/shield-alt.png",
+		"client/sounds/doorbell.mp3"
 	]
 }
