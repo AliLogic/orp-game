@@ -19,6 +19,7 @@
 		"dialogui",
 		"borkui",
 		"discord",
+		"soundstreamer",
 		"orp"
 	],
 	"stream_distance": 12000.0,
