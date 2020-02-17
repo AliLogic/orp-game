@@ -57,3 +57,8 @@ AddEvent("OnPackageStop", function ()
 
 	mariadb_close(sql)
 end)
+
+AddEvent("OnQueryError", function (errorid, error_str, query_str, handle_id)
+
+	print("[SQL: " .. errorid .. "] [" .. query_str .. "] (" .. error_str .. ")")
+end)
