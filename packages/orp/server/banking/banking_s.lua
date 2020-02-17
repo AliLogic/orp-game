@@ -37,8 +37,7 @@ AddEvent("OnPlayerLoggedIn", function(player)
 end)
 
 function CreateATM(id, modelid, x, y, z, rx, ry, rz)
-	ATMData[id] = { }
-	ATMData[id].object = CreateObject(modelid, x, y, z, rx, ry, rz)		
+	ATMData[id] = {}
 	ATMData[id].text3d = CreateText3D("ATM\n/atm", 18, x, y, z + 200, 0, 0, 0)
 
 	table.insert(AtmObjectsCached, ATMData[id].object)

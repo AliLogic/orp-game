@@ -1,6 +1,7 @@
 local colour = ImportPackage('colours')
 
-function cmd_createatm(player)
+
+AddCommand("acreateatm", function (player)
     if (PlayerData[player].admin < 5) then
         return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
     end
@@ -14,8 +15,7 @@ function cmd_createatm(player)
 		x, y, z, h)
 
 	mariadb_query(sql, query, OnAtmAdded, player, modelid, x, y, z, h)
-end
-AddCommand("acreateatm", cmd_createatm)
+end)
 
 function OnAtmAdded(player, modelid, x, y, z, h)
 	local id = mariadb_get_insert_id()

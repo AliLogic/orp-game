@@ -92,25 +92,11 @@ function addSwitch(label, type, colour = 'is_success', anchor = 0, checked = 0) 
 		is-outlined
 	*/
 
-	let switch_class = ' class="switch ';
-	let checked_class = '';
-
-	swith_class = switch_class + type + colour;
-
-	if (anchor == 1) {
-		switch_class = switch_class + ' is-rtl'
-	}
-
-	if (checked == 0) {
-		checked_class = 'checked="checked"'
-	}
-
 	elementId += 1;
 	elements.push([elementId, true]);
 	
 	console.log('Switch ID: '+ elementId);
-
-	$('#content').append(`<div class="field"><input id="${elementId}" type="checkbox" name="${elementId}" class="${switch_class}" ${checked_class}><label id="${elementId}">${label}</label></div>`);
+	$('#content').append(`<div class="field"><input id="${elementId}" type="checkbox" name="${elementId}" class="${anchor === 1 ? `switch is-rtl ${type} ${colour}` : `switch ${type} ${colour}`}"${checked === 0 ? ' checked="checked"' : ''}><label id="${elementId}">${label}</label></div>`);
 }
 
 function addButton(text, colour = 'is-dark', size = 1, rounded = false, fullwidth = true, anchor = 0) {
@@ -129,8 +115,8 @@ function addButton(text, colour = 'is-dark', size = 1, rounded = false, fullwidt
 		3 - Large
 	*/
 
-	let alignment;
-	let chosen_size;
+	let alignment = '';
+	let chosen_size = '';
 
 	switch (anchor) {
 		case 1: {
@@ -139,10 +125,6 @@ function addButton(text, colour = 'is-dark', size = 1, rounded = false, fullwidt
 		}
 		case 2: {
 			alignment = ' style="text-align: right;"';
-			break;
-		}
-		default: {
-			alignment = '';
 			break;
 		}
 	}
@@ -160,22 +142,12 @@ function addButton(text, colour = 'is-dark', size = 1, rounded = false, fullwidt
 			chosen_size = 'is-large';
 			break;
 		}
-		default: {
-			chosen_size = '';
-			break;
-		}
 	}
 
 	elementId += 1;
 	elements.push([elementId, true]);
 	
-	console.log('Button ID: '+ elementId);
-	
-	if (colour.startsWith('is-')) {
-		$('#content').append(`<div${alignment}><button class="button ${colour} ${chosen_size} ${fullwidth ? 'is-fullwidth' : ''} ${rounded ? 'is-rounded' : ''}" id="${elementId}">${text}</button></div>`)
-	} else {
-		$('#content').append(`<div${alignment}><button class="button ${chosen_size} ${fullwidth ? 'is-fullwidth' : ''} ${rounded ? 'is-rounded' : ''}" id="${elementId}" style="background-color: ${colour};">${text}</button></div>`)
-	}
+	$('#content').append(`<div${alignment}><button class="button${colour.startsWith('is-') ? ` ${colour}` : ''}${chosen_size !== "" ? ` ${chosen_size} ` : ''}${fullwidth ? 'is-fullwidth' : ''} ${rounded ? 'is-rounded' : ''}" id="${elementId}">${text}</button></div>`)$('#content').append(`<div${alignment}><button class="button ${colour}${chosen_size !== "" ? ` ${chosen_size} ` : ''}${fullwidth ? 'is-fullwidth' : ''} ${rounded ? 'is-rounded' : ''}" id="${elementId}">${text}</button></div>`)
 }
 
 function addTextInput(label, size = 1, type = 0, placeholder = '') {
