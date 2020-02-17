@@ -152,7 +152,9 @@ local function cmd_house(playerid, prefix, ...)
 
 			AddPlayerChatRange(HousingData[house].ix, HousingData[house].iy, 800.0, "<span color=\""..colour.COLOUR_PURPLE().."\">* "..GetPlayerName(playerid).." rings the doorbell of the house.</>")
 
-			sound.CreateSound3D("http://asset/orp/sounds/doorbell.mp3", HousingData[house].ix, HousingData[house].iy, HousingData[house].ix, HousingData[house].iz, 800.0, 2.0)
+			for k, v in pairs(GetPlayersInRange3D(HousingData[house].ix, HousingData[house].iy, HousingData[house].ix, HousingData[house].iz, 800.0)) do
+				PlayPlayerSound(v, "doorbell")
+			end
 		else
 			local doorid = HousingData[house].doors[1]
 
@@ -165,9 +167,9 @@ local function cmd_house(playerid, prefix, ...)
 		end
 
 		local x, y, z = GetPlayerLocation(playerid)
-		sound.CreateSound3D("http://asset/orp/sounds/doorbell.mp3", x, y, z, 800.0, 2.0)
-
-		-- add door bell sound for those fuckers near the playerid and those inside the house
+		for k, v in pairs(GetPlayersInRange3D(x, y, z, 800.0)) do
+			PlayPlayerSound(v, "doorbell")
+		end
 
 	elseif prefix == "rent" then
 
