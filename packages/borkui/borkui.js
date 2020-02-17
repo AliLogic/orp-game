@@ -147,7 +147,8 @@ function addButton(text, colour = 'is-dark', size = 1, rounded = false, fullwidt
 	elementId += 1;
 	elements.push([elementId, true]);
 	
-	$('#content').append(`<div${alignment}><button class="button${colour.startsWith('is-') ? ` ${colour}` : ''}${chosen_size !== "" ? ` ${chosen_size} ` : ''}${fullwidth ? 'is-fullwidth' : ''} ${rounded ? 'is-rounded' : ''}" id="${elementId}">${text}</button></div>`)$('#content').append(`<div${alignment}><button class="button ${colour}${chosen_size !== "" ? ` ${chosen_size} ` : ''}${fullwidth ? 'is-fullwidth' : ''} ${rounded ? 'is-rounded' : ''}" id="${elementId}">${text}</button></div>`)
+	$('#content').append(`<div${alignment}><button class="button${colour.startsWith('is-') ? ` ${colour}` : ''}${chosen_size !== "" ? ` ${chosen_size} ` : ''}${fullwidth ? 'is-fullwidth' : ''} ${rounded ? 'is-rounded' : ''}" id="${elementId}">${text}</button></div>`)
+	$('#content').append(`<div${alignment}><button class="button ${colour}${chosen_size !== "" ? ` ${chosen_size} ` : ''}${fullwidth ? 'is-fullwidth' : ''} ${rounded ? 'is-rounded' : ''}" id="${elementId}">${text}</button></div>`)
 }
 
 function addTextInput(label, size = 1, type = 0, placeholder = '') {
