@@ -148,8 +148,19 @@ local function cmd_house(playerid, prefix, ...)
 
 	elseif prefix == "ring" or prefix == "bell" then
 
-		local x, y, z = GetPlayerLocation(playerid)
-		AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." rings the doorbell of the house.")
+		if #HousingData[house].doors == 0 then
+
+			AddPlayerChatRange(HousingData[house].ix, HousingData[house].iy, 800.0, "* "..GetPlayerName(playerid).." rings the doorbell of the house.")
+		else
+			local doorid = HousingData[house].doors[1]
+
+			if (Door_Nearest(playerid) == doorid) then
+				local x, y, z = GetPlayerLocation(playerid)
+				AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." rings the doorbell of the house.")
+			else
+				return AddPlayerChatError(playerid, "You are not near the main house door.")
+			end
+		end
 
 		-- add door bell sound for those fuckers near the playerid and those inside the house
 
