@@ -18,6 +18,7 @@ To do:
 -- Variables
 
 local colour = ImportPackage("colours")
+local sound = ImportPackage("soundstreamer")
 
 -- Commands
 
@@ -150,6 +151,8 @@ local function cmd_house(playerid, prefix, ...)
 		if #HousingData[house].doors == 0 then
 
 			AddPlayerChatRange(HousingData[house].ix, HousingData[house].iy, 800.0, "<span color=\""..colour.COLOUR_PURPLE().."\">* "..GetPlayerName(playerid).." rings the doorbell of the house.</>")
+
+			sound.CreateSound3D("http://asset/orp/sounds/doorbell.mp3", HousingData[house].ix, HousingData[house].iy, HousingData[house].ix, HousingData[house].iz, 800.0, 2.0)
 		else
 			local doorid = HousingData[house].doors[1]
 
@@ -160,6 +163,9 @@ local function cmd_house(playerid, prefix, ...)
 				return AddPlayerChatError(playerid, "You are not near the main house door.")
 			end
 		end
+
+		local x, y, z = GetPlayerLocation(playerid)
+		sound.CreateSound3D("http://asset/orp/sounds/doorbell.mp3", x, y, z, 800.0, 2.0)
 
 		-- add door bell sound for those fuckers near the playerid and those inside the house
 
