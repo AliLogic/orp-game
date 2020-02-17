@@ -153,7 +153,7 @@ local function cmd_house(playerid, prefix, ...)
 			AddPlayerChatRange(HousingData[house].ix, HousingData[house].iy, 800.0, "<span color=\""..colour.COLOUR_PURPLE().."\">* "..GetPlayerName(playerid).." rings the doorbell of the house.</>")
 
 			for k, v in pairs(GetPlayersInRange3D(HousingData[house].ix, HousingData[house].iy, HousingData[house].ix, HousingData[house].iz, 800.0)) do
-				PlayPlayerSound(v, "doorbell")
+				PlayPlayerSound(v, "https://sndup.net/42s4/doorbell.mp3")
 			end
 		else
 			local doorid = HousingData[house].doors[1]
@@ -168,7 +168,7 @@ local function cmd_house(playerid, prefix, ...)
 
 		local x, y, z = GetPlayerLocation(playerid)
 		for k, v in pairs(GetPlayersInRange3D(x, y, z, 800.0)) do
-			PlayPlayerSound(v, "doorbell")
+			PlayPlayerSound(v, "https://sndup.net/42s4/doorbell.mp3")
 		end
 
 	elseif prefix == "rent" then
