@@ -1,5 +1,6 @@
 let elements = [];
 let elementId = 0;
+let switches = [];
 
 $(document).ready(() => {
 	CallEvent('borkui:ready');
@@ -94,6 +95,7 @@ function addSwitch(label, type, colour = 'is_success', anchor = 0, checked = 0) 
 
 	elementId += 1;
 	elements.push([elementId, true]);
+	switches.push([elementId]);
 	
 	console.log('Switch ID: '+ elementId);
 	$('#content').append(`<div class="field"><input id="${elementId}" type="checkbox" name="${elementId}" class="${anchor === 1 ? `switch is-rtl ${type} ${colour}` : `switch ${type} ${colour}`}"${checked === 0 ? ' checked="checked"' : ''}><label id="${elementId}">${label}</label></div>`);
@@ -276,6 +278,12 @@ function showUI(id) {
 		$('body').show();
 		$('button').on('click', function (e) {
 			e.preventDefault();
+
+			let switchValues = [];
+
+			switches.forEach((element) => {
+				switchValues.push(document.getElementById(`${element}`).checked)
+			});
 			
 			let returnValues = [];
 		
@@ -288,7 +296,7 @@ function showUI(id) {
 			});
 		
 			console.log(returnValues);
-			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), returnValues);
+			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), returnValues, switchValues);
 		});
 	}
 }
