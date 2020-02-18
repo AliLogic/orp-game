@@ -10,7 +10,7 @@ $(document).ready(() => {
 	addDivider();
 	addInformation('This is just a basic test.');
 	addDivider();
-	addSwitch('test', 'is-medium', 'is_success', 1, 0);
+	addSwitch('test', 'is-rounded is-outlined is-medium', 'is_success', 1, 0);
 	addDivider();
 	addTextInput('Name:');
 	addDropdown(['test of the century', 'test2']);
@@ -100,7 +100,7 @@ function addSwitch(label, type, colour = 'is_success', anchor = 0, checked = 0) 
 	switches.push([elementId]);
 	
 	console.log('Switch ID: '+ elementId);
-	$('#content').append(`<div class="field"><input id="${elementId}" type="checkbox" name="${elementId}" class="${anchor === 1 ? `switch is-rtl ${type} ${colour}` : `switch ${type} ${colour}`}"${checked === 1 ? ' checked="checked"' : ''}><label id="${elementId}">${label}</label></div>`);
+	$('#content').append(`<div class="field"><input id="${elementId}" type="checkbox" name="${elementId}" class="${anchor === 1 ? `switch is-rtl ${type} ${colour}` : `switch ${type} ${colour}`}"${checked === 1 ? ' checked="checked"' : ''}><label for="${elementId}">${label}</label></div>`);
 }
 
 function addButton(text, colour = 'is-dark', size = 1, rounded = false, fullwidth = true, anchor = 0) {
@@ -280,9 +280,9 @@ function showUI(id) {
 		console.log("Body is hidden, showing it.");
 
 		$('body').show();
-		$('field').on('click', function (e) { // This doesn't work at the moment...
-			console.log($(`switch pressed with elementId: "${elementId}"`));
-			// $(`${elementId}`).prop( "checked", document.getElementById(`${element}`).checked); // Toggle the checked when clicked
+		$('.field').on('click', function () { // This doesn't work at the moment...
+			console.log('switch pressed!');
+			//$(`${elementId}`).prop( "checked", document.getElementById(`${element}`).checked); // Toggle the checked when clicked
 		});
 
 		$('button').on('click', function (e) {
@@ -292,7 +292,7 @@ function showUI(id) {
 
 			switches.forEach((element) => {
 				//switchValues.push(document.getElementById(`${element}`).checked)
-                                switchValues.push($(`#${element}:checked`)); // this still won't work anyways in terms of getting any useful info over to ORP.
+				switchValues.push($(`#${element}:checked`)); // this still won't work anyways in terms of getting any useful info over to ORP.
 			});
 
 			console.log(switchValues);
