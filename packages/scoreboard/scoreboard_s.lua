@@ -2,12 +2,12 @@ function ToggleScoreboard(player, toggle)
 	CallRemoteEvent(player, 'scorebork:ToggleScoreboard', toggle)
 end
 
-function InsertPlayer(player, name, level, ping)
-	CallRemoteEvent(player, 'scorebork:InsertPlayer', player, name, level, ping)
+function InsertPlayer(player, other, name, level, ping)
+	CallRemoteEvent(player, 'scorebork:InsertPlayer', other, name, level, ping)
 end
 
-function RemovePlayer(player)
-	CallRemoteEvent(player, 'scorebork:RemovePlayer', player)
+function RemovePlayers(player)
+	CallRemoteEvent(player, 'scorebork:removePlayers')
 end
 
 function UpdatePlayer(player, value, newvalue)
@@ -16,14 +16,16 @@ end
 
 AddFunctionExport('ToggleScoreboard', ToggleScoreboard)
 AddFunctionExport('InsertPlayer', InsertPlayer)
-AddFunctionExport('RemovePlayer', RemovePlayer)
+AddFunctionExport('RemovePlayers', RemovePlayers)
 AddFunctionExport('UpdatePlayer', UpdatePlayer)
 
-AddRemoteEvent("scorebork:updateScoreboard", function ()
+AddRemoteEvent("scorebork:updateScoreboard", function (playerid)
+
+	RemovePlayers()
 
 	for _, v in pairs(GetAllPlayers()) do
 		if PlayerData[v] ~= nil then
-			InsertPlayer(v, GetPlayerName(v), PlayerData[v].level, GetPlayerPing(v))
+			InsertPlayer(playerid, v, GetPlayerName(v), PlayerData[v].level, GetPlayerPing(v))
 		end
 	end
 end)
