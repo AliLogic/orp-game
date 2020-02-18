@@ -21,7 +21,7 @@ AddFunctionExport('UpdatePlayer', UpdatePlayer)
 
 AddRemoteEvent("scorebork:updateScoreboard", function (playerid)
 
-	RemovePlayers()
+	RemovePlayers(playerid)
 
 	for _, v in pairs(GetAllPlayers()) do
 		if PlayerData[v] ~= nil then
