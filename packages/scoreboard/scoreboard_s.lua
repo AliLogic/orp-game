@@ -24,8 +24,11 @@ AddRemoteEvent("scorebork:updateScoreboard", function (playerid)
 	RemovePlayers(playerid)
 
 	for _, v in pairs(GetAllPlayers()) do
+		--[[
 		if PlayerData[v] ~= nil then
 			InsertPlayer(playerid, v, GetPlayerName(v), PlayerData[v].level, GetPlayerPing(v))
 		end
+		]]--
+		InsertPlayer(playerid, v, GetPlayerName(v), 1, GetPlayerPing(v))
 	end
 end)
