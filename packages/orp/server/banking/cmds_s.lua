@@ -3,7 +3,7 @@ local colour = ImportPackage('colours')
 
 AddCommand("acreateatm", function (player)
     if (PlayerData[player].admin < 5) then
-        return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+        return AddPlayerChatError(player, "You don't have permission to use this command.")
     end
 
 	local x, y, z = GetPlayerLocation(player)

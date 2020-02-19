@@ -259,7 +259,7 @@ AddCommand("ach", cmd_ach)
 local function cmd_aeh(player, house, prefix, ...)
 
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if house == nil or prefix == nil then

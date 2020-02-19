@@ -14,7 +14,7 @@ local colour = ImportPackage('colours')
 local function cmd_acsc(player, speed)
 
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if speed == nil then
@@ -45,7 +45,7 @@ AddCommand('acsc', cmd_acsc)
 local function cmd_aesc(player, speedcam, prefix, ...)
 
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if speedcam == nil or prefix == nil then

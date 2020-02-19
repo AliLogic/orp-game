@@ -423,7 +423,7 @@ end)
 
 local function cmd_acf(player, maxrank, shortname, ...)
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	local args = {...}
@@ -457,7 +457,7 @@ AddCommand("acf", cmd_acf)
 
 local function cmd_adf(player, faction)
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if faction == nil then
@@ -483,7 +483,7 @@ AddCommand("adf", cmd_adf)
 
 local function cmd_aef(player, faction, prefix, ...)
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if faction == nil or prefix == nil then

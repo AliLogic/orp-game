@@ -165,7 +165,7 @@ AddCommand("biz", cmd_biz)
 
 local function cmd_acb(player, biztype, enterable, price, ...)
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if biztype == nil or enterable == nil or price == nil or #{...} == 0 then
@@ -215,7 +215,7 @@ AddCommand("acb", cmd_acb)
 local function cmd_aeb(player, business, prefix, ...)
 
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if business == nil or prefix == nil then

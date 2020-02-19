@@ -101,7 +101,7 @@ AddCommand("dimension", cmd_vw)
 
 AddCommand("w", function (player, weapon, slot, ammo)
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if (weapon == nil or slot == nil or ammo == nil) then

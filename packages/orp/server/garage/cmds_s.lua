@@ -4,7 +4,7 @@ local colour = ImportPackage('colours')
 
 function cmd_acg(player, price)
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if price == nil then
@@ -28,7 +28,7 @@ end
 
 function cmd_aeg(player, prefix, ...)
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	local args = {...}
