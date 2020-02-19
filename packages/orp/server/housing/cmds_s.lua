@@ -55,34 +55,17 @@ local function cmd_house(playerid, prefix, ...)
 
 	if prefix == "lock" or prefix == "unlock" then
 
-		if #HousingData[house].doors == 0 then
-
-			if house == 0 then
-				return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
-			end
-
-			if HousingData[house].locked == 1 then
-				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
-				HousingData[house].locked = 0
-			else
-				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
-				HousingData[house].locked = 1
-			end
-		else
+		if house == 0 then -- In this case, the player is not near any house
 
 			local doorid = 0
 
-			if house == 0 then
-				doorid = House_GetNearestDoor(playerid, house)
-			else
-				for houseid = 1, MAX_HOUSING, 1 do
-					if PlayerHasHouseKey(playerid, houseid) then
-						print("Player has house key for " .. houseid .. ".")
-						doorid = House_GetNearestDoor(playerid, houseid)
+			for houseid = 1, MAX_HOUSING, 1 do
+				if PlayerHasHouseKey(playerid, houseid) then
+					print("Player has house key for " .. houseid .. ".")
+					doorid = House_GetNearestDoor(playerid, houseid)
 
-						if doorid ~= 0 then
-							break
-						end
+					if doorid ~= 0 then
+						break
 					end
 				end
 			end
@@ -98,6 +81,34 @@ local function cmd_house(playerid, prefix, ...)
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house door.")
 				SetDoorOpen(DoorData[doorid].door, false)
 				DoorData[doorid].is_locked = 1
+			end
+
+		else -- Player is near a house
+
+			if #HousingData[house].doors == 0 then
+
+				if HousingData[house].locked == 1 then
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
+					HousingData[house].locked = 0
+				else
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
+					HousingData[house].locked = 1
+				end
+			else
+				local doorid = House_GetNearestDoor(playerid, house)
+
+				if doorid == 0 then
+					return AddPlayerChatError(playerid, "You are not near any door of your owned houses.")
+				end
+
+				if DoorData[doorid].is_locked == 1 then
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house door.")
+					DoorData[doorid].is_locked = 0
+				else
+					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house door.")
+					SetDoorOpen(DoorData[doorid].door, false)
+					DoorData[doorid].is_locked = 1
+				end
 			end
 		end
 
