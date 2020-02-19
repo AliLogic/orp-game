@@ -54,6 +54,10 @@ function AddUIDropdown(player, dialog, options, size, rounded, label)
 	CallRemoteEvent(player, "borkui:serverAddUIDropdown", dialog, options, size, rounded, label)
 end
 
+function AddUISwitch(player, dialog, label, type, color, anchor, checked)
+	CallRemoteEvent(player, "borkui:serverAddUISwitch", dialog, label, type, color, anchor, checked)
+end
+
 function ShowUI(player, dialog)
 	CallRemoteEvent(player, "borkui:serverShowUI", dialog)
 end
@@ -74,6 +78,7 @@ AddFunctionExport('addUIDivider', AddUIDivider)
 AddFunctionExport('addUIButton', AddUIButton)
 AddFunctionExport('addUITextInput', AddUITextInput)
 AddFunctionExport('addUIDropdown', AddUIDropdown)
+AddFunctionExport('addUISwitch', AddUISwitch)
 AddFunctionExport('showUI', ShowUI)
 AddFunctionExport('hideUI', HideUI)
 AddFunctionExport('destroyUI', DestroyUI)
