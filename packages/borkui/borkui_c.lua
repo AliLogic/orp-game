@@ -277,11 +277,11 @@ AddEvent("borkui:OnHideMenu", function()
 	end
 end)
 
-AddEvent("borkui:OnDialogSubmit", function (dialog, button, text)
+AddEvent("borkui:OnDialogSubmit", function (dialog, button, text, switch)
 	dialog = math.tointeger(dialog)
 	button = math.tointeger(button)
 
-	CallRemoteEvent("borkui:clientOnDialogSubmit", dialog, dialogs[dialog].extraid, button, text)
+	CallRemoteEvent("borkui:clientOnDialogSubmit", dialog, dialogs[dialog].extraid, button, text, switch)
 end)
 
 --[[

@@ -93,7 +93,7 @@ AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid
 
 end)
 
-AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, text)
+AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, text, switch)
 
 	if extraid == DIALOG_WHITELIST_LOG then
 
