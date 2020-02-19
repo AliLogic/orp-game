@@ -53,11 +53,11 @@ local function cmd_house(playerid, prefix, ...)
 
 	local house = Housing_Nearest(playerid)
 
-	if house == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
-	end
-
 	if prefix == "lock" or prefix == "unlock" then
+
+		if house == 0 then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
+		end
 
 		if #HousingData[house].doors == 0 then
 
@@ -69,7 +69,26 @@ local function cmd_house(playerid, prefix, ...)
 				HousingData[house].locked = 1
 			end
 		else
-			local doorid = HousingData[house].doors[1]
+
+			local doorid = 0
+
+			if house == 0 then
+				doorid = House_GetNearestDoor(playerid, house)
+			else
+				for houseid = 1, MAX_HOUSING, 1 do
+					if PlayerHasHouseKey(playerid, houseid) then
+						doorid = House_GetNearestDoor(playerid, houseid)
+
+						if doorid ~= 0 then
+							break
+						end
+					end
+				end
+			end
+
+			if doorid == 0 then
+				return AddPlayerChatError(playerid, "You are not near any door of your owned houses.")
+			end
 
 			if DoorData[doorid].is_locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house door.")
@@ -84,6 +103,10 @@ local function cmd_house(playerid, prefix, ...)
 		SetPlayerAnimation(playerid, "LOCKDOOR")
 
 	elseif prefix == "kickdoor" then
+
+		if house == 0 then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
+		end
 
 		if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
 			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">You are not in the appropriate faction to execute this command.</>")
@@ -115,6 +138,10 @@ local function cmd_house(playerid, prefix, ...)
 				end
 			end)
 		else
+			if house == 0 then
+				return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
+			end
+
 			local doorid = HousingData[house].doors[1]
 
 			if DoorData[doorid].is_locked == 0 then
@@ -145,6 +172,10 @@ local function cmd_house(playerid, prefix, ...)
 
 	elseif prefix == "ring" or prefix == "bell" then
 
+		if house == 0 then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
+		end
+
 		if #HousingData[house].doors == 0 then
 
 			AddPlayerChatRange(HousingData[house].ix, HousingData[house].iy, 800.0, "<span color=\""..colour.COLOUR_PURPLE().."\">* "..GetPlayerName(playerid).." rings the doorbell of the house.</>")
@@ -172,9 +203,17 @@ local function cmd_house(playerid, prefix, ...)
 
 	elseif prefix == "rent" then
 
+		if house == 0 then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
+		end
+
 		AddPlayerChat(playerid, "Coming soon!")
 
 	elseif prefix == "buy" then
+
+		if house == 0 then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
+		end
 
 		if HousingData[house].owner == 0 and HousingData[house].ownership_type ~= HOUSE_OWNERSHIP_STATE then
 
@@ -194,6 +233,10 @@ local function cmd_house(playerid, prefix, ...)
 
 	elseif prefix == "sell" then
 
+		if house == 0 then
+			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
+		end
+
 		if HousingData[house].owner == PlayerData[playerid].id then
 
 			local price = math.floor(HousingData[house].price / 2)
@@ -207,19 +250,6 @@ local function cmd_house(playerid, prefix, ...)
 		else
 			AddPlayerChatError(playerid, "You do not own this house.")
 		end
-
-	elseif prefix == "doors" then
-
-		if #HousingData[house].doors == 0 then
-			return
-		end
-
-		DialogString = {}
-		for _, v in pairs(HousingData[house].doors) do
-			print("DialogString: {" .. v .. ", " .. DoorData[v].is_locked .. " }")
-			table.insert(DialogString, {v, DoorData[v].is_locked})
-		end
-		borkui.createUI(playerid, 0, DIALOG_HOME_DOORS)
 
 	else
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> un(lock), kickdoor, ring, rent, buy, sell")
