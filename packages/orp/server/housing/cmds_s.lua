@@ -60,8 +60,8 @@ local function cmd_house(playerid, prefix, ...)
 			local doorid = 0
 
 			for houseid = 1, MAX_HOUSING, 1 do
-				if PlayerHasHouseKey(playerid, houseid) then
-					print("Player has house key for " .. houseid .. ".")
+				if PlayerHasHouseKey(playerid, houseid) or House_IsOwner(playerid, houseid) then
+					print("Player has house key/ owns " .. houseid .. ".")
 					doorid = House_GetNearestDoor(playerid, houseid)
 
 					if doorid ~= 0 then
@@ -71,7 +71,7 @@ local function cmd_house(playerid, prefix, ...)
 			end
 
 			if doorid == 0 then
-				return AddPlayerChatError(playerid, "You are not near any door of your owned houses.")
+				return AddPlayerChatError(playerid, "You are not near any door of your owned houses")
 			end
 
 			if DoorData[doorid].is_locked == 1 then
