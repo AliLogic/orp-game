@@ -333,14 +333,16 @@ AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extr
 
 	if extraid == DIALOG_HOME_DOORS then
 
-		for _, v in pairs(switch) do
+		if #switch ~= 0 then
+			for _, v in pairs(switch) do
 
-			local doorid = v[1]
-			local status = v[2]
-			status = (status == 1) and 1 or 0
+				local doorid = v[1]
+				local status = v[2]
+				status = (status == 1) and 1 or 0
 
-			if status ~= DoorData[doorid].is_locked then
-				AddPlayerChat(playerid, "You toggled the door " .. doorid .. " to " .. status .. ".")
+				if status ~= DoorData[doorid].is_locked then
+					AddPlayerChat(playerid, "You toggled the door " .. doorid .. " to " .. status .. ".")
+				end
 			end
 		end
 
