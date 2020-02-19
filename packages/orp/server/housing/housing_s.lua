@@ -11,6 +11,7 @@ Contributors:
 
 -- Variables
 
+local borkui = ImportPackage("borkui")
 local colour = ImportPackage("colours")
 
 HousingData = {}
@@ -310,5 +311,39 @@ end)
 AddEvent('UnloadHouses', function ()
 	for i = 1, #HousingData, 1 do
 		House_Unload(i)
+	end
+end)
+
+AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
+
+	if extraid == DIALOG_HOME_DOORS then
+		borkui.addUITitle(playerid, dialogid, 'Home Doors')
+		borkui.addUIDivider(playerid, dialogid)
+		for _, v in pairs(DialogString) do
+			borkui.addUISwitch(playerid, dialogid, 'Door ' .. v .. '', 'is-rounded is-medium', 'is_success', 1, v[1]);
+		end
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIButton(playerid, dialogid, 'Done', 'is-success')
+		borkui.showUI(playerid, dialogid)
+	end
+end)
+
+AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extraid, button, text, switch)
+
+	if extraid == DIALOG_HOME_DOORS then
+
+		for _, v in pairs(switch) do
+
+			local doorid = v[1]
+			local status = v[2]
+			status = (status == 1) and 1 or 0
+
+			if status ~= DoorData[doorid].is_locked then
+				AddPlayerChat(playerid, "You toggled the door " .. doorid .. " to " .. status .. ".")
+			end
+		end
+
+		borkui.hideUI(playerid)
+		borkui.destroyUI(playerid, dialogid)
 	end
 end)

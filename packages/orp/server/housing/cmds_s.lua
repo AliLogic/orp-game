@@ -15,7 +15,7 @@ To do:
 -- Variables
 
 local colour = ImportPackage("colours")
-local sound = ImportPackage("soundstreamer")
+local borkui = ImportPackage("borkui")
 
 -- Commands
 
@@ -207,6 +207,18 @@ local function cmd_house(playerid, prefix, ...)
 		else
 			AddPlayerChatError(playerid, "You do not own this house.")
 		end
+
+	elseif prefix == "doors" then
+
+		if #HousingData[house].doors == 0 then
+			return
+		end
+
+		DialogString = {}
+		for _, v in pairs(HousingData[house].doors) do
+			table.insert(DialogString, {v, DoorData[v].is_locked})
+		end
+		borkui.createUI(playerid, 0, DIALOG_HOME_DOORS)
 
 	else
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> un(lock), kickdoor, ring, rent, buy, sell")
