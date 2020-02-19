@@ -12,6 +12,7 @@
 		"borkui.js",
 		"borkui.css",
 		"divider.min.css",
+		"bulma-switch.min.css",
 		"bulma.min.css",
 		"jquery.min.js"
 	]
