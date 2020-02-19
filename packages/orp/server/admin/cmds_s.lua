@@ -49,7 +49,7 @@ AddCommand("ban", function (playerid, lookupid, ...)
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	local reason = ""
@@ -165,7 +165,7 @@ AddCommand("spec", function (playerid, lookupid)
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if PlayerData[lookupid].admin > PlayerData[playerid].admin then
@@ -211,7 +211,7 @@ AddCommand("kick", function (playerid, lookupid, ...)
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if PlayerData[lookupid].admin > PlayerData[playerid].admin then
@@ -245,7 +245,7 @@ AddCommand("warp", function (playerid, fromid, toid)
 	end
 
 	if (not IsValidPlayer(fromid)) or (not IsValidPlayer(toid)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	local x, y, z = GetPlayerLocation(toid)
@@ -280,7 +280,7 @@ AddCommand("slap", function (playerid, lookupid)
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	Slap(lookupid)
@@ -297,7 +297,7 @@ AddCommand("goto", function (playerid, lookupid)
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
@@ -323,7 +323,7 @@ AddCommand("get", function (playerid, lookupid)
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
@@ -817,7 +817,7 @@ AddCommand("ahelp", function (player)
 
 	if PlayerData[player].admin > 3 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/setarmour /sethealth /toggleg /gotohouse /housedoors")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/setarmour /sethealth /toggleg /gotohouse /housedoors /gotopump /gotodoor /gotoveh /gotoplant /gotospeedcam /gotobiz")
 	end
 
 	if PlayerData[player].admin > 4 then
@@ -922,7 +922,7 @@ AddCommand("setarmour", function (playerid, lookupid, armour)
 	armour = tonumber(armour)
 
 	if IsValidPlayer(lookupid) == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if armour < 0 or armour > 100 then
@@ -953,7 +953,7 @@ AddCommand("sethealth", function (playerid, lookupid, health)
 	health = tonumber(health)
 
 	if IsValidPlayer(lookupid) == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if health < 0 or health > 100 then
@@ -1087,7 +1087,7 @@ AddCommand("assist", function (playerid, lookupid, ...)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if (not IsValidPlayer(lookupid)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	local message = table.concat({...}, " ")
@@ -1130,7 +1130,7 @@ AddCommand("revokelicense", function (playerid, lookupid, license)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if (not IsValidPlayer(lookupid)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	for i = 1, #LicensesColumns, 1 do
@@ -1170,7 +1170,7 @@ AddCommand("grantlicense", function (playerid, lookupid, license)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if (not IsValidPlayer(lookupid)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	for i = 1, #LicensesColumns, 1 do
@@ -1203,7 +1203,7 @@ AddCommand("ajail", function (playerid, lookupid, minutes)
 	minutes = tonumber(minutes)
 
 	if (not IsValidPlayer(lookupid)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if playerid == lookupid then
@@ -1254,7 +1254,7 @@ AddCommand("arevive", function (playerid, lookupid)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if PlayerData[lookupid].state == CHARACTER_STATE_ALIVE then
@@ -1284,7 +1284,7 @@ AddCommand("clearinventory", function (playerid, lookupid)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	Inventory_Clear(lookupid)

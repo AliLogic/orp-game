@@ -108,3 +108,24 @@ end
 
 AddCommand('aeditspeedcam', cmd_aesc)
 AddCommand('aesc', cmd_aesc)
+
+AddCommand("gotospeedcam", function (playerid, speedcamid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+	end
+
+	if speedcamid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotospeedcam <speedcam>")
+	end
+
+	speedcamid = tonumber(speedcamid)
+
+	if SpeedcamData[speedcamid] == nil then
+		return AddPlayerChatError(playerid, "Speedcam " .. speedcamid .. "doesn't exist.")
+	end
+
+	SetPlayerLocation(playerid, SpeedcamData[speedcamid].x, SpeedcamData[speedcamid].y, SpeedcamData[speedcamid].z)
+
+	AddPlayerChat(playerid, "You have been teleported to speedcam ID: " .. speedcamid ..".")
+end)

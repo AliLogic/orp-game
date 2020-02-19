@@ -257,3 +257,24 @@ end
 AddCommand("aeditbusiness", cmd_aeb)
 AddCommand("aeditbiz", cmd_aeb)
 AddCommand("aeb", cmd_aeb)
+
+AddCommand("gotobiz", function (playerid, bizid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+	end
+
+	if bizid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotobiz <biz>")
+	end
+
+	bizid = tonumber(bizid)
+
+	if BusinessData[bizid] == nil then
+		return AddPlayerChatError(playerid, "Business " .. bizid .. "doesn't exist.")
+	end
+
+	SetPlayerLocation(playerid, BusinessData[bizid].ex, BusinessData[bizid].ey, BusinessData[bizid].ez)
+
+	AddPlayerChat(playerid, "You have been teleported to business ID: " .. bizid ..".")
+end)

@@ -276,7 +276,7 @@ AddCommand("badge", function (playerid, lookupid)
 		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " looks at their badge.</>")
 	else
 		if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
-			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+			return AddPlayerChatError(playerid, "The specified player is not in your range.")
 		end
 
 		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " shows " .. GetPlayerName(lookupid) .." their badge.</>")
@@ -310,7 +310,7 @@ local function cmd_handcuff(playerid, lookupid)
 	end
 
 	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
 	local is_handcuffed = IsPlayerHandcuffed(lookupid)
@@ -627,7 +627,7 @@ AddCommand("ticket", function (playerid, lookupid, price, ...)
 	end
 
 	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
 	if price < 1 or price > 1000 then
@@ -720,7 +720,7 @@ AddCommand("detain", function (playerid, lookupid)
 	end
 
 	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
 	if not IsPlayerHandcuffed(lookupid) then

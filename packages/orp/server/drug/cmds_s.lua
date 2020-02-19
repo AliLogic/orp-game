@@ -99,3 +99,24 @@ AddCommand("adestroyplant", function (playerid, plantid)
 
 	return
 end)
+
+AddCommand("gotoplant", function (playerid, plantid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+	end
+
+	if plantid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotoplant <plant>")
+	end
+
+	plantid = tonumber(plantid)
+
+	if DrugData[plantid] == nil then
+		return AddPlayerChatError(playerid, "Plant " .. plantid .. "doesn't exist.")
+	end
+
+	SetPlayerLocation(playerid, DrugData[plantid].x, DrugData[plantid].y, DrugData[plantid].z)
+
+	AddPlayerChat(playerid, "You have been teleported to plant ID: " .. plantid ..".")
+end)
