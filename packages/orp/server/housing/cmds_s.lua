@@ -55,11 +55,11 @@ local function cmd_house(playerid, prefix, ...)
 
 	if prefix == "lock" or prefix == "unlock" then
 
-		if house == 0 then
-			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
-		end
-
 		if #HousingData[house].doors == 0 then
+
+			if house == 0 then
+				return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any houses.</>")
+			end
 
 			if HousingData[house].locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
@@ -77,6 +77,7 @@ local function cmd_house(playerid, prefix, ...)
 			else
 				for houseid = 1, MAX_HOUSING, 1 do
 					if PlayerHasHouseKey(playerid, houseid) then
+						print("Player has house key for " .. houseid .. ".")
 						doorid = House_GetNearestDoor(playerid, houseid)
 
 						if doorid ~= 0 then
