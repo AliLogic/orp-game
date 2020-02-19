@@ -239,7 +239,7 @@ function ShowUI(id)
 		elseif dialogs[id].columns[i][1] == COLUMN_TYPE_INFORMATION then
 			ExecuteWebJS(web, string.format('addInformation("%s");', column[2]))
 		elseif dialogs[id].columns[i][1] == COLUMN_TYPE_INFORMATION then
-			ExecuteWebJS(web, string.format('addSwitch("%s", "%s", "%s", %d, %d);', column[2], column[3], column[4], column[5], column[6]))
+			ExecuteWebJS(web, string.format('addSwitch("%s", %s, %s, %d, %d);', column[2], column[3], column[4], column[5], column[6]))
 		end
 	end
 
