@@ -216,6 +216,7 @@ local function cmd_house(playerid, prefix, ...)
 
 		DialogString = {}
 		for _, v in pairs(HousingData[house].doors) do
+			print("DialogString: {" .. v .. ", " .. DoorData[v].is_locked .. " }")
 			table.insert(DialogString, {v, DoorData[v].is_locked})
 		end
 		borkui.createUI(playerid, 0, DIALOG_HOME_DOORS)

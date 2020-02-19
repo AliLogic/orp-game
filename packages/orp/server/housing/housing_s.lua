@@ -320,7 +320,7 @@ AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid
 		borkui.addUITitle(playerid, dialogid, 'Home Doors')
 		borkui.addUIDivider(playerid, dialogid)
 		for _, v in pairs(DialogString) do
-			print(v)
+			print("{" .. v[1] .. ", " .. v[2] .. "}")
 			borkui.addUISwitch(playerid, dialogid, 'Door ' .. v .. '', 'is-rounded is-medium', 'is_success', 1, v[2]);
 		end
 		borkui.addUIDivider(playerid, dialogid)
