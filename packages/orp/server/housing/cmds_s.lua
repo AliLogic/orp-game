@@ -168,6 +168,8 @@ local function cmd_house(playerid, prefix, ...)
 			PlayPlayerSound(v, "https://sndup.net/42s4/doorbell.mp3")
 		end
 
+		SetPlayerAnimation(playerid, "ENTERCODE")
+
 	elseif prefix == "rent" then
 
 		AddPlayerChat(playerid, "Coming soon!")
