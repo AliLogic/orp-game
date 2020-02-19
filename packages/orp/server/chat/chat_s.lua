@@ -45,6 +45,7 @@ AddCommand("help", function (player, section)
 		AddPlayerChat(player, "General: /whisper /showlicenses")
 	elseif section == "property" then
 		AddPlayerChat(player, "Property: /h(ouse) /biz /myhousekeys /properties /listcars")
+		AddPlayerChat(player, "Property: /givehousekey /takehousekeys")
 	elseif section == "donator" then
 		AddPlayerChat(player, "Donator: /dc")
 	end
@@ -315,7 +316,7 @@ AddCommand("showlicenses", function (playerid, lookupid)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	AddPlayerChat(lookupid, "Licenses registered to " .. GetPlayerName(playerid) .. " (ID: " .. playerid .. "):")

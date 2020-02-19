@@ -9,9 +9,6 @@ Contributors:
 * Blue Mountains GmbH
 
 To do:
-* /givehousekey
-* /takehousekey
-* /myhousekeys
 * ability to view people that have keys to your house by using it near your house door
 ]]--
 
@@ -348,13 +345,77 @@ AddCommand("gotohouse", function (playerid, houseid)
 	AddPlayerChat(playerid, "You have been teleported to house ID: " .. houseid ..".")
 end)
 
-AddCommand("givehousekey", function (playerid, lookupid)
+AddCommand("givehousekey", function (playerid, lookupid, houseid)
+
+	if (lookupid == nil or houseid == nil) then
+		return AddPlayerChat(playerid, "Usage: /givehousekey <playerid> <houseid>")
+	end
+
+	lookupid = GetPlayerIdFromData(lookupid)
+
+	if lookupid == playerid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot give your own house keys to yourself!</>")
+	end
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
+	end
+
+	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
+	end
+
+	if not House_IsOwner(playerid, houseid) then
+		return AddPlayerChatError(playerid, "You do not own the specified house.")
+	end
+
+	if PlayerHasHouseKey(lookupid, houseid) == true then
+		return AddPlayerChatError(playerid, "The specified player already have the specified house's key.")
+	end
+
+	PlayerAddHouseKey(lookupid, houseid)
+
+	AddPlayerChat(playerid, "You have gave the keys for house (ID: " .. houseid .. ") to " .. GetPlayerName(lookupid) .. ".")
+	AddPlayerChat(lookupid, "You have receieved keys for house (ID: " .. houseid .. ") from " .. GetPlayerName(playerid) .. ".")
 end)
 
-AddCommand("takehousekey", function (playerid, lookupid)
+AddCommand("takehousekey", function (playerid, lookupid, houseid)
+
+	if (lookupid == nil or houseid == nil) then
+		return AddPlayerChat(playerid, "Usage: /takehousekey <playerid> <houseid>")
+	end
+
+	lookupid = GetPlayerIdFromData(lookupid)
+
+	if lookupid == playerid then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot take your own house keys from yourself!</>")
+	end
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
+	end
+
+	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
+	end
+
+	if not House_IsOwner(playerid, houseid) then
+		return AddPlayerChatError(playerid, "You do not own the specified house.")
+	end
+
+	if PlayerHasHouseKey(lookupid, houseid) ~= true then
+		return AddPlayerChatError(playerid, "The specified player doesn't have the specified house's key.")
+	end
+
+	PlayerRemoveHouseKey(lookupid, houseid)
+
+	AddPlayerChat(playerid, "You have taken house (ID: " .. houseid .. ") keys from " .. GetPlayerName(lookupid) .. ".")
+	AddPlayerChat(lookupid, "Your keys for house (ID: " .. houseid .. ") has been taken away by " .. GetPlayerName(playerid) .. ".")
 end)
 
 AddCommand("myhousekeys", function (playerid)
+
+	AddPlayerChat(playerid, "My house keys:")
 
 	local count = false
 
