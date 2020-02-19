@@ -291,8 +291,7 @@ function showUI(id) {
 			let switchValues = [];
 
 			switches.forEach((element) => {
-				//switchValues.push(document.getElementById(`${element}`).checked)
-				switchValues.push($(`#${element}:checked`)); // this still won't work anyways in terms of getting any useful info over to ORP.
+				switchValues.push($(`#${element}`).prop("checked"));
 			});
 
 			console.log(switchValues);
