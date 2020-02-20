@@ -17,7 +17,7 @@ AddEvent("OnWebLoadComplete",function(web)
 	end
 end)
 
-function forceUIFocus(ui)
+local function forceUIFocus(ui)
     local allUi = GetAllWebUI()
     for k,v in pairs(allUi) do
         if v ~= ui then

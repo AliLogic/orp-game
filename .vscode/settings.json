@@ -361,6 +361,7 @@
         "SetObjectStreamDistance",
         "SetObjectDimension",
         "GetObjectDimension",
-        "IsObjectStreamedIn"
+        "IsObjectStreamedIn",
+        "GetAllWebUI"
     ]
 }
