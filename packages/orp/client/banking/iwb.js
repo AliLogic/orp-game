@@ -19,7 +19,7 @@ const show = (hand, bank, statements) => {
 	
 	statements.forEach((statement) => {
 		console.log(statement);
-		$('#statement-log').append(`<div class="columns"><div class="column">${statement.purchase}</div><div class="column">${statement.in > 0 ? `$${statement.in}` : ''}</div><div class="column">${statement.out > 0 ? `-$${statement.out}` : ''}</div></div>`);
+		$('#statement-log').append(`<div class="columns"><div class="column">${statement.purchase}</div><div class="column">${statement.moneyin > 0 ? `$${statement.moneyin}` : ''}</div><div class="column">${statement.moneyout > 0 ? `-$${statement.moneyout}` : ''}</div></div>`);
 	});
 
 	$('#loading').show();
@@ -59,7 +59,7 @@ const transactionSuccessful = () => {
 	currentDiv.hide();
 	$('#thankyou').show();
 	setTimeout(() => {
-		// CallEvent("iwb:hidegui");
+		CallEvent("iwb:hidegui");
 	}, 4000);
 };
 
@@ -67,8 +67,8 @@ $(document).ready(() => {
 	$('#withdrawamount').numeric();
 	$('#depositamount').numeric();
 
-	// CallEvent("iwb:ready");
-	show(0, 1, [{
+	CallEvent("iwb:ready");
+	/*show(0, 1, [{
 		purchase: "Refund from Ottos Autos",
 		in: 100000,
 		out: 0
@@ -77,11 +77,11 @@ $(document).ready(() => {
 		purchase: "Multiple items from Onset Gas Station",
 		in: 0,
 		out: 26.79
-	}]);
+	}]);*/
 
 	$('#close').on('click', (e) => {
 		if (currentDiv === null) return;
-		// CallEvent to hide.
+		CallEvent("iwb:hidegui");
 	});
 
 	$('#withdraw-button').on('click', (e) => {
@@ -150,7 +150,7 @@ $(document).ready(() => {
 			amount = parseInt($('#withdrawamount').val());
 		}
 
-		// CallEvent("iwb:withdraw", isNaN(amount) ? null : amount);
+		CallEvent("iwb:withdraw", isNaN(amount) ? null : amount);
 
 		/*if (isNaN(amount)) {
 			if (currentDiv.attr("id") === "withdrawother") {
@@ -235,7 +235,7 @@ $(document).ready(() => {
 
 	$('button.button.is-primary.is-large#depositother').on('click', (e) => {
 		let amount = parseInt($('#depositamount').val());
-		// CallEvent("iwb:deposit", isNaN(amount) ? null : amount);
+		CallEvent("iwb:deposit", isNaN(amount) ? null : amount);
 
 		/*if (isNaN(amount)) {
 			$("#depositerror").html(mustEnterNumberError(false));

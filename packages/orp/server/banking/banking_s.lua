@@ -3,11 +3,16 @@ local colour = ImportPackage('colours')
 AtmObjectsCached = { }
 ATMData = { }
 
-local CONFIG_ATM_WITHDRAW_MIN = 1
-local CONFIG_ATM_WITHDRAW_MAX = 2500
-
-local CONFIG_ATM_DEPOSIT_MIN = 1
-local CONFIG_ATM_DEPOSIT_MAX = 500
+local CONFIG_ATM = {
+    withdraw = {
+        min = 1, 
+        max = 2500
+    },
+    deposit = {
+        min = 1,
+        max = 1000
+    }
+}
 
 AddEvent("LoadATMs", function()
 	mariadb_async_query(sql, "SELECT * FROM atm;", OnAtmLoaded)
@@ -51,7 +56,7 @@ AddRemoteEvent("banking:atminteract", function(player, atmobject)
 		local dist = GetDistance3D(x, y, z, x2, y2, z2)
 
         if dist < 200 then
-            CallRemoteEvent(player, "OpenATMMenu")
+            CallRemoteEvent(player, "iwb:opengui")
             
 			--webgui.ShowInputBox(player, "Balance: "..FormatMoney(PlayerData[player].bank_balance).."<br><br>Withdraw money", "Withdraw", "OnBankingWithdrawMoney")
 		end

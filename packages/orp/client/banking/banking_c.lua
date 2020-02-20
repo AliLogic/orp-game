@@ -1,20 +1,15 @@
+local web = CreateWebUI(0, 0, 0, 0, 1, 16)
+SetWebAlignment(web, 0, 0)
+SetWebAnchors(web, 0, 0, 1, 1)
+SetWebURL(web, "http://asset/"..GetPackageName().."/client/banking/iwb.html")
+SetWebVisibility(web, WEB_HIDDEN)
+
+AddEvent("OnPackageStop", function()
+	DestroyWebUI(web)
+end)
+
 local StreamedAtmIds = { }
 local AtmIds = { }
-
-local CONFIG_ATM = {
-    withdraw = {
-        MIN = 1, 
-        MAX = 2500
-    },
-    deposit = {
-        min = 1,
-        max = 1000
-    }
-}
-
-local atmmenu = nil
-local withdrawmenu = nil
-local depositmenu = nil
 
 local function tablefind(tab, el)
 	for index, value in pairs(tab) do
@@ -54,6 +49,42 @@ AddEvent("OnObjectStreamOut", function(object)
 			break
 		end
 	end
+end)
+
+AddEvent("iwb:ready", function ()
+    AddPlayerChat("Imminent Wealth Bank is now ready!")
+end)
+
+
+AddEvent("iwb:hidegui", function () end)
+AddEvent("iwb:deposit", function (amount) end)
+AddEvent("iwb:withdraw", function (amount) end)
+
+AddRemoteEvent("iwb:opengui", function ()
+    AddPlayerChat("Opening ATM")
+
+    local statement = {
+        {
+            purchase = "Refund from Bank of IWB",
+            moneyin = 1000,
+            moneyout = 0
+        },
+        {
+            purchase = "Chicken from Cock N Bell",
+            moneyin = 0,
+            moneyout = 15
+        }
+    } -- Example of how statements should be formed.
+
+    local hand = 5000 -- Random amount of cash in hand.
+    local bank = 1000000 -- Random amount of money in the bank. For testing purposes.
+
+	SetWebVisibility(web, WEB_VISIBLE)
+	ExecuteWebJS(web, 'show('..hand..', '..bank..', '..json_encode(statement)..');')
+	SetIgnoreLookInput(true)
+	SetIgnoreMoveInput(true)
+	ShowMouseCursor(true)
+	SetInputMode(INPUT_GAMEANDUI)
 end)
 
 --[[AddRemoteEvent("OpenATMMenu", function (bal)

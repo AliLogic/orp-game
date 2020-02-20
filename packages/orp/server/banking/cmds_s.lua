@@ -1,6 +1,5 @@
 local colour = ImportPackage('colours')
 
-
 AddCommand("acreateatm", function (player)
     if (PlayerData[player].admin < 5) then
         return AddPlayerChatError(player, "You don't have permission to use this command.")
