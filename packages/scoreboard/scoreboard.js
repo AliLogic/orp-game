@@ -5,9 +5,11 @@ const toggleScoreboard = bool => bool ? $('body').show() : $('body').hide();
 
 const removeElement = (array, elem) => {
 	var index = array.indexOf(elem);
-    if (index > -1) {
-        array.splice(index, 1);
+	if (index != -1) {
+		array.splice(index, 1);
+		return true;
 	}
+	return false;
 }
 
 $(document).ready(() => {
@@ -70,37 +72,32 @@ $(document).ready(() => {
 });
 
 function insertPlayer(player) {
-	players.push([player.id, players.length + 1]);
-	$('.table .body .data').append(`<div class="columns" id="${players.length}"><div class="column" id="id">${player.id}</div><div class="column" id="name">${player.name}</div><div class="column" id="level">${player.level}</div><div class="column" id="ping">${player.ping}</div></div>`);
+
+	removeElement(players, player.id); // remove if it exists already
+	$('.table .body .data').append(`<div class="columns" id="${player.id}"><div class="column" id="id">${player.id}</div><div class="column" id="name">${player.name}</div><div class="column" id="level">${player.level}</div><div class="column" id="ping">${player.ping}</div></div>`);
+	players.push(player.id);
 	return true;
 }
 
-function removePlayer(player) {
-	players.forEach((index) => {
-		if (index[0] === player) {
-
-			$(`.table .body .data #${index[0]}`).remove();
-			removeElement(players, index[0]);
-			console.log(`removePlayer(${index[0]})`);
-			return true;
-		}
-	});
+function removePlayer(playerid) {
+	if (removeElement(players, playerid)) {
+		$(`.table .body .data #${playerid}`).remove();
+		console.log(`removePlayer(${playerid})`);
+		return true;
+	}
 	return false;
 }
 
 function updateValue(player, value, newvalue) {
 	if (value !== "id" && value !== "name" && value !== "level" && value !== "ping") {
-		//return CallEvent('scorebork:update', 0);
 		return false;
 	}
 
-	if (players[player] === undefined) {
-		//return CallEvent('scorebork:update', 0);
+	if (players.indexOf(player) === -1) {
 		return false;
 	}
 
-	$(`.table .body .data #${players[player][1]} #${value}`).text(newvalue);
-	//return CallEvent('scorebork:update', 0);
+	$(`.table .body .data #${players[player]} #${value}`).text(newvalue);
 	return true;
 }
 
@@ -108,7 +105,7 @@ function removePlayers() {
 
 	players.forEach((index) => {
 		$(`.table .body .data #${index}`).remove();
-		removeElement(players, index);
 	});
+	players = [];
 	return true;
 }

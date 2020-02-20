@@ -321,7 +321,7 @@ local function cmd_sms(playerid, phonenumber, ...)
 		return AddPlayerChatError(playerid, "Your cellphone is turned off.");
 	end
 
-	if IsPlayerHandcuffed(playerid) then
+	if IsPlayerHandcuffed(playerid) == 1 then
 		return AddPlayerChatError(playerid, "You can't use your phone right now.")
 	end
 
@@ -356,7 +356,7 @@ AddCommand("louspeaker", function (playerid)
 		return AddPlayerChatError(playerid, "Your cellphone is turned off.");
 	end
 
-	if IsPlayerHandcuffed(playerid) then
+	if IsPlayerHandcuffed(playerid) == 1 then
 		return AddPlayerChatError(playerid, "You can't use your phone right now.")
 	end
 

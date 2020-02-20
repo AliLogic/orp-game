@@ -18,7 +18,7 @@ AddCommand("callsign", function (player, callsign)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You must be in a faction owned vehicle.")
 	end
 
-	if VehicleData[vehicle].callsign ~= nil and IsValidText3D(VehicleData[vehicle].callsign) then
+	if VehicleData[vehicle].callsign ~= 0 and IsValidText3D(VehicleData[vehicle].callsign) then
 		DestroyText3D(VehicleData[vehicle].callsign)
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Your previous callsign was destroyed!")
 		return
@@ -38,7 +38,7 @@ end)
 
 AddEvent("UnloadCallsigns", function ()
 	for i = 1, #VehicleData, 1 do
-		if VehicleData[i].callsign ~= nil and IsValidText3D(VehicleData[i].callsign) then
+		if VehicleData[i].callsign ~= 0 and IsValidText3D(VehicleData[i].callsign) then
 			DestroyText3D(VehicleData[i].callsign)
 		end
 	end
