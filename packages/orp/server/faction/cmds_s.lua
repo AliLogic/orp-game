@@ -315,7 +315,7 @@ local function cmd_handcuff(playerid, lookupid)
 
 	local is_handcuffed = IsPlayerHandcuffed(lookupid)
 
-	if is_handcuffed then
+	if is_handcuffed == 1 then
 		AddPlayerChat(playerid, "You unhandcuffed "..GetPlayerName(lookupid)..".")
 	else
 		AddPlayerChat(playerid, "You handcuffed "..GetPlayerName(lookupid)..".")
@@ -709,6 +709,10 @@ AddCommand("detain", function (playerid, lookupid)
 
 	local vehicleid = GetNearestVehicle(playerid)
 
+	if lookupid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /detain <playerid>")
+	end
+
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if (not IsValidPlayer(lookupid)) then
@@ -723,7 +727,7 @@ AddCommand("detain", function (playerid, lookupid)
 		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
-	if not IsPlayerHandcuffed(lookupid) then
+	if IsPlayerHandcuffed(lookupid) ~= 1 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The player is not cuffed at the moment.</>")
 	end
 

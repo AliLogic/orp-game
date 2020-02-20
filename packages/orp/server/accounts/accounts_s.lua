@@ -376,6 +376,7 @@ function CreatePlayerData(player)
 
 	PlayerData[player].is_frozen = false
 	PlayerData[player].label = nil -- 3d text label
+	PlayerData[player].handcuffed = 0
 
 	PlayerData[player].pd_timer = 0
 	PlayerData[player].death_timer = 0
