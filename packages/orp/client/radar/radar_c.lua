@@ -83,6 +83,7 @@ AddEvent("OnRenderHUD", function()
 end)
 
 AddEvent("OnPackageStart", function()
+	mapUI = CreateWebUI(0, 0, 0, 0, 1, 60)
 	SetWebAlignment(mapUI, 0, 0)
 	SetWebAnchors(mapUI, 0, 0, 1, 1)
 	SetWebURL(mapUI, "http://asset/"..GetPackageName().."/client/radar/radar.html")
