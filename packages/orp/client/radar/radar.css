@@ -1,0 +1,19 @@
+body {
+    margin: 0em;
+    padding: 0em;
+}
+
+.mini-map {
+    border-radius: 50%;
+    border: 2px solid black;
+    position: absolute;
+    bottom: 0.5em;
+    left: 0.5em;
+}
+
+.mini-gta-style {
+    box-shadow: 0 0 2px black;
+    position: absolute;
+    bottom: 0.5em;
+    left: 0.5em;
+}
