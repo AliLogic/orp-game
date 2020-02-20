@@ -162,6 +162,7 @@ function GetPlayerCash(player)
 	if PlayerData[player] ~= nil then
 		return PlayerData[player].cash
 	end
+	return 0
 end
 
 function SetPlayerCash(player, amount)
@@ -183,6 +184,13 @@ function RemovePlayerCash(player, amount)
 		PlayerData[player].cash = PlayerData[player].cash - amount
 		SetGUICash(player, PlayerData[player].cash)
 	end
+end
+
+function GetPlayerBankCash(player)
+	if PlayerData[player] ~= nil then
+		return PlayerData[player].bank
+	end
+	return 0
 end
 
 function SetPlayerBankCash(player, amount)

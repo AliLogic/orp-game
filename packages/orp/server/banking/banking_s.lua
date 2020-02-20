@@ -14,10 +14,6 @@ local CONFIG_ATM = {
     }
 }
 
-AddEvent("LoadATMs", function()
-	mariadb_async_query(sql, "SELECT * FROM atm;", OnAtmLoaded)
-end)
-
 function OnAtmLoaded()
 	for i = 1, mariadb_get_row_count() do
 		local result = mariadb_get_assoc(i)
@@ -37,31 +33,12 @@ function OnAtmLoaded()
 	print("** ATMs Loaded: " .. #ATMData .. ".")
 end
 
-AddEvent("OnPlayerLoggedIn", function(player)
-	CallRemoteEvent(player, "banking:atmsetup", AtmObjectsCached)
-end)
-
 function CreateATM(id, modelid, x, y, z, rx, ry, rz)
 	ATMData[id] = {}
 	ATMData[id].text3d = CreateText3D("ATM\n/atm", 18, x, y, z + 200, 0, 0, 0)
 
 	table.insert(AtmObjectsCached, ATMData[id].object)
 end
-
-AddRemoteEvent("banking:atminteract", function(player, atmobject)
-	local atm = GetAtmByObject(atmobject)
-	if atm then
-		local x, y, z = GetObjectLocation(atm.object)
-		local x2, y2, z2 = GetPlayerLocation(player)
-		local dist = GetDistance3D(x, y, z, x2, y2, z2)
-
-        if dist < 200 then
-            CallRemoteEvent(player, "iwb:opengui")
-            
-			--webgui.ShowInputBox(player, "Balance: "..FormatMoney(PlayerData[player].bank_balance).."<br><br>Withdraw money", "Withdraw", "OnBankingWithdrawMoney")
-		end
-	end
-end)
 
 function GetAtmByObject(atmobject)
 	for _,v in pairs(ATMData) do
@@ -72,32 +49,56 @@ function GetAtmByObject(atmobject)
 	return nil
 end
 
-AddRemoteEvent("banking:withdraw", function(player, amount)
+-- Events
 
-	if amount > PlayerData[player].bank then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to withdraw your chosen amount.</>")
-	end
-	
-    RemovePlayerCash(player, amount)
-
-    AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Withdrawn: $"..amount.."</>")
-    AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">New Balance: $"..PlayerData[player].bank.."</>")
-    AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
+AddEvent("LoadATMs", function()
+	mariadb_async_query(sql, "SELECT * FROM atm;", OnAtmLoaded)
 end)
 
-AddRemoteEvent("banking:deposit", function (player, amount)
+AddRemoteEvent("banking:atminteract", function(player, atmobject)
+	local atm = GetAtmByObject(atmobject)
+	if atm then
+		local x, y, z = GetObjectLocation(atm.object)
+		local x2, y2, z2 = GetPlayerLocation(player)
+		local dist = GetDistance3D(x, y, z, x2, y2, z2)
 
-	if amount > PlayerData[player].cash then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: You do not have enough money to deposit your chosen amount.</>")
+        if dist < 200 then
+            CallRemoteEvent(player, "iwb:opengui")
+			--webgui.ShowInputBox(player, "Balance: "..FormatMoney(PlayerData[player].bank_balance).."<br><br>Withdraw money", "Withdraw", "OnBankingWithdrawMoney")
+		end
 	end
-
-    AddPlayerCash(player, amount)
-
-    AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Deposited: $"..amount.."</>")
-    AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">New Balance: $"..PlayerData[player].bank.."</>")
-    AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
 end)
 
-AddCommand("atm", function (player) 
-    CallRemoteEvent(player, "OpenATMMenu", tonumber(PlayerData[player].bank))
+AddRemoteEvent("iwb:OnClientDeposit", function (playerid, amount)
+
+	if amount > GetPlayerBankCash(playerid) then
+		return AddPlayerChatError(playerid, "You do not have enough money to withdraw your chosen amount.")
+	end
+
+	RemovePlayerCash(playerid, amount)
+	AddPlayerBankCash(playerid, amount)
+
+    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Withdrawn: $"..amount.."</>")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">New Balance: $".. GetPlayerBankCash(playerid) .."</>")
+    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
+end)
+
+AddRemoteEvent("iwb:OnClientWithdraw", function (playerid, amount)
+
+	if amount > GetPlayerCash(playerid) then
+		return AddPlayerChatError(playerid, "You do not have enough money to deposit your chosen amount.")
+	end
+
+	AddPlayerCash(playerid, amount)
+	RemovePlayerBankCash(playerid, amount)
+
+    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Deposited: $"..amount.."</>")
+    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">New Balance: $".. GetPlayerBankCash(playerid) .."</>")
+    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
+end)
+
+-- Commands
+
+AddCommand("atm", function (player)
+    CallRemoteEvent(player, "iwb:opengui")
 end)

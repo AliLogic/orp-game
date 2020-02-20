@@ -1,3 +1,16 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Bork
+* Logic_
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local web = CreateWebUI(0, 0, 0, 0, 1, 16)
 SetWebAlignment(web, 0, 0)
 SetWebAnchors(web, 0, 0, 1, 1)
@@ -11,6 +24,8 @@ end)
 local StreamedAtmIds = { }
 local AtmIds = { }
 
+-- Functions
+
 local function tablefind(tab, el)
 	for index, value in pairs(tab) do
 		if value == el then
@@ -18,6 +33,24 @@ local function tablefind(tab, el)
 		end
 	end
 end
+
+function GetNearestATM()
+	local x, y, z = GetPlayerLocation()
+
+	for _,v in pairs(StreamedAtmIds) do
+		local x2, y2, z2 = GetObjectLocation(v)
+
+		local dist = GetDistance3D(x, y, z, x2, y2, z2)
+
+		if dist < 160.0 then
+			return v
+		end
+	end
+
+	return 0
+end
+
+-- Events
 
 AddRemoteEvent("banking:atmsetup", function(AtmObjects)
 	AtmIds = AtmObjects
@@ -57,8 +90,12 @@ end)
 
 
 AddEvent("iwb:hidegui", function () end)
-AddEvent("iwb:deposit", function (amount) end)
-AddEvent("iwb:withdraw", function (amount) end)
+AddEvent("iwb:deposit", function (amount)
+    CallRemoteEvent("iwb:OnClientDeposit", amount)
+end)
+AddEvent("iwb:withdraw", function (amount)
+    CallRemoteEvent("iwb:OnClientWithdraw", amount)
+end)
 
 AddRemoteEvent("iwb:opengui", function ()
     AddPlayerChat("Opening ATM")
@@ -195,19 +232,3 @@ end)]]
 	CallRemoteEvent("banking:withdraw", math.tointeger(value))
 end
 AddEvent("OnBankingWithdrawMoney", OnBankingWithdrawMoney)]]
-
-function GetNearestATM()
-	local x, y, z = GetPlayerLocation()
-
-	for _,v in pairs(StreamedAtmIds) do
-		local x2, y2, z2 = GetObjectLocation(v)
-
-		local dist = GetDistance3D(x, y, z, x2, y2, z2)
-
-		if dist < 160.0 then
-			return v
-		end
-	end
-
-	return 0
-end
