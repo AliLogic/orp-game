@@ -72,6 +72,7 @@
 		"client/customization/customization_c.lua",
 		"client/trafficlights/trafficlights_c.lua",
 		"client/gui/gui_c.lua",
+		"client/radar/radar_c.lua",
 		"server/misc/colours.lua",
 		"client/misc/json.lua",
 		"client/misc/misc_c.lua"
@@ -131,6 +132,16 @@
 		"client/banking/jquery.alphanum.min.js",
 		"client/banking/simplebar.css",
 		"client/banking/simplebar.min.js",
-		"client/sounds/doorbell.mp3"
+		"client/sounds/doorbell.mp3",
+		"client/radar/amunation.png",
+		"client/radar/marker.png",
+		"client/radar/petrol.png",
+		"client/radar/store.png",
+		"client/radar/OnsetMapLayout_latest.png",
+		"client/radar/radar_config.js",
+		"client/radar/radar_script.js",
+		"client/radar/radar.css",
+		"client/radar/radar.html",
+		"client/radar/umbrellajs.min.js"
 	]
 }
