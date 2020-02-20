@@ -325,8 +325,9 @@ function DuplicateEditorObject(object)
 	local ModelId = GetObjectModel(object)
 	local x, y, z = GetObjectLocation(object)
 	local rx, ry, rz = GetObjectRotation(object)
-
-	CallRemoteEvent("Server_EditorSpawnObject", ModelId, x + 35.0, y, z, rx, ry, rz)
+	local sx, sy, sz = GetObjectScale(object)
+	
+	CallRemoteEvent("Server_EditorSpawnObject", ModelId, x + 15.0, y, z, rx, ry, rz, sx, sy, sz)
 end
 
 --[[
