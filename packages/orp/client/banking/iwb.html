@@ -1,0 +1,190 @@
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>Imminent Wealth Bank</title>
+
+		<link rel="stylesheet" href="http://asset/orp/client/charui/dist/bulma.min.css" /> <!-- shared asset -->
+
+		<script src="http://asset/orp/client/charui/dist/jquery.min.js"></script> <!-- shared asset -->
+		<script src="jquery.alphanum.min.js"></script>
+		
+		<link rel="stylesheet" href="simplebar.css" />
+		<script src="simplebar.min.js"></script>
+		
+		<link rel="stylesheet" href="bulma-scrollable-table.css" />
+		<script src="http://asset/orp/client/charui/js/util.js"></script> <!-- shared asset -->
+
+		<link rel="stylesheet" href="iwb.css" />
+		<script src="iwb.js"></script>
+	</head>
+	<body>
+		<div class="flex-container">
+			<div style="width: calc(100vw / 2); margin: 5px;">
+				<div class="card">
+					<div class="card-content">
+
+						<div style="float: left; clear: 0;"><img src="iwb.png" class="iwb-logo"></div>
+						<div style="float: right; clear: 0;"><span id="currentbalance"></span><button class="delete" id="close"></button></div>
+
+						<hr>
+
+						<div class="iwb-page" id="loading" style="display: none;">
+							<h1 class="title">Please enter your pin</h1>
+							<div class="iwb-pinbox"></div>
+						</div>
+
+						<div class="iwb-page" id="atm" style="display: none;">
+							<h1 class="title">What operation would you like to perform?</h1>
+
+							<div class="field">
+								<div class="control">
+									<button class="button is-danger is-large is-fullwidth" id="withdraw-button">Withdraw</button>
+								</div>
+							</div>
+
+							<div class="field">
+								<div class="control">
+									<button class="button is-danger is-large is-fullwidth" id="deposit-button">Deposit</button>
+								</div>
+							</div>
+
+							<div class="field">
+								<div class="control">
+									<button class="button is-danger is-large is-fullwidth" id="statement-button">View your Latest Statement</button>
+								</div>
+							</div>
+							
+						</div>
+
+						<div class="iwb-page" id="withdraw" style="display: none;">
+							<h1 class="title">Select the amount you wish to withdraw from this account</h1>
+
+							<div id="withdrawerror"></div>
+
+							<div class="field">
+								<div class="control">
+									<div class="columns">
+										<div class="column">
+											<button class="button is-danger is-large is-fullwidth" id="10">$10</button>
+										</div>
+										<div class="column">
+											<button class="button is-danger is-large is-fullwidth" id="100">$100</button>
+										</div>
+									</div>
+		
+									<div class="columns">
+										<div class="column">
+											<button class="button is-danger is-large is-fullwidth" id="20">$20</button>
+										</div>
+										<div class="column">
+											<button class="button is-danger is-large is-fullwidth" id="500">$500</button>
+										</div>
+									</div>
+		
+									<div class="columns">
+										<div class="column">
+											<button class="button is-danger is-large is-fullwidth" id="50">$50</button>
+										</div>
+										<div class="column">
+											<button class="button is-danger is-large is-fullwidth" id="withdrawother-button">Other</button>
+										</div>
+									</div>
+								</div>
+							</div>
+
+							<div class="field">
+								<div class="control">
+									<button class="button is-danger is-large" id="backwithdraw">
+										Back
+									</button>
+								</div>
+							</div>
+
+						</div>
+
+						<div class="iwb-page" id="deposit" style="display: none;">
+							<h1 class="title">Enter the amount you wish to deposit into this account</h1>
+
+							<div id="depositerror"></div>
+
+							<div class="field">
+								<div class="control">
+									<input type="text" class="input is-large" id="depositamount">
+								</div>
+							</div>
+							
+							<div class="field is-grouped">
+								<div class="control">
+									<button class="button is-danger is-large" id="backdeposit">
+										Back
+									</button>
+								</div>
+								<div class="control">
+									<button class="button is-primary is-large" id="depositother">
+										Deposit
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="iwb-page" id="withdrawother" style="display: none;">
+							<h1 class="title">Enter the amount you wish to withdraw from this account</h1>
+
+							<div id="withdrawerror2"></div>
+
+							<div class="field">
+								<div class="control">
+									<input type="text" class="input is-large" id="withdrawamount">
+								</div>
+							</div>
+							
+							<div class="field is-grouped">
+								<div class="control">
+									<button class="button is-danger is-large" id="backwithdrawother">
+										Back
+									</button>
+								</div>
+								<div class="control">
+									<button class="button is-primary is-large" id="withdrawother">
+										Withdraw
+									</button>
+								</div>
+							</div>
+						</div>
+
+						<div class="iwb-page" id="thankyou" style="display: none;">
+							<h1 class="title">Thank you for using Imminent Wealth Bank! Have a good day!</h1>
+						</div>
+
+						<div class="iwb-page" id="statement" style="display: none;">
+							<h1 class="title">Your Latest Statement</h1>
+
+							<div class="table">
+								<div class="head">
+									<div class="columns">
+										<div class="column">Purchase</div>
+										<div class="column">In</div>
+										<div class="column">Out</div>
+									</div>
+								</div>
+	
+								<div class="body" data-simplebar data-simplebar-auto-hide="false">
+									<div id="statement-log"></div>
+								</div>
+							</div>
+
+							<div class="field">
+								<div class="control">
+									<button class="button is-large is-danger" id="backstatement">Back</button>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

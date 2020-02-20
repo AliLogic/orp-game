@@ -1,0 +1,45 @@
+/* 
+by borkdoggo69
+ask before using! 
+*/
+
+.head {
+	padding-bottom: 10px;
+}
+
+.head .columns > .column {
+	font-weight: 700;
+}
+
+.body {
+	height: 400px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+.body .columns {
+	margin-top: 4px;
+	margin-bottom: 4px;
+}
+
+.body .columns.selected {
+	background-color: red;
+}
+
+.body .columns .column:nth-child(4)::after {
+	content: " ms";
+}
+
+.column {
+	padding-top: 8px !important;
+	padding-bottom: 8px !important;
+}
+
+.table {
+	background-color: white;
+	border-radius: 4px;
+}
+
+.table .head {
+	border-bottom: 2px solid #dbdbdb;
+}

@@ -1,0 +1,70 @@
+html, body {
+	overflow: hidden !important;
+}
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	min-height: 100%;
+	min-width: 100%;
+	margin: 0;
+	background-color: black !important;
+}
+
+.flex-container {
+    display: flex;           /* establish flex container */
+    flex-direction: column;  /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;     /* center items horizontally, in this case */
+    height: 100vh;
+}
+
+.card {
+	border-radius: 2px;
+}
+
+div.iwb-pinbox, input.iwb-inputbox {
+	margin: auto;
+	padding: 10px;
+	font-size: 60px;
+
+	border: 1px solid black;
+	border-radius: 2px;
+
+	width: 260px;
+	height: 100px;
+}
+
+input.iwb-inputbox {
+	-webkit-appearance: none;
+
+	border: 1px solid black;
+	border-radius: 2px;
+
+	width: 260px;
+	height: 100px;
+
+	padding: 10px;
+	font-size: 60px;
+}
+
+img.iwb-logo {
+	width: 200px;
+	height: calc(calc(1355px / 279px) * 200);
+}
+
+div.iwb-page {
+	justify-content: center;
+	text-align: center;
+}
+
+#currentbalance::before {
+	content: "Your Current Balance: ";
+}
+
+#currentbalance {
+	margin-right: 6px;
+}

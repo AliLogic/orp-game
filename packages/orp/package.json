@@ -120,6 +120,14 @@
 		"client/gui/plus.png",
 		"client/gui/university.png",
 		"client/gui/credit-card.png",
-		"client/gui/shield-alt.png"
+		"client/gui/shield-alt.png",
+		"client/banking/iwb.html",
+		"client/banking/iwb.css",
+		"client/banking/iwb.js",
+		"client/banking/iwb.png",
+		"client/banking/bulma-scrollable-table.css",
+		"client/banking/jquery.alphanum.min.js",
+		"client/banking/simplebar.css",
+		"client/banking/simplebar.min.js"
 	]
 }
