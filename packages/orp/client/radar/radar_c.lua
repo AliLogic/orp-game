@@ -1,6 +1,6 @@
 local callBackLoad = {}
 local width, height = GetScreenSize()
-local mapUi = CreateWebUI(0, 0, 0, 0, 0, 45)
+local mapUi = CreateWebUI(0, 0, 0, 0, 1, 60)
 local load = false;
 SetWebAlignment(mapUi, 0, 0)
 SetWebAnchors(mapUi, 0, 0, 1, 1)
