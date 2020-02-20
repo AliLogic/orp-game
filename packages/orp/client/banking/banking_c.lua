@@ -1,14 +1,16 @@
-local Dialog = ImportPackage('dialogui')
-local colour = ImportPackage('colours')
-
 local StreamedAtmIds = { }
 local AtmIds = { }
 
-local CONFIG_ATM_WITHDRAW_MIN = 1
-local CONFIG_ATM_WITHDRAW_MAX = 2500
-
-local CONFIG_ATM_DEPOSIT_MIN = 1
-local CONFIG_ATM_DEPOSIT_MAX = 500
+local CONFIG_ATM = {
+    withdraw = {
+        MIN = 1, 
+        MAX = 2500
+    },
+    deposit = {
+        min = 1,
+        max = 1000
+    }
+}
 
 local atmmenu = nil
 local withdrawmenu = nil
@@ -54,7 +56,7 @@ AddEvent("OnObjectStreamOut", function(object)
 	end
 end)
 
-AddRemoteEvent("OpenATMMenu", function (bal)
+--[[AddRemoteEvent("OpenATMMenu", function (bal)
     if GetNearestATM() ~= 0 then
         atmmenu = Dialog.create("ATM Interaction:", 
             string.format("Welcome to the Bank of Nevada!<br><br>Your current balance is %d.<br><br>Please select a menu to continue:", bal),
@@ -65,9 +67,9 @@ AddRemoteEvent("OpenATMMenu", function (bal)
     else
         return AddPlayerChat("<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You are not near any ATMs!")
     end
-end)
+end)]]
 
-AddEvent("OnDialogSubmit", function (dialog, button, amount)
+--[[AddEvent("OnDialogSubmit", function (dialog, button, amount)
     if dialog == atmmenu then
         if button == 1 then
             local player = GetPlayerId()
@@ -156,12 +158,12 @@ AddEvent("OnDialogSubmit", function (dialog, button, amount)
     else
         return
     end
-end)
+end)]]
 
-function OnBankingWithdrawMoney(value)
+--[[function OnBankingWithdrawMoney(value)
 	CallRemoteEvent("banking:withdraw", math.tointeger(value))
 end
-AddEvent("OnBankingWithdrawMoney", OnBankingWithdrawMoney)
+AddEvent("OnBankingWithdrawMoney", OnBankingWithdrawMoney)]]
 
 function GetNearestATM()
 	local x, y, z = GetPlayerLocation()
