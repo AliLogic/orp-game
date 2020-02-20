@@ -97,7 +97,7 @@ AddEvent("iwb:withdraw", function (amount)
     CallRemoteEvent("iwb:OnClientWithdraw", amount)
 end)
 
-AddRemoteEvent("iwb:opengui", function ()
+AddRemoteEvent("iwb:opengui", function (hand, bank)
     AddPlayerChat("Opening ATM")
 
     local statement = {
@@ -112,9 +112,6 @@ AddRemoteEvent("iwb:opengui", function ()
             moneyout = 15
         }
     } -- Example of how statements should be formed.
-
-    local hand = 5000 -- Random amount of cash in hand.
-    local bank = 1000000 -- Random amount of money in the bank. For testing purposes.
 
 	SetWebVisibility(web, WEB_VISIBLE)
 	ExecuteWebJS(web, 'show('..hand..', '..bank..', '..json_encode(statement)..');')

@@ -63,7 +63,7 @@ AddRemoteEvent("banking:atminteract", function(player, atmobject)
 		local dist = GetDistance3D(x, y, z, x2, y2, z2)
 
         if dist < 200 then
-            CallRemoteEvent(player, "iwb:opengui")
+            CallRemoteEvent(player, "iwb:opengui", GetPlayerCash(player), GetPlayerBankCash(player))
 			--webgui.ShowInputBox(player, "Balance: "..FormatMoney(PlayerData[player].bank_balance).."<br><br>Withdraw money", "Withdraw", "OnBankingWithdrawMoney")
 		end
 	end
@@ -100,5 +100,5 @@ end)
 -- Commands
 
 AddCommand("atm", function (player)
-    CallRemoteEvent(player, "iwb:opengui")
+    CallRemoteEvent(player, "iwb:opengui", GetPlayerCash(player), GetPlayerBankCash(player))
 end)
