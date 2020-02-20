@@ -12,6 +12,12 @@ You should have received a copy of the Onset Open Source License along with this
 see https://bluemountains.io/Onset_OpenSourceSoftware_License.txt
 ]]--
 
+--[[
+	 Changes : 
+→ Copying object scaling when an object is cloned.
+→ No changes in the object position when cloned, if possible.
+]]
+
 local EditorObjects = { }
 
 function OnPlayerJoin(player)
@@ -42,17 +48,22 @@ function OnPlayerQuit(player)
 end
 AddEvent("OnPlayerQuit", OnPlayerQuit)
 
-function Server_EditorSpawnObject(player, modelid, x, y, z, rx, ry, rz)
+function Server_EditorSpawnObject(player, modelid, x, y, z, rx, ry, rz, sx, sy, sz)
 	
 	-- Rotation is optional
 	rx = rx or 0.0
 	ry = ry or 0.0
 	rz = rz or 0.0
 
+	-- Object scale is optional
+	sx = sx or 1.0
+	sy = sy or 1.0
+	sz = sz or 1.0
+
 	local object
 
 	if modelid ~= 39 then
-		object = CreateMapEditorObject(player, modelid, x, y, z, rx, ry, rz, 1.0, 1.0, 1.0)
+		object = CreateMapEditorObject(player, modelid, x, y, z, rx, ry, rz, sx, sy, sz)
 	else
 		object = CreateMapEditorObject(player, modelid, x, y, z, rx, ry, rz, 0.75, 0.75, 0.75)
 	end
@@ -133,7 +144,7 @@ function ExportMapAsLua(player, MapName)
 	local FileName = "map_"..MapName.."_"..os.date("%H_%M_%a_%b")..".lua"
 	
 	local ObjectCount = 0
-	local MapFile = io.open(FileName, "w")
+	local MapFile = io.open("export/"..FileName, "w")
 	for k, _ in pairs(EditorObjects[player]) do
 		local model = GetObjectModel(k)
 		local x, y, z = GetObjectLocation(k)
