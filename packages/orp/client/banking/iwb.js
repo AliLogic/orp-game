@@ -11,7 +11,7 @@ const mustEnterNumberError = (deposit) => `<div class="field"><div class="contro
 const numbersWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 
 const show = (hand, bank, statements) => {
-	inHand = hand;
+	//inHand = hand;
 	inBank = bank;
 
 	$('#currentbalance').text(`$${numbersWithCommas(bank)}`);
@@ -51,9 +51,9 @@ const setBank = (amount) => {
 	$('#currentbalance').text(`$${numbersWithCommas(inBank)}`);
 };
 
-const setHand = (amount) => {
+/*const setHand = (amount) => {
 	amount < 0 ? inHand -= (amount / -1) : inHand += amount;
-};
+};*/
 
 const transactionSuccessful = () => {
 	currentDiv.hide();
