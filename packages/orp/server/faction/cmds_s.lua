@@ -662,10 +662,10 @@ AddCommand("impound", function (playerid, price)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The price can't be below $1 or above $10,000.</>")
 	end
 
-	local vehicleid = GetPlayerVehicle(playerid)
+	local vehicleid = GetNearestVehicle(playerid)
 
 	if vehicleid == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be in a vehicle to use this command.</>")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be near a vehicle to use this command.</>")
 	end
 
 	local factionid = PlayerData[playerid].faction
