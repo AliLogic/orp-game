@@ -45,11 +45,11 @@ AddCommand("ban", function (playerid, lookupid, ...)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if lookupid == playerid then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot ban yourself!</>")
+		return AddPlayerChatError(playerid, "You cannot ban yourself!")
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	local reason = ""
@@ -161,15 +161,15 @@ AddCommand("spec", function (playerid, lookupid)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if lookupid == playerid then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot kick yourself!</>")
+		return AddPlayerChatError(playerid, "You cannot kick yourself!")
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if PlayerData[lookupid].admin > PlayerData[playerid].admin then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You can not spectate "..GetPlayerName(lookupid)..".</>")
+		return AddPlayerChatError(playerid, "You can not spectate "..GetPlayerName(lookupid)..".")
 	end]]--
 
 	SetPlayerSpectate(playerid, true)
@@ -207,15 +207,15 @@ AddCommand("kick", function (playerid, lookupid, ...)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if lookupid == playerid then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot kick yourself!</>")
+		return AddPlayerChatError(playerid, "You cannot kick yourself!")
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if PlayerData[lookupid].admin > PlayerData[playerid].admin then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You can not kick "..GetPlayerName(lookupid)..".</>")
+		return AddPlayerChatError(playerid, "You can not kick "..GetPlayerName(lookupid)..".")
 	end
 
 	local reason
@@ -241,11 +241,11 @@ AddCommand("warp", function (playerid, fromid, toid)
 	end
 
 	if (fromid == toid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You can not warp the same player to itself.</>")
+		return AddPlayerChatError(playerid, "You can not warp the same player to itself.")
 	end
 
 	if (not IsValidPlayer(fromid)) or (not IsValidPlayer(toid)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	local x, y, z = GetPlayerLocation(toid)
@@ -280,7 +280,7 @@ AddCommand("slap", function (playerid, lookupid)
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	Slap(lookupid)
@@ -297,13 +297,13 @@ AddCommand("goto", function (playerid, lookupid)
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if playerid == lookupid then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot TP to yourself!</>")
+		return AddPlayerChatError(playerid, "You cannot TP to yourself!")
 	end
 
 	local x, y, z = GetPlayerLocation(lookupid)
@@ -323,13 +323,13 @@ AddCommand("get", function (playerid, lookupid)
 	end
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if playerid == lookupid then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot TP to yourself!</>")
+		return AddPlayerChatError(playerid, "You cannot TP to yourself!")
 	end
 
 	local x, y, z = GetPlayerLocation(playerid)
@@ -340,7 +340,7 @@ end)
 
 AddCommand("apos", function (player, id)
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if GetPlayerVehicle(player) == 0 then
@@ -361,7 +361,7 @@ end)
 
 AddCommand("av", function (player, model)
 	if (PlayerData[player].admin < 2) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if (model == nil) then
@@ -398,7 +398,7 @@ end)
 
 AddCommand("asetadmin", function (player, target, level)
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if target == nil or level == nil then
@@ -442,7 +442,7 @@ end)
 
 AddCommand("a", function (player, ...)
 	if (PlayerData[player].admin < 1) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if #{...} == 0 then
@@ -458,7 +458,7 @@ end)
 
 AddCommand("setstats", function (player, target, prefix, ...)
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if target == nil then
@@ -562,7 +562,7 @@ end)
 
 AddCommand("astats", function (player, target)
 	if (PlayerData[player].admin < 2) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if target == nil then
@@ -584,7 +584,7 @@ end)
 
 local function cmd_acv(player, model, plate)
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if model == nil or plate == nil then
@@ -618,7 +618,7 @@ AddCommand('acv', cmd_acv)
 
 local function cmd_aev(player, vehicle, prefix, ...)
 	if (PlayerData[player].admin < 2) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if vehicle == nil or prefix == nil then
@@ -802,7 +802,7 @@ end)
 
 AddCommand("ahelp", function (player)
 	if (PlayerData[player].admin < 1) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off /(whitelist)log /banlog /(assist)s /ajail")
@@ -817,7 +817,7 @@ AddCommand("ahelp", function (player)
 
 	if PlayerData[player].admin > 3 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/setarmour /sethealth /toggleg /gotohouse /housedoors")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/setarmour /sethealth /toggleg /gotohouse /housedoors /gotopump /gotodoor /gotoveh /gotoplant /gotospeedcam /gotobiz")
 	end
 
 	if PlayerData[player].admin > 4 then
@@ -828,7 +828,7 @@ end)
 
 AddCommand("asethelper", function (player, target, level)
 	if (PlayerData[player].admin < 5 or PlayerData[player].helper ~= 2) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if target == nil or level == nil then
@@ -873,7 +873,7 @@ end)
 AddCommand("avpark", function (player)
 
 	if (PlayerData[player].admin < 3) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	local vehicle = GetPlayerVehicle(player)
@@ -922,15 +922,15 @@ AddCommand("setarmour", function (playerid, lookupid, armour)
 	armour = tonumber(armour)
 
 	if IsValidPlayer(lookupid) == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if armour < 0 or armour > 100 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid health specified.</>")
+		return AddPlayerChatError(playerid, "Invalid health specified.")
 	end
 
 	if PlayerData[lookupid].logged_in == false then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
+		return AddPlayerChatError(playerid, "This player is not logged in.")
 	end
 
 	SetPlayerArmor(lookupid, armour)
@@ -953,15 +953,15 @@ AddCommand("sethealth", function (playerid, lookupid, health)
 	health = tonumber(health)
 
 	if IsValidPlayer(lookupid) == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if health < 0 or health > 100 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid health specified.</>")
+		return AddPlayerChatError(playerid, "Invalid health specified.")
 	end
 
 	if PlayerData[lookupid].logged_in == false then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</>")
+		return AddPlayerChatError(playerid, "This player is not logged in.")
 	end
 
 	SetPlayerHealth(lookupid, health)
@@ -1044,11 +1044,11 @@ AddCommand("assistance", function (playerid, ...)
 	end
 
 	if length < 5 or length > 50 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid request message length.</>")
+		return AddPlayerChatError(playerid, "Invalid request message length.")
 	end
 
 	if PlayerData[playerid].assistance ~= 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You have already requested an assistance. Please use /cancelassist if you no longer need help.</>")
+		return AddPlayerChatError(playerid, "You have already requested an assistance. Please use /cancelassist if you no longer need help.")
 	end
 
 	SendAssistance(playerid, message)
@@ -1087,7 +1087,7 @@ AddCommand("assist", function (playerid, lookupid, ...)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if (not IsValidPlayer(lookupid)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	local message = table.concat({...}, " ")
@@ -1098,7 +1098,7 @@ AddCommand("assist", function (playerid, lookupid, ...)
 	end
 
 	if PlayerData[lookupid].assistance == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Player has not requested any assistance.</>")
+		return AddPlayerChatError(playerid, "Player has not requested any assistance.")
 	end
 
 	AddPlayerChat(lookupid, "<span color=\""..colour.COLOUR_YELLOW().."\">[ASSIST]</> "..PlayerData[playerid].steamname..": "..message)
@@ -1130,7 +1130,7 @@ AddCommand("revokelicense", function (playerid, lookupid, license)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if (not IsValidPlayer(lookupid)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	for i = 1, #LicensesColumns, 1 do
@@ -1144,7 +1144,7 @@ AddCommand("revokelicense", function (playerid, lookupid, license)
 		end
 	end
 
-	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid license name specified.")
+	AddPlayerChatError(playerid, "Invalid license name specified.")
 
 	return
 end)
@@ -1170,7 +1170,7 @@ AddCommand("grantlicense", function (playerid, lookupid, license)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if (not IsValidPlayer(lookupid)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	for i = 1, #LicensesColumns, 1 do
@@ -1184,7 +1184,7 @@ AddCommand("grantlicense", function (playerid, lookupid, license)
 		end
 	end
 
-	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid license name specified.")
+	AddPlayerChatError(playerid, "Invalid license name specified.")
 
 	return
 end)
@@ -1203,19 +1203,19 @@ AddCommand("ajail", function (playerid, lookupid, minutes)
 	minutes = tonumber(minutes)
 
 	if (not IsValidPlayer(lookupid)) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if playerid == lookupid then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You cannot admin jail yourself!</>")
+		return AddPlayerChatError(playerid, "You cannot admin jail yourself!")
 	end
 
 	if (minutes < 0 or minutes > 1440) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Minutes can be between 0 to 1440 (24 hours).</>")
+		return AddPlayerChatError(playerid, "Minutes can be between 0 to 1440 (24 hours).")
 	end
 
 	if (PlayerData[lookupid].ajail == 0 and minutes == 0) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not admin jailed.</>")
+		return AddPlayerChatError(playerid, "The specified player is not admin jailed.")
 	end
 
 	if minutes ~= 0 then
@@ -1254,7 +1254,7 @@ AddCommand("arevive", function (playerid, lookupid)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	if PlayerData[lookupid].state == CHARACTER_STATE_ALIVE then
@@ -1284,7 +1284,7 @@ AddCommand("clearinventory", function (playerid, lookupid)
 	lookupid = GetPlayerIdFromData(lookupid)
 
 	if not IsValidPlayer(lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
 	Inventory_Clear(lookupid)
@@ -1316,7 +1316,7 @@ AddCommand("flipveh", function (playerid, vehicleid)
 		vehicleid = tonumber(vehicleid)
 
 		if not IsValidVehicle(vehicleid) then
-			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid vehicle ID entered.</>")
+			return AddPlayerChatError(playerid, "Invalid vehicle ID entered.")
 		end
 
 		SetVehicleRotation(vehicleid, 0.0, 0.0, 0.0)

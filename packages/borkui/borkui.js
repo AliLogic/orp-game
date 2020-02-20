@@ -1,5 +1,6 @@
 let elements = [];
 let elementId = 0;
+let switches = [];
 
 $(document).ready(() => {
 	CallEvent('borkui:ready');
@@ -8,6 +9,8 @@ $(document).ready(() => {
 	addTitle('Bork UI');
 	addDivider();
 	addInformation('This is just a basic test.');
+	addDivider();
+	addSwitch('test', 'is-rounded is-outlined is-medium', 'is_success', 1, 0);
 	addDivider();
 	addTextInput('Name:');
 	addDropdown(['test of the century', 'test2']);
@@ -94,9 +97,10 @@ function addSwitch(label, type, colour = 'is_success', anchor = 0, checked = 0) 
 
 	elementId += 1;
 	elements.push([elementId, true]);
+	switches.push([elementId]);
 	
 	console.log('Switch ID: '+ elementId);
-	$('#content').append(`<div class="field"><input id="${elementId}" type="checkbox" name="${elementId}" class="${anchor === 1 ? `switch is-rtl ${type} ${colour}` : `switch ${type} ${colour}`}"${checked === 0 ? ' checked="checked"' : ''}><label id="${elementId}">${label}</label></div>`);
+	$('#content').append(`<div class="field"><input id="${elementId}" type="checkbox" name="${elementId}" class="${anchor === 1 ? `switch is-rtl ${type} ${colour}` : `switch ${type} ${colour}`}"${checked === 1 ? ' checked="checked"' : ''}><label for="${elementId}">${label}</label></div>`);
 }
 
 function addButton(text, colour = 'is-dark', size = 1, rounded = false, fullwidth = true, anchor = 0) {
@@ -146,9 +150,11 @@ function addButton(text, colour = 'is-dark', size = 1, rounded = false, fullwidt
 
 	elementId += 1;
 	elements.push([elementId, true]);
+
+	console.log('Button ID: '+ elementId);
 	
 	//$('#content').append(`<div${alignment}><button class="button${colour.startsWith('is-') ? ` ${colour}` : ''}${chosen_size !== "" ? ` ${chosen_size} ` : ''}${fullwidth ? 'is-fullwidth' : ''} ${rounded ? 'is-rounded' : ''}" id="${elementId}">${text}</button></div>`)
-	$('#content').append(`<div${alignment}><button class="button ${colour}${chosen_size !== "" ? ` ${chosen_size} ` : ''}${fullwidth ? 'is-fullwidth' : ''}${rounded ? ' is-rounded' : ''}" id="${elementId}">${text}</button></div>`)
+	$('#content').append(`<div${alignment}><button class="button ${colour} ${chosen_size !== "" ? ` ${chosen_size} ` : ''} ${fullwidth ? 'is-fullwidth' : ''} ${rounded ? ' is-rounded' : ''}" id="${elementId}">${text}</button></div>`)
 }
 
 function addTextInput(label, size = 1, type = 0, placeholder = '') {
@@ -274,8 +280,21 @@ function showUI(id) {
 		console.log("Body is hidden, showing it.");
 
 		$('body').show();
+		$('.field').on('click', function () { // This doesn't work at the moment...
+			console.log('switch pressed!');
+			//$(`${elementId}`).prop( "checked", document.getElementById(`${element}`).checked); // Toggle the checked when clicked
+		});
+
 		$('button').on('click', function (e) {
 			e.preventDefault();
+
+			let switchValues = [];
+
+			switches.forEach((element) => {
+				switchValues.push($(`#${element}`).prop("checked"));
+			});
+
+			console.log(switchValues);
 			
 			let returnValues = [];
 		
@@ -288,7 +307,7 @@ function showUI(id) {
 			});
 		
 			console.log(returnValues);
-			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), returnValues);
+			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), returnValues, switchValues);
 		});
 	}
 }

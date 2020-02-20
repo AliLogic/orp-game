@@ -2,7 +2,7 @@ local colour = ImportPackage("colours")
 
 local function cmd_hhelp(player)
 	if (PlayerData[player].helper < 1) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if PlayerData[player].helper > 0 then
@@ -18,7 +18,7 @@ AddCommand("helperhelp", cmd_hhelp)
 
 AddCommand("hc", function (player, ...)
 	if (PlayerData[player].helper < 1) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if #{...} == 0 then

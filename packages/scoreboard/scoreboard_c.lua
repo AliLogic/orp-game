@@ -9,34 +9,25 @@ local function UpdateScoreboardData()
 	CallRemoteEvent("scorebork:updateScoreboard")
 end
 
-function ToggleScoreboard(toggle)
+AddRemoteEvent('scorebork:ToggleScoreboard', function (toggle)
 	if toggle == true then
 		ExecuteWebJS(scoreboard, "toggleScoreboard(true);")
 	else
 		ExecuteWebJS(scoreboard, "toggleScoreboard(false);")
 	end
-end
-AddRemoteEvent('scorebork:ToggleScoreboard', ToggleScoreboard)
+end)
 
-function InsertPlayer(id, name, level, ping)
+AddRemoteEvent('scorebork:InsertPlayer', function (id, name, level, ping)
 	ExecuteWebJS(scoreboard, "insertPlayer({id: "..id..", name: \""..name.."\", level: "..level..", ping: "..ping.."});")
-end
-AddRemoteEvent('scorebork:InsertPlayer', InsertPlayer)
+end)
 
-function RemovePlayer(id)
-	ExecuteWebJS(scoreboard, "removePlayer("..id..");")
-end
-AddRemoteEvent('scorebork:RemovePlayer', RemovePlayer)
+AddRemoteEvent('scorebork:RemovePlayers', function ()
+	ExecuteWebJS(scoreboard, "removePlayers();")
+end)
 
-function UpdatePlayer(id, value, newvalue)
+AddRemoteEvent('scorebork:UpdatePlayer', function (id, value, newvalue)
 	ExecuteWebJS(scoreboard, "updateValue("..id..", \""..value.."\", \""..newvalue.."\");")
-end
-AddRemoteEvent('scorebork:UpdatePlayer', UpdatePlayer)
-
-AddFunctionExport('ToggleScoreboard', ToggleScoreboard)
-AddFunctionExport('InsertPlayer', InsertPlayer)
-AddFunctionExport('RemovePlayer', RemovePlayer)
-AddFunctionExport('UpdatePlayer', UpdatePlayer)
+end)
 
 -- Events
 

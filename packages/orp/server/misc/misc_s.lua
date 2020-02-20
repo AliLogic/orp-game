@@ -319,6 +319,10 @@ function GetPlayerFromPartialName(name)
     end
 end
 
+function PlayPlayerSound(playerid, sound)
+	CallRemoteEvent(playerid, "PlayPlayerSound", sound)
+end
+
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
 AddRemoteEvent("SetPlayerCash", SetPlayerCash)
 AddRemoteEvent("AddPlayerCash", AddPlayerCash)

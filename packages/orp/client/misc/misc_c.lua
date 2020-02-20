@@ -33,3 +33,7 @@ function GetPlayerVehicleRPM()
 
 	return math.floor(GetVehicleEngineRPM(vehicle))
 end
+
+AddRemoteEvent("PlayPlayerSound", function (sound)
+	SetSoundVolume(CreateSound(sound), 2.0)
+end)

@@ -165,7 +165,7 @@ AddCommand("biz", cmd_biz)
 
 local function cmd_acb(player, biztype, enterable, price, ...)
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if biztype == nil or enterable == nil or price == nil or #{...} == 0 then
@@ -215,7 +215,7 @@ AddCommand("acb", cmd_acb)
 local function cmd_aeb(player, business, prefix, ...)
 
 	if (PlayerData[player].admin < 4) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if business == nil or prefix == nil then
@@ -257,3 +257,24 @@ end
 AddCommand("aeditbusiness", cmd_aeb)
 AddCommand("aeditbiz", cmd_aeb)
 AddCommand("aeb", cmd_aeb)
+
+AddCommand("gotobiz", function (playerid, bizid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+	end
+
+	if bizid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotobiz <biz>")
+	end
+
+	bizid = tonumber(bizid)
+
+	if BusinessData[bizid] == nil then
+		return AddPlayerChatError(playerid, "Business " .. bizid .. "doesn't exist.")
+	end
+
+	SetPlayerLocation(playerid, BusinessData[bizid].ex, BusinessData[bizid].ey, BusinessData[bizid].ez)
+
+	AddPlayerChat(playerid, "You have been teleported to business ID: " .. bizid ..".")
+end)

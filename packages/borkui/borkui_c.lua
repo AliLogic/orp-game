@@ -20,6 +20,7 @@ local COLUMN_TYPE_BUTTON = 2
 local COLUMN_TYPE_TEXTINPUT = 3
 local COLUMN_TYPE_DROPDOWN = 4
 local COLUMN_TYPE_INFORMATION = 5
+local COLUMN_TYPE_SWITCH = 6
 
 AddEvent("OnPackageStart", function()
 	web = CreateWebUI(0, 0, 0, 0, 1, 16)
@@ -180,6 +181,28 @@ function AddUIDropdown(id, options, size, rounded, label)
 end
 AddRemoteEvent('borkui:serverAddUIDropdown', AddUIDropdown)
 
+function AddUISwitch(id, label, type, color, anchor, checked)
+	if dialogs[id] == nil then
+		return false
+	end
+
+	anchor = anchor or 0
+	label = label or ''
+	checked = checked or 0
+
+	if anchor < 0 or anchor > 1 then
+		anchor = 0
+	end
+
+	if checked < 0 or checked > 1 then
+		checked = 0
+	end
+
+	table.insert(dialogs[id].columns, {COLUMN_TYPE_SWITCH, label, type, color, anchor, checked})
+	AddPlayerChat('(borkui): AddUISwitch called')
+end
+AddRemoteEvent('borkui:serverAddUISwitch', AddUISwitch)
+
 function ShowUI(id)
 	if dialogs[id] == nil then
 		return false
@@ -215,6 +238,8 @@ function ShowUI(id)
 			ExecuteWebJS(web, string.format('addDropdown(%s, %d, %s, "%s");', column[2], column[3], tostring(column[4]), column[5]))
 		elseif dialogs[id].columns[i][1] == COLUMN_TYPE_INFORMATION then
 			ExecuteWebJS(web, string.format('addInformation("%s");', column[2]))
+		elseif dialogs[id].columns[i][1] == COLUMN_TYPE_SWITCH then
+			ExecuteWebJS(web, string.format('addSwitch("%s", "%s", "%s", %d, %d);', column[2], column[3], column[4], column[5], column[6]))
 		end
 	end
 
@@ -277,11 +302,11 @@ AddEvent("borkui:OnHideMenu", function()
 	end
 end)
 
-AddEvent("borkui:OnDialogSubmit", function (dialog, button, text)
+AddEvent("borkui:OnDialogSubmit", function (dialog, button, text, switch)
 	dialog = math.tointeger(dialog)
 	button = math.tointeger(button)
 
-	CallRemoteEvent("borkui:clientOnDialogSubmit", dialog, dialogs[dialog].extraid, button, text)
+	CallRemoteEvent("borkui:clientOnDialogSubmit", dialog, dialogs[dialog].extraid, button, text, switch)
 end)
 
 --[[
@@ -292,6 +317,7 @@ end)
 	AddUIButton
 	AddUITextInput
 	AddUIDropdown
+	addUISwitch
 	ShowUI
 	HideUI
 	DestroyUI
@@ -304,6 +330,7 @@ AddFunctionExport('addUIDivider', AddUIDivider)
 AddFunctionExport('addUIButton', AddUIButton)
 AddFunctionExport('addUITextInput', AddUITextInput)
 AddFunctionExport('addUIDropdown', AddUIDropdown)
+AddFunctionExport('addUISwitch', AddUISwitch)
 AddFunctionExport('showUI', ShowUI)
 AddFunctionExport('hideUI', HideUI)
 AddFunctionExport('destroyUI', DestroyUI)

@@ -193,6 +193,7 @@ function House_GetNearestDoor(playerid, houseid)
 	local distance = 0
 
 	for _, v in pairs(HousingData[houseid].doors) do
+		print("Looping through house " .. houseid .." 's door " .. v .. ".")
 		distance = GetDistance3D(x, y, z, DoorData[v].x, DoorData[v].y, DoorData[v].z)
 
 		if distance <= 200.0 then

@@ -81,3 +81,24 @@ AddCommand("fill", function (playerid)
 	SetVehicleFuel(vehicleid, 100)
 	return
 end)
+
+AddCommand("gotopump", function (playerid, pumpid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+	end
+
+	if pumpid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotopump <pump>")
+	end
+
+	pumpid = tonumber(pumpid)
+
+	if PumpData[pumpid] == nil then
+		return AddPlayerChatError(playerid, "Pump " .. pumpid .. "doesn't exist.")
+	end
+
+	SetPlayerLocation(playerid, PumpData[pumpid].x, PumpData[pumpid].y, PumpData[pumpid].z)
+
+	AddPlayerChat(playerid, "You have been teleported to pump ID: " .. pumpid ..".")
+end)

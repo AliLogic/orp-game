@@ -128,6 +128,7 @@
 		"client/banking/bulma-scrollable-table.css",
 		"client/banking/jquery.alphanum.min.js",
 		"client/banking/simplebar.css",
-		"client/banking/simplebar.min.js"
+		"client/banking/simplebar.min.js",
+		"client/sounds/doorbell.mp3"
 	]
 }

@@ -353,6 +353,14 @@
         "http_result_body",
         "http_result_header",
         "http_result_status",
-        "RemovePlayerFromVehicle"
+        "RemovePlayerFromVehicle",
+        "GetObjectActor",
+        "CreateSound3D",
+        "SetSoundPitch",
+        "SetSound3DLocation",
+        "SetObjectStreamDistance",
+        "SetObjectDimension",
+        "GetObjectDimension",
+        "IsObjectStreamedIn"
     ]
 }

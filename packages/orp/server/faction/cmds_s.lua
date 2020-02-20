@@ -276,7 +276,7 @@ AddCommand("badge", function (playerid, lookupid)
 		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " looks at their badge.</>")
 	else
 		if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
-			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+			return AddPlayerChatError(playerid, "The specified player is not in your range.")
 		end
 
 		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " shows " .. GetPlayerName(lookupid) .." their badge.</>")
@@ -310,7 +310,7 @@ local function cmd_handcuff(playerid, lookupid)
 	end
 
 	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
 	local is_handcuffed = IsPlayerHandcuffed(lookupid)
@@ -423,7 +423,7 @@ end)
 
 local function cmd_acf(player, maxrank, shortname, ...)
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	local args = {...}
@@ -457,7 +457,7 @@ AddCommand("acf", cmd_acf)
 
 local function cmd_adf(player, faction)
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if faction == nil then
@@ -483,7 +483,7 @@ AddCommand("adf", cmd_adf)
 
 local function cmd_aef(player, faction, prefix, ...)
 	if (PlayerData[player].admin < 5) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You don't have permission to use this command.</>")
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
 	end
 
 	if faction == nil or prefix == nil then
@@ -627,7 +627,7 @@ AddCommand("ticket", function (playerid, lookupid, price, ...)
 	end
 
 	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
 	if price < 1 or price > 1000 then
@@ -720,7 +720,7 @@ AddCommand("detain", function (playerid, lookupid)
 	end
 
 	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is not in your range.</>")
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
 	if not IsPlayerHandcuffed(lookupid) then

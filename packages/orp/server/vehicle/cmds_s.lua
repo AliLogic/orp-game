@@ -282,3 +282,24 @@ end
 
 AddCommand('v', cmd_v)
 AddCommand('vehicle', cmd_v)
+
+AddCommand("gotoveh", function (playerid, vehid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+	end
+
+	if vehid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotoveh <veh>")
+	end
+
+	vehid = tonumber(vehid)
+
+	if VehicleData[vehid] == nil then
+		return AddPlayerChatError(playerid, "Vehicle " .. vehid .. "doesn't exist.")
+	end
+
+	SetPlayerLocation(playerid, VehicleData[vehid].x, VehicleData[vehid].y, VehicleData[vehid].z)
+
+	AddPlayerChat(playerid, "You have been teleported to vehicle ID: " .. vehid ..".")
+end)

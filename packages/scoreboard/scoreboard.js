@@ -72,16 +72,20 @@ $(document).ready(() => {
 function insertPlayer(player) {
 	players.push([player.id, players.length + 1]);
 	$('.table .body .data').append(`<div class="columns" id="${players.length}"><div class="column" id="id">${player.id}</div><div class="column" id="name">${player.name}</div><div class="column" id="level">${player.level}</div><div class="column" id="ping">${player.ping}</div></div>`);
+	return true;
 }
 
 function removePlayer(player) {
-	if (players[player] === undefined) {
-		//return CallEvent('scorebork:remove', 0);
-		return false;
-	}
+	players.forEach((index) => {
+		if (index[0] === player) {
 
-	$(`.table .body .data #${players[player][1]}`).remove();
-	removeElement(players, players[player]);
+			$(`.table .body .data #${index[0]}`).remove();
+			removeElement(players, index[0]);
+			console.log(`removePlayer(${index[0]})`);
+			return true;
+		}
+	});
+	return false;
 }
 
 function updateValue(player, value, newvalue) {
@@ -102,7 +106,9 @@ function updateValue(player, value, newvalue) {
 
 function removePlayers() {
 
-	$.each(players, function(index) {
-		removePlayer(index)
+	players.forEach((index) => {
+		$(`.table .body .data #${index}`).remove();
+		removeElement(players, index);
 	});
+	return true;
 }

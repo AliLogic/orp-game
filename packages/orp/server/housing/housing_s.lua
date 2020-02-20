@@ -11,6 +11,7 @@ Contributors:
 
 -- Variables
 
+local borkui = ImportPackage("borkui")
 local colour = ImportPackage("colours")
 
 HousingData = {}

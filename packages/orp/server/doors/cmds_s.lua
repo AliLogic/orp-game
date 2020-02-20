@@ -107,3 +107,24 @@ end
 
 AddCommand("aeditdoor", cmd_aed)
 AddCommand("aed", cmd_aed)
+
+AddCommand("gotodoor", function (playerid, doorid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+	end
+
+	if doorid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotodoor <door>")
+	end
+
+	doorid = tonumber(doorid)
+
+	if DoorData[doorid] == nil then
+		return AddPlayerChatError(playerid, "Door " .. doorid .. "doesn't exist.")
+	end
+
+	SetPlayerLocation(playerid, DoorData[doorid].x, DoorData[doorid].y, DoorData[doorid].z)
+
+	AddPlayerChat(playerid, "You have been teleported to door ID: " .. doorid ..".")
+end)
