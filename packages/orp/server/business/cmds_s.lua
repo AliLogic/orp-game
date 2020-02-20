@@ -23,14 +23,9 @@ end
 
 local function cmd_biz(playerid, prefix, ...)
 
-	if prefix == nil then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /biz <prefix>")
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> (un)lock, buy, sell, shop")
-	end
-
 	local biz = Business_Nearest(playerid)
 
-	if biz == 0 then
+	if prefix ~= nil and biz == 0 then
 		return AddPlayerChatError(playerid, "You are not near any businesses.")
 	end
 
@@ -133,7 +128,6 @@ local function cmd_biz(playerid, prefix, ...)
 				return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This business is already unlocked.</>")
 			end
 
-			local x, y, z = GetPlayerLocation(playerid)
 			AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." attempts to kick the business's door down.")
 
 			Delay(2000, function ()
@@ -159,7 +153,7 @@ local function cmd_biz(playerid, prefix, ...)
 
 	else
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /biz <prefix>")
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> buy, sell, shop")
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> (un)lock, buy, sell, shop")
 	end
 end
 
