@@ -145,7 +145,7 @@ function CreatePlant(type, x, y, z)
 		return false
 	end
 
-	z = (z - 200)
+	z = (z - 100)
 
 	local query = mariadb_prepare(sql, "INSERT INTO plants (type, x, y, z) VALUES ('?', '?', ?, ?);",
 		type, x, y, z
