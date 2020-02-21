@@ -10,7 +10,7 @@ Contributors:
 ]]--
 
 -- Variables
-local TruckerLevels = {
+TruckerLevels = {
 	{
 		level = "Courier Trainee",
 		hours = 0,
@@ -43,7 +43,7 @@ local TruckerLevels = {
 	}
 }
 
-local Vehicles = {
+Vehicles = {
 	{
 		id = 17,
 		slots = 32,
