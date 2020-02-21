@@ -286,7 +286,7 @@ AddCommand('vehicle', cmd_v)
 AddCommand("gotoveh", function (playerid, vehid)
 
 	if (PlayerData[playerid].admin < 3) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if vehid == nil then

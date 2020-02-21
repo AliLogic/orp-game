@@ -3,7 +3,7 @@ local colour = ImportPackage('colours')
 local function cmd_acd(playerid, modelid)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if modelid == nil then
@@ -34,7 +34,7 @@ AddCommand("acd", cmd_acd)
 local function cmd_add(playerid, doorid)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if doorid == nil then
@@ -56,7 +56,7 @@ AddCommand("add", cmd_add)
 local function cmd_aed(playerid, doorid, prefix, ...)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if doorid == nil or prefix == nil then
@@ -111,7 +111,7 @@ AddCommand("aed", cmd_aed)
 AddCommand("gotodoor", function (playerid, doorid)
 
 	if (PlayerData[playerid].admin < 3) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if doorid == nil then

@@ -22,7 +22,7 @@ local borkui = ImportPackage("borkui")
 AddCommand("housedoors", function (playerid)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	local house = Housing_Nearest(playerid)
@@ -386,7 +386,7 @@ AddCommand("aeh", cmd_aeh)
 AddCommand("gotohouse", function (playerid, houseid)
 
 	if (PlayerData[playerid].admin < 3) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if houseid == nil then

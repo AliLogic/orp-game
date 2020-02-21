@@ -2,7 +2,7 @@ local colour = ImportPackage('colours')
 
 local function cmd_asw(playerid, weatherid)
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if weatherid == nil then
@@ -25,7 +25,7 @@ AddCommand("asw", cmd_asw)
 
 local function cmd_asf(playerid, fog)
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if fog == nil then

@@ -93,7 +93,7 @@ end)
 AddCommand("adestroyplant", function (playerid, plantid)
 
 	if (PlayerData[playerid].admin < 5) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if plantid == nil then
@@ -115,7 +115,7 @@ end)
 AddCommand("gotoplant", function (playerid, plantid)
 
 	if (PlayerData[playerid].admin < 3) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if plantid == nil then

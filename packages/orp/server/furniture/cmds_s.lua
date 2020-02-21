@@ -9,6 +9,7 @@ Contributors:
 ]]--
 
 local borkui = ImportPackage("borkui")
+local colour = ImportPackage("colours")
 
 -- Commands
 
@@ -21,4 +22,26 @@ AddCommand("furniture", function (playerid)
 	end
 
 	borkui.createUI(playerid, 0, DIALOG_FURNITURE_MENU)
+end)
+
+AddCommand("gotofurniture", function (playerid, furnitureid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
+	end
+
+	if furnitureid == nil then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotofurnitureid <furniture>")
+	end
+
+	furnitureid = tonumber(furnitureid)
+
+	if not IsValidFurniture(furnitureid) then
+		return AddPlayerChatError(playerid, "Furniture " .. furnitureid .. "doesn't exist.")
+	end
+
+	local x, y, z = GetFurnitureLocation(furnitureid)
+	SetPlayerLocation(playerid, x, y, z)
+
+	AddPlayerChat(playerid, "You have been teleported to furniture ID: " .. furnitureid ..".")
 end)

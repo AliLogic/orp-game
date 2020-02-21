@@ -112,7 +112,7 @@ AddCommand('aesc', cmd_aesc)
 AddCommand("gotospeedcam", function (playerid, speedcamid)
 
 	if (PlayerData[playerid].admin < 3) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if speedcamid == nil then
