@@ -45,7 +45,7 @@ DRUG_TYPE_COKE = 2
 
 DrugData = {}
 
-local TIME_PER_STAGE = 10 * 000 -- time in ms
+local TIME_PER_STAGE = 10 * 1000 -- time in ms
 
 DRUG_STAGES = {
 	{scale = 0.10},
@@ -144,6 +144,8 @@ function CreatePlant(type, x, y, z)
 	if index == 0 then
 		return false
 	end
+
+	z = (z - 200)
 
 	local query = mariadb_prepare(sql, "INSERT INTO plants (type, x, y, z) VALUES ('?', '?', ?, ?);",
 		type, x, y, z
