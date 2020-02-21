@@ -1,7 +1,22 @@
 AddCommand("anims", function (player)
 	AddPlayerChat(player, "Animations: /sit /lay /wave /stretch /frontfall /handsup /lean /bow /drunk")
-	AddPlayerChat(player, "Animations: /salute /clap /yawn /facepalm /cpr /shrug /(s)top(a)nim")
+	AddPlayerChat(player, "Animations: /salute /clap /yawn /facepalm /cpr /shrug /kneel /(s)top(a)nim")
 	return
+end)
+
+AddCommand("kneel", function (playerid)
+
+	Delay(100, function ()
+		SetPlayerAnimation(playerid, "HANDSUP_KNEEL")
+
+		Delay(2000, function ()
+			SetPlayerAnimation(playerid, "HANDSHEAD_KNEEL")
+
+			Delay(2000, function ()
+				SetPlayerAnimation(playerid, "HANDSHEAD_STAND")
+			end)
+		end)
+	end)
 end)
 
 AddCommand("anim", function (playerid, anim)
