@@ -232,12 +232,12 @@ end
 
 local function Plant_Unload(plantid)
 	local query = mariadb_prepare(sql, "UPDATE plants SET stage = ?, type = ?, x = ?, y = ?, z = ? WHERE id = ?",
-		DrugData[plantid].id,
 		DrugData[plantid].stage,
 		DrugData[plantid].type,
 		DrugData[plantid].x,
 		DrugData[plantid].y,
-		DrugData[plantid].z
+		DrugData[plantid].z,
+		DrugData[plantid].id
 	)
 
 	mariadb_async_query(sql, query, OnPlantUnloaded, plantid)
