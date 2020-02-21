@@ -145,12 +145,12 @@ function CreatePlant(type, x, y, z)
 		return false
 	end
 
-	z = (z - 100)
+	local new_z = z - 90
 
-	local query = mariadb_prepare(sql, "INSERT INTO plants (type, x, y, z) VALUES ('?', '?', ?, ?);",
-		type, x, y, z
+	local query = mariadb_prepare(sql, "INSERT INTO plants (type, x, y, z) VALUES ('?', ?, ?, ?);",
+		type, x, y, new_z
 	)
-	mariadb_async_query(sql, query, OnPlantCreated, index, type, x, y, z)
+	mariadb_async_query(sql, query, OnPlantCreated, index, type, x, y, new_z)
 end
 
 function OnPlantTick(plantid)

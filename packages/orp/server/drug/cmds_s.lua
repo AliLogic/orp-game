@@ -17,9 +17,7 @@ local colour = ImportPackage('colours')
 
 AddCommand("harvest", function (playerid)
 
-	local plantid = 0
-
-	plantid = Plant_Nearest(playerid)
+	local plantid = Plant_Nearest(playerid)
 	if plantid == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any plants.</>")
 	end
@@ -31,7 +29,7 @@ AddCommand("harvest", function (playerid)
 	local type = GetPlantTypeId(plantid)
 	local amount = Random(DRUG_TYPE_AMOUNT[type][1], DRUG_TYPE_AMOUNT[type][2])
 
-	AddPlayerChat(plantid, "You have harvested "..amount.." gm of "..GetPlantTypeName(plantid)..".")
+	AddPlayerChat(playerid, "You have harvested "..amount.." gm of "..GetPlantTypeName(plantid)..".")
 	Inventory_GiveItem(playerid, DRUG_TYPE_ITEM[type], amount)
 
 	Plant_Destroy(plantid)
