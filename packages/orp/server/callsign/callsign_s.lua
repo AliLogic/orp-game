@@ -1,5 +1,19 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic_
+* Bork
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local colour = ImportPackage('colours')
-MAX_CALLSIGNS = 300
+
+-- Commands
 
 AddCommand("callsign", function (player, callsign)
 	if GetPlayerFactionType(player) ~= FACTION_POLICE and GetPlayerFactionType(player) ~= FACTION_MEDIC and GetPlayerFactionType(player) ~= FACTION_GOV then
@@ -9,25 +23,31 @@ AddCommand("callsign", function (player, callsign)
 	local vehicle = GetPlayerVehicle(player)
 
 	if vehicle == 0 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You must be in a vehicle.")
+		return AddPlayerChatError(player, "You must be in a vehicle.")
 	end
 
 	local faction = GetFactionType(VehicleData[vehicle].faction)
 
 	if VehicleData[vehicle] == nil or (faction == FACTION_CIVILIAN or faction == FACTION_NONE) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> You must be in a faction owned vehicle.")
+		return AddPlayerChatError(player, "You must be in a faction owned vehicle.")
 	end
 
 	if VehicleData[vehicle].callsign ~= 0 and IsValidText3D(VehicleData[vehicle].callsign) then
+		SetText3DAttached(VehicleData[vehicle].callsign, ATTACH_NONE, 0, 0.0, 0.0, 0.0)
 		DestroyText3D(VehicleData[vehicle].callsign)
+		VehicleData[vehicle].callsign = 0
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Your previous callsign was destroyed!")
 		return
+
 	elseif callsign == nil then
+
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /callsign <text>")
 	end
 
-	if string.len(callsign) < 0 or string.len(callsign) > 12 then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> Callsign length ranges from 1 - 12.")
+	local length = string.len(callsign)
+
+	if length < 0 or length > 12 then
+		return AddPlayerChatError(player, "Callsign length ranges from 1 - 12.")
 	end
 
 	VehicleData[vehicle].callsign = CreateText3D(callsign, 10.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
@@ -35,6 +55,8 @@ AddCommand("callsign", function (player, callsign)
 
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Callsign "..callsign.." attached!")
 end)
+
+-- Events
 
 AddEvent("UnloadCallsigns", function ()
 	for i = 1, #VehicleData, 1 do

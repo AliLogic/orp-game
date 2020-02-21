@@ -362,6 +362,7 @@
         "SetObjectDimension",
         "GetObjectDimension",
         "IsObjectStreamedIn",
-        "GetAllWebUI"
+        "GetAllWebUI",
+        "ATTACH_NONE"
     ]
 }
