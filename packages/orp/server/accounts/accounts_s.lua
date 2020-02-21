@@ -389,6 +389,7 @@ function CreatePlayerData(player)
 	PlayerData[player].assistance = 0
 	PlayerData[player].ajail = 0
 	PlayerData[player].death_state = 0
+	PlayerData[player].faction_inviter = 0
 
 	CreatePlayerClothingData(player)
 
@@ -779,6 +780,14 @@ AddEvent("OnPlayerSteamAuth", function (player)
 end)
 
 AddEvent("OnPlayerQuit", function (player)
+
+	for _, v in pairs(GetAllPlayers()) do
+		if PlayerData[v].faction_inviter == player then
+			PlayerData[v].faction_inviter = 0
+			AddPlayerChat(player, "Your faction invitation was discarded.  Your inviter disconnected.")
+		end
+	end
+
 	CallEvent("UnrentPlayerVehicle", player)
 	DestroyDrivingTest(player)
 	SavePlayerAccount(player)

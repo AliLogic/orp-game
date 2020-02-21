@@ -1,12 +1,28 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 local colour = ImportPackage('colours')
 local borkui = ImportPackage('borkui')
+
+-- Commands
 
 AddCommand("fhelp", function (playerid)
 	local faction_type = GetPlayerFactionType(playerid)
 
-	if faction_type ~= FACTION_NONE then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /online, /f, /fquit, /flocker, /finvite, /fremove, /frank</>")
+	if faction_type == FACTION_NONE then
+		return AddPlayerChatError(playerid, "You are not in any faction!")
 	end
+
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /online, /f, /fquit, /flocker, /finvite, /fremove, /frank, /accept</>")
 
 	if faction_type == FACTION_CIVILIAN then
 	elseif faction_type == FACTION_POLICE then
@@ -119,9 +135,42 @@ AddCommand("finvite", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The specified player is already in a faction!</>")
 	end
 
-	-- Do the invite code here
+	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
+	end
+
+	PlayerData[lookupid].faction_inviter = playerid
+
+	AddPlayerChat(playerid, " You invited " .. GetPlayerName(lookupid) .. " to join the " .. Faction_GetName(factionid) .. ".")
+	AddPlayerChat(lookupid, "" .. GetPlayerName(playerid) .. " has invited you to join the " .. Faction_GetName(factionid) .. ", type <span style='bold'>/accept</> to join.")
 
 	return
+end)
+
+AddCommand("accept", function (playerid)
+
+	if (GetPlayerFactionType(playerid) ~= FACTION_NONE) then
+		return AddPlayerChatError(playerid, "You are already in a faction!")
+	end
+
+	local inviterid = PlayerData[playerid].faction_inviter
+
+	if (inviterid == 0) then
+		return AddPlayerChatError(playerid, "You weren't invited to join any faction!")
+	end
+
+	local factionid = GetPlayerFactionId(inviterid)
+
+	PlayerData[playerid].faction = factionid
+	PlayerData[playerid].faction_rank = 1
+
+	AddPlayerChat(inviterid, "" .. GetPlayerName(playerid) .. " has accepted your faction invite .")
+	AddPlayerChat(playerid, "You joined the faction: " .. Faction_GetName(factionid) .. " from the invitation of " .. GetPlayerName(inviterid) .. ".")
+
+	PlayerData[playerid].faction_inviter = 0
+
+	local query = mariadb_prepare(sql, "INSERT INTO faction_members VALUES(?, ?, 1)", PlayerData[playerid].id, factionid)
+	mariadb_async_query(sql, query)
 end)
 
 AddCommand("fremove", function (playerid, lookupid)
@@ -269,17 +318,16 @@ AddCommand("badge", function (playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid playerid specified.</>")
 	end
 
-	local x, y, z = GetPlayerLocation(playerid)
 	local rankId = PlayerData[playerid].faction_rank
 
 	if lookupid == playerid then
-		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " looks at their badge.</>")
+		AddPlayerChatAction(playerid, "" .. GetPlayerName(playerid) .. " looks at their badge.")
 	else
 		if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
 			return AddPlayerChatError(playerid, "The specified player is not in your range.")
 		end
 
-		AddPlayerChatRange(x, y, 800.0, "<span color=\"#c2a2da\">* " .. GetPlayerName(playerid) .. " shows " .. GetPlayerName(lookupid) .." their badge.</>")
+		AddPlayerChatAction(playerid, "" .. GetPlayerName(playerid) .. " shows " .. GetPlayerName(lookupid) .." their badge.")
 	end
 
 	AddPlayerChat(lookupid, "______________________________________")
@@ -785,31 +833,35 @@ end)
 AddCommand("arrest", function (playerid, lookupid)
 
 	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+		return AddPlayerChatError(playerid, "You are not in the appropriate faction.")
 	end
 end)
 
 AddCommand("take", function (playerid, lookupid)
 
 	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+		return AddPlayerChatError(playerid, "You are not in the appropriate faction.")
 	end
 end)
 
 AddCommand("spikes", function (playerid, lookupid)
 
 	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+		return AddPlayerChatError(playerid, "You are not in the appropriate faction.")
 	end
 end)
 
 AddCommand("roadblock", function (playerid, lookupid)
+
+	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
+		return AddPlayerChatError(playerid, "You are not in the appropriate faction.")
+	end
 end)
 
 AddCommand("revokeweapon", function (playerid, lookupid)
 
 	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction.</>")
+		return AddPlayerChatError(playerid, "You are not in the appropriate faction.")
 	end
 end)
 
@@ -817,10 +869,10 @@ AddCommand("flocker", function (playerid)
 	local factionid = PlayerData[playerid].faction
 
 	if factionid == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
+		return AddPlayerChatError(playerid, "You are not in any faction.")
 	end
 
 	if (not IsPlayerInRangeOfPoint(playerid, 150.0, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z)) then
-		AddPlayerChat(playerid, "You are interacting with the faction locker.")
+		return AddPlayerChatError(playerid, "You are not near your faction locker.")
 	end
 end)

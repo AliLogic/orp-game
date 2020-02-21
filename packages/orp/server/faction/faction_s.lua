@@ -240,6 +240,11 @@ function OnLoadCharacterFaction(playerid)
 	end
 end
 
+function GetPlayerFactionId(playerid)
+
+	return PlayerData[playerid].faction
+end
+
 function GetPlayerFactionType(player)
 	if PlayerData[player].faction == 0 then
 		return FACTION_NONE
