@@ -316,6 +316,7 @@ function hideUI() {
 	if ($('body').is(':visible')) {
 		console.log("Body is visible, hiding it.");
 
+		clearUI();
 		$('body').hide();
 		$('button').off();
 		CallEvent('borkui:OnHideMenu');
