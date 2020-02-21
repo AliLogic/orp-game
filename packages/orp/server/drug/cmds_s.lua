@@ -41,15 +41,12 @@ end)
 
 AddCommand("plant", function (playerid, drug)
 
-	if drug == nil then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /plant <drug>")
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Drug:</> marijuana, cocaine")
+	if drug ~= nil then
+		drug = string.lower(drug)
 	end
 
 	local slot = false
 	local x, y, z = GetPlayerLocation(playerid)
-
-	drug = string.lower(drug)
 
 	if drug == "marijuana" then
 

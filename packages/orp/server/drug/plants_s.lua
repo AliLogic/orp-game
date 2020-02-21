@@ -145,7 +145,7 @@ function CreatePlant(type, x, y, z)
 		return false
 	end
 
-	local query = mariadb_prepare(sql, "INSERT INTO houses (type, x, y, z) VALUES ('?', '?', ?, ?);",
+	local query = mariadb_prepare(sql, "INSERT INTO plants (type, x, y, z) VALUES ('?', '?', ?, ?);",
 		type, x, y, z
 	)
 	mariadb_async_query(sql, query, OnPlantCreated, index, type, x, y, z)
