@@ -28,7 +28,7 @@ AddCommand("refuel", function (playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in range of any gas pump.</>")
 	end
 
-	if PumpData[id].is_occupied then
+	if PumpData[id].is_occupied ~= 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This fuel pump is already occupied.")
 	end
 
@@ -43,8 +43,8 @@ AddCommand("refuel", function (playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 	AddPlayerChatRange(x, y, 800.0, "* "..GetPlayerName(playerid).." has started refilling their vehicle.")
 
-	PumpData[id].is_occupied = true
-	PumpData[id].timer = CreateTimer(OnPumpTick, 1000, id, playerid, vehicle)
+	PumpData[id].is_occupied = playerid
+	PumpData[id].timer = CreateTimer(OnPumpTick, 1000, id, vehicle)
 end)
 
 AddCommand("fill", function (playerid)

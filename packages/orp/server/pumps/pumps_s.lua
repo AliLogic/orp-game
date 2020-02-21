@@ -45,40 +45,42 @@ local function DestroyPumpData(pumpid)
 	PumpData[pumpid] = nil
 end
 
-function OnPumpTick(pumpid, playerid, vehicleid)
+local function SetPumpUnoccupied(pumpid)
+	DestroyTimer(PumpData[pumpid].timer)
+	PumpData[pumpid].is_occupied = 0
+end
 
-	if PumpData[pumpid].is_occupied == true then
-		if IsValidPlayer(playerid) then
-			if PumpData[pumpid].litres > 0 then
+function OnPumpTick(pumpid, vehicleid)
 
-				SetText3DText(PumpData[pumpid].text3d, "Pump ("..pumpid..")\nLitres: "..PumpData[pumpid].litres)
+	local playerid = PumpData[pumpid].is_occupied
 
-				PumpData[pumpid].litres = (PumpData[pumpid].litres - 1)
+	if playerid ~= 0 and IsValidPlayer(playerid) then
+		if PumpData[pumpid].litres > 0 then
 
-				VehicleData[vehicleid].fuel = (VehicleData[vehicleid].fuel + 1)
+			SetText3DText(PumpData[pumpid].text3d, "Pump ("..pumpid..")\nLitres: "..PumpData[pumpid].litres)
 
-				if VehicleData[vehicleid].fuel >= 100 then
+			PumpData[pumpid].litres = (PumpData[pumpid].litres - 1)
 
-					DestroyTimer(PumpData[pumpid].timer)
-					PumpData[pumpid].is_occupied = false
+			VehicleData[vehicleid].fuel = (VehicleData[vehicleid].fuel + 1)
 
-					AddPlayerChat(playerid, "Your vehicle has been refuelled.")
-				end
-			else
+			if GetVehicleFuel(vehicleid) >= 100 then
 
-				SetText3DText(PumpData[pumpid].text3d, "Pump ("..pumpid..")\nLitres: "..PumpData[pumpid].litres)
+				SetPumpUnoccupied(pumpid)
 
-				DestroyTimer(PumpData[pumpid].timer)
-				PumpData[pumpid].is_occupied = false
-
-				AddPlayerChat(playerid, "The fuel pump has ran out of fuel.")
+				AddPlayerChat(playerid, "Your vehicle has been refuelled.")
 			end
 		else
-			DestroyTimer(PumpData[pumpid].timer)
-			PumpData[pumpid].is_occupied = false
 
-			print("The player ID "..playerid.." has disconnected the server while vehicle "..vehicleid.." being refuelled.")
+			SetText3DText(PumpData[pumpid].text3d, "Pump ("..pumpid..")\nLitres: "..PumpData[pumpid].litres)
+
+			SetPumpUnoccupied(pumpid)
+
+			AddPlayerChat(playerid, "The fuel pump has ran out of fuel.")
 		end
+	else
+		SetPumpUnoccupied(pumpid)
+
+		print("The player ID "..playerid.." has disconnected the server while vehicle "..vehicleid.." being refuelled.")
 	end
 end
 
@@ -91,7 +93,7 @@ local function OnPumpCreated(index, x, y, z, litres)
 	PumpData[index].z = z
 
 	PumpData[index].litres = litres
-	PumpData[index].is_occupied = false
+	PumpData[index].is_occupied = 0
 
 	PumpData[index].text3d = CreateText3D("Pump ("..index..")\nLiters: "..PumpData[index].litres, 20, x, y, z + 150.0, 0.0, 0.0, 0.0)
 end
@@ -152,8 +154,7 @@ local function Pump_Load(i)
 
 	PumpData[index].text3d = CreateText3D("Pump ("..index..")\nLitres: "..PumpData[index].litres, 20, PumpData[index].x, PumpData[index].y, PumpData[index].z + 150.0, 0.0, 0.0, 0.0)
 
-	PumpData[index].is_occupied = false
-
+	PumpData[index].is_occupied = 0
 end
 
 local function OnPumpLoad()
