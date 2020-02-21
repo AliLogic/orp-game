@@ -126,6 +126,9 @@ local function OnPlantCreated(index, type, x, y, z)
 
 	DrugData[index].stage = 1
 	DrugData[index].type = type
+	DrugData[index].x = x
+	DrugData[index].y = y
+	DrugData[index].z = z
 
 	local scale = DRUG_STAGES[1].scale
 

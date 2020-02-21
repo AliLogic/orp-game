@@ -26,8 +26,14 @@ AddCommand("harvest", function (playerid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This plant is not ready to be harvested yet.</>")
 	end
 
+	if not IsPlayerCrouched(playerid) then
+		return AddPlayerChatError(playerid, "You must be crouched to harvest.")
+	end
+
 	local type = GetPlantTypeId(plantid)
 	local amount = Random(DRUG_TYPE_AMOUNT[type][1], DRUG_TYPE_AMOUNT[type][2])
+
+	SetPlayerAnimation(playerid, "SLAP01")
 
 	AddPlayerChat(playerid, "You have harvested "..amount.." gm of "..GetPlantTypeName(plantid)..".")
 	Inventory_GiveItem(playerid, DRUG_TYPE_ITEM[type], amount)
@@ -46,6 +52,10 @@ AddCommand("plant", function (playerid, drug)
 	local slot = false
 	local x, y, z = GetPlayerLocation(playerid)
 
+	if not IsPlayerCrouched(playerid) then
+		return AddPlayerChatError(playerid, "You must be crouched to plant something.")
+	end
+
 	if drug == "marijuana" then
 
 		slot = Inventory_HasItem(playerid, INV_ITEM_WEEDSEED)
@@ -53,14 +63,21 @@ AddCommand("plant", function (playerid, drug)
 			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not have any of these seeds.</>")
 		end
 
+		AddPlayerChatAction(playerid, "" .. GetPlayerName(playerid) .. " plants a marijuana seed into the ground.")
+		SetPlayerAnimation(playerid, "SLAP01")
+
 		Inventory_GiveItem(playerid, INV_ITEM_WEEDSEED, -1)
 		CreatePlant(DRUG_TYPE_WEED, x, y, z)
+
 	elseif drug == "cocaine" then
 
 		slot = Inventory_HasItem(playerid, INV_ITEM_COKESEED)
 		if slot == false then
 			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not have any of these seeds.</>")
 		end
+
+		AddPlayerChatAction(playerid, "" .. GetPlayerName(playerid) .. " plants a poppy seed into the ground.")
+		SetPlayerAnimation(playerid, "SLAP01")
 
 		Inventory_GiveItem(playerid, INV_ITEM_COKESEED, -1)
 		CreatePlant(DRUG_TYPE_COKE, x, y, z)

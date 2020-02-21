@@ -300,7 +300,7 @@ function ShowPropertiesList(playerid, lookupid)
 end
 
 function AddPlayerChatError(playerid, message)
-	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: " .. message .. ".</>")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: " .. message .. "</>")
 end
 
 function AddPlayerChatAction(playerid, message)
@@ -333,6 +333,11 @@ end
 
 function PlayPlayerSound(playerid, sound)
 	CallRemoteEvent(playerid, "PlayPlayerSound", sound)
+end
+
+function IsPlayerCrouched(playerid)
+
+	return (GetPlayerMovementMode(playerid) == 4)
 end
 
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
