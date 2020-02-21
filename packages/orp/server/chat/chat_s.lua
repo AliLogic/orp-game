@@ -255,11 +255,11 @@ AddCommand("pm", function (player, target, ...)
 	target = GetPlayerIdFromData(target)
 
 	if target == player then
-		return AddPlayerChat(player, "You cannot PM yourself.")
+		return AddPlayerChatError(player, "You cannot PM yourself.")
 	end
 
 	if not IsValidPlayer(target) then
-		return AddPlayerChat(player, "Invalid player id.")
+		return AddPlayerChatError(player, "Invalid player id.")
 	end
 
 	local text = table.concat({...}, " ")
