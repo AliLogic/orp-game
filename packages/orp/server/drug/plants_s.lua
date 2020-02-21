@@ -148,7 +148,12 @@ function CreatePlant(type, x, y, z)
 		return false
 	end
 
-	local new_z = z - 90
+	--[[
+		When player is standing do -100 on Z
+		When player is crouched do -59 on Z
+	]]--
+
+	local new_z = z - 59
 
 	local query = mariadb_prepare(sql, "INSERT INTO plants (type, x, y, z) VALUES ('?', ?, ?, ?);",
 		type, x, y, new_z
