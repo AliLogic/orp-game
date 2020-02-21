@@ -109,7 +109,7 @@ function CreatePlayerClothing(player)
 	local query = mariadb_prepare(sql, "INSERT INTO clothing (id) VALUES (?);",
 		PlayerData[player].id
 	)
-	mariadb_query(sql, query)
+	mariadb_async_query(sql, query)
 end
 
 function SavePlayerClothing(player)
@@ -145,10 +145,7 @@ local function OnClothingLoad(player)
 		PlayerClothingData[player].shoes = mariadb_get_value_name_int(1, "shoes")
 		PlayerClothingData[player].skin_color = mariadb_get_value_name_int(1, "skin_color")
 	else
-		local query = mariadb_prepare(sql, "INSERT INTO clothing WHERE id = "..PlayerData[player].."",
-			PlayerData[player].id
-		)
-		mariadb_async_query(sql, query)
+		CreatePlayerClothing(player)
 	end
 end
 
