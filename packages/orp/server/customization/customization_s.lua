@@ -219,7 +219,7 @@ end)
 AddCommand("hair", function (playerid, hairid)
 
 	if hairid == nil then
-		return AddPlayerChat(playerid, "/hair <1 - 7>")
+		return AddPlayerChat(playerid, "/hair <1 - 10>")
 	end
 
 	hairid = tonumber(hairid)
@@ -230,7 +230,7 @@ end)
 AddCommand("pants", function (playerid, pantid)
 
 	if pantid == nil then
-		return AddPlayerChat(playerid, "/pants <1 - 6>")
+		return AddPlayerChat(playerid, "/pants <1 - 8>")
 	end
 
 	pantid = tonumber(pantid)
@@ -241,7 +241,7 @@ end)
 AddCommand("shirt", function (playerid, shirtid)
 
 	if shirtid == nil then
-		return AddPlayerChat(playerid, "/shirt <1 - 22>")
+		return AddPlayerChat(playerid, "/shirt <1 - 45>")
 	end
 
 	shirtid = tonumber(shirtid)
@@ -252,7 +252,7 @@ end)
 AddCommand("shoe", function (playerid, shoeid)
 
 	if shoeid == nil then
-		return AddPlayerChat(playerid, "/shoe <1 - 4>")
+		return AddPlayerChat(playerid, "/shoe <1 - 6>")
 	end
 	shoeid = tonumber(shoeid)
 
