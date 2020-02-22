@@ -1,3 +1,10 @@
+-- Variables
+
+FooterMsg = 0
+FooterTimer = 0
+
+-- Functions
+
 function GetPlayerVehicleVelocity()
 
 	local vehicle = GetPlayerVehicle()
@@ -33,6 +40,8 @@ function GetPlayerVehicleRPM()
 
 	return math.floor(GetVehicleEngineRPM(vehicle))
 end
+
+-- Events
 
 AddRemoteEvent("PlayPlayerSound", function (sound)
 	SetSoundVolume(CreateSound(sound), 2.0)
