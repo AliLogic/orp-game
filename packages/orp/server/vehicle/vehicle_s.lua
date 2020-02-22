@@ -71,9 +71,11 @@ function CreateVehicleData(vehicle)
 	VehicleData[vehicle].rental = 0
 	VehicleData[vehicle].renter = 0
 
-	VehicleData[vehicle].impounded = 0
+	VehicleData[vehicle].alarm = 0
 
+	VehicleData[vehicle].impounded = 0
 	VehicleData[vehicle].being_repaired = 0
+	VehicleData[vehicle].alarm_object = 0
 end
 
 function DestroyVehicleData(vehicle)
@@ -203,6 +205,7 @@ function Vehicle_Load(i)
 	VehicleData[vehicle].faction = mariadb_get_value_name_int(i, "faction")
 	VehicleData[vehicle].rental = mariadb_get_value_name_int(i, "rental")
 	VehicleData[vehicle].fuel = mariadb_get_value_name_int(i, "litres")
+	VehicleData[vehicle].alarm = mariadb_get_value_name_int(i, "alarm")
 
 	VehicleData[vehicle].impounded = mariadb_get_value_name_int(i, "impounded")
 
