@@ -56,7 +56,7 @@ const setBank = (amount) => {
 };*/
 
 const transactionSuccessful = () => {
-	currentDiv.hide();
+	hide();
 	$('#thankyou').show();
 	setTimeout(() => {
 		CallEvent("iwb:hidegui");

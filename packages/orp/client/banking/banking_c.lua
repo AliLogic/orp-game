@@ -98,11 +98,10 @@ AddEvent("iwb:hidegui", function ()
 end)
 
 AddEvent("iwb:deposit", function (amount)
-	AddPlayerChat("deposit called client")
 	CallRemoteEvent("iwb:OnClientDeposit", amount)
 end)
+
 AddEvent("iwb:withdraw", function (amount)
-	AddPlayerChat("withdraw called client")
 	CallRemoteEvent("iwb:OnClientWithdraw", amount)
 end)
 
@@ -128,6 +127,11 @@ AddRemoteEvent("iwb:opengui", function (hand, bank)
 	SetIgnoreMoveInput(true)
 	ShowMouseCursor(true)
 	SetInputMode(INPUT_GAMEANDUI)
+end)
+
+AddRemoteEvent("iwb:OnServerATMAction", function (amount)
+	ExecuteWebJS(web, 'setBank('..amount..');')
+	ExecuteWebJS(web, 'transactionSuccessful();')
 end)
 
 --[[AddRemoteEvent("OpenATMMenu", function (bal)
