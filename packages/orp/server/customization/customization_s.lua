@@ -128,7 +128,7 @@ function SetPlayerClothing(player, otherplayer)
 
 	local r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].hair_color)
 
-	CallRemoteEvent(player, "SetPlayerBody", otherplayer, 1, Body[PlayerClothingData[otherplayer].body])
+	CallRemoteEvent(player, "SetPlayerBody", otherplayer, Body[PlayerClothingData[otherplayer].body])
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, 255)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
