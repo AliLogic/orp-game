@@ -94,7 +94,10 @@ end)
 
 AddEvent("iwb:hidegui", function ()
 	SetWebVisibility(web, WEB_HIDDEN)
+	SetIgnoreLookInput(false)
+	SetIgnoreMoveInput(false)
 	ShowMouseCursor(false)
+	SetInputMode(INPUT_GAME)
 
 	AddPlayerChat('hidegui called')
 end)
