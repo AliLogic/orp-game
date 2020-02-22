@@ -1306,7 +1306,8 @@ AddCommand("flipveh", function (playerid, vehicleid)
 
 	if (player_vehicle > 0 and vehicleid == nil) then
 
-		SetVehicleRotation(player_vehicle, 0.0, 0.0, 0.0)
+		local x, y, z = GetVehicleRotation(player_vehicle)
+		SetVehicleRotation(player_vehicle, 0.0, y, 0.0)
 		AddPlayerChat(playerid, "You have flipped your current vehicle.")
 
 	else
@@ -1321,7 +1322,13 @@ AddCommand("flipveh", function (playerid, vehicleid)
 			return AddPlayerChatError(playerid, "Invalid vehicle ID entered.")
 		end
 
-		SetVehicleRotation(vehicleid, 0.0, 0.0, 0.0)
+		local x, y, z = GetVehicleRotation(vehicleid)
+		SetVehicleRotation(vehicleid, 0.0, y, 0.0)
 		AddPlayerChat(playerid, "You have flipped vehicle ID: " .. vehicleid .. ".")
 	end
+end)
+
+AddCommand("footer", function (playerid, x, y, ...)
+
+	ShowFooterMessage(playerid, table.concat({...}, " "), x, y, 5)
 end)
