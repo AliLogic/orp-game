@@ -14,7 +14,6 @@ const show = (bank, statements) => {
 	//inHand = hand;
 	inBank = bank;
 
-	if (('#thankyou').is(':visible')) $('#thankyou').hide();
 	$('#currentbalance').text(`$${numbersWithCommas(bank)}`);
 	$('#statement-log').html("");
 	
@@ -25,8 +24,6 @@ const show = (bank, statements) => {
 
 	$('#loading').show();
 	timerCount += 1;
-	
-	$('.iwb-pinbox').html("");
 
 	let interval = setInterval(() => {
 		console.log(timerCount);
@@ -36,9 +33,10 @@ const show = (bank, statements) => {
 			$('#atm').show();
 
 			currentDiv = $('#atm');
-			clearInterval(interval);
-
+			$('.iwb-pinbox').text("");
 			timerCount = 0;
+
+			clearInterval(interval);
 		} else {
 			$('.iwb-pinbox').append("*");
 		}
@@ -66,6 +64,7 @@ const transactionSuccessful = () => {
 	setTimeout(() => {
 		if (timerCount !== 0) timerCount = 0;
 		CallEvent("iwb:hidegui");
+		setTimeout(() => $('#thankyou').hide(), 50);
 	}, 4000);
 };
 
