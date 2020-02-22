@@ -1302,14 +1302,15 @@ AddCommand("flipveh", function (playerid, vehicleid)
 		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
-	vehicleid = GetPlayerVehicle(playerid)
+	local player_vehicle = GetPlayerVehicle(playerid)
 
-	if (vehicleid > 0 and vehicleid == nil) then
+	if (player_vehicle > 0 and vehicleid == nil) then
 
-		SetVehicleRotation(vehicleid, 0.0, 0.0, 0.0)
+		SetVehicleRotation(player_vehicle, 0.0, 0.0, 0.0)
 		AddPlayerChat(playerid, "You have flipped your current vehicle.")
 
 	else
+
 		if vehicleid == nil then
 			return AddPlayerChat(playerid, "Usage: /flipveh <vehicleid>")
 		end
