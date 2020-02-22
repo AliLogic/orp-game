@@ -95,6 +95,8 @@ end)
 AddEvent("iwb:hidegui", function ()
 	SetWebVisibility(web, WEB_HIDDEN)
 	ShowMouseCursor(false)
+
+	AddPlayerChat('hidegui called')
 end)
 
 AddEvent("iwb:deposit", function (amount)
