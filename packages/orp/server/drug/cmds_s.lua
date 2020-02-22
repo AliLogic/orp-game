@@ -30,15 +30,34 @@ AddCommand("harvest", function (playerid)
 		return AddPlayerChatError(playerid, "You must be crouched to harvest.")
 	end
 
-	local type = GetPlantTypeId(plantid)
-	local amount = Random(DRUG_TYPE_AMOUNT[type][1], DRUG_TYPE_AMOUNT[type][2])
+	if PlayerData[playerid].harvesting ~= 0 then
+		return AddPlayerChatError(playerid, "You are already harvesting a plant.")
+	end
 
-	SetPlayerAnimation(playerid, "SLAP01")
+	AddPlayerChatAction(playerid, "" .. GetPlayerName(playerid) .. " begins to harvest the drug plant.")
 
-	AddPlayerChat(playerid, "You have harvested "..amount.." gm of "..GetPlantTypeName(plantid)..".")
-	Inventory_GiveItem(playerid, DRUG_TYPE_ITEM[type], amount)
+	PlayerData[playerid].harvesting = 1
 
-	Plant_Destroy(plantid)
+	Delay(3000, function ()
+
+		PlayerData[playerid].harvesting = 0
+
+		if (plantid ~= Plant_Nearest(playerid) or not IsPlayerCrouched(playerid) or not IsValidPlant(plantid)) then
+			return
+		end
+
+		SetPlayerAnimation(playerid, "SLAP01")
+
+		local type = GetPlantTypeId(plantid)
+		local amount = Random(DRUG_TYPE_AMOUNT[type][1], DRUG_TYPE_AMOUNT[type][2])
+
+		AddPlayerChatAction(playerid, "" .. GetPlayerName(playerid) .. " has harvested " .. amount .." grams of marijuana.");
+		AddPlayerChat(playerid, "You have harvested "..amount.." gm of "..GetPlantTypeName(plantid)..".")
+
+		Inventory_GiveItem(playerid, DRUG_TYPE_ITEM[type], amount)
+
+		Plant_Destroy(plantid)
+	end)
 
 	return
 end)

@@ -390,6 +390,7 @@ function CreatePlayerData(player)
 	PlayerData[player].ajail = 0
 	PlayerData[player].death_state = 0
 	PlayerData[player].faction_inviter = 0
+	PlayerData[player].harvesting = 0
 
 	CreatePlayerClothingData(player)
 
