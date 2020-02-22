@@ -144,7 +144,7 @@ AddCommand("gotoplant", function (playerid, plantid)
 	plantid = tonumber(plantid)
 
 	if DrugData[plantid] == nil then
-		return AddPlayerChatError(playerid, "Plant " .. plantid .. "doesn't exist.")
+		return AddPlayerChatError(playerid, "Plant " .. plantid .. " doesn't exist.")
 	end
 
 	SetPlayerLocation(playerid, DrugData[plantid].x, DrugData[plantid].y, DrugData[plantid].z)

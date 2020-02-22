@@ -95,7 +95,7 @@ AddCommand("gotopump", function (playerid, pumpid)
 	pumpid = tonumber(pumpid)
 
 	if PumpData[pumpid] == nil then
-		return AddPlayerChatError(playerid, "Pump " .. pumpid .. "doesn't exist.")
+		return AddPlayerChatError(playerid, "Pump " .. pumpid .. " doesn't exist.")
 	end
 
 	SetPlayerLocation(playerid, PumpData[pumpid].x, PumpData[pumpid].y, PumpData[pumpid].z)

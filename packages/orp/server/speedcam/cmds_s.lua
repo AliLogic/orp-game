@@ -122,7 +122,7 @@ AddCommand("gotospeedcam", function (playerid, speedcamid)
 	speedcamid = tonumber(speedcamid)
 
 	if SpeedcamData[speedcamid] == nil then
-		return AddPlayerChatError(playerid, "Speedcam " .. speedcamid .. "doesn't exist.")
+		return AddPlayerChatError(playerid, "Speedcam " .. speedcamid .. " doesn't exist.")
 	end
 
 	SetPlayerLocation(playerid, SpeedcamData[speedcamid].x, SpeedcamData[speedcamid].y, SpeedcamData[speedcamid].z)

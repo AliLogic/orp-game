@@ -37,7 +37,7 @@ AddCommand("gotofurniture", function (playerid, furnitureid)
 	furnitureid = tonumber(furnitureid)
 
 	if not IsValidFurniture(furnitureid) then
-		return AddPlayerChatError(playerid, "Furniture " .. furnitureid .. "doesn't exist.")
+		return AddPlayerChatError(playerid, "Furniture " .. furnitureid .. " doesn't exist.")
 	end
 
 	local x, y, z = GetFurnitureLocation(furnitureid)

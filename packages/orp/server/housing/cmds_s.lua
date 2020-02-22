@@ -396,7 +396,7 @@ AddCommand("gotohouse", function (playerid, houseid)
 	houseid = tonumber(houseid)
 
 	if HousingData[houseid] == nil then
-		return AddPlayerChatError(playerid, "House " .. houseid .. "doesn't exist.")
+		return AddPlayerChatError(playerid, "House " .. houseid .. " doesn't exist.")
 	end
 
 	SetPlayerLocation(playerid, HousingData[houseid].ex, HousingData[houseid].ey, HousingData[houseid].ez)

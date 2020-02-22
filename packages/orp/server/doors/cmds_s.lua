@@ -121,7 +121,7 @@ AddCommand("gotodoor", function (playerid, doorid)
 	doorid = tonumber(doorid)
 
 	if DoorData[doorid] == nil then
-		return AddPlayerChatError(playerid, "Door " .. doorid .. "doesn't exist.")
+		return AddPlayerChatError(playerid, "Door " .. doorid .. " doesn't exist.")
 	end
 
 	SetPlayerLocation(playerid, DoorData[doorid].x, DoorData[doorid].y, DoorData[doorid].z)

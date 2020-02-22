@@ -267,7 +267,7 @@ AddCommand("gotobiz", function (playerid, bizid)
 	bizid = tonumber(bizid)
 
 	if BusinessData[bizid] == nil then
-		return AddPlayerChatError(playerid, "Business " .. bizid .. "doesn't exist.")
+		return AddPlayerChatError(playerid, "Business " .. bizid .. " doesn't exist.")
 	end
 
 	SetPlayerLocation(playerid, BusinessData[bizid].ex, BusinessData[bizid].ey, BusinessData[bizid].ez)

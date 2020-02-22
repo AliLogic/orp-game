@@ -296,7 +296,7 @@ AddCommand("gotoveh", function (playerid, vehid)
 	vehid = tonumber(vehid)
 
 	if VehicleData[vehid] == nil then
-		return AddPlayerChatError(playerid, "Vehicle " .. vehid .. "doesn't exist.")
+		return AddPlayerChatError(playerid, "Vehicle " .. vehid .. " doesn't exist.")
 	end
 
 	SetPlayerLocation(playerid, VehicleData[vehid].x, VehicleData[vehid].y, VehicleData[vehid].z)
