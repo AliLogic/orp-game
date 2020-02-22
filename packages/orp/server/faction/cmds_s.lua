@@ -718,7 +718,7 @@ AddCommand("impound", function (playerid, price)
 
 	local factionid = PlayerData[playerid].faction
 
-	AddPlayerChatFaction(FactionData[factionid].id, "RADIO: ".. GetPlayerName(playerid) .." has impounded a ".. VEHICLE_NAMES[vehicleid] .." for $".. price ..".")
+	AddPlayerChatFaction(factionid, "RADIO: ".. GetPlayerName(playerid) .." has impounded a ".. VEHICLE_NAMES[vehicleid] .." for $".. price ..".")
 
 	ImpoundVehicle(vehicleid, price)
 end)

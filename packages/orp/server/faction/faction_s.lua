@@ -249,6 +249,7 @@ function GetPlayerFactionType(player)
 	if PlayerData[player].faction == 0 then
 		return FACTION_NONE
 	end
+
 	return FactionData[PlayerData[player].faction].type
 end
 
@@ -318,7 +319,7 @@ end
 
 function AddPlayerChatFaction(factionid, message)
 	for _, v in ipairs(GetAllPlayers()) do
-		if factionid == FactionData[PlayerData[v].faction].id then
+		if factionid == PlayerData[v].faction then
 			AddPlayerChat(v, message)
 		end
 	end
