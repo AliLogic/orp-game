@@ -294,7 +294,7 @@ local function cmd_ach(player, htype, price, ...)
 		return AddPlayerChatError(player, "House price must range from 0 - 10,000,000.")
 	end
 
-	local address = table.contact({...}, " ")
+	local address = table.concat({...}, " ")
 
 	if string.len(address) < 0 or string.len(address) > 32 then
 		return AddPlayerChatError(player, "House addresses lengths range from 1 - 32.")
@@ -356,7 +356,7 @@ local function cmd_aeh(player, house, prefix, ...)
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(h)ouse <house> name <name>")
 		end
 
-		local address = table.contact({...}, " ")
+		local address = table.concat({...}, " ")
 
 		if string.len(address) < 0 or string.len(address) > 32 then
 			return AddPlayerChatError(player, "House addresses lengths range from 1 - 32.")
