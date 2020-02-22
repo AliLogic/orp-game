@@ -93,13 +93,13 @@ AddEvent("iwb:ready", function ()
 end)
 
 AddEvent("iwb:hidegui", function ()
+	AddPlayerChat('hidegui called')
+
 	SetWebVisibility(web, WEB_HIDDEN)
 	SetIgnoreLookInput(false)
 	SetIgnoreMoveInput(false)
 	ShowMouseCursor(false)
 	SetInputMode(INPUT_GAME)
-
-	AddPlayerChat('hidegui called')
 end)
 
 AddEvent("iwb:deposit", function (amount)
@@ -127,7 +127,7 @@ AddRemoteEvent("iwb:opengui", function (hand, bank)
 	} -- Example of how statements should be formed.
 
 	SetWebVisibility(web, WEB_VISIBLE)
-	ExecuteWebJS(web, 'show('..hand..', '..bank..', '..json_encode(statement)..');')
+	ExecuteWebJS(web, 'show('..bank..', '..json_encode(statement)..');')
 	SetIgnoreLookInput(true)
 	SetIgnoreMoveInput(true)
 	ShowMouseCursor(true)
