@@ -225,7 +225,7 @@ end
 AddEvent("OnPlayerInteractDoor", function(player, door, bWantsOpen)
 
 	if DoorData[door].is_locked == 1 then
-		return ShowFooterMessage(player, "This door is locked", 0, 400)
+		return ShowFooterMessage(player, "This door is locked!", colour.COLOUR_LIGHTRED())
 	end
 
 	-- Let the players open/close the door by default.

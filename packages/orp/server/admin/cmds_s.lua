@@ -1327,8 +1327,3 @@ AddCommand("flipveh", function (playerid, vehicleid)
 		AddPlayerChat(playerid, "You have flipped vehicle ID: " .. vehicleid .. ".")
 	end
 end)
-
-AddCommand("footer", function (playerid, x, y, ...)
-
-	ShowFooterMessage(playerid, table.concat({...}, " "), tonumber(x), tonumber(y), 5)
-end)

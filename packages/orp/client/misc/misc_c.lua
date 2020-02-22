@@ -47,7 +47,7 @@ AddRemoteEvent("PlayPlayerSound", function (sound)
 	SetSoundVolume(CreateSound(sound), 2.0)
 end)
 
-AddRemoteEvent("ShowFooterMessage", function (message, x, y, seconds)
+AddRemoteEvent("ShowFooterMessage", function (message, color, seconds)
 
 	if FooterMsg ~= 0 then
 		DestroyTimer(FooterTimer)
@@ -56,9 +56,9 @@ AddRemoteEvent("ShowFooterMessage", function (message, x, y, seconds)
 		FooterTimer = 0
 	end
 
-	message = "<span size=\"30\" color=\"#42f448\" style=\"bold\">" .. message .. "</>"
+	message = "<span size=\"30\" color=\"".. color .."\" style=\"bold\">" .. message .. "</>"
 
-	FooterMsg = CreateTextBox(x, y, message, "center")
+	FooterMsg = CreateTextBox(0, 400, message, "center")
 	SetTextBoxAnchors(FooterMsg, 0.5, 0.5, 0.5, 0.5)
 	SetTextBoxAlignment(FooterMsg, 0.5, 0.5)
 
