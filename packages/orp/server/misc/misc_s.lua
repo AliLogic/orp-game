@@ -340,6 +340,11 @@ function IsPlayerCrouched(playerid)
 	return (GetPlayerMovementMode(playerid) == 4)
 end
 
+function IsPlayerIdle(playerid)
+
+	return (GetPlayerMovementMode(playerid) == 0)
+end
+
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
 AddRemoteEvent("SetPlayerCash", SetPlayerCash)
 AddRemoteEvent("AddPlayerCash", AddPlayerCash)
