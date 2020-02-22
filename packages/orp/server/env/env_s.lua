@@ -34,7 +34,7 @@ local function UpdateTime()
 	EnvMin = t.min
 	EnvTemperature = 30
 
-	if ((EnvHour % 6) == 0) then
+	if ((EnvHour % 6) == 0 and EnvMin == 0) then
 		EnvWeather = EnvWeather + 1
 
 		if EnvWeather > 12 then
