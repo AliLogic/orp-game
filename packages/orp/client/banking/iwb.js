@@ -14,6 +14,8 @@ const show = (bank, statements) => {
 	//inHand = hand;
 	inBank = bank;
 
+	if ($('#thankyou').is(':visible')) $('#thankyou').hide();
+
 	$('#currentbalance').text(`$${numbersWithCommas(bank)}`);
 	$('#statement-log').html("");
 	
@@ -64,7 +66,6 @@ const transactionSuccessful = () => {
 	setTimeout(() => {
 		if (timerCount !== 0) timerCount = 0;
 		CallEvent("iwb:hidegui");
-		setTimeout(() => $('#thankyou').hide(), 50);
 	}, 4000);
 };
 
