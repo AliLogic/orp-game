@@ -52,6 +52,7 @@
 		"server/drug/plants_s.lua",
 		"server/drug/cmds_s.lua",
 		"server/maps/dmv_s.lua",
+		"server/maps/dealership_s.lua",
 		"server/gui/gui_s.lua",
 		"server/misc/colours.lua",
 		"server/misc/json.lua",
