@@ -303,7 +303,6 @@ AddCommand("pupil", function (playerid, pupil)
 end)
 
 AddCommand("body", function (player, body)
-	--CallRemoteEvent(player, 'SetPlayerFemale', player)
 
 	if body == nil then
 		return AddPlayerChat(player, "/body <1 - "..#Body..">")
