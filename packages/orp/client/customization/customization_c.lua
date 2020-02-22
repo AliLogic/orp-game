@@ -33,10 +33,17 @@ local function SetPlayerSkinColor(player, r, g, b)
 	SkeletalMeshComponent:SetColorParameterOnMaterials("Skin Color", FLinearColor(r / 255, g / 255, b / 255, 1))
 end
 
+local function SetPlayerBody(player, body)
+
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Body")
+	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset(body))
+end
+
 -- Events
 
 AddRemoteEvent("SetPlayerClothing", SetPlayerClothing)
 AddRemoteEvent("SetPlayerSkinColor", SetPlayerSkinColor)
+AddRemoteEvent("SetPlayerBody", SetPlayerBody)
 
 AddEvent("OnPlayerStreamIn", function(player, otherplayer)
 	CallRemoteEvent("ServerSetPlayerClothing", player, otherplayer)

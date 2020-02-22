@@ -13,6 +13,11 @@ Contributors:
 
 PlayerClothingData = {}
 
+Body = {}
+Body[1]		= nil
+Body[2]		= "/Game/CharacterModels/Female/Meshes/SK_Female01"
+Body[3]		= "/Game/CharacterModels/Female/Meshes/SK_Female02"
+
 Tops = {}
 Tops[1]		= nil
 Tops[2]		= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Knitted_Shirt_LPR"
@@ -40,6 +45,32 @@ Tops[21]	= "/Game/CharacterModels/Clothing/Meshes/SK_ShirtCombo01"
 
 Tops[22]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR"
 
+-- female
+Tops[23]	= "/Game/CharacterModels/Female/Meshes/SK_Outfit01"
+Tops[24]	= "/Game/CharacterModels/Female/Meshes/SK_Outfit02"
+Tops[25]	= "/Game/CharacterModels/Female/Meshes/SK_Outfit03"
+Tops[26]	= "/Game/CharacterModels/Female/Meshes/SK_Outfit04"
+Tops[27]	= "/Game/CharacterModels/Female/Meshes/SK_Outfit05"
+Tops[28]	= "/Game/CharacterModels/Female/Meshes/SK_Outfit06"
+
+Tops[29]	= "/Game/CharacterModels/Female/Meshes/HZN_CH3D_Prison-Guard_LPR"
+Tops[30]	= "/Game/CharacterModels/Female/Meshes/HZN_CH3D_Prisoner_LPR"
+Tops[31]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_BusinessShoes_LPR"
+Tops[32]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_CargoPants_LPR"
+Tops[33]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_DenimPants_LPR"
+Tops[34]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalJacket_LPR"
+Tops[35]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalPants_LPR"
+Tops[36]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalShirt_LPR"
+Tops[37]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_NormalShoes"
+Tops[38]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Shirt_LPR"
+Tops[39]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Tie_LPR"
+Tops[40]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Police_Shirt-Long_LPR"
+Tops[41]	= "/Game/CharacterModels/Female/Meshes/HZN_Outfit_Police_Shirt-Short_LPR"
+Tops[42]	= "/Game/CharacterModels/Female/Meshes/SK_Armor01"
+Tops[43]	= "/Game/CharacterModels/Female/Meshes/SK_Equipment01"
+Tops[44]	= "/Game/CharacterModels/Female/Meshes/SK_Jacket01"
+Tops[45]	= "/Game/CharacterModels/Female/Meshes/SK_Jacket02"
+
 Pants = {}
 Pants[1]	= nil
 Pants[2] 	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_CargoPants_LPR"
@@ -47,12 +78,18 @@ Pants[3]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_DenimPan
 Pants[4]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_FormalPants_LPR"
 Pants[5]	= "/Game/CharacterModels/Clothing/Meshes/SK_Jeans01"
 Pants[6]	= "/Game/CharacterModels/Clothing/Meshes/SK_Shorts01"
+-- female
+Pants[7]	= "/Game/CharacterModels/Female/Meshes/SK_Pants01"
+Pants[8]	= "/Game/CharacterModels/Female/Meshes/SK_Pants02"
 
 Shoes = {}
 Shoes[1]	= nil
 Shoes[2]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_BusinessShoes_LPR"
 Shoes[3]	= "/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_NormalShoes_LPR"
 Shoes[4]	= "/Game/CharacterModels/Clothing/Meshes/SK_Shoes01"
+-- female
+Shoes[5]	= "/Game/CharacterModels/Female/Meshes/SK_Shoes01"
+Shoes[6]	= "/Game/CharacterModels/Female/Meshes/SK_Shoes02"
 
 Hair = {}
 Hair[1]		= nil
@@ -62,6 +99,10 @@ Hair[4]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_01_LPR"
 Hair[5]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Police_Hair_LPR"
 Hair[6]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_03_LPR"
 Hair[7]		= "/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_02_LPR"
+-- female
+Hair[8]		= "/Game/CharacterModels/Female/Meshes/SK_Hair01"
+Hair[9]		= "/Game/CharacterModels/Female/Meshes/SK_Hair02"
+Hair[10]	= "/Game/CharacterModels/Female/Meshes/SK_Hair03"
 
 -- Functions
 
@@ -87,6 +128,7 @@ function SetPlayerClothing(player, otherplayer)
 
 	local r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].hair_color)
 
+	CallRemoteEvent(player, "SetPlayerBody", otherplayer, 1, Body[PlayerClothingData[otherplayer].body])
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, 255)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
@@ -246,8 +288,17 @@ AddCommand("pupil", function (playerid, pupil)
 	SetPlayerClothing(playerid, playerid)
 end)
 
-AddCommand("female", function (player)
-	CallRemoteEvent(player, 'SetPlayerFemale', player)
+AddCommand("female", function (player, body)
+	--CallRemoteEvent(player, 'SetPlayerFemale', player)
+
+	if body == nil then
+		return AddPlayerChat(player, "/female <1 - 3>")
+	end
+
+	body = tonumber(body)
+
+	PlayerClothingData[player].body = body
+	SetPlayerClothing(player, player)
 end)
 
 -- Events
