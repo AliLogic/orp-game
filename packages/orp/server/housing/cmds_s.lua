@@ -365,7 +365,8 @@ local function cmd_aeh(player, house, prefix, ...)
 		address = address .. ", " .. GetLocationName(HousingData[house].ex, HousingData[house].ey, HousingData[house].ez)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..HousingData[house].address.." ("..house..")'s house name to "..address..".")
-		FactionData[house].address = address
+		HousingData[house].address = address
+		House_RefreshLabel(house)
 
 		return
 
@@ -382,6 +383,7 @@ local function cmd_aeh(player, house, prefix, ...)
 		end
 
 		HousingData[house].price = amount
+		House_RefreshLabel(house)
 
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..HousingData[house].address.." ("..house..")'s house price to "..amount..".")
 	end
