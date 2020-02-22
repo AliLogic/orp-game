@@ -16,7 +16,10 @@ AddFunctionExport('UpdatePlayer', UpdatePlayer)
 
 AddRemoteEvent("scorebork:updateScoreboard", function (playerid)
 
-	for _, v in pairs(GetAllPlayers()) do
+	local players = GetAllPlayers()
+	table.sort(players)
+
+	for _, v in pairs(players) do
 		--[[
 		if PlayerData[v] ~= nil then
 			InsertPlayer(playerid, v, GetPlayerName(v), PlayerData[v].level, GetPlayerPing(v))
