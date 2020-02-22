@@ -6,6 +6,8 @@ local scoreboard_timer = 0
 -- Functions
 
 local function UpdateScoreboardData()
+	ExecuteWebJS(scoreboard, "removePlayers();")
+
 	CallRemoteEvent("scorebork:updateScoreboard")
 end
 
@@ -19,10 +21,6 @@ end)
 
 AddRemoteEvent('scorebork:InsertPlayer', function (id, name, level, ping)
 	ExecuteWebJS(scoreboard, "insertPlayer({id: "..id..", name: \""..name.."\", level: "..level..", ping: "..ping.."});")
-end)
-
-AddRemoteEvent('scorebork:RemovePlayers', function ()
-	ExecuteWebJS(scoreboard, "removePlayers();")
 end)
 
 AddRemoteEvent('scorebork:UpdatePlayer', function (id, value, newvalue)
