@@ -62,6 +62,7 @@ Tops = {
 }
 
 Equipment = {
+	nil,
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalJacket_LPR", -- Female
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalShirt_LPR",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Shirt_LPR",
@@ -122,6 +123,8 @@ function CreatePlayerClothingData(player)
 	PlayerClothingData[player].shoes = 1
 	PlayerClothingData[player].skin_color = RGB(255, 255, 255)
 	PlayerClothingData[player].body = 1
+	PlayerClothingData[player].pupil = 1.0
+	PlayerClothingData[player].equipment = 1
 end
 
 function DestroyPlayerClothingData(player)
@@ -135,9 +138,11 @@ function SetPlayerClothing(player, otherplayer)
 
 	local r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].hair_color)
 
+	CallRemoteEvent(player, "SetPlayerPupilScale", otherplayer, PlayerClothingData[otherplayer].pupil)
 	CallRemoteEvent(player, "SetPlayerBody", otherplayer, Body[PlayerClothingData[otherplayer].body])
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, 255)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
+	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 2, Equipment[PlayerClothingData[otherplayer].equipment], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
 
@@ -170,7 +175,7 @@ function SavePlayerClothing(player)
 		return
 	end
 
-	local query = mariadb_prepare(sql, "UPDATE clothing SET hair_color = '?', hair = ?, top = ?, pants = ?, shoes = ?, skin_color = '?', body = '?' WHERE id = ? LIMIT 1;",
+	local query = mariadb_prepare(sql, "UPDATE clothing SET hair_color = '?', hair = ?, top = ?, pants = ?, shoes = ?, skin_color = '?', body = '?', equipment = '?' WHERE id = ? LIMIT 1;",
 		PlayerClothingData[player].hair_color,
 		PlayerClothingData[player].hair,
 		PlayerClothingData[player].top,
@@ -178,6 +183,7 @@ function SavePlayerClothing(player)
 		PlayerClothingData[player].shoes,
 		PlayerClothingData[player].skin_color,
 		PlayerClothingData[player].body,
+		PlayerClothingData[player].equipment,
 		PlayerData[player].id
 	)
 	mariadb_query(sql, query)
@@ -195,6 +201,7 @@ local function OnClothingLoad(player)
 		PlayerClothingData[player].shoes = mariadb_get_value_name_int(1, "shoes")
 		PlayerClothingData[player].skin_color = mariadb_get_value_name_int(1, "skin_color")
 		PlayerClothingData[player].body = mariadb_get_value_name_int(1, "body")
+		PlayerClothingData[player].equipment = mariadb_get_value_name_int(1, "equipment")
 	else
 		CreatePlayerClothing(player)
 	end
@@ -289,11 +296,9 @@ AddCommand("pupil", function (playerid, pupil)
 		return AddPlayerChat(playerid, "/pupil <size>")
 	end
 
-	AddPlayerChat(playerid, "PUPIL SYNC NOT IN YET.")
-
 	pupil = tonumber(pupil)
 
-	--PlayerClothingData[playerid].pupil = pupil
+	PlayerClothingData[playerid].pupil = pupil
 	SetPlayerClothing(playerid, playerid)
 end)
 
@@ -301,12 +306,24 @@ AddCommand("body", function (player, body)
 	--CallRemoteEvent(player, 'SetPlayerFemale', player)
 
 	if body == nil then
-		return AddPlayerChat(player, "/body <1 - 8>")
+		return AddPlayerChat(player, "/body <1 - "..#Body..">")
 	end
 
 	body = tonumber(body)
 
 	PlayerClothingData[player].body = body
+	SetPlayerClothing(player, player)
+end)
+
+AddCommand("equip", function (player, equip)
+
+	if equip == nil then
+		return AddPlayerChat(player, "/equip <1 - "..#Equipment..">")
+	end
+
+	equip = tonumber(equip)
+
+	PlayerClothingData[player].equipment = equip
 	SetPlayerClothing(player, player)
 end)
 

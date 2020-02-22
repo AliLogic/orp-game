@@ -39,11 +39,17 @@ local function SetPlayerBody(player, body)
 	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset(body))
 end
 
+local function SetPlayerPupilScale(player, scale)
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Body")
+	SkeletalMeshComponent:SetFloatParameterOnMaterials("PupilScale", scale)
+end
+
 -- Events
 
 AddRemoteEvent("SetPlayerClothing", SetPlayerClothing)
 AddRemoteEvent("SetPlayerSkinColor", SetPlayerSkinColor)
 AddRemoteEvent("SetPlayerBody", SetPlayerBody)
+AddRemoteEvent("SetPlayerPupilScale", SetPlayerPupilScale)
 
 AddEvent("OnPlayerStreamIn", function(player, otherplayer)
 	CallRemoteEvent("ServerSetPlayerClothing", player, otherplayer)
