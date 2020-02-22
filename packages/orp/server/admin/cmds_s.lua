@@ -1330,5 +1330,5 @@ end)
 
 AddCommand("footer", function (playerid, x, y, ...)
 
-	ShowFooterMessage(playerid, table.concat({...}, " "), x, y, 5)
+	ShowFooterMessage(playerid, table.concat({...}, " "), tonumber(x), tonumber(y), 5)
 end)

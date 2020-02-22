@@ -58,7 +58,7 @@ AddRemoteEvent("ShowFooterMessage", function (message, x, y, seconds)
 
 	message = "<span style='bold'>" .. message .. "</>"
 
-	FooterMsg = DrawText(x, y, message)
+	FooterMsg = CreateTextBox(x, y, message, "center")
 	SetTextBoxAnchors(FooterMsg, 1.0, 0.0, 1.0, 0.0)
 	SetTextBoxAlignment(FooterMsg, 1.0, 0.0)
 
