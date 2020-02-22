@@ -300,7 +300,8 @@ local function cmd_ach(player, htype, price, ...)
 		return AddPlayerChatError(player, "House addresses lengths range from 1 - 32.")
 	end
 
-	address = address .. ", " .. GetLocationName(GetPlayerLocation(player))
+	local x, y, z = GetPlayerLocation(player)
+	address = address .. ", " .. GetLocationName(x, y, z)
 
 	local house = House_Create(player, htype, price, address)
 
@@ -355,7 +356,13 @@ local function cmd_aeh(player, house, prefix, ...)
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(h)ouse <house> name <name>")
 		end
 
-		local address = table.concat({...}, " ")
+		local address = table.contact({...}, " ")
+
+		if string.len(address) < 0 or string.len(address) > 32 then
+			return AddPlayerChatError(player, "House addresses lengths range from 1 - 32.")
+		end
+
+		address = address .. ", " .. GetLocationName(HousingData[house].ex, HousingData[house].ey, HousingData[house].ez)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..HousingData[house].address.." ("..house..")'s house name to "..address..".")
 		FactionData[house].address = address
