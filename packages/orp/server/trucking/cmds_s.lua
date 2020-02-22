@@ -15,7 +15,7 @@ Contributors:
 
 -- Events
 AddCommand("tpda", function (player, prefix)
-	if GetPlayerJob(player) ~= JOB_TYPE_MECHANIC then
+	if GetPlayerJob(player) ~= JOB_TYPE_TRUCKER then
 		return AddPlayerChat(player, "<span color=\""..Colours.lightred.."\">Error: You must be a trucker to use this command!</>")
 	end
 

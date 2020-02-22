@@ -195,10 +195,10 @@ local function cmd_v(player, args)
 
 		if GetVehicleLightState(vehicle) then
 			SetVehicleLightEnabled(vehicle, false)
-			AddPlayerChat(player, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">turned off</> the lights.")
+			AddPlayerChat(player, "You turned <span color=\""..colour.COLOUR_LIGHTRED().."\">off</> the lights.")
 		else
 			SetVehicleLightEnabled(vehicle, true)
-			AddPlayerChat(player, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">turned on</> the lights.")
+			AddPlayerChat(player, "You turned <span color=\""..colour.COLOUR_DARKGREEN().."\">on</> the lights.")
 		end
 
 	elseif args == "spawn" then
