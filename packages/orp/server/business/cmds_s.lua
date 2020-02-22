@@ -257,7 +257,7 @@ AddCommand("aeb", cmd_aeb)
 AddCommand("gotobiz", function (playerid, bizid)
 
 	if (PlayerData[playerid].admin < 3) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if bizid == nil then
@@ -267,7 +267,7 @@ AddCommand("gotobiz", function (playerid, bizid)
 	bizid = tonumber(bizid)
 
 	if BusinessData[bizid] == nil then
-		return AddPlayerChatError(playerid, "Business " .. bizid .. "doesn't exist.")
+		return AddPlayerChatError(playerid, "Business " .. bizid .. " doesn't exist.")
 	end
 
 	SetPlayerLocation(playerid, BusinessData[bizid].ex, BusinessData[bizid].ey, BusinessData[bizid].ez)

@@ -19,6 +19,8 @@ DIALOG_TICKETS_PAY = 2
 DIALOG_WHITELIST_LOG = 3
 DIALOG_BAN_LOG = 4
 DIALOG_HOME_FURNITURE = 5
+DIALOG_FURNITURE_BUY = 6
+DIALOG_FURNITURE_MENU = 7
 
 DIMENSION_IMPOUND = 500
 
@@ -39,11 +41,13 @@ LOC_TICKETS_Z = 1300
 function GetLocationName(x, y, z)
 
 	local locations = {
-		{"Nevada",				0.0, 0.0, 0.0, 0.0, 0.0, 0.0}, --[[ -269513, -225764, -30, 221220, 134652, 62000 ]]--
-		{"State Prison",		-190813, 64752, 1500, -162363, 88169, 62000},
-		{"Oasis Pancakes",		112661, 163016, 2960, 120213, 165066, 3035},
-		{"Los Ruidosa",			120213, 163016, 463, 197614, 219828, 3035},
-		{"Solar Farm",			100002, -35831, 1270, 120236, 273, 1375}
+		{"Nevada",				0.0,		0.0,		0.0,	0.0,		0.0,	0.0}, --[[ -269513, -225764, -30, 221220, 134652, 62000 ]]--
+		{"State Prison",		-190813,	64752,		1500,	-162363,	88169,	62000},
+		{"Oasis Pancakes",		112661,		163016,		2960,	120213,		165066,	3035},
+		{"Los Ruidosa",			120213,		163016,		460,	197614,		219828,	3035},
+		{"Solar Farm",			100002,		-35831,		1260,	120236,		273,	1375},
+		{"Castleberry",			-199102,	-73194,		560,	-151685,	-25562,	1583},
+		{"Frere town",			-36385,		-40472,		1950,	52,			6457,	2845}
 	}
 
 	for i = 2, #locations, 1 do
@@ -296,7 +300,7 @@ function ShowPropertiesList(playerid, lookupid)
 end
 
 function AddPlayerChatError(playerid, message)
-	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: " .. message .. ".</>")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: " .. message .. "</>")
 end
 
 function AddPlayerChatAction(playerid, message)
@@ -329,6 +333,16 @@ end
 
 function PlayPlayerSound(playerid, sound)
 	CallRemoteEvent(playerid, "PlayPlayerSound", sound)
+end
+
+function IsPlayerCrouched(playerid)
+
+	return (GetPlayerMovementMode(playerid) == 4)
+end
+
+function IsPlayerIdle(playerid)
+
+	return (GetPlayerMovementMode(playerid) == 0)
 end
 
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)

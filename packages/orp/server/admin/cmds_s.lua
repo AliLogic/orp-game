@@ -818,6 +818,7 @@ AddCommand("ahelp", function (player)
 	if PlayerData[player].admin > 3 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/setarmour /sethealth /toggleg /gotohouse /housedoors /gotopump /gotodoor /gotoveh /gotoplant /gotospeedcam /gotobiz")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/gotofurniture")
 	end
 
 	if PlayerData[player].admin > 4 then
@@ -1301,14 +1302,15 @@ AddCommand("flipveh", function (playerid, vehicleid)
 		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
-	vehicleid = GetPlayerVehicle(playerid)
+	local player_vehicle = GetPlayerVehicle(playerid)
 
-	if (vehicleid > 0 and vehicleid == nil) then
+	if (player_vehicle > 0 and vehicleid == nil) then
 
-		SetVehicleRotation(vehicleid, 0.0, 0.0, 0.0)
+		SetVehicleRotation(player_vehicle, 0.0, 0.0, 0.0)
 		AddPlayerChat(playerid, "You have flipped your current vehicle.")
 
 	else
+
 		if vehicleid == nil then
 			return AddPlayerChat(playerid, "Usage: /flipveh <vehicleid>")
 		end

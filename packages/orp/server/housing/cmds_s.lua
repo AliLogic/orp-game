@@ -22,7 +22,7 @@ local borkui = ImportPackage("borkui")
 AddCommand("housedoors", function (playerid)
 
 	if (PlayerData[playerid].admin < 4) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	local house = Housing_Nearest(playerid)
@@ -294,13 +294,14 @@ local function cmd_ach(player, htype, price, ...)
 		return AddPlayerChatError(player, "House price must range from 0 - 10,000,000.")
 	end
 
-	local address = table.contact({...}, " ")
+	local address = table.concat({...}, " ")
 
 	if string.len(address) < 0 or string.len(address) > 32 then
 		return AddPlayerChatError(player, "House addresses lengths range from 1 - 32.")
 	end
 
-	address = address .. ", " .. GetLocationName(GetPlayerLocation(player))
+	local x, y, z = GetPlayerLocation(player)
+	address = address .. ", " .. GetLocationName(x, y, z)
 
 	local house = House_Create(player, htype, price, address)
 
@@ -357,6 +358,12 @@ local function cmd_aeh(player, house, prefix, ...)
 
 		local address = table.concat({...}, " ")
 
+		if string.len(address) < 0 or string.len(address) > 32 then
+			return AddPlayerChatError(player, "House addresses lengths range from 1 - 32.")
+		end
+
+		address = address .. ", " .. GetLocationName(HousingData[house].ex, HousingData[house].ey, HousingData[house].ez)
+
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You've set "..HousingData[house].address.." ("..house..")'s house name to "..address..".")
 		FactionData[house].address = address
 
@@ -386,7 +393,7 @@ AddCommand("aeh", cmd_aeh)
 AddCommand("gotohouse", function (playerid, houseid)
 
 	if (PlayerData[playerid].admin < 3) then
-		return AddPlayerChatError(playerid, "ou don't have permission to use this command.")
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
 	end
 
 	if houseid == nil then
@@ -396,7 +403,7 @@ AddCommand("gotohouse", function (playerid, houseid)
 	houseid = tonumber(houseid)
 
 	if HousingData[houseid] == nil then
-		return AddPlayerChatError(playerid, "House " .. houseid .. "doesn't exist.")
+		return AddPlayerChatError(playerid, "House " .. houseid .. " doesn't exist.")
 	end
 
 	SetPlayerLocation(playerid, HousingData[houseid].ex, HousingData[houseid].ey, HousingData[houseid].ez)

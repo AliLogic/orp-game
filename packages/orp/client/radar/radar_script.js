@@ -26,7 +26,7 @@ let dynamicBlips = {};
 let assetsCount = 0;
 
 u(mapImg).on('load', () => loadAssets());
-mapImg.src = 'OnsetMapLayout_latest.png';
+mapImg.src = 'OnsetMapLayout_latest.jpg';
 
 const loadAssets = () => {
 	for(let [k,v] of Object.entries(types)){

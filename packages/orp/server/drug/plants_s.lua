@@ -45,7 +45,7 @@ DRUG_TYPE_COKE = 2
 
 DrugData = {}
 
-local TIME_PER_STAGE = 10 * 000 -- time in ms
+local TIME_PER_STAGE = 10 * 1000 -- time in ms
 
 DRUG_STAGES = {
 	{scale = 0.10},
@@ -126,6 +126,9 @@ local function OnPlantCreated(index, type, x, y, z)
 
 	DrugData[index].stage = 1
 	DrugData[index].type = type
+	DrugData[index].x = x
+	DrugData[index].y = y
+	DrugData[index].z = z
 
 	local scale = DRUG_STAGES[1].scale
 
@@ -145,10 +148,17 @@ function CreatePlant(type, x, y, z)
 		return false
 	end
 
-	local query = mariadb_prepare(sql, "INSERT INTO houses (type, x, y, z) VALUES ('?', '?', ?, ?);",
-		type, x, y, z
+	--[[
+		When player is standing do -100 on Z
+		When player is crouched do -59 on Z
+	]]--
+
+	local new_z = z - 59
+
+	local query = mariadb_prepare(sql, "INSERT INTO plants (type, x, y, z) VALUES ('?', ?, ?, ?);",
+		type, x, y, new_z
 	)
-	mariadb_async_query(sql, query, OnPlantCreated, index, type, x, y, z)
+	mariadb_async_query(sql, query, OnPlantCreated, index, type, x, y, new_z)
 end
 
 function OnPlantTick(plantid)
@@ -230,12 +240,12 @@ end
 
 local function Plant_Unload(plantid)
 	local query = mariadb_prepare(sql, "UPDATE plants SET stage = ?, type = ?, x = ?, y = ?, z = ? WHERE id = ?",
-		DrugData[plantid].id,
 		DrugData[plantid].stage,
 		DrugData[plantid].type,
 		DrugData[plantid].x,
 		DrugData[plantid].y,
-		DrugData[plantid].z
+		DrugData[plantid].z,
+		DrugData[plantid].id
 	)
 
 	mariadb_async_query(sql, query, OnPlantUnloaded, plantid)

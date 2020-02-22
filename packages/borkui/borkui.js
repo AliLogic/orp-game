@@ -307,7 +307,7 @@ function showUI(id) {
 			});
 		
 			console.log(returnValues);
-			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id')) - elements.length) + 1), returnValues, switchValues);
+			CallEvent('borkui:OnDialogSubmit', Math.floor(id), Math.floor((parseInt($(this).attr('id'))) + 1), returnValues, switchValues);
 		});
 	}
 }
@@ -316,6 +316,7 @@ function hideUI() {
 	if ($('body').is(':visible')) {
 		console.log("Body is visible, hiding it.");
 
+		clearUI();
 		$('body').hide();
 		$('button').off();
 		CallEvent('borkui:OnHideMenu');

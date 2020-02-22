@@ -75,3 +75,11 @@ body {
 	justify-content: center;
 	align-items: center;
 }
+
+.ui-component .ui-bar#cash {
+	-webkit-text-stroke: 1px white;
+}
+
+.ui-component .ui-bar#bank {
+	-webkit-text-stroke: 1px white;	
+}

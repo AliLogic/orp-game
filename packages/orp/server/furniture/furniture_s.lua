@@ -239,11 +239,27 @@ end
 AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
 
 	if extraid == DIALOG_HOME_FURNITURE then
-		borkui.addUITitle(playerid, dialogid, 'Home Furniture')
+		borkui.addUITitle(playerid, dialogid, 'Home Furniture List')
 		borkui.addUIDivider(playerid, dialogid)
 		--borkui.AddUIDropdown(playerid, dialogid, options, size, 1, label) --borkui.addUIInformation(playerid, dialogid, DialogString)
 		borkui.addUIDivider(playerid, dialogid)
 		borkui.addUIButton(playerid, dialogid, 'Select', 'is-primary')
+		borkui.addUIButton(playerid, dialogid, 'Cancel', 'is-danger')
+		borkui.showUI(playerid, dialogid)
+	elseif extraid == DIALOG_FURNITURE_BUY then
+		borkui.addUITitle(playerid, dialogid, 'Buy Home Furniture')
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.AddUIDropdown(playerid, dialogid, FurnitureTypes, 1, 0, "Furniture category")
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIButton(playerid, dialogid, 'Select', 'is-primary')
+		borkui.addUIButton(playerid, dialogid, 'Cancel', 'is-danger')
+		borkui.showUI(playerid, dialogid)
+	elseif extraid == DIALOG_FURNITURE_MENU then
+		borkui.addUITitle(playerid, dialogid, 'Home Furniture Menu')
+		borkui.addUIDivider(playerid, dialogid)
+		borkui.addUIButton(playerid, dialogid, 'Furniture List', 'is-primary')
+		borkui.addUIButton(playerid, dialogid, 'Buy Furniture', 'is-primary')
+		borkui.addUIDivider(playerid, dialogid)
 		borkui.addUIButton(playerid, dialogid, 'Cancel', 'is-danger')
 		borkui.showUI(playerid, dialogid)
 	end
@@ -254,5 +270,46 @@ AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extr
 	if extraid == DIALOG_HOME_FURNITURE then
 		borkui.hideUI(playerid)
 		borkui.destroyUI(playerid, dialogid)
+	elseif extraid == DIALOG_FURNITURE_BUY then
+		borkui.hideUI(playerid)
+		borkui.destroyUI(playerid, dialogid)
+	elseif extraid == DIALOG_FURNITURE_MENU then
+		borkui.hideUI(playerid)
+		borkui.destroyUI(playerid, dialogid)
+
+		if button == 1 then
+			local houseid = Housing_Nearest(playerid)
+
+			if houseid == 0 or (not House_IsOwner(playerid, houseid) and not PlayerHasHouseKey(playerid, houseid))then
+				return AddPlayerChat(playerid, "You are not in range of your house interior.")
+			end
+
+			local count = 0
+			local string = ""
+			local x, y, z = GetPlayerLocation(playerid)
+			local distance = 0
+			local fx, fy, fz = 0
+
+			for i = 1, MAX_FURNITURE, 1 do
+				if (IsValidFurniture(i)) then
+					if (count < MAX_HOUSE_FURNITURE and GetFurnitureHouseID(i) == houseid) then
+
+						fx, fy, fz = GetFurnitureLocation(i)
+						distance = GetDistance3D(x, y, z, fx, fy, fz)
+
+						string = string .. GetFurnitureNameByModel(i) .. "(" .. distance .. " meters)"
+					end
+
+					if (count == 0) then
+						return AddPlayerChat(playerid, "This house doesn't have any furniture spawned in.")
+					end
+
+					borkui.createUI(playerid, 0, DIALOG_HOME_FURNITURE)
+					-- Show them the listed furniture dialog
+				end
+			end
+		elseif button == 2 then
+			borkui.createUI(playerid, 0, DIALOG_FURNITURE_BUY)
+		end
 	end
 end)
