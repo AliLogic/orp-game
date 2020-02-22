@@ -98,9 +98,11 @@ AddEvent("iwb:hidegui", function ()
 end)
 
 AddEvent("iwb:deposit", function (amount)
+	AddPlayerChat("deposit called client")
 	CallRemoteEvent("iwb:OnClientDeposit", amount)
 end)
 AddEvent("iwb:withdraw", function (amount)
+	AddPlayerChat("withdraw called client")
 	CallRemoteEvent("iwb:OnClientWithdraw", amount)
 end)
 
