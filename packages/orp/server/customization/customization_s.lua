@@ -13,13 +13,17 @@ Contributors:
 
 PlayerClothingData = {}
 
+Outfit = {
+	"/Game/CharacterModels/Female/Meshes/SK_Outfit01", -- female
+	"/Game/CharacterModels/Female/Meshes/SK_Outfit02",
+	"/Game/CharacterModels/Female/Meshes/SK_Outfit03",
+	"/Game/CharacterModels/Female/Meshes/SK_Outfit04",
+	"/Game/CharacterModels/Female/Meshes/SK_Outfit05",
+	"/Game/CharacterModels/Female/Meshes/SK_Outfit06",
+}
+
 Body = {
-	"/Game/CharacterModels/Materials/HZN_Materials/M_HZN_Body_NoClothes",
-	"/Game/CharacterModels/Materials/HZN_Materials/M_HZN_Body_NoLegs",
-	"/Game/CharacterModels/Materials/HZN_Materials/M_HZN_Body_NoShoes",
-	"/Game/CharacterModels/Materials/HZN_Materials/M_HZN_Body_NoShoesLegs",
-	"/Game/CharacterModels/Materials/HZN_Materials/M_HZN_Body_NoShoesLegsTorso",
-	"/Game/CharacterModels/Materials/HZN_Materials/M_HZN_Body_NoTorso",
+	nil,
 	"/Game/CharacterModels/Female/Meshes/SK_Female01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Female02"
 }
@@ -49,28 +53,22 @@ Tops = {
 	"/Game/CharacterModels/Clothing/Meshes/SK_ShirtCombo01",
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_Shirt_LPR",
 
-	"/Game/CharacterModels/Female/Meshes/SK_Outfit01", -- female
-	"/Game/CharacterModels/Female/Meshes/SK_Outfit02",
-	"/Game/CharacterModels/Female/Meshes/SK_Outfit03",
-	"/Game/CharacterModels/Female/Meshes/SK_Outfit04",
-	"/Game/CharacterModels/Female/Meshes/SK_Outfit05",
-	"/Game/CharacterModels/Female/Meshes/SK_Outfit06",
-	"/Game/CharacterModels/Female/Meshes/HZN_CH3D_Prison-Guard_LPR",
+	"/Game/CharacterModels/Female/Meshes/HZN_CH3D_Prison-Guard_LPR", -- Female
 	"/Game/CharacterModels/Female/Meshes/HZN_CH3D_Prisoner_LPR",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Police_Shirt-Long_LPR",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Police_Shirt-Short_LPR",
+	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalJacket_LPR",
+	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalShirt_LPR",
+	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Shirt_LPR",
+	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Tie_LPR",
+	"/Game/CharacterModels/Female/Meshes/SK_Jacket01",
+	"/Game/CharacterModels/Female/Meshes/SK_Jacket02"
 }
 
 Equipment = {
 	nil,
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalJacket_LPR", -- Female
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalShirt_LPR",
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Shirt_LPR",
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Tie_LPR",
 	"/Game/CharacterModels/Female/Meshes/SK_Armor01",
 	"/Game/CharacterModels/Female/Meshes/SK_Equipment01",
-	"/Game/CharacterModels/Female/Meshes/SK_Jacket01",
-	"/Game/CharacterModels/Female/Meshes/SK_Jacket02"
 }
 
 Pants = {
