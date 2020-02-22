@@ -71,34 +71,37 @@ end)
 
 AddRemoteEvent("iwb:OnClientDeposit", function (playerid, amount)
 
-	if amount > GetPlayerBankCash(playerid) then
-		return AddPlayerChatError(playerid, "You do not have enough money to withdraw your chosen amount.")
+	if amount > GetPlayerCash(playerid) then
+		return AddPlayerChatError(playerid, "You do not have enough money to deposit your chosen amount.")
 	end
 
 	RemovePlayerCash(playerid, amount)
 	AddPlayerBankCash(playerid, amount)
 
-    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Withdrawn: $"..amount.."</>")
+    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Deposited: $"..amount.."</>")
 	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">New Balance: $".. GetPlayerBankCash(playerid) .."</>")
-    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Imminent Wealth Bank, see you soon!</>")
+	
+	CallRemoteEvent(playerid, "iwb:OnServerATMAction", GetPlayerBankCash(playerid))
 end)
 
 AddRemoteEvent("iwb:OnClientWithdraw", function (playerid, amount)
 
-	if amount > GetPlayerCash(playerid) then
-		return AddPlayerChatError(playerid, "You do not have enough money to deposit your chosen amount.")
+	if amount > GetPlayerBankCash(playerid) then
+		return AddPlayerChatError(playerid, "You do not have enough money to withdraw your chosen amount.")
 	end
 
 	AddPlayerCash(playerid, amount)
 	RemovePlayerBankCash(playerid, amount)
 
-    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Deposited: $"..amount.."</>")
+    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Withdrawn: $"..amount.."</>")
     AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">New Balance: $".. GetPlayerBankCash(playerid) .."</>")
-    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Bank of Nevada, see you soon!</>")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Imminent Wealth Bank, see you soon!</>")
+	
+	CallRemoteEvent(playerid, "iwb:OnServerATMAction", GetPlayerBankCash(playerid))
 end)
 
 -- Commands
-
 AddCommand("atm", function (player)
     CallRemoteEvent(player, "iwb:opengui", GetPlayerCash(player), GetPlayerBankCash(player))
 end)

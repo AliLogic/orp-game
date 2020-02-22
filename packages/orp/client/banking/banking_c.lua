@@ -93,16 +93,21 @@ AddEvent("iwb:ready", function ()
 end)
 
 AddEvent("iwb:hidegui", function ()
+	AddPlayerChat('hidegui called')
+	ExecuteWebJS(web, "$('#thankyou').hide();")
+
 	SetWebVisibility(web, WEB_HIDDEN)
+	SetIgnoreLookInput(false)
+	SetIgnoreMoveInput(false)
 	ShowMouseCursor(false)
+	SetInputMode(INPUT_GAME)
 end)
 
 AddEvent("iwb:deposit", function (amount)
-	AddPlayerChat("deposit called client")
 	CallRemoteEvent("iwb:OnClientDeposit", amount)
 end)
+
 AddEvent("iwb:withdraw", function (amount)
-	AddPlayerChat("withdraw called client")
 	CallRemoteEvent("iwb:OnClientWithdraw", amount)
 end)
 
@@ -123,11 +128,16 @@ AddRemoteEvent("iwb:opengui", function (hand, bank)
 	} -- Example of how statements should be formed.
 
 	SetWebVisibility(web, WEB_VISIBLE)
-	ExecuteWebJS(web, 'show('..hand..', '..bank..', '..json_encode(statement)..');')
+	ExecuteWebJS(web, 'show('..bank..', '..json_encode(statement)..');')
 	SetIgnoreLookInput(true)
 	SetIgnoreMoveInput(true)
 	ShowMouseCursor(true)
 	SetInputMode(INPUT_GAMEANDUI)
+end)
+
+AddRemoteEvent("iwb:OnServerATMAction", function (amount)
+	ExecuteWebJS(web, 'setBank('..amount..');')
+	ExecuteWebJS(web, 'transactionSuccessful();')
 end)
 
 --[[AddRemoteEvent("OpenATMMenu", function (bal)
