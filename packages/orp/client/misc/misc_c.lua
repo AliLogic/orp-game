@@ -56,7 +56,7 @@ AddRemoteEvent("ShowFooterMessage", function (message, x, y, seconds)
 		FooterTimer = 0
 	end
 
-	message = "<span size='30' style='bold'>" .. message .. "</>"
+	message = "<span size=\"30\" color=\"#42f448\" style=\"bold\">" .. message .. "</>"
 
 	FooterMsg = CreateTextBox(x, y, message, "center")
 	SetTextBoxAnchors(FooterMsg, 0.5, 0.5, 0.5, 0.5)
