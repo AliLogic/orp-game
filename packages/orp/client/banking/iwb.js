@@ -25,6 +25,8 @@ const show = (hand, bank, statements) => {
 	$('#loading').show();
 	timerCount += 1;
 	
+	$('.iwb-pinbox').text("");
+
 	let interval = setInterval(() => {
 		console.log(timerCount);
 		timerCount += 1;
@@ -80,7 +82,9 @@ $(document).ready(() => {
 	}]);*/
 
 	$('#close').on('click', (e) => {
+		e.preventDefault();
 		if (currentDiv === null) return;
+		else currentDiv.hide();
 		CallEvent("iwb:hidegui");
 	});
 
