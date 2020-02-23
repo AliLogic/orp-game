@@ -108,4 +108,19 @@ Products = {
 
 -- Functions
 
+function IsPlayerInTruck(player)
+	if not IsPlayerInVehicle(player) then
+		return false
+	end
+
+	local model = GetVehicleModel(GetPlayerVehicle(player))
+
+	for i = 1, #Vehicles, 1 do
+		if model == Vehicles[i].id then
+			return true
+		end
+	end
+	return false
+end
+
 -- Events

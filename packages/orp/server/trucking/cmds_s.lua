@@ -9,20 +9,6 @@ Contributors:
 * Blue Mountains GmbH
 ]]--
 
--- Variables
-
--- Functions
-function IsPlayerInTruck(player)
-	if IsPlayerInVehicle(player) == false then return false end
-	for i = 1, #Vehicles, 1 do
-		if GetVehicleModel(GetPlayerVehicle(player)) == Vehicles[i].id then
-			return true
-		end
-	end
-	return false
-end
--- quick test3
--- Events
 AddCommand("tpda", function (player, prefix)
 	if GetPlayerJob(player) ~= JOB_TYPE_TRUCKER then
 		return AddPlayerChat(player, "<span color=\""..Colours.lightred.."\">Error: You must be a trucker to use this command!</>")
