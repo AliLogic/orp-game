@@ -365,12 +365,14 @@ local function cmd_handcuff(playerid, lookupid)
 
 	if is_handcuffed == 1 then
 		AddPlayerChat(playerid, "You unhandcuffed "..GetPlayerName(lookupid)..".")
+		is_handcuffed = 0
 	else
 		AddPlayerChat(playerid, "You handcuffed "..GetPlayerName(lookupid)..".")
 		AddPlayerChat(lookupid, GetPlayerName(playerid).." handcuffed you.")
+		is_handcuffed = 1
 	end
 
-	SetPlayerHandcuff(lookupid, not is_handcuffed)
+	SetPlayerHandcuff(lookupid, is_handcuffed)
 end
 AddCommand("hcuff", cmd_handcuff)
 AddCommand("handcuff", cmd_handcuff)
