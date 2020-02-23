@@ -20,7 +20,7 @@ end
 AddCommand("acceptmechanic", function (playerid)
 
 	if GetPlayerJob(playerid) ~= JOB_TYPE_MECHANIC then
-		return AddPlayerChat(playerid, "You are not a mechanic.")
+		return AddPlayerChatError(playerid, "You are not a mechanic.")
 	end
 
 	Mechanic_ShowCalls(playerid)
@@ -29,37 +29,37 @@ end)
 AddCommand("repair", function (playerid)
 
 	if GetPlayerJob(playerid) ~= JOB_TYPE_MECHANIC then
-		return AddPlayerChat(playerid, "You are not a mechanic.")
+		return AddPlayerChatError(playerid, "You are not a mechanic.")
 	end
 
 	if IsPlayerInVehicle(playerid) then
-		return AddPlayerChat(playerid, "You must exit the vehicle first.")
+		return AddPlayerChatError(playerid, "You must exit the vehicle first.")
 	end
 
 	if not Inventory_HasItem(playerid, INV_ITEM_REPAIR) then
-		return AddPlayerChat(playerid, "You don't have a repair kit on you.")
+		return AddPlayerChatError(playerid, "You don't have a repair kit on you.")
 	end
 
 	local vehicle = GetNearestVehicle(playerid)
 	local x, y, z = GetPlayerLocation(playerid)
 
 	if not vehicle then
-		AddPlayerChat(playerid, "You are not near any vehicle.")
+		AddPlayerChatError(playerid, "You are not near any vehicle.")
 	else
 		-- If player is not near the hood then
-		--	return AddPlayerChat(playerid, "You are not in range of any vehicle's hood.");
+		--	return AddPlayerChatError(playerid, "You are not in range of any vehicle's hood.");
 		-- end
 
 		if not IsEngineVehicle(vehicle) then
-			return AddPlayerChat(playerid, "This vehicle can't be repaired.")
+			return AddPlayerChatError(playerid, "This vehicle can't be repaired.")
 		end
 
 		if tonumber(math.floor(GetVehicleHoodRatio(vehicle))) == 0 then
-			return AddPlayerChat(playerid, "The hood must be opened before a repair.")
+			return AddPlayerChatError(playerid, "The hood must be opened before a repair.")
 		end
 
 		if VehicleData[vehicle].being_repaired then
-			return AddPlayerChat(playerid, "This vehicle is already being repaired.")
+			return AddPlayerChatError(playerid, "This vehicle is already being repaired.")
 		end
 
 		Inventory_RemoveItem(playerid, Inventory_HasItem(playerid, INV_ITEM_REPAIR))
@@ -80,28 +80,28 @@ end)
 AddCommand("nitrous", function (playerid)
 
 	if GetPlayerJob(playerid) ~= JOB_TYPE_MECHANIC then
-		return AddPlayerChat(playerid, "You are not a mechanic.")
+		return AddPlayerChatError(playerid, "You are not a mechanic.")
 	end
 
 	if IsPlayerInVehicle(playerid) then
-		return AddPlayerChat(playerid, "You must exit the vehicle first.")
+		return AddPlayerChatError(playerid, "You must exit the vehicle first.")
 	end
 
 	if not Inventory_HasItem(playerid, INV_ITEM_NOSCAN) then
-		return AddPlayerChat(playerid, "You don't have a NOS Canister on you.")
+		return AddPlayerChatError(playerid, "You don't have a NOS Canister on you.")
 	end
 
 	local vehicle = GetNearestVehicle(playerid)
 
 	if not vehicle then
-		AddPlayerChat(playerid, "You are not near any vehicle.")
+		AddPlayerChatError(playerid, "You are not near any vehicle.")
 	else
 		if not IsVehicleCar(vehicle) then
-			return AddPlayerChat(playerid, "This vehicle can't have nitrous.")
+			return AddPlayerChatError(playerid, "This vehicle can't have nitrous.")
 		end
 
 		if tonumber(math.floor(GetVehicleHoodRatio(vehicle))) == 0 then
-			return AddPlayerChat(playerid, "The hood must be opened before adding nitrous.")
+			return AddPlayerChatError(playerid, "The hood must be opened before adding nitrous.")
 		end
 
 		Inventory_RemoveItem(playerid, Inventory_HasItem(playerid, INV_ITEM_NOSCAN))
@@ -118,5 +118,5 @@ AddCommand("nitrous", function (playerid)
 		return
 	end
 
-	AddPlayerChat(playerid, "You are not in range of any vehicle's hood.");
+	AddPlayerChatError(playerid, "You are not in range of any vehicle's hood.");
 end)
