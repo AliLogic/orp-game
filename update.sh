@@ -1,3 +1,3 @@
 #!/usr/bin/env sh
 
-git pull https://onsetrp:v^GcUsUDILa*ncfF6YTA2%Lh@github.com/infin1tyy/orp-game.git
+git pull http://onsetroleplay:8We4bu5H&7gBbY25$nF^%uQ5Ix@68.183.37.59:4092/orp/game.git
