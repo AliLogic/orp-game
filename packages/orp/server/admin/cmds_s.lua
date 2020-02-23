@@ -470,7 +470,7 @@ AddCommand("setstats", function (player, target, prefix, ...)
 	target = GetPlayerIdFromData(target)
 
 	if not IsValidPlayer(target) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(player, "Invalid player ID entered")
 	end
 
 	if PlayerData[target].logged_in == false then
@@ -572,7 +572,7 @@ AddCommand("astats", function (player, target)
 	target = GetPlayerIdFromData(target)
 
 	if not IsValidPlayer(target) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(player, "Invalid player ID entered")
 	end
 
 	if PlayerData[target].logged_in == false then
@@ -837,7 +837,7 @@ AddCommand("asethelper", function (player, target, level)
 	end
 
 	if not IsValidPlayer(target) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(player, "Invalid player ID entered")
 	end
 
 	target = GetPlayerIdFromData(target)

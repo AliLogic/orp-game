@@ -624,7 +624,7 @@ local function cmd_aef(player, faction, prefix, ...)
 		local target = tonumber(args[1])
 
 		if IsValidPlayer(target) == nil or PlayerData[target] == nil then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+			return AddPlayerChatError(player, "Invalid player ID entered")
 		end
 
 		if PlayerData[target].logged_in == false then
