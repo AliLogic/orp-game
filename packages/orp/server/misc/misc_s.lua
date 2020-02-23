@@ -345,6 +345,21 @@ function IsPlayerIdle(playerid)
 	return (GetPlayerMovementMode(playerid) == 0)
 end
 
+function ShowFooterMessage(playerid, message, color, seconds)
+
+	if (seconds == nil) then
+		seconds = 5
+	end
+
+	if (color == nil) then
+		color = "#FFFFFF"
+	end
+
+	CallRemoteEvent(playerid, "ShowFooterMessage", message, color, seconds)
+end
+
+-- Events
+
 AddRemoteEvent("GetPlayerCash", GetPlayerCash)
 AddRemoteEvent("SetPlayerCash", SetPlayerCash)
 AddRemoteEvent("AddPlayerCash", AddPlayerCash)

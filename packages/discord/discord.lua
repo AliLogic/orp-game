@@ -10,7 +10,7 @@ function SendMessage(channel, style, message)
 	channel = channel or nil
 	message = message or nil
 	style = style or "plain"
-	
+
 	if channel == nil or message == nil or channel == false then
 		return false
 	end
@@ -29,15 +29,15 @@ function SendMessage(channel, style, message)
 	http_set_timeout(r, 30)
 	http_set_version(r, 11)
 	http_set_keepalive(r, true)
-	http_set_field(r, "user-agent", "Onset Server "..GetGameVersionString())
+	http_set_field(r, "User-Agent", "Onset Server "..GetGameVersionString())
 	http_set_field(r, "Token", "borkland!")
 
 	local body = json_encode({type = style, channelid = channel, message = message})
-	
+
 	http_set_body(r, body)
-	http_set_field(r, "content-length", string.len(body))
-	http_set_field(r, "content-type", "application/json; charset=utf-8")
-	
+	http_set_field(r, "Content-Length", string.len(body))
+	http_set_field(r, "Content-Type", "application/json; charset=utf-8")
+
 	if http_send(r, OnPostComplete, "OK", r) == false then
 		print("HTTP REQ NOT SENT :(")
 		http_destroy(r)
@@ -65,15 +65,15 @@ function SendEmbed(channel, embed)
 	http_set_timeout(r, 30)
 	http_set_version(r, 11)
 	http_set_keepalive(r, true)
-	http_set_field(r, "user-agent", "Onset Server "..GetGameVersionString())
+	http_set_field(r, "User-Agent", "Onset Server "..GetGameVersionString())
 	http_set_field(r, "Token", "borkland!")
 
 	local body = json_encode({type = 'embed', channelid = channel, colour = embed.colour, title = embed.title, description = embed.description, fields = embed.fields})
-	
+
 	http_set_body(r, body)
-	http_set_field(r, "content-length", string.len(body))
-	http_set_field(r, "content-type", "application/json; charset=utf-8")
-	
+	http_set_field(r, "Content-Length", string.len(body))
+	http_set_field(r, "Content-Type", "application/json; charset=utf-8")
+
 	if http_send(r, OnPostComplete, "OK", r) == false then
 		print("HTTP REQ NOT SENT :(")
 		http_destroy(r)

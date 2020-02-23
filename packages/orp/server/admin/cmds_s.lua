@@ -408,7 +408,7 @@ AddCommand("asetadmin", function (player, target, level)
 	target = GetPlayerIdFromData(target)
 
 	if not IsValidPlayer(target) then
-		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</>")
+		return AddPlayerChatError(player, "Invalid player ID entered.")
 	end
 
 	if PlayerData[target].logged_in == false then
@@ -451,7 +451,7 @@ AddCommand("a", function (player, ...)
 
 	local text = table.concat({...}, " ")
 
-	SendAdminMessage(string.format("<span color=\"%s\">** %s %s (%s, %d): %s</>",
+	SendAdminMessage(string.format("<span color=\"%s\" style=\"bold\">** %s %s (%s, %d): %s</>",
 		colour.COLOUR_LIGHTRED(), GetPlayerAdminRank(player), GetPlayerName(player), PlayerData[player].name, player, text)
 	)
 end)
@@ -1306,7 +1306,8 @@ AddCommand("flipveh", function (playerid, vehicleid)
 
 	if (player_vehicle > 0 and vehicleid == nil) then
 
-		SetVehicleRotation(player_vehicle, 0.0, 0.0, 0.0)
+		local x, y, z = GetVehicleRotation(player_vehicle)
+		SetVehicleRotation(player_vehicle, 0.0, y, 0.0)
 		AddPlayerChat(playerid, "You have flipped your current vehicle.")
 
 	else
@@ -1321,7 +1322,8 @@ AddCommand("flipveh", function (playerid, vehicleid)
 			return AddPlayerChatError(playerid, "Invalid vehicle ID entered.")
 		end
 
-		SetVehicleRotation(vehicleid, 0.0, 0.0, 0.0)
+		local x, y, z = GetVehicleRotation(vehicleid)
+		SetVehicleRotation(vehicleid, 0.0, y, 0.0)
 		AddPlayerChat(playerid, "You have flipped vehicle ID: " .. vehicleid .. ".")
 	end
 end)

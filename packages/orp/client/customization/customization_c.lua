@@ -13,17 +13,13 @@ Contributors:
 
 local function SetPlayerClothing(player, part, piece, r, g, b, a)
 
-	local SkeletalMeshComponent
-	local pieceName
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Clothing"..part)
 
-	SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Clothing"..part)
-	pieceName = piece
-
-	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset(pieceName))
-	local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
+	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset(piece))
+	-- local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
 
 	if part == 0 then
-		SkeletalMeshComponent:SetColorParameterOnMaterials("Hair Color", FLinearColor(r / 255, g / 255, b / 255, a / 255))
+		SkeletalMeshComponent:SetColorParameterOnMaterials("Hair Color", FLinearColor(r, g, b, a))
 	end
 end
 
@@ -33,10 +29,23 @@ local function SetPlayerSkinColor(player, r, g, b)
 	SkeletalMeshComponent:SetColorParameterOnMaterials("Skin Color", FLinearColor(r / 255, g / 255, b / 255, 1))
 end
 
+local function SetPlayerBody(player, body)
+
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Body")
+	SkeletalMeshComponent:SetSkeletalMesh(USkeletalMesh.LoadFromAsset(body))
+end
+
+local function SetPlayerPupilScale(player, scale)
+	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Body")
+	SkeletalMeshComponent:SetFloatParameterOnMaterials("PupilScale", scale)
+end
+
 -- Events
 
 AddRemoteEvent("SetPlayerClothing", SetPlayerClothing)
 AddRemoteEvent("SetPlayerSkinColor", SetPlayerSkinColor)
+AddRemoteEvent("SetPlayerBody", SetPlayerBody)
+AddRemoteEvent("SetPlayerPupilScale", SetPlayerPupilScale)
 
 AddEvent("OnPlayerStreamIn", function(player, otherplayer)
 	CallRemoteEvent("ServerSetPlayerClothing", player, otherplayer)
