@@ -20,6 +20,13 @@ Outfit = {
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit04",
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit05",
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit06",
+
+	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_SpecialAgent_LPR", -- Male
+	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_LPR",
+	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_Open_LPR",
+	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Police_LPR",
+	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Scientist_LPR",
+	"/Game/CharacterModels/Mafia/Meshes/SK_Mafia"
 }
 
 Body = {
@@ -28,6 +35,7 @@ Body = {
 	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal02_LPR",
 	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal03_LPR",
 	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal04_LPR",
+
 	"/Game/CharacterModels/Female/Meshes/SK_Female01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Female02"
 }
@@ -44,13 +52,6 @@ Tops = {
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_CH3D_Prisoner_LPR",
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Police_Shirt-Long_LPR",
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Police_Shirt-Short_LPR",
-	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_SpecialAgent_LPR",
-	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_LPR",
-	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_Open_LPR",
-	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Police_LPR",
-	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Scientist_LPR",
-	"/Game/CharacterModels/Mafia/Meshes/SK_Mafia",
-
 	"/Game/CharacterModels/Clothing/Meshes/SK_Pullover",
 	"/Game/CharacterModels/Clothing/Meshes/SK_TShirt01",
 	"/Game/CharacterModels/Clothing/Meshes/SK_Undershirt01",
@@ -82,6 +83,7 @@ Pants = {
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_FormalPants_LPR",
 	"/Game/CharacterModels/Clothing/Meshes/SK_Jeans01",
 	"/Game/CharacterModels/Clothing/Meshes/SK_Shorts01",
+
 	"/Game/CharacterModels/Female/Meshes/SK_Pants01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Pants02",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_CargoPants_LPR",
@@ -94,6 +96,7 @@ Shoes = {
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_BusinessShoes_LPR", -- Male
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_NormalShoes_LPR",
 	"/Game/CharacterModels/Clothing/Meshes/SK_Shoes01",
+
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes02",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_BusinessShoes_LPR",
@@ -108,6 +111,7 @@ Hair = {
 	"/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Police_Hair_LPR",
 	"/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_03_LPR",
 	"/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_02_LPR",
+
 	"/Game/CharacterModels/Female/Meshes/SK_Hair01", -- female
 	"/Game/CharacterModels/Female/Meshes/SK_Hair02",
 	"/Game/CharacterModels/Female/Meshes/SK_Hair03"
