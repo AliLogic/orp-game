@@ -14,8 +14,11 @@ Contributors:
 -- Functions
 function IsPlayerInTruck(player)
 	if IsPlayerInVehicle(player) == false then return false end
+
+	local model = GetVehicleModel(GetPlayerVehicle(player))
+
 	for i = 1, #Vehicles, 1 do
-		if GetVehicleModel(GetPlayerVehicle(player)) == Vehicles[i].id then
+		if model == Vehicles[i].id then
 			return true
 		end
 	end
