@@ -451,7 +451,7 @@ AddCommand("a", function (player, ...)
 
 	local text = table.concat({...}, " ")
 
-	SendAdminMessage(string.format("<span color=\"%s\">** %s %s (%s, %d): %s</>",
+	SendAdminMessage(string.format("<span color=\"%s\" style=\"bold\">** %s %s (%s, %d): %s</>",
 		colour.COLOUR_LIGHTRED(), GetPlayerAdminRank(player), GetPlayerName(player), PlayerData[player].name, player, text)
 	)
 end)
