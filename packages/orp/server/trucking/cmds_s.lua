@@ -21,7 +21,7 @@ function IsPlayerInTruck(player)
 	end
 	return false
 end
-
+-- quick test
 -- Events
 AddCommand("tpda", function (player, prefix)
 	if GetPlayerJob(player) ~= JOB_TYPE_TRUCKER then
