@@ -40,9 +40,8 @@ end)
 AddCommand("frank", function (playerid, lookupid, rank)
 
 	local factionid = PlayerData[playerid].faction
-	local faction_rank = PlayerData[playerid].faction_rank
 
-	if factionid == 0 or rank == nil then
+	if factionid == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in any faction.</>")
 	end
 
@@ -89,8 +88,11 @@ AddCommand("online", function (playerid)
 	local message = ""
 
 	for _, v in pairs(GetAllPlayers()) do
+
 		if FactionData[factionid].id == FactionData[PlayerData[v].faction].id then
-			message = message .. FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid..")"
+			faction_rank = PlayerData[v].faction_rank
+
+			message = message .. FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(v).." ("..v..")"
 		end
 
 		if playerid == v then
@@ -141,8 +143,8 @@ AddCommand("finvite", function (playerid, lookupid)
 
 	PlayerData[lookupid].faction_inviter = playerid
 
-	AddPlayerChat(playerid, " You invited " .. GetPlayerName(lookupid) .. " to join the " .. Faction_GetName(factionid) .. ".")
-	AddPlayerChat(lookupid, "" .. GetPlayerName(playerid) .. " has invited you to join the " .. Faction_GetName(factionid) .. ", type <span style='bold'>/accept</> to join.")
+	AddPlayerChat(playerid, "You invited " .. GetPlayerName(lookupid) .. " to join the " .. Faction_GetName(factionid) .. ".")
+	AddPlayerChat(lookupid, "" .. GetPlayerName(playerid) .. " has invited you to join the " .. Faction_GetName(factionid) .. ", type <span style=\"bold\">/accept</> to join.")
 
 	return
 end)
@@ -451,24 +453,6 @@ AddCommand("f", function(playerid, ...)
 	end]]--t
 
 	AddPlayerChatFaction(FactionData[factionid].id, "(( "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
-end)
-
-AddCommand("bandage", function (playerid)
-	if GetPlayerFactionType(playerid) ~= FACTION_MEDIC then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction to use this command!.</>")
-	end
-
-	return 1
-end)
-
-AddCommand("revive", function (playerid)
-	if GetPlayerFactionType(playerid) ~= FACTION_MEDIC then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction to use this command!.</>")
-	end
-
-	SetPlayerAnimation(playerid, "REVIVE")
-
-	return 1
 end)
 
 local function cmd_acf(player, maxrank, shortname, ...)
@@ -877,4 +861,22 @@ AddCommand("flocker", function (playerid)
 	if (not IsPlayerInRangeOfPoint(playerid, 150.0, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z)) then
 		return AddPlayerChatError(playerid, "You are not near your faction locker.")
 	end
+end)
+
+AddCommand("bandage", function (playerid)
+	if GetPlayerFactionType(playerid) ~= FACTION_MEDIC then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction to use this command!.</>")
+	end
+
+	return 1
+end)
+
+AddCommand("revive", function (playerid)
+	if GetPlayerFactionType(playerid) ~= FACTION_MEDIC then
+		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not in the appropriate faction to use this command!.</>")
+	end
+
+	SetPlayerAnimation(playerid, "REVIVE")
+
+	return 1
 end)
