@@ -94,7 +94,7 @@ end)
 
 AddEvent("iwb:hidegui", function ()
 	AddPlayerChat('hidegui called')
-	ExecuteWebJS(web, "$('#thankyou').hide();") -- pls work
+	ExecuteWebJS(web, "$('#thankyou').hide();")
 
 	SetWebVisibility(web, WEB_HIDDEN)
 	SetIgnoreLookInput(false)
