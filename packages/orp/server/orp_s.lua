@@ -17,6 +17,12 @@ local colour = ImportPackage('colours')
 
 AddEvent("OnPackageStart", function()
 	SetObjectScale(CreateObject(39, 122080, 90856, 1100), 0.75, 0.75, 0.75)
+
+	local handle = io.popen("git log --pretty=format:'%h' -n 1")
+	local result = handle:read("*a")
+	handle:close()
+	print(result)
+
 	--dev_talk = Discord.Channel("653324626977619968")
 	--Discord.SendMessage(dev_talk, "plain", "Testing message as requested by daky")
 end)
