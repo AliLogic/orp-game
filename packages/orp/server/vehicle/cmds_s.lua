@@ -124,10 +124,10 @@ local function cmd_v(player, args)
 		if vehicle ~= 0 and VehicleData[vehicle] ~= nil and (VehicleData[vehicle].owner == PlayerData[player].id or VehicleData[vehicle].renter == player) then
 			if VehicleData[vehicle].is_locked == true then
 				VehicleData[vehicle].is_locked = false
-				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle unlocked!</>")
+				ShowFooterMessage(player, "Vehicle unlocked!", colour.COLOUR_DARKGREEN())
 			else
 				VehicleData[vehicle].is_locked = true
-				AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle locked!</>")
+				ShowFooterMessage(player, "Vehicle locked!", colour.COLOUR_LIGHTRED())
 			end
 			return
 		end
@@ -146,12 +146,12 @@ local function cmd_v(player, args)
 					if v.is_locked == true then
 						v.is_locked = false
 
-						AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle unlocked!</>")
+						ShowFooterMessage(player, "Vehicle unlocked!", colour.COLOUR_DARKGREEN())
 						return
 					else
 						v.is_locked = true
 
-						AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle locked!</>")
+						ShowFooterMessage(player, "Vehicle locked!", colour.COLOUR_LIGHTRED())
 						return
 					end
 					ownsVehicle = true
@@ -209,21 +209,16 @@ local function cmd_v(player, args)
 
 			for i = 1, #VehicleData, 1 do
 				if VehicleData[i] ~= nil then
-					print('IS NOT NILL')
-					print(type(VehicleData[i].owner))
-					print(type(PlayerData[player].id))
 					if VehicleData[i].owner == PlayerData[player].id then
-						vehicles = string.format('%s ID:%d, Model:%d |', vehicles, i, VehicleData[i].model)
+						vehicles = string.format('%s ID:%d, Model: %s |', vehicles, i, GetVehicleModelEx(VehicleData[i].model))
 					end
 				end
 			end
 
-			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /v(ehicle) spawn <ingame id>")
-			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Owned Vehicles:"..vehicles)
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /v(ehicle) spawn <id>")
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Owned Vehicles:" .. vehicles)
 			return
 		end
-
-		--print('next codeblock')
 
 		if VehicleData[vehicle] == nil or PlayerData[player].id ~= VehicleData[vehicle].owner then
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> Invalid vehicle.")
@@ -299,7 +294,7 @@ AddCommand("gotoveh", function (playerid, vehid)
 		return AddPlayerChatError(playerid, "Vehicle " .. vehid .. " doesn't exist.")
 	end
 
-	SetPlayerLocation(playerid, VehicleData[vehid].x, VehicleData[vehid].y, VehicleData[vehid].z)
+	SetPlayerLocation(playerid, VehicleData[vehid].x, VehicleData[vehid].y, VehicleData[vehid].z + 20.0)
 
 	AddPlayerChat(playerid, "You have been teleported to vehicle ID: " .. vehid ..".")
 end)

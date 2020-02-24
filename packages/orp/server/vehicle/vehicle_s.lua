@@ -378,8 +378,7 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 		end
 
 		if VehicleData[vehicle].is_locked == true then
-			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">This vehicle is locked, you cannot enter it!</>")
-			Slap(player)
+			ShowFooterMessage(player, "This vehicle is locked!", colour.COLOUR_LIGHTRED())
 			--return false
 		else
 			if VehicleData[vehicle].renter ~= 0 and VehicleData[vehicle].renter == player then
