@@ -1,17 +1,22 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic
+* Bork
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 IndustryData = {}
 MAX_INDUSTRIES = 256
 
-function GetFreeIndustryId()
-	for i = 1, MAX_INDUSTRIES, 1 do
-		if IndustryData[i] == nil then
-			CreateIndustryData(i)
-			return i
-		end
-	end
-	return 0
-end
+-- Functions
 
-function CreateIndustryData(industry)
+local function CreateIndustryData(industry)
 	IndustryData[industry] = {}
 
 	-- Permanent (saving) values
@@ -35,29 +40,24 @@ function CreateIndustryData(industry)
 	IndustryData[industry].text3d = nil -- The marker for inside coordinates where you execute /buy.
 end
 
-function DestroyIndustryData(industry)
+function GetFreeIndustryId()
+	for i = 1, MAX_INDUSTRIES, 1 do
+		if IndustryData[i] == nil then
+			CreateIndustryData(i)
+			return i
+		end
+	end
+	return 0
+end
+
+local function DestroyIndustryData(industry)
 	IndustryData[industry] = nil
 end
 
-AddEvent('LoadIndustries', function ()
-	mariadb_async_query(sql, "SELECT * FROM industries;", OnIndustryLoad)
-end)
-
-function OnIndustryLoad()
-	for i = 1, mariadb_get_row_count(), 1 do
-		Industry_Load(i)
-	end
-
-	print("** Industries Loaded: " .. #IndustryData .. ".")
+local function Industry_Unload(industry)
 end
 
-AddEvent('UnloadIndustries', function () 
-	for i = 1, #IndustryData, 1 do
-		Industry_Unload(i)
-	end
-end)
-
-function Industry_Load(i)
+local function Industry_Load(i)
 	local industry = GetFreeIndustryId()
 	if industry == 0 then
 		print("A free industry id wasn't able to be found? ("..#IndustryData.."/"..MAX_INDUSTRIES..") industry SQL ID "..mariadb_get_value_name_int(i, "id")..".")
@@ -78,10 +78,40 @@ function Industry_Load(i)
 	IndustryData[industry].y = tonumber(mariadb_get_value_name_float(i, "y"))
 	IndustryData[industry].z = tonumber(mariadb_get_value_name_float(i, "z"))
 
-	IndustryData[industry].text3d = CreateText3D(
+	Industry_RefreshLabel(industry)
+end
+
+local function OnIndustryLoad()
+	for i = 1, mariadb_get_row_count(), 1 do
+		Industry_Load(i)
+	end
+
+	print("** Industries Loaded: " .. #IndustryData .. ".")
+end
+
+function Industry_RefreshLabel(industry)
+
+	if not IsValidText3D(IndustryData[industry].text3d) then
+
+		IndustryData[industry].text3d = CreateText3D(" ", 17, IndustryData[industry].x, IndustryData[industry].y, IndustryData[industry].z, 0, 0, 0)
+	end
+
+	SetText3DText(IndustryData[industry].text3d,
 		string.format(
 			"[%s]\nStorage: %d / %d\nPrice: $%d / Unit", 
 			Products[IndustryData[industry].products].name, IndustryData[industry].goods, IndustryData[industry].max_goods, IndustryData[industry].priceperunit
-		), 17, IndustryData[industry].x, IndustryData[industry].y, IndustryData[industry].z, 0, 0, 0
+		)
 	)
 end
+
+-- Events
+
+AddEvent('UnloadIndustries', function () 
+	for i = 1, #IndustryData, 1 do
+		Industry_Unload(i)
+	end
+end)
+
+AddEvent('LoadIndustries', function ()
+	mariadb_async_query(sql, "SELECT * FROM industries;", OnIndustryLoad)
+end)
