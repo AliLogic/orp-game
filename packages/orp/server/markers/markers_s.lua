@@ -1,7 +1,5 @@
 -- Variables
 
-local colour = ImportPackage('colours')
-
 MAX_MARKERS = 100
 MarkerData = {}
 
