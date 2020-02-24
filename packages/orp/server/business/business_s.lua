@@ -1,5 +1,3 @@
-local colour = ImportPackage('colours')
-
 BusinessData = {}
 MAX_BUSINESSES = 256
 
