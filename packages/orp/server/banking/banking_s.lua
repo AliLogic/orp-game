@@ -64,7 +64,7 @@ local function OnAtmCreated(index, x, y, z, h)
 end
 
 function ATM_Create(player, x, y, z, h)
-	local index = GetFreeHousingId()
+	local index = GetFreeAtmId()
 	if index == 0 then
 		return false
 	end
