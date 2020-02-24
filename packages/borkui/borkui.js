@@ -154,7 +154,7 @@ function addButton(text, colour = 'is-dark', size = 1, rounded = false, fullwidt
 	console.log('Button ID: '+ elementId);
 	
 	//$('#content').append(`<div${alignment}><button class="button${colour.startsWith('is-') ? ` ${colour}` : ''}${chosen_size !== "" ? ` ${chosen_size} ` : ''}${fullwidth ? 'is-fullwidth' : ''} ${rounded ? 'is-rounded' : ''}" id="${elementId}">${text}</button></div>`)
-	$('#content').append(`<div${alignment}><button class="button ${colour} ${chosen_size !== "" ? ` ${chosen_size} ` : ''} ${fullwidth ? 'is-fullwidth' : ''} ${rounded ? ' is-rounded' : ''}" id="${elementId}">${text}</button></div>`)
+	$('#content').append(`<div class="field"><div class="control"><div${alignment}><button class="button ${colour} ${chosen_size !== "" ? ` ${chosen_size} ` : ''} ${fullwidth ? 'is-fullwidth' : ''} ${rounded ? ' is-rounded' : ''}" id="${elementId}">${text}</button></div></div></div>`)
 }
 
 function addTextInput(label, size = 1, type = 0, placeholder = '') {
