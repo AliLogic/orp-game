@@ -69,33 +69,34 @@ local function OnSpeedcamTick(speedcam)
 	end
 end
 
-local function OnSpeedcamCreated(index, x, y, z, speed)
+local function OnSpeedcamCreated(index, x, y, z, h, speed)
 
 	SpeedcamData[index].id = mariadb_get_insert_id()
 
 	SpeedcamData[index].x = x
 	SpeedcamData[index].y = y
 	SpeedcamData[index].z = z
+	SpeedcamData[index].h = h
 
 	SpeedcamData[index].speed = speed
 
-	SpeedcamData[index].objectid = CreateObject(963, x, y, z)
+	SpeedcamData[index].objectid = CreateObject(963, x, y, z, 0.0, h, 0.0)
 	SpeedcamData[index].text3d = CreateText3D("Speedcam ("..index..")\nSpeed: "..speed.." MPH", 20, x, y, z + 180.0, 0.0, 0.0, 0.0)
 
 	SpeedcamData[index].timer = CreateTimer(OnSpeedcamTick, 1000, index)
 end
 
-function Speedcam_Create(x, y, z, speed)
+function Speedcam_Create(x, y, z, h, speed)
 
 	local index = GetFreeSpeedcamId()
 	if index == 0 then
 		return false
 	end
 
-	local query = mariadb_prepare(sql, "INSERT INTO speedcams (x, y, z, speed) VALUES (?, ?, ?, ?);",
-		x, y, z, speed
+	local query = mariadb_prepare(sql, "INSERT INTO speedcams (x, y, z, h, speed) VALUES (?, ?, ?, ?, ?);",
+		x, y, z, h, speed
 	)
-	mariadb_async_query(sql, query, OnSpeedcamCreated, index, x, y, z, speed)
+	mariadb_async_query(sql, query, OnSpeedcamCreated, index, x, y, z, h, speed)
 
 	return index
 end

@@ -28,8 +28,9 @@ local function cmd_acsc(player, speed)
 	end
 
 	local x, y, z = GetPlayerLocation(player)
+	local h = GetPlayerHeading(player)
 
-	local speedcam = Speedcam_Create(x, y, z - 99, speed)
+	local speedcam = Speedcam_Create(x, y, z - 99, h, speed)
 	if speedcam == false then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Speedcam wasn't able to be created.</>")
 	else
