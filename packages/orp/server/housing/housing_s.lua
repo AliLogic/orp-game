@@ -122,7 +122,6 @@ local function House_Load(i)
 
 	LoadHouseDoors(house)
 
-	HousingData[house].text3d_in = CreateText3D("House ("..house..")", 10, HousingData[house].ix, HousingData[house].iy, HousingData[house].iz + 10, 0.0, 0.0, 0.0)
 	House_RefreshLabel(house)
 
 	LoadHouseFurniture(house)
@@ -136,7 +135,7 @@ function OnHouseLoad()
 	print("** Houses Loaded: " .. #HousingData .. ".")
 end
 
-function House_Create(player, htype, price, address)
+function House_Create(htype, price, address, x, y, z)
 	htype = tonumber(htype)
 	price = tonumber(price)
 
@@ -160,16 +159,23 @@ function House_Create(player, htype, price, address)
 	local query = mariadb_prepare(sql, "INSERT INTO houses (type, price, address) VALUES ('?', ?, ?, '?');",
 		htype, price, address
 	)
-	mariadb_async_query(sql, query, OnHouseCreated, index, htype, price, address)
+	mariadb_async_query(sql, query, OnHouseCreated, index, htype, price, address, x, y, z)
 end
 
-function OnHouseCreated(i, htype, price, address)
-	HousingData[i].id = mariadb_get_insert_id()
+function OnHouseCreated(index, htype, price, address, x, y, z)
+	HousingData[index].id = mariadb_get_insert_id()
 
-	HousingData[i].type = htype
+	HousingData[index].type = htype
 
-	HousingData[i].price = price
-	HousingData[i].address = address
+	HousingData[index].price = price
+	HousingData[index].address = address
+
+	HousingData[index].ex = x
+	HousingData[index].ey = y
+	HousingData[index].ez = z
+	HousingData[index].ea = 0
+
+	House_RefreshLabel(index)
 end
 
 function House_Unload(house)
@@ -293,6 +299,10 @@ function House_RefreshLabel(house)
 
 	if HousingData[house].owner == 0 then
 		string = string .. "\nPrice: $"..HousingData[house].price
+	end
+
+	if not IsValidText3D(HousingData[house].text3d_in) then
+		HousingData[house].text3d_in = CreateText3D("House ("..house..")", 10, HousingData[house].ix, HousingData[house].iy, HousingData[house].iz + 10, 0.0, 0.0, 0.0)
 	end
 
 	if IsValidText3D(HousingData[house].text3d_outside) then
