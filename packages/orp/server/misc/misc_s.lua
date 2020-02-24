@@ -299,6 +299,10 @@ function ShowPropertiesList(playerid, lookupid)
 	end
 end
 
+function AddPlayerChatUsage(playerid, message)
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage: </>" .. message .. "")
+end
+
 function AddPlayerChatError(playerid, message)
 	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: " .. message .. "</>")
 end
