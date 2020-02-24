@@ -84,26 +84,86 @@ Cargo = {
 }
 
 Products = {
-	gunpowder = 1,
-	steel_shapes = 2,
-	clothes = 3,
-	wood_planks = 4,
-	beverages = 5,
-	meal = 6,
-	car_parts = 7,
-	appliances = 8,
-	fruits = 9,
-	meat = 10,
-	eggs = 11,
-	brick_pallet = 12,
-	fuel = 13,
-	milk = 14,
-	dyes = 15,
-	scrap_metal = 15,
-	cotton = 16,
-	cereal = 17,
-	malt = 18,
-	aggregate = 19
+	gunpowder = {
+		name = "gunpowder",
+		id = 1
+	},
+	steel_shapes = {
+		name = "steel shapes",
+		id = 2
+	},
+	clothes = {
+		name = "clothes",
+		id = 3
+	},
+	wood_planks = {
+		name = "wood planks",
+		id = 4
+	},
+	beverages = {
+		name = "beverages",
+		id = 5
+	},
+	meal = {
+		name = "meal",
+		id = 6
+	},
+	car_parts = {
+		name = "car parts",
+		id = 7
+	},
+	appliances = {
+		name = "appliances",
+		id = 8
+	},
+	fruits = {
+		name = "fruits",
+		id = 9
+	},
+	meat = {
+		name = "meat",
+		id = 10
+	},
+	eggs = {
+		name = "eggs",
+		id = 11
+	},
+	brick_pallet = {
+		name = "brick pallet",
+		id = 12
+	},
+	fuel = {
+		name = "fuel",
+		id = 13
+	},
+	milk = {
+		name = "milk",
+		id = 14
+	},
+	dyes = {
+		name = "dyes",
+		id = 15
+	},
+	scrap_metal = {
+		name = "scrap metal",
+		id = 16
+	},
+	cotton = {
+		name = "cotton",
+		id = 17
+	},
+	cereal = {
+		name = "cereal",
+		id = 18
+	},
+	malt = {
+		name = "malt",
+		id = 19
+	},
+	aggregate = {
+		name = "aggregate",
+		id = 20
+	}
 }
 
 -- Functions
