@@ -29,11 +29,11 @@ AddEvent("OnPackageStart", function ()
 		CallEvent('LoadDoors')
 		CallEvent('LoadPumps')
 		CallEvent('LoadPlants')
+		CallEvent('LoadIndustries')
 
 		--CallRemoteEvent('CreateMinimap')
 	else
 		print("MariaDB: Connection failed to " .. SQL_HOST .. ", see mariadb_log file")
-
 		-- Immediately stop the server if we cannot connect
 		ServerExit()
 	end
@@ -52,6 +52,7 @@ AddEvent("OnPackageStop", function ()
 	CallEvent('UnloadDoors')
 	CallEvent('UnloadPumps')
 	CallEvent('UnloadPlants')
+	CallEvent('UnloadIndustries')
 
 	CallEvent('SavePlayers')
 
@@ -59,6 +60,5 @@ AddEvent("OnPackageStop", function ()
 end)
 
 AddEvent("OnQueryError", function (errorid, error_str, query_str, handle_id)
-
 	print("[SQL: " .. errorid .. "] [" .. query_str .. "] (" .. error_str .. ")")
 end)
