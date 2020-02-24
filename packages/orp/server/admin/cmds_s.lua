@@ -1138,7 +1138,7 @@ AddCommand("revokelicense", function (playerid, lookupid, license)
 		if license == LicensesColumns[i] then
 
 			AddPlayerChat(playerid, "You have revoked " .. GetPlayerName(lookupid) .. "'s " .. LicensesColumns[i] .. " .")
-			AddPlayerChat(lookupid, GetPlayerName(lookupid) .. " has revoked your " .. LicensesColumns[i] .. " .")
+			AddPlayerChat(lookupid, GetPlayerName(playerid) .. " has revoked your " .. LicensesColumns[i] .. " .")
 
 			SetPlayerLicense(lookupid, i, 0)
 			return
@@ -1178,7 +1178,7 @@ AddCommand("grantlicense", function (playerid, lookupid, license)
 		if license == LicensesColumns[i] then
 
 			AddPlayerChat(playerid, "You have granted " .. GetPlayerName(lookupid) .. "'s " .. LicensesColumns[i] .. " .")
-			AddPlayerChat(lookupid, GetPlayerName(lookupid) .. " has granted your " .. LicensesColumns[i] .. " .")
+			AddPlayerChat(lookupid, GetPlayerName(playerid) .. " has granted your " .. LicensesColumns[i] .. " .")
 
 			SetPlayerLicense(lookupid, i, 1)
 			return
