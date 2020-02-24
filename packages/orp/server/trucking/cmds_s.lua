@@ -14,8 +14,11 @@ Contributors:
 -- Functions
 function IsPlayerInTruck(player)
 	if IsPlayerInVehicle(player) == false then return false end
+
+	local model = GetVehicleModel(GetPlayerVehicle(player))
+
 	for i = 1, #Vehicles, 1 do
-		if GetVehicleModel(GetPlayerVehicle(player)) == Vehicles[i].id then
+		if model == Vehicles[i].id then
 			return true
 		end
 	end
@@ -25,7 +28,11 @@ end
 -- Events
 AddCommand("tpda", function (player, prefix)
 	if GetPlayerJob(player) ~= JOB_TYPE_TRUCKER then
-		return AddPlayerChat(player, "<span color=\""..Colours.lightred.."\">Error: You must be a trucker to use this command!</>")
+		return AddPlayerChatError(player, "Error: You must be a trucker to use this command!")
+	end
+
+	if IsPlayerInTruck(player) == false then
+		return AddPlayerChatError(player, "Error: You must be in a truck to use this command!")
 	end
 
 	if prefix == nil then
