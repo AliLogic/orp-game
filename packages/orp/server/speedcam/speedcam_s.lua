@@ -205,6 +205,7 @@ AddRemoteEvent("OnSpeedcamFlashed", function(playerid, speedcam, speed)
 
 	local price = 100 + math.tointeger(math.floor(speed - SpeedcamData[speedcam].speed))
 
-	AddPlayerChat(playerid, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
+	-- AddPlayerChat(playerid, "You have received a <span color=\""..colour.COLOUR_LIGHTRED().."\">$"..price.."</> speeding ticket.")
+	ShowFooterMessage(playerid, "Speeding: $"..price.."", colour.COLOUR_LIGHTRED())
 	Ticket_Add(playerid, price, "Speeding (".. speed .."/".. SpeedcamData[speedcam].speed .." MPH)")
 end)
