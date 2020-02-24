@@ -22,16 +22,16 @@ AddCommand("fhelp", function (playerid)
 		return AddPlayerChatError(playerid, "You are not in any faction!")
 	end
 
-	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /online, /f, /fquit, /flocker, /finvite, /fremove, /frank, /accept</>")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /online, /f, /fquit, /flocker, /finvite, /fremove, /frank, /accept, /radio</>")
 
 	if faction_type == FACTION_CIVILIAN then
 	elseif faction_type == FACTION_POLICE then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /hcuff, /drag, /detain, /mdc, /arrest, /radio, /d, /callsign, /take</>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /hcuff, /drag, /detain, /mdc, /arrest, /d, /callsign, /take</>")
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /ticket, /spike, /roadblock, /impound, /revokeweapon, /checkproperties</>")
 	elseif faction_type == FACTION_MEDIC then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /radio, /d, /bandage, /revive</>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /d, /bandage, /revive</>")
 	elseif faction_type == FACTION_GOV then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /radio, /d, /checkproperties</>")
+		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">FACTION: /d, /checkproperties</>")
 	end
 
 	return 1
@@ -816,10 +816,38 @@ end)
 AddCommand("drag", function (playerid, lookupid)
 end)
 
-AddCommand("arrest", function (playerid, lookupid)
+AddCommand("arrest", function (playerid, lookupid, minutes)
 
 	if GetPlayerFactionType(playerid) ~= FACTION_POLICE then
 		return AddPlayerChatError(playerid, "You are not in the appropriate faction.")
+	end
+
+	if lookupid == nil or minutes == nil then
+		return AddPlayerChatUsage(playerid, "/arrest <player> <minutes>")
+	end
+
+	lookupid = GetPlayerIdFromData(lookupid)
+
+	if not IsValidPlayer(lookupid) then
+		return AddPlayerChatError(playerid, "Invalid playerid specified.")
+	end
+
+	if lookupid == playerid then
+		return AddPlayerChatError(playerid, "You cannot invite yourself!")
+	end
+
+	if not IsPlayerInRangeOfPlayer(playerid, lookupid) then
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
+	end
+
+	minutes = tonumber(minutes)
+
+	if minutes < 1 or minutes > 120 then
+		return AddPlayerChatError(playerid, "The specified player is not in your range.")
+	end
+
+	if IsPlayerHandcuffed(lookupid) ~= 1 then
+		return AddPlayerChatError(playerid, "The player is not cuffed at the moment.")
 	end
 end)
 

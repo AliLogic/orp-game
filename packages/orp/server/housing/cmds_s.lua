@@ -303,7 +303,7 @@ local function cmd_ach(player, htype, price, ...)
 	local x, y, z = GetPlayerLocation(player)
 	address = address .. ", " .. GetLocationName(x, y, z)
 
-	local house = House_Create(player, htype, price, address)
+	local house = House_Create(htype, price, address, x, y, z)
 
 	if house == false then
 		return AddPlayerChatError(player, "Maximum houses ("..MAX_HOUSING..") on the server are created.")

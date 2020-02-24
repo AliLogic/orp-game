@@ -38,6 +38,8 @@ AddCommand("harvest", function (playerid)
 
 	PlayerData[playerid].harvesting = 1
 
+	ShowFooterMessage(playerid, "Harvesting...", colour.COLOUR_DARKGREEN(), 3)
+
 	Delay(3000, function ()
 
 		PlayerData[playerid].harvesting = 0

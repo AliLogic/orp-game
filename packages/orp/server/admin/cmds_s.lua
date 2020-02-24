@@ -616,6 +616,29 @@ end
 AddCommand('acreatevehicle', cmd_acv)
 AddCommand('acv', cmd_acv)
 
+local function cmd_adv(player, vehicle)
+	if (PlayerData[player].admin < 2) then
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
+	end
+
+	if vehicle == nil then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(v)ehicle <vehicle>")
+	end
+
+	vehicle = tonumber(vehicle)
+
+	if IsValidVehicle(vehicle) == false or VehicleData[vehicle] == nil then
+		return AddPlayerChatError(player, "Vehicle "..vehicle.." doesn't exist or isn't valid.")
+	end
+
+	AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Vehicle %s (ID: %d) deleted successfully!", colour.COLOUR_LIGHTRED(), GetVehicleModelEx(vehicle), vehicle))
+
+	Vehicle_Destroy(vehicle)
+	return
+end
+AddCommand('adestroyvehicle', cmd_adv)
+AddCommand('adv', cmd_adv)
+
 local function cmd_aev(player, vehicle, prefix, ...)
 	if (PlayerData[player].admin < 2) then
 		return AddPlayerChatError(player, "You don't have permission to use this command.")
@@ -816,7 +839,7 @@ AddCommand("ahelp", function (player)
 	end
 
 	if PlayerData[player].admin > 3 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /adestroyvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/setarmour /sethealth /toggleg /gotohouse /housedoors /gotopump /gotodoor /gotoveh /gotoplant /gotospeedcam /gotobiz")
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/gotofurniture")
 	end
@@ -1138,7 +1161,7 @@ AddCommand("revokelicense", function (playerid, lookupid, license)
 		if license == LicensesColumns[i] then
 
 			AddPlayerChat(playerid, "You have revoked " .. GetPlayerName(lookupid) .. "'s " .. LicensesColumns[i] .. " .")
-			AddPlayerChat(lookupid, GetPlayerName(lookupid) .. " has revoked your " .. LicensesColumns[i] .. " .")
+			AddPlayerChat(lookupid, GetPlayerName(playerid) .. " has revoked your " .. LicensesColumns[i] .. " .")
 
 			SetPlayerLicense(lookupid, i, 0)
 			return
@@ -1178,7 +1201,7 @@ AddCommand("grantlicense", function (playerid, lookupid, license)
 		if license == LicensesColumns[i] then
 
 			AddPlayerChat(playerid, "You have granted " .. GetPlayerName(lookupid) .. "'s " .. LicensesColumns[i] .. " .")
-			AddPlayerChat(lookupid, GetPlayerName(lookupid) .. " has granted your " .. LicensesColumns[i] .. " .")
+			AddPlayerChat(lookupid, GetPlayerName(playerid) .. " has granted your " .. LicensesColumns[i] .. " .")
 
 			SetPlayerLicense(lookupid, i, 1)
 			return
