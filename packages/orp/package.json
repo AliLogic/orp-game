@@ -76,7 +76,6 @@
 		"client/customization/customization_c.lua",
 		"client/trafficlights/trafficlights_c.lua",
 		"client/gui/gui_c.lua",
-		"client/radar/radar_c.lua",
 		"server/misc/colours.lua",
 		"client/misc/json.lua",
 		"client/misc/misc_c.lua"
