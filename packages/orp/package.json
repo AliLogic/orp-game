@@ -54,6 +54,7 @@
 		"server/maps/dmv_s.lua",
 		"server/maps/dealership_s.lua",
 		"server/gui/gui_s.lua",
+		"server/keys/keys_s.lua",
 		"server/misc/colours.lua",
 		"server/misc/json.lua",
 		"server/misc/misc_s.lua"

@@ -247,39 +247,6 @@ local function OnPlayerHouseKeysLoaded(playerid)
 	end
 end
 
-function LoadPlayerHouseKeys(playerid)
-
-	PlayerHouseKeys[playerid] = {}
-
-	local query = mariadb_prepare(sql, "SELECT * housekeys WHERE id = ?", PlayerData[playerid].id)
-	mariadb_async_query(sql, query, OnPlayerHouseKeysLoaded, playerid)
-end
-
-function PlayerHasHouseKey(playerid, houseid)
-
-	if #PlayerHouseKeys[playerid] == 0 then
-		return false
-	end
-
-	return PlayerHouseKeys[playerid][houseid]
-end
-
-function PlayerAddHouseKey(playerid, houseid)
-
-	PlayerHouseKeys[playerid][houseid] = true
-
-	local query = mariadb_prepare(sql, "INSERT INTO housekeys (id, house) VALUES(?, ?)", PlayerData[playerid].id, houseid)
-	mariadb_async_query(sql, query)
-end
-
-function PlayerRemoveHouseKey(playerid, houseid)
-
-	PlayerHouseKeys[playerid][houseid] = nil
-
-	local query = mariadb_prepare(sql, "DELETE FROM housekeys WHERE id = ? AND house = ?", PlayerData[playerid].id, houseid)
-	mariadb_async_query(sql, query)
-end
-
 function House_IsOwner(playerid, houseid)
 
 	if HousingData[houseid] == nil then

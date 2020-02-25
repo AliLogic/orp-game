@@ -280,7 +280,7 @@ AddRemoteEvent("borkui:clientOnDialogSubmit", function (playerid, dialogid, extr
 		if button == 1 then
 			local houseid = Housing_Nearest(playerid)
 
-			if houseid == 0 or (not House_IsOwner(playerid, houseid) and not PlayerHasHouseKey(playerid, houseid))then
+			if houseid == 0 or (not House_IsOwner(playerid, houseid) or Key_PlayerHasKey(playerid, KEY_HOUSE, houseid) == 0) then
 				return AddPlayerChat(playerid, "You are not in range of your house interior.")
 			end
 

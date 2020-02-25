@@ -684,10 +684,6 @@ function PutPlayerInHospital(player)
 	--Camera: 215498, 158293, 2954
 end
 
-function LoadPlayerKeys(playerid)
-	LoadPlayerHouseKeys(playerid)
-end
-
 function Player_GetFactionRank(playerid)
 	if PlayerData[playerid] == nil then
 		return 0

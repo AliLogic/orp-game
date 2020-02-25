@@ -60,7 +60,7 @@ local function cmd_house(playerid, prefix, ...)
 			local doorid = 0
 
 			for houseid = 1, MAX_HOUSING, 1 do
-				if PlayerHasHouseKey(playerid, houseid) or House_IsOwner(playerid, houseid) then
+				if Key_PlayerHasKey(playerid, KEY_HOUSE, houseid) or House_IsOwner(playerid, houseid) then
 					print("Player has house key/ owns " .. houseid .. ".")
 					doorid = House_GetNearestDoor(playerid, houseid)
 
@@ -437,11 +437,11 @@ AddCommand("givehousekey", function (playerid, lookupid, houseid)
 		return AddPlayerChatError(playerid, "You do not own the specified house.")
 	end
 
-	if PlayerHasHouseKey(lookupid, houseid) == true then
+	if Key_PlayerHasKey(lookupid, KEY_HOUSE, houseid) == true then
 		return AddPlayerChatError(playerid, "The specified player already have the specified house's key.")
 	end
 
-	PlayerAddHouseKey(lookupid, houseid)
+	Key_PlayerAddKey(lookupid, KEY_HOUSE, houseid)
 
 	AddPlayerChat(playerid, "You have gave the keys for house (ID: " .. houseid .. ") to " .. GetPlayerName(lookupid) .. ".")
 	AddPlayerChat(lookupid, "You have receieved keys for house (ID: " .. houseid .. ") from " .. GetPlayerName(playerid) .. ".")
@@ -471,11 +471,11 @@ AddCommand("takehousekey", function (playerid, lookupid, houseid)
 		return AddPlayerChatError(playerid, "You do not own the specified house.")
 	end
 
-	if PlayerHasHouseKey(lookupid, houseid) ~= true then
+	if Key_PlayerHasKey(lookupid, KEY_HOUSE, houseid) == 0 then
 		return AddPlayerChatError(playerid, "The specified player doesn't have the specified house's key.")
 	end
 
-	PlayerRemoveHouseKey(lookupid, houseid)
+	Key_PlayerRemoveKey(lookupid, KEY_HOUSE, houseid)
 
 	AddPlayerChat(playerid, "You have taken house (ID: " .. houseid .. ") keys from " .. GetPlayerName(lookupid) .. ".")
 	AddPlayerChat(lookupid, "Your keys for house (ID: " .. houseid .. ") has been taken away by " .. GetPlayerName(playerid) .. ".")
@@ -488,7 +488,7 @@ AddCommand("myhousekeys", function (playerid)
 	local count = false
 
 	for houseid = 1, MAX_HOUSING, 1 do
-		if PlayerHasHouseKey(playerid, houseid) then
+		if Key_PlayerHasKey(playerid, KEY_HOUSE, houseid) then
 			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
 			count = true
 		end
