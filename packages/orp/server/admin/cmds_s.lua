@@ -97,11 +97,11 @@ AddCommand("whitelist", function(playerid, steam_id)
 	end
 
 	if (steam_id == nil or steam_id == 0) then
-		return AddPlayerChat(playerid, "Usage: /whitelist <steam id>")
+		return AddPlayerChatUsage(playerid, "/whitelist <steam id>")
 	end
 
-	if (#steam_id < 10 or #steam_id > 20) then
-		return AddPlayerChat(playerid, "Parameter \"steam id\" invalid length 10-20")
+	if (string.len(steam_id) ~= 17) then
+		return AddPlayerChatError(playerid, "Parameter \"steam id\".")
 	end
 
 	AddWhitelist(playerid, steam_id)
@@ -129,7 +129,7 @@ AddCommand("whitelistlog", function(playerid, otherplayer)
 		otherplayer = math.tointeger(otherplayer)
 
 		if (not IsValidPlayer(otherplayer)) then
-			return AddPlayerChat(playerid, "Selected player does not exist")
+			return AddPlayerChatError(playerid, "Invalid player ID entered.")
 		end
 
 		query = mariadb_prepare(sql, "SELECT player.steamname AS player_name, admin.steamname AS admin_name, timestamp\
