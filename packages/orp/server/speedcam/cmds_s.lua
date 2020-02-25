@@ -85,12 +85,15 @@ local function cmd_aesc(player, speedcam, prefix, ...)
 	elseif prefix == "location" then
 
 		local x, y, z = GetPlayerLocation(player)
+		local h = GetPlayerHeading(player)
 
 		SpeedcamData[speedcam].x = x
 		SpeedcamData[speedcam].y = y
 		SpeedcamData[speedcam].z = (z - 99)
+		SpeedcamData[speedcam].h = h
 
 		SetObjectLocation(SpeedcamData[speedcam].objectid, x, y, (z - 99))
+		SetObjectRotation(SpeedcamData[speedcam].objectid, 0.0, h, 0.0)
 
 		if IsValidText3D(SpeedcamData[speedcam].text3d) then
 			DestroyText3D(SpeedcamData[speedcam].text3d)

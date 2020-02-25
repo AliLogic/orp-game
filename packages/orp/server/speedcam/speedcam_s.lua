@@ -32,6 +32,7 @@ local function CreateSpeedcamData(speedcam)
 	SpeedcamData[speedcam].x = 0
 	SpeedcamData[speedcam].y = 0
 	SpeedcamData[speedcam].z = 0
+	SpeedcamData[speedcam].h = 0
 
 	SpeedcamData[speedcam].speed = 0
 end
@@ -164,8 +165,8 @@ local function OnSpeedcamUnloaded(speedcam)
 end
 
 local function Speedcam_Unload(speedcam)
-	local query = mariadb_prepare(sql, "UPDATE speedcams SET x = '?', y = '?', z = '?', speed = '?' WHERE id = ?;",
-		SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z, SpeedcamData[speedcam].speed,
+	local query = mariadb_prepare(sql, "UPDATE speedcams SET x = '?', y = '?', z = '?', h = '?, speed = '?' WHERE id = ?;",
+		SpeedcamData[speedcam].x, SpeedcamData[speedcam].y, SpeedcamData[speedcam].z, SpeedcamData[speedcam].h, SpeedcamData[speedcam].speed,
 		SpeedcamData[speedcam].id
 	)
 	mariadb_async_query(sql, query, OnSpeedcamUnloaded, speedcam)
