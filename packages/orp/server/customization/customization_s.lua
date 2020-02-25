@@ -37,7 +37,8 @@ Body = {
 	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal04_LPR",
 
 	"/Game/CharacterModels/Female/Meshes/SK_Female01", -- Female
-	"/Game/CharacterModels/Female/Meshes/SK_Female02"
+	"/Game/CharacterModels/Female/Meshes/SK_Female02",
+	"/Game/CharacterModels/Female/Meshes/SK_Female03",
 }
 
 Tops = {
