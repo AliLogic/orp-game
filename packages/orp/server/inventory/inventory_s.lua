@@ -1,3 +1,16 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic
+* Bork
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
 InventoryData = {}
 MAX_INVENTORY_SLOTS = 12
 
@@ -50,35 +63,7 @@ ITEM_NAMES = {
 	"Opium Poppy Seed"
 }
 
---[[
-	Functions from this module:
-
-	Inventory_GiveItem(player, item, amount)
-	Inventory_RemoveItem(player, slot)
-	Inventory_HasItem(player, item)
-	Inventory_GetItemName(item)
-	Inventory_Clear(player)
-]]--
-
-AddEvent("SaveInventory", function (player)
-	for i = 1, #InventoryData[player], 1 do
-		local query = mariadb_prepare(sql, "UPDATE inventory SET itemid = ?, amount = ? WHERE id = ?;",
-			InventoryData[player][i].itemid,
-			InventoryData[player][i].amount,
-			InventoryData[player][i].id
-		)
-		mariadb_async_query(sql, query)
-	end
-end)
-
-AddEvent("LoadInventory", function (player)
-	for i = 1, MAX_INVENTORY_SLOTS, 1 do
-		CreatePlayerInventory(player, i)
-	end
-
-	local query = mariadb_prepare(sql, "SELECT * FROM inventory WHERE charid = ?;", PlayerData[player].id)
-	mariadb_async_query(sql, query, OnInventoryLoaded, player)
-end)
+-- Functions
 
 function OnInventoryLoaded(player)
 	for i = 1, mariadb_get_row_count(), 1 do
@@ -101,15 +86,30 @@ function CreatePlayerInventory(player, slot)
 	InventoryData[player][slot].amount = 0
 end
 
+function Inventory_TakeItem(player, item, amount)
+	if InventoryData[player] == nil then
+		return false
+	end
+
+	local slot = Inventory_HasItem(player, item)
+	if (slot ~= false) then
+
+		local _amount = InventoryData[player][slot].amount
+		InventoryData[player][slot].amount = (_amount - amount)
+
+		if (InventoryData[player][slot].amount <= 0) then
+			Inventory_RemoveItem(player, slot)
+		end
+	end
+end
+
 function Inventory_GiveItem(player, item, amount)
 	if InventoryData[player] == nil then
-		print("Inventory Data for Player IS NIL")
 		return false
 	end
 
 	for i = 1, MAX_INVENTORY_SLOTS, 1 do
 		if InventoryData[player][i].id == 0 and InventoryData[player][i].itemid == 0 and InventoryData[player][i].amount == 0 then
-			print("Giving player "..GetPlayerName(player).." item id "..tonumber(item))
 
 			InventoryData[player][i].itemid = item
 			InventoryData[player][i].amount = amount
@@ -128,7 +128,6 @@ function Inventory_GiveItem(player, item, amount)
 end
 
 function OnInventoryItemAdded(player, slot)
-	print("Setting that item's SQL ID to "..mariadb_get_insert_id())
 	InventoryData[player][slot].id = mariadb_get_insert_id()
 end
 
@@ -171,3 +170,36 @@ function Inventory_Clear(playerid)
 		CreatePlayerInventory(playerid, i)
 	end
 end
+
+-- Events
+
+--[[
+	Functions from this module:
+
+	Inventory_GiveItem(player, item, amount)
+	Inventory_RemoveItem(player, slot)
+	Inventory_HasItem(player, item)
+	Inventory_GetItemName(item)
+	Inventory_Clear(player)
+	Inventory_TakeItem(player, item, amount)
+]]--
+
+AddEvent("SaveInventory", function (player)
+	for i = 1, #InventoryData[player], 1 do
+		local query = mariadb_prepare(sql, "UPDATE inventory SET itemid = ?, amount = ? WHERE id = ?;",
+			InventoryData[player][i].itemid,
+			InventoryData[player][i].amount,
+			InventoryData[player][i].id
+		)
+		mariadb_async_query(sql, query)
+	end
+end)
+
+AddEvent("LoadInventory", function (player)
+	for i = 1, MAX_INVENTORY_SLOTS, 1 do
+		CreatePlayerInventory(player, i)
+	end
+
+	local query = mariadb_prepare(sql, "SELECT * FROM inventory WHERE charid = ?;", PlayerData[player].id)
+	mariadb_async_query(sql, query, OnInventoryLoaded, player)
+end)

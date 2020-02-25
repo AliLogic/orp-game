@@ -87,7 +87,7 @@ AddCommand("plant", function (playerid, drug)
 		AddPlayerChatAction(playerid, "" .. GetPlayerName(playerid) .. " plants a marijuana seed into the ground.")
 		SetPlayerAnimation(playerid, "SLAP01")
 
-		Inventory_GiveItem(playerid, INV_ITEM_WEEDSEED, -1)
+		Inventory_TakeItem(playerid, INV_ITEM_WEEDSEED, 1)
 		CreatePlant(DRUG_TYPE_WEED, x, y, z)
 
 	elseif drug == "cocaine" then
@@ -100,7 +100,7 @@ AddCommand("plant", function (playerid, drug)
 		AddPlayerChatAction(playerid, "" .. GetPlayerName(playerid) .. " plants a poppy seed into the ground.")
 		SetPlayerAnimation(playerid, "SLAP01")
 
-		Inventory_GiveItem(playerid, INV_ITEM_COKESEED, -1)
+		Inventory_TakeItem(playerid, INV_ITEM_COKESEED, 1)
 		CreatePlant(DRUG_TYPE_COKE, x, y, z)
 	else
 

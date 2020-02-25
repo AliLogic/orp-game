@@ -73,7 +73,7 @@ AddCommand("fill", function (playerid)
 
 	PlayerData[playerid].fuel_can = 1
 
-	Inventory_GiveItem(playerid, INV_ITEM_FUELCAN, -1)
+	Inventory_TakeItem(playerid, INV_ITEM_FUELCAN, 1)
 
 	local x, y, z = GetPlayerLocation(playerid)
 	AddPlayerChatRange(x, y, 800.0, "* " .. GetPlayerName(playerid) .. " opens a can of fuel and fills the vehicle.")

@@ -62,7 +62,7 @@ AddCommand("repair", function (playerid)
 			return AddPlayerChatError(playerid, "This vehicle is already being repaired.")
 		end
 
-		Inventory_RemoveItem(playerid, Inventory_HasItem(playerid, INV_ITEM_REPAIR))
+		Inventory_TakeItem(playerid, INV_ITEM_REPAIR, 1)
 		SetPlayerAnimation(playerid, "COMBINE")
 		VehicleData[vehicle].being_repaired = true
 		AddPlayerChatRange(x, y, 800.0, "** "..GetPlayerName(playerid).." starts to repair the vehicle.")
