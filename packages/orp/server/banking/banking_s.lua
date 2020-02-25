@@ -19,14 +19,14 @@ MAX_ATM = 50
 ATMData = { }
 
 local CONFIG_ATM = {
-    withdraw = {
-        min = 1,
-        max = 2500
-    },
-    deposit = {
-        min = 1,
-        max = 1000
-    }
+	withdraw = {
+		min = 1,
+		max = 2500
+	},
+	deposit = {
+		min = 1,
+		max = 1000
+	}
 }
 
 -- Functions
@@ -120,15 +120,6 @@ function OnAtmLoaded()
 	print("** ATMs Loaded: " .. #ATMData .. ".")
 end
 
-function GetAtmByObject(atmobject)
-	for _,v in pairs(ATMData) do
-		if v.object == atmobject then
-			return v
-		end
-	end
-	return nil
-end
-
 -- Events
 
 AddEvent("LoadATMs", function()
@@ -144,7 +135,7 @@ AddRemoteEvent("iwb:OnClientDeposit", function (playerid, amount)
 	RemovePlayerCash(playerid, amount)
 	AddPlayerBankCash(playerid, amount)
 
-    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Deposited: $"..amount.."</>")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Deposited: $"..amount.."</>")
 	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">New Balance: $".. GetPlayerBankCash(playerid) .."</>")
 	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Imminent Wealth Bank, see you soon!</>")
 
@@ -160,8 +151,8 @@ AddRemoteEvent("iwb:OnClientWithdraw", function (playerid, amount)
 	AddPlayerCash(playerid, amount)
 	RemovePlayerBankCash(playerid, amount)
 
-    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Withdrawn: $"..amount.."</>")
-    AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">New Balance: $".. GetPlayerBankCash(playerid) .."</>")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Amount Withdrawn: $"..amount.."</>")
+	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">New Balance: $".. GetPlayerBankCash(playerid) .."</>")
 	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Imminent Wealth Bank, see you soon!</>")
 
 	CallRemoteEvent(playerid, "iwb:OnServerATMAction", GetPlayerBankCash(playerid))
