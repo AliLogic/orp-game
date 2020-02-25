@@ -241,7 +241,7 @@ AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid
 	if extraid == DIALOG_HOME_FURNITURE then
 		borkui.addUITitle(playerid, dialogid, 'Home Furniture List')
 		borkui.addUIDivider(playerid, dialogid)
-		--borkui.AddUIDropdown(playerid, dialogid, options, size, 1, label) --borkui.addUIInformation(playerid, dialogid, DialogString)
+		--borkui.addUIDropdown(playerid, dialogid, options, size, 1, label) --borkui.addUIInformation(playerid, dialogid, DialogString)
 		borkui.addUIDivider(playerid, dialogid)
 		borkui.addUIButton(playerid, dialogid, 'Select', 'is-primary')
 		borkui.addUIButton(playerid, dialogid, 'Cancel', 'is-danger')
@@ -249,7 +249,7 @@ AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid
 	elseif extraid == DIALOG_FURNITURE_BUY then
 		borkui.addUITitle(playerid, dialogid, 'Buy Home Furniture')
 		borkui.addUIDivider(playerid, dialogid)
-		borkui.AddUIDropdown(playerid, dialogid, FurnitureTypes, 1, 0, "Furniture category")
+		borkui.addUIDropdown(playerid, dialogid, FurnitureTypes, 1, 0, "Furniture category")
 		borkui.addUIDivider(playerid, dialogid)
 		borkui.addUIButton(playerid, dialogid, 'Select', 'is-primary')
 		borkui.addUIButton(playerid, dialogid, 'Cancel', 'is-danger')

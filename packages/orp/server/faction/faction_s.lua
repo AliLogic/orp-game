@@ -341,7 +341,7 @@ AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid
 
 		borkui.addUITitle(playerid, dialogid, "Tickets")
 		borkui.addUIDivider(playerid, dialogid)
-		borkui.AddUIDropdown(playerid, dialogid, DialogString, 1, false, "Select the ticket you wish to pay:")
+		borkui.addUIDropdown(playerid, dialogid, DialogString, 1, false, "Select the ticket you wish to pay:")
 		borkui.addUIDivider(playerid, dialogid)
 		borkui.addUIButton(playerid, dialogid, 'Pay', 'is-success')
 		borkui.addUIButton(playerid, dialogid, 'Cancel', 'is-danger')
