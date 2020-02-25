@@ -89,7 +89,7 @@ AddCommand("gotopump", function (playerid, pumpid)
 	end
 
 	if pumpid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotopump <pump>")
+		return AddPlayerChatUsage(playerid, "/gotopump <pump>")
 	end
 
 	pumpid = tonumber(pumpid)

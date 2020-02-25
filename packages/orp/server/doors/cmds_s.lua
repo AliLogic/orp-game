@@ -7,7 +7,7 @@ local function cmd_acd(playerid, modelid)
 	end
 
 	if modelid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(d)oor <model>")
+		return AddPlayerChatUsage(playerid, "/(ac)reate(d)oor <model>")
 	end
 
 	modelid = tonumber(modelid)
@@ -38,7 +38,7 @@ local function cmd_add(playerid, doorid)
 	end
 
 	if doorid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(d)oor <door>")
+		return AddPlayerChatUsage(playerid, "/(ad)estroy(d)oor <door>")
 	end
 
 	doorid = tonumber(doorid)
@@ -60,7 +60,7 @@ local function cmd_aed(playerid, doorid, prefix, ...)
 	end
 
 	if doorid == nil or prefix == nil then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(d)oor <door> <prefix>")
+		AddPlayerChatUsage(playerid, "/(ae)dit(d)oor <door> <prefix>")
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> location, lock")
 	end
 
@@ -99,7 +99,7 @@ local function cmd_aed(playerid, doorid, prefix, ...)
 		end
 		return
 	else
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(d)oor <door> <prefix>")
+		AddPlayerChatUsage(playerid, "/(ae)dit(d)oor <door> <prefix>")
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> location, lock")
 	end
 end
@@ -114,7 +114,7 @@ AddCommand("gotodoor", function (playerid, doorid)
 	end
 
 	if doorid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotodoor <door>")
+		return AddPlayerChatUsage(playerid, "/gotodoor <door>")
 	end
 
 	doorid = tonumber(doorid)

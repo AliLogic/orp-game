@@ -116,7 +116,7 @@ AddCommand("finvite", function (playerid, lookupid)
 	end
 
 	if lookupid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /finvite <playerid>")
+		return AddPlayerChatUsage(playerid, "/finvite <playerid>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
@@ -185,7 +185,7 @@ AddCommand("fremove", function (playerid, lookupid)
 	end
 
 	if lookupid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /fremove <playerid>")
+		return AddPlayerChatUsage(playerid, "/fremove <playerid>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
@@ -287,7 +287,7 @@ local function cmd_m(playerid, ...)
 	end
 
 	if #{...} == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /megaphone <message>")
+		return AddPlayerChatUsage(playerid, "/megaphone <message>")
 	end
 
 	local msg = table.concat({...}, " ")
@@ -311,7 +311,7 @@ AddCommand("badge", function (playerid, lookupid)
 	end
 
 	if lookupid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /badge <playerid>")
+		return AddPlayerChatUsage(playerid, "/badge <playerid>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
@@ -352,7 +352,7 @@ local function cmd_handcuff(playerid, lookupid)
 	end
 
 	if lookupid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /h(and)cuff <playerid>")
+		return AddPlayerChatUsage(playerid, "/h(and)cuff <playerid>")
 	end
 
 	if not IsValidPlayer(lookupid) then
@@ -418,7 +418,7 @@ AddCommand("d", function(playerid, ...)
 	end
 
 	if #{...} == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /d <message>")
+		return AddPlayerChatUsage(playerid, "/d <message>")
 	end
 
 	local msg = table.concat({...}, " ")
@@ -443,7 +443,7 @@ AddCommand("f", function(playerid, ...)
 	end
 
 	if #{...} == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /f <message>")
+		return AddPlayerChatUsage(playerid, "/f <message>")
 	end
 
 	local msg = table.concat({...}, " ")
@@ -650,7 +650,7 @@ AddCommand("ticket", function (playerid, lookupid, price, ...)
 	end
 
 	if lookupid == nil or price == nil or #{...} == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ticket <playerid> <price> <reason>")
+		return AddPlayerChatUsage(playerid, "/ticket <playerid> <price> <reason>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
@@ -687,7 +687,7 @@ AddCommand("impound", function (playerid, price)
 	end
 
 	if price == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /impound <price>")
+		return AddPlayerChatUsage(playerid, "/impound <price>")
 	end
 
 	price = tonumber(price)
@@ -718,7 +718,7 @@ AddCommand("checkproperties", function (playerid, lookupid)
 	end
 
 	if lookupid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /checkproperties <playerid>")
+		return AddPlayerChatUsage(playerid, "/checkproperties <playerid>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
@@ -744,7 +744,7 @@ AddCommand("detain", function (playerid, lookupid)
 	local vehicleid = GetNearestVehicle(playerid)
 
 	if lookupid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /detain <playerid>")
+		return AddPlayerChatUsage(playerid, "/detain <playerid>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)

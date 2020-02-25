@@ -152,7 +152,7 @@ local function cmd_biz(playerid, prefix, ...)
 		end
 
 	else
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /biz <prefix>")
+		AddPlayerChatUsage(playerid, "/biz <prefix>")
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> (un)lock, buy, sell, shop")
 	end
 end
@@ -261,7 +261,7 @@ AddCommand("gotobiz", function (playerid, bizid)
 	end
 
 	if bizid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotobiz <biz>")
+		return AddPlayerChatUsage(playerid, "/gotobiz <biz>")
 	end
 
 	bizid = tonumber(bizid)

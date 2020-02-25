@@ -6,7 +6,7 @@ local function cmd_asw(playerid, weatherid)
 	end
 
 	if weatherid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(as)et(w)eather <weather>")
+		return AddPlayerChatUsage(playerid, "/(as)et(w)eather <weather>")
 	end
 
 	weatherid = tonumber(weatherid)
@@ -29,7 +29,7 @@ local function cmd_asf(playerid, fog)
 	end
 
 	if fog == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(as)et(f)og <fog>")
+		return AddPlayerChatUsage(playerid, "/(as)et(f)og <fog>")
 	end
 
 	fog = tonumber(fog)

@@ -7,7 +7,7 @@ local function cmd_acm(playerid, modelid)
 	end
 
 	if modelid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(m)arker <model>")
+		return AddPlayerChatUsage(playerid, "/(ac)reate(m)arker <model>")
 	end
 
 	modelid = tonumber(modelid)
@@ -38,7 +38,7 @@ local function cmd_adm(playerid, markerid)
 	end
 
 	if markerid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(m)arker <marker>")
+		return AddPlayerChatUsage(playerid, "/(ad)estroy(m)arker <marker>")
 	end
 
 	markerid = tonumber(markerid)
@@ -60,7 +60,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 	end
 
 	if markerid == nil or prefix == nil then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(m)arker <marker> <prefix>")
+		AddPlayerChatUsage(playerid, "/(ae)dit(m)arker <marker> <prefix>")
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> color, interior, exterior")
 	end
 
@@ -79,7 +79,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 		a = tonumber(args[4])
 
 		if r == nil or g == nil or b == nil or a == nil then
-			return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(m)arker <marker> <color> <red> <green> <blue> <alpha>")
+			return AddPlayerChatUsage(playerid, "/(ae)dit(m)arker <marker> <color> <red> <green> <blue> <alpha>")
 		end
 
 		if r < 0 or r > 255 or g < 0 or g > 255 or b < 0 or b > 255 or a < 0 or a > 255 then
@@ -133,7 +133,7 @@ local function cmd_aem(playerid, markerid, prefix, ...)
 
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Marker "..markerid.." exterior location changed.</>")
 	else
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(m)arker <marker> <prefix>")
+		AddPlayerChatUsage(playerid, "/(ae)dit(m)arker <marker> <prefix>")
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> color, interior, exterior")
 	end
 end

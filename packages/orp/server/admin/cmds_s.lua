@@ -155,7 +155,7 @@ AddCommand("spec", function (playerid, lookupid)
 	end
 
 	--[[if (lookupid == nil) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /spec <player>")
+		return AddPlayerChatUsage(playerid, "/spec <player>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
@@ -201,7 +201,7 @@ AddCommand("kick", function (playerid, lookupid, ...)
 	end
 
 	if (lookupid == nil) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /kick <player> <reason*>")
+		return AddPlayerChatUsage(playerid, "/kick <player> <reason*>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
@@ -237,7 +237,7 @@ AddCommand("warp", function (playerid, fromid, toid)
 	end
 
 	if (fromid == nil or toid == nil) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /warp <player> <target>")
+		return AddPlayerChatUsage(playerid, "/warp <player> <target>")
 	end
 
 	if (fromid == toid) then
@@ -261,7 +261,7 @@ AddCommand("gotoxyz", function (playerid, x, y, z)
 	end
 
 	if (x == nil or y == nil or z == nil) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotoxyz <x> <y> <z>")
+		return AddPlayerChatUsage(playerid, "/gotoxyz <x> <y> <z>")
 	end
 
 	SetPlayerLocation(playerid, x, y, z)
@@ -276,7 +276,7 @@ AddCommand("slap", function (playerid, lookupid)
 	end
 
 	if (lookupid == nil) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /slap <playerid>")
+		return AddPlayerChatUsage(playerid, "/slap <playerid>")
 	end
 
 	if not IsValidPlayer(lookupid) then
@@ -293,7 +293,7 @@ AddCommand("goto", function (playerid, lookupid)
 	end
 
 	if (lookupid == nil) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /goto <playerid>")
+		return AddPlayerChatUsage(playerid, "/goto <playerid>")
 	end
 
 	if not IsValidPlayer(lookupid) then
@@ -319,7 +319,7 @@ AddCommand("get", function (playerid, lookupid)
 	end
 
 	if (lookupid == nil) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /get <playerid>")
+		return AddPlayerChatUsage(playerid, "/get <playerid>")
 	end
 
 	if not IsValidPlayer(lookupid) then
@@ -939,7 +939,7 @@ AddCommand("setarmour", function (playerid, lookupid, armour)
 	end
 
 	if lookupid == nil or armour == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /setarmour <playerid> <armour>")
+		return AddPlayerChatUsage(playerid, "/setarmour <playerid> <armour>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
@@ -970,7 +970,7 @@ AddCommand("sethealth", function (playerid, lookupid, health)
 	end
 
 	if lookupid == nil or health == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /sethealth <playerid> <health>")
+		return AddPlayerChatUsage(playerid, "/sethealth <playerid> <health>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)

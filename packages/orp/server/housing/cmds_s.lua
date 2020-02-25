@@ -47,7 +47,7 @@ end)
 local function cmd_house(playerid, prefix, ...)
 
 	if prefix == nil then
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(h)ouse <prefix>")
+		AddPlayerChatUsage(playerid, "/(h)ouse <prefix>")
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> un(lock), kickdoor, ring, rent, buy, sell")
 	end
 
@@ -399,7 +399,7 @@ AddCommand("gotohouse", function (playerid, houseid)
 	end
 
 	if houseid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotohouse <house>")
+		return AddPlayerChatUsage(playerid, "/gotohouse <house>")
 	end
 
 	houseid = tonumber(houseid)

@@ -120,7 +120,7 @@ AddCommand("gotospeedcam", function (playerid, speedcamid)
 	end
 
 	if speedcamid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotospeedcam <speedcam>")
+		return AddPlayerChatUsage(playerid, "/gotospeedcam <speedcam>")
 	end
 
 	speedcamid = tonumber(speedcamid)

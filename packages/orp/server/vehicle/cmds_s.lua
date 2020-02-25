@@ -285,7 +285,7 @@ AddCommand("gotoveh", function (playerid, vehid)
 	end
 
 	if vehid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotoveh <veh>")
+		return AddPlayerChatUsage(playerid, "/gotoveh <veh>")
 	end
 
 	vehid = tonumber(vehid)

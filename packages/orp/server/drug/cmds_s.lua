@@ -104,7 +104,7 @@ AddCommand("plant", function (playerid, drug)
 		CreatePlant(DRUG_TYPE_COKE, x, y, z)
 	else
 
-		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /plant <drug>")
+		AddPlayerChatUsage(playerid, "/plant <drug>")
 		AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Drug:</> marijuana, cocaine")
 	end
 
@@ -118,7 +118,7 @@ AddCommand("adestroyplant", function (playerid, plantid)
 	end
 
 	if plantid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /adestroyplant <plant>")
+		return AddPlayerChatUsage(playerid, "/adestroyplant <plant>")
 	end
 
 	plantid = tonumber(plantid)
@@ -140,7 +140,7 @@ AddCommand("gotoplant", function (playerid, plantid)
 	end
 
 	if plantid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotoplant <plant>")
+		return AddPlayerChatUsage(playerid, "/gotoplant <plant>")
 	end
 
 	plantid = tonumber(plantid)

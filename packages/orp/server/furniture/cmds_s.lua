@@ -31,7 +31,7 @@ AddCommand("gotofurniture", function (playerid, furnitureid)
 	end
 
 	if furnitureid == nil then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /gotofurnitureid <furniture>")
+		return AddPlayerChatUsage(playerid, "/gotofurnitureid <furniture>")
 	end
 
 	furnitureid = tonumber(furnitureid)

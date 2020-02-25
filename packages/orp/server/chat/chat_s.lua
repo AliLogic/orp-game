@@ -61,7 +61,7 @@ AddCommand("dc", function (playerid, ...)
 	local args = table.concat({...}, " ")
 
 	if #{...} == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /d <message>")
+		return AddPlayerChatUsage(playerid, "/d <message>")
 	end
 
 	AddPlayerChatDonator("[DONATION] " .. GetPlayerName(playerid) .. ": " .. args)
@@ -117,7 +117,7 @@ local function cmd_shout(playerid, ...)
 	local args = table.concat({...}, " ")
 
 	if #{...} == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /shout [message]")
+		return AddPlayerChatUsage(playerid, "/shout [message]")
 	end
 
 	local x, y, z = GetPlayerLocation(playerid)
@@ -132,7 +132,7 @@ local function cmd_low(playerid, ...)
 	local args = table.concat({...}, " ")
 
 	if #{...} == 0 then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /low [message]")
+		return AddPlayerChatUsage(playerid, "/low [message]")
 	end
 
 	local x, y, z = GetPlayerLocation(playerid)
@@ -310,7 +310,7 @@ end)
 AddCommand("showlicenses", function (playerid, lookupid)
 
 	if (lookupid == nil) then
-		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /showlicenses <playerid>")
+		return AddPlayerChatUsage(playerid, "/showlicenses <playerid>")
 	end
 
 	lookupid = GetPlayerIdFromData(lookupid)
