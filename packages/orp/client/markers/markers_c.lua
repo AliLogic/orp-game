@@ -4,25 +4,20 @@ AddEvent("OnKeyPress", function(key)
 	if not IsPlayerInVehicle() and key == 'E' then
 
 		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
-		if pickupid ~= false then
+		if pickupid ~= false or pickupid ~= 0 then
 
-			pickupid = tonumber(pickupid)
+			local plX, plY, plZ = GetPlayerLocation()
+			local pkX, pkY, pkZ = GetPickupLocation(pickupid)
 
-			if pickupid ~= 0 then
+			if pkX ~= nil then
+				local distance = GetDistance3D(plX, plY, plZ, pkX, pkY, pkZ)
 
-				local plX, plY, plZ = GetPlayerLocation()
-				local pkX, pkY, pkZ = GetPickupLocation(pickupid)
+				if distance < 300 then
+					AddPlayerChat("You have pressed the key while in range of pickupid "..pickupid..".") -- nil value, currently problematic.
 
-				if pkX ~= nil then
-					local distance = GetDistance3D(plX, plY, plZ, pkX, pkY, pkZ)
-
-					if distance < 300 then
-						AddPlayerChat("You have pressed the key while in range of pickupid "..pickupid..".") -- nil value, currently problematic.
-
-						CallRemoteEvent("OnPlayerInteractMarker", pickupid)
-					else
-						SetPlayerPropertyValue(GetPlayerId(), "pickupid", 0)
-					end
+					CallRemoteEvent("OnPlayerInteractMarker", pickupid)
+				else
+					SetPlayerPropertyValue(GetPlayerId(), "pickupid", 0)
 				end
 			end
 		end
