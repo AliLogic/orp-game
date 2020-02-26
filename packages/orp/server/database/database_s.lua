@@ -18,6 +18,7 @@ AddEvent("OnPackageStart", function ()
 		print("MariaDB: Connected to " .. SQL_HOST)
 		mariadb_set_charset(sql, SQL_CHAR)
 
+		CallEvent('LoadServer')
 		CallEvent('LoadVehicles')
 		CallEvent('LoadFactions')
 		CallEvent('LoadMarkers')
@@ -41,6 +42,8 @@ end)
 
 -- Cleanup the MariaDB connection when the package/server stops
 AddEvent("OnPackageStop", function ()
+
+	CallEvent('UnloadServer')
 	CallEvent('UnloadCallsigns')
 	CallEvent('UnloadVehicles')
 	CallEvent('UnloadFactions')
