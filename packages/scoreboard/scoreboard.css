@@ -39,8 +39,8 @@ img.image {
 	background-color: orange;
 }
 
-.body .columns .selected {
-	background-color: red;
+.selected {
+	background-color: lightcoral;
 }
 
 .body .columns .column:nth-child(4)::after {

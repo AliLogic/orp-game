@@ -21,7 +21,7 @@ $(document).ready(() => {
 		console.log('selected');
 
 		if (selectedlast !== null) {
-			if (selectedlast.innerText === $(this).innerText && !selectedlast.hasClass('selected')) {
+			if (selectedlast.innerText === $(this).innerText && selectedlast.hasClass('selected')) {
 				$(this).removeClass('selected');
 				console.log('selected is being deselected');
 				return;
