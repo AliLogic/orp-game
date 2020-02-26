@@ -17,7 +17,7 @@ $(document).ready(() => {
 
 	toggleScoreboard(true);
 
-	$('.table .body .data > .columns').on('click', function () {
+	$(document).on('click', '.table .body .data .columns', function () { // $('.table .body .data .columns .column').on('click', function () {
 		console.log('selected');
 
 		if (selectedlast !== null) {

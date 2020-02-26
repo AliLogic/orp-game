@@ -35,7 +35,11 @@ img.image {
 	margin-bottom: 4px;
 }
 
-.body .columns.selected {
+.body .columns:hover .column {
+	background-color: orange;
+}
+
+.body .columns .selected {
 	background-color: red;
 }
 
