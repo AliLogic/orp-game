@@ -728,7 +728,7 @@ AddEvent("OnPlayerSpawn", function(player)
 
 	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
 
-		SetPlayerLocation(PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z)
+		SetPlayerLocation(player, PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z)
 
 		AddPlayerChat(player, "You are now wounded... You can use /acceptdeath.")
 		FreezePlayer(player, true)
@@ -739,7 +739,7 @@ AddEvent("OnPlayerSpawn", function(player)
 
 	elseif PlayerData[player].state == CHARACTER_STATE_DEAD then
 
-		SetPlayerLocation(PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z)
+		SetPlayerLocation(player, PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z)
 
 		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
 		FreezePlayer(player, true)
