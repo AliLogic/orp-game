@@ -21,7 +21,7 @@ $(document).ready(() => {
 		console.log('selected');
 
 		if (selectedlast !== null) {
-			if (selectedlast.innerText === $(this).innerText && selectedlast.hasClass('selected')) {
+			if (selectedlast.innerText === $(this).innerText && !selectedlast.hasClass('selected')) {
 				$(this).removeClass('selected');
 				console.log('selected is being deselected');
 				return;
@@ -103,9 +103,11 @@ function updateValue(player, value, newvalue) {
 
 function removePlayers() {
 
-	players.forEach((index) => {
+	$(`.table .body .data .columns .column`).remove();
+	$(`.table .body .data`).addClass(`.columns .column`)
+	/*players.forEach((index) => {
 		$(`.table .body .data #${index}`).remove();
-	});
+	});*/
 	players = [];
 	return true;
 }
