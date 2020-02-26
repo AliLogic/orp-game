@@ -90,9 +90,7 @@ local function OnIndustryLoad()
 end
 
 function Industry_RefreshLabel(industry)
-
 	if not IsValidText3D(IndustryData[industry].text3d) then
-
 		IndustryData[industry].text3d = CreateText3D(" ", 17, IndustryData[industry].x, IndustryData[industry].y, IndustryData[industry].z, 0, 0, 0)
 	end
 
@@ -102,6 +100,24 @@ function Industry_RefreshLabel(industry)
 			Products[IndustryData[industry].products].name, IndustryData[industry].goods, IndustryData[industry].max_goods, IndustryData[industry].priceperunit
 		)
 	)
+end
+
+function Industry_Nearest(playerid)
+
+	local x, y, z = GetPlayerLocation(playerid)
+	local distance = 0
+
+	for v = 1, #IndustryData, 1 do
+		if IndustryData[v] ~= nil then
+			distance = GetDistance3D(x, y, z, IndustryData[v].x, IndustryData[v].y, IndustryData[v].z)
+
+			if distance <= 200.0 then
+				return v
+			end
+		end
+	end
+
+	return 0
 end
 
 -- Events
