@@ -433,7 +433,7 @@ AddCommand("givehousekey", function (playerid, lookupid, houseid)
 		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
-	if not House_IsOwner(playerid, houseid) then
+	if House_IsOwner(playerid, houseid) ~= true then
 		return AddPlayerChatError(playerid, "You do not own the specified house.")
 	end
 
@@ -467,7 +467,7 @@ AddCommand("takehousekey", function (playerid, lookupid, houseid)
 		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
-	if not House_IsOwner(playerid, houseid) then
+	if House_IsOwner(playerid, houseid) ~= true then
 		return AddPlayerChatError(playerid, "You do not own the specified house.")
 	end
 

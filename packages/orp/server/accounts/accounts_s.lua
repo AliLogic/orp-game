@@ -551,7 +551,7 @@ function OnPlayerPayday(player)
 
 		if PlayerData[player].job ~= 0 then
 		else
-			AddPlayerChat(player, "Unemployement benefit: $100")
+			AddPlayerChat(player, "Unemployment benefit: $100")
 
 			paycheck = paycheck + 100
 		end
