@@ -301,10 +301,13 @@ AddCommand("respawnme", function (playerid)
 		return AddPlayerChat(playerid, "You can't use this command right now.")
 	end
 
-	AddPlayerChat(playerid, "You are now being respawned...")
+	AddPlayerChat(playerid, "You will now be respawned shortly...")
 
 	ClearCharacterDeath(playerid)
-	PutPlayerInHospital(playerid)
+	PlayerData[playerid].death_timer = CreateTimer(function ()
+		ClearCharacterDeath(playerid)
+		PutPlayerInHospital(playerid)
+	end, 5 * 1000, playerid)
 end)
 
 AddCommand("showlicenses", function (playerid, lookupid)

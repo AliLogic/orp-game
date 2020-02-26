@@ -363,6 +363,7 @@
         "GetObjectDimension",
         "IsObjectStreamedIn",
         "GetAllWebUI",
-        "ATTACH_NONE"
+        "ATTACH_NONE",
+        "SetPlayerRespawnTime"
     ]
 }
