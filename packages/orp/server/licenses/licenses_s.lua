@@ -60,7 +60,7 @@ function SetPlayerLicense(playerid, license, status)
 
 	PlayerLicenseData[playerid][license] = status
 
-	local query = mariadb_prepare(sql, "UPDATE licenses SET "..LicensesColumns[license].." = "..status.." WHERE id = "..PlayerData[playerid].id.."")
+	local query = mariadb_prepare(sql, "UPDATE licenses SET ? = ? WHERE id = ?", LicensesColumns[license], status, PlayerData[playerid].id)
 	mariadb_async_query(sql, query)
 end
 
@@ -74,7 +74,7 @@ local function OnLoadPlayerLicenses(playerid)
 		mariadb_get_value_index_int(1, "MML", PlayerLicenseData[playerid].LICENSE_TYPE_MML)
 		mariadb_get_value_index_int(1, "PL", PlayerLicenseData[playerid].LICENSE_TYPE_PL)
 	else
-		local query = mariadb_prepare(sql, "INSERT INTO licenses WHERE id = "..PlayerData[playerid].id.."")
+		local query = mariadb_prepare(sql, "INSERT INTO licenses WHERE id = ?", PlayerData[playerid].id)
 		mariadb_async_query(sql, query)
 	end
 end
@@ -83,6 +83,6 @@ function LoadPlayerLicenses(playerid)
 
 	CreatePlayerLicenseData(playerid)
 
-	local query = mariadb_prepare(sql, "SELECT * FROM licenses WHERE id = "..PlayerData[playerid].id.."")
+	local query = mariadb_prepare(sql, "SELECT * FROM licenses WHERE id = ?", PlayerData[playerid].id)
 	mariadb_async_query(sql, query, OnLoadPlayerLicenses, playerid)
 end
