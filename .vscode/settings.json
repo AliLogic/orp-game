@@ -364,6 +364,8 @@
         "IsObjectStreamedIn",
         "GetAllWebUI",
         "ATTACH_NONE",
-        "SetPlayerRespawnTime"
+        "SetPlayerRespawnTime",
+        "GetVehicleDoorLocation",
+        "GetStreamedVehicles"
     ]
 }
