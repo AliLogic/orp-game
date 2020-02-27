@@ -75,7 +75,7 @@ local function cmd_house(playerid, prefix, ...)
 			return AddPlayerChatError(playerid, "You do not have the keys to this house nor do you own it.")
 		end
 
-		if HousingData[houseid].doors == 0 then
+		if #HousingData[houseid].doors == 0 then
 			if HousingData[house].locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
 				HousingData[house].locked = 0
