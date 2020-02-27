@@ -1,18 +1,51 @@
+--[[
+Copyright (C) 2019 Onset Roleplay
+
+Developers:
+* Logic_
+
+Contributors:
+* Blue Mountains GmbH
+]]--
+
+-- Variables
+
+-- Functions
+
+local function SetPickupColor(pickup, r, g, b, a, materialslot)
+	materialslot = materialslot or 0
+	local StaticMeshComponent = GetPickupStaticMeshComponent(pickup)
+	StaticMeshComponent:SetMaterial(materialslot, UMaterialInterface.LoadFromAsset("/Game/Scripting/Materials/MI_TranslucentLit"))
+	local MaterialInstance = StaticMeshComponent:CreateDynamicMaterialInstance(materialslot)
+
+	r = r / 255
+	g = g / 255
+	b = b / 255
+	a = a / 255
+
+	MaterialInstance:SetColorParameter("BaseColor", FLinearColor(r, g, b, a))
+end
+
+-- Events
+
 AddEvent("OnKeyPress", function(key)
 
 	-- Cancel out if player is in a vehicle
 	if not IsPlayerInVehicle() and key == 'E' then
 
 		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
-		if pickupid ~= false or pickupid ~= 0 then
+		if pickupid ~= false and pickupid ~= 0 then
 
 			local plX, plY, plZ = GetPlayerLocation()
 			local pkX, pkY, pkZ = GetPickupLocation(pickupid)
 
-			if pkX ~= nil then
+			AddPlayerChat("type(pkX): " .. type(pkX))
+			AddPlayerChat("pkX: " .. pkX)
+
+			if pkX ~= nil and pkX ~= false then
 				local distance = GetDistance3D(plX, plY, plZ, pkX, pkY, pkZ)
 
-				if distance < 300 then
+				if distance < 150 then
 					AddPlayerChat("You have pressed the key while in range of pickupid "..pickupid..".") -- nil value, currently problematic.
 
 					CallRemoteEvent("OnPlayerInteractMarker", pickupid)
@@ -43,20 +76,6 @@ AddEvent("OnPickupStreamOut", function (pickup)
 		SetPlayerPropertyValue(GetPlayerId(), "pickupid", 0)
 	end
 end)
-
-function SetPickupColor(pickup, r, g, b, a, materialslot)
-	materialslot = materialslot or 0
-	local StaticMeshComponent = GetPickupStaticMeshComponent(pickup)
-	StaticMeshComponent:SetMaterial(materialslot, UMaterialInterface.LoadFromAsset("/Game/Scripting/Materials/MI_TranslucentLit"))
-	local MaterialInstance = StaticMeshComponent:CreateDynamicMaterialInstance(materialslot)
-
-	r = r / 255
-	g = g / 255
-	b = b / 255
-	a = a / 255
-
-	MaterialInstance:SetColorParameter("BaseColor", FLinearColor(r, g, b, a))
-end
 
 AddEvent("OnPickupNetworkUpdatePropertyValue", function(pickup, PropertyName, PropertyValue)
 

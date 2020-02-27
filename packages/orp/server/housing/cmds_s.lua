@@ -55,25 +55,35 @@ local function cmd_house(playerid, prefix, ...)
 
 	if prefix == "lock" or prefix == "unlock" then
 
-		if house == 0 then -- In this case, the player is not near any house
+		local houseid = 0
+		local doorid = 0
+		for i = 1, MAX_HOUSING, 1 do
 
-			local doorid = 0
+			doorid = House_GetNearestDoor(playerid, i)
 
-			for houseid = 1, MAX_HOUSING, 1 do
-				if Key_PlayerHasKey(playerid, KEY_HOUSE, houseid) or House_IsOwner(playerid, houseid) then
-					print("Player has house key/ owns " .. houseid .. ".")
-					doorid = House_GetNearestDoor(playerid, houseid)
-
-					if doorid ~= 0 then
-						break
-					end
-				end
+			if doorid ~= 0 then
+				houseid = i
+				break
 			end
+		end
 
-			if doorid == 0 then
-				return AddPlayerChatError(playerid, "You are not near any door of your owned houses")
+		if house == 0 and doorid == 0 then
+			return AddPlayerChatError(playerid, "You are not near any house or any house door.")
+		end
+
+		if Key_PlayerHasKey(playerid, KEY_HOUSE, house) == 0 and House_IsOwner(playerid, house) then
+			return AddPlayerChatError(playerid, "You do not have the keys to this house nor do you own it.")
+		end
+
+		if #HousingData[houseid].doors == 0 then
+			if HousingData[house].locked == 1 then
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
+				HousingData[house].locked = 0
+			else
+				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
+				HousingData[house].locked = 1
 			end
-
+		else
 			if DoorData[doorid].is_locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house door.")
 				DoorData[doorid].is_locked = 0
@@ -81,34 +91,6 @@ local function cmd_house(playerid, prefix, ...)
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house door.")
 				SetDoorOpen(DoorData[doorid].door, false)
 				DoorData[doorid].is_locked = 1
-			end
-
-		else -- Player is near a house
-
-			if #HousingData[house].doors == 0 then
-
-				if HousingData[house].locked == 1 then
-					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
-					HousingData[house].locked = 0
-				else
-					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house.")
-					HousingData[house].locked = 1
-				end
-			else
-				local doorid = House_GetNearestDoor(playerid, house)
-
-				if doorid == 0 then
-					return AddPlayerChatError(playerid, "You are not near any door of your owned houses.")
-				end
-
-				if DoorData[doorid].is_locked == 1 then
-					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house door.")
-					DoorData[doorid].is_locked = 0
-				else
-					AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_DARKGREEN().."\">locked</> the house door.")
-					SetDoorOpen(DoorData[doorid].door, false)
-					DoorData[doorid].is_locked = 1
-				end
 			end
 		end
 
@@ -433,11 +415,11 @@ AddCommand("givehousekey", function (playerid, lookupid, houseid)
 		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
-	if not House_IsOwner(playerid, houseid) then
+	if House_IsOwner(playerid, houseid) ~= true then
 		return AddPlayerChatError(playerid, "You do not own the specified house.")
 	end
 
-	if Key_PlayerHasKey(lookupid, KEY_HOUSE, houseid) == true then
+	if Key_PlayerHasKey(lookupid, KEY_HOUSE, houseid) ~= 0 then
 		return AddPlayerChatError(playerid, "The specified player already have the specified house's key.")
 	end
 
@@ -467,7 +449,7 @@ AddCommand("takehousekey", function (playerid, lookupid, houseid)
 		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
-	if not House_IsOwner(playerid, houseid) then
+	if House_IsOwner(playerid, houseid) ~= true then
 		return AddPlayerChatError(playerid, "You do not own the specified house.")
 	end
 
@@ -488,7 +470,7 @@ AddCommand("myhousekeys", function (playerid)
 	local count = false
 
 	for houseid = 1, MAX_HOUSING, 1 do
-		if Key_PlayerHasKey(playerid, KEY_HOUSE, houseid) then
+		if Key_PlayerHasKey(playerid, KEY_HOUSE, houseid) ~= 0 then
 			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
 			count = true
 		end

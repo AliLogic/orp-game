@@ -374,6 +374,10 @@ function CreatePlayerData(player)
 	PlayerData[player].z = 0.0
 	PlayerData[player].a = 0.0
 
+	PlayerData[player].death_x = 0.0
+	PlayerData[player].death_y = 0.0
+	PlayerData[player].death_z = 0.0
+
 	PlayerData[player].is_frozen = false
 	PlayerData[player].label = nil -- 3d text label
 	PlayerData[player].handcuffed = 0
@@ -547,7 +551,7 @@ function OnPlayerPayday(player)
 
 		if PlayerData[player].job ~= 0 then
 		else
-			AddPlayerChat(player, "Unemployement benefit: $100")
+			AddPlayerChat(player, "Unemployment benefit: $100")
 
 			paycheck = paycheck + 100
 		end
@@ -701,6 +705,11 @@ function Player_GetFactionId(playerid)
 	return PlayerData[playerid].faction
 end
 
+function UpdatePlayerDeathLocation(player)
+
+	PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z = GetPlayerLocation(player)
+end
+
 -- Events
 
 AddEvent("OnPlayerSpawn", function(player)
@@ -719,17 +728,25 @@ AddEvent("OnPlayerSpawn", function(player)
 
 	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
 
-		AddPlayerChat(player, "You are now wounded... You can use /acceptdeath shortly.")
+		SetPlayerLocation(player, PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z)
+
+		AddPlayerChat(player, "You are now wounded... You can use /acceptdeath.")
 		FreezePlayer(player, true)
 		PlayerData[player].death_state = 1
-		SetPlayerAnimation(player, "LAY_3")
+		Delay(1000, function ()
+			SetPlayerAnimation(player, "LAY_3")
+		end)
 
 	elseif PlayerData[player].state == CHARACTER_STATE_DEAD then
+
+		SetPlayerLocation(player, PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z)
 
 		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
 		FreezePlayer(player, true)
 		PlayerData[player].death_state = 2
-		SetPlayerAnimation(player, "LAY_3")
+		Delay(1000, function ()
+			SetPlayerAnimation(player, "LAY_3")
+		end)
 
 	else
 
@@ -740,6 +757,8 @@ AddEvent("OnPlayerSpawn", function(player)
 end)
 
 AddEvent("OnPlayerDeath", function (player, instigator)
+
+	UpdatePlayerDeathLocation(player)
 
 	if PlayerData[player].state == CHARACTER_STATE_ALIVE then
 
