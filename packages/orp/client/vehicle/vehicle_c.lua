@@ -10,6 +10,8 @@ Contributors:
 
 -- Variables
 
+local ENTER_DISTANCE = 300.0
+
 -- Functions
 
 function GetNearestVehicleAndDoor(passenger)
@@ -24,7 +26,7 @@ function GetNearestVehicleAndDoor(passenger)
 
 			vx, vy, vz = GetVehicleLocation(vehicle)
 
-			if GetDistance3D(x, y, z, vx, vy, vz) <= 400.0 then
+			if GetDistance3D(x, y, z, vx, vy, vz) <= ENTER_DISTANCE then
 				return vehicle, 1
 			end
 		end
@@ -36,7 +38,7 @@ function GetNearestVehicleAndDoor(passenger)
 			for seat = 2, #GetVehicleNumberOfSeats(vehicle), 1 do
 				vx, vy, vz = GetVehicleDoorLocation(vehicle, seat)
 
-				if GetDistance3D(x, y, z, vx, vy, vz) <= 400.0 then
+				if GetDistance3D(x, y, z, vx, vy, vz) <= ENTER_DISTANCE then
 					return vehicle, seat
 				end
 			end
