@@ -55,15 +55,20 @@ local function cmd_house(playerid, prefix, ...)
 
 	if prefix == "lock" or prefix == "unlock" then
 
-		local houseid = 0
 		local doorid = 0
-		for i = 1, MAX_HOUSING, 1 do
 
-			doorid = House_GetNearestDoor(playerid, i)
+		if house == 0 then
+			for i = 1, MAX_HOUSING, 1 do
 
-			if doorid ~= 0 then
-				houseid = i
-				break
+				doorid = House_GetNearestDoor(playerid, i)
+
+				if doorid ~= 0 then
+					house = i
+					break
+				end
+			end
+		else if #HousingData[house].doors ~= 0 then
+				doorid = HousingData[house].doors[1]
 			end
 		end
 
@@ -75,7 +80,7 @@ local function cmd_house(playerid, prefix, ...)
 			return AddPlayerChatError(playerid, "You do not have the keys to this house nor do you own it.")
 		end
 
-		if #HousingData[houseid].doors == 0 then
+		if #HousingData[house].doors == 0 then
 			if HousingData[house].locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the house.")
 				HousingData[house].locked = 0
