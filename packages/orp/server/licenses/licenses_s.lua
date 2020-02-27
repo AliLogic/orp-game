@@ -41,15 +41,10 @@ LicensesColumns = {
 
 function CreatePlayerLicenseData(playerid)
 
-	AddPlayerChat(playerid, "CreatePlayerLicenseData - start")
-
 	PlayerLicenseData[playerid] = {}
 	for i = 1, #LicensesColumns, 1 do
-		AddPlayerChat(playerid, "CreatePlayerLicenseData - loop")
 		PlayerLicenseData[playerid][i] = 0
 	end
-
-	AddPlayerChat(playerid, "CreatePlayerLicenseData - end")
 end
 
 function DestroyPlayerLicenseData(playerid)
@@ -72,12 +67,12 @@ end
 local function OnLoadPlayerLicenses(playerid)
 
 	if mariadb_get_row_count() ~= 0 then
-		mariadb_get_value_index_int(1, "GDL", PlayerLicenseData[playerid].LICENSE_TYPE_GDL)
-		mariadb_get_value_index_int(1, "CDL", PlayerLicenseData[playerid].LICENSE_TYPE_CDL)
-		mariadb_get_value_index_int(1, "BL", PlayerLicenseData[playerid].LICENSE_TYPE_BL)
-		mariadb_get_value_index_int(1, "PF", PlayerLicenseData[playerid].LICENSE_TYPE_PF)
-		mariadb_get_value_index_int(1, "MML", PlayerLicenseData[playerid].LICENSE_TYPE_MML)
-		mariadb_get_value_index_int(1, "PL", PlayerLicenseData[playerid].LICENSE_TYPE_PL)
+		mariadb_get_value_name_int(1, "GDL", PlayerLicenseData[playerid].LICENSE_TYPE_GDL)
+		mariadb_get_value_name_int(1, "CDL", PlayerLicenseData[playerid].LICENSE_TYPE_CDL)
+		mariadb_get_value_name_int(1, "BL", PlayerLicenseData[playerid].LICENSE_TYPE_BL)
+		mariadb_get_value_name_int(1, "PF", PlayerLicenseData[playerid].LICENSE_TYPE_PF)
+		mariadb_get_value_name_int(1, "MML", PlayerLicenseData[playerid].LICENSE_TYPE_MML)
+		mariadb_get_value_name_int(1, "PL", PlayerLicenseData[playerid].LICENSE_TYPE_PL)
 	else
 		local query = mariadb_prepare(sql, "INSERT INTO licenses WHERE id = ?", PlayerData[playerid].id)
 		mariadb_async_query(sql, query)
@@ -86,14 +81,8 @@ end
 
 function LoadPlayerLicenses(playerid)
 
-	AddPlayerChat(playerid, "LoadPlayerLicense - start")
-
 	CreatePlayerLicenseData(playerid)
-
-	AddPlayerChat(playerid, "LoadPlayerLicense - mid")
 
 	local query = mariadb_prepare(sql, "SELECT * FROM licenses WHERE id = ?", PlayerData[playerid].id)
 	mariadb_async_query(sql, query, OnLoadPlayerLicenses, playerid)
-
-	AddPlayerChat(playerid, "LoadPlayerLicense - end")
 end
