@@ -55,6 +55,19 @@ local function DestroyIndustryData(industry)
 end
 
 local function Industry_Unload(industry)
+	local query = mariadb_prepare(sql, "UPDATE industries SET markerid = ?, locked = ?, products = ?, max_goods = ?, goods = ?, priceperunit = ?, x = ?, y = ?, z = ? WHERE id = ?;",
+		IndustryData[industry].markerid, IndustryData[industry].locked, IndustryData[industry].products, IndustryData[industry].max_goods, IndustryData[industry].goods,
+		IndustryData[industry].priceperunit, IndustryData[industry].x, IndustryData[industry].y, IndustryData[industry].z, IndustryData[industry].id
+	)
+	mariadb_async_query(sql, query, OnIndustryUnloaded, industry)
+end
+
+function OnIndustryUnloaded(industry)
+	if mariadb_get_affected_rows() == 0 then
+		print("Industry ID "..industry.." unload unsuccessful!")
+	else
+		print("Industry ID "..industry.." unload successful!")
+	end
 end
 
 local function Industry_Load(i)
