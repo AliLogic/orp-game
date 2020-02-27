@@ -109,7 +109,7 @@ function ViewPlayerStats(player, target)
 		colour.COLOUR_DARKGREEN(), GetPlayerName(target), PlayerData[target].name)) -- in future, add time.
 
 	AddPlayerChat(player, string.format("<span color=\"%s\">CHARACTER: Gender:[%s] CharID:[%d]</>",
-		colour.COLOUR_GRAD2(), (PlayerData[target].gender == 0 and 'Male' or 'Female'), PlayerData[player].id))
+		colour.COLOUR_GRAD2(), (PlayerData[target].gender == 0 and 'Male' or 'Female'), PlayerData[target].id))
 
 	AddPlayerChat(player, string.format("<span color=\"%s\">CHARACTER: Level:[%d] XP:[%d/%d] Job:[%s]</>",
 		colour.COLOUR_GRAD2(), PlayerData[target].level, PlayerData[target].exp, (PlayerData[target].exp * 4) + 2, GetJobName(GetPlayerJob(target))))
