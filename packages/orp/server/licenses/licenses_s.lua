@@ -41,10 +41,15 @@ LicensesColumns = {
 
 function CreatePlayerLicenseData(playerid)
 
+	AddPlayerChat(playerid, "CreatePlayerLicenseData - start")
+
 	PlayerLicenseData[playerid] = {}
-	for i = 1, 6, 1 do
+	for i = 1, #LicensesColumns, 1 do
+		AddPlayerChat(playerid, "CreatePlayerLicenseData - loop")
 		PlayerLicenseData[playerid][i] = 0
 	end
+
+	AddPlayerChat(playerid, "CreatePlayerLicenseData - end")
 end
 
 function DestroyPlayerLicenseData(playerid)
@@ -81,8 +86,14 @@ end
 
 function LoadPlayerLicenses(playerid)
 
+	AddPlayerChat(playerid, "LoadPlayerLicense - start")
+
 	CreatePlayerLicenseData(playerid)
+
+	AddPlayerChat(playerid, "LoadPlayerLicense - mid")
 
 	local query = mariadb_prepare(sql, "SELECT * FROM licenses WHERE id = ?", PlayerData[playerid].id)
 	mariadb_async_query(sql, query, OnLoadPlayerLicenses, playerid)
+
+	AddPlayerChat(playerid, "LoadPlayerLicense - end")
 end
