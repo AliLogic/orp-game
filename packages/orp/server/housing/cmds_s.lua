@@ -60,8 +60,7 @@ local function cmd_house(playerid, prefix, ...)
 			local doorid = 0
 
 			for houseid = 1, MAX_HOUSING, 1 do
-				if Key_PlayerHasKey(playerid, KEY_HOUSE, houseid) or House_IsOwner(playerid, houseid) then
-					print("Player has house key/ owns " .. houseid .. ".")
+				if Key_PlayerHasKey(playerid, KEY_HOUSE, houseid) ~= 0 or House_IsOwner(playerid, houseid) then
 					doorid = House_GetNearestDoor(playerid, houseid)
 
 					if doorid ~= 0 then
@@ -437,7 +436,7 @@ AddCommand("givehousekey", function (playerid, lookupid, houseid)
 		return AddPlayerChatError(playerid, "You do not own the specified house.")
 	end
 
-	if Key_PlayerHasKey(lookupid, KEY_HOUSE, houseid) == true then
+	if Key_PlayerHasKey(lookupid, KEY_HOUSE, houseid) ~= 0 then
 		return AddPlayerChatError(playerid, "The specified player already have the specified house's key.")
 	end
 
@@ -488,7 +487,7 @@ AddCommand("myhousekeys", function (playerid)
 	local count = false
 
 	for houseid = 1, MAX_HOUSING, 1 do
-		if Key_PlayerHasKey(playerid, KEY_HOUSE, houseid) then
+		if Key_PlayerHasKey(playerid, KEY_HOUSE, houseid) ~= 0 then
 			AddPlayerChat(playerid, "* House ID: ".. houseid .." | Address: ".. HousingData[houseid].address .. ".")
 			count = true
 		end
