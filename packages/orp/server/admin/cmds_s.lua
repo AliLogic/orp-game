@@ -841,7 +841,7 @@ AddCommand("ahelp", function (player)
 	if PlayerData[player].admin > 3 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/acreatevehicle /aeditvehicle /adestroyvehicle /acreatemarker /aeditmarker /adestroymarker /acreategarage /aeditgarage /adestroygarage")
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/setarmour /sethealth /toggleg /gotohouse /housedoors /gotopump /gotodoor /gotoveh /gotoplant /gotospeedcam /gotobiz")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/gotofurniture")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 4: </>/gotofurniture /gotomarker")
 	end
 
 	if PlayerData[player].admin > 4 then

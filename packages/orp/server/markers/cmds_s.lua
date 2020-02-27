@@ -140,3 +140,24 @@ end
 
 AddCommand("aeditmarker", cmd_aem)
 AddCommand("aem", cmd_aem)
+
+AddCommand("gotomarker", function (playerid, markerid)
+
+	if (PlayerData[playerid].admin < 3) then
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
+	end
+
+	if markerid == nil then
+		return AddPlayerChatUsage(playerid, "/gotomarker <marker>")
+	end
+
+	markerid = tonumber(markerid)
+
+	if MarkerData[markerid] == nil then
+		return AddPlayerChatError(playerid, "Marker " .. markerid .. " doesn't exist.")
+	end
+
+	SetPlayerLocation(playerid, MarkerData[markerid].x1, MarkerData[markerid].y1, MarkerData[markerid].z1)
+
+	AddPlayerChat(playerid, "You have been teleported to marker ID: " .. markerid ..".")
+end)
