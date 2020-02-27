@@ -16,26 +16,9 @@ local colour = ImportPackage('colours')
 
 AddCommand("listcars", function (playerid)
 
-	local count = 0
-	local vehicleid = 0
+	AddPlayerChat(playerid, "Vehicles registered to you, "..GetPlayerName(playerid).." ("..playerid.."):")
 
-	AddPlayerChat(playerid, "-----------------------------------------------------------")
-
-	for i = 1, MAX_VEHICLES, 1 do
-		if VehicleData[i] ~= nil then
-			if VehicleData[i].owner == PlayerData[playerid].id then
-				vehicleid = VehicleData[i].vid
-				AddPlayerChat(playerid, "* ID: "..vehicleid.." | Model: "..GetVehicleModelEx(vehicleid).." | Location: "..GetLocationName(GetVehicleLocation(vehicleid)).."")
-				count = count + 1
-			end
-		end
-	end
-
-	if count == 0 then
-		AddPlayerChat(playerid, "You don't own any vehicles.")
-	end
-
-	AddPlayerChat(playerid, "-----------------------------------------------------------")
+	ShowVehiclesList(playerid, playerid)
 end)
 
 local function cmd_drivingtest(playerid)
@@ -298,3 +281,225 @@ AddCommand("gotoveh", function (playerid, vehid)
 
 	AddPlayerChat(playerid, "You have been teleported to vehicle ID: " .. vehid ..".")
 end)
+
+local function cmd_acv(player, model, plate)
+	if (PlayerData[player].admin < 4) then
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
+	end
+
+	if model == nil or plate == nil then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ac)reate(v)ehicle <model> <plate>")
+	end
+
+	model = tonumber(model)
+
+	if model < 0 or model > 25 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle model "..model.." does not exist.</>")
+	end
+
+	if string.len(plate) < 0 or string.len(plate) > 13 then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Plate lengths range from 1 - 13.</>")
+	end
+
+	local x, y, z = GetPlayerLocation(player)
+	local a = GetPlayerHeading(player)
+
+	local vehicle = Vehicle_Create(model, plate, x, y, z, a)
+	if vehicle == false then
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..model.." wasn't able to be created!</>")
+	else
+		AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Vehicle %s (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), GetVehicleModelEx(VehicleData[vehicle].vid), vehicle))
+		Slap(player)
+	end
+	return
+end
+AddCommand('acreatevehicle', cmd_acv)
+AddCommand('acv', cmd_acv)
+
+local function cmd_adv(player, vehicle)
+	if (PlayerData[player].admin < 2) then
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
+	end
+
+	if vehicle == nil then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ad)estroy(v)ehicle <vehicle>")
+	end
+
+	vehicle = tonumber(vehicle)
+
+	if VehicleData[vehicle] == nil then
+		return AddPlayerChatError(player, "Vehicle "..vehicle.." doesn't exist or isn't valid.")
+	end
+
+	AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>Vehicle %s (ID: %d) deleted successfully!", colour.COLOUR_LIGHTRED(), GetVehicleModelEx(VehicleData[vehicle].vid), vehicle))
+
+	Vehicle_Destroy(vehicle)
+	return
+end
+AddCommand('adestroyvehicle', cmd_adv)
+AddCommand('adv', cmd_adv)
+
+local function cmd_aev(player, vehicle, prefix, ...)
+	if (PlayerData[player].admin < 2) then
+		return AddPlayerChatError(player, "You don't have permission to use this command.")
+	end
+
+	if vehicle == nil or prefix == nil then
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> <prefix>")
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Prefix:</> owner, color, plate, rental, faction, fuel, health")
+	end
+
+	vehicle = tonumber(vehicle)
+
+	if VehicleData[vehicle] == nil then
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Vehicle "..vehicle.." doesn't exist or isn't valid.</>")
+	end
+
+	local args = {...}
+
+	if prefix == "owner" then
+		local target = args[1]
+
+		if target == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> owner <target>")
+		end
+
+		target = GetPlayerIdFromData(target)
+
+		if not IsValidPlayer(target) or PlayerData[target] == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid player ID entered.</target>")
+		end
+
+		if PlayerData[target].logged_in == false then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: This player is not logged in.</vehicle>")
+		end
+
+		if VehicleData[vehicle].faction ~= 0 then
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: As this vehicle was owned by a faction, it will now be passed onto the player.</>")
+			VehicleData[vehicle].faction = 0
+		end
+
+		VehicleData[vehicle].owner = PlayerData[target].id
+		print("Player Char SQLID is "..PlayerData[target].id)
+		print("Vehicle Owner Is Now Char SQLID: "..VehicleData[vehicle].owner)
+
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..GetPlayerName(target).." now owns the vehicle "..GetVehicleModelEx(VehicleData[vehicle].vid).." (ID: "..vehicle..").</>")
+		return
+
+		--CallRemoteEvent(player, "askClientActionConfirmation", 1, "Would you like to change this vehicle's owner?", target, vehicle)
+	elseif prefix == "color" then
+		local r, g, b
+
+		r = tonumber(args[1])
+		g = tonumber(args[2])
+		b = tonumber(args[3])
+
+		if r == nil or g == nil or b == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> color <red> <green> <blue>")
+		end
+
+		if r < 0 or r > 255 or g < 0 or g > 255 or b < 0 or b > 255 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The R, G, B values can only be between 0 to 255.")
+		end
+
+		VehicleData[vehicle].r = r
+		VehicleData[vehicle].g = g
+		VehicleData[vehicle].b = b
+
+		SetVehicleColor(VehicleData[vehicle].vid, RGB(r, g, b))
+
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." color changed.</>")
+	elseif prefix == "plate" then
+		local numberPlate = table.concat({...}, " ")
+
+		if numberPlate == nil or #numberPlate == 0 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> plate <plate>")
+		end
+
+		VehicleData[vehicle].plate = numberPlate
+		SetVehicleLicensePlate(VehicleData[vehicle].vid, numberPlate)
+
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Vehicle "..vehicle.." number plate changed to \""..numberPlate.."\".</>")
+	elseif prefix == "rental" then
+		local rental = tonumber(args[1])
+
+		if rental == nil or (rental ~= 0 and rental ~= 1) then
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> rental <value>")
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> Values: No (0), Yes (1)")
+			return
+		end
+
+		if VehicleData[vehicle].owner ~= 0 then
+			VehicleData[vehicle].owner = 0
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> As this vehicle was owned by a player, it will now be passwed onto the state.")
+		end
+
+		if VehicleData[vehicle].faction ~= 0 then
+			VehicleData[vehicle].faction = 0
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> As this vehicle was owned by a faction, it will now be passed onto the state.")
+		end
+
+		VehicleData[vehicle].plate = "RENTAL"
+		SetVehicleLicensePlate(vehicle, VehicleData[vehicle].plate)
+
+		VehicleData[vehicle].rental = rental
+		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">You have made vehicle "..GetVehicleModelEx(VehicleData[vehicle].vid).." (ID: "..vehicle..") a rental vehicle!</>")
+	elseif prefix == "faction" then
+		local faction = tonumber(args[1])
+
+		if faction == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> faction <target>")
+		end
+
+		if FactionData[faction] == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Invalid faction ID entered.</>")
+		end
+
+		if VehicleData[vehicle].owner ~= 0 then
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server: As this vehicle was owned by a player, it will now be passed onto the faction.</>")
+			VehicleData[vehicle].owner = 0
+		end
+
+		VehicleData[vehicle].faction = FactionData[faction].id
+		print("Vehicle Owner Is Now FACTION SQLID: "..FactionData[faction].id)
+
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">"..FactionData[faction].name.." now owns the vehicle "..GetVehicleModelEx(VehicleData[vehicle].vid).." (ID: "..vehicle..").</>")
+		return
+	elseif prefix == "fuel" then
+
+		local fuel = args[1]
+		if fuel == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> fuel <litres>")
+		end
+
+		fuel = tonumber(fuel)
+		if fuel < 0 or fuel > 1000 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Fuel must be between 0 to 1000 litres.</>")
+		end
+
+		VehicleData[vehicle].fuel = fuel
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\"> Vehicle "..GetVehicleModelEx(VehicleData[vehicle].vid).." (ID: "..vehicle..") fuel is now set to "..fuel..".</>")
+		return
+	elseif prefix == "health" then
+
+		local health = args[1]
+		if health == nil then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /(ae)dit(v)ehicle <vehicle> health <0-5000>")
+		end
+
+		health = tonumber(health)
+		if health < 0 or health > 5000 then
+			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Health must be between 0 to 5000.</>")
+		end
+
+		SetVehicleHealth(VehicleData[vehicle].vid, health)
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\"> Vehicle "..GetVehicleModelEx(VehicleData[vehicle].vid).." (ID: "..vehicle..") health is now set to "..health..".</>")
+		return
+	else
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /ae(dit)v(ehicle) <argument>")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> owner, color, plate, rental, faction, fuel, health")
+		return
+	end
+end
+AddCommand('aeditvehicle', cmd_aev)
+AddCommand('aev', cmd_aev)

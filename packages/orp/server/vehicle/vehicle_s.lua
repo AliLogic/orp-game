@@ -32,15 +32,15 @@ function GetVehicleModelEx(vehicleid)
 	return VEHICLE_NAMES[GetVehicleModel(vehicleid)]
 end
 
--- function GetFreeVehicleId()
--- 	for i = 1, MAX_VEHICLES, 1 do
--- 		if VehicleData[i] == nil then
--- 			CreateVehicleData(i)
--- 			return i
--- 		end
--- 	end
--- 	return 0
--- end
+function GetFreeVehicleId()
+	for i = 1, MAX_VEHICLES, 1 do
+		if VehicleData[i] == nil then
+			CreateVehicleData(i)
+			return i
+		end
+	end
+	return 0
+end
 
 function CreateVehicleData(vehicle)
 	VehicleData[vehicle] = {}
@@ -118,17 +118,21 @@ function Vehicle_Create(model, plate, x, y, z, a)
 		return false
 	end
 
-	local vehicle = CreateVehicle(model, x, y, z, a)
-	if vehicle == false then
+	local index = GetFreeVehicleId()
+	if index == false then
 		return false
 	end
 
-	SetVehicleRespawnParams(vehicle, false, 0, false)
-	CreateVehicleData(vehicle)
-	VehicleData[vehicle].vid = vehicle
-	SetVehicleLicensePlate(vehicle, plate)
+	local vehicleid = CreateVehicle(model, x, y, z, a)
+	if vehicleid == false then
+		return false
+	end
 
-	local r, g, b, al = HexToRGBA(GetVehicleColor(vehicle))
+	SetVehicleRespawnParams(vehicleid, false, 0, false)
+	VehicleData[index].vid = vehicleid
+	SetVehicleLicensePlate(vehicleid, plate)
+
+	local r, g, b, al = HexToRGBA(GetVehicleColor(vehicleid))
 
 	local query = mariadb_prepare(sql, "INSERT INTO vehicles (model, plate, x, y, z, a, r, g, b) VALUES (?, '?', '?', '?', '?', '?', ?, ?, ?);",
 		model,
@@ -142,8 +146,8 @@ function Vehicle_Create(model, plate, x, y, z, a)
 		b
 	)
 
-	mariadb_async_query(sql, query, OnVehicleCreated, vehicle, model, plate, x, y, z, a, r, g, b)
-	return vehicle
+	mariadb_async_query(sql, query, OnVehicleCreated, index, model, plate, x, y, z, a, r, g, b)
+	return index
 end
 
 function OnVehicleCreated(vehicle, model, plate, x, y, z, a, r, g, b)
@@ -327,6 +331,45 @@ function ImpoundVehicle(vehicleid, price)
 	SetVehicleDimension(vehicleid, DIMENSION_IMPOUND)
 
 	VehicleData[vehicleid].impounded = price
+end
+
+function ShowVehiclesList(playerid, lookupid)
+	local count = 0
+	local vehid = 0
+
+	for vehicleid = 1, MAX_VEHICLES, 1 do
+
+		if Vehicle_IsOwner(lookupid, vehicleid) == true then
+
+			vehid = VehicleData[vehicleid].vid
+
+			AddPlayerChat(playerid, "* ID: "..vehid.." | Model: "..GetVehicleModelEx(vehid).." | Location: "..GetLocationName(GetVehicleLocation(vehid)).."")
+
+			count = count + 1
+
+		end
+	end
+
+	if count == 0 then
+		if playerid == lookupid then
+			AddPlayerChat(playerid, "You do not own any vehicles.")
+		else
+			AddPlayerChat(playerid, ""..GetPlayerName(lookupid).." does not own any vehicles.")
+		end
+	end
+end
+
+function Vehicle_IsOwner(playerid, vehicle)
+
+	if VehicleData[vehicle] == nil then
+		return false
+	end
+
+	if VehicleData[vehicle].owner == PlayerData[playerid].id then
+		return true
+	end
+
+	return false
 end
 
 -- Events
