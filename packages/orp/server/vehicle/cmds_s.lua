@@ -190,10 +190,8 @@ local function cmd_v(player, args)
 			local vehicles = ''
 
 			for i = 1, #VehicleData, 1 do
-				if VehicleData[i] ~= nil then
-					if VehicleData[i].owner == PlayerData[player].id then
-						vehicles = string.format('%s ID:%d, Model: %s |', vehicles, i, GetVehicleModelEx(VehicleData[i].model))
-					end
+				if Vehicle_IsOwner(player, i) then
+					vehicles = string.format('%s ID:%d, Model: %s |', vehicles, i, GetVehicleModelEx(VehicleData[i].vid))
 				end
 			end
 
