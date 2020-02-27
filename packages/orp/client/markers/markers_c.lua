@@ -4,7 +4,7 @@ AddEvent("OnKeyPress", function(key)
 	if not IsPlayerInVehicle() and key == 'E' then
 
 		local pickupid = GetPlayerPropertyValue(GetPlayerId(), "pickupid")
-		if pickupid ~= false or pickupid ~= 0 then
+		if pickupid ~= false and pickupid ~= 0 then
 
 			local plX, plY, plZ = GetPlayerLocation()
 			local pkX, pkY, pkZ = GetPickupLocation(pickupid)
