@@ -247,6 +247,7 @@ function OnVehicleUnloaded(vehicle)
 	else
 		print('Vehicle unload successful, id: '..vehicle)
 		DestroyVehicle(VehicleData[vehicle].vid)
+		VehicleData[vehicle].vid = 0
 	end
 end
 

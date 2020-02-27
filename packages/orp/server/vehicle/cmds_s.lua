@@ -101,6 +101,7 @@ end
 AddCommand("engine", cmd_engine)
 
 local function cmd_v(player, args)
+
 	if args == "lock" then
 
 		local vehicle = GetPlayerVehicle(player)
@@ -168,8 +169,6 @@ local function cmd_v(player, args)
 		VehicleData[vehicle].z = z
 		VehicleData[vehicle].a = a
 
-		VehicleData[vehicle].is_spawned = false
-
 		Vehicle_Unload(vehicle)
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Vehicle parked!</>")
 	elseif args == "lights" then
@@ -207,8 +206,8 @@ local function cmd_v(player, args)
 			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> Invalid vehicle.")
 		end
 
-		if VehicleData[vehicle].is_spawned == true then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error:</> This vehicle is already spawned.")
+		if VehicleData[vehicle].vid ~= 0 then
+			return AddPlayerChatError(player, "This vehicle is already spawned.")
 		end
 
 		Vehicle_Load(VehicleData[vehicle].id)
