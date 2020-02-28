@@ -34,7 +34,9 @@ Outfit = {
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit03",
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit04",
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit05",
-	"/Game/CharacterModels/Female/Meshes/SK_Outfit06"
+	"/Game/CharacterModels/Female/Meshes/SK_Outfit06",
+	"/Game/CharacterModels/Female/Meshes/SK_Worker",
+	"/Game/CharacterModels/Female/Meshes/SK_TShirtShorts01"
 }
 
 Body = {
@@ -78,14 +80,11 @@ Tops = {
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Shirt_LPR",
 	"/Game/CharacterModels/Female/Meshes/SK_Jacket01",
 	"/Game/CharacterModels/Female/Meshes/SK_Jacket02",
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Labcoat_LPR",
 	"/Game/CharacterModels/Female/Meshes/SK_Pullover01",
 	"/Game/CharacterModels/Female/Meshes/SK_ShirtCombo01",
 	"/Game/CharacterModels/Female/Meshes/SK_TShirt01",
 	"/Game/CharacterModels/Female/Meshes/SK_TShirt02",
-	"/Game/CharacterModels/Female/Meshes/SK_TShirtShorts01",
-	"/Game/CharacterModels/Female/Meshes/SK_Undershirt01",
-	"/Game/CharacterModels/Female/Meshes/SK_Worker",
+	"/Game/CharacterModels/Female/Meshes/SK_Undershirt01"
 }
 
 Equipment = {
@@ -96,6 +95,7 @@ Equipment = {
 	"/Game/CharacterModels/Female/Meshes/SK_Armor01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Equipment01",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Tie_LPR",
+	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Labcoat_LPR"
 }
 
 Pants = {
@@ -128,9 +128,7 @@ Shoes = {
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes03",
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes04",
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes05",
-	"/Game/CharacterModels/Female/Meshes/SK_Shoes06",
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_BusinessShoes_LPR",
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_NormalShoes"
+	"/Game/CharacterModels/Female/Meshes/SK_Shoes06"
 }
 
 Hair = {
