@@ -28,10 +28,10 @@ function LoadPlayerKeys(playerid)
 	return row
 end
 
-function Key_PlayerHasKey(playerid, type, subject)
+function Key_PlayerHasKey(playerid, key, subject)
 
 	local query = mariadb_prepare(sql, "SELECT 1 FROM character_keys WHERE id = ? AND type = ? AND subject = ?",
-		PlayerData[playerid].id, type, subject
+		PlayerData[playerid].id, key, subject
 	)
 	local result = mariadb_await_query(sql, query, true)
 	local row = mariadb_get_row_count()
