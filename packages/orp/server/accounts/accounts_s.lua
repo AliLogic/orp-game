@@ -286,7 +286,7 @@ function OnCharacterLoaded(player, id)
 
 		PlayerData[player].lastname = result['lastname']
 		PlayerData[player].gender = math.tointeger(result['gender'])
-		PlayerData[player].state = math.tointeger(result['state'])
+		PlayerData[player].death_state = math.tointeger(result['death_state'])
 
 		PlayerData[player].cash = math.tointeger(result['cash'])
 		PlayerData[player].bank = math.tointeger(result['bank'])
@@ -302,13 +302,13 @@ function OnCharacterLoaded(player, id)
 
 		PlayerData[player].radio = tonumber(result['radio'])
 
-		if PlayerData[player].state == CHARACTER_STATE_ALIVE then
+		if PlayerData[player].death_state == CHARACTER_STATE_ALIVE then
 
 			SetPlayerHealth(player, tonumber(result['health']))
 			SetPlayerArmor(player, tonumber(result['armour']))
 		else
 
-			PlayerData[player].state = (PlayerData[player].state - 1)
+			PlayerData[player].death_state = (PlayerData[player].death_state - 1)
 			SetPlayerHealth(player, 0)
 			SetPlayerArmor(player, 0)
 		end
@@ -338,7 +338,7 @@ function CreatePlayerData(player)
 	PlayerData[player].lastname = ""
 
 	PlayerData[player].gender = 0
-	PlayerData[player].state = CHARACTER_STATE_ALIVE
+	PlayerData[player].death_state = CHARACTER_STATE_ALIVE
 
 	PlayerData[player].level = 1
 	PlayerData[player].exp = 0
@@ -658,7 +658,7 @@ end
 
 local function OnPlayerRecover(player)
 
-	PlayerData[player].state = CHARACTER_STATE_ALIVE
+	PlayerData[player].death_state = CHARACTER_STATE_ALIVE
 	AddPlayerChat(player, "You have now recovered...")
 
 	ClearCharacterDeath(player)
@@ -670,7 +670,7 @@ local function OnPlayerRecover(player)
 end
 
 function PutPlayerInHospital(player)
-	PlayerData[player].state = CHARACTER_STATE_RECOVER
+	PlayerData[player].death_state = CHARACTER_STATE_RECOVER
 	PlayerData[player].death_state = 0
 
 	AddPlayerChat(player, "You are now being recovered at a nearby hospital...")
@@ -722,11 +722,11 @@ AddEvent("OnPlayerSpawn", function(player)
 		return
 	end
 
-	if PlayerData[player].state == CHARACTER_STATE_ALIVE then
+	if PlayerData[player].death_state == CHARACTER_STATE_ALIVE then
 
 		-- Nothing
 
-	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
+	elseif PlayerData[player].death_state == CHARACTER_STATE_WOUNDED then
 
 		SetPlayerLocation(player, PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z)
 
@@ -737,7 +737,7 @@ AddEvent("OnPlayerSpawn", function(player)
 			SetPlayerAnimation(player, "LAY_3")
 		end)
 
-	elseif PlayerData[player].state == CHARACTER_STATE_DEAD then
+	elseif PlayerData[player].death_state == CHARACTER_STATE_DEAD then
 
 		SetPlayerLocation(player, PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z)
 
@@ -760,13 +760,13 @@ AddEvent("OnPlayerDeath", function (player, instigator)
 
 	UpdatePlayerDeathLocation(player)
 
-	if PlayerData[player].state == CHARACTER_STATE_ALIVE then
+	if PlayerData[player].death_state == CHARACTER_STATE_ALIVE then
 
-		PlayerData[player].state = CHARACTER_STATE_WOUNDED
+		PlayerData[player].death_state = CHARACTER_STATE_WOUNDED
 
-	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
+	elseif PlayerData[player].death_state == CHARACTER_STATE_WOUNDED then
 
-		PlayerData[player].state = CHARACTER_STATE_DEAD
+		PlayerData[player].death_state = CHARACTER_STATE_DEAD
 
 	else
 

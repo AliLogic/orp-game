@@ -284,7 +284,7 @@ AddCommand("acceptdeath", function (playerid)
 		return AddPlayerChat(playerid, "You can't use this command right now.")
 	end
 
-	PlayerData[playerid].state = CHARACTER_STATE_DEAD
+	PlayerData[playerid].death_state = CHARACTER_STATE_DEAD
 	AddPlayerChat(playerid, "You are now dead. You need to wait before you can now use /respawnme.")
 
 	ClearCharacterDeath(playerid)

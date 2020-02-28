@@ -1045,12 +1045,12 @@ AddCommand("arevive", function (playerid, lookupid)
 		return AddPlayerChatError(playerid, "Invalid player ID entered.")
 	end
 
-	if PlayerData[lookupid].state == CHARACTER_STATE_ALIVE then
+	if PlayerData[lookupid].death_state == CHARACTER_STATE_ALIVE then
 		return
 	end
 
 	ClearCharacterDeath(lookupid)
-	PlayerData[lookupid].state = CHARACTER_STATE_ALIVE
+	PlayerData[lookupid].death_state = CHARACTER_STATE_ALIVE
 	SetPlayerHealth(lookupid, 10.0)
 
 	AddPlayerChat(playerid, "You have revived "..GetPlayerName(lookupid)..".")

@@ -237,7 +237,7 @@ end
 
 function IsPlayerAlive(playerid)
 	if PlayerData[playerid] ~= nil then
-		return (PlayerData[playerid].state == CHARACTER_STATE_ALIVE)
+		return (PlayerData[playerid].death_state == CHARACTER_STATE_ALIVE)
 	end
 	return false
 end
