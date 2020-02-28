@@ -72,7 +72,6 @@ Tops = {
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalJacket_LPR",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalShirt_LPR",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Shirt_LPR",
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Tie_LPR",
 	"/Game/CharacterModels/Female/Meshes/SK_Jacket01",
 	"/Game/CharacterModels/Female/Meshes/SK_Jacket02"
 }
@@ -81,6 +80,7 @@ Equipment = {
 	nil,
 	"/Game/CharacterModels/Female/Meshes/SK_Armor01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Equipment01",
+	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Tie_LPR"
 }
 
 Pants = {
@@ -139,6 +139,7 @@ function CreatePlayerClothingData(player)
 	PlayerClothingData[player].pupil = 1.0
 	PlayerClothingData[player].equipment = 1
 	PlayerClothingData[player].texture = 1
+	PlayerClothingData[player].outfit = 1
 end
 
 function DestroyPlayerClothingData(player)
@@ -155,12 +156,17 @@ function SetPlayerClothing(player, otherplayer)
 	CallRemoteEvent(player, "SetPlayerPupilScale", otherplayer, PlayerClothingData[otherplayer].pupil)
 	CallRemoteEvent(player, "SetPlayerBody", otherplayer, Body[PlayerClothingData[otherplayer].body])
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, 255)
-	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
-	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 2, Equipment[PlayerClothingData[otherplayer].equipment], 0, 0, 0, 0)
-	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
-	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
 
-	CallRemoteEvent(player, "SetPlayerClothingTexture", otherplayer, 1, PlayerClothingData[otherplayer].texture)
+	if (PlayerClothingData[otherplayer].outfit == 1) then
+		CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
+		CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 2, Equipment[PlayerClothingData[otherplayer].equipment], 0, 0, 0, 0)
+		CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
+		CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
+
+		CallRemoteEvent(player, "SetPlayerClothingTexture", otherplayer, 1, PlayerClothingData[otherplayer].texture)
+	else
+		CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Outfit[PlayerClothingData[otherplayer].outfit], 0, 0, 0, 0)
+	end
 
 	r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].skin_color)
 
@@ -351,6 +357,18 @@ AddCommand("texture", function (player, texture)
 	texture = tonumber(texture)
 
 	PlayerClothingData[player].texture = texture
+	SetPlayerClothing(player, player)
+end)
+
+AddCommand("outfit", function (player, outfit)
+
+	if outfit == nil then
+		return AddPlayerChat(player, "/outfit <1 - "..#Outfit..">")
+	end
+
+	outfit = tonumber(outfit)
+
+	PlayerClothingData[player].outfit = outfit
 	SetPlayerClothing(player, player)
 end)
 
