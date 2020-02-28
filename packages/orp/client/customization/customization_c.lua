@@ -45,6 +45,7 @@ end
 local function SetPlayerClothingTexture(player, part, texture)
 
 	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Clothing"..part)
+	SkeletalMeshComponent:SetMaterial(0, UMaterialInterface.LoadFromAsset("/Materials2/MI_ClothMaterials"))
 	local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
 	DynamicMaterialInstance:SetTextureParameter("BaseColorTexture", TexturesLoaded[texture])
 end
@@ -59,8 +60,8 @@ AddRemoteEvent("SetPlayerClothingTexture", SetPlayerClothingTexture)
 
 AddEvent("OnPackageStart", function()
 
-	--local pakname = "Materials2"
-	--LoadPak(pakname, "/"..pakname.."/", "../../../OnsetModding/Plugins/"..pakname.."/Content")
+	-- local pakname = "Materials2"
+	-- LoadPak(pakname, "/"..pakname.."/", "../../../OnsetModding/Plugins/"..pakname.."/Content")
 end)
 
 AddEvent("OnPackageStop", function()
@@ -73,6 +74,7 @@ end)
 AddRemoteEvent("LoadPlayerClothingTextures", function (textures)
 
 	for k, v in pairs(textures) do
+		AddPlayerChat("texture: " .. v)
 		TexturesLoaded[v] = UTexture2D.LoadFromFile(v)
 	end
 end)
