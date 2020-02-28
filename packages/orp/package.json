@@ -117,6 +117,7 @@
 		"client/customization/css/divider.min.css",
 		"client/customization/js/charcustom.js",
 		"client/customization/charcustom.html",
+		"client/customization/textures/lv.jpg",
 		"client/models/teslaevc/TeslaEVC.pak",
 		"client/models/femalechar/FemaleChar.pak",
 		"client/gui/gui.html",

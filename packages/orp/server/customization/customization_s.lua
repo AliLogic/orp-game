@@ -13,6 +13,12 @@ Contributors:
 
 PlayerClothingData = {}
 
+Textures = {
+	nil,
+	"customization/textures/lv.jpg",
+	"textures/lv.jpg"
+}
+
 Outfit = {
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit02",
@@ -132,6 +138,7 @@ function CreatePlayerClothingData(player)
 	PlayerClothingData[player].body = 1
 	PlayerClothingData[player].pupil = 1.0
 	PlayerClothingData[player].equipment = 1
+	PlayerClothingData[player].texture = 1
 end
 
 function DestroyPlayerClothingData(player)
@@ -152,6 +159,8 @@ function SetPlayerClothing(player, otherplayer)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 2, Equipment[PlayerClothingData[otherplayer].equipment], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
+
+	CallRemoteEvent(player, "SetPlayerClothingTexture", otherplayer, 1, Textures[PlayerClothingData[otherplayer].texture])
 
 	r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].skin_color)
 
@@ -333,6 +342,18 @@ AddCommand("equip", function (player, equip)
 	SetPlayerClothing(player, player)
 end)
 
+AddCommand("texture", function (player, texture)
+
+	if texture == nil then
+		return AddPlayerChat(player, "/texture <1 - "..#Textures..">")
+	end
+
+	texture = tonumber(texture)
+
+	PlayerClothingData[player].texture = texture
+	SetPlayerClothing(player, player)
+end)
+
 -- Events
 
 AddRemoteEvent("ServerSetPlayerClothing", SetPlayerClothing)
@@ -342,4 +363,9 @@ AddEvent("OnPlayerSpawn", function(playerid)
 	Delay(1000, function()
 		SetPlayerClothing(playerid, playerid)
 	end)
+end)
+
+AddEvent("OnPlayerJoin", function(player)
+
+	CallRemoteEvent(player, "LoadPlayerClothingTextures", Textures)
 end)
