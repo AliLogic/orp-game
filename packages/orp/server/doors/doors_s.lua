@@ -187,6 +187,22 @@ AddEvent('UnloadDoors', function ()
 	end
 end)
 
+function Business_GetNearestDoor(playerid, bizid)
+
+	local x, y, z = GetPlayerLocation(playerid)
+	local distance = 0
+
+	for _, v in pairs(BusinessData[bizid].doors) do
+		distance = GetDistance3D(x, y, z, DoorData[v].x, DoorData[v].y, DoorData[v].z)
+
+		if distance <= 200.0 then
+			return v
+		end
+	end
+
+	return 0
+end
+
 function House_GetNearestDoor(playerid, houseid)
 
 	local x, y, z = GetPlayerLocation(playerid)
