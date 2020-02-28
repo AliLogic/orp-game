@@ -16,7 +16,8 @@ PlayerClothingData = {}
 Textures = {
 	nil,
 	GetPackageName().."/client/customization/textures/lv.jpg",
-	GetPackageName().."/client/customization/textures/supreme_fondosdepantalla.jpg"
+	GetPackageName().."/client/customization/textures/supreme_fondosdepantalla.jpg",
+	GetPackageName().."/client/customization/textures/supreme_floral.jpg"
 }
 
 Outfit = {
