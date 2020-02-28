@@ -117,7 +117,6 @@ local function cmd_v(player, args)
 		end
 
 		local x, y, z = GetPlayerLocation(player) -- Get the player's location
-		local ownsVehicle = false -- Player owns the vehicle bool
 
 		for _, v in pairs(VehicleData) do
 			local vx, vy, vz = GetVehicleLocation(v.vid)
@@ -125,30 +124,25 @@ local function cmd_v(player, args)
 			if GetDistance3D(x, y, z, vx, vy, vz) <= 200.0 then
 				if (v.owner == PlayerData[player].id) or
 				(v.renter == player) or
-				(v.faction == PlayerData[player].faction) then
+				(v.faction == PlayerData[player].faction) or
+				(Key_PlayerHasKey(player, KEY_VEHICLE, v.id) ~= 0) then
 
 					if v.is_locked == true then
 						v.is_locked = false
 
 						ShowFooterMessage(player, "Vehicle unlocked!", colour.COLOUR_DARKGREEN())
-						return
 					else
 						v.is_locked = true
 
 						ShowFooterMessage(player, "Vehicle locked!", colour.COLOUR_LIGHTRED())
-						return
 					end
-					ownsVehicle = true
-					break
+
+					return
 				end
 			end
 		end
 
-		if ownsVehicle == false then
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You do not own any vehicles!</>")
-		else
-			return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You are not near any of your owned vehicles!</>")
-		end
+		return AddPlayerChatError(player, "You are not near any vehicles that you may have access!")
 
 	elseif args == "park" then
 		local vehicle = GetPlayerVehicle(player)
