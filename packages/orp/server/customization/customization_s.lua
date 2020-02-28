@@ -16,7 +16,7 @@ PlayerClothingData = {}
 Textures = {
 	nil,
 	GetPackageName().."/client/customization/textures/lv.jpg",
-	"textures/lv.jpg"
+	GetPackageName().."/client/customization/textures/supreme_fondosdepantalla.jpg"
 }
 
 Outfit = {
@@ -160,7 +160,7 @@ function SetPlayerClothing(player, otherplayer)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
 
-	CallRemoteEvent(player, "SetPlayerClothingTexture", otherplayer, 1, Textures[PlayerClothingData[otherplayer].texture])
+	CallRemoteEvent(player, "SetPlayerClothingTexture", otherplayer, 1, PlayerClothingData[otherplayer].texture)
 
 	r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].skin_color)
 
