@@ -138,6 +138,6 @@ AddRemoteEvent('SendSpeedgunMessage', function (vehiclename, vehicle)
 end)
 
 function OnScriptError(message)
-	AddPlayerChat('<span color="#ff0000bb" style="bold" size="10">'..message..'</>')
+	AddPlayerChat('<span color="#ff0000bb" style="bold" size="14">'..message..'</>')
 end
 AddEvent("OnScriptError", OnScriptError)
