@@ -44,13 +44,13 @@ end
 
 local function SetPlayerClothingTexture(player, part, texture)
 
-	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Clothing"..part)
-	SkeletalMeshComponent:SetMaterial(0, UMaterialInterface.LoadFromAsset("/Game/Scripting/Materials/MI_GenericTexture"))
-	local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
-	AddPlayerChat("texture: "..texture)
-	AddPlayerChat("textureloaded: "..TexturesLoaded[texture])
-	DynamicMaterialInstance:SetTextureParameter("BaseColorTexture", TexturesLoaded[texture])
-	-- DynamicMaterialInstance:SetColorParameter("Roughness", FLinearColor(0.75,0.75,0.75,0.0))
+	if texture ~= nil then
+		local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Clothing"..part)
+		SkeletalMeshComponent:SetMaterial(0, UMaterialInterface.LoadFromAsset("/Game/Scripting/Materials/MI_GenericTexture"))
+		local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
+		DynamicMaterialInstance:SetTextureParameter("BaseColorTexture", UTexture2D.LoadFromFile(texture)) -- TexturesLoaded[texture]
+		-- DynamicMaterialInstance:SetColorParameter("Roughness", FLinearColor(0.75,0.75,0.75,0.0))
+	end
 end
 
 -- Events
@@ -77,7 +77,6 @@ end)
 AddRemoteEvent("LoadPlayerClothingTextures", function (textures)
 
 	for k, v in pairs(textures) do
-		AddPlayerChat("v:" .. v)
 		table.insert(TexturesLoaded, UTexture2D.LoadFromFile(v))
 	end
 end)
