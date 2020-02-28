@@ -45,7 +45,7 @@ end
 local function SetPlayerClothingTexture(player, part, texture)
 
 	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Clothing"..part)
-	SkeletalMeshComponent:SetMaterial(0, UMaterialInterface.LoadFromAsset("/Materials2/MI_ClothMaterials"))
+	SkeletalMeshComponent:SetMaterial(0, UMaterialInterface.LoadFromAsset("/Game/Scripting/Materials/MI_GenericTexture"))
 	local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
 	DynamicMaterialInstance:SetTextureParameter("BaseColorTexture", TexturesLoaded[texture])
 end
