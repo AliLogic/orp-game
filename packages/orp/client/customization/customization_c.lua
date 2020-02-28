@@ -44,7 +44,7 @@ end
 
 local function SetPlayerClothingTexture(player, part, texture)
 
-	if texture ~= nil then
+	if texture ~= 1 then -- Since the first index in TexturesLoaded is nill
 		local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Clothing"..part)
 		SkeletalMeshComponent:SetMaterial(0, UMaterialInterface.LoadFromAsset("/Game/Scripting/Materials/MI_GenericTexture"))
 		local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
