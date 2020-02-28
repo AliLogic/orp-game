@@ -173,6 +173,10 @@ function SetPlayerClothing(player, otherplayer)
 		return
 	end
 
+	if PlayerData[player].id == 0 or PlayerData[otherplayer].id == 0 then
+		return
+	end
+
 	local r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].hair_color)
 
 	CallRemoteEvent(player, "SetPlayerPupilScale", otherplayer, PlayerClothingData[otherplayer].pupil)
