@@ -15,7 +15,7 @@ PlayerClothingData = {}
 
 Textures = {
 	nil,
-	"customization/textures/lv.jpg",
+	GetPackageName().."/client/customization/textures/lv.jpg",
 	"textures/lv.jpg"
 }
 
