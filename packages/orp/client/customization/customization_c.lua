@@ -46,7 +46,7 @@ local function SetPlayerClothingTexture(player, part, texture)
 
 	local SkeletalMeshComponent = GetPlayerSkeletalMeshComponent(player, "Clothing"..part)
 	local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
-	DynamicMaterialInstance:SetTextureParameter("BaseColorTexture", texture)
+	DynamicMaterialInstance:SetTextureParameter("BaseColorTexture", TexturesLoaded[texture])
 end
 
 -- Events
