@@ -20,17 +20,9 @@ Dialog.addTextInput(charCreate, 1, "First Name:")
 Dialog.addTextInput(charCreate, 1, "Last Name:")
 Dialog.addSelect(charCreate, 1, "Gender:", 1, "Male", "Female")
 
-local charViewNone = Dialog.create("Select character:", "Select a character to spawn as. If slot is empty, you will be prompted to create a new character.", "Select", "Quit")
-Dialog.setAutoclose(charViewNone, false)
-Dialog.addSelect(charViewNone, 1, "Select a character below:", 1, "(1) Create New Character", "(2) Create New Character", "(3) Create New Character")
-
-local charview = nil
-local creation_slot = 0
-
 local charUI = 0
 local charUIdata = {}
 local count = 0
-
 local is_frozen = false
 
 -- Functions
@@ -128,28 +120,6 @@ AddRemoteEvent("askClientShowCharSelection", function(chardata, logout)
 		UpdateCharactersList()
 		ExecuteWebJS(charUI, "toggleCharMenu();")
 	end
-
-	--[[ExecuteWebJS(charUI, "test();")
-	ExecuteWebJS(charUI, "toggleCharMenu();")]]
-
-	--[[if count == 0 then
-		AddPlayerChat("Count is 0")
-		Dialog.show(charViewNone)
-	else
-		local char = {}
-		char[1] = 'Create New Character'
-		char[2] = 'Create New Character'
-		char[3] = 'Create New Character'
-
-		for i = 1, count, 1 do
-			char[i] = chardata[i].firstname.." "..chardata[i].lastname
-		end
-
-		charview = Dialog.create("Select character:", "Select a character to spawn as. If slot is empty, you will be prompted to create a new character.", "Select", "Quit")
-		Dialog.setAutoclose(charview, false)
-		Dialog.addSelect(charview, 1, "Select a character below:", 1, "(1) "..char[1], "(2) "..char[2], "(3) "..char[3])
-		Dialog.show(charview)
-	end]]
 end)
 
 AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
@@ -183,33 +153,6 @@ AddEvent("OnDialogSubmit", function(dialog, button, firstname, lastname, gender)
 			Dialog.close(charCreate)
 			CallRemoteEvent("accounts:kick")
 		end
-	elseif dialog == charViewNone then
-		if button == 1 then
-			creation_slot = 1
-			Dialog.close(charViewNone)
-			Dialog.show(charCreate)
-		else
-			Dialog.close(charViewNone)
-			CallRemoteEvent("accounts:kick")
-		end
-	--[[elseif dialog == charview then
-		if button == 1 then
-			local slot = firstname
-
-			if string.match(slot, "Create") then
-				creation_slot = math.tointeger(string.match(slot, "%d"))
-				Dialog.close(charview)
-				Dialog.show(charCreate)
-				return
-			end
-
-			AddPlayerChat('Logging in as '..string.match(slot, '[a-zA-Z]+ [a-zA-Z]+'))
-			CallRemoteEvent("accounts:login", math.tointeger(string.match(slot, "%d")))
-			Dialog.close(charview)
-		else
-			Dialog.close(charview)
-			CallRemoteEvent("accounts:kick")
-		end]]
 	else
 		return
 	end
@@ -221,7 +164,6 @@ AddEvent('charui:create', function (slot)
 	ExecuteWebJS(charUI, "toggleCharMenu();");
 	SetWebVisibility(charUI, WEB_HITINVISIBLE)
 
-	creation_slot = math.tointeger(slot)
 	Dialog.show(charCreate)
 end)
 
