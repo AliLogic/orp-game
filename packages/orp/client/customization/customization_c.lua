@@ -48,6 +48,7 @@ local function SetPlayerClothingTexture(player, part, texture)
 	SkeletalMeshComponent:SetMaterial(0, UMaterialInterface.LoadFromAsset("/Game/Scripting/Materials/MI_GenericTexture"))
 	local DynamicMaterialInstance = SkeletalMeshComponent:CreateDynamicMaterialInstance(0)
 	DynamicMaterialInstance:SetTextureParameter("BaseColorTexture", TexturesLoaded[texture])
+	-- DynamicMaterialInstance:SetColorParameter("Roughness", FLinearColor(0.75,0.75,0.75,0.0))
 end
 
 -- Events
@@ -74,8 +75,7 @@ end)
 AddRemoteEvent("LoadPlayerClothingTextures", function (textures)
 
 	for k, v in pairs(textures) do
-		AddPlayerChat("texture: " .. v)
-		TexturesLoaded[v] = UTexture2D.LoadFromFile(v)
+		table.insert(TexturesLoaded, UTexture2D.LoadFromFile(v))
 	end
 end)
 
