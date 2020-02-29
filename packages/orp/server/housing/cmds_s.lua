@@ -67,9 +67,8 @@ local function cmd_house(playerid, prefix, ...)
 					break
 				end
 			end
-		else if #HousingData[house].doors ~= 0 then
-				doorid = HousingData[house].doors[1]
-			end
+		elseif #HousingData[house].doors ~= 0 then
+			doorid = HousingData[house].doors[1]
 		end
 
 		if house == 0 and doorid == 0 then

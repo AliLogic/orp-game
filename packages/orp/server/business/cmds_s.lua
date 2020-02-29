@@ -39,9 +39,8 @@ local function cmd_biz(playerid, prefix, ...)
 					break
 				end
 			end
-		else if #BusinessData[biz].doors ~= 0 then
-				doorid = BusinessData[biz].doors[1]
-			end
+		elseif #BusinessData[biz].doors ~= 0 then
+			doorid = BusinessData[biz].doors[1]
 		end
 
 		if biz == 0 and doorid == 0 then
