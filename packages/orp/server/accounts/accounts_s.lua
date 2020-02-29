@@ -328,11 +328,24 @@ end
 function CreatePlayerData(player)
 	PlayerData[player] = {}
 
-	PlayerData[player].id = 0
+	-- Player
+
 	PlayerData[player].accountid = 0
 
 	PlayerData[player].name = GetPlayerName(player)
 	PlayerData[player].steamname = GetPlayerName(player)
+
+	PlayerData[player].ajail = 0
+	PlayerData[player].steamid = GetPlayerSteamId(player)
+
+	PlayerData[player].admin = 0
+	PlayerData[player].helper = 0
+
+	PlayerData[player].is_frozen = false
+
+	-- Character
+
+	PlayerData[player].id = 0
 
 	PlayerData[player].firstname = ""
 	PlayerData[player].lastname = ""
@@ -344,13 +357,7 @@ function CreatePlayerData(player)
 	PlayerData[player].exp = 0
 	PlayerData[player].minutes = 0
 
-	PlayerData[player].clothing = {}
-	PlayerData[player].inventory = {}
-
 	PlayerData[player].logged_in = false
-
-	PlayerData[player].admin = 0
-	PlayerData[player].helper = 0
 
 	PlayerData[player].health = 100.0
 	PlayerData[player].armour = 0.0
@@ -362,11 +369,7 @@ function CreatePlayerData(player)
 	PlayerData[player].faction = 0
 	PlayerData[player].faction_rank = 0
 
-	PlayerData[player].steamid = GetPlayerSteamId(player)
-	PlayerData[player].job_vehicle = nil
-
 	PlayerData[player].job = 0
-	PlayerData[player].onAction = false
 	PlayerData[player].cmd_cooldown = 0.0
 
 	PlayerData[player].x = 0.0
@@ -377,22 +380,20 @@ function CreatePlayerData(player)
 	PlayerData[player].death_x = 0.0
 	PlayerData[player].death_y = 0.0
 	PlayerData[player].death_z = 0.0
+	PlayerData[player].death_state = 0
 
-	PlayerData[player].is_frozen = false
 	PlayerData[player].label = nil -- 3d text label
 	PlayerData[player].handcuffed = 0
 
 	PlayerData[player].pd_timer = 0
 	PlayerData[player].death_timer = 0
-	PlayerData[player].renting = 0 -- Vehicle ID that a player is renting.
 
+	PlayerData[player].renting = 0 -- Vehicle ID that a player is renting.
 	PlayerData[player].driving_test = false
 	PlayerData[player].test_vehicle = 0
 	PlayerData[player].test_warns = 0
 	PlayerData[player].test_stage = 0
 	PlayerData[player].assistance = 0
-	PlayerData[player].ajail = 0
-	PlayerData[player].death_state = 0
 	PlayerData[player].faction_inviter = 0
 	PlayerData[player].harvesting = 0
 
