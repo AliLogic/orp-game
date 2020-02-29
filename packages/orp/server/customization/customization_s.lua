@@ -234,7 +234,7 @@ function SavePlayerClothing(player)
 		PlayerClothingData[player].equipment,
 		PlayerData[player].id
 	)
-	mariadb_query(sql, query)
+	mariadb_async_query(sql, query)
 
 	return
 end

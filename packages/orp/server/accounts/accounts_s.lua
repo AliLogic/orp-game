@@ -445,7 +445,7 @@ function SavePlayerAccount(player)
 			PlayerData[player].minutes,
 			x,
 			y,
-			z,
+			(z + 100),
 			a,
 			PlayerData[player].id
 		)
@@ -482,7 +482,7 @@ function SetPlayerLoggedIn(player)
 	SetGUICash(player, PlayerData[player].cash)
 	SetGUIBank(player, PlayerData[player].bank)
 
-	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, (PlayerData[player].z + 200))
+	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, (PlayerData[player].z + 300))
 	SetPlayerHeading(player, PlayerData[player].a)
 	SetPlayerDimension(player, 0)
 
