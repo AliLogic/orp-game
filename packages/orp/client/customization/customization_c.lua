@@ -74,14 +74,10 @@ end)
 
 AddRemoteEvent("LoadPlayerClothingTextures", function (textures)
 
-	AddPlayerChat("textures init size: "..#TexturesLoaded)
-
 	table.insert(TexturesLoaded, 0) -- this is a workaround as Lua uses nil to empty/ reset tables
 	for k, v in pairs(textures) do
 		table.insert(TexturesLoaded, UTexture2D.LoadFromFile(v))
 	end
-
-	AddPlayerChat("textures final size: "..#TexturesLoaded)
 end)
 
 AddEvent("OnPlayerStreamIn", function(player, otherplayer)
