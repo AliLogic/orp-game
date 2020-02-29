@@ -200,17 +200,6 @@ function OnAccountLoaded(player)
 		PlayerData[player].admin = mariadb_get_value_name_int(1, "admin")
 		PlayerData[player].helper = mariadb_get_value_name_int(1, "helper")
 		PlayerData[player].ajail = mariadb_get_value_name_int(1, "ajail")
-		--PlayerData[player].cash = math.tointeger(result['cash'])
-		--PlayerData[player].bank_balance = math.tointeger(result['bank_balance'])
-		--PlayerData[player].name = tostring(result['name'])
-		--PlayerData[player].clothing = json_decode(result['clothing'])
-		--PlayerData[player].inventory = json_decode(result['inventory'])
-		--PlayerData[player].created = math.tointeger(result['created'])
-
-		--SetPlayerHealth(player, tonumber(result['health']))
-		--SetPlayerArmor(player, tonumber(result['armor']))
-		--setPlayerThirst(player, tonumber(result['thirst']))
-		--setPlayerHunger(player, tonumber(result['hunger']))
 
 		if PlayerData[player].admin ~= 0 then
 			AddPlayerChat(player, "You have logged in successfully as "..GetPlayerAdminRank(player)..".")
@@ -219,8 +208,6 @@ function OnAccountLoaded(player)
 		else
 			AddPlayerChat(player, "You have logged in successfully.")
 		end
-
-		--AddPlayerChat(player, "Logged in as ")
 
 		local query = mariadb_prepare(sql, "SELECT id, firstname, lastname, level, cash FROM characters WHERE accountid = ?;",
 			PlayerData[player].accountid)
@@ -828,6 +815,7 @@ AddEvent("OnPackageStart", function ()
 end)
 
 AddEvent("OnPlayerSteamAuth", function (player)
+
 	CreatePlayerData(player)
 end)
 
