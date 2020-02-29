@@ -425,51 +425,32 @@ function SavePlayerAccount(player)
 		return
 	end
 
-	--[[local query = mariadb_prepare(sql, "UPDATE accounts SET admin = ?, cash = ?, bank_balance = ?, health = ?, armor = ?, hunger = ?, thirst = ?, name = '?', clothing = '?', inventory = '?', created = '?' WHERE id = ? LIMIT 1;",
-		PlayerData[player].admin,
-		PlayerData[player].cash,
-		PlayerData[player].bank_balance,
-		GetPlayerHealth(player),
-		GetPlayerArmor(player),
-		PlayerData[player].hunger,
-		PlayerData[player].thirst,
+	local query = mariadb_prepare(sql, "UPDATE accounts SET steamname = '?', locale = '?' WHERE id = ? LIMIT 1;",
 		PlayerData[player].name,
-		json_encode(PlayerData[player].clothing),
-		json_encode(PlayerData[player].inventory),
-		PlayerData[player].created,
-		PlayerData[player].accountid
-	)]]--
-
-	local query = mariadb_prepare(sql, "UPDATE accounts SET steamname = '?', helper = '?', locale = '?' WHERE id = ? LIMIT 1;",
-		PlayerData[player].name,
-		PlayerData[player].helper,
 		GetPlayerLocale(player),
 		PlayerData[player].accountid
 	)
-
-	mariadb_query(sql, query)
+	mariadb_async_query(sql, query)
 
 	if PlayerData[player].id ~= 0 then
-		PlayerData[player].x, PlayerData[player].y, PlayerData[player].z = GetPlayerLocation(player)
-		PlayerData[player].a = GetPlayerHeading(player)
+		local x, y, z = GetPlayerLocation(player)
+		local a = GetPlayerHeading(player)
 
-		query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, minutes = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
-			PlayerData[player].firstname,
-			PlayerData[player].lastname,
+		query = mariadb_prepare(sql, "UPDATE characters SET gender = '?', health = ?, armour = ?, cash = ?, bank = ?, minutes = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
 			PlayerData[player].gender,
 			PlayerData[player].health,
 			PlayerData[player].armour,
 			PlayerData[player].cash,
 			PlayerData[player].bank,
 			PlayerData[player].minutes,
-			tostring(PlayerData[player].x),
-			tostring(PlayerData[player].y),
-			tostring(PlayerData[player].z),
-			tostring(PlayerData[player].a),
+			x,
+			y,
+			z,
+			a,
 			PlayerData[player].id
 		)
 
-		mariadb_query(sql, query)
+		mariadb_async_query(sql, query)
 		CallEvent("SaveInventory", player)
 		SavePlayerClothing(player)
 	end
@@ -591,22 +572,17 @@ AddRemoteEvent('accounts:kick', function (player)
 end)
 
 AddCommand("logout", function (player)
-	print("Logging out [1]")
 	SavePlayerAccount(player)
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You will be logged out in 5 seconds.")
 	SetPlayerChatBubble(player, "(( Player is logging out. ))", 4)
 
 	PlayerData[player].logged_in = false
 
-	print("Logging out [2]")
-
 	Delay(5000, function ()
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You are now being logged out.")
 		SendAdminMessage("<span color=\""..colour.COLOUR_LIGHTRED().."\">AdmCmd: "..PlayerData[player].name.." is logging out.</>")
 		ShowCharacterSelection(player, true)
 	end)
-
-	print("Logging out [3]")
 end)
 
 function DestroyDrivingTest(playerid)
@@ -807,7 +783,10 @@ AddEvent("OnPlayerQuit", function (player)
 	CallEvent("UnrentPlayerVehicle", player)
 	DestroyDrivingTest(player)
 	SavePlayerAccount(player)
-	DestroyPlayerData(player)
+
+	Delay(1000, function (player)
+		DestroyPlayerData(player)
+	end, player)
 end)
 
 AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)
