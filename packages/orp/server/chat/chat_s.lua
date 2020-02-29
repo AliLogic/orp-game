@@ -348,18 +348,23 @@ end)
 -- Events
 
 AddEvent("OnPlayerChatCommand", function (player, cmd, exists)
-	if (GetTimeSeconds() - PlayerData[player].cmd_cooldown < 0.5) then
-		AddPlayerChat(player, "Slow down with your commands.")
+
+	if PlayerData[player] == nil then -- Cancel out any commands sent if they are not logged in
+		return false
+	end
+
+	if (PlayerData[player].admin ~= 5 and GetTimeSeconds() - PlayerData[player].cmd_cooldown < 0.5) then
+		AddPlayerChatError(player, "Slow down with your commands...")
 		return false
 	end
 
 	PlayerData[player].cmd_cooldown = GetTimeSeconds()
 
 	if not exists then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: </>The command '/"..cmd.."' doesnt exist! Type in /help or consult a helper.")
+		AddPlayerChatError(player, "The command '/"..cmd.."' doesnt exist! Type in /help or consult a helper.")
 	else
 		if PlayerData[player].logged_in == false then
-			AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be logged in to use any commands.</>")
+			AddPlayerChatError(player, "You must be logged in to use any commands.")
 			return false
 		end
 	end
