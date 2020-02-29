@@ -380,7 +380,7 @@ function CreatePlayerData(player)
 	PlayerData[player].death_x = 0.0
 	PlayerData[player].death_y = 0.0
 	PlayerData[player].death_z = 0.0
-	PlayerData[player].death_state = 0
+	PlayerData[player].down_state = 0
 
 	PlayerData[player].label = nil -- 3d text label
 	PlayerData[player].handcuffed = 0
@@ -648,7 +648,7 @@ end
 
 function PutPlayerInHospital(player)
 	PlayerData[player].death_state = CHARACTER_STATE_RECOVER
-	PlayerData[player].death_state = 0
+	PlayerData[player].down_state = 0
 
 	AddPlayerChat(player, "You are now being recovered at a nearby hospital...")
 
@@ -709,7 +709,7 @@ AddEvent("OnPlayerSpawn", function(player)
 
 		AddPlayerChat(player, "You are now wounded... You can use /acceptdeath.")
 		FreezePlayer(player, true)
-		PlayerData[player].death_state = 1
+		PlayerData[player].down_state = 1
 		Delay(1000, function ()
 			SetPlayerAnimation(player, "LAY_3")
 		end)
@@ -720,7 +720,7 @@ AddEvent("OnPlayerSpawn", function(player)
 
 		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
 		FreezePlayer(player, true)
-		PlayerData[player].death_state = 2
+		PlayerData[player].down_state = 2
 		Delay(1000, function ()
 			SetPlayerAnimation(player, "LAY_3")
 		end)
@@ -747,7 +747,7 @@ AddEvent("OnPlayerDeath", function (player, instigator)
 
 	else
 
-		PlayerData[player].death_state = 0
+		PlayerData[player].down_state = 0
 		PutPlayerInHospital(player)
 	end
 end)

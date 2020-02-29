@@ -280,7 +280,7 @@ end)
 
 AddCommand("acceptdeath", function (playerid)
 
-	if PlayerData[playerid].death_state ~= 1 then
+	if PlayerData[playerid].down_state ~= 1 then
 		return AddPlayerChat(playerid, "You can't use this command right now.")
 	end
 
@@ -289,7 +289,7 @@ AddCommand("acceptdeath", function (playerid)
 
 	ClearCharacterDeath(playerid)
 	PlayerData[playerid].death_timer = CreateTimer(function ()
-		PlayerData[playerid].death_state = 2
+		PlayerData[playerid].down_state = 2
 		AddPlayerChat(playerid, "You can now use /respawnme.")
 		ClearCharacterDeath(playerid)
 	end, 10 * 1000, playerid)
@@ -297,7 +297,7 @@ end)
 
 AddCommand("respawnme", function (playerid)
 
-	if PlayerData[playerid].death_state ~= 2 then
+	if PlayerData[playerid].down_state ~= 2 then
 		return AddPlayerChat(playerid, "You can't use this command right now.")
 	end
 
