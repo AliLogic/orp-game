@@ -283,10 +283,10 @@ function OnCharacterLoaded(player, id)
 
 		PlayerData[player].id = math.tointeger(result['id'])
 		PlayerData[player].firstname = result['firstname']
-
 		PlayerData[player].lastname = result['lastname']
 		PlayerData[player].gender = math.tointeger(result['gender'])
 		PlayerData[player].death_state = math.tointeger(result['death_state'])
+		PlayerData[player].char_state = math.tointeger(result['char_state'])
 
 		PlayerData[player].cash = math.tointeger(result['cash'])
 		PlayerData[player].bank = math.tointeger(result['bank'])
@@ -474,8 +474,68 @@ function DestroyPlayerData(player)
 	print("Data destroyed for: "..player)
 end
 
+function SetPlayerIntro(player)
+
+	local query = mariadb_prepare(sql, "UPDATE characters SET char_state = ? WHERE id = ? LIMIT 1;",
+		PlayerData[player].char_state,
+		PlayerData[player].id
+	)
+	mariadb_async_query(sql, query)
+
+	if (PlayerData[player].char_state == 0) then
+
+		AddPlayerChat(player, "Hey and welcome to Onset Roleplay.  Thank you for choosing Onset Roleplay as your server to roleplay at.")
+		AddPlayerChat(player, "This is just a sample introduction message that will ask you to if you wish to take a tour of the server or not.")
+
+		PlayerData[player].char_state = 1 -- Skipping the tutorial code for now
+
+		Delay(10 * 1000, function (player)
+			SetPlayerIntro(player)
+		end, player)
+
+	elseif (PlayerData[player].char_state == 1) then
+
+		AddPlayerChat(player, "Hey you are proceeding towards the character creation panel...")
+		AddPlayerChat(player, "This is just a sample hint message to provide you basic information.")
+
+		PlayerData[player].char_state = 2 -- Skipping the tutorial code for now
+
+		Delay(10 * 1000, function (player)
+			SetPlayerIntro(player)
+		end, player)
+
+	elseif (PlayerData[player].char_state == 2) then
+
+		AddPlayerChat(player, "Oh! That's awesome character of yours. We are spawning you in a few seconds.")
+
+		PlayerData[player].char_state = 3 -- Skipping the tutorial code for now
+
+		Delay(10 * 1000, function (player)
+			SetPlayerIntro(player)
+		end, player)
+
+	elseif (PlayerData[player].char_state == 3) then
+
+		PlayerData[player].char_state = 3 -- Character and tutorial has been completed
+
+		PlayerData[player].x = LOC_DEFAULT_X
+		PlayerData[player].y = LOC_DEFAULT_Y
+		PlayerData[player].z = LOC_DEFAULT_Z
+		PlayerData[player].a = LOC_DEFAULT_A
+
+		SetPlayerLoggedIn(player)
+
+	end
+
+	return
+end
+
 function SetPlayerLoggedIn(player)
 	PlayerData[player].logged_in = true
+
+	if (PlayerData[player].char_state ~= 3) then
+		SetPlayerIntro(player)
+	end
 
 	SetGUIHealth(player, PlayerData[player].health)
 	SetGUIArmour(player, PlayerData[player].armour)
