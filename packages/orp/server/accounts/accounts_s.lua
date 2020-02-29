@@ -313,8 +313,6 @@ function OnCharacterLoaded(player, id)
 			SetPlayerArmor(player, 0)
 		end
 
-		SetPlayerLoggedIn(player)
-
 		LoadCharacterFaction(player)
 		LoadPlayerClothing(player)
 		CallEvent("LoadInventory", player)
@@ -322,6 +320,8 @@ function OnCharacterLoaded(player, id)
 		LoadPlayerLicenses(player)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay, "..PlayerData[player].firstname.." "..PlayerData[player].lastname..".</>")
+
+		SetPlayerLoggedIn(player) -- This function deals with the character spawn (teleport)
 	end
 end
 
@@ -501,7 +501,7 @@ function SetPlayerLoggedIn(player)
 	SetGUICash(player, PlayerData[player].cash)
 	SetGUIBank(player, PlayerData[player].bank)
 
-	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, PlayerData[player].z)
+	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, (PlayerData[player].z + 200))
 	SetPlayerHeading(player, PlayerData[player].a)
 	SetPlayerDimension(player, 0)
 
