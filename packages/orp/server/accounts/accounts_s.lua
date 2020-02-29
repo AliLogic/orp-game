@@ -533,8 +533,11 @@ end
 function SetPlayerLoggedIn(player)
 	PlayerData[player].logged_in = true
 
+	SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
+
 	if (PlayerData[player].char_state ~= 3) then
 		SetPlayerIntro(player)
+		return
 	end
 
 	SetGUIHealth(player, PlayerData[player].health)
@@ -550,12 +553,8 @@ function SetPlayerLoggedIn(player)
 	PlayerData[player].pd_timer = CreateTimer(OnPlayerPayday, 60 * 1000, player)
 
 	Delay(1000, function ()
-		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
 		SetPlayerClothing(player, player)
 	end)
-
-	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
-	--CallEvent("OnPlayerJoined", player)
 end
 
 function OnPlayerPayday(player)
