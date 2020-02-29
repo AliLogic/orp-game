@@ -25,14 +25,33 @@ local function cmd_biz(playerid, prefix, ...)
 
 	local biz = Business_Nearest(playerid)
 
-	if prefix ~= nil and biz == 0 then
-		return AddPlayerChatError(playerid, "You are not near any businesses.")
-	end
-
 	if prefix == "lock" or prefix == "unlock" then
 
-		if #BusinessData[biz].doors == 0 then
+		local doorid = 0
 
+		if biz == 0 then
+			for i = 1, MAX_BUSINESSES, 1 do
+
+				doorid = Business_GetNearestDoor(playerid, i)
+
+				if doorid ~= 0 then
+					biz = i
+					break
+				end
+			end
+		elseif #BusinessData[biz].doors ~= 0 then
+			doorid = BusinessData[biz].doors[1]
+		end
+
+		if biz == 0 and doorid == 0 then
+			return AddPlayerChatError(playerid, "You are not near any business or any business door.")
+		end
+
+		if Key_PlayerHasKey(playerid, KEY_BUSINESS, biz) == 0 and not Business_IsOwner(playerid, biz) then
+			return AddPlayerChatError(playerid, "You do not have the keys to this business nor do you own it.")
+		end
+
+		if #BusinessData[biz].doors == 0 then
 			if BusinessData[biz].locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the business.")
 				BusinessData[biz].locked = 0
@@ -41,8 +60,6 @@ local function cmd_biz(playerid, prefix, ...)
 				BusinessData[biz].locked = 1
 			end
 		else
-			local doorid = BusinessData[biz].doors[1]
-
 			if DoorData[doorid].is_locked == 1 then
 				AddPlayerChat(playerid, "You <span color=\""..colour.COLOUR_LIGHTRED().."\">unlocked</> the business door.")
 				DoorData[doorid].is_locked = 0

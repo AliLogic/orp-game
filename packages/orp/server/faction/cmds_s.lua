@@ -363,18 +363,14 @@ local function cmd_handcuff(playerid, lookupid)
 		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
-	local is_handcuffed = IsPlayerHandcuffed(lookupid)
-
-	if is_handcuffed == 1 then
+	if IsPlayerHandcuffed(lookupid) == 1 then
 		AddPlayerChat(playerid, "You unhandcuffed "..GetPlayerName(lookupid)..".")
-		is_handcuffed = 0
+		SetPlayerHandcuff(lookupid, 0)
 	else
 		AddPlayerChat(playerid, "You handcuffed "..GetPlayerName(lookupid)..".")
 		AddPlayerChat(lookupid, GetPlayerName(playerid).." handcuffed you.")
-		is_handcuffed = 1
+		SetPlayerHandcuff(lookupid, 0)
 	end
-
-	SetPlayerHandcuff(lookupid, is_handcuffed)
 end
 AddCommand("hcuff", cmd_handcuff)
 AddCommand("handcuff", cmd_handcuff)
@@ -761,7 +757,7 @@ AddCommand("detain", function (playerid, lookupid)
 		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
-	if IsPlayerHandcuffed(lookupid) ~= 1 then
+	if IsPlayerHandcuffed(lookupid) == 0 then
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: The player is not cuffed at the moment.</>")
 	end
 
@@ -846,7 +842,7 @@ AddCommand("arrest", function (playerid, lookupid, minutes)
 		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
-	if IsPlayerHandcuffed(lookupid) ~= 1 then
+	if IsPlayerHandcuffed(lookupid) == 0 then
 		return AddPlayerChatError(playerid, "The player is not cuffed at the moment.")
 	end
 end)

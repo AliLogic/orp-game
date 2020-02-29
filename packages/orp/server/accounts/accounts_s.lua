@@ -200,17 +200,6 @@ function OnAccountLoaded(player)
 		PlayerData[player].admin = mariadb_get_value_name_int(1, "admin")
 		PlayerData[player].helper = mariadb_get_value_name_int(1, "helper")
 		PlayerData[player].ajail = mariadb_get_value_name_int(1, "ajail")
-		--PlayerData[player].cash = math.tointeger(result['cash'])
-		--PlayerData[player].bank_balance = math.tointeger(result['bank_balance'])
-		--PlayerData[player].name = tostring(result['name'])
-		--PlayerData[player].clothing = json_decode(result['clothing'])
-		--PlayerData[player].inventory = json_decode(result['inventory'])
-		--PlayerData[player].created = math.tointeger(result['created'])
-
-		--SetPlayerHealth(player, tonumber(result['health']))
-		--SetPlayerArmor(player, tonumber(result['armor']))
-		--setPlayerThirst(player, tonumber(result['thirst']))
-		--setPlayerHunger(player, tonumber(result['hunger']))
 
 		if PlayerData[player].admin ~= 0 then
 			AddPlayerChat(player, "You have logged in successfully as "..GetPlayerAdminRank(player)..".")
@@ -219,8 +208,6 @@ function OnAccountLoaded(player)
 		else
 			AddPlayerChat(player, "You have logged in successfully.")
 		end
-
-		--AddPlayerChat(player, "Logged in as ")
 
 		local query = mariadb_prepare(sql, "SELECT id, firstname, lastname, level, cash FROM characters WHERE accountid = ?;",
 			PlayerData[player].accountid)
@@ -283,10 +270,10 @@ function OnCharacterLoaded(player, id)
 
 		PlayerData[player].id = math.tointeger(result['id'])
 		PlayerData[player].firstname = result['firstname']
-
 		PlayerData[player].lastname = result['lastname']
 		PlayerData[player].gender = math.tointeger(result['gender'])
-		PlayerData[player].state = math.tointeger(result['state'])
+		PlayerData[player].death_state = math.tointeger(result['death_state'])
+		PlayerData[player].char_state = math.tointeger(result['char_state'])
 
 		PlayerData[player].cash = math.tointeger(result['cash'])
 		PlayerData[player].bank = math.tointeger(result['bank'])
@@ -302,18 +289,16 @@ function OnCharacterLoaded(player, id)
 
 		PlayerData[player].radio = tonumber(result['radio'])
 
-		if PlayerData[player].state == CHARACTER_STATE_ALIVE then
+		if PlayerData[player].death_state == CHARACTER_STATE_ALIVE then
 
 			SetPlayerHealth(player, tonumber(result['health']))
 			SetPlayerArmor(player, tonumber(result['armour']))
 		else
 
-			PlayerData[player].state = (PlayerData[player].state - 1)
+			PlayerData[player].death_state = (PlayerData[player].death_state - 1)
 			SetPlayerHealth(player, 0)
 			SetPlayerArmor(player, 0)
 		end
-
-		SetPlayerLoggedIn(player)
 
 		LoadCharacterFaction(player)
 		LoadPlayerClothing(player)
@@ -322,35 +307,44 @@ function OnCharacterLoaded(player, id)
 		LoadPlayerLicenses(player)
 
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay, "..PlayerData[player].firstname.." "..PlayerData[player].lastname..".</>")
+
+		SetPlayerLoggedIn(player) -- This function deals with the character spawn (teleport)
 	end
 end
 
 function CreatePlayerData(player)
 	PlayerData[player] = {}
 
-	PlayerData[player].id = 0
+	-- Player
+
 	PlayerData[player].accountid = 0
 
 	PlayerData[player].name = GetPlayerName(player)
 	PlayerData[player].steamname = GetPlayerName(player)
 
+	PlayerData[player].ajail = 0
+	PlayerData[player].steamid = GetPlayerSteamId(player)
+
+	PlayerData[player].admin = 0
+	PlayerData[player].helper = 0
+
+	PlayerData[player].is_frozen = false
+
+	-- Character
+
+	PlayerData[player].id = 0
+
 	PlayerData[player].firstname = ""
 	PlayerData[player].lastname = ""
 
 	PlayerData[player].gender = 0
-	PlayerData[player].state = CHARACTER_STATE_ALIVE
+	PlayerData[player].death_state = CHARACTER_STATE_ALIVE
 
 	PlayerData[player].level = 1
 	PlayerData[player].exp = 0
 	PlayerData[player].minutes = 0
 
-	PlayerData[player].clothing = {}
-	PlayerData[player].inventory = {}
-
 	PlayerData[player].logged_in = false
-
-	PlayerData[player].admin = 0
-	PlayerData[player].helper = 0
 
 	PlayerData[player].health = 100.0
 	PlayerData[player].armour = 0.0
@@ -362,11 +356,7 @@ function CreatePlayerData(player)
 	PlayerData[player].faction = 0
 	PlayerData[player].faction_rank = 0
 
-	PlayerData[player].steamid = GetPlayerSteamId(player)
-	PlayerData[player].job_vehicle = nil
-
 	PlayerData[player].job = 0
-	PlayerData[player].onAction = false
 	PlayerData[player].cmd_cooldown = 0.0
 
 	PlayerData[player].x = 0.0
@@ -377,22 +367,20 @@ function CreatePlayerData(player)
 	PlayerData[player].death_x = 0.0
 	PlayerData[player].death_y = 0.0
 	PlayerData[player].death_z = 0.0
+	PlayerData[player].down_state = 0
 
-	PlayerData[player].is_frozen = false
 	PlayerData[player].label = nil -- 3d text label
 	PlayerData[player].handcuffed = 0
 
 	PlayerData[player].pd_timer = 0
 	PlayerData[player].death_timer = 0
-	PlayerData[player].renting = 0 -- Vehicle ID that a player is renting.
 
+	PlayerData[player].renting = 0 -- Vehicle ID that a player is renting.
 	PlayerData[player].driving_test = false
 	PlayerData[player].test_vehicle = 0
 	PlayerData[player].test_warns = 0
 	PlayerData[player].test_stage = 0
 	PlayerData[player].assistance = 0
-	PlayerData[player].ajail = 0
-	PlayerData[player].death_state = 0
 	PlayerData[player].faction_inviter = 0
 	PlayerData[player].harvesting = 0
 
@@ -425,51 +413,32 @@ function SavePlayerAccount(player)
 		return
 	end
 
-	--[[local query = mariadb_prepare(sql, "UPDATE accounts SET admin = ?, cash = ?, bank_balance = ?, health = ?, armor = ?, hunger = ?, thirst = ?, name = '?', clothing = '?', inventory = '?', created = '?' WHERE id = ? LIMIT 1;",
-		PlayerData[player].admin,
-		PlayerData[player].cash,
-		PlayerData[player].bank_balance,
-		GetPlayerHealth(player),
-		GetPlayerArmor(player),
-		PlayerData[player].hunger,
-		PlayerData[player].thirst,
+	local query = mariadb_prepare(sql, "UPDATE accounts SET steamname = '?', locale = '?' WHERE id = ? LIMIT 1;",
 		PlayerData[player].name,
-		json_encode(PlayerData[player].clothing),
-		json_encode(PlayerData[player].inventory),
-		PlayerData[player].created,
-		PlayerData[player].accountid
-	)]]--
-
-	local query = mariadb_prepare(sql, "UPDATE accounts SET steamname = '?', helper = '?', locale = '?' WHERE id = ? LIMIT 1;",
-		PlayerData[player].name,
-		PlayerData[player].helper,
 		GetPlayerLocale(player),
 		PlayerData[player].accountid
 	)
-
-	mariadb_query(sql, query)
+	mariadb_async_query(sql, query)
 
 	if PlayerData[player].id ~= 0 then
-		PlayerData[player].x, PlayerData[player].y, PlayerData[player].z = GetPlayerLocation(player)
-		PlayerData[player].a = GetPlayerHeading(player)
+		local x, y, z = GetPlayerLocation(player)
+		local a = GetPlayerHeading(player)
 
-		query = mariadb_prepare(sql, "UPDATE characters SET firstname = '?', lastname = '?', gender = '?', health = ?, armour = ?, cash = ?, bank = ?, minutes = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
-			PlayerData[player].firstname,
-			PlayerData[player].lastname,
+		query = mariadb_prepare(sql, "UPDATE characters SET gender = '?', health = ?, armour = ?, cash = ?, bank = ?, minutes = ?, x = '?', y = '?', z = '?', a = '?' WHERE id = ?",
 			PlayerData[player].gender,
 			PlayerData[player].health,
 			PlayerData[player].armour,
 			PlayerData[player].cash,
 			PlayerData[player].bank,
 			PlayerData[player].minutes,
-			tostring(PlayerData[player].x),
-			tostring(PlayerData[player].y),
-			tostring(PlayerData[player].z),
-			tostring(PlayerData[player].a),
+			x,
+			y,
+			(z + 100),
+			a,
 			PlayerData[player].id
 		)
 
-		mariadb_query(sql, query)
+		mariadb_async_query(sql, query)
 		CallEvent("SaveInventory", player)
 		SavePlayerClothing(player)
 	end
@@ -492,8 +461,71 @@ function DestroyPlayerData(player)
 	print("Data destroyed for: "..player)
 end
 
+function SetPlayerIntro(player)
+
+	local query = mariadb_prepare(sql, "UPDATE characters SET char_state = ? WHERE id = ? LIMIT 1;",
+		PlayerData[player].char_state,
+		PlayerData[player].id
+	)
+	mariadb_async_query(sql, query)
+
+	if (PlayerData[player].char_state == 0) then
+
+		AddPlayerChat(player, "Hey and welcome to Onset Roleplay.  Thank you for choosing Onset Roleplay as your server to roleplay at.")
+		AddPlayerChat(player, "This is just a sample introduction message that will ask you to if you wish to take a tour of the server or not.")
+
+		PlayerData[player].char_state = 1 -- Skipping the tutorial code for now
+
+		Delay(10 * 1000, function (player)
+			SetPlayerIntro(player)
+		end, player)
+
+	elseif (PlayerData[player].char_state == 1) then
+
+		AddPlayerChat(player, "Hey you are proceeding towards the character creation panel...")
+		AddPlayerChat(player, "This is just a sample hint message to provide you basic information.")
+
+		PlayerData[player].char_state = 2 -- Skipping the tutorial code for now
+
+		Delay(10 * 1000, function (player)
+			SetPlayerIntro(player)
+		end, player)
+
+	elseif (PlayerData[player].char_state == 2) then
+
+		AddPlayerChat(player, "Oh! That's awesome character of yours. We are spawning you in a few seconds.")
+
+		PlayerData[player].char_state = 3 -- Skipping the tutorial code for now
+
+		Delay(10 * 1000, function (player)
+			SetPlayerIntro(player)
+		end, player)
+
+	elseif (PlayerData[player].char_state == 3) then
+
+		PlayerData[player].char_state = 3 -- Character and tutorial has been completed
+
+		PlayerData[player].x = LOC_DEFAULT_X
+		PlayerData[player].y = LOC_DEFAULT_Y
+		PlayerData[player].z = LOC_DEFAULT_Z
+		PlayerData[player].a = LOC_DEFAULT_A
+
+		SetPlayerLoggedIn(player)
+
+	end
+
+	return
+end
+
 function SetPlayerLoggedIn(player)
 	PlayerData[player].logged_in = true
+
+	SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
+
+	if (PlayerData[player].char_state ~= 3) then
+		SetPlayerIntro(player)
+		return
+	end
 
 	SetGUIHealth(player, PlayerData[player].health)
 	SetGUIArmour(player, PlayerData[player].armour)
@@ -501,19 +533,15 @@ function SetPlayerLoggedIn(player)
 	SetGUICash(player, PlayerData[player].cash)
 	SetGUIBank(player, PlayerData[player].bank)
 
-	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, PlayerData[player].z)
+	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, (PlayerData[player].z + 300))
 	SetPlayerHeading(player, PlayerData[player].a)
 	SetPlayerDimension(player, 0)
 
 	PlayerData[player].pd_timer = CreateTimer(OnPlayerPayday, 60 * 1000, player)
 
 	Delay(1000, function ()
-		SetPlayerName(player, PlayerData[player].firstname.." "..PlayerData[player].lastname)
 		SetPlayerClothing(player, player)
 	end)
-
-	--SetPlayerSpawnLocation(player, 125773.000000, 80246.000000, 1645.000000, 90.0)
-	--CallEvent("OnPlayerJoined", player)
 end
 
 function OnPlayerPayday(player)
@@ -591,22 +619,17 @@ AddRemoteEvent('accounts:kick', function (player)
 end)
 
 AddCommand("logout", function (player)
-	print("Logging out [1]")
 	SavePlayerAccount(player)
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You will be logged out in 5 seconds.")
 	SetPlayerChatBubble(player, "(( Player is logging out. ))", 4)
 
 	PlayerData[player].logged_in = false
 
-	print("Logging out [2]")
-
 	Delay(5000, function ()
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Server:</> You are now being logged out.")
 		SendAdminMessage("<span color=\""..colour.COLOUR_LIGHTRED().."\">AdmCmd: "..PlayerData[player].name.." is logging out.</>")
 		ShowCharacterSelection(player, true)
 	end)
-
-	print("Logging out [3]")
 end)
 
 function DestroyDrivingTest(playerid)
@@ -658,7 +681,7 @@ end
 
 local function OnPlayerRecover(player)
 
-	PlayerData[player].state = CHARACTER_STATE_ALIVE
+	PlayerData[player].death_state = CHARACTER_STATE_ALIVE
 	AddPlayerChat(player, "You have now recovered...")
 
 	ClearCharacterDeath(player)
@@ -670,8 +693,8 @@ local function OnPlayerRecover(player)
 end
 
 function PutPlayerInHospital(player)
-	PlayerData[player].state = CHARACTER_STATE_RECOVER
-	PlayerData[player].death_state = 0
+	PlayerData[player].death_state = CHARACTER_STATE_RECOVER
+	PlayerData[player].down_state = 0
 
 	AddPlayerChat(player, "You are now being recovered at a nearby hospital...")
 
@@ -722,28 +745,28 @@ AddEvent("OnPlayerSpawn", function(player)
 		return
 	end
 
-	if PlayerData[player].state == CHARACTER_STATE_ALIVE then
+	if PlayerData[player].death_state == CHARACTER_STATE_ALIVE then
 
 		-- Nothing
 
-	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
+	elseif PlayerData[player].death_state == CHARACTER_STATE_WOUNDED then
 
 		SetPlayerLocation(player, PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z)
 
 		AddPlayerChat(player, "You are now wounded... You can use /acceptdeath.")
 		FreezePlayer(player, true)
-		PlayerData[player].death_state = 1
+		PlayerData[player].down_state = 1
 		Delay(1000, function ()
 			SetPlayerAnimation(player, "LAY_3")
 		end)
 
-	elseif PlayerData[player].state == CHARACTER_STATE_DEAD then
+	elseif PlayerData[player].death_state == CHARACTER_STATE_DEAD then
 
 		SetPlayerLocation(player, PlayerData[player].death_x, PlayerData[player].death_y, PlayerData[player].death_z)
 
 		AddPlayerChat(player, "You are now dead... You can now use /respawnme.")
 		FreezePlayer(player, true)
-		PlayerData[player].death_state = 2
+		PlayerData[player].down_state = 2
 		Delay(1000, function ()
 			SetPlayerAnimation(player, "LAY_3")
 		end)
@@ -760,17 +783,17 @@ AddEvent("OnPlayerDeath", function (player, instigator)
 
 	UpdatePlayerDeathLocation(player)
 
-	if PlayerData[player].state == CHARACTER_STATE_ALIVE then
+	if PlayerData[player].death_state == CHARACTER_STATE_ALIVE then
 
-		PlayerData[player].state = CHARACTER_STATE_WOUNDED
+		PlayerData[player].death_state = CHARACTER_STATE_WOUNDED
 
-	elseif PlayerData[player].state == CHARACTER_STATE_WOUNDED then
+	elseif PlayerData[player].death_state == CHARACTER_STATE_WOUNDED then
 
-		PlayerData[player].state = CHARACTER_STATE_DEAD
+		PlayerData[player].death_state = CHARACTER_STATE_DEAD
 
 	else
 
-		PlayerData[player].death_state = 0
+		PlayerData[player].down_state = 0
 		PutPlayerInHospital(player)
 	end
 end)
@@ -792,6 +815,7 @@ AddEvent("OnPackageStart", function ()
 end)
 
 AddEvent("OnPlayerSteamAuth", function (player)
+
 	CreatePlayerData(player)
 end)
 
@@ -807,7 +831,10 @@ AddEvent("OnPlayerQuit", function (player)
 	CallEvent("UnrentPlayerVehicle", player)
 	DestroyDrivingTest(player)
 	SavePlayerAccount(player)
-	DestroyPlayerData(player)
+
+	Delay(1000, function (player)
+		DestroyPlayerData(player)
+	end, player)
 end)
 
 AddRemoteEvent("borkui:clientOnUICreated", function (playerid, dialogid, extraid)

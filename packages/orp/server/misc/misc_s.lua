@@ -24,6 +24,11 @@ DIALOG_FURNITURE_MENU = 7
 
 DIMENSION_IMPOUND = 500
 
+LOC_DEFAULT_X = 159278
+LOC_DEFAULT_Y = 204121
+LOC_DEFAULT_Z = 1858
+LOC_DEFAULT_A = 0
+
 LOC_DRIVINGTEST_X = 195750
 LOC_DRIVINGTEST_Y = 208048
 LOC_DRIVINGTEST_Z = 1314
@@ -218,10 +223,10 @@ function RemovePlayerBankCash(player, amount)
 	end
 end
 
-function SetPlayerHandcuff(playerid, bToggle)
+function SetPlayerHandcuff(playerid, handcuff)
 
-	PlayerData[playerid].handcuffed = bToggle
-	if bToggle then
+	PlayerData[playerid].handcuffed = handcuff
+	if handcuff == 1 then
 		SetPlayerAnimation(playerid, "CUFF")
 	else
 		SetPlayerAnimation(playerid, "STOP")
@@ -237,7 +242,7 @@ end
 
 function IsPlayerAlive(playerid)
 	if PlayerData[playerid] ~= nil then
-		return (PlayerData[playerid].state == CHARACTER_STATE_ALIVE)
+		return (PlayerData[playerid].death_state == CHARACTER_STATE_ALIVE)
 	end
 	return false
 end

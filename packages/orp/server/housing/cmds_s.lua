@@ -67,16 +67,15 @@ local function cmd_house(playerid, prefix, ...)
 					break
 				end
 			end
-		else if #HousingData[house].doors ~= 0 then
-				doorid = HousingData[house].doors[1]
-			end
+		elseif #HousingData[house].doors ~= 0 then
+			doorid = HousingData[house].doors[1]
 		end
 
 		if house == 0 and doorid == 0 then
 			return AddPlayerChatError(playerid, "You are not near any house or any house door.")
 		end
 
-		if Key_PlayerHasKey(playerid, KEY_HOUSE, house) == 0 and House_IsOwner(playerid, house) then
+		if Key_PlayerHasKey(playerid, KEY_HOUSE, house) == 0 and not House_IsOwner(playerid, house) then
 			return AddPlayerChatError(playerid, "You do not have the keys to this house nor do you own it.")
 		end
 

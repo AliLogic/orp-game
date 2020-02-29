@@ -13,28 +13,55 @@ Contributors:
 
 PlayerClothingData = {}
 
+Textures = {
+	nil,
+
+	GetPackageName().."/client/customization/textures/lv.jpg",
+	GetPackageName().."/client/customization/textures/supreme_fondosdepantalla.jpg",
+	GetPackageName().."/client/customization/textures/supreme_floral.jpg"
+}
+
 Outfit = {
+	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_SpecialAgent_LPR", -- Male
+	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_LPR",
+	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_Open_LPR",
+	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Police_LPR",
+	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Scientist_LPR",
+	"/Game/CharacterModels/Mafia/Meshes/SK_Mafia",
+
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit02",
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit03",
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit04",
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit05",
 	"/Game/CharacterModels/Female/Meshes/SK_Outfit06",
-
-	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_SpecialAgent_LPR", -- Male
-	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_LPR",
-	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Pimp_Open_LPR",
-	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Police_LPR",
-	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Set_Scientist_LPR",
-	"/Game/CharacterModels/Mafia/Meshes/SK_Mafia"
+	"/Game/CharacterModels/Female/Meshes/SK_Worker",
+	"/Game/CharacterModels/Female/Meshes/SK_TShirtShorts01"
 }
 
 Body = {
 	nil,
+
 	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal01_LPR", -- Male
 	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal02_LPR",
 	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal03_LPR",
 	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal04_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal05_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal06_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal07_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal08_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal09_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal10_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal11_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal12_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal13_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal14_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal15_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal16_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal17_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal18_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal19_LPR",
+	"/Game/CharacterModels/SkeletalMesh/BodyMerged/HZN_CH3D_Normal20_LPR",
 
 	"/Game/CharacterModels/Female/Meshes/SK_Female01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Female02",
@@ -43,6 +70,7 @@ Body = {
 
 Tops = {
 	nil,
+
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Knitted_Shirt_LPR", -- Male
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_FormalShirt_LPR",
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_FormalShirt2_LPR",
@@ -66,19 +94,29 @@ Tops = {
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalJacket_LPR",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalShirt_LPR",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Shirt_LPR",
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Tie_LPR",
 	"/Game/CharacterModels/Female/Meshes/SK_Jacket01",
-	"/Game/CharacterModels/Female/Meshes/SK_Jacket02"
+	"/Game/CharacterModels/Female/Meshes/SK_Jacket02",
+	"/Game/CharacterModels/Female/Meshes/SK_Pullover01",
+	"/Game/CharacterModels/Female/Meshes/SK_ShirtCombo01",
+	"/Game/CharacterModels/Female/Meshes/SK_TShirt01",
+	"/Game/CharacterModels/Female/Meshes/SK_TShirt02",
+	"/Game/CharacterModels/Female/Meshes/SK_Undershirt01"
 }
 
 Equipment = {
 	nil,
+
+	"/Game/CharacterModels/Clothing/Meshes/SK_Armor01", -- Male
+
 	"/Game/CharacterModels/Female/Meshes/SK_Armor01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Equipment01",
+	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Tie_LPR",
+	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Labcoat_LPR"
 }
 
 Pants = {
 	nil,
+
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_CargoPants_LPR", -- Male
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_DenimPants_LPR",
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_FormalPants_LPR",
@@ -89,23 +127,48 @@ Pants = {
 	"/Game/CharacterModels/Female/Meshes/SK_Pants02",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_CargoPants_LPR",
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_DenimPants_LPR",
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalPants_LPR"
+	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_FormalPants_LPR",
+	"/Game/CharacterModels/Female/Meshes/HZN_CH3D_PrisonerPants_LPR",
+	"/Game/CharacterModels/Female/Meshes/SK_Jeans01",
+	"/Game/CharacterModels/Female/Meshes/SK_Shorts01",
 }
 
 Shoes = {
 	nil,
+
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_BusinessShoes_LPR", -- Male
 	"/Game/CharacterModels/SkeletalMesh/Outfits/HZN_Outfit_Piece_NormalShoes_LPR",
 	"/Game/CharacterModels/Clothing/Meshes/SK_Shoes01",
 
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes01", -- Female
-	"/Game/CharacterModels/Female/Meshes/SK_Shoes02",
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_BusinessShoes_LPR",
-	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_NormalShoes"
+	"/Game/CharacterModels/Female/Meshes/SK_Shoes03",
+	"/Game/CharacterModels/Female/Meshes/SK_Shoes04",
+	"/Game/CharacterModels/Female/Meshes/SK_Shoes05",
+	"/Game/CharacterModels/Female/Meshes/SK_Shoes06"
 }
 
 Hair = {
 	nil,
+
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair01",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair02",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair03",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair04",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair05",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair06",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair07",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair08",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair09",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair10",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair11",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair12",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair13",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair14",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair15",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair16",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair17",
+	"/Game/CharacterModels/SkeletalMesh/SK_Hair18",
+
 	"/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Hair_Business_LP",
 	"/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Hair_Scientist_LP",
 	"/Game/CharacterModels/SkeletalMesh/HZN_CH3D_Normal_Hair_01_LPR",
@@ -132,6 +195,8 @@ function CreatePlayerClothingData(player)
 	PlayerClothingData[player].body = 1
 	PlayerClothingData[player].pupil = 1.0
 	PlayerClothingData[player].equipment = 1
+	PlayerClothingData[player].texture = 1
+	PlayerClothingData[player].outfit = 1
 end
 
 function DestroyPlayerClothingData(player)
@@ -143,15 +208,26 @@ function SetPlayerClothing(player, otherplayer)
 		return
 	end
 
+	if PlayerData[player].id == 0 or PlayerData[otherplayer].id == 0 then
+		return
+	end
+
 	local r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].hair_color)
 
 	CallRemoteEvent(player, "SetPlayerPupilScale", otherplayer, PlayerClothingData[otherplayer].pupil)
 	CallRemoteEvent(player, "SetPlayerBody", otherplayer, Body[PlayerClothingData[otherplayer].body])
 	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 0, Hair[PlayerClothingData[otherplayer].hair], r, g, b, 255)
-	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
-	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 2, Equipment[PlayerClothingData[otherplayer].equipment], 0, 0, 0, 0)
-	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
-	CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
+
+	if (PlayerClothingData[otherplayer].outfit == 1) then
+		CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Tops[PlayerClothingData[otherplayer].top], 0, 0, 0, 0)
+		CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 2, Equipment[PlayerClothingData[otherplayer].equipment], 0, 0, 0, 0)
+		CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 4, Pants[PlayerClothingData[otherplayer].pants], 0, 0, 0, 0)
+		CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 5, Shoes[PlayerClothingData[otherplayer].shoes], 0, 0, 0, 0)
+
+		CallRemoteEvent(player, "SetPlayerClothingTexture", otherplayer, 1, PlayerClothingData[otherplayer].texture)
+	else
+		CallRemoteEvent(player, "SetPlayerClothing", otherplayer, 1, Outfit[PlayerClothingData[otherplayer].outfit], 0, 0, 0, 0)
+	end
 
 	r, g, b, a = HexToRGBA(PlayerClothingData[otherplayer].skin_color)
 
@@ -193,7 +269,7 @@ function SavePlayerClothing(player)
 		PlayerClothingData[player].equipment,
 		PlayerData[player].id
 	)
-	mariadb_query(sql, query)
+	mariadb_async_query(sql, query)
 
 	return
 end
@@ -333,6 +409,30 @@ AddCommand("equip", function (player, equip)
 	SetPlayerClothing(player, player)
 end)
 
+AddCommand("texture", function (player, texture)
+
+	if texture == nil then
+		return AddPlayerChat(player, "/texture <1 - "..#Textures..">")
+	end
+
+	texture = tonumber(texture)
+
+	PlayerClothingData[player].texture = texture
+	SetPlayerClothing(player, player)
+end)
+
+AddCommand("outfit", function (player, outfit)
+
+	if outfit == nil then
+		return AddPlayerChat(player, "/outfit <1 - "..#Outfit..">")
+	end
+
+	outfit = tonumber(outfit)
+
+	PlayerClothingData[player].outfit = outfit
+	SetPlayerClothing(player, player)
+end)
+
 -- Events
 
 AddRemoteEvent("ServerSetPlayerClothing", SetPlayerClothing)
@@ -342,4 +442,9 @@ AddEvent("OnPlayerSpawn", function(playerid)
 	Delay(1000, function()
 		SetPlayerClothing(playerid, playerid)
 	end)
+end)
+
+AddEvent("OnPlayerJoin", function(player)
+
+	CallRemoteEvent(player, "LoadPlayerClothingTextures", Textures)
 end)
