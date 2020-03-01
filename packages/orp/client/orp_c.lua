@@ -12,6 +12,8 @@ Contributors:
 
 AddEvent("OnPlayerSpawn", function(playerid)
 	SetPostEffect("MotionBlur", "Amount", 0.2)
+	SetPostEffect("ImageEffects", "GrainJitter", 0.0)
+	SetPostEffect("ImageEffects", "GrainIntensity", 0.0)
 
 	if IsGameDevMode() then
 		CallRemoteEvent("OnPlayerGameDevMode")
