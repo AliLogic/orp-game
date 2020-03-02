@@ -366,6 +366,7 @@
         "ATTACH_NONE",
         "SetPlayerRespawnTime",
         "GetVehicleDoorLocation",
-        "GetStreamedVehicles"
+        "GetStreamedVehicles",
+        "SetPlayerVoiceTone"
     ]
 }

@@ -306,10 +306,22 @@ function OnCharacterLoaded(player, id)
 		LoadPlayerKeys(player)
 		LoadPlayerLicenses(player)
 
+		SetPlayerGender(player)
+
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay, "..PlayerData[player].firstname.." "..PlayerData[player].lastname..".</>")
 
 		SetPlayerLoggedIn(player) -- This function deals with the character spawn (teleport)
 	end
+end
+
+function SetPlayerGender(player)
+	local is_male = true
+
+	if (PlayerData[player].gender == 1) then
+		is_male = false
+	end
+
+	CallRemoteEvent(player, "SetPlayerGenderVoice", is_male)
 end
 
 function CreatePlayerData(player)
