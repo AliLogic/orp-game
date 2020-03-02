@@ -1,4 +1,5 @@
 local colour = ImportPackage("colours")
+local discord =  ImportPackage("discord")
 
 AddCommand("banlog", function(playerid, otherplayer)
 	if (PlayerData[playerid].admin < 1) then
@@ -453,6 +454,10 @@ AddCommand("a", function (player, ...)
 
 	SendAdminMessage(string.format("<span color=\"%s\" style=\"bold\">** %s %s (%s, %d): %s</>",
 		colour.COLOUR_LIGHTRED(), GetPlayerAdminRank(player), GetPlayerName(player), PlayerData[player].name, player, text)
+	)
+
+	discord.SendMessage(DiscordChannels.server, "plain", string.format("* %s %s (%s): %s",
+		colour.COLOUR_LIGHTRED(), GetPlayerAdminRank(player), GetPlayerName(player), PlayerData[player].name, text)
 	)
 end)
 

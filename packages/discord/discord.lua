@@ -106,7 +106,7 @@ function OnPostComplete(a, http)
 		print("OnHttpRequestComplete succeeded for id", http)
 		print_active_results(http)
 	end
-	
+
 	http_destroy(http)
 end
 
@@ -114,7 +114,7 @@ function print_active_results(http)
 	local body = http_result_body(http)
 	local header = http_result_header(http)
 	local status = http_result_status(http)
-	
+
 	print("\tBody: ", body)
 	print("\tHTTP Status: ", status)
 	print("\t Headers:")
