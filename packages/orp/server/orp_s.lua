@@ -23,6 +23,7 @@ AddEvent("OnPackageStart", function()
 	handle:close() -- works and tested]]
 
 	DiscordChannels.server = Discord.Channel("684094217378988055")
+	DiscordChannels.adverts = Discord.Channel("684091464829108255")
 	Discord.SendMessage(DiscordChannels.server, "plain", "The server is now live!")
 end)
 

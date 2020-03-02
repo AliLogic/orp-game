@@ -1,4 +1,5 @@
 local colour = ImportPackage('colours')
+local discord = ImportPackage('discord')
 
 AddCommand("q", function (playerid)
 	return KickPlayer(playerid, "Goodbye!")
@@ -343,6 +344,31 @@ AddCommand("showlicenses", function (playerid, lookupid)
 	end
 
 	return
+end)
+
+AddCommand("ad", function (playerid, ...)
+
+	if #{...} == 0 then
+		return AddPlayerChatUsage(playerid, "/ad <phone number> <advertisement>")
+	end
+
+	local text = {...}
+	local phone = text[1]
+	table.remove(text, 1)
+	table.concat(text, " ")
+
+	phone = math.tointeger(phone)
+	if phone == false then
+		return AddPlayerChatError(playerid, "The phone number provided is not a number.")
+	end
+
+	AddPlayerChatAll(string.format("<span color=\"%s\" style=\"bold\">[Advertisement] %s [PH: %d]</>",
+		colour.COLOUR_DARKGREEN(), text, phone
+	))
+
+	discord.SendMessage(DiscordChannels.adverts, "plain", string.format("<span color=\"%s\" style=\"bold\">[Advertisement] %s [PH: %d]</>",
+		GetPlayerName(playerid), phone
+	))
 end)
 
 -- Events
