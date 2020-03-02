@@ -595,7 +595,7 @@ AddCommand("ahelp", function (player)
 	AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 1: </>/a /get /goto /gotoxyz /slap /warp /kick /(spec)off /(whitelist)log /banlog /(assist)s /ajail")
 
 	if PlayerData[player].admin > 1 then
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats /clearinventory")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 2: </>/av /astats /clearinventory /assets")
 	end
 
 	if PlayerData[player].admin > 2 then
@@ -610,7 +610,7 @@ AddCommand("ahelp", function (player)
 
 	if PlayerData[player].admin > 4 then
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/w /apos /asetadmin /acreatefaction /aeditfaction /setstats /acreatehouse /aedithouse /asetweather /asetfog")
-		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/asethelper /acreatespeedcam /aeditspeedcam /adestroyplant")
+		AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Level 5: </>/asethelper /acreatespeedcam /aeditspeedcam /adestroyplant /doublexp")
 	end
 end)
 
@@ -1122,6 +1122,10 @@ end)
 
 AddCommand("assets", function (playerid, lookupid)
 
+	if (PlayerData[playerid].admin < 2) then
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
+	end
+
 	if lookupid == nil then
 		return AddPlayerChatUsage(playerid, "/assets <playerid>")
 	end
@@ -1136,4 +1140,19 @@ AddCommand("assets", function (playerid, lookupid)
 
 	ShowPropertiesList(playerid, lookupid)
 	ShowVehiclesList(playerid, lookupid)
+end)
+
+AddCommand("doublexp", function (playerid)
+
+	if (PlayerData[playerid].admin < 5) then
+		return AddPlayerChatError(playerid, "You don't have permission to use this command.")
+	end
+
+	if Server_IsDoubleXP() == 1 then
+		Server_SetDoubleXP(0)
+		AddPlayerChatAll("" .. GetPlayerAdminRank(playerid) .. " " .. GetPlayerName(playerid) .. " has disabled the DOUBLE XP!")
+	else
+		Server_SetDoubleXP(1)
+		AddPlayerChatAll("" .. GetPlayerAdminRank(playerid) .. " " .. GetPlayerName(playerid) .. " has enabled the DOUBLE XP!")
+	end
 end)

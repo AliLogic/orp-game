@@ -604,7 +604,12 @@ function OnPlayerPayday(player)
 		PlayerData[player].minutes = 0
 		PlayerData[player].paycheck = 0
 
-		PlayerData[player].exp = (PlayerData[player].exp + 1)
+		if Server_IsDoubleXP() == 1 then
+			PlayerData[player].exp = (PlayerData[player].exp + 2)
+			AddPlayerChat(player, "You got double experience points for this hour.")
+		else
+			PlayerData[player].exp = (PlayerData[player].exp + 1)
+		end
 
 		local exp = PlayerData[player].exp
 		local level = PlayerData[player].level
