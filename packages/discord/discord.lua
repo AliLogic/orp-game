@@ -72,7 +72,7 @@ function SendEmbed(channel, embed)
 
 	http_set_body(r, body)
 	http_set_field(r, "Content-Length", string.len(body))
-	http_set_field(r, "Content-Type", "application/json; charset=utf-8")
+	http_set_field(r, "Content-Type", "application/json")
 
 	if http_send(r, OnPostComplete, "OK", r) == false then
 		print("HTTP REQ NOT SENT :(")
