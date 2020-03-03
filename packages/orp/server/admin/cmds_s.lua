@@ -456,7 +456,7 @@ AddCommand("a", function (player, ...)
 		colour.COLOUR_LIGHTRED(), GetPlayerAdminRank(player), GetPlayerName(player), PlayerData[player].name, player, text)
 	)
 
-	discord.SendMessage(DiscordChannels.server, "plain", string.format("* %s (%s): %s",
+	discord.SendMessage(DiscordChannels.server, "plain", string.format("* %s %s (%s): %s",
 		GetPlayerAdminRank(player), GetPlayerName(player), PlayerData[player].name, text)
 	)
 end)
