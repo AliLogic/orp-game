@@ -38,13 +38,17 @@ function SendMessage(channel, style, message)
 	http_set_field(r, "Content-Length", string.len(body))
 	http_set_field(r, "Content-Type", "application/json")
 
+	local status = false
+
 	if http_send(r, OnPostComplete, "OK", r) == false then
 		print("HTTP REQ NOT SENT :(")
-		http_destroy(r)
-		return false
+		status = false
 	else
-		return true
+		status = true
 	end
+
+	http_destroy(r)
+	return status
 end
 
 function SendEmbed(channel, embed)
@@ -74,15 +78,18 @@ function SendEmbed(channel, embed)
 	http_set_field(r, "Content-Length", string.len(body))
 	http_set_field(r, "Content-Type", "application/json")
 
+	local status = false
+
 	if http_send(r, OnPostComplete, "OK", r) == false then
 		print("HTTP REQ NOT SENT :(")
 		http_destroy(r)
-		return false
+		status = false
 	else
-		return true
+		status = true
 	end
 
-	return false -- Incomplete function.
+	http_destroy(r)
+	return status
 end
 
 function Channel(channel)
