@@ -21,13 +21,14 @@ img.image {
 }
 
 .head .columns > .column {
-	font-weight: 700;
+	font-weight: 900;
 }
 
 .body {
 	height: 400px;
 	overflow-y: auto;
 	overflow-x: hidden;
+	font-weight: 500;
 }
 
 .body .columns {
