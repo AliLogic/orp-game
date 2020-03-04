@@ -234,13 +234,7 @@ end)
 
 AddEvent("OnPlayerPickupHit", function (playerid, pickupid)
 
-	AddPlayerChat(playerid, "OnPlayerPickupHit - player: "..playerid.." pickup: "..pickupid.."")
-	AddPlayerChat(playerid, "OnPlayerPickupHit - "..GetPickupPropertyValue(pickupid, "markerid")..".")
-
 	if (GetPickupPropertyValue(pickupid, "markerid") ~= false) then
-
-		AddPlayerChat(playerid, "pickupid "..pickupid.." has been detected as a marker id")
-
 		SetPlayerPropertyValue(playerid, "pickupid", pickupid, true)
 	end
 end)
@@ -252,8 +246,6 @@ AddEvent("OnPlayerJoin", function (playerid)
 end)
 
 AddRemoteEvent("OnPlayerInteractMarker", function (playerid, pickupid)
-
-	AddPlayerChat(playerid, "Server knows you interacted with pickupid: "..pickupid..".")
 
 	for i = 1, #MarkerData, 1 do
 		if IsValidMarker(i) then
