@@ -109,7 +109,7 @@ local function RefreshPlantTextLabel(plantid)
 		string = "Plant (" .. plantid .. ") [" .. GetPlantTypeName(plantid) .. "]\nReady"
 	end
 
-	DrugData[plantid].text3d = CreateText3D(string, 20, DrugData[plantid].x, DrugData[plantid].y, text_z, 0, 0, 0)
+	DrugData[plantid].text3d = CreateText3D(string, 12, DrugData[plantid].x, DrugData[plantid].y, text_z, 0, 0, 0)
 end
 
 local function GetFreePlantId()

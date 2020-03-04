@@ -153,7 +153,7 @@ function Faction_Load(i)
 	FactionData[factionid].locker_z = mariadb_get_value_name_int(i, "locker_z")
 
 	if FactionData[factionid].locker_x ~= 0 then
-		FactionData[factionid].locker_text3d = CreateText3D("Faction Locker (/flocker)", 10, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z, 0.0, 0.0, 0.0)
+		FactionData[factionid].locker_text3d = CreateText3D("Faction Locker (/flocker)", 12, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z, 0.0, 0.0, 0.0)
 	end
 
 	for j = 1, FactionData[factionid].leadership_rank, 1 do

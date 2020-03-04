@@ -95,7 +95,7 @@ local function OnPumpCreated(index, x, y, z, litres)
 	PumpData[index].litres = litres
 	PumpData[index].is_occupied = 0
 
-	PumpData[index].text3d = CreateText3D("Pump ("..index..")\nLiters: "..PumpData[index].litres, 20, x, y, z + 150.0, 0.0, 0.0, 0.0)
+	PumpData[index].text3d = CreateText3D("Pump ("..index..")\nLiters: "..PumpData[index].litres, 12, x, y, z + 150.0, 0.0, 0.0, 0.0)
 end
 
 function Pump_Create(x, y, z, litres)
@@ -152,7 +152,7 @@ local function Pump_Load(i)
 	PumpData[index].z = mariadb_get_value_name_int(i, "z")
 	PumpData[index].litres = mariadb_get_value_name_int(i, "litres")
 
-	PumpData[index].text3d = CreateText3D("Pump ("..index..")\nLitres: "..PumpData[index].litres, 20, PumpData[index].x, PumpData[index].y, PumpData[index].z + 150.0, 0.0, 0.0, 0.0)
+	PumpData[index].text3d = CreateText3D("Pump ("..index..")\nLitres: "..PumpData[index].litres, 12, PumpData[index].x, PumpData[index].y, PumpData[index].z + 150.0, 0.0, 0.0, 0.0)
 
 	PumpData[index].is_occupied = 0
 end

@@ -104,7 +104,7 @@ end
 
 function Industry_RefreshLabel(industry)
 	if not IsValidText3D(IndustryData[industry].text3d) then
-		IndustryData[industry].text3d = CreateText3D(" ", 17, IndustryData[industry].x, IndustryData[industry].y, IndustryData[industry].z, 0, 0, 0)
+		IndustryData[industry].text3d = CreateText3D(" ", 12, IndustryData[industry].x, IndustryData[industry].y, IndustryData[industry].z, 0, 0, 0)
 	end
 
 	SetText3DText(IndustryData[industry].text3d,
