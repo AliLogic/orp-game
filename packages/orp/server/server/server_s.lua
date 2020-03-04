@@ -8,7 +8,8 @@ local function OnLoadServerData()
 
 	ServerData = {
 		tax = 0,
-		tax_percent = 10
+		tax_percent = 10,
+		double_xp = 0
 	}
 
 	if mariadb_get_row_count() ~= 0 then
@@ -17,7 +18,9 @@ local function OnLoadServerData()
 		ServerData.double_xp = mariadb_get_value_name_float(1, "double_xp")
 	end
 
-	print("Tax: " .. ServerData.tax .. " | Tax Percent: " .. ServerData.tax_percent .. ".")
+	print("Tax: " .. ServerData.tax .. "")
+	print("Tax Percent: " .. ServerData.tax_percent .. "")
+	print("Double XP: " .. ServerData.double_xp .. "")
 end
 
 function Tax_AddMoney(amount)
@@ -57,7 +60,6 @@ end)
 
 AddEvent('UnloadServer', function ()
 
-	local query = mariadb_prepare(sql, "UPDATE server\
-		SET tax = ?, tax_percent = ? WHERE server = 'server'")
+	local query = mariadb_prepare(sql, "UPDATE server SET tax = ?, tax_percent = ? WHERE server = 'server'")
 	mariadb_query(sql, query)
 end)
