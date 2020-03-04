@@ -20,24 +20,24 @@ AddEvent("gui:ready", function ()
 end)
 
 AddEvent("OnPackageStart", function()
-	ShowHealthHUD(false)
+	-- ShowHealthHUD(false)
 end)
 
-function SetGUIHealth(health)
-	if health < 0 then health = 0
-	elseif health > 100 then health = 100 end
+-- function SetGUIHealth(health)
+-- 	if health < 0 then health = 0
+-- 	elseif health > 100 then health = 100 end
 
-	ExecuteWebJS(web, "setHealth("..math.floor(health)..");")
-end
-AddRemoteEvent("SetGUIHealth", SetGUIHealth)
+-- 	ExecuteWebJS(web, "setHealth("..math.floor(health)..");")
+-- end
+-- AddRemoteEvent("SetGUIHealth", SetGUIHealth)
 
-function SetGUIArmour(armour)
-	if armour < 0 then armour = 0
-	elseif armour > 100 then armour = 100 end
+-- function SetGUIArmour(armour)
+-- 	if armour < 0 then armour = 0
+-- 	elseif armour > 100 then armour = 100 end
 
-	ExecuteWebJS(web, "setArmour("..math.floor(armour)..");")
-end
-AddRemoteEvent("SetGUIArmour", SetGUIArmour)
+-- 	ExecuteWebJS(web, "setArmour("..math.floor(armour)..");")
+-- end
+-- AddRemoteEvent("SetGUIArmour", SetGUIArmour)
 
 function SetGUICash(money)
 	if money < 0 then return false end
