@@ -21,6 +21,9 @@ VEHICLE_NAMES = {
 VehicleData = {}
 MAX_VEHICLES = 4096
 
+VEHICLE_TYPE_NORMAL = 1
+VEHICLE_TYPE_ADMIN = 2
+
 -- Functions
 
 function GetVehicleModelEx(vehicleid)
@@ -44,6 +47,8 @@ end
 
 function CreateVehicleData(vehicle)
 	VehicleData[vehicle] = {}
+
+	VehicleData[vehicle].type = VEHICLE_TYPE_NORMAL
 
 	VehicleData[vehicle].id = 0
 	VehicleData[vehicle].vid = 0
@@ -190,6 +195,8 @@ function Vehicle_Load(i)
 
 	SetVehicleRespawnParams(vehicle, false, 0, false)
 	CreateVehicleData(vehicle)
+
+	VehicleData[vehicle].type = VEHICLE_TYPE_NORMAL
 
 	VehicleData[vehicle].id = mariadb_get_value_name_int(i, "id")
 	VehicleData[vehicle].vid = vehicle
@@ -382,7 +389,9 @@ end)
 
 AddEvent('UnloadVehicles', function ()
 	for i = 1, #VehicleData, 1 do
-		Vehicle_Unload(i)
+		if VehicleData[i].type == VEHICLE_TYPE_NORMAL then
+			Vehicle_Unload(i)
+		end
 	end
 end)
 
