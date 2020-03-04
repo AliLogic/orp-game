@@ -71,7 +71,7 @@ AddEvent("OnPlayerStartEnterVehicle", function(vehicleid, seatid)
 end)
 
 AddEvent("OnKeyPress", function(key)
-	if key == "F" then
+	if key == "F" and not IsPlayerInVehicle() then
 
 		local vehicleid, seatid = GetNearestVehicleAndDoor(false)
 
@@ -80,7 +80,7 @@ AddEvent("OnKeyPress", function(key)
 			CallRemoteEvent("OnPlayerStartEnterVehicle", vehicleid, seatid)
 		end
 
-	elseif key == "G" then
+	elseif key == "G" and not IsPlayerInVehicle() then
 
 		local vehicleid, seatid = GetNearestVehicleAndDoor(true)
 
