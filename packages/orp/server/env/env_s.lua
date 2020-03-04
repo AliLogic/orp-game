@@ -30,7 +30,7 @@ local url = 'http://api.openweathermap.org/data/2.5/weather?q=Nevada,us&APPID='
 local function UpdateTime()
 	local t = os.date ("*t")
 
-	EnvHour = t.hour
+	-- EnvHour = t.hour
 	EnvMin = t.min
 	EnvTemperature = 30
 
