@@ -448,7 +448,7 @@ AddCommand("f", function(playerid, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Message has invalid length 128")
 	end]]--t
 
-	AddPlayerChatFaction(FactionData[factionid].id, "(( "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
+	AddPlayerChatFaction(FactionData[factionid].id, "<span color=\""..colour.COLOUR_LIGHTBLUE().."\">(( "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))</>")
 end)
 
 local function cmd_acf(player, maxrank, shortname, ...)
