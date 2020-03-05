@@ -30,7 +30,8 @@ VEHICLE_TYPE_ADMIN = 2
 function FindIndexByVehicleId(vehicleid)
 
 	for _, v in ipairs(VehicleData) do
-		if vehicleid == v.vid then
+		print("v" .. v .. "vid " .. v.vid .. "test" .. VehicleData[v].vid)
+		if VehicleData[v].vid == vehicleid then
 			return v
 		end
 	end
