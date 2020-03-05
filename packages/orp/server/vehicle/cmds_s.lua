@@ -281,7 +281,7 @@ AddCommand("gotoveh", function (playerid, vehid)
 		return AddPlayerChatError(playerid, "Vehicle " .. vehid .. " doesn't exist.")
 	end
 
-	SetPlayerLocation(playerid, VehicleData[vehid].x, VehicleData[vehid].y, VehicleData[vehid].z + 20.0)
+	SetPlayerLocation(playerid, VehicleData[vehid].x, VehicleData[vehid].y, VehicleData[vehid].z + 200.0)
 
 	AddPlayerChat(playerid, "You have been teleported to vehicle ID: " .. vehid ..".")
 end)
