@@ -267,6 +267,12 @@ function UpdateFactionLocker(factionid, x, y, z)
 	FactionData[factionid].locker_y = y
 	FactionData[factionid].locker_z = z
 
+	if FactionData[factionid].locker_text3d ~= 0 then
+		DestroyText3D(FactionData[factionid].locker_text3d)
+		FactionData[factionid].locker_text3d = 0
+	end
+	FactionData[factionid].locker_text3d = CreateText3D("Faction Locker (/flocker)", 12, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z, 0.0, 0.0, 0.0)
+
 	mariadb_async_query(sql, "UPDATE factions SET locker_x = "..x..", locker_y "..y..", locker_z "..z.." WHERE id = "..FactionData[factionid].id.." LIMIT 1")
 end
 

@@ -885,6 +885,8 @@ AddCommand("flocker", function (playerid)
 	if (not IsPlayerInRangeOfPoint(playerid, 150.0, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z)) then
 		return AddPlayerChatError(playerid, "You are not near your faction locker.")
 	end
+
+	AddPlayerChat(playerid, "Add a faction locker dialog here.")
 end)
 
 AddCommand("bandage", function (playerid)
