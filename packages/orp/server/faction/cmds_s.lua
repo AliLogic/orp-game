@@ -363,7 +363,8 @@ local function cmd_handcuff(playerid, lookupid)
 		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
-	if IsPlayerHandcuffed(lookupid) == 1 then
+	print("handcuffed: "..IsPlayerHandcuffed(lookupid))
+	if IsPlayerHandcuffed(lookupid) then
 		AddPlayerChat(playerid, "You unhandcuffed "..GetPlayerName(lookupid)..".")
 		SetPlayerHandcuff(lookupid, 0)
 	else
