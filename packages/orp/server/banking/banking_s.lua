@@ -157,13 +157,3 @@ AddRemoteEvent("iwb:OnClientWithdraw", function (playerid, amount)
 
 	CallRemoteEvent(playerid, "iwb:OnServerATMAction", GetPlayerBankCash(playerid))
 end)
-
--- Commands
-AddCommand("atm", function (player)
-
-	if ATM_Nearest(player) ~= 0 then
-		return AddPlayerChatError(player, "You are not near any ATMs.")
-	end
-
-	CallRemoteEvent(player, "iwb:opengui", GetPlayerCash(player), GetPlayerBankCash(player))
-end)

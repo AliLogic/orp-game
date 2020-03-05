@@ -16,3 +16,12 @@ AddCommand("acreateatm", function (player)
 
 	AddPlayerChat(player, string.format("<span color=\"%s\">Server: </>ATM (ID: %d) created successfully!", colour.COLOUR_LIGHTRED(), atm))
 end)
+
+AddCommand("atm", function (player)
+
+	if ATM_Nearest(player) ~= 0 then
+		return AddPlayerChatError(player, "You are not near any ATMs.")
+	end
+
+	CallRemoteEvent(player, "iwb:opengui", GetPlayerCash(player), GetPlayerBankCash(player))
+end)
