@@ -19,7 +19,7 @@ AddCommand("alarm", function (playerid)
 	local vehicleid = GetPlayerVehicle(playerid)
 	local v = FindVehicleIdByIndex(vehicleid)
 
-	Vehicle_ToggleAlarm(VehicleData[v].vid, true)
+	Vehicle_ToggleAlarm(v, true)
 end)
 
 AddCommand("listcars", function (playerid)
