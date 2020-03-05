@@ -139,6 +139,8 @@
 		"client/banking/simplebar.css",
 		"client/banking/simplebar.min.js",
 		"client/sounds/doorbell.mp3",
+		"client/sounds/gps_arrived.mp3",
+		"client/sounds/car_alarm.mp3",
 		"client/radar/img/amunation.png",
 		"client/radar/img/marker.png",
 		"client/radar/img/petrol.png",

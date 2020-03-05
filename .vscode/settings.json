@@ -367,6 +367,7 @@
         "SetPlayerRespawnTime",
         "GetVehicleDoorLocation",
         "GetStreamedVehicles",
-        "SetPlayerVoiceTone"
+        "SetPlayerVoiceTone",
+        "SetCameraViewDistance"
     ]
 }
