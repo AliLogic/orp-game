@@ -369,7 +369,7 @@ local function cmd_handcuff(playerid, lookupid)
 	else
 		AddPlayerChat(playerid, "You handcuffed "..GetPlayerName(lookupid)..".")
 		AddPlayerChat(lookupid, GetPlayerName(playerid).." handcuffed you.")
-		SetPlayerHandcuff(lookupid, 0)
+		SetPlayerHandcuff(lookupid, 1)
 	end
 end
 AddCommand("hcuff", cmd_handcuff)

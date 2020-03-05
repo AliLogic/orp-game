@@ -223,10 +223,10 @@ function RemovePlayerBankCash(player, amount)
 	end
 end
 
-function SetPlayerHandcuff(playerid, handcuff)
+function SetPlayerHandcuff(playerid, set)
 
-	PlayerData[playerid].handcuffed = handcuff
-	if handcuff == 1 then
+	PlayerData[playerid].handcuffed = set
+	if set == 1 then
 		SetPlayerAnimation(playerid, "CUFF")
 	else
 		SetPlayerAnimation(playerid, "STOP")
