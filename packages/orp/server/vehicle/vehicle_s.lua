@@ -456,23 +456,23 @@ AddEvent("OnPlayerEnterVehicle", function(playerid, vehicleid, seatid)
 	end
 end)
 
--- AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
 AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 	AddPlayerChat(player, "[DEBUG-S] OnPlayerStartEnterVehicle player: "..player..", vehicle: "..vehicle..", seat :"..seat.."")
-	if VehicleData[vehicle] ~= nil then
 
-		if VehicleData[vehicle].rental == 1 then
-			if VehicleData[vehicle].renter == 0 and PlayerData[player].renting == 0 then
-				SetPlayerInVehicle(player, vehicle, seat)
-				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">This is a rentable "..GetVehicleModelEx(vehicle).." for $50! Enter /rent to rent it.</>")
-				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Note: You will require a valid drivers license.</>")
-				return
-			end
+	local indexid = FindVehicleIdByIndex(vehicle)
+	if VehicleData[indexid].type == VEHICLE_TYPE_ADMIN then
+		SetPlayerInVehicle(player, vehicle, seat)
+		AddPlayerChat(player, "[DEBUG-S] The vehicle is probably an admin vehicle so putting them in!")
+	else
+		if VehicleData[vehicle].rental == 1 and VehicleData[vehicle].renter == 0 and PlayerData[player].renting == 0 then
+			SetPlayerInVehicle(player, vehicle, seat)
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">This is a rentable "..GetVehicleModelEx(vehicle).." for $50! Enter /rent to rent it.</>")
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Note: You will require a valid drivers license.</>")
+			return
 		end
 
 		if VehicleData[vehicle].is_locked == true then
 			ShowFooterMessage(player, "This vehicle is locked!", colour.COLOUR_LIGHTRED())
-			--return false
 		else
 			if VehicleData[vehicle].renter ~= 0 and VehicleData[vehicle].renter == player then
 				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Welcome back to your rental vehicle, "..GetPlayerName(player)..".</>")
@@ -481,8 +481,5 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 			AddPlayerChat(player, "[DEBUG-S] The vehicle is unlocked so putting them in!")
 			SetPlayerInVehicle(player, vehicle, seat)
 		end
-	else
-		AddPlayerChat(player, "[DEBUG-S] The vehicle is probably an admin vehicle so putting them in!")
-		SetPlayerInVehicle(player, vehicle, seat)
 	end
 end)
