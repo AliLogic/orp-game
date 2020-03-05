@@ -545,7 +545,12 @@ function SetPlayerLoggedIn(player)
 	SetGUICash(player, PlayerData[player].cash)
 	SetGUIBank(player, PlayerData[player].bank)
 
-	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, (PlayerData[player].z + 300))
+	FreezePlayer(player, true)
+	Delay(5 * 1000, function ()
+		FreezePlayer(player, false)
+	end)
+
+	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, (PlayerData[player].z + 100))
 	SetPlayerHeading(player, PlayerData[player].a)
 	SetPlayerDimension(player, 0)
 
