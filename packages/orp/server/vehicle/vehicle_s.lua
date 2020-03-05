@@ -30,9 +30,8 @@ VEHICLE_TYPE_ADMIN = 2
 function FindIndexByVehicleId(vehicleid)
 
 	for k, v in pairs(VehicleData) do
-		print("k"..k.." - v.vid"..v.vid)
 		if v.vid == vehicleid then
-			return v
+			return k
 		end
 	end
 
@@ -147,8 +146,8 @@ function Vehicle_Create(model, plate, x, y, z, a)
 	end
 
 	SetVehicleRespawnParams(vehicleid, false, 0, false)
-	VehicleData[index].vid = vehicleid
 	SetVehicleLicensePlate(vehicleid, plate)
+	VehicleData[index].vid = vehicleid
 
 	local r, g, b, al = HexToRGBA(GetVehicleColor(vehicleid))
 
