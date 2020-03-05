@@ -11,6 +11,7 @@ Contributors:
 -- Variables
 
 local colour = ImportPackage('colours')
+local sound = ImportPackage('soundstreamer')
 
 VEHICLE_NAMES = {
 	"Premier", "Taxi", "Police Cruiser", "Luxe", "Regal", "Nascar", "Raptor", "Ambulance", "Garbage Truck", "Maverick",
@@ -25,6 +26,17 @@ VEHICLE_TYPE_NORMAL = 1
 VEHICLE_TYPE_ADMIN = 2
 
 -- Functions
+
+function FindVehicleIdByIndex(vehicleid)
+
+	for _, v in ipairs(VehicleData) do
+		if vehicleid == v.vid then
+			return v
+		end
+	end
+
+	return 0
+end
 
 function GetVehicleModelEx(vehicleid)
 
@@ -80,7 +92,7 @@ function CreateVehicleData(vehicle)
 
 	VehicleData[vehicle].impounded = 0
 	VehicleData[vehicle].being_repaired = 0
-	VehicleData[vehicle].alarm_object = 0
+	VehicleData[vehicle].alarm_id = 0
 end
 
 function DestroyVehicleData(vehicle)
@@ -378,6 +390,34 @@ function Vehicle_IsOwner(playerid, vehicle)
 	end
 
 	return false
+end
+
+function Vehicle_ToggleAlarm(vehicleid, alarm, time)
+
+	if VehicleData[vehicleid] == nil then
+		return false
+	end
+
+	time = time or (5 * 1000)
+
+	if alarm then
+		if VehicleData[vehicleid].alarm_id ~= 0 then
+			sound.DestroySound3D(VehicleData[vehicleid].alarm_id)
+			VehicleData[vehicleid].alarm_id = 0
+		end
+
+		local x, y, z = GetVehicleLocation(VehicleData[vehicleid].vid)
+		VehicleData[vehicleid].alarm_id = sound.CreateSound3D("orp/client/sounds/car_alarm.mp3", x, y, z, 1000.0, 1.0, 1.0)
+
+		Delay(time, function ()
+			Vehicle_ToggleAlarm(vehicleid, false, 0)
+		end)
+	else
+		sound.DestroySound3D(VehicleData[vehicleid].alarm_id)
+		VehicleData[vehicleid].alarm_id = 0
+	end
+
+	return
 end
 
 -- Events

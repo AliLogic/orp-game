@@ -14,6 +14,14 @@ local colour = ImportPackage('colours')
 
 -- Functions and Events
 
+AddCommand("alarm", function (playerid)
+
+	local vehicleid = GetPlayerVehicle(playerid)
+	local v = FindVehicleIdByIndex(vehicleid)
+
+	Vehicle_ToggleAlarm(VehicleData[v].vid, true)
+end)
+
 AddCommand("listcars", function (playerid)
 
 	AddPlayerChat(playerid, "Vehicles registered to you, "..GetPlayerName(playerid).." ("..playerid.."):")
