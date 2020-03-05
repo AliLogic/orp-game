@@ -188,10 +188,12 @@ AddRemoteEvent('FreezePlayer', function (status)
 	if status == true then
 		SetIgnoreMoveInput(true)
 		SetIgnoreLookInput(true)
+		GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body"):SetEnableGravity(false)
 		is_frozen = true
 	else
 		SetIgnoreMoveInput(false)
 		SetIgnoreLookInput(false)
+		GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body"):SetEnableGravity(true)
 		is_frozen = false
 	end
 	return true
