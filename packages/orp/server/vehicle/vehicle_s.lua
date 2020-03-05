@@ -27,7 +27,7 @@ VEHICLE_TYPE_ADMIN = 2
 
 -- Functions
 
-function FindVehicleIdByIndex(vehicleid)
+function FindIndexByVehicleId(vehicleid)
 
 	for _, v in ipairs(VehicleData) do
 		if vehicleid == v.vid then
@@ -398,16 +398,20 @@ function Vehicle_ToggleAlarm(vehicleid, alarm, time)
 		return false
 	end
 
-	time = time or (5 * 1000)
+	if time == nil then
+		time = 5 * 1000
+	end
 
 	if alarm then
 		if VehicleData[vehicleid].alarm_id ~= 0 then
-			sound.DestroySound3D(VehicleData[vehicleid].alarm_id)
+			if sound.IsValidSound(VehicleData[vehicleid].alarm_id) then
+				sound.DestroySound3D(VehicleData[vehicleid].alarm_id)
+			end
 			VehicleData[vehicleid].alarm_id = 0
 		end
 
 		local x, y, z = GetVehicleLocation(VehicleData[vehicleid].vid)
-		VehicleData[vehicleid].alarm_id = sound.CreateSound3D("orp/client/sounds/car_alarm.mp3", x, y, z, 1000.0, 1.0, 1.0)
+		VehicleData[vehicleid].alarm_id = sound.CreateSound3D("orp/client/sounds/car_alarm.mp3", x, y, z, 1000.0)
 
 		Delay(time, function ()
 			Vehicle_ToggleAlarm(vehicleid, false, 0)
@@ -459,10 +463,10 @@ end)
 AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 	AddPlayerChat(player, "[DEBUG-S] OnPlayerStartEnterVehicle player: "..player..", vehicle: "..vehicle..", seat :"..seat.."")
 
-	local indexid = FindVehicleIdByIndex(vehicle)
+	local indexid = FindIndexByVehicleId(vehicle)
 	if VehicleData[indexid].type == VEHICLE_TYPE_ADMIN then
 		SetPlayerInVehicle(player, vehicle, seat)
-		AddPlayerChat(player, "[DEBUG-S] The vehicle is probably an admin vehicle so putting them in!")
+		AddPlayerChat(player, "[DEBUG-S] The vehicle is an admin vehicle so putting in!")
 	else
 		if VehicleData[vehicle].rental == 1 and VehicleData[vehicle].renter == 0 and PlayerData[player].renting == 0 then
 			SetPlayerInVehicle(player, vehicle, seat)
