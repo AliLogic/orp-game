@@ -294,7 +294,7 @@ local function cmd_m(playerid, ...)
 	local rankId = PlayerData[playerid].faction_rank
 	local x, y, z = GetPlayerLocation(playerid)
 
-	AddPlayerChatRange(x, y, 2000.0, FactionRankData[factionId][rankId].rank_name .." " .. GetPlayerName(playerid) .. " (megaphone): "..msg)
+	AddPlayerChatRange(x, y, 2000.0, "<span color=\""..colour.COLOUR_YELLOW().."\">" .. GetPlayerName(playerid) .. " (megaphone): " .. msg .. "</>")
 end
 AddCommand("m", cmd_m)
 AddCommand("megaphone", cmd_m)
