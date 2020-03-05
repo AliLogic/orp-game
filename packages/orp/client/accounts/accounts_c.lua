@@ -43,8 +43,8 @@ local function ToggleCharUI(status)
 	SetIgnoreLookInput(status)
 	SetIgnoreMoveInput(status)
 
-	ShowHealthHUD(status)
-	ShowWeaponHUD(status)
+	ShowHealthHUD(not status)
+	ShowWeaponHUD(not status)
 
 	ShowMouseCursor(status)
 
