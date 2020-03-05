@@ -196,7 +196,7 @@ end)
 
 AddCommand("b", function (player, ...)
 
-	if (#{...} == nil) then
+	if (#{...} == 0) then
 		return AddPlayerChat(player, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Usage:</> /b [text]")
 	end
 
