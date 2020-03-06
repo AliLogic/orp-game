@@ -53,6 +53,7 @@
 		"server/drug/plants_s.lua",
 		"server/drug/cmds_s.lua",
 		"server/maps/dmv_s.lua",
+		"server/maps/impound_s.lua",
 		"server/maps/dealership_s.lua",
 		"server/maps/pd_s.lua",
 		"server/gui/gui_s.lua",
