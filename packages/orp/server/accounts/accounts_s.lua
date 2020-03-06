@@ -494,27 +494,33 @@ function SetPlayerTutorial(playerid)
 	-- Actual function
 
 	if (tutorial_state == 1) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 122371.22, 99170.25, 1668.49, 265, true)
 		AddPlayerChat(playerid, "Welcome to Onset Roleplay! Here, we strive to provide you with the best experience possible.")
 		AddPlayerChat(playerid, "We can see that it is your first time on the server! To proceed to the tutorial press [ENTER] to continue, otherwise, press [BUTTON] to skip!")
 		AddPlayerChat(playerid, "<span style=\"bold\">Please note: We highly recommend you view the tutorial, as it will prepare you for the journey ahead.</>")
 	elseif (tutorial_state == 2) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 122371.22, 99170.25, 1668.49, 265, true)
 		AddPlayerChat(playerid, "Around the city of [PLACE NAME] you will find various dealerships, here, you can purchase a nice set of wheels to get around.")
 		AddPlayerChat(playerid, "Once you have acquired a sufficient amount of money, come on down to any of the dealership icons you see on your mini-map and step into the [ICON?],")
 		AddPlayerChat(playerid, "here you will be presented with all of the information required to make your purchase.")
 	elseif (tutorial_state == 3) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 122371.22, 99170.25, 1668.49, 265, true)
 		AddPlayerChat(playerid, "Want your own place to sit and relax? Or perhaps a business to start earning some money whilst giving back to the community?")
 		AddPlayerChat(playerid, "Side note: You can also use our advertisement system (/ad) and deal with property owners directly.")
 		AddPlayerChat(playerid, "Come on down to the lettings building located on your mini-map, here you will see all of the properties around [PLACE NAME] that are currently for sale!")
 	elseif (tutorial_state == 4) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 122371.22, 99170.25, 1668.49, 265, true)
 		AddPlayerChat(playerid, "This is the [DMV NAME], located in [AREA], this building is represented by the [ICON] on the mini-map!")
 		AddPlayerChat(playerid, "If you want to remain on the correct side of the law, you'll want to obtain a license to operate your vehicle!")
 		AddPlayerChat(playerid, "For a small fee of [$FEE], you can take the practical and theory test, if you pass successfully, you will then be eligible to drive on the road legally.")
 		AddPlayerChat(playerid, "<span style=\"bold\">Side note: A license is not mandatory, however you may find yourself in trouble with law enforcement for driving without one!</>")
 	elseif (tutorial_state == 5) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 122371.22, 99170.25, 1668.49, 265, true)
 		AddPlayerChat(playerid, "Upon first stepping into the world, you will begin with a [ITEM] which contains [X] spaces. This can be viewed by pressing the [KEY] key. Your inventory is important, it allows you to interact with the world around you.")
 		AddPlayerChat(playerid, "If you wish to increase your inventory spaces, you will need to purchase additional carrier items such as a backpack, or a brief-case, which can be purchased from various stores around the city!")
 		AddPlayerChat(playerid, "<span style=\"bold\">Side note: All items shown in your inventory are an accurate representation of what your character is holding, that means that you MUST roleplay appropriately.</>")
 	elseif (tutorial_state == 6) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 122371.22, 99170.25, 1668.49, 265, true)
 		AddPlayerChat(playerid, "Struggling to make income whilst unemployed, not looking to oppose the law to make a pretty penny? Understandable! Come on down to the job centre, located on your mini-map by the [ICON].")
 		AddPlayerChat(playerid, "Here, you can find a side-job which will provide you with a generous income to begin building your life.")
 		AddPlayerChat(playerid, "Here, you can find employment in the following areas:")
@@ -525,6 +531,7 @@ function SetPlayerTutorial(playerid)
 		AddPlayerChat(playerid, "- Mechanic")
 		AddPlayerChat(playerid, "<span style=\"bold\">Side note: When using a side-job, it is expected that you roleplay appropriately whilst conducting these jobs, this is a roleplay server after all.</>")
 	elseif (tutorial_state == 7) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 122371.22, 99170.25, 1668.49, 265, true)
 		AddPlayerChat(playerid, "You have completed the tutorial.  Thanks for choosing Onset Roleplay...")
 		PlayerData[playerid].char_state = 1 -- Tutorial completed
 		SetPlayerIntro(playerid)
@@ -552,6 +559,7 @@ function SetPlayerIntro(player)
 
 	elseif (PlayerData[player].char_state == 1) then
 
+		CallRemoteEvent(player, "SetPlayerCameraLocation", 0, 0, 0, 0, false)
 		AddPlayerChat(player, "Hey you are proceeding towards the character creation panel...")
 		AddPlayerChat(player, "This is just a sample hint message to provide you basic information.")
 

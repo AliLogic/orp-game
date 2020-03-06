@@ -202,3 +202,8 @@ end)
 AddRemoteEvent("SetPlayerGenderVoice", function (is_male)
 	SetPlayerVoiceTone(GetPlayerId(), is_male)
 end)
+
+AddRemoteEvent("SetPlayerCameraLocation", function (x, y, z, a, status)
+	SetCameraLocation(x, y, z, status)
+	SetCameraRotation(0, a, 0, status)
+end)
