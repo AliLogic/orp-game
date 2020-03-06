@@ -546,6 +546,7 @@ function SetPlayerIntro(player)
 
 	if (PlayerData[player].char_state == 0) then
 
+		PlayerData[player].tutorial = 1
 		SetPlayerTutorial(player)
 
 	elseif (PlayerData[player].char_state == 1) then
