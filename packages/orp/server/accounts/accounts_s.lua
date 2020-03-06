@@ -532,6 +532,7 @@ function SetPlayerTutorial(playerid)
 	end
 
 	Delay(20 * 1000, function ()
+		PlayerData[playerid].tutorial = (tutorial_state + 1)
 		SetPlayerTutorial(playerid)
 	end)
 end
