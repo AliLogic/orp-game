@@ -496,7 +496,7 @@ function SetPlayerTutorial(playerid)
 	if (tutorial_state == 1) then
 		AddPlayerChat(playerid, "Welcome to Onset Roleplay! Here, we strive to provide you with the best experience possible.")
 		AddPlayerChat(playerid, "We can see that it is your first time on the server! To proceed to the tutorial press [ENTER] to continue, otherwise, press [BUTTON] to skip!")
-		AddPlayerChat(playerid, "Please note: We highly recommend you view the tutorial, as it will prepare you for the journey ahead.")
+		AddPlayerChat(playerid, "<span style=\"bold\">Please note: We highly recommend you view the tutorial, as it will prepare you for the journey ahead.</>")
 	elseif (tutorial_state == 2) then
 		AddPlayerChat(playerid, "Around the city of [PLACE NAME] you will find various dealerships, here, you can purchase a nice set of wheels to get around.")
 		AddPlayerChat(playerid, "Once you have acquired a sufficient amount of money, come on down to any of the dealership icons you see on your mini-map and step into the [ICON?],")
@@ -509,11 +509,11 @@ function SetPlayerTutorial(playerid)
 		AddPlayerChat(playerid, "This is the [DMV NAME], located in [AREA], this building is represented by the [ICON] on the mini-map!")
 		AddPlayerChat(playerid, "If you want to remain on the correct side of the law, you'll want to obtain a license to operate your vehicle!")
 		AddPlayerChat(playerid, "For a small fee of [$FEE], you can take the practical and theory test, if you pass successfully, you will then be eligible to drive on the road legally.")
-		AddPlayerChat(playerid, "Side note: A license is not mandatory, however you may find yourself in trouble with law enforcement for driving without one!")
+		AddPlayerChat(playerid, "<span style=\"bold\">Side note: A license is not mandatory, however you may find yourself in trouble with law enforcement for driving without one!</>")
 	elseif (tutorial_state == 5) then
 		AddPlayerChat(playerid, "Upon first stepping into the world, you will begin with a [ITEM] which contains [X] spaces. This can be viewed by pressing the [KEY] key. Your inventory is important, it allows you to interact with the world around you.")
 		AddPlayerChat(playerid, "If you wish to increase your inventory spaces, you will need to purchase additional carrier items such as a backpack, or a brief-case, which can be purchased from various stores around the city!")
-		AddPlayerChat(playerid, "Side note: All items shown in your inventory are an accurate representation of what your character is holding, that means that you MUST roleplay appropriately.")
+		AddPlayerChat(playerid, "<span style=\"bold\">Side note: All items shown in your inventory are an accurate representation of what your character is holding, that means that you MUST roleplay appropriately.</>")
 	elseif (tutorial_state == 6) then
 		AddPlayerChat(playerid, "Struggling to make income whilst unemployed, not looking to oppose the law to make a pretty penny? Understandable! Come on down to the job centre, located on your mini-map by the [ICON].")
 		AddPlayerChat(playerid, "Here, you can find a side-job which will provide you with a generous income to begin building your life.")
@@ -523,7 +523,7 @@ function SetPlayerTutorial(playerid)
 		AddPlayerChat(playerid, "- Taxi Cab")
 		AddPlayerChat(playerid, "- Fishing")
 		AddPlayerChat(playerid, "- Mechanic")
-		AddPlayerChat(playerid, "Side note: When using a side-job, it is expected that you roleplay appropriately whilst conducting these jobs, this is a roleplay server after all.")
+		AddPlayerChat(playerid, "<span style=\"bold\">Side note: When using a side-job, it is expected that you roleplay appropriately whilst conducting these jobs, this is a roleplay server after all.</>")
 	elseif (tutorial_state == 7) then
 		AddPlayerChat(playerid, "You have completed the tutorial.  Thanks for choosing Onset Roleplay...")
 		PlayerData[playerid].char_state = 1 -- Tutorial completed
