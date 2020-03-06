@@ -473,38 +473,65 @@ function DestroyPlayerData(player)
 	print("Data destroyed for: "..player)
 end
 
-function SetPlayerTutorial(player)
+function SetPlayerTutorial(playerid)
 
-	AddPlayerChat(player, "Welcome to Onset Roleplay! Here, we strive to provide you with the best experience possible.")
-	AddPlayerChat(player, "We can see that it is your first time on the server! To proceed to the tutorial press [ENTER] to continue, otherwise, press [BUTTON] to skip!")
-	AddPlayerChat(player, "Please note: We highly recommend you view the tutorial, as it will prepare you for the journey ahead.")
+	-- Validation checks
 
-	AddPlayerChat(player, "Around the city of [PLACE NAME] you will find various dealerships, here, you can purchase a nice set of wheels to get around.")
-	AddPlayerChat(player, "Once you have acquired a sufficient amount of money, come on down to any of the dealership icons you see on your mini-map and step into the [ICON?],")
-	AddPlayerChat(player, "here you will be presented with all of the information required to make your purchase.")
+	if (not IsValidPlayer(playerid)) then
+		return
+	end
 
-	AddPlayerChat(player, "Want your own place to sit and relax? Or perhaps a business to start earning some money whilst giving back to the community?")
-	AddPlayerChat(player, "Side note: You can also use our advertisement system (/ad) and deal with property owners directly.")
-	AddPlayerChat(player, "Come on down to the lettings building located on your mini-map, here you will see all of the properties around [PLACE NAME] that are currently for sale!")
+	if (PlayerData[playerid].tutorial == 0) then
+		return
+	end
 
-	AddPlayerChat(player, "This is the [DMV NAME], located in [AREA], this building is represented by the [ICON] on the mini-map!")
-	AddPlayerChat(player, "If you want to remain on the correct side of the law, you'll want to obtain a license to operate your vehicle!")
-	AddPlayerChat(player, "For a small fee of [$FEE], you can take the practical and theory test, if you pass successfully, you will then be eligible to drive on the road legally.")
-	AddPlayerChat(player, "Side note: A license is not mandatory, however you may find yourself in trouble with law enforcement for driving without one!")
+	-- Initialization
 
-	AddPlayerChat(player, "Upon first stepping into the world, you will begin with a [ITEM] which contains [X] spaces. This can be viewed by pressing the [KEY] key. Your inventory is important, it allows you to interact with the world around you.")
-	AddPlayerChat(player, "If you wish to increase your inventory spaces, you will need to purchase additional carrier items such as a backpack, or a brief-case, which can be purchased from various stores around the city!")
-	AddPlayerChat(player, "Side note: All items shown in your inventory are an accurate representation of what your character is holding, that means that you MUST roleplay appropriately.")
+	local tutorial_state = PlayerData[playerid].tutorial
 
-	AddPlayerChat(player, "Struggling to make income whilst unemployed, not looking to oppose the law to make a pretty penny? Understandable! Come on down to the job centre, located on your mini-map by the [ICON].")
-	AddPlayerChat(player, "Here, you can find a side-job which will provide you with a generous income to begin building your life.")
-	AddPlayerChat(player, "Here, you can find employment in the following areas:")
-	AddPlayerChat(player, "- Delivery Driving")
-	AddPlayerChat(player, "- Trucking")
-	AddPlayerChat(player, "- Taxi Cab")
-	AddPlayerChat(player, "- Fishing")
-	AddPlayerChat(player, "- Mechanic")
-	AddPlayerChat(player, "Side note: When using a side-job, it is expected that you roleplay appropriately whilst conducting these jobs, this is a roleplay server after all.")
+	-- Actual function
+
+	if (tutorial_state == 1) then
+		AddPlayerChat(playerid, "Welcome to Onset Roleplay! Here, we strive to provide you with the best experience possible.")
+		AddPlayerChat(playerid, "We can see that it is your first time on the server! To proceed to the tutorial press [ENTER] to continue, otherwise, press [BUTTON] to skip!")
+		AddPlayerChat(playerid, "Please note: We highly recommend you view the tutorial, as it will prepare you for the journey ahead.")
+	elseif (tutorial_state == 2) then
+		AddPlayerChat(playerid, "Around the city of [PLACE NAME] you will find various dealerships, here, you can purchase a nice set of wheels to get around.")
+		AddPlayerChat(playerid, "Once you have acquired a sufficient amount of money, come on down to any of the dealership icons you see on your mini-map and step into the [ICON?],")
+		AddPlayerChat(playerid, "here you will be presented with all of the information required to make your purchase.")
+	elseif (tutorial_state == 3) then
+		AddPlayerChat(playerid, "Want your own place to sit and relax? Or perhaps a business to start earning some money whilst giving back to the community?")
+		AddPlayerChat(playerid, "Side note: You can also use our advertisement system (/ad) and deal with property owners directly.")
+		AddPlayerChat(playerid, "Come on down to the lettings building located on your mini-map, here you will see all of the properties around [PLACE NAME] that are currently for sale!")
+	elseif (tutorial_state == 4) then
+		AddPlayerChat(playerid, "This is the [DMV NAME], located in [AREA], this building is represented by the [ICON] on the mini-map!")
+		AddPlayerChat(playerid, "If you want to remain on the correct side of the law, you'll want to obtain a license to operate your vehicle!")
+		AddPlayerChat(playerid, "For a small fee of [$FEE], you can take the practical and theory test, if you pass successfully, you will then be eligible to drive on the road legally.")
+		AddPlayerChat(playerid, "Side note: A license is not mandatory, however you may find yourself in trouble with law enforcement for driving without one!")
+	elseif (tutorial_state == 5) then
+		AddPlayerChat(playerid, "Upon first stepping into the world, you will begin with a [ITEM] which contains [X] spaces. This can be viewed by pressing the [KEY] key. Your inventory is important, it allows you to interact with the world around you.")
+		AddPlayerChat(playerid, "If you wish to increase your inventory spaces, you will need to purchase additional carrier items such as a backpack, or a brief-case, which can be purchased from various stores around the city!")
+		AddPlayerChat(playerid, "Side note: All items shown in your inventory are an accurate representation of what your character is holding, that means that you MUST roleplay appropriately.")
+	elseif (tutorial_state == 6) then
+		AddPlayerChat(playerid, "Struggling to make income whilst unemployed, not looking to oppose the law to make a pretty penny? Understandable! Come on down to the job centre, located on your mini-map by the [ICON].")
+		AddPlayerChat(playerid, "Here, you can find a side-job which will provide you with a generous income to begin building your life.")
+		AddPlayerChat(playerid, "Here, you can find employment in the following areas:")
+		AddPlayerChat(playerid, "- Delivery Driving")
+		AddPlayerChat(playerid, "- Trucking")
+		AddPlayerChat(playerid, "- Taxi Cab")
+		AddPlayerChat(playerid, "- Fishing")
+		AddPlayerChat(playerid, "- Mechanic")
+		AddPlayerChat(playerid, "Side note: When using a side-job, it is expected that you roleplay appropriately whilst conducting these jobs, this is a roleplay server after all.")
+	elseif (tutorial_state == 7) then
+		AddPlayerChat(playerid, "You have completed the tutorial.  Thanks for choosing Onset Roleplay...")
+		PlayerData[playerid].char_state = 1 -- Tutorial completed
+		SetPlayerIntro(playerid)
+		return
+	end
+
+	Delay(20 * 1000, function ()
+		SetPlayerTutorial(playerid)
+	end)
 end
 
 function SetPlayerIntro(player)
@@ -518,12 +545,6 @@ function SetPlayerIntro(player)
 	if (PlayerData[player].char_state == 0) then
 
 		SetPlayerTutorial(player)
-
-		PlayerData[player].char_state = 1 -- Skipping the tutorial code for now
-
-		Delay(10 * 1000, function (player)
-			SetPlayerIntro(player)
-		end, player)
 
 	elseif (PlayerData[player].char_state == 1) then
 
