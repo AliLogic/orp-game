@@ -71,6 +71,8 @@ function ATM_Create(player, x, y, z, h)
 
 	local query = mariadb_prepare(sql, "INSERT INTO atm VALUES(?, ?, ?, ?, 0.0, ?, 0.0);", 494, x, y, z, h)
 	mariadb_async_query(sql, query, OnAtmCreated, index, x, y, z, h)
+
+	return index
 end
 
 function ATM_Nearest(playerid)
