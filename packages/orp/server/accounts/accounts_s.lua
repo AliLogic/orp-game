@@ -351,6 +351,7 @@ function CreatePlayerData(player)
 
 	PlayerData[player].gender = 0
 	PlayerData[player].death_state = CHARACTER_STATE_ALIVE
+	PlayerData[player].char_state = 0
 
 	PlayerData[player].level = 1
 	PlayerData[player].exp = 0
@@ -395,10 +396,11 @@ function CreatePlayerData(player)
 	PlayerData[player].assistance = 0
 	PlayerData[player].faction_inviter = 0
 	PlayerData[player].harvesting = 0
+	PlayerData[player].tutorial = 0
 
 	CreatePlayerClothingData(player)
 
-	print("Data created for: "..player)
+	print("Data created for: " .. player)
 end
 
 function CreateCharacterData(player, character)
