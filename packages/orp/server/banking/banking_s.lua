@@ -111,7 +111,7 @@ local function LoadATM(i)
 	--local ry = tonumber(result["ry"])
 	--local rz = tonumber(result["rz"])
 
-	ATMData[index].text3d = CreateText3D("ATM ("..ATMData[index].id..")\n/atm", 12, ATMData[index].x, ATMData[index].y, ATMData[index].z + 200, 0, 0, 0)
+	ATMData[index].text3d = CreateText3D("ATM ("..index..")\n/atm", 12, ATMData[index].x, ATMData[index].y, ATMData[index].z + 200, 0, 0, 0)
 end
 
 function OnAtmLoaded()
