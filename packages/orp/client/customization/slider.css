@@ -1,0 +1,33 @@
+span {
+	margin-top: 0.925em;
+}
+
+input[type=range].slider:hover {
+	opacity: 1; /* Fully shown on mouse-over */
+}
+
+input[type=range].slider {
+	-webkit-appearance: none;  /* Override default CSS styles */
+	transition: opacity .2s;
+	opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+
+	outline: 0;
+	margin-top: 0.925em;
+	max-height: 100%;
+	width: 100%;
+	height: 8px;
+	background: lightgrey;
+	border-radius: 10px;
+}
+
+input[type=range].slider::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	opacity: 1 !important;
+	appearance: none;
+	width: 15px;
+	height: 15px;
+	box-shadow: 0 0 0 0.5px #4a4a4a;
+	border-radius: 4px;
+	background: slategrey;
+	cursor: pointer;
+}
