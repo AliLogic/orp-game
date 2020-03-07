@@ -10,7 +10,7 @@ Contributors:
 
 -- Variables
 
-local ENTER_DISTANCE = 300.0
+local ENTER_DISTANCE = 200.0
 
 -- Functions
 
