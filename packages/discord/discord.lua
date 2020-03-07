@@ -134,7 +134,6 @@ function print_active_results(http)
 end
 
 AddFunctionExport("SendMessage", SendMessage)
-AddFunctionExport("SendMessageExperimental", SendMessageExperimental)
 AddFunctionExport("SendEmbed", SendEmbed)
 AddFunctionExport("Channel", Channel)
 AddFunctionExport("Embed", Embed)
