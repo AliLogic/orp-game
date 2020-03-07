@@ -15,6 +15,9 @@ local Discord = ImportPackage('discord')
 
 --local dev_talk = 0
 DiscordChannels = {}
+DiscordChannels.server = Discord.Channel("684094217378988055")
+DiscordChannels.adverts = Discord.Channel("684091464829108255")
+DiscordChannels.dev_talk = Discord.Channel("653324626977619968")
 
 AddEvent("OnPackageStart", function()
 	SetObjectScale(CreateObject(39, 122080, 90856, 1100), 0.75, 0.75, 0.75)
@@ -23,11 +26,7 @@ AddEvent("OnPackageStart", function()
 	local result = handle:read("*a")
 	handle:close() -- works and tested]]
 
-	local dev_talk = Discord.Channel("653324626977619968")
-	Discord.SendMessage(dev_talk, "quotation", "This is a message sent from the Onset Game Server via the Discord API.")
-	--Discord.SendMessage(dev_talk, "plain", "Testing message as requested by daky")
-	DiscordChannels.server = Discord.Channel("684094217378988055")
-	DiscordChannels.adverts = Discord.Channel("684091464829108255")
+	Discord.SendMessage(DiscordChannels.dev_talk, "quotation", "This is a message sent from the Onset Game Server via the Discord API.")
 	Discord.SendMessage(DiscordChannels.server, "plain", "The server is now live!")
 end)
 
