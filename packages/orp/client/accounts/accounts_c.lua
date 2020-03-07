@@ -200,7 +200,11 @@ AddRemoteEvent('FreezePlayer', function (status)
 end)
 
 AddRemoteEvent("SetPlayerGenderVoice", function (is_male)
-	SetPlayerVoiceTone(GetPlayerId(), is_male)
+	if is_male == true then
+		SetPlayerVoiceTone(GetPlayerId(), "male")
+	else
+		SetPlayerVoiceTone(GetPlayerId(), "female")
+	end
 end)
 
 AddRemoteEvent("SetPlayerCameraLocation", function (x, y, z, a, status)
