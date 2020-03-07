@@ -5,13 +5,13 @@
 	"name"		"Onset Dedicated Server"
 	"StateFlags"		"4"
 	"installdir"		"Onset Dedicated Server"
-	"LastUpdated"		"1581260567"
+	"LastUpdated"		"1583618657"
 	"UpdateResult"		"0"
-	"SizeOnDisk"		"86000990"
-	"buildid"		"4600057"
-	"LastOwner"		"76561199456146478"
-	"BytesToDownload"		"2818512"
-	"BytesDownloaded"		"2818512"
+	"SizeOnDisk"		"86060941"
+	"buildid"		"4754137"
+	"LastOwner"		"76561199573726278"
+	"BytesToDownload"		"2608624"
+	"BytesDownloaded"		"2608624"
 	"AutoUpdateBehavior"		"0"
 	"AllowOtherDownloadsWhileRunning"		"0"
 	"ScheduledAutoUpdate"		"0"
@@ -23,13 +23,13 @@
 		}
 		"1204171"
 		{
-			"manifest"		"7355500304237802051"
+			"manifest"		"7807453660089703509"
 		}
 	}
 	"MountedDepots"
 	{
 		"1004"		"2144826912121883656"
-		"1204171"		"7355500304237802051"
+		"1204171"		"7807453660089703509"
 	}
 	"UserConfig"
 	{

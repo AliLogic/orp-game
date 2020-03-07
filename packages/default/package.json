@@ -2,7 +2,8 @@
 	"author": "Blue Mountains",
 	"version": "1.0",
 	"server_scripts": [
-		"WorldDoors.lua"
+		"WorldDoors.lua",
+		"VehicleEngine.lua"
 	],
 	"client_scripts": [
 		"Weapons.lua"
