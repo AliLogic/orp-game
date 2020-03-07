@@ -1214,6 +1214,13 @@ function OnPlayWeaponHitEffects(PlayerId, Weapon, HitType, HitId, StartLocation,
 
 		GetWorld():SpawnSoundAtLocation(USoundCue.LoadFromAsset(HitSounds["Water"]), HitLocation, HitNormal)
 
+	elseif HitType == HIT_DOOR then
+
+		local HitEffect = GetWorld():SpawnEmitterAtLocation(UParticleSystem.LoadFromAsset(HitParticles["Metal"]), HitLocation, HitNormal, FVector(1.0, 1.0, 1.0))
+		HitEffect:SetWorldScale3D(FVector(0.5, 0.5, 0.5))
+
+		GetWorld():SpawnSoundAtLocation(USoundCue.LoadFromAsset(HitSounds["Object"]), HitLocation)
+
 	end
 
 	local HitComponent = HitResult:GetComponent()
