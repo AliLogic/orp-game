@@ -67,6 +67,7 @@ function OnIndustryUnloaded(industry)
 		print("Industry ID "..industry.." unload unsuccessful!")
 	else
 		print("Industry ID "..industry.." unload successful!")
+		DestroyIndustryData(industry)
 	end
 end
 
@@ -109,7 +110,7 @@ function Industry_RefreshLabel(industry)
 
 	SetText3DText(IndustryData[industry].text3d,
 		string.format(
-			"[%s]\nStorage: %d / %d\nPrice: $%d / Unit", 
+			"[%s]\nStorage: %d / %d\nPrice: $%d / Unit",
 			Products[IndustryData[industry].products].name, IndustryData[industry].goods, IndustryData[industry].max_goods, IndustryData[industry].priceperunit
 		)
 	)
