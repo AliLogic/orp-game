@@ -44,7 +44,7 @@ function GetNearestVehicleAndDoor(passenger)
 
 		for _, vehicle in pairs(GetStreamedVehicles()) do
 
-			for seat = 2, #GetVehicleNumberOfSeats(vehicle), 1 do
+			for seat = 2, GetVehicleNumberOfSeats(vehicle), 1 do
 				vx, vy, vz = GetVehicleDoorLocation(vehicle, seat)
 
 				if (GetDistance3D(x, y, z, vx, vy, vz) < closest_dis) then
