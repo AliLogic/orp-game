@@ -108,22 +108,28 @@ function Inventory_GiveItem(player, item, amount)
 		return false
 	end
 
-	for i = 1, MAX_INVENTORY_SLOTS, 1 do
-		if InventoryData[player][i].id == 0 and InventoryData[player][i].itemid == 0 and InventoryData[player][i].amount == 0 then
+	local slot = Inventory_HasItem(player, item)
+	if (slot ~= false) then -- If the player already has the same item, then stack it!
+		InventoryData[player][slot].amount = (InventoryData[player][slot].amount + amount)
+	else -- If the player doesn't have the same item, then add it!
+		for i = 1, MAX_INVENTORY_SLOTS, 1 do
+			if InventoryData[player][i].id == 0 and InventoryData[player][i].itemid == 0 and InventoryData[player][i].amount == 0 then
 
-			InventoryData[player][i].itemid = item
-			InventoryData[player][i].amount = amount
+				InventoryData[player][i].itemid = item
+				InventoryData[player][i].amount = amount
 
-			local query = mariadb_prepare(sql, "INSERT INTO inventory (charid, itemid, amount) VALUES('?', '?', '?');",
-				PlayerData[player].id,
-				tonumber(item),
-				amount
-			)
+				local query = mariadb_prepare(sql, "INSERT INTO inventory (charid, itemid, amount) VALUES('?', '?', '?');",
+					PlayerData[player].id,
+					tonumber(item),
+					amount
+				)
 
-			mariadb_async_query(sql, query, OnInventoryItemAdded, player, i)
-			return true
+				mariadb_async_query(sql, query, OnInventoryItemAdded, player, i)
+				return true
+			end
 		end
 	end
+
 	return false
 end
 
