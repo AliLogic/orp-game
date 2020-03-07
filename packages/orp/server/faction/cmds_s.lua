@@ -351,6 +351,8 @@ local function cmd_handcuff(playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
 	end
 
+	lookupid = GetPlayerIdFromData(lookupid)
+
 	if lookupid == nil then
 		return AddPlayerChatUsage(playerid, "/h(and)cuff <playerid>")
 	end
@@ -363,8 +365,7 @@ local function cmd_handcuff(playerid, lookupid)
 		return AddPlayerChatError(playerid, "The specified player is not in your range.")
 	end
 
-	print("handcuffed: "..IsPlayerHandcuffed(lookupid))
-	if IsPlayerHandcuffed(lookupid) then
+	if IsPlayerHandcuffed(lookupid) == 1 then
 		AddPlayerChat(playerid, "You unhandcuffed "..GetPlayerName(lookupid)..".")
 		SetPlayerHandcuff(lookupid, 0)
 	else
