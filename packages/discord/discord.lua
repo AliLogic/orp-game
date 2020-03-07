@@ -6,11 +6,26 @@
 	dm - Direct Message
 	embed - embed
 ]]
-function SendMessageExperimental(channel, message)
+local token = "NjUxMzg0NDE2MDY4Njk4MTI4.XmPfcw.V-NApIHEtgEFn4tEYynMlkc0E_k"
+
+function SendMessage(channel, style, message)
 	channel = channel or nil
 	message = message or nil
+	style = style or "plain"
 
-	if channel == nil or message == nil then
+	if channel == nil or message == nil or channel == false then
+		return false
+	end
+
+	if style == "plain" then
+		message = message
+	elseif style == "code" then
+		message = '```'..message..'```'
+	elseif style == "quotation" then
+		message = '> '..message
+	elseif style == "dm" then
+		message = message
+	else
 		return false
 	end
 
@@ -25,54 +40,13 @@ function SendMessageExperimental(channel, message)
 	http_set_version(r, 11)
 	http_set_keepalive(r, true)
 	http_set_field(r, "User-Agent", "Onset Server "..GetGameVersionString())
-	http_set_field(r, "Authorization", "Bot NjUxMzg0NDE2MDY4Njk4MTI4.XmPfcw.V-NApIHEtgEFn4tEYynMlkc0E_k")
+	http_set_field(r, "Authorization", "Bot "..token)
 
 	local body = json_encode({content = message, tts = false})
 
 	http_set_body(r, body)
 	http_set_field(r, "Content-Length", string.len(body))
 	http_set_field(r, "Content-Type", "application/json; charset=utf-8")
-
-	if http_send(r, OnPostComplete, "OK", r) == false then
-		print("HTTP REQ NOT SENT :(")
-		http_destroy(r)
-		return false
-	else
-		return true
-	end
-end
-
-function SendMessage(channel, style, message)
-	channel = channel or nil
-	message = message or nil
-	style = style or "plain"
-
-	if channel == nil or message == nil or channel == false then
-		return false
-	end
-
-	if style ~= "plain" and style ~= "code" and style ~= "quotation" and style ~= "dm" then
-		return false
-	end
-
-	local r = http_create()
-	http_set_resolver_protocol(r, "ipv4")
-	http_set_protocol(r, "http")
-	http_set_host(r, "127.0.0.1")
-	http_set_port(r, 3997)
-	http_set_target(r, "/discord/post/")
-	http_set_verb(r, "post")
-	http_set_timeout(r, 30)
-	http_set_version(r, 11)
-	http_set_keepalive(r, true)
-	http_set_field(r, "User-Agent", "Onset Server "..GetGameVersionString())
-	http_set_field(r, "Token", "borkland!")
-
-	local body = json_encode({type = style, channelid = channel, message = message})
-
-	http_set_body(r, body)
-	http_set_field(r, "Content-Length", string.len(body))
-	http_set_field(r, "Content-Type", "application/json")
 
 	if http_send(r, OnPostComplete, "OK", r) == false then
 		print("HTTP REQ NOT SENT :(")
