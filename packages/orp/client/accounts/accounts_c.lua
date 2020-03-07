@@ -208,3 +208,14 @@ AddRemoteEvent("SetPlayerCameraLocation", function (x, y, z, a, status)
 	SetCameraRotation(0, a, 0, status)
 	SetIgnoreLookInput(status)
 end)
+
+AddEvent("OnRenderHUD", function()
+	local FlyingState, TopRotorSpeed, ForwardRate, UpRate, StrafeRate, TurnRate, UpSpeed, ForwardSpeed, RightSpeed, TurnSpeed, RollSpeed, PitchSpeed, YawSpeed = GetHeliDebugInfo(GetPlayerVehicle())
+
+	if FlyingState ~= false then
+		DrawText(4, 300, "State: "..FlyingState..", Rotor Speed: "..TopRotorSpeed)
+		DrawText(4, 320, "FR: "..ForwardRate..", UR: "..UpRate..", SR: "..StrafeRate..", TR: "..TurnRate)
+		DrawText(4, 340, "US: "..math.floor(UpSpeed)..", FW: "..math.floor(ForwardSpeed)..", RS: "..math.floor(RightSpeed)..", TS: "..TurnSpeed)
+		DrawText(4, 360, "RS: "..math.floor(RollSpeed)..", PS: "..math.floor(PitchSpeed)..", YS: "..YawSpeed)
+	end
+end)

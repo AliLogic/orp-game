@@ -371,6 +371,7 @@
         "SetCameraViewDistance",
         "HIT_DOOR",
         "GetDoorPropertyValue",
-        "SetDoorPropertyValue"
+        "SetDoorPropertyValue",
+        "GetHeliDebugInfo"
     ]
 }
