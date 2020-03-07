@@ -197,20 +197,20 @@ end)
 
 function OnFuelTick()
 
-	for v = 1, #VehicleData, 1 do
-		if VehicleData[v] ~= nil then
-			if GetVehicleEngineState(v) == true then
-				if VehicleData[v].fuel > 0 then
-					VehicleData[v].fuel = (VehicleData[v].fuel - 1)
+	for k, v in pairs(VehicleData) do
+		if v.type == VEHICLE_TYPE_NORMAL then
+			if GetVehicleEngineState(v.vid) == true then
+				if v.fuel > 0 then
+					v.fuel = (v.fuel - 1)
 
-					if VehicleData[v].fuel <= 5 then
+					if v.fuel <= 5 then
 
-						AddPlayerChat(GetVehicleDriver(v), "This vehicle is low on fuel. You must visit a fuel station and refuel it!");
+						AddPlayerChat(GetVehicleDriver(v.vid), "This vehicle is low on fuel. You must visit a fuel station and refuel it!");
 					end
-				elseif VehicleData[v].fuel <= 0 then
-					VehicleData[v].fuel = 0
-					StopVehicleEngine(v)
-					AddPlayerChat(GetVehicleDriver(v), "This vehicle has run out of fuel!");
+				elseif v.fuel <= 0 then
+					v.fuel = 0
+					StopVehicleEngine(v.vid)
+					AddPlayerChat(GetVehicleDriver(v.vid), "This vehicle has run out of fuel!");
 				end
 			end
 		end

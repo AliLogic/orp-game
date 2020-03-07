@@ -78,7 +78,7 @@ function CreateVehicleData(vehicle)
 	VehicleData[vehicle].g = 0
 	VehicleData[vehicle].b = 0
 
-	VehicleData[vehicle].fuel = 0
+	VehicleData[vehicle].fuel = 100
 
 	VehicleData[vehicle].callsign = 0
 
