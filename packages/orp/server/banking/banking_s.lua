@@ -60,10 +60,10 @@ local function OnAtmCreated(index, x, y, z, h)
 	ATMData[index].y = y
 	ATMData[index].z = z
 
-	ATMData[index].text3d = CreateText3D("ATM ("..ATMData[index].id..")\n/atm", 18, ATMData[index].x, ATMData[index].y, ATMData[index].z + 200, 0, 0, 0)
+	ATMData[index].text3d = CreateText3D("ATM ("..index..")\n/atm", 12, ATMData[index].x, ATMData[index].y, ATMData[index].z + 200, 0, 0, 0)
 end
 
-function ATM_Create(player, x, y, z, h)
+function ATM_Create(x, y, z, h)
 	local index = GetFreeAtmId()
 	if index == 0 then
 		return false
@@ -71,6 +71,8 @@ function ATM_Create(player, x, y, z, h)
 
 	local query = mariadb_prepare(sql, "INSERT INTO atm VALUES(?, ?, ?, ?, 0.0, ?, 0.0);", 494, x, y, z, h)
 	mariadb_async_query(sql, query, OnAtmCreated, index, x, y, z, h)
+
+	return index
 end
 
 function ATM_Nearest(playerid)
@@ -109,7 +111,7 @@ local function LoadATM(i)
 	--local ry = tonumber(result["ry"])
 	--local rz = tonumber(result["rz"])
 
-	ATMData[index].text3d = CreateText3D("ATM ("..ATMData[index].id..")\n/atm", 18, ATMData[index].x, ATMData[index].y, ATMData[index].z + 200, 0, 0, 0)
+	ATMData[index].text3d = CreateText3D("ATM ("..index..")\n/atm", 12, ATMData[index].x, ATMData[index].y, ATMData[index].z + 200, 0, 0, 0)
 end
 
 function OnAtmLoaded()
@@ -156,14 +158,4 @@ AddRemoteEvent("iwb:OnClientWithdraw", function (playerid, amount)
 	AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_DARKGREEN().."\">ATM: Thank you for using our services at the Imminent Wealth Bank, see you soon!</>")
 
 	CallRemoteEvent(playerid, "iwb:OnServerATMAction", GetPlayerBankCash(playerid))
-end)
-
--- Commands
-AddCommand("atm", function (player)
-
-	if ATM_Nearest(player) ~= 0 then
-		return AddPlayerChatError(player, "You are not near any ATMs.")
-	end
-
-	CallRemoteEvent(player, "iwb:opengui", GetPlayerCash(player), GetPlayerBankCash(player))
 end)

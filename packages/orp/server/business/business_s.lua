@@ -128,7 +128,7 @@ function Business_Create(player, type, enterable, price, name)
 	local x, y, z = GetPlayerLocation(player)
 
 	if enterable == 0 then
-		BusinessData[index].text3d = CreateText3D(string.format("%s %d\n/buy", BusinessData[index].name, index), 17, x, y, z, 0, 0, 0)
+		BusinessData[index].text3d = CreateText3D(string.format("%s %d\n/buy", BusinessData[index].name, index), 12, x, y, z, 0, 0, 0)
 
 		local query = mariadb_prepare(sql, "INSERT INTO businesses (name, type, enterable, price, mx, my, mz) VALUES ('?', ?, ?, ?, '?', '?', '?');",
 			name, type, enterable, price, x, y, z
@@ -137,7 +137,7 @@ function Business_Create(player, type, enterable, price, name)
 	else
 		-- For enterable == 1, set it whenever they set a entrance (ex ey ez) to the business. (done)
 		local a = GetPlayerHeading(player)
-		BusinessData[index].text3d = CreateText3D(string.format("%s %d", BusinessData[index].name, index), 17, x, y, z, 0, 0, 0)
+		BusinessData[index].text3d = CreateText3D(string.format("%s %d", BusinessData[index].name, index), 12, x, y, z, 0, 0, 0)
 
 		local query = mariadb_prepare(sql, "INSERT INTO businesses (name, type, enterable, price, ex, ey, ez, ea) VALUES ('?', ?, ?, ?, '?', '?', '?', '?');",
 			name, type, enterable, price, x, y, z, a
@@ -211,7 +211,7 @@ function Business_Load(i)
 
 	if BusinessData[business].enterable == 0 then
 		BusinessData[business].text3d = CreateText3D(string.format("%s\n/buy", BusinessData[business].name), 
-		17, BusinessData[business].mx, BusinessData[business].my, BusinessData[business].mz, 0, 0, 0)
+		12, BusinessData[business].mx, BusinessData[business].my, BusinessData[business].mz, 0, 0, 0)
 	end
 
 	if BusinessData[business].markerid ~= 0 then

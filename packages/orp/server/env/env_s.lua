@@ -21,7 +21,7 @@ EnvFog = 0
 local apikey = '4e444684a31d5a4b581548a901e6f0e8'
 local url = 'http://api.openweathermap.org/data/2.5/weather?q=Nevada,us&APPID='
 
-http_set_user_agent("myCustomPlugin/1.0")
+-- http_set_user_agent("myCustomPlugin/1.0")
 
 -- http://api.openweathermap.org/data/2.5/weather?q=Nevada,us&APPID=4e444684a31d5a4b581548a901e6f0e8
 
@@ -30,7 +30,7 @@ http_set_user_agent("myCustomPlugin/1.0")
 local function UpdateTime()
 	local t = os.date ("*t")
 
-	EnvHour = t.hour
+	-- EnvHour = t.hour
 	EnvMin = t.min
 	EnvTemperature = 30
 

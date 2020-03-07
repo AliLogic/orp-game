@@ -10,22 +10,37 @@ Contributors:
 * Blue Mountains GmbH
 ]]--
 
+local PlayerCamera = 1
+
 AddEvent("OnPlayerSpawn", function(playerid)
 	SetPostEffect("MotionBlur", "Amount", 0.2)
+	SetPostEffect("ImageEffects", "GrainJitter", 0.0)
+	SetPostEffect("ImageEffects", "GrainIntensity", 0.0)
 
 	if IsGameDevMode() then
 		CallRemoteEvent("OnPlayerGameDevMode")
 	end
+
+	SetCameraViewDistance(350.0)
+	PlayerCamera = 1
 end)
 
 AddEvent("OnKeyPress", function (key)
 	if key == "V" then
-		local bEnable = not IsFirstPersonCamera()
-		EnableFirstPersonCamera(bEnable)
-		if bEnable then
-			SetNearClipPlane(14)
-		else
-			SetNearClipPlane(0)
+
+		if PlayerCamera == 1 then
+			SetCameraViewDistance(250.0)
+			PlayerCamera = 2
+		elseif PlayerCamera == 2 then
+			local bEnable = not IsFirstPersonCamera()
+			EnableFirstPersonCamera(bEnable)
+			if bEnable then
+				SetNearClipPlane(14)
+			else
+				SetNearClipPlane(0)
+				SetCameraViewDistance(350.0)
+				PlayerCamera = 1
+			end
 		end
 	end
 end)

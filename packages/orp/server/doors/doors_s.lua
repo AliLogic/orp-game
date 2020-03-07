@@ -32,6 +32,8 @@ function CreateDoorData(door_id)
 
 	DoorData[door_id].property = 0
 	DoorData[door_id].property_id = 0
+
+	DoorData[door_id].faction = 0
 end
 
 function DestroyDoorData(door_id)
@@ -68,6 +70,7 @@ function OnDoorCreated(door_id, modelid, x, y, z, a, dimension)
 	DoorData[door_id].model = modelid
 	DoorData[door_id].door = CreateDoor(modelid, x, y, z, a, true)
 	SetDoorDimension(DoorData[door_id].door, dimension)
+	SetDoorPropertyValue(DoorData[door_id].door, "index", door_id, true)
 
 	DoorData[door_id].x = x
 	DoorData[door_id].y = y
@@ -239,7 +242,9 @@ end
 
 AddEvent("OnPlayerInteractDoor", function(player, door, bWantsOpen)
 
-	if DoorData[door].is_locked == 1 then
+	local doorId = GetDoorPropertyValue(door, "index")
+
+	if DoorData[doorId].is_locked == 1 then
 		return ShowFooterMessage(player, "This door is locked!", colour.COLOUR_LIGHTRED())
 	end
 

@@ -102,12 +102,8 @@ function updateValue(player, value, newvalue) {
 }
 
 function removePlayers() {
-
-	$(`.table .body .data .columns .column`).remove();
-	$(`.table .body .data`).addClass(`.columns .column`)
-	/*players.forEach((index) => {
-		$(`.table .body .data #${index}`).remove();
-	});*/
+	
+	$(`.table .body .data`).html('');
 	players = [];
 	return true;
 }

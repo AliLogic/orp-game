@@ -294,7 +294,7 @@ local function cmd_m(playerid, ...)
 	local rankId = PlayerData[playerid].faction_rank
 	local x, y, z = GetPlayerLocation(playerid)
 
-	AddPlayerChatRange(x, y, 2000.0, FactionRankData[factionId][rankId].rank_name .." " .. GetPlayerName(playerid) .. " (megaphone): "..msg)
+	AddPlayerChatRange(x, y, 2000.0, "<span color=\""..colour.COLOUR_YELLOW().."\">" .. GetPlayerName(playerid) .. " (megaphone): " .. msg .. "</>")
 end
 AddCommand("m", cmd_m)
 AddCommand("megaphone", cmd_m)
@@ -351,6 +351,8 @@ local function cmd_handcuff(playerid, lookupid)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: You must be a cop to use this command.</>")
 	end
 
+	lookupid = GetPlayerIdFromData(lookupid)
+
 	if lookupid == nil then
 		return AddPlayerChatUsage(playerid, "/h(and)cuff <playerid>")
 	end
@@ -369,7 +371,7 @@ local function cmd_handcuff(playerid, lookupid)
 	else
 		AddPlayerChat(playerid, "You handcuffed "..GetPlayerName(lookupid)..".")
 		AddPlayerChat(lookupid, GetPlayerName(playerid).." handcuffed you.")
-		SetPlayerHandcuff(lookupid, 0)
+		SetPlayerHandcuff(lookupid, 1)
 	end
 end
 AddCommand("hcuff", cmd_handcuff)
@@ -448,7 +450,7 @@ AddCommand("f", function(playerid, ...)
 		return AddPlayerChat(playerid, "<span color=\""..colour.COLOUR_LIGHTRED().."\">Error: Message has invalid length 128")
 	end]]--t
 
-	AddPlayerChatFaction(FactionData[factionid].id, "(( "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))")
+	AddPlayerChatFaction(FactionData[factionid].id, "<span color=\""..colour.COLOUR_LIGHTBLUE().."\">(( "..FactionRankData[factionid][faction_rank].rank_name.." "..GetPlayerName(playerid).." ("..playerid.."): "..msg.." ))</>")
 end)
 
 local function cmd_acf(player, maxrank, shortname, ...)
@@ -885,6 +887,8 @@ AddCommand("flocker", function (playerid)
 	if (not IsPlayerInRangeOfPoint(playerid, 150.0, FactionData[factionid].locker_x, FactionData[factionid].locker_y, FactionData[factionid].locker_z)) then
 		return AddPlayerChatError(playerid, "You are not near your faction locker.")
 	end
+
+	AddPlayerChat(playerid, "Add a faction locker dialog here.")
 end)
 
 AddCommand("bandage", function (playerid)

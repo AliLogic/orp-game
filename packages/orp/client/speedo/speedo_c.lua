@@ -1,11 +1,14 @@
-local speedo = CreateWebUI(0, 0, 0, 0, 1, 60)
-SetWebAlignment(speedo, 0, 0)
-SetWebAnchors(speedo, 0, 0, 1, 1)
-SetWebURL(speedo, "http://asset/"..GetPackageName().."/client/speedo/speedo.html")
-SetWebVisibility(speedo, WEB_HIDDEN)
-
+local speedo = 0
 local speedoReady = false
 local speedoToggleStatus = false -- Its not visible.
+
+AddEvent("OnPackageStart", function()
+	speedo = CreateWebUI(0, 0, 0, 0, 1, 60)
+	SetWebAlignment(speedo, 0, 0)
+	SetWebAnchors(speedo, 0, 0, 1, 1)
+	SetWebURL(speedo, "http://asset/"..GetPackageName().."/client/speedo/speedo.html")
+	SetWebVisibility(speedo, WEB_HIDDEN)
+end)
 
 AddEvent("OnPackageStop", function()
 	DestroyWebUI(speedo)

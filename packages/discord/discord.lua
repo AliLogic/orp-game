@@ -72,7 +72,7 @@ function SendMessage(channel, style, message)
 
 	http_set_body(r, body)
 	http_set_field(r, "Content-Length", string.len(body))
-	http_set_field(r, "Content-Type", "application/json; charset=utf-8")
+	http_set_field(r, "Content-Type", "application/json")
 
 	if http_send(r, OnPostComplete, "OK", r) == false then
 		print("HTTP REQ NOT SENT :(")
@@ -108,7 +108,7 @@ function SendEmbed(channel, embed)
 
 	http_set_body(r, body)
 	http_set_field(r, "Content-Length", string.len(body))
-	http_set_field(r, "Content-Type", "application/json; charset=utf-8")
+	http_set_field(r, "Content-Type", "application/json")
 
 	if http_send(r, OnPostComplete, "OK", r) == false then
 		print("HTTP REQ NOT SENT :(")
@@ -142,7 +142,7 @@ function OnPostComplete(a, http)
 		print("OnHttpRequestComplete succeeded for id", http)
 		print_active_results(http)
 	end
-	
+
 	http_destroy(http)
 end
 
@@ -150,7 +150,7 @@ function print_active_results(http)
 	local body = http_result_body(http)
 	local header = http_result_header(http)
 	local status = http_result_status(http)
-	
+
 	print("\tBody: ", body)
 	print("\tHTTP Status: ", status)
 	print("\t Headers:")

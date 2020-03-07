@@ -306,10 +306,22 @@ function OnCharacterLoaded(player, id)
 		LoadPlayerKeys(player)
 		LoadPlayerLicenses(player)
 
+		SetPlayerGender(player)
+
 		AddPlayerChat(player, "<span color=\""..colour.COLOUR_PMOUT().."\" style=\"bold italic\" size=\"15\">Welcome back to Onset Roleplay, "..PlayerData[player].firstname.." "..PlayerData[player].lastname..".</>")
 
 		SetPlayerLoggedIn(player) -- This function deals with the character spawn (teleport)
 	end
+end
+
+function SetPlayerGender(player)
+	local is_male = true
+
+	if (PlayerData[player].gender == 1) then
+		is_male = false
+	end
+
+	CallRemoteEvent(player, "SetPlayerGenderVoice", is_male)
 end
 
 function CreatePlayerData(player)
@@ -339,6 +351,7 @@ function CreatePlayerData(player)
 
 	PlayerData[player].gender = 0
 	PlayerData[player].death_state = CHARACTER_STATE_ALIVE
+	PlayerData[player].char_state = 0
 
 	PlayerData[player].level = 1
 	PlayerData[player].exp = 0
@@ -383,10 +396,11 @@ function CreatePlayerData(player)
 	PlayerData[player].assistance = 0
 	PlayerData[player].faction_inviter = 0
 	PlayerData[player].harvesting = 0
+	PlayerData[player].tutorial = 0
 
 	CreatePlayerClothingData(player)
 
-	print("Data created for: "..player)
+	print("Data created for: " .. player)
 end
 
 function CreateCharacterData(player, character)
@@ -461,6 +475,75 @@ function DestroyPlayerData(player)
 	print("Data destroyed for: "..player)
 end
 
+function SetPlayerTutorial(playerid)
+
+	-- Validation checks
+
+	if (not IsValidPlayer(playerid)) then
+		return
+	end
+
+	if (PlayerData[playerid].tutorial == 0) then
+		return
+	end
+
+	-- Initialization
+
+	local tutorial_state = PlayerData[playerid].tutorial
+
+	-- Actual function
+
+	if (tutorial_state == 1) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 122371.22, 99170.25, 1668.49, 265, true)
+		AddPlayerChat(playerid, "Welcome to Onset Roleplay! Here, we strive to provide you with the best experience possible.")
+		AddPlayerChat(playerid, "We can see that it is your first time on the server! To proceed to the tutorial press [ENTER] to continue, otherwise, press [BUTTON] to skip!")
+		AddPlayerChat(playerid, "<span style=\"bold\">Please note: We highly recommend you view the tutorial, as it will prepare you for the journey ahead.</>")
+	elseif (tutorial_state == 2) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 163143.81, 188802.39, 1329.94, 126, true)
+		AddPlayerChat(playerid, "Around the city of [PLACE NAME] you will find various dealerships, here, you can purchase a nice set of wheels to get around.")
+		AddPlayerChat(playerid, "Once you have acquired a sufficient amount of money, come on down to any of the dealership icons you see on your mini-map and step into the [ICON?],")
+		AddPlayerChat(playerid, "here you will be presented with all of the information required to make your purchase.")
+	elseif (tutorial_state == 3) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 195960.25, 178873.54, 1327.15, -127.76, true)
+		AddPlayerChat(playerid, "Want your own place to sit and relax? Or perhaps a business to start earning some money whilst giving back to the community?")
+		AddPlayerChat(playerid, "Side note: You can also use our advertisement system (/ad) and deal with property owners directly.")
+		AddPlayerChat(playerid, "Come on down to the lettings building located on your mini-map, here you will see all of the properties around [PLACE NAME] that are currently for sale!")
+	elseif (tutorial_state == 4) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 195883.375, 209910.359375, 1328.90, -106, true)
+		AddPlayerChat(playerid, "This is the [DMV NAME], located in [AREA], this building is represented by the [ICON] on the mini-map!")
+		AddPlayerChat(playerid, "If you want to remain on the correct side of the law, you'll want to obtain a license to operate your vehicle!")
+		AddPlayerChat(playerid, "For a small fee of [$FEE], you can take the practical and theory test, if you pass successfully, you will then be eligible to drive on the road legally.")
+		AddPlayerChat(playerid, "<span style=\"bold\">Side note: A license is not mandatory, however you may find yourself in trouble with law enforcement for driving without one!</>")
+	elseif (tutorial_state == 5) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 212473.65, 187311.0, 1326.94, 58.43, true)
+		AddPlayerChat(playerid, "Upon first stepping into the world, you will begin with a [ITEM] which contains [X] spaces. This can be viewed by pressing the [KEY] key. Your inventory is important, it allows you to interact with the world around you.")
+		AddPlayerChat(playerid, "If you wish to increase your inventory spaces, you will need to purchase additional carrier items such as a backpack, or a brief-case, which can be purchased from various stores around the city!")
+		AddPlayerChat(playerid, "<span style=\"bold\">Side note: All items shown in your inventory are an accurate representation of what your character is holding, that means that you MUST roleplay appropriately.</>")
+	elseif (tutorial_state == 6) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 212473.65, 187311.0, 1326.94, 58.43, true)
+		AddPlayerChat(playerid, "Struggling to make income whilst unemployed, not looking to oppose the law to make a pretty penny? Understandable! Come on down to the job centre, located on your mini-map by the [ICON].")
+		AddPlayerChat(playerid, "Here, you can find a side-job which will provide you with a generous income to begin building your life.")
+		AddPlayerChat(playerid, "Here, you can find employment in the following areas:")
+		AddPlayerChat(playerid, "- Delivery Driving")
+		AddPlayerChat(playerid, "- Trucking")
+		AddPlayerChat(playerid, "- Taxi Cab")
+		AddPlayerChat(playerid, "- Fishing")
+		AddPlayerChat(playerid, "- Mechanic")
+		AddPlayerChat(playerid, "<span style=\"bold\">Side note: When using a side-job, it is expected that you roleplay appropriately whilst conducting these jobs, this is a roleplay server after all.</>")
+	elseif (tutorial_state == 7) then
+		CallRemoteEvent(playerid, "SetPlayerCameraLocation", 122371.22, 99170.25, 1668.49, 265, true)
+		AddPlayerChat(playerid, "You have completed the tutorial.  Thanks for choosing Onset Roleplay...")
+		PlayerData[playerid].char_state = 1 -- Tutorial completed
+		SetPlayerIntro(playerid)
+		return
+	end
+
+	Delay(20 * 1000, function ()
+		PlayerData[playerid].tutorial = (tutorial_state + 1)
+		SetPlayerTutorial(playerid)
+	end)
+end
+
 function SetPlayerIntro(player)
 
 	local query = mariadb_prepare(sql, "UPDATE characters SET char_state = ? WHERE id = ? LIMIT 1;",
@@ -471,17 +554,12 @@ function SetPlayerIntro(player)
 
 	if (PlayerData[player].char_state == 0) then
 
-		AddPlayerChat(player, "Hey and welcome to Onset Roleplay.  Thank you for choosing Onset Roleplay as your server to roleplay at.")
-		AddPlayerChat(player, "This is just a sample introduction message that will ask you to if you wish to take a tour of the server or not.")
-
-		PlayerData[player].char_state = 1 -- Skipping the tutorial code for now
-
-		Delay(10 * 1000, function (player)
-			SetPlayerIntro(player)
-		end, player)
+		PlayerData[player].tutorial = 1
+		SetPlayerTutorial(player)
 
 	elseif (PlayerData[player].char_state == 1) then
 
+		CallRemoteEvent(player, "SetPlayerCameraLocation", 0, 0, 0, 0, false)
 		AddPlayerChat(player, "Hey you are proceeding towards the character creation panel...")
 		AddPlayerChat(player, "This is just a sample hint message to provide you basic information.")
 
@@ -511,7 +589,6 @@ function SetPlayerIntro(player)
 		PlayerData[player].a = LOC_DEFAULT_A
 
 		SetPlayerLoggedIn(player)
-
 	end
 
 	return
@@ -533,7 +610,12 @@ function SetPlayerLoggedIn(player)
 	SetGUICash(player, PlayerData[player].cash)
 	SetGUIBank(player, PlayerData[player].bank)
 
-	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, (PlayerData[player].z + 300))
+	FreezePlayer(player, true)
+	Delay(5 * 1000, function ()
+		FreezePlayer(player, false)
+	end)
+
+	SetPlayerLocation(player, PlayerData[player].x, PlayerData[player].y, (PlayerData[player].z + 100))
 	SetPlayerHeading(player, PlayerData[player].a)
 	SetPlayerDimension(player, 0)
 
@@ -592,7 +674,12 @@ function OnPlayerPayday(player)
 		PlayerData[player].minutes = 0
 		PlayerData[player].paycheck = 0
 
-		PlayerData[player].exp = (PlayerData[player].exp + 1)
+		if Server_IsDoubleXP() == 1 then
+			PlayerData[player].exp = (PlayerData[player].exp + 2)
+			AddPlayerChat(player, "You got double experience points for this hour.")
+		else
+			PlayerData[player].exp = (PlayerData[player].exp + 1)
+		end
 
 		local exp = PlayerData[player].exp
 		local level = PlayerData[player].level

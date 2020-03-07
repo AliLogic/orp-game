@@ -37,9 +37,9 @@ LOC_RESPAWN_X = 212101
 LOC_RESPAWN_Y = 159561
 LOC_RESPAWN_Z = 1322
 
-LOC_TICKETS_X = 175596
-LOC_TICKETS_Y = 211493
-LOC_TICKETS_Z = 1300
+LOC_TICKETS_X = 170724
+LOC_TICKETS_Y = 193970
+LOC_TICKETS_Z = 1397
 
 -- Functions
 
@@ -223,10 +223,10 @@ function RemovePlayerBankCash(player, amount)
 	end
 end
 
-function SetPlayerHandcuff(playerid, handcuff)
+function SetPlayerHandcuff(playerid, set)
 
-	PlayerData[playerid].handcuffed = handcuff
-	if handcuff == 1 then
+	PlayerData[playerid].handcuffed = set
+	if set == 1 then
 		SetPlayerAnimation(playerid, "CUFF")
 	else
 		SetPlayerAnimation(playerid, "STOP")

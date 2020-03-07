@@ -366,6 +366,12 @@
         "ATTACH_NONE",
         "SetPlayerRespawnTime",
         "GetVehicleDoorLocation",
-        "GetStreamedVehicles"
+        "GetStreamedVehicles",
+        "SetPlayerVoiceTone",
+        "SetCameraViewDistance",
+        "HIT_DOOR",
+        "GetDoorPropertyValue",
+        "SetDoorPropertyValue",
+        "GetHeliDebugInfo"
     ]
 }

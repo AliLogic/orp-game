@@ -14,6 +14,19 @@ local colour = ImportPackage('colours')
 
 -- Functions and Events
 
+AddCommand("alarm", function (playerid)
+
+	AddPlayerChat(playerid, "alarm 1")
+
+	local vehicleid = GetPlayerVehicle(playerid)
+
+	AddPlayerChat(playerid, "alarm "..vehicleid.."")
+	local v = FindIndexByVehicleId(vehicleid)
+
+	AddPlayerChat(playerid, "v "..v.."")
+	Vehicle_ToggleAlarm(v, true)
+end)
+
 AddCommand("listcars", function (playerid)
 
 	AddPlayerChat(playerid, "Vehicles registered to you, "..GetPlayerName(playerid).." ("..playerid.."):")
@@ -268,7 +281,7 @@ AddCommand("gotoveh", function (playerid, vehid)
 		return AddPlayerChatError(playerid, "Vehicle " .. vehid .. " doesn't exist.")
 	end
 
-	SetPlayerLocation(playerid, VehicleData[vehid].x, VehicleData[vehid].y, VehicleData[vehid].z + 20.0)
+	SetPlayerLocation(playerid, VehicleData[vehid].x, VehicleData[vehid].y, VehicleData[vehid].z + 200.0)
 
 	AddPlayerChat(playerid, "You have been teleported to vehicle ID: " .. vehid ..".")
 end)

@@ -11,6 +11,7 @@ Contributors:
 -- Variables
 
 local colour = ImportPackage('colours')
+local sound = ImportPackage('soundstreamer')
 
 VEHICLE_NAMES = {
 	"Premier", "Taxi", "Police Cruiser", "Luxe", "Regal", "Nascar", "Raptor", "Ambulance", "Garbage Truck", "Maverick",
@@ -18,10 +19,29 @@ VEHICLE_NAMES = {
 	"Maverick SE", "Patriot", "Cargo Lite Desert", "Cargo Lite Army", "Securicar", "Dacia"
 }
 
-VehicleData = {}
-MAX_VEHICLES = 4096
+VehicleData					= {}
+MAX_VEHICLES				= 4096
+
+VEHICLE_TYPE_NORMAL			= 1
+VEHICLE_TYPE_ADMIN			= 2
+
+VEHICLE_ALARM_TYPE_NONE	 	= 1
+VEHICLE_ALARM_TYPE_BASIC	= 2
+VEHICLE_ALARM_TYPE_ADVANCE	= 3
+VEHICLE_ALARM_TYPE_SPECIAL	= 4
 
 -- Functions
+
+function FindIndexByVehicleId(vehicleid)
+
+	for k, v in pairs(VehicleData) do
+		if v.vid == vehicleid then
+			return k
+		end
+	end
+
+	return 0
+end
 
 function GetVehicleModelEx(vehicleid)
 
@@ -45,6 +65,8 @@ end
 function CreateVehicleData(vehicle)
 	VehicleData[vehicle] = {}
 
+	VehicleData[vehicle].type = VEHICLE_TYPE_NORMAL
+
 	VehicleData[vehicle].id = 0
 	VehicleData[vehicle].vid = 0
 	VehicleData[vehicle].owner = 0
@@ -61,7 +83,7 @@ function CreateVehicleData(vehicle)
 	VehicleData[vehicle].g = 0
 	VehicleData[vehicle].b = 0
 
-	VehicleData[vehicle].fuel = 0
+	VehicleData[vehicle].fuel = 100
 
 	VehicleData[vehicle].callsign = 0
 
@@ -75,7 +97,7 @@ function CreateVehicleData(vehicle)
 
 	VehicleData[vehicle].impounded = 0
 	VehicleData[vehicle].being_repaired = 0
-	VehicleData[vehicle].alarm_object = 0
+	VehicleData[vehicle].alarm_id = 0
 end
 
 function DestroyVehicleData(vehicle)
@@ -129,8 +151,8 @@ function Vehicle_Create(model, plate, x, y, z, a)
 	end
 
 	SetVehicleRespawnParams(vehicleid, false, 0, false)
-	VehicleData[index].vid = vehicleid
 	SetVehicleLicensePlate(vehicleid, plate)
+	VehicleData[index].vid = vehicleid
 
 	local r, g, b, al = HexToRGBA(GetVehicleColor(vehicleid))
 
@@ -190,6 +212,8 @@ function Vehicle_Load(i)
 
 	SetVehicleRespawnParams(vehicle, false, 0, false)
 	CreateVehicleData(vehicle)
+
+	VehicleData[vehicle].type = VEHICLE_TYPE_NORMAL
 
 	VehicleData[vehicle].id = mariadb_get_value_name_int(i, "id")
 	VehicleData[vehicle].vid = vehicle
@@ -373,6 +397,57 @@ function Vehicle_IsOwner(playerid, vehicle)
 	return false
 end
 
+function Vehicle_ToggleAlarm(vehicleid, alarm, time)
+
+	if VehicleData[vehicleid] == nil then
+		return false
+	end
+
+	if VehicleData[vehicleid].alarm == VEHICLE_ALARM_TYPE_NONE then
+		return 0
+	end
+
+	if time == nil then
+		time = 5 * 1000
+	end
+
+	if alarm then
+		if VehicleData[vehicleid].alarm_id ~= 0 then
+			if sound.IsValidSound(VehicleData[vehicleid].alarm_id) then
+				sound.DestroySound3D(VehicleData[vehicleid].alarm_id)
+			end
+			VehicleData[vehicleid].alarm_id = 0
+		end
+
+		local x, y, z = GetVehicleLocation(VehicleData[vehicleid].vid)
+		VehicleData[vehicleid].alarm_id = sound.CreateSound3D("orp/client/sounds/car_alarm.mp3", x, y, z, 1000.0)
+
+		if VehicleData[vehicleid].alarm >= VEHICLE_ALARM_TYPE_ADVANCE then
+
+			if VehicleData[vehicleid].owner ~= 0 then
+				for k, v in pairs(PlayerData) do
+					if v.id == VehicleData[v].owner then
+						AddPlayerChat(v, "Your vehicle alarm is ringing!")
+					end
+				end
+			end
+
+			if VehicleData[vehicleid].alarm >= VEHICLE_ALARM_TYPE_SPECIAL then
+				-- AddPlayerChatFaction(factionId, "Vehicle alarm is ringing.")
+			end
+		end
+
+		Delay(time, function ()
+			Vehicle_ToggleAlarm(vehicleid, false, 0)
+		end)
+	else
+		sound.DestroySound3D(VehicleData[vehicleid].alarm_id)
+		VehicleData[vehicleid].alarm_id = 0
+	end
+
+	return
+end
+
 -- Events
 
 AddEvent('LoadVehicles', function ()
@@ -382,7 +457,9 @@ end)
 
 AddEvent('UnloadVehicles', function ()
 	for i = 1, #VehicleData, 1 do
-		Vehicle_Unload(i)
+		if VehicleData[i].type == VEHICLE_TYPE_NORMAL then
+			Vehicle_Unload(i)
+		end
 	end
 end)
 
@@ -407,23 +484,23 @@ AddEvent("OnPlayerEnterVehicle", function(playerid, vehicleid, seatid)
 	end
 end)
 
--- AddEvent("OnPlayerEnterVehicle", function(player, vehicle, seat)
 AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 	AddPlayerChat(player, "[DEBUG-S] OnPlayerStartEnterVehicle player: "..player..", vehicle: "..vehicle..", seat :"..seat.."")
-	if VehicleData[vehicle] ~= nil then
 
-		if VehicleData[vehicle].rental == 1 then
-			if VehicleData[vehicle].renter == 0 and PlayerData[player].renting == 0 then
-				SetPlayerInVehicle(player, vehicle, seat)
-				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">This is a rentable "..GetVehicleModelEx(vehicle).." for $50! Enter /rent to rent it.</>")
-				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Note: You will require a valid drivers license.</>")
-				return
-			end
+	local indexid = FindIndexByVehicleId(vehicle)
+	if VehicleData[indexid].type == VEHICLE_TYPE_ADMIN then
+		SetPlayerInVehicle(player, vehicle, seat)
+		AddPlayerChat(player, "[DEBUG-S] The vehicle is an admin vehicle so putting in!")
+	else
+		if VehicleData[vehicle].rental == 1 and VehicleData[vehicle].renter == 0 and PlayerData[player].renting == 0 then
+			SetPlayerInVehicle(player, vehicle, seat)
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">This is a rentable "..GetVehicleModelEx(vehicle).." for $50! Enter /rent to rent it.</>")
+			AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Note: You will require a valid drivers license.</>")
+			return
 		end
 
 		if VehicleData[vehicle].is_locked == true then
 			ShowFooterMessage(player, "This vehicle is locked!", colour.COLOUR_LIGHTRED())
-			--return false
 		else
 			if VehicleData[vehicle].renter ~= 0 and VehicleData[vehicle].renter == player then
 				AddPlayerChat(player, "<span color=\""..colour.COLOUR_DARKGREEN().."\">Welcome back to your rental vehicle, "..GetPlayerName(player)..".</>")
@@ -432,8 +509,5 @@ AddRemoteEvent("OnPlayerStartEnterVehicle", function (player, vehicle, seat)
 			AddPlayerChat(player, "[DEBUG-S] The vehicle is unlocked so putting them in!")
 			SetPlayerInVehicle(player, vehicle, seat)
 		end
-	else
-		AddPlayerChat(player, "[DEBUG-S] The vehicle is probably an admin vehicle so putting them in!")
-		SetPlayerInVehicle(player, vehicle, seat)
 	end
 end)

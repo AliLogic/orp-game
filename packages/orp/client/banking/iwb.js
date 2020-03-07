@@ -52,8 +52,7 @@ const hide = () => {
 }
 
 const setBank = (amount) => {
-	amount < 0 ? inBank -= (amount / -1) : inBank += amount;
-	$('#currentbalance').text(`$${numbersWithCommas(inBank)}`);
+	$('#currentbalance').text(`$${numbersWithCommas(amount)}`);
 };
 
 /*const setHand = (amount) => {
