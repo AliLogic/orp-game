@@ -70,6 +70,10 @@ AddEvent("OnPlayerStartEnterVehicle", function(vehicleid, seatid)
 	return false
 end)
 
+-- AddEvent("OnPlayerToggleVehicleLight", function ()
+-- 	return false
+-- end)
+
 AddEvent("OnKeyPress", function(key)
 	if key == "F" and not IsPlayerInVehicle() then
 

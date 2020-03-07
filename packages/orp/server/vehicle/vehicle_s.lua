@@ -16,7 +16,7 @@ local sound = ImportPackage('soundstreamer')
 VEHICLE_NAMES = {
 	"Premier", "Taxi", "Police Cruiser", "Luxe", "Regal", "Nascar", "Raptor", "Ambulance", "Garbage Truck", "Maverick",
 	"Pinnacle", "Sultan", "Bearcat Police", "Bearcat Camo", "Bearcat Medic", "Bearcat Military", "Barracks Police", "Barracks Camo", "Premier SE", 
-	"Maverick SE", "Patriot", "Cargo Lite Desert", "Cargo Lite Army", "Securicar", "Dacia"
+	"Maverick SE", "Patriot", "Cargo Lite Desert", "Cargo Lite Army", "Securicar", "Dacia", "Buzzard"
 }
 
 VehicleData					= {}
@@ -132,7 +132,7 @@ end
 function Vehicle_Create(model, plate, x, y, z, a)
 	model = tonumber(model)
 
-	if (model < 1 or model > 25) then
+	if (model < 1 or model > 26) then
 		return false
 	end
 
