@@ -32,6 +32,8 @@ function CreateDoorData(door_id)
 
 	DoorData[door_id].property = 0
 	DoorData[door_id].property_id = 0
+
+	DoorData[door_id].faction = 0
 end
 
 function DestroyDoorData(door_id)
