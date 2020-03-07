@@ -369,6 +369,8 @@
         "GetStreamedVehicles",
         "SetPlayerVoiceTone",
         "SetCameraViewDistance",
-        "HIT_DOOR"
+        "HIT_DOOR",
+        "GetDoorPropertyValue",
+        "SetDoorPropertyValue"
     ]
 }
