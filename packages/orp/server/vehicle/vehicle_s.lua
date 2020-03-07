@@ -19,11 +19,16 @@ VEHICLE_NAMES = {
 	"Maverick SE", "Patriot", "Cargo Lite Desert", "Cargo Lite Army", "Securicar", "Dacia"
 }
 
-VehicleData = {}
-MAX_VEHICLES = 4096
+VehicleData					= {}
+MAX_VEHICLES				= 4096
 
-VEHICLE_TYPE_NORMAL = 1
-VEHICLE_TYPE_ADMIN = 2
+VEHICLE_TYPE_NORMAL			= 1
+VEHICLE_TYPE_ADMIN			= 2
+
+VEHICLE_ALARM_TYPE_NONE	 	= 1
+VEHICLE_ALARM_TYPE_BASIC	= 2
+VEHICLE_ALARM_TYPE_ADVANCE	= 3
+VEHICLE_ALARM_TYPE_SPECIAL	= 4
 
 -- Functions
 
@@ -398,6 +403,10 @@ function Vehicle_ToggleAlarm(vehicleid, alarm, time)
 		return false
 	end
 
+	if VehicleData[vehicleid].alarm == VEHICLE_ALARM_TYPE_NONE then
+		return 0
+	end
+
 	if time == nil then
 		time = 5 * 1000
 	end
@@ -412,6 +421,21 @@ function Vehicle_ToggleAlarm(vehicleid, alarm, time)
 
 		local x, y, z = GetVehicleLocation(VehicleData[vehicleid].vid)
 		VehicleData[vehicleid].alarm_id = sound.CreateSound3D("orp/client/sounds/car_alarm.mp3", x, y, z, 1000.0)
+
+		if VehicleData[vehicleid].alarm >= VEHICLE_ALARM_TYPE_ADVANCE then
+
+			if VehicleData[vehicleid].owner ~= 0 then
+				for k, v in pairs(PlayerData) do
+					if v.id == VehicleData[v].owner then
+						AddPlayerChat(v, "Your vehicle alarm is ringing!")
+					end
+				end
+			end
+
+			if VehicleData[vehicleid].alarm >= VEHICLE_ALARM_TYPE_SPECIAL then
+				-- AddPlayerChatFaction(factionId, "Vehicle alarm is ringing.")
+			end
+		end
 
 		Delay(time, function ()
 			Vehicle_ToggleAlarm(vehicleid, false, 0)
