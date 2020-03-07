@@ -1,10 +1,4 @@
-local web = CreateWebUI(0, 0, 0, 0, 1, 1)
-SetWebAlignment(web, 0, 0)
-SetWebAnchors(web, 0, 0, 1, 1)
-SetWebURL(web, "http://asset/"..GetPackageName().."/client/gui/gui.html")
-SetWebVisibility(web, WEB_HITINVISIBLE)
-
-local guiReady = false
+local web = 0
 
 AddEvent("OnPackageStop", function ()
 	DestroyWebUI(web)
@@ -14,13 +8,13 @@ AddRemoteEvent("DestroyGUI", function ()
 	DestroyWebUI(web)
 end)
 
-AddEvent("gui:ready", function ()
-	guiReady = true
-	CallRemoteEvent("gui:ready")
-end)
-
 AddEvent("OnPackageStart", function()
 	-- ShowHealthHUD(false)
+	web = CreateWebUI(0, 0, 0, 0, 1, 1)
+	SetWebAlignment(web, 0, 0)
+	SetWebAnchors(web, 0, 0, 1, 1)
+	SetWebURL(web, "http://asset/"..GetPackageName().."/client/gui/gui.html")
+	SetWebVisibility(web, WEB_HITINVISIBLE)
 end)
 
 -- function SetGUIHealth(health)

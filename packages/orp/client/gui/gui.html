@@ -34,10 +34,6 @@
 				if (money < 0) return;
 				$('#bank .container div').text(`$${numberWithCommas(money)}`);
 			}
-
-			$(document).ready(() => {
-				CallEvent("gui:ready");
-			});
 		</script>
 	</head>
 	<body>

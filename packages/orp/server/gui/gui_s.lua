@@ -1,10 +1,3 @@
-local guiReady = false
-
-AddRemoteEvent("gui:ready", function (player)
-	guiReady = true
-	AddPlayerChat(player, "GUIReady is now true!")
-end)
-
 AddEvent("OnPlayerQuit", function (player)
 	CallRemoteEvent(player, "DestroyGUI")
 end)
