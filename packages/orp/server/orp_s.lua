@@ -11,9 +11,10 @@ Contributors:
 ]]--
 
 local colour = ImportPackage('colours')
---local Discord = ImportPackage('discord')
+local Discord = ImportPackage('discord')
 
 --local dev_talk = 0
+local dev_talk = Discord.Channel("653324626977619968")
 
 AddEvent("OnPackageStart", function()
 	SetObjectScale(CreateObject(39, 122080, 90856, 1100), 0.75, 0.75, 0.75)
@@ -22,7 +23,8 @@ AddEvent("OnPackageStart", function()
 	local result = handle:read("*a")
 	handle:close() -- works and tested]]
 
-	--dev_talk = Discord.Channel("653324626977619968")
+	dev_talk = Discord.Channel("653324626977619968")
+	Discord.SendMessageExperimental(dev_talk, "This is a message sent from the Onset Game Server via the Discord API.")
 	--Discord.SendMessage(dev_talk, "plain", "Testing message as requested by daky")
 end)
 
