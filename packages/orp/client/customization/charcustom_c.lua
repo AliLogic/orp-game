@@ -89,9 +89,9 @@ AddEvent("OnWebLoadComplete", function (web)
 	end
 end)
 
-AddEvent("Customization_OnSubmit", function ()
+AddEvent("Customization_OnSubmit", function (shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
 
-	CallRemoteEvent("Customization_OnSubmit")
+	CallRemoteEvent("Customization_OnSubmit", shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
 end)
 
 AddRemoteEvent("Customization_Toggle", Customization_Toggle)

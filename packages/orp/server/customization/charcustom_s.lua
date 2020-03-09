@@ -41,7 +41,38 @@ AddRemoteEvent("Customization_OnReady", function (player)
 	Customization_Ready(player)
 end)
 
-AddRemoteEvent("Customization_OnSubmit", function (player)
+AddRemoteEvent("Customization_OnSubmit", function (player, shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+
+	AddPlayerChat(player, "Shirt: " .. shirt)
+	AddPlayerChat(player, "Pant: " .. pant)
+	AddPlayerChat(player, "Shoe: " .. shoe)
+	AddPlayerChat(player, "Skin: " .. skin)
+	AddPlayerChat(player, "Skin tone: " .. skin_tone)
+	AddPlayerChat(player, "Hair: " .. hair)
+	AddPlayerChat(player, "Hair colour: " .. hair_colour)
+
+	local colour = {}
+
+	skin_tone = skin_tone .. ","
+	for i in string:gmatch("(%d+),") do
+		table.insert(colour, i)
+	end
+
+	colour = {}
+	hair_colour = hair_colour .. ","
+	for i in string:gmatch("(%d+),") do
+		table.insert(colour, i)
+	end
+
+	PlayerClothingData[player].hair_color = RGB(colour[1], colour[2], colour[3])
+	PlayerClothingData[player].hair = hair
+	PlayerClothingData[player].pants = pant
+	PlayerClothingData[player].top = shirt
+	PlayerClothingData[player].shoes = shoe
+	PlayerClothingData[player].skin_color = RGB(colour[1], colour[2], colour[3])
+	PlayerClothingData[player].body = skin
+
+	SetPlayerClothing(player, player)
 
 	PlayerData[player].char_state = 2 -- Skipping the tutorial code for now
 
