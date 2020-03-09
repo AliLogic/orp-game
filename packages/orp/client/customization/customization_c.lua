@@ -147,10 +147,15 @@ AddEvent("Customization_DocumentReady", function ()
 	CallRemoteEvent("Customization_OnReady")
 end)
 
-AddEvent("Customization_OnSubmit", function (shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+AddEvent("Customization_OnSubmit", function (shirt, pant, shoe, skin, hair)
 
-	CallRemoteEvent("Customization_OnSubmit", shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+	CallRemoteEvent("Customization_OnSubmit", shirt, pant, shoe, skin, hair)
 end)
+
+-- AddEvent("Customization_OnSubmit", function (shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+
+-- 	CallRemoteEvent("Customization_OnSubmit", shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+-- end)
 
 AddRemoteEvent("Customization_Toggle", Customization_Toggle)
 AddRemoteEvent("Customization_Ready", Customization_Ready)

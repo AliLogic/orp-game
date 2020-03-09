@@ -137,7 +137,9 @@ $(document).ready(() => {
 	$('#submit').on('click', function (e) {
 		e.preventDefault();
 
-		CallEvent("Customization_OnSubmit", [lastShirt, lastPant, lastShoe, $('#skinslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastSkinRadio.css("background-color")).split(",")), $('#hairslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastHairRadio.css("background-color")).split(","))]);
+		CallEvent("Customization_OnSubmit", [lastShirt, lastPant, lastShoe, $('#skinslider').attr("max"), $('#hairslider').attr("max")]);
+
+		//CallEvent("Customization_OnSubmit", [lastShirt, lastPant, lastShoe, $('#skinslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastSkinRadio.css("background-color")).split(",")), $('#hairslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastHairRadio.css("background-color")).split(","))]);
 	});
 
 	CallEvent("Customization_DocumentReady");
