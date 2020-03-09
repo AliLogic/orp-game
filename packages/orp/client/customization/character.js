@@ -17,28 +17,28 @@ $(document).ready(() => {
 	$('#pantslabel').text(`${trousers.length === 0 ? '0' : '1'}/${trousers.length}`);
 	$('#shoeslabel').text(`${trousers.length === 0 ? '0' : '1'}/${shoes.length}`);
 
-	const setShirts = (shirtsArray) => {
+	function setShirts(shirtsArray) {
 		shirts = shirtsArray;
 		$('#shirtlabel').text(`${shirts.length === 0 ? '0' : '1'}/${shirts.length}`);
 		lastShirt = 1;
 	}
 
-	const setPants = (pantsArray) => {
+	function setPants(pantsArray) {
 		trousers = pantsArray;
 		$('#pantslabel').text(`${trousers.length === 0 ? '0' : '1'}/${trousers.length}`);
 	}
 
-	const setShoes = (shoesArray) => {
+	function setShoes(shoesArray) {
 		shoes = shoesArray;
 		$('#shoeslabel').text(`${trousers.length === 0 ? '0' : '1'}/${shoes.length}`);
 	}
 
-	const setHairAmount = (amount) => {
+	function setHairAmount(amount) {
 		$('#hairslider').attr("max", Number.isInteger(amount) ? amount : '1');
 		$('#hairlabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
 	}
 	
-	const setFaceAmount = (amount) => {
+	function setFaceAmount(amount) {
 		$('#faceslider').attr("max", Number.isInteger(amount) ? amount : '1');
 		$('#facelabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
 	}
