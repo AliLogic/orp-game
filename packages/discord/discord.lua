@@ -17,32 +17,41 @@ function SendMessage(channel, style, message)
 		return false
 	end
 
+	local r = http_create()
+	local body = nil
+
 	if style == "plain" then
 		message = message
+		http_set_target(r, "/api/v6/channels/"..channel.."/messages")
+		body = json_encode({content = message, tts = false})
 	elseif style == "code" then
 		message = '```'..message..'```'
+		http_set_target(r, "/api/v6/channels/"..channel.."/messages")
+		body = json_encode({content = message, tts = false})
 	elseif style == "quotation" then
 		message = '> '..message
+		http_set_target(r, "/api/v6/channels/"..channel.."/messages")
+		body = json_encode({content = message, tts = false})
 	elseif style == "dm" then
 		message = message
+		http_set_target(r, "/api/v6/users/@me/channels")
+		body = json_encode({recipient_id = channel})
 	else
+		body = nil
+		http_destroy(r)
 		return false
 	end
 
-	local r = http_create()
 	http_set_resolver_protocol(r, "ipv4")
 	http_set_protocol(r, "https")
 	http_set_host(r, "discordapp.com")
 	http_set_port(r, 443)
-	http_set_target(r, "/api/v6/channels/"..channel.."/messages")
 	http_set_verb(r, "post")
 	http_set_timeout(r, 30)
 	http_set_version(r, 11)
 	http_set_keepalive(r, true)
 	http_set_field(r, "User-Agent", "Onset Server "..GetGameVersionString())
 	http_set_field(r, "Authorization", "Bot "..token)
-
-	local body = json_encode({content = message, tts = false})
 
 	http_set_body(r, body)
 	http_set_field(r, "Content-Length", string.len(body))
@@ -120,7 +129,7 @@ function OnPostComplete(a, http)
 	http_destroy(http)
 end
 
-function print_active_results(http)
+--[[function print_active_results(http)
 	local body = http_result_body(http)
 	local header = http_result_header(http)
 	local status = http_result_status(http)
@@ -131,7 +140,7 @@ function print_active_results(http)
 	for k, v in pairs(header) do
 		print("\t", k, v)
 	end
-end
+end]]
 
 AddFunctionExport("SendMessage", SendMessage)
 AddFunctionExport("SendEmbed", SendEmbed)
