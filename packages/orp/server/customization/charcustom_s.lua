@@ -44,6 +44,8 @@ end)
 -- AddRemoteEvent("Customization_OnSubmit", function (player, shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
 AddRemoteEvent("Customization_OnSubmit", function (player, shirt, pant, shoe, skin, hair)
 
+	AddPlayerChat(player, "[server] Customization_OnSubmit")
+
 	local gender = PlayerData[player].gender
 	local colour = {}
 
