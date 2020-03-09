@@ -21,20 +21,20 @@ $(document).ready(() => {
 	$('#pantslabel').text(`${pants.length === 0 ? '0' : '1'}/${pants.length}`);
 	$('#shoeslabel').text(`${pants.length === 0 ? '0' : '1'}/${shoes.length}`);
 
-	$('.hairslider').on('change', function (e) {
-		e.preventDefault();
+	$('.hairslider').on('input', function (e) {
+		//e.preventDefault();
 		console.log("changed");
 
 		let count = $('#hairslider').attr("value");
-		$('#hairlabel').text(`${count}/${Number.isInteger(amount) ? amount : NaN}`);
+		$('#hairlabel').text(`${count}/${$('#faceslider').attr("max")}`);
 	});
 
 	$('.faceslider').on('change', function (e) {
-		e.preventDefault();
+		//e.preventDefault();
 		console.log("changed");
 
 		let count = $('#faceslider').attr("value");
-		$('#facelabel').text(`${count}/${Number.isInteger(amount) ? amount : NaN}`);
+		$('#facelabel').text(`${count}/${$('#faceslider').attr("max")}`);
 	});
 
 	$('.tabs ul li').on('click', function (e) {
