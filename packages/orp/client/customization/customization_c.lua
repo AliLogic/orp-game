@@ -18,6 +18,12 @@ local TexturesLoaded = {}
 
 -- Functions
 
+local function Rotate(rotation)
+
+	charAngle = charAngle + rotation
+	GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body"):SetRelativeRotation(FRotator(0.0, charAngle, 0.0))
+end
+
 local function Customization_Toggle(status)
 
 	if status then
@@ -34,7 +40,10 @@ local function Customization_Toggle(status)
 		DestroyWebUI(customUI)
 		customUI = 0
 		customizationOpen = false
+		charAngle = 0
 	end
+
+	Rotate(0)
 end
 
 local function Customization_Ready(shirts, pants, shoes, hair, face)
@@ -50,12 +59,6 @@ local function Customization_Ready(shirts, pants, shoes, hair, face)
 	ExecuteWebJS(customUI, "setFaceAmount("..face..")")
 
 	SetWebVisibility(customUI, WEB_VISIBLE)
-end
-
-local function Rotate(rotation)
-
-	charAngle = charAngle + rotation
-	GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body"):SetRelativeRotation(FRotator(0.0, charAngle, 0.0))
 end
 
 local function SetPlayerClothing(player, part, piece, r, g, b, a)
@@ -110,7 +113,7 @@ end)
 
 AddEvent("OnPackageStop", function()
 
-	for i = 1, #TexturesLoaded, 1 do
+	for i = 2, #TexturesLoaded, 1 do
 		TexturesLoaded[i]:Release()
 	end
 end)

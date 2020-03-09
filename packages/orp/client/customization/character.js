@@ -21,6 +21,22 @@ $(document).ready(() => {
 	$('#pantslabel').text(`${pants.length === 0 ? '0' : '1'}/${pants.length}`);
 	$('#shoeslabel').text(`${pants.length === 0 ? '0' : '1'}/${shoes.length}`);
 
+	$('.hairslider').on('change', function (e) {
+		e.preventDefault();
+		console.log("changed");
+
+		let count = $('#hairslider').attr("value");
+		$('#hairlabel').text(`${count}/${Number.isInteger(amount) ? amount : NaN}`);
+	});
+
+	$('.faceslider').on('change', function (e) {
+		e.preventDefault();
+		console.log("changed");
+
+		let count = $('#faceslider').attr("value");
+		$('#facelabel').text(`${count}/${Number.isInteger(amount) ? amount : NaN}`);
+	});
+
 	$('.tabs ul li').on('click', function (e) {
 		e.preventDefault();
 		console.log("clicked");
@@ -166,6 +182,7 @@ function setHairAmount(amount) {
 }
 
 function setFaceAmount(amount) {
+
 	$('#faceslider').attr("max", Number.isInteger(amount) ? amount : '1');
 	$('#facelabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
 }
