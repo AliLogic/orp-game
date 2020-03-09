@@ -55,11 +55,11 @@ AddRemoteEvent("Customization_OnSubmit", function (player, shirt, pant, shoe, sk
 	AddPlayerChat(player, "Skin: " .. skin + BODY_CONSTANTS[gender])
 	AddPlayerChat(player, "Hair: " .. hair + HAIR_CONSTANTS[gender])
 
+	PlayerClothingData[player].body = skin
 	PlayerClothingData[player].hair = hair
 	PlayerClothingData[player].pants = pant
 	PlayerClothingData[player].top = shirt
 	PlayerClothingData[player].shoes = shoe
-	PlayerClothingData[player].body = skin
 
 	SetPlayerClothing(player, player)
 

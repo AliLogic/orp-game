@@ -130,6 +130,10 @@ end)
 
 AddEvent("OnKeyPress", function (key)
 
+	if not customizationOpen then
+		return
+	end
+
 	if key == "A" then
 		Rotate(-3)
 	elseif key == "D" then
@@ -152,6 +156,8 @@ AddEvent("Customization_OnSubmit", function (shirt, pant, shoe, skin, hair)
 	AddPlayerChat("[client] Customization_OnSubmit")
 
 	CallRemoteEvent("Customization_OnSubmit", shirt, pant, shoe, skin, hair)
+
+	Customization_Toggle(false)
 end)
 
 -- AddEvent("Customization_OnSubmit", function (shirt, pant, shoe, skin, skin_tone, hair, hair_colour)

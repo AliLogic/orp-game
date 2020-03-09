@@ -17,7 +17,6 @@ $(document).ready(() => {
 	lastTab = $('.tabs ul li.is-active');
 	lastPage = $('#appearance');
 
-
 	$('#shirtlabel').text(`${shirts.length === 0 ? '0' : '1'}/${shirts.length}`);
 	$('#pantslabel').text(`${pants.length === 0 ? '0' : '1'}/${pants.length}`);
 	$('#shoeslabel').text(`${pants.length === 0 ? '0' : '1'}/${shoes.length}`);
@@ -106,7 +105,7 @@ $(document).ready(() => {
 		console.log(lastShoe);
 	});
 
-	$('button.button#pantleft').on('click', function (e) {
+	$('button.button#pantsleft').on('click', function (e) {
 		e.preventDefault();
 		console.log("pant left clicked");
 		console.log((pants.length - pants.length) + 1);
@@ -120,7 +119,7 @@ $(document).ready(() => {
 		console.log(lastPant);
 	});
 	
-	$('button.button#pantright').on('click', function (e) {
+	$('button.button#pantsright').on('click', function (e) {
 		e.preventDefault();
 		console.log("pant right clicked");
 		console.log(lastPant);
@@ -137,7 +136,7 @@ $(document).ready(() => {
 	$('#submit').on('click', function (e) {
 		e.preventDefault();
 
-		CallEvent("Customization_OnSubmit", lastShirt, lastPant, lastShoe, $('#faceslider').attr("max"), $('#hairslider').attr("max"));
+		CallEvent("Customization_OnSubmit", lastShirt, lastPant, lastShoe, $('#faceslider').attr("value"), $('#hairslider').attr("value"));
 
 		//CallEvent("Customization_OnSubmit", [lastShirt, lastPant, lastShoe, $('#faceslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastSkinRadio.css("background-color")).split(",")), $('#hairslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastHairRadio.css("background-color")).split(","))]);
 	});
