@@ -55,7 +55,7 @@ end
 local function Rotate(rotation)
 
 	charAngle = charAngle + rotation
-	GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body"):SetRelativeRotation(FRotator(0.0, rotation, 0.0))
+	GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body"):SetRelativeRotation(FRotator(0.0, charAngle, 0.0))
 end
 
 local function SetPlayerClothing(player, part, piece, r, g, b, a)
