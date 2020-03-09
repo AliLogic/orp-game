@@ -26,8 +26,10 @@ local function Customization_Toggle(status)
 		SetWebAnchors(customUI, 0, 0, 1, 1)
 		SetWebURL(customUI, "http://asset/"..GetPackageName().."/client/customization/character.html")
 		SetWebVisibility(customUI, WEB_VISIBLE)
+		SetInputMode(INPUT_GAMEANDUI)
 		customizationOpen = true
 	else
+		SetInputMode(INPUT_GAME)
 		SetWebVisibility(customUI, WEB_HIDDEN)
 		DestroyWebUI(customUI)
 		customUI = 0
@@ -138,6 +140,7 @@ end)
 AddEvent("OnWebLoadComplete", function (web)
 
 	if web == customUI then
+		SetInputMode(INPUT_GAMEANDUI)
 		SetWebVisibility(customUI, WEB_VISIBLE)
 		ShowMouseCursor(true)
 		SetIgnoreLookInput(true)
