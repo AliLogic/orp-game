@@ -137,17 +137,14 @@ AddEvent("OnKeyPress", function (key)
 	end
 end)
 
-AddEvent("OnWebLoadComplete", function (web)
+AddEvent("Customization_DocumentReady", function ()
+	SetInputMode(INPUT_GAMEANDUI)
+	SetWebVisibility(customUI, WEB_VISIBLE)
+	ShowMouseCursor(true)
+	SetIgnoreLookInput(true)
+	SetIgnoreMoveInput(true)
 
-	if web == customUI then
-		SetInputMode(INPUT_GAMEANDUI)
-		SetWebVisibility(customUI, WEB_VISIBLE)
-		ShowMouseCursor(true)
-		SetIgnoreLookInput(true)
-		SetIgnoreMoveInput(true)
-
-		CallRemoteEvent("Customization_OnReady")
-	end
+	CallRemoteEvent("Customization_OnReady")
 end)
 
 AddEvent("Customization_OnSubmit", function (shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
