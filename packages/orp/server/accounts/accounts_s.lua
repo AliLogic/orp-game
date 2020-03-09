@@ -563,11 +563,7 @@ function SetPlayerIntro(player)
 		AddPlayerChat(player, "Hey you are proceeding towards the character creation panel...")
 		AddPlayerChat(player, "This is just a sample hint message to provide you basic information.")
 
-		PlayerData[player].char_state = 2 -- Skipping the tutorial code for now
-
-		Delay(10 * 1000, function (player)
-			SetPlayerIntro(player)
-		end, player)
+		Customization_Toggle(player)
 
 	elseif (PlayerData[player].char_state == 2) then
 
