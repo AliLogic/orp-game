@@ -9,16 +9,10 @@ Contributors:
 * Blue Mountains GmbH
 ]]--
 
--- WebUI
-local charcustom = CreateWebUI(0, 0, 0, 0, 1, 30)
-SetWebAlignment(charcustom, 0, 0)
-SetWebAnchors(charcustom, 0, 0, 1, 1)
-SetWebURL(charcustom, "http://asset/"..GetPackageName().."/client/customization/charcustom.html")
-SetWebVisibility(charcustom, WEB_HIDDEN)
-
 -- Declarations
+local charAngle = 0
+local customUI = 0
 local customizationOpen = false
-local customizationReady = false
 
 local hairColourOptions = {
     'FF6633', 'FFB399', 'FF33FF', 'FFFF99', '00B3E6',
@@ -34,59 +28,71 @@ local hairColourOptions = {
 }
 
 -- Functions
-function ToggleCustomization()
-	if customizationReady then
-		if customizationOpen then
-			customizationOpen = false
-			SetWebVisibility(charcustom, WEB_HIDDEN)
-			ExecuteWebJS(charcustom, 'toggleCustomization();')
-		else
-			customizationOpen = true
-			SetWebVisibility(charcustom, WEB_VISIBLE)
-			ExecuteWebJS(charcustom, 'toggleCustomization();')
-		end
+local function Customization_Toggle(status)
+
+	SetWebVisibility(customUI, WEB_HIDDEN)
+
+	if status then
+		customUI = CreateWebUI(0, 0, 0, 0, 1, 30)
+		SetWebAlignment(customUI, 0, 0)
+		SetWebAnchors(customUI, 0, 0, 1, 1)
+		SetWebURL(customUI, "http://asset/"..GetPackageName().."/client/customization/character.html")
+		customizationOpen = true
+	else
+		DestroyWebUI(customUI)
+		customUI = 0
+		customizationOpen = false
 	end
 end
 
-function SetDisplayName(name)
-	if customizationReady then
-		ExecuteWebJS(charcustom, 'setDisplayName('..name..');')
+local function Customization_Ready(shirts, pants, shoes, hair, face)
+
+	if customUI == 0 or not customizationOpen then
+		return
 	end
+
+	ExecuteWebJS(customUI, "setShirts("..json_encode(shirts).."")
+	ExecuteWebJS(customUI, "setPants("..json_encode(pants).."")
+	ExecuteWebJS(customUI, "setShoes("..json_encode(shoes).."")
+	ExecuteWebJS(customUI, "setHairAmount("..hair.."")
+	ExecuteWebJS(customUI, "setFaceAmount("..face..")")
+
+	SetWebVisibility(customUI, WEB_VISIBLE)
 end
 
-function SetDisplaySliderOptions(id, options)
-	if customizationReady then
-		ExecuteWebJS(charcustom, "setDisplaySliderOptions("..id..", "..json_encode(options)..");")
-	end
+local function Rotate(rotation)
+
+	charAngle = charAngle + rotation
+	GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body"):SetRelativeRotation(FRotator(0.0, rotation, 0.0))
 end
-AddRemoteEvent('SetDisplaySliderOptions', SetDisplaySliderOptions)
 
 -- Events
-AddEvent('charcustom:ready', function ()
-	customizationReady = true
-end)
 
-AddEvent('charcustom:preview', function (id, value)
-	-- id = skincolor, hair, haircolor, shirt, pants, shoes
-	-- value = the value it should be set to.
-end)
+AddEvent("OnKeyPress", function (key)
 
-AddEvent('charcustom:finish', function (skinColor, ...)
-	-- hair, hairColour, shirt, pants, shoes
-	if skinColor == 0 then
-		-- One of the clothing options were not loaded in the JavaScript.
-	else
-		local args = {...}
-		local hair = args[1]
-		local hairColour = args[2]
-		local shirt = args[3]
-		local pants = args[4]
-		local shoes = args[5]
-
-		-- All their options with the corresponding values returned.
+	if key == "A" then
+		Rotate(-3)
+	elseif key == "D" then
+		Rotate(3)
 	end
 end)
 
-AddEvent('charcustom:exit', function ()
-	ToggleCustomization()
+AddEvent("OnWebLoadComplete", function (web)
+
+	if web == customUI then
+		SetWebVisibility(WEB_VISIBLE)
+		ShowMouseCursor(true)
+		SetIgnoreLookInput(true)
+		SetIgnoreMoveInput(true)
+
+		CallRemoteEvent("Customization_OnReady")
+	end
 end)
+
+AddEvent("Customization_OnSubmit", function ()
+
+	CallRemoteEvent("Customization_OnSubmit")
+end)
+
+AddRemoteEvent("Customization_Toggle", Customization_Toggle)
+AddRemoteEvent("Customization_Ready", Customization_Ready)

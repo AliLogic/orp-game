@@ -141,6 +141,7 @@ Shoes = {
 	"/Game/CharacterModels/Clothing/Meshes/SK_Shoes01",
 
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes01", -- Female
+	"/Game/CharacterModels/Female/Meshes/SK_Shoes02",
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes03",
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes04",
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes05",
