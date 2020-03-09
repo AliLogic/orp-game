@@ -10,19 +10,24 @@ end
 function Customization_Ready(player)
 
 	local gender = PlayerData[player].gender
+	local shirts = 0
+	local pants = 0
+	local shoes = 0
+	local hair = 0
+	local face = 0
 
 	if gender == 0 then -- Male
-		local shirts = 15
-		local pants = 5
-		local shoes = 3
-		local hair = 24
-		local face = 15
+		shirts = 15
+		pants = 5
+		shoes = 3
+		hair = 24
+		face = 15
 	else -- Female
-		local shirts = 14
-		local pants = 8
-		local shoes = 6
-		local hair = 3
-		local face = 3
+		shirts = 14
+		pants = 8
+		shoes = 6
+		hair = 3
+		face = 3
 	end
 
 
