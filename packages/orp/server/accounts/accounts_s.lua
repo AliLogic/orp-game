@@ -538,10 +538,10 @@ function SetPlayerTutorial(playerid)
 		return
 	end
 
-	Delay(20 * 1000, function ()
+	Delay(20 * 1000, function (playerid)
 		PlayerData[playerid].tutorial = (tutorial_state + 1)
 		SetPlayerTutorial(playerid)
-	end)
+	end, playerid)
 end
 
 function SetPlayerIntro(player)

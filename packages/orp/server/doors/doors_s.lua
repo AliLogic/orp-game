@@ -120,6 +120,7 @@ local function Door_Load(i)
 
 	DoorData[indexid].door = CreateDoor(DoorData[indexid].model, DoorData[indexid].x, DoorData[indexid].y, DoorData[indexid].z, DoorData[indexid].a, true)
 	SetDoorDimension(DoorData[indexid].door, DoorData[indexid].dimension)
+	SetDoorPropertyValue(DoorData[indexid].door, "index", indexid, true)
 
 	DoorData[indexid].property = mariadb_get_value_name_int(i, "property")
 	DoorData[indexid].property_id = mariadb_get_value_name_int(i, "property_id")

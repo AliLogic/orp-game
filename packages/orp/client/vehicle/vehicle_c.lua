@@ -10,7 +10,7 @@ Contributors:
 
 -- Variables
 
-local ENTER_DISTANCE = 300.0
+local ENTER_DISTANCE = 200.0
 
 -- Functions
 
@@ -44,7 +44,7 @@ function GetNearestVehicleAndDoor(passenger)
 
 		for _, vehicle in pairs(GetStreamedVehicles()) do
 
-			for seat = 2, #GetVehicleNumberOfSeats(vehicle), 1 do
+			for seat = 2, GetVehicleNumberOfSeats(vehicle), 1 do
 				vx, vy, vz = GetVehicleDoorLocation(vehicle, seat)
 
 				if (GetDistance3D(x, y, z, vx, vy, vz) < closest_dis) then
@@ -69,6 +69,10 @@ end
 AddEvent("OnPlayerStartEnterVehicle", function(vehicleid, seatid)
 	return false
 end)
+
+-- AddEvent("OnPlayerToggleVehicleLight", function ()
+-- 	return false
+-- end)
 
 AddEvent("OnKeyPress", function(key)
 	if key == "F" and not IsPlayerInVehicle() then
