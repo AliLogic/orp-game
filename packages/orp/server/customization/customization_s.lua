@@ -39,6 +39,11 @@ Outfit = {
 	"/Game/CharacterModels/Female/Meshes/SK_TShirtShorts01"
 }
 
+BODY_CONSTANTS = {
+	7,
+	20
+}
+
 Body = {
 	nil,
 
@@ -66,6 +71,11 @@ Body = {
 	"/Game/CharacterModels/Female/Meshes/SK_Female01", -- Female
 	"/Game/CharacterModels/Female/Meshes/SK_Female02",
 	"/Game/CharacterModels/Female/Meshes/SK_Female03",
+}
+
+TOP_CONSTANTS = {
+	2,
+	16
 }
 
 Tops = {
@@ -114,6 +124,11 @@ Equipment = {
 	"/Game/CharacterModels/Female/Meshes/HZN_Outfit_Piece_Labcoat_LPR"
 }
 
+PANTS_CONSTANTS = {
+	2,
+	6
+}
+
 Pants = {
 	nil,
 
@@ -133,6 +148,11 @@ Pants = {
 	"/Game/CharacterModels/Female/Meshes/SK_Shorts01",
 }
 
+SHOES_CONSTANTS = {
+	2,
+	4
+}
+
 Shoes = {
 	nil,
 
@@ -146,6 +166,11 @@ Shoes = {
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes04",
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes05",
 	"/Game/CharacterModels/Female/Meshes/SK_Shoes06"
+}
+
+HAIR_CONSTANTS = {
+	2,
+	24
 }
 
 Hair = {
