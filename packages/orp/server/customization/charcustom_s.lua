@@ -10,9 +10,9 @@ end
 function Customization_Ready(player)
 
 	local gender = PlayerData[player].gender
-	local shirts = 0
-	local pants = 0
-	local shoes = 0
+	local shirts = {}
+	local pants = {}
+	local shoes = {}
 	local hair = 0
 	local face = 0
 
