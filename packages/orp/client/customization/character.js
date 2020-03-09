@@ -5,11 +5,11 @@ let lastSkinRadio = null;
 let lastHairRadio = null;
 
 let shirts = [];
-let trousers = [];
+let pants = [];
 let shoes = [];
 
 let lastShirt = shirts.length > 0 ? 1 : 0;
-let lastTrouser = trousers.length > 0 ? 1 : 0;
+let lastPant = pants.length > 0 ? 1 : 0;
 let lastShoe = shoes.length > 0 ? 1 : 0;
 
 $(document).ready(() => {
@@ -19,8 +19,8 @@ $(document).ready(() => {
 
 
 	$('#shirtlabel').text(`${shirts.length === 0 ? '0' : '1'}/${shirts.length}`);
-	$('#pantslabel').text(`${trousers.length === 0 ? '0' : '1'}/${trousers.length}`);
-	$('#shoeslabel').text(`${trousers.length === 0 ? '0' : '1'}/${shoes.length}`);
+	$('#pantslabel').text(`${pants.length === 0 ? '0' : '1'}/${pants.length}`);
+	$('#shoeslabel').text(`${pants.length === 0 ? '0' : '1'}/${shoes.length}`);
 
 	$('.tabs ul li').on('click', function (e) {
 		e.preventDefault();
@@ -78,10 +78,66 @@ $(document).ready(() => {
 		console.log(lastShirt);
 	});
 
+	$('button.button#shoeleft').on('click', function (e) {
+		e.preventDefault();
+		console.log("shoe left clicked");
+		console.log((shoes.length - shoes.length) + 1);
+		if (lastShoe < ((shoes.length - shoes.length) + 1)) {
+			console.log("not possible");
+		} else {
+			lastShoe -= 1;
+			$('#shoeinput').val(shoes[lastShoe - 1]);
+			console.log("very possible");
+		}
+		console.log(lastShoe);
+	});
+	
+	$('button.button#shoeright').on('click', function (e) {
+		e.preventDefault();
+		console.log("shoe right clicked");
+		console.log(lastShoe);
+		if (lastShoe >= shoes.length) {
+			console.log("not possible");
+		} else {
+			lastShoe += 1;
+			$('#shoeinput').val(shoes[lastShoe - 1]);
+			console.log("very possible");
+		}
+		console.log(lastShoe);
+	});
+
+	$('button.button#pantleft').on('click', function (e) {
+		e.preventDefault();
+		console.log("pant left clicked");
+		console.log((pants.length - pants.length) + 1);
+		if (lastPant < ((pants.length - pants.length) + 1)) {
+			console.log("not possible");
+		} else {
+			lastPant -= 1;
+			$('#pantinput').val(pants[lastPant - 1]);
+			console.log("very possible");
+		}
+		console.log(lastPant);
+	});
+	
+	$('button.button#pantright').on('click', function (e) {
+		e.preventDefault();
+		console.log("pant right clicked");
+		console.log(lastPant);
+		if (lastPant >= pants.length) {
+			console.log("not possible");
+		} else {
+			lastPant += 1;
+			$('#pantinput').val(pants[lastPant - 1]);
+			console.log("very possible");
+		}
+		console.log(lastPant);
+	});
+
 	$('#submit').on('click', function (e) {
 		e.preventDefault();
 
-		CallEvent("Customization_OnSubmit", [lastShirt, lastTrouser, lastShoe, $('#skinslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastSkinRadio.css("background-color")).split(",")), $('#hairslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastHairRadio.css("background-color")).split(","))]);
+		CallEvent("Customization_OnSubmit", [lastShirt, lastPant, lastShoe, $('#skinslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastSkinRadio.css("background-color")).split(",")), $('#hairslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastHairRadio.css("background-color")).split(","))]);
 	});
 
 	CallEvent("Customization_DocumentReady");
@@ -94,13 +150,13 @@ function setShirts(shirtsArray) {
 }
 
 function setPants(pantsArray) {
-	trousers = pantsArray;
-	$('#pantslabel').text(`${trousers.length === 0 ? '0' : '1'}/${trousers.length}`);
+	pants = pantsArray;
+	$('#pantslabel').text(`${pants.length === 0 ? '0' : '1'}/${pants.length}`);
 }
 
 function setShoes(shoesArray) {
 	shoes = shoesArray;
-	$('#shoeslabel').text(`${trousers.length === 0 ? '0' : '1'}/${shoes.length}`);
+	$('#shoeslabel').text(`${pants.length === 0 ? '0' : '1'}/${shoes.length}`);
 }
 
 function setHairAmount(amount) {
