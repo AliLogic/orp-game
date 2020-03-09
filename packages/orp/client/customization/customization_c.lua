@@ -43,10 +43,10 @@ local function Customization_Ready(shirts, pants, shoes, hair, face)
 		return
 	end
 
-	ExecuteWebJS(customUI, "setShirts("..json_encode(shirts).."")
-	ExecuteWebJS(customUI, "setPants("..json_encode(pants).."")
-	ExecuteWebJS(customUI, "setShoes("..json_encode(shoes).."")
-	ExecuteWebJS(customUI, "setHairAmount("..hair.."")
+	ExecuteWebJS(customUI, "setShirts("..json_encode(shirts)..")")
+	ExecuteWebJS(customUI, "setPants("..json_encode(pants)..")")
+	ExecuteWebJS(customUI, "setShoes("..json_encode(shoes)..")")
+	ExecuteWebJS(customUI, "setHairAmount("..hair..")")
 	ExecuteWebJS(customUI, "setFaceAmount("..face..")")
 
 	SetWebVisibility(customUI, WEB_VISIBLE)
