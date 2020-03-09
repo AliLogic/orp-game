@@ -17,15 +17,15 @@ function Customization_Ready(player)
 	local face = 0
 
 	if gender == 0 then -- Male
-		shirts = 15
-		pants = 5
-		shoes = 3
+		shirts = {"Shirt 1", "Shirt 2"} -- 15
+		pants = {"Pants 1", "Pants 2"} -- 5
+		shoes = {"Shoes 1", "Shoes 2"} -- 3
 		hair = 24
 		face = 15
 	else -- Female
-		shirts = 14
-		pants = 8
-		shoes = 6
+		shirts = {"Shirt 1", "Shirt 2"} -- 14
+		pants = {"Pants 1", "Pants 2"} -- 8
+		shoes = {"Shoes 1", "Shoes 2"} -- 6
 		hair = 3
 		face = 3
 	end

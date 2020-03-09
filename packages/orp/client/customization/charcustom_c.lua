@@ -30,15 +30,15 @@ local hairColourOptions = {
 -- Functions
 local function Customization_Toggle(status)
 
-	SetWebVisibility(customUI, WEB_HIDDEN)
-
 	if status then
 		customUI = CreateWebUI(0, 0, 0, 0, 1, 30)
 		SetWebAlignment(customUI, 0, 0)
 		SetWebAnchors(customUI, 0, 0, 1, 1)
 		SetWebURL(customUI, "http://asset/"..GetPackageName().."/client/customization/character.html")
+		SetWebVisibility(customUI, WEB_VISIBLE)
 		customizationOpen = true
 	else
+		SetWebVisibility(customUI, WEB_HIDDEN)
 		DestroyWebUI(customUI)
 		customUI = 0
 		customizationOpen = false
