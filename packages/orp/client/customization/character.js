@@ -5,9 +5,6 @@ $(document).ready(() => {
 	let lastSkinRadio = null;
 	let lastHairRadio = null;
 
-	let maxHair = 1;
-	let maxFaces = 1;
-
 	let shirts = [];
 	let trousers = [];
 	let shoes = [];
@@ -15,9 +12,6 @@ $(document).ready(() => {
 	let lastShirt = shirts.length > 0 ? 1 : 0;
 	let lastTrouser = trousers.length > 0 ? 1 : 0;
 	let lastShoe = shoes.length > 0 ? 1 : 0;
-
-	$('#face').attr("max", maxFaces);
-	$('#hair').attr("max", maxHair);
 
 	$('#shirtlabel').text(`${shirts.length === 0 ? '0' : '1'}/${shirts.length}`);
 	$('#pantslabel').text(`${trousers.length === 0 ? '0' : '1'}/${trousers.length}`);
@@ -39,7 +33,20 @@ $(document).ready(() => {
 		$('#shoeslabel').text(`${trousers.length === 0 ? '0' : '1'}/${shoes.length}`);
 	}
 
+	const setHairAmount = (amount) => {
+		$('#hairslider').attr("max", Number.isInteger(amount) ? amount : '1');
+		$('#hairlabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
+	}
+	
+	const setFaceAmount = (amount) => {
+		$('#faceslider').attr("max", Number.isInteger(amount) ? amount : '1');
+		$('#facelabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
+	}
+
 	setShirts(["Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4"]);
+	setHairAmount(20);
+	setFaceAmount(20);
+
 	console.log("LASTSHIRT LENGTH IS " + lastShirt);
 
 	$('.tabs ul li').on('click', function (e) {
