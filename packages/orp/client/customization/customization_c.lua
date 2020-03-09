@@ -138,7 +138,7 @@ end)
 AddEvent("OnWebLoadComplete", function (web)
 
 	if web == customUI then
-		SetWebVisibility(WEB_VISIBLE)
+		SetWebVisibility(customUI, WEB_VISIBLE)
 		ShowMouseCursor(true)
 		SetIgnoreLookInput(true)
 		SetIgnoreMoveInput(true)

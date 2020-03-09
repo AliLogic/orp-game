@@ -117,6 +117,7 @@
 		"client/speedo/dist/gauge.min.js",
 		"client/speedo/css/speedo.css",
 		"client/customization/css/divider.min.css",
+		"client/customization/slider.css",
 		"client/customization/character.css",
 		"client/customization/character.html",
 		"client/customization/character.js",
