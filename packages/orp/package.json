@@ -76,7 +76,6 @@
 		"client/speedcam/speedcam_c.lua",
 		"client/models/teslaevc/teslaevc_c.lua",
 		"client/customization/customization_c.lua",
-		"client/customization/charcustom_c.lua",
 		"client/trafficlights/trafficlights_c.lua",
 		"client/gui/gui_c.lua",
 		"server/misc/colours.lua",
