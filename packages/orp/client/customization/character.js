@@ -1,27 +1,26 @@
+let lastTab = null;
+let lastPage = null;
+
+let lastSkinRadio = null;
+let lastHairRadio = null;
+
+let shirts = [];
+let trousers = [];
+let shoes = [];
+
+let lastShirt = shirts.length > 0 ? 1 : 0;
+let lastTrouser = trousers.length > 0 ? 1 : 0;
+let lastShoe = shoes.length > 0 ? 1 : 0;
+
 $(document).ready(() => {
-	let lastTab = $('.tabs ul li.is-active');
-	let lastPage = $('#appearance');
 
-	let lastSkinRadio = null;
-	let lastHairRadio = null;
+	lastTab = $('.tabs ul li.is-active');
+	lastPage = $('#appearance');
 
-	let shirts = [];
-	let trousers = [];
-	let shoes = [];
-
-	let lastShirt = shirts.length > 0 ? 1 : 0;
-	let lastTrouser = trousers.length > 0 ? 1 : 0;
-	let lastShoe = shoes.length > 0 ? 1 : 0;
 
 	$('#shirtlabel').text(`${shirts.length === 0 ? '0' : '1'}/${shirts.length}`);
 	$('#pantslabel').text(`${trousers.length === 0 ? '0' : '1'}/${trousers.length}`);
 	$('#shoeslabel').text(`${trousers.length === 0 ? '0' : '1'}/${shoes.length}`);
-
-	//setShirts(["Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4"]);
-	//setHairAmount(20);
-	//setFaceAmount(20);
-
-	console.log("LASTSHIRT LENGTH IS " + lastShirt);
 
 	$('.tabs ul li').on('click', function (e) {
 		e.preventDefault();
