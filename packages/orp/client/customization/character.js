@@ -43,9 +43,9 @@ $(document).ready(() => {
 		$('#facelabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
 	}
 
-	setShirts(["Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4"]);
-	setHairAmount(20);
-	setFaceAmount(20);
+	//setShirts(["Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4"]);
+	//setHairAmount(20);
+	//setFaceAmount(20);
 
 	console.log("LASTSHIRT LENGTH IS " + lastShirt);
 
@@ -107,5 +107,7 @@ $(document).ready(() => {
 
 	$('#submit').on('click', function (e) {
 		e.preventDefault();
+
+		CallEvent("Customization_OnSubmit", [lastShirt, lastTrouser, lastShoe, $('#skinslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastSkinRadio.css("background-color")).split(",")), $('#hairslider').attr("max"), JSON.stringify(/[0-9]{1,3}, [0-9]{1,3}, [0-9]{1,3}/.exec(lastHairRadio.css("background-color")).split(","))]);
 	});
 });
