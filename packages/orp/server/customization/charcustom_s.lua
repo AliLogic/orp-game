@@ -41,7 +41,10 @@ AddRemoteEvent("Customization_OnReady", function (player)
 	Customization_Ready(player)
 end)
 
-AddRemoteEvent("Customization_OnSubmit", function (player, shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+-- AddRemoteEvent("Customization_OnSubmit", function (player, shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+AddRemoteEvent("Customization_OnSubmit", function (player, shirt, pant, shoe, skin, hair)
+
+	AddPlayerChat(player, "[server] Customization_OnSubmit")
 
 	local gender = PlayerData[player].gender
 	local colour = {}
@@ -50,28 +53,13 @@ AddRemoteEvent("Customization_OnSubmit", function (player, shirt, pant, shoe, sk
 	AddPlayerChat(player, "Pant: " .. pant + PANTS_CONSTANTS[gender])
 	AddPlayerChat(player, "Shoe: " .. shoe + SHOES_CONSTANTS[gender])
 	AddPlayerChat(player, "Skin: " .. skin + BODY_CONSTANTS[gender])
-	AddPlayerChat(player, "Skin tone: " .. skin_tone)
 	AddPlayerChat(player, "Hair: " .. hair + HAIR_CONSTANTS[gender])
-	AddPlayerChat(player, "Hair colour: " .. hair_colour)
 
-	skin_tone = skin_tone .. ","
-	for i in string:gmatch("(%d+),") do
-		table.insert(colour, i)
-	end
-	PlayerClothingData[player].hair_color = RGB(colour[1], colour[2], colour[3])
-
-	colour = {}
-	hair_colour = hair_colour .. ","
-	for i in string:gmatch("(%d+),") do
-		table.insert(colour, i)
-	end
-	PlayerClothingData[player].skin_color = RGB(colour[1], colour[2], colour[3])
-
+	PlayerClothingData[player].body = skin
 	PlayerClothingData[player].hair = hair
 	PlayerClothingData[player].pants = pant
 	PlayerClothingData[player].top = shirt
 	PlayerClothingData[player].shoes = shoe
-	PlayerClothingData[player].body = skin
 
 	SetPlayerClothing(player, player)
 

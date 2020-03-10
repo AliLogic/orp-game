@@ -18,6 +18,12 @@ local TexturesLoaded = {}
 
 -- Functions
 
+local function Rotate(rotation)
+
+	charAngle = charAngle + rotation
+	GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body"):SetRelativeRotation(FRotator(0.0, charAngle, 0.0))
+end
+
 local function Customization_Toggle(status)
 
 	if status then
@@ -34,7 +40,10 @@ local function Customization_Toggle(status)
 		DestroyWebUI(customUI)
 		customUI = 0
 		customizationOpen = false
+		charAngle = 0
 	end
+
+	Rotate(0)
 end
 
 local function Customization_Ready(shirts, pants, shoes, hair, face)
@@ -50,12 +59,6 @@ local function Customization_Ready(shirts, pants, shoes, hair, face)
 	ExecuteWebJS(customUI, "setFaceAmount("..face..")")
 
 	SetWebVisibility(customUI, WEB_VISIBLE)
-end
-
-local function Rotate(rotation)
-
-	charAngle = charAngle + rotation
-	GetPlayerSkeletalMeshComponent(GetPlayerId(), "Body"):SetRelativeRotation(FRotator(0.0, charAngle, 0.0))
 end
 
 local function SetPlayerClothing(player, part, piece, r, g, b, a)
@@ -110,7 +113,7 @@ end)
 
 AddEvent("OnPackageStop", function()
 
-	for i = 1, #TexturesLoaded, 1 do
+	for i = 2, #TexturesLoaded, 1 do
 		TexturesLoaded[i]:Release()
 	end
 end)
@@ -130,6 +133,10 @@ end)
 
 AddEvent("OnKeyPress", function (key)
 
+	if not customizationOpen then
+		return
+	end
+
 	if key == "A" then
 		Rotate(-3)
 	elseif key == "D" then
@@ -147,10 +154,19 @@ AddEvent("Customization_DocumentReady", function ()
 	CallRemoteEvent("Customization_OnReady")
 end)
 
-AddEvent("Customization_OnSubmit", function (shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+AddEvent("Customization_OnSubmit", function (shirt, pant, shoe, skin, hair)
 
-	CallRemoteEvent("Customization_OnSubmit", shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+	AddPlayerChat("[client] Customization_OnSubmit")
+
+	CallRemoteEvent("Customization_OnSubmit", shirt, pant, shoe, skin, hair)
+
+	Customization_Toggle(false)
 end)
+
+-- AddEvent("Customization_OnSubmit", function (shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+
+-- 	CallRemoteEvent("Customization_OnSubmit", shirt, pant, shoe, skin, skin_tone, hair, hair_colour)
+-- end)
 
 AddRemoteEvent("Customization_Toggle", Customization_Toggle)
 AddRemoteEvent("Customization_Ready", Customization_Ready)
