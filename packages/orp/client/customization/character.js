@@ -1,3 +1,29 @@
+function setShirts(shirtsArray) {
+	shirts = shirtsArray;
+	$('#shirtlabel').text(`${shirts.length === 0 ? '0' : '1'}/${shirts.length}`);
+	lastShirt = 1;
+}
+
+function setPants(pantsArray) {
+	trousers = pantsArray;
+	$('#pantslabel').text(`${trousers.length === 0 ? '0' : '1'}/${trousers.length}`);
+}
+
+function setShoes(shoesArray) {
+	shoes = shoesArray;
+	$('#shoeslabel').text(`${trousers.length === 0 ? '0' : '1'}/${shoes.length}`);
+}
+
+function setHairAmount(amount) {
+	$('#hairslider').attr("max", Number.isInteger(amount) ? amount : '1');
+	$('#hairlabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
+}
+
+function setFaceAmount(amount) {
+	$('#faceslider').attr("max", Number.isInteger(amount) ? amount : '1');
+	$('#facelabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
+}
+
 $(document).ready(() => {
 	let lastTab = $('.tabs ul li.is-active');
 	let lastPage = $('#appearance');
@@ -16,32 +42,6 @@ $(document).ready(() => {
 	$('#shirtlabel').text(`${shirts.length === 0 ? '0' : '1'}/${shirts.length}`);
 	$('#pantslabel').text(`${trousers.length === 0 ? '0' : '1'}/${trousers.length}`);
 	$('#shoeslabel').text(`${trousers.length === 0 ? '0' : '1'}/${shoes.length}`);
-
-	function setShirts(shirtsArray) {
-		shirts = shirtsArray;
-		$('#shirtlabel').text(`${shirts.length === 0 ? '0' : '1'}/${shirts.length}`);
-		lastShirt = 1;
-	}
-
-	function setPants(pantsArray) {
-		trousers = pantsArray;
-		$('#pantslabel').text(`${trousers.length === 0 ? '0' : '1'}/${trousers.length}`);
-	}
-
-	function setShoes(shoesArray) {
-		shoes = shoesArray;
-		$('#shoeslabel').text(`${trousers.length === 0 ? '0' : '1'}/${shoes.length}`);
-	}
-
-	function setHairAmount(amount) {
-		$('#hairslider').attr("max", Number.isInteger(amount) ? amount : '1');
-		$('#hairlabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
-	}
-	
-	function setFaceAmount(amount) {
-		$('#faceslider').attr("max", Number.isInteger(amount) ? amount : '1');
-		$('#facelabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
-	}
 
 	//setShirts(["Shirt 1", "Shirt 2", "Shirt 3", "Shirt 4"]);
 	//setHairAmount(20);
