@@ -114,7 +114,7 @@ end)
 AddEvent("OnPackageStop", function()
 
 	for i = 2, #TexturesLoaded, 1 do
-		TexturesLoaded[i]:Release()
+		TexturesLoaded[i]:ReleaseTexture()
 	end
 end)
 
