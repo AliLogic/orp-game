@@ -1,6 +1,3 @@
-let lastTab = null;
-let lastPage = null;
-
 let lastSkinRadio = null;
 let lastHairRadio = null;
 
@@ -13,9 +10,8 @@ let lastPant = pants.length > 0 ? 1 : 0;
 let lastShoe = shoes.length > 0 ? 1 : 0;
 
 $(document).ready(() => {
-
-	lastTab = $('.tabs ul li.is-active');
-	lastPage = $('#appearance');
+	let lastTab = $('.tabs ul li.is-active');
+	let lastPage = $('#appearance');
 
 	$('#shirtlabel').text(`${shirts.length === 0 ? '0' : '1'}/${shirts.length}`);
 	$('#pantslabel').text(`${pants.length === 0 ? '0' : '1'}/${pants.length}`);
@@ -182,7 +178,6 @@ function setHairAmount(amount) {
 }
 
 function setFaceAmount(amount) {
-
 	$('#faceslider').attr("max", Number.isInteger(amount) ? amount : '1');
 	$('#facelabel').text(`${Number.isInteger(amount) ? '1' : NaN}/${Number.isInteger(amount) ? amount : NaN}`);
 }
