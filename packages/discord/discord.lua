@@ -116,20 +116,7 @@ function Embed()
 	return Embed:New()
 end
 
-function OnPostComplete(a, http)
-	print("OnPostComplete:", a, http)
-
-	if http_is_error(http) then
-		print("OnHttpRequestComplete failed for id", http..": "..http_result_error(http))
-	else
-		print("OnHttpRequestComplete succeeded for id", http)
-		print_active_results(http)
-	end
-
-	http_destroy(http)
-end
-
---[[function print_active_results(http)
+local function print_active_results(http)
 	local body = http_result_body(http)
 	local header = http_result_header(http)
 	local status = http_result_status(http)
@@ -140,7 +127,20 @@ end
 	for k, v in pairs(header) do
 		print("\t", k, v)
 	end
-end]]
+end
+
+function OnPostComplete(a, http)
+	print("OnPostComplete:", a, http)
+
+	if http_is_error(http) then
+		print("OnHttpRequestComplete failed for id", http..": "..http_result_error(http))
+	else
+		print("OnHttpRequestComplete succeeded for id", http)
+		-- print_active_results(http)
+	end
+
+	http_destroy(http)
+end
 
 AddFunctionExport("SendMessage", SendMessage)
 AddFunctionExport("SendEmbed", SendEmbed)
