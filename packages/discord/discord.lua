@@ -6,7 +6,7 @@
 	dm - Direct Message
 	embed - embed
 ]]
-local token = "NjUxMzg0NDE2MDY4Njk4MTI4.XmPfcw.V-NApIHEtgEFn4tEYynMlkc0E_k"
+local token = "remove t0k"
 
 function SendMessage(channel, style, message)
 	channel = channel or nil
