@@ -1,8 +1,0 @@
-*.exe
-*.zip
-*.rar
-*.txt
-
-config/
-logs/
-appcache/
